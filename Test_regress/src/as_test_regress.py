@@ -753,7 +753,7 @@ class Test(unittest.TestCase):
     def test_regress(self):
         #self.register()
         self.login_from_index()
-        self.release_normal()
+        #self.release_normal()
         #self.release_three_video()
         #self.agency_course()
         #self.package_course() #等做成网络班
@@ -777,7 +777,7 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
-        #new_course_management.class_redirect(self.driver, self.base_url)
+        new_course_management.class_redirect(self.driver, self.base_url)
         #new_course_management.forsale_couse(self.driver, self.base_url)
         #login.logout(self.driver, self.base_url)
         #self.login_user()

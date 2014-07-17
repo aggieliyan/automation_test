@@ -130,7 +130,7 @@ def pre_sale_course(cfg, driver,base_url,org_name,course_title=u"自动化-预�
     time.sleep(2)
 
 #发布代理课程    
-def release_agency_course(cfg,driver, base_url, org_name,course_title = u'代理课程'):
+def release_agency_course(cfg,driver, base_url, org_name,course_title=u'代理课程'):
     
     driver.get(base_url + org_name)
     time.sleep(2)

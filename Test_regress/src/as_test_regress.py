@@ -15,7 +15,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "Chrome"
+        self.browser = "firefox"
         self.test_enviroment = "omega" 
         self.org_name = "salesdemo"
         self.org_password = "1234"
@@ -97,7 +97,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
+            login.login_by_as(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
         except Exception,e:
             print e
         finally:
@@ -751,9 +751,9 @@ class Test(unittest.TestCase):
         
     
     def test_regress(self):
-        #self.register()
-        self.login_from_index()
-        self.release_normal()
+        self.register()
+        #self.login_from_index()
+        #self.release_normal()
         #self.release_three_video()
         #self.agency_course()
         #self.package_course() #等做成网络班

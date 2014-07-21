@@ -751,13 +751,10 @@ class Test(unittest.TestCase):
         
     
     def test_regress(self):
-<<<<<<< HEAD
         self.register()
         #self.login_from_index()
-=======
         #self.register()
-        self.login_from_index()
->>>>>>> 5806ce0728ff0f0a2823fc041330bfa8b7d41e7b
+        #self.login_from_index()
         #self.release_normal()
         #self.release_three_video()
         #self.agency_course()

@@ -751,8 +751,13 @@ class Test(unittest.TestCase):
         
     
     def test_regress(self):
+<<<<<<< HEAD
         self.register()
         #self.login_from_index()
+=======
+        #self.register()
+        self.login_from_index()
+>>>>>>> 5806ce0728ff0f0a2823fc041330bfa8b7d41e7b
         #self.release_normal()
         #self.release_three_video()
         #self.agency_course()
@@ -777,7 +782,7 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
-        #new_course_management.class_redirect(self.driver, self.base_url)
+        new_course_management.class_redirect(self.driver, self.base_url)
         #new_course_management.forsale_couse(self.driver, self.base_url)
         #login.logout(self.driver, self.base_url)
         #self.login_user()

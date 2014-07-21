@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Task</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+  </head>
+  <body style="font-family: 'Microsoft YaHei';font-size:14px;">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12" style="margin-top:20px;">
+          <ul class="unstyled">
+          <li>Config.ini 用来存各种元素id/XPATH的文件，当页面元素发生变化时，不直接在代码里改，改这个配置文件即可。</li>
+          <li>as_test_regress.py 回归流程脚本，进行回归测试时，在这个脚本中调用各个模块的方法</li>
+          <li>admin_management.py 管理员相关操作</li>
+          <li>card_management.py 卡、卡组相关操作</li>
+          <li>cate_management.py  类目相关操作</li>
+          <li>course_management.py 老版发课-一直没舍得删，发代理课程的方法还放在里面</li>
+          <li>new_ course_management.py  新版发课相关操作</li>
+          <li>student_management.py 学员管理相关操作</li>
+          <li>user_management.py 个人用户的一些操作</li>
+          <li>login.py  登录注册等操作</li>
+          <li>其他文件是测试模块或别的方法写的一些脚本</li>
+          </ul>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>人员</th>
+                <th>模块</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>李稳</td>
+                <td>login</td>
+              </tr>
+              <tr>
+                <td>国玉玲</td>
+                <td>admin_management</td>
+              </tr>
+              <tr>
+                <td>刘红蛟</td>
+                <td>student_management</td>
+              </tr>
+              <tr>
+                <td>高岳</td>
+                <td>card_management/cate_management</td>
+              </tr>
+              <tr>
+                <td>范峤</td>
+                <td>user_management</td>
+              </tr>
+              <tr>
+                <td>易璐璐</td>
+                <td>new_course_management</td>
+              </tr>
+
+            </tbody>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>基本流程</th>
+                <th>所在模块</th>
+                <th>对应方法</th>
+                <th>完成情况</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. 发布知识资料，普通资料</td>
+                <td>new_course_management</td>
+                <td>course_redirect</td>
+                <td><button class="btn btn-success">完成</button></td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>2. 三分屏/双视频</td>
+                <td>new_course_management</td>
+                <td>course_redirect 目前不能选择发三分屏还是双视频，就是选两个课件发成三分屏</td>
+                <td><button class="btn btn-warning">待改进</button></td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>3. 编辑三分屏</td>
+                <td>暂无</td>
+                <td></td>
+                <td><button class="btn btn-danger">没做</button></td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>4.  打包系列资料</td>
+                <td>new_course_management</td>
+                <td>class_redirect</td>
+                <td><button class="btn btn-success">完成</button></td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>5.  发布预售资料</td>
+                <td>new_course_management</td>
+                <td>class_redirect</td>
+                <td><button class="btn btn-success">完成</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>6.  批量导入学员/单个导入</td>
+                <td>student_management</td>
+                <td>import_one_student/import_multi_student</td>
+                <td><button class="btn btn-success">完成</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>7.  批量创建学员</td>
+                <td>student_management</td>
+                <td>create_student/auto_create_student</td>
+                <td><button class="btn btn-success">完成</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>8.  为学员开通资料、批量开通</td>
+                <td>student_management</td>
+                <td>open_course_for_one/open_course_for_multi</td>
+                <td><button class="btn btn-success">完成</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>9.  管理卡组、添加卡组/卡</td>
+                <td>card_management</td>
+                <td>add_course_cardgroup/add_cate_cardgroup/add_prepaid_cardgroup/add_card</td>
+                <td><button class="btn btn-success">完成</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>10. 管理学员点播授权数</td>
+                <td>student_management</td>
+                <td></td>
+                <td><button class="btn btn-danger">没做</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>11. 管理知识资料类目、添加类目、向类目中添加资料（看显示）、删除类目</td>
+                <td>cate_management</td>
+                <td>add_cate/add_courese_to_cate/delete_cate</td>
+                <td><button class="btn btn-success">完成</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>12. 管理机构管理员（添加/编辑/删除）</td>
+                <td>cate_management</td>
+                <td>add_cate/add_courese_to_cate/delete_cate</td>
+                <td><button class="btn btn-success">完成</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>13. 文件存储空间，大小文件都传一下</td>
+                <td>暂无</td>
+                <td></td>
+                <td><button class="btn btn-danger">没做</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>14. 发布机构公告</td>
+                <td>user_management</td>
+                <td>release_announcement</td>
+                <td><button class="btn btn-danger">待改</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>15. 修改首页横幅/编辑页脚信息</td>
+                <td>user_management</td>
+                <td>change_banner/modify_pagefoot</td>
+                <td><button class="btn btn-danger">待改</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>16. 修改头像</td>
+                <td>user_management</td>
+                <td>org_chang_headpic</td>
+                <td><button class="btn btn-danger">待改</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>17. 发布代理资料</td>
+                <td>course_management</td>
+                <td>release_agency_course</td>
+                <td><button class="btn btn-danger">待改</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>18. 购买开通授权数</td>
+                <td>student_management.</td>
+                <td>buy_open_num</td>
+                <td><button class="btn btn-danger">待改</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>19. 独立域名上的登录和退出</td>
+                <td>Login</td>
+                <td>login_by_independent_domian/logout_by_independent_domia</td>
+                <td><button class="btn btn-danger">待改</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>20. 外链功能</td>
+                <td>user_management</td>
+                <td>release_href_course</td>
+                <td><button class="btn btn-danger">待改</button>跟发布公告一块，现在那个方法在course_management中</td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>21. 扣佣金还是扣授权的机制</td>
+                <td>暂无</td>
+                <td></td>
+                <td><button class="btn btn-danger">待做</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>22. 注册(网站+独立域名)</td>
+                <td>Login</td>
+                <td>register_by_index</td>
+                <td><button class="btn btn-danger">待改</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>23. 使用机构发售的课程卡（充值卡/充课卡/补课卡）</td>
+                <td>card_management</td>
+                <td>use_prepaid_card/use_course_card</td>
+                <td><button class="btn btn-success">完成</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>24. 购买资料（充值卡购买/人民币购买）</td>
+                <td>user_management</td>
+                <td>buy_course/buy_course_usecard</td>
+                <td><button class="btn btn-success">完成</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>25. 我的听课中心（购买/开通/充课卡资料/补课卡资料</td>
+                <td></td>
+                <td></td>
+                <td><button class="btn btn-danger">没做</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>26. 剩余点播次数</td>
+                <td></td>
+                <td></td>
+                <td><button class="btn btn-danger">没做</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>27. 发布资料后进行搜索</td>
+                <td></td>
+                <td></td>
+                <td><button class="btn btn-danger">没做</button></td>
+              </tr>
+            </tbody>
+             <tbody>
+              <tr>
+                <td>28. 考试卡功能</td>
+                <td>card_management</td>
+                <td></td>
+                <td><button class="btn btn-danger">待做</button></td>
+              </tr>
+            </tbody>
+
+
+
+
+
+
+
+          </table>
+        </div>
+      </div>
+    <div>
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

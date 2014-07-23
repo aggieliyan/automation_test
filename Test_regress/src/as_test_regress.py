@@ -768,11 +768,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-<<<<<<< HEAD
         self.login_from_index()
-=======
-        #self.login_from_index()
->>>>>>> origin/master
         #self.register()
         #self.login_from_index()
         #self.release_normal()

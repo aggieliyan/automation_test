@@ -50,8 +50,8 @@ class Test(unittest.TestCase):
         self.base_url = "http://www."+self.test_enviroment+".ablesky.com/"
         #self.base_url = "http://www.zhongyan.com/"
         
-        if os.path.exists("D:\\test_rs_pic")!= True:
-            os.system("mkdir D:\\test_rs_pic")
+        if os.path.exists("C:\\test_rs_pic")!= True:
+            os.system("mkdir C:\\test_rs_pic")
     
     def connect_db(self,database):
         try:
@@ -90,7 +90,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to register!")
         finally:
-            self.driver.save_screenshot(r'D:/test_rs_pic/1_register.png')
+            self.driver.save_screenshot(r'C:/test_rs_pic/1_register.png')
             
         self.import_name = user_name #待单个导入学员使用
     
@@ -102,7 +102,7 @@ class Test(unittest.TestCase):
         except Exception,e:
             print e
         finally:
-            self.driver.save_screenshot(r'D:/test_rs_pic/1_login.png')
+            self.driver.save_screenshot(r'C:/test_rs_pic/1_login.png')
     
     def login_user(self):
         
@@ -111,7 +111,7 @@ class Test(unittest.TestCase):
         except Exception,e:
             print e
         finally:
-            self.driver.save_screenshot(r'D:/test_rs_pic/1_login_user.png')
+            self.driver.save_screenshot(r'C:/test_rs_pic/1_login_user.png')
     
     def release_normal(self):
         
@@ -124,7 +124,7 @@ class Test(unittest.TestCase):
         except Exception,e:
             print e
         finally:
-            self.driver.save_screenshot(r'D:/test_rs_pic/2_normal_course.png')
+            self.driver.save_screenshot(r'C:/test_rs_pic/2_normal_course.png')
             
         self.normal_course = title#待用-在数据库中查是否转换失败
         
@@ -149,7 +149,7 @@ class Test(unittest.TestCase):
         except Exception,e:
             print e
         finally:
-            self.driver.save_screenshot(r'D:/test_rs_pic/4_three_video.png')
+            self.driver.save_screenshot(r'C:/test_rs_pic/4_three_video.png')
         
         self.three_title = title   
         rs = self.verify_course(title)
@@ -173,7 +173,7 @@ class Test(unittest.TestCase):
         except Exception,e:
             print e
         finally:
-            self.driver.save_screenshot(r'D:/test_rs_pic/5_two_video.png')
+            self.driver.save_screenshot(r'C:/test_rs_pic/5_two_video.png')
         
         self.two_title = title   
         rs = self.verify_course(title)
@@ -194,7 +194,7 @@ class Test(unittest.TestCase):
         except Exception,e:
             print e
         finally:
-            self.driver.save_screenshot(r'D:/test_rs_pic/6_package.png')
+            self.driver.save_screenshot(r'C:/test_rs_pic/6_package.png')
         self.package_title = title   
         rs = self.verify_course(title)
         try:
@@ -213,7 +213,7 @@ class Test(unittest.TestCase):
         except Exception,e:
             print e
         finally:
-            self.driver.save_screenshot(r'D:/test_rs_pic/7_add_cate.png')
+            self.driver.save_screenshot(r'C:/test_rs_pic/7_add_cate.png')
         
         time.sleep(1)
         actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
@@ -232,7 +232,7 @@ class Test(unittest.TestCase):
         except Exception,e:
             print e
         finally:
-            self.driver.save_screenshot(r'D:/test_rs_pic/8_presale.png')
+            self.driver.save_screenshot(r'C:/test_rs_pic/8_presale.png')
             
         self.presale_title = title   
         rs = self.verify_course(title)
@@ -255,7 +255,7 @@ class Test(unittest.TestCase):
         #except Exception,e:
         #    print e
         #finally:
-        self.driver.save_screenshot(r'D:/test_rs_pic/9_agency_course.png')
+        self.driver.save_screenshot(r'C:/test_rs_pic/9_agency_course.png')
         
         rs = self.verify_course(title)
         try:
@@ -275,7 +275,7 @@ class Test(unittest.TestCase):
         except Exception,e:
             print e
         finally:
-            self.driver.save_screenshot(r'D:/test_rs_pic/9_prepaid_cardgroup.png')
+            self.driver.save_screenshot(r'C:/test_rs_pic/9_prepaid_cardgroup.png')
         
         time.sleep(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
@@ -300,7 +300,7 @@ class Test(unittest.TestCase):
         except Exception,e:
             print e
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/10_course_cardgroup.png")
+            self.driver.save_screenshot("C:/test_rs_pic/10_course_cardgroup.png")
         
         time.sleep(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
@@ -326,7 +326,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append('fail to create course cardgroup!')
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/11_cate_cardgroup.png")
+            self.driver.save_screenshot("C:/test_rs_pic/11_cate_cardgroup.png")
         
         time.sleep(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
@@ -378,7 +378,7 @@ class Test(unittest.TestCase):
             print e
             before_delete ="0"
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/12_delete_cate.png")           
+            self.driver.save_screenshot("C:/test_rs_pic/12_delete_cate.png")           
         time.sleep(1)
         after_delete = self.driver.execute_script("return $(\".categTitle:last\").text()")#取最后一个类目的名称
         print after_delete
@@ -401,7 +401,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append('fail to add course to category!') 
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/13_add_course_to_cate.png")
+            self.driver.save_screenshot("C:/test_rs_pic/13_add_course_to_cate.png")
             
         try:      
             self.assertEqual(course_name, actual_name, "fail to add course to category!")
@@ -420,7 +420,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to import one student!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/import_one_student.png")
+            self.driver.save_screenshot("C:/test_rs_pic/import_one_student.png")
         
         #验证
         self.driver.refresh()
@@ -439,7 +439,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to import multi student!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/import_multi_student.png")
+            self.driver.save_screenshot("C:/test_rs_pic/import_multi_student.png")
             
         #验证,待完成
     def create_multi_student(self):
@@ -452,7 +452,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to create multi student!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/create_student.png")
+            self.driver.save_screenshot("C:/test_rs_pic/create_student.png")
             
         #验证，待完成
       
@@ -477,7 +477,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append('fail to use prepaid card!')
         finally: 
-            self.driver.save_screenshot("D:/test_rs_pic/use_prepaidcard.png")
+            self.driver.save_screenshot("C:/test_rs_pic/use_prepaidcard.png")
             
         #验证，待完成
     
@@ -490,7 +490,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append('fail to use course card!')
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/use_coursecard.png")
+            self.driver.save_screenshot("C:/test_rs_pic/use_coursecard.png")
             
         #验证,待完成
     
@@ -503,7 +503,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append('fail to use category card!')
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/use_catecard.png")
+            self.driver.save_screenshot("C:/test_rs_pic/use_catecard.png")
     
     def add_admin(self):
         
@@ -521,7 +521,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to create admin!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/add_admin.png")
+            self.driver.save_screenshot("C:/test_rs_pic/add_admin.png")
         
 
                 
@@ -534,7 +534,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to modify admin!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/modify_admin.png")
+            self.driver.save_screenshot("C:/test_rs_pic/modify_admin.png")
             
         #验证
         xpath = "//div[text()=\'"+admin_name+"\']"
@@ -554,7 +554,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to delete admin!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/delete_admin.png")
+            self.driver.save_screenshot("C:/test_rs_pic/delete_admin.png")
             
         #验证
         
@@ -570,7 +570,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to release announcement!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/release_announcement.png")
+            self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")
             
         #验证
         self.driver.get(self.base_url+self.org_name)
@@ -587,7 +587,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to release href course!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/href_course.png")
+            self.driver.save_screenshot("C:/test_rs_pic/href_course.png")
             
         #验证
         self.driver.get(self.base_url+self.org_name)
@@ -611,7 +611,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to buy course use rmb!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/href_course.png")
+            self.driver.save_screenshot("C:/test_rs_pic/href_course.png")
             
         #验证待完成
         
@@ -633,7 +633,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to open course for one!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/open_course_for_one.png")
+            self.driver.save_screenshot("C:/test_rs_pic/open_course_for_one.png")
             
         #验证，待完成
         
@@ -646,7 +646,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to open course for multi!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/open_course_for_multi.png")
+            self.driver.save_screenshot("C:/test_rs_pic/open_course_for_multi.png")
             
         #验证，待完成
     
@@ -659,7 +659,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to add playnum!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/add_playnum.png")
+            self.driver.save_screenshot("C:/test_rs_pic/add_playnum.png")
             
         #验证，待完成
         
@@ -673,7 +673,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to buy open num!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/buy_open_num.png")
+            self.driver.save_screenshot("C:/test_rs_pic/buy_open_num.png")
     
     def change_headpic(self):
         
@@ -684,7 +684,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to change headpic!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/change_headpic.png")
+            self.driver.save_screenshot("C:/test_rs_pic/change_headpic.png")
             
         #验证
             
@@ -697,7 +697,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to change banner!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/change_banner.png")
+            self.driver.save_screenshot("C:/test_rs_pic/change_banner.png")
         
         #验证
     
@@ -710,7 +710,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to modify_pagefoot")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/modify_pagefoot.png")
+            self.driver.save_screenshot("C:/test_rs_pic/modify_pagefoot.png")
     
     def login_from_independent_domian(self):
         
@@ -720,7 +720,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to login from independent_domian!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/login_from_independent_domian.png")
+            self.driver.save_screenshot("C:/test_rs_pic/login_from_independent_domian.png")
             
         #验证
             
@@ -732,7 +732,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to logout from independent domian!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/logout_from_independent_domian.png")
+            self.driver.save_screenshot("C:/test_rs_pic/logout_from_independent_domian.png")
         
         #验证
         
@@ -746,7 +746,7 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to add photo!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/add_photot.png")
+            self.driver.save_screenshot("C:/test_rs_pic/add_photot.png")
             
         #验证
         

@@ -15,8 +15,8 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "firefox"
-        self.test_enviroment = "omega" 
+        self.browser = "Chrome"
+        self.test_enviroment = "gamma" 
         self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
@@ -249,7 +249,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000,9999))
         title = u"agencycourse"+rand_name
         #try:
-        course_management.release_agency_course(self.cfg, self.driver, self.base_url, self.org_name, course_title=title)
+        new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
         #except Exception,e:
         #    print e
         #finally:
@@ -755,16 +755,16 @@ class Test(unittest.TestCase):
         
     
     def test_regress(self):
-        self.register()
-        #self.login_from_index()
+        #self.register()
+        self.login_from_index()
         #self.register()
         #self.login_from_index()
         #self.release_normal()
         #self.release_three_video()
-        #self.agency_course()
-        self.package_course() #等做成网络班
+        self.agency_course()
+        #self.package_course() #等做成网络班
         #self.add_cate()
-        self.presale_course()
+        #self.presale_course()
         #self.prepaid_cardgroup()
         #self.course_cardgroup()
         #self.delete_cate()

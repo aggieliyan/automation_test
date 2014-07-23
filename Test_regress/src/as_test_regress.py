@@ -6,7 +6,7 @@ Created on Sep. 24, 2012
 '''
 import unittest,ConfigParser,random,time,os,MySQLdb
 from selenium import webdriver
-import login, new_course_management, course_management, student_management, card_management,cate_management,admin_management,user_management
+import login, new_course_management, course_management, student_management, card_management,cate_management,admin_management,user_management,exam_paper
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
@@ -750,9 +750,21 @@ class Test(unittest.TestCase):
             
         #验证
         
+    def createpaper(self):
+        self.total += 1
+        exam_num = 2
+        try:
+            exam_paper.auto_createpaper(self.cfg,self.driver, self.base_url,exam_num) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to create paper")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+        
+        
     
     def test_regress(self):
-        self.register()
+        #self.register()
         #self.login_from_index()
         #self.register()
         #self.login_from_index()
@@ -789,6 +801,7 @@ class Test(unittest.TestCase):
         #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
+        self.createpaper()
        
     def tearDown(self):
         self.driver.quit()

@@ -48,6 +48,7 @@ class Test(unittest.TestCase):
 
         self.driver.implicitly_wait(5)
         self.base_url = "http://www."+self.test_enviroment+".ablesky.com/"
+        #self.base_url = "http://www.zhongyan.com/"
         
         if os.path.exists("D:\\test_rs_pic")!= True:
             os.system("mkdir D:\\test_rs_pic")
@@ -779,7 +780,7 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
-        new_course_management.class_redirect(self.driver, self.base_url)
+        #new_course_management.class_redirect(self.driver, self.base_url)
         #new_course_management.forsale_couse(self.driver, self.base_url)
         #login.logout(self.driver, self.base_url)
         #self.login_user()

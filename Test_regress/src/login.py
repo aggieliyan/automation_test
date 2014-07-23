@@ -120,11 +120,50 @@ def register_by_mobile_index(cfg,driver, base_url,r_username, r_mobile, r_psw):
     except:
         print 'pass'
 
+#独立域名注册
+def register_by_independent_domian(cfg,driver,base_url,r_username, r_email, r_psw):
+    driver.get(base_url + "/")
+    time.sleep(2)
+    driver.find_element_by_link_text(u"[注册]").click()
+    driver.find_element_by_id(cfg.get('as_index','register_email_uid')).clear()
+    driver.find_element_by_id(cfg.get('as_index','register_email_uid')).send_keys(r_username)
+    driver.find_element_by_id(cfg.get('as_index','register_email_id')).clear()
+    driver.find_element_by_id(cfg.get('as_index','register_email_id')).send_keys(r_email)
+    driver.find_element_by_id(cfg.get('as_index','register_email_psw_id')).clear()
+    driver.find_element_by_id(cfg.get('as_index','register_email_psw_id')).send_keys(r_psw)
+    driver.find_element_by_id(cfg.get('as_index','register_email_confirm_psw_id')).clear()
+    driver.find_element_by_id(cfg.get('as_index','register_email_confirm_psw_id')).send_keys(r_psw)
+    driver.find_element_by_id("J_iCode").send_keys("aaaa")
+    time.sleep(3)
+    driver.find_element_by_css_selector(cfg.get('as_index','register_email_next_css')).click()
+    time.sleep(6)
+    driver.find_element_by_id(cfg.get('as_index','register_email_realname_id')).clear()
+    driver.find_element_by_id(cfg.get('as_index','register_email_realname_id')).send_keys("真实姓名")
+    driver.find_element_by_id(cfg.get('as_index','register_email_mobile_id')).clear()
+    driver.find_element_by_id(cfg.get('as_index','register_email_mobile_id')).send_keys("15888855588")
+    driver.find_element_by_id(cfg.get('as_index','register_email_address_id')).clear()
+    driver.find_element_by_id(cfg.get('as_index','register_email_address_id')).send_keys(u"地址啊")
+    driver.find_element_by_id(cfg.get('as_index','register_email_code_id')).clear()
+    driver.find_element_by_id(cfg.get('as_index','register_email_code_id')).send_keys("055550")
+    driver.find_element_by_xpath(cfg.get('as_index','register_mobile_school_xpath')).click()
+    driver.find_element_by_css_selector(cfg.get('as_index','register_mobile_age_css')).click()
+    driver.find_element_by_id(cfg.get('as_index','register_mobile_qq_id')).clear()
+    driver.find_element_by_id(cfg.get('as_index','register_mobile_qq_id')).send_keys("529111129")
+    driver.find_element_by_id(cfg.get('as_index','register_email_next_css')).clear()
+    driver.find_element_by_id(cfg.get('as_index','register_mobile_year_id')).send_keys("2013")
+    driver.find_element_by_css_selector(cfg.get('as_index','register_email_submit_css')).click()
+    time.sleep(6)
+    try:
+        logout(driver,base_url,r_username)
+    except:
+        print 'pass'
+    
+    
 #自动注册 
 def auto_register(cfg,driver, base_url,r_num):
     
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
-    user_file = open(r"D:/register_user_list.txt",'w')
+    user_file = open(r"register_user_list.txt",'w')
     for i in range(r_num):
         r_username = 'testlogin_' + prefix + str(i) 
         r_email = r_username+"@sohu.com"
@@ -132,7 +171,8 @@ def auto_register(cfg,driver, base_url,r_num):
         r_psw = '1234aa'
       
         #register_by_mobile_index(cfg,driver, base_url,r_username, r_mobile, r_psw)
-        register_by_email_index(cfg,driver, base_url,r_username, r_email, r_psw)
+        #register_by_email_index(cfg,driver, base_url,r_username, r_email, r_psw)
+        register_by_independent_domian(cfg,driver, base_url,r_username, r_email, r_psw)
         
         #except Exception,info:
             #print info
@@ -143,7 +183,3 @@ def auto_register(cfg,driver, base_url,r_num):
         
     user_file.close()  
     return user_name
-
-#独立域名注册
-
-

@@ -98,7 +98,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            login.login_by_as(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
+            login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
         except Exception,e:
             print e
         finally:
@@ -116,7 +116,7 @@ class Test(unittest.TestCase):
     def release_normal(self):
         
         self.total += 1
-        file=r"W:\Testing\Testing Files\Automation_test\OLAY.mpe.asc.flv"
+        #file=r"W:\Testing\Testing Files\Automation_test\OLAY.mpe.asc.flv"
         rand_name = str(random.randint(1000,9999))
         title =u"course"+rand_name#在标题中加入随机数字确保课件标题的唯一性
         try:
@@ -181,22 +181,20 @@ class Test(unittest.TestCase):
             self.assertEqual(True, rs, "fail to release two video course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
-            
-
-    
+               
     def package_course(self):
-        
+        #打包课程，即网络班
         self.total += 1
         rand_name = str(random.randint(1000,9999))
-        title = u"自动化测试-打包"+rand_name
+        title = "onlineclass" + rand_name
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, ctype=2, course_title=title)
+            new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)
         except Exception,e:
             print e
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/6_package.png')
         self.package_title = title   
-        rs = self.verify_course(title)
+        rs = self.verify_onlineclass(title)
         try:
             self.assertEqual(True, rs)
         except AssertionError,e:
@@ -226,23 +224,23 @@ class Test(unittest.TestCase):
         
         self.total += 1
         rand_name = str(random.randint(1000,9999))
-        title = u"presalecourse"+rand_name
+        title = "presaleclass" + rand_name
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, ctype=3, course_title=title, course_price=10)
+            new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title, ctype=2)
         except Exception,e:
             print e
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/8_presale.png')
             
         self.presale_title = title   
-        rs = self.verify_course(title)
+        rs = self.verify_onlineclass(title)
         try:
             self.assertEqual(True, rs,"fail to release presale course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
             
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
-        self.course_href_2 = self.base_url+course_href
+        self.course_href_2 = self.base_url + course_href
         
     
     def agency_course(self):
@@ -434,7 +432,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            student_management.import_multi_student(self.cfg, self.driver, self.base_url, self.org_name, r"D:\register_user_list.txt")
+            student_management.import_multi_student(self.cfg, self.driver, self.base_url, self.org_name, r"C:\register_user_list.txt")
         except Exception,e:
             print e
             self.verificationErrors.append("fail to import multi student!")
@@ -466,6 +464,11 @@ class Test(unittest.TestCase):
         self.driver.find_element_by_link_text(u"课程中心").click()
         time.sleep(2) 
         rs = self.is_element_present(By.LINK_TEXT, title)
+        return rs
+
+    def verify_onlineclass(self, classname):
+        time.sleep(1) 
+        rs = self.is_element_present(By.LINK_TEXT, classname)
         return rs
     
     def use_prepaidcard(self):
@@ -771,9 +774,9 @@ class Test(unittest.TestCase):
         #self.release_normal()
         #self.release_three_video()
         #self.agency_course()
-        #self.package_course() #等做成网络班
+        self.package_course() #等做成网络班
         #self.add_cate()
-        #self.presale_course()
+        self.presale_course()
         #self.prepaid_cardgroup()
         #self.course_cardgroup()
         #self.delete_cate()
@@ -792,8 +795,6 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
-        #new_course_management.class_redirect(self.driver, self.base_url)
-        #new_course_management.forsale_couse(self.driver, self.base_url)
         #login.logout(self.driver, self.base_url)
         #self.login_user()
         #self.use_prepaidcard()

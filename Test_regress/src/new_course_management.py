@@ -7,7 +7,7 @@ Created on Aug 12, 2013
 import time
 import login
 
-def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course_file =u"D:\\manual.pdf",course_title=u"course",course_describe='hello world',course_tags='english',course_price=0):
+def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course_file="", course_title=u"course",course_describe='hello world',course_tags='english\n',course_price=0):
     """
     ctype代表发课类型 1表示点播课程
     upload是发点播课程的时候需要用的，1是存储空间上传，2是本地上传
@@ -21,7 +21,7 @@ def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course
     
     """
     #进入发课页面
-    url = "%s/coursePostRedirect.do?action=courseStepOne"%(base_url)#
+    url = "%s/coursePostRedirect.do?action=courseStepOne"%(base_url)
     driver.get(url)
     time.sleep(1)
     
@@ -29,28 +29,28 @@ def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course
     if ctype == 1:        
         #从存储空间上传
         if isthree == 1:#发三分屏
-            driver.find_element_by_class_name(cfg.get('courseRedirect','threevideo_class')).click()
-            driver.find_elements_by_css_selector(cfg.get('courseRedirect','upload_btn_css'))[1].click()
+            driver.find_element(cfg.get('courseRedirect','threevideo_by'), cfg.get('courseRedirect','threevideo')).click()
+            driver.find_elements(cfg.get('courseRedirect','upload_btn_by'), cfg.get('courseRedirect','upload_btn'))[1].click()
             time.sleep(1)
             driver.execute_script("$(\'.spacefile-name input\').last().click()")
             driver.execute_script("$(\'.dialog-button-container button\').eq(0).click()")
             time.sleep(1)
         
-            driver.find_elements_by_css_selector(cfg.get('courseRedirect','upload_btn_css'))[2].click()
+            driver.find_elements(cfg.get('courseRedirect','upload_btn_by'), cfg.get('courseRedirect','upload_btn'))[2].click()
             time.sleep(1)
             driver.execute_script("$(\'.spacefile-name input\').eq(0).click()")
             driver.execute_script("$(\'.dialog-button-container button\').eq(0).click()")
             time.sleep(1)
             
-            driver.find_elements_by_class_name(cfg.get('courseRedirect','next_btn_class'))[1].click()
         else:#单视频
+            #存储空间上传
             if upload == 1:
                 driver.find_element_by_css_selector("span.greenbtn30_text").click()
                 time.sleep(1)
                 
                 #全选          
                 #driver.execute_script("$(\'.bottomInfo input\').eq(0).click()")
-                driver.find_element_by_name("checkAll").click()
+                driver.find_element(cfg.get('courseRedirect','select_cfile_by'), cfg.get('courseRedirect','select_cfile')).click()
                 
                 driver.execute_script("$(\'.dialog-button-container button\').eq(0).click()")
                 time.sleep(1)
@@ -61,66 +61,61 @@ def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course
                 time.sleep(1)
                 input = driver.find_element_by_name("files").send_keys(course_file)
                 time.sleep(3)
-            
-            driver.find_element_by_name("files").send_keys(u"D:\\manual.pdf")
-            driver.find_element_by_id(cfg.get('courseRedirect','single_btn_id')).click()          
-                              
+
+    driver.find_element(cfg.get('courseRedirect','next_btn_by'), cfg.get('courseRedirect','next_btn')).click()                                 
     #发课第二步-课程信息页面
     time.sleep(2)
-    driver.find_element_by_name("courseTitle").click()
-    driver.find_element_by_name("courseTitle").send_keys(course_title)
+    driver.find_element(cfg.get('courseRedirect','ctitle_by'), cfg.get('courseRedirect','ctitle')).click()
+    driver.find_element(cfg.get('courseRedirect','ctitle_by'), cfg.get('courseRedirect','ctitle')).send_keys(course_title)
     #设置价格
     if course_price != 0:
-        driver.find_element_by_id("J_charge").click()
-        driver.find_element_by_name(cfg.get('courseRedirect','price_name')).send_keys(course_price)            
+        driver.find_element(cfg.get('courseRedirect','chanrge_by'), cfg.get('courseRedirect','chanrge')).click()
+        driver.find_element(cfg.get('courseRedirect','price_by'), cfg.get('courseRedirect','price')).send_keys(course_price)            
     #填课程详情
     driver.execute_script("var element=window.document.getElementById('courseDesc-editor_ifr');\
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');element.innerHTML =\'"+course_describe+"\';")
     #选择服务分类
     driver.execute_script("$(\'li.level2\').click()") 
-    driver.execute_script("$(\'li.level3.selected\').click()")    
+    driver.execute_script("$(\'li.level3.selected\').click()")  
     #填写课程标签
-    driver.find_element_by_css_selector("div.text-layer.clearfix > input[type=\"text\"]").send_keys(course_tags)
-    time.sleep(1)
+    driver.find_element(cfg.get('courseRedirect','tags_by'), cfg.get('courseRedirect','tags')).send_keys(course_tags)
     #完成
-    driver.find_element_by_id(cfg.get('courseRedirect','done_btn_id')).click()
-    time.sleep(2)
+    driver.find_element(cfg.get('courseRedirect','done_btn_by'), cfg.get('courseRedirect','done_btn')).click()
+    time.sleep(1)
 
-def class_redirect(driver, base_url, ctype=2, price=10):
+def class_redirect(cfg, driver, base_url, classname='onlineclass', ctype=1, price=10, course_describe='hello world',course_tags='english\n'):
     '''
     ctype代表发课类型，1代表普通网络班（打包），2代表预售网络班
     '''
-    course_describe = "hello"
-    driver.get(base_url + "myOffice.do")
+    driver.get("%smyOffice.do" %(base_url))
     time.sleep(2)
     driver.find_element_by_link_text(u"报班管理").click()
     time.sleep(3)
-    driver.find_element_by_css_selector("span.greenbtn25_text").click()
+    driver.find_element(cfg.get('classRedirect','redirect_btn_by'), cfg.get('classRedirect','redirect_btn')).click()
 
     if ctype == 1:
-        classname = "onlineclass"
-        driver.find_element_by_name("checkAll").click()
+        #classname = "onlineclass"
+        driver.find_element(cfg.get('classRedirect','select_course_by'), cfg.get('classRedirect','select_course')).click()
     else:
         driver.find_element_by_link_text(u"课程预售").click()
         time.sleep(2)
-        classname = "onlineclass-presale"
+        #classname = "onlineclass-presale"
         driver.execute_script("$(\".comp-presell input\").eq(0).attr(\"checked\",\"checked\")")
-        driver.find_element_by_class_name("last-price").send_keys(price)
+        driver.find_element(cfg.get('classRedirect','presell_price_by'), cfg.get('classRedirect','presell_price')).send_keys(price)
 
-    driver.find_element_by_id("J_className").send_keys(classname)
+    driver.find_element(cfg.get('classRedirect','classname_by'), cfg.get('classRedirect','classname')).send_keys(classname)
     time.sleep(1)
 
     #填课程详情
     driver.execute_script("var element=window.document.getElementById('courseDescribe-editor_ifr');\
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');element.innerHTML =\'"+course_describe+"\';")
-    driver.find_element_by_css_selector("div.text-layer.clearfix > input[type=\"text\"]").send_keys("english\n")
+    driver.find_element_by_css_selector("div.text-layer.clearfix > input[type=\"text\"]").send_keys(course_tags)
     #选择服务分类
     driver.execute_script("$(\'li.level2\').click()") 
     driver.execute_script("$(\'li.level3.selected\').click()") 
     driver.execute_script("$('.greenbtn25_text').click()")
-    time.sleep(5)
-    driver.save_screenshot(r'D:/test_rs_pic/onlineclass.png')
-    
+    time.sleep(2)
+
 def forsale_couse(driver, base_url):
     filepath = "W:\Testing\auto_test_file\headpic.jpg"
     driver.get(base_url + "myOffice.do")

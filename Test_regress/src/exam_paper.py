@@ -9,24 +9,8 @@ from selenium.webdriver.common.by import By
 import random, time
 
 def create_paper(cfg, driver, base_url, exam_name, exam_time):
-    driver.get(base_url + " ")
-    driver.find_element_by_link_text(u"[登录]").click()
-    driver.find_element_by_id("J_loginUsername").clear()
-    driver.find_element_by_id("J_loginUsername").send_keys("haitian")
-    driver.find_element_by_id("J_loginPassword").clear()
-    driver.find_element_by_id("J_loginPassword").send_keys("1234")
-    driver.find_element_by_css_selector("span.bluebtn35_text").click()
-    #获得当前窗口句柄
-    now_handle1 = driver.current_window_handle
-    driver.find_element_by_link_text(u"考试系统").click()
-    time.sleep(2)
-    #获取所有窗口句柄
-    all_handles1 = driver.window_handles 
-    
-    for handle1 in all_handles1:
-        if handle1 != now_handle1:
-            driver.switch_to_window(handle1)
-            
+    driver.get("%sexam/" %(base_url))
+    time.sleep(1)
     driver.find_element_by_xpath("//a[2]").click()
     now_handle = driver.current_window_handle #得到当前窗口句柄
     driver.find_element_by_link_text(u"新建试卷").click()
@@ -43,39 +27,61 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time):
     time.sleep(2)
     #添加大题
     auto_creatquestion(cfg,driver,3)
-   
-    #导入试题
-    driver.find_element_by_id("import_q_btn").click()
-    driver.find_element_by_css_selector("label.import-list-item.clearfix > input[type=\"checkbox\"]").click()
-    driver.find_element_by_css_selector("button[type=\"button\"]").click()
-    time.sleep(2)
     #生成试卷
     driver.find_element_by_id("bulid_paper_btn").click()
-    time.sleep(2)
-    
+    time.sleep(2)    
         
-#创建大题1=单选题，2=多选题，3=是非题，4=填空题，5=问答题，6=完型填空题，7=综合题       
-def add_big_question_falsequestions(cfg, driver,qscore):
+#添加大题        
+def add_big_question(cfg, driver,qscore, qtype):
+    """
+    qtype表示大题类型，1=单选题，2=多选题，3=是非题，4=填空题，5=问答题，6=完型填空题，7=综合题
+    """
     driver.find_element_by_id("add_big_btn").click()
     driver.find_element_by_css_selector("span.cc-arrow").click()
-    driver.find_element_by_xpath("//div[10]/ul/li[1]").click()
+    if qtype == 1:
+        driver.find_element_by_xpath("//div[10]/ul/li[1]").click()
+    if qtype == 2:
+        driver.find_element_by_xpath("//div[10]/ul/li[2]").click()
+    if qtype == 3:
+        driver.find_element_by_xpath("//div[10]/ul/li[3]").click()
+    if qtype == 4:
+        driver.find_element_by_xpath("//div[10]/ul/li[4]").click()
+    if qtype == 5:
+        driver.find_element_by_xpath("//div[10]/ul/li[5]").click()
+    if qtype == 6:
+        driver.find_element_by_xpath("//div[10]/ul/li[6]").click()
+    if qtype == 7:
+        driver.find_element_by_xpath("//div[10]/ul/li[7]").click()
     #driver.find_element_by_id("add_q_description_input").clear()
     #driver.find_element_by_id("add_q_description_input").send_keys(u"是非题")
+    time.sleep(2)
     driver.find_element_by_id("add_q_score_input").clear()
     driver.find_element_by_id("add_q_score_input").send_keys(qscore)
     driver.find_element_by_css_selector("button[type=\"button\"]").click()
     time.sleep(2)
+    #导入试题
+    driver.find_element_by_id("import_q_btn").click()
+    time.sleep(2)
+    #勾选全部
+    driver.find_element_by_id("select_all_btn").click()
+    #driver.find_element_by_css_selector("label.import-list-item.clearfix > input[type=\"checkbox\"]").click()
+    driver.find_element_by_css_selector("button[type=\"button\"]").click()
+    time.sleep(3)        
     
-    
-    
-#自动创建大题
+#自动添加题型
 def auto_creatquestion(cfg,driver,q_num):
-    #prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
+    type = [1,2,3,4,5,6,7]
     for i in range(q_num):
         qscore = '3'
-        add_big_question_falsequestions(cfg, driver, qscore)
-        print i
- 
+        qtype=random.choice(type)
+        add_big_question(cfg, driver, qscore, qtype)
+        
+#向试卷中导入试题        
+def exam_export_question(cfg, driver,qscore, qtype):
+    driver.find_element_by_id("import_q_btn").click()
+    driver.find_element_by_css_selector("label.import-list-item.clearfix > input[type=\"checkbox\"]").click()
+    driver.find_element_by_css_selector("button[type=\"button\"]").click()
+    time.sleep(2) 
     
 #自动创建试卷
 def auto_createpaper(cfg,driver,base_url,exam_num):
@@ -83,7 +89,6 @@ def auto_createpaper(cfg,driver,base_url,exam_num):
     for i in range(exam_num):
         exam_name = 'testpaper_' + prefix + str(i) 
         exam_time = '120'
-        qscore = '3'
         create_paper(cfg, driver, base_url, exam_name, exam_time)
         print i
       

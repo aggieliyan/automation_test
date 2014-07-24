@@ -18,7 +18,7 @@ def buy_course(cfg, driver, course_url):
     driver.switch_to_window(h[-1])
 
     driver.find_element_by_id(cfg.get('org_index','use_rmb_id')).click()
-    driver.find_element_by_css_selector(cfg.get('org_index','pay_ok_css')).click()
+    driver.find_element(cfg.get('org_index','pay_ok_by'), cfg.get('org_index','pay_ok')).click()
     time.sleep(5)
 
 #个人充值卡买课

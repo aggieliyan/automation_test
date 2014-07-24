@@ -100,10 +100,10 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
                              3代表为学员评分
     """
     #exam_name = u"未作答（主观题，免费）"
-    #username = "sunmin1990"
+    username = "sunmin1990"
     driver.get("%sexam/" %(base_url))
     driver.find_element_by_link_text(u"试卷库").click()
-    driver.find_element("id", "search_text").send_keys(exam_name)
+    driver.find_element(cfg.get('exam','paper_search_by'), cfg.get('exam','paper_search')).send_keys(exam_name)
     time.sleep(1)
     exam_href = driver.execute_script("return $(\"a:contains(\'"+exam_name+"\')\").attr('href')")
     driver.get("%sexam/%s" % (base_url, exam_href))
@@ -111,23 +111,24 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
     if etype == 2:
         driver.find_element_by_link_text(u"作为开放试卷的统计结果").click()
         time.sleep(1)
-        driver.find_element("id", "select_all_btn").click()
-        driver.find_element("id", "output_btn_open").click()
+        driver.find_element(cfg.get('exam','select_paper_by'), cfg.get('exam','select_paper')).click()
+        driver.find_element(cfg.get('exam','output_open_by'), cfg.get('exam','output_open')).click()
     elif etype == 1:
-        driver.find_element("id", "select_all_btn").click()
-        driver.find_element("id", "output_btn").click()
+        driver.find_element(cfg.get('exam','select_paper_by'), cfg.get('exam','select_paper')).click()
+        driver.find_element(cfg.get('exam','output_by'), cfg.get('exam','output')).click()
     else:
         #取评分链接
         time.sleep(1)
         grade_href = driver.execute_script("return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
+        time.sleep(1)
         driver.get("%sexam/%s" % (base_url, grade_href))
-        score_input = driver.find_elements("class name", "subjective-score-input")
+        score_input = driver.find_elements(cfg.get('exam','input_score_by'), cfg.get('exam','input_score'))
         score = "0.1"
         for item in score_input:
             item.clear()
             item.send_keys(score)
-        driver.find_element("id", "sava_btn").click()
-        total_score = item.length * score
+        driver.find_element(cfg.get('exam','score_save_by'), cfg.get('exam','score_save')).click()
+        total_score = len(score_input) * score
         return total_score
 
     time.sleep(5)
@@ -142,16 +143,16 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     time.sleep(1)
     driver.find_element("xpath", "//p[4]/a").click()
     time.sleep(2)
-    driver.find_element("class name", "sec-txt").clear()
-    driver.find_element("class name", "sec-txt").send_keys(username)
+    driver.find_element(cfg.get('exam','user_search_by'), cfg.get('exam','user_search')).clear()
+    driver.find_element(cfg.get('exam','user_search_by'), cfg.get('exam','user_search')).send_keys(username)
     time.sleep(1)
     if atype == 1:
         driver.find_element_by_link_text(u"分发试卷").click()
     else:
         driver.find_element_by_link_text(u"关闭试卷").click()
-    driver.find_element("id", "J_selectAll").click()
+    driver.find_element(cfg.get('exam','open_paper_by'), cfg.get('exam','open_paper')).click()
     time.sleep(1)
-    driver.find_element("xpath", "//button").click()
+    driver.find_element(cfg.get('exam','open_paper_ok_by'), cfg.get('exam','open_paper_ok')).click()
     time.sleep(5)
 
 

@@ -802,11 +802,13 @@ class Test(unittest.TestCase):
         #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
-        self.createpaper() 
-        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）")
-
-        #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url)
-        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
+        #self.createpaper() 
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
+        #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
+        #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
+        exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
         
        
     def tearDown(self):

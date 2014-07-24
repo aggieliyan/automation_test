@@ -88,11 +88,14 @@ def auto_createpaper(cfg,driver,base_url,exam_num):
         print i
       
 
-def export_exam_result(cfg, driver, base_url, exam_name, etype=1):
+def exam_result(cfg, driver, base_url, exam_name, etype=3, username=""):
     """
-    etype表示试卷类型，1为分发给学员的，2为作为开放试卷的
+    etype表示需要的操作类型，1为导出分发给学员的试卷统计结果，
+                             2为导出作为开放试卷的统计结果, 
+                             3代表为学员评分
     """
     #exam_name = u"未作答（主观题，免费）"
+    username = "sunmin1990"
     driver.get("%sexam/" %(base_url))
     driver.find_element_by_link_text(u"试卷库").click()
     driver.find_element("id", "search_text").send_keys(exam_name)
@@ -105,11 +108,24 @@ def export_exam_result(cfg, driver, base_url, exam_name, etype=1):
         driver.find_element("id", "select_all_btn").click()
         driver.find_element("id", "output_btn_open").click()
         time.sleep(2)
-    else:
+    elif etype == 1:
         driver.find_element("id", "select_all_btn").click()
         driver.find_element("id", "output_btn").click()
+    else:
+        #取评分链接
+        time.sleep(1)
+        grade_href = driver.execute_script("return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
+        driver.get("%sexam/%s" % (base_url, grade_href))
+        score_input = driver.find_elements("class name", "subjective-score-input")
+        for item in score_input:
+            item.clear()
+            item.send_keys("0.1")
+        driver.find_element("id", "sava_btn").click()
  
     time.sleep(5)
+
+def exam_grade(cfg, driver, base_url, exam_name, username):
+    driver.fin
 
     
     

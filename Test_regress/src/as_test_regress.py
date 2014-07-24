@@ -756,7 +756,7 @@ class Test(unittest.TestCase):
     def createpaper(self):
         self.total += 1
         try:
-            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1) 
+            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 ,1, 1,1) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to create paper")
@@ -803,7 +803,7 @@ class Test(unittest.TestCase):
         #self.buy_course_use_card()
         self.createpaper() 
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）")
-        exam_paper.send_paper(self.cfg, self.driver, self.base_url)
+        #exam_paper.send_paper(self.cfg, self.driver, self.base_url)
        
     def tearDown(self):
         self.driver.quit()

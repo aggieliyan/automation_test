@@ -801,15 +801,9 @@ class Test(unittest.TestCase):
         #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
-<<<<<<< HEAD
         self.createpaper() 
-        #exam_paper.export_exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）")
-=======
-        #self.createpaper()
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）")
         exam_paper.send_paper(self.cfg, self.driver, self.base_url)
-        
->>>>>>> origin/master
        
     def tearDown(self):
         self.driver.quit()

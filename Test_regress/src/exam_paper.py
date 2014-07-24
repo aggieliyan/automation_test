@@ -42,15 +42,8 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time):
     driver.find_element_by_id("create_step_one").click()
     time.sleep(2)
     #添加大题
-    driver.find_element_by_id("add_big_btn").click()
-    driver.find_element_by_css_selector("span.cc-arrow").click()
-    driver.find_element_by_xpath("//div[10]/ul/li[3]").click()
-    driver.find_element_by_id("add_q_description_input").clear()
-    driver.find_element_by_id("add_q_description_input").send_keys(u"是非题")
-    driver.find_element_by_id("add_q_score_input").clear()
-    driver.find_element_by_id("add_q_score_input").send_keys("2")
-    driver.find_element_by_css_selector("button[type=\"button\"]").click()
-    time.sleep(2)
+    auto_creatquestion(cfg,driver,3)
+   
     #导入试题
     driver.find_element_by_id("import_q_btn").click()
     driver.find_element_by_css_selector("label.import-list-item.clearfix > input[type=\"checkbox\"]").click()
@@ -59,23 +52,30 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time):
     #生成试卷
     driver.find_element_by_id("bulid_paper_btn").click()
     time.sleep(2)
+    
         
-#创建大题       
-def add_big_question_falsequestions(cfg, driver, qscore):
+#创建大题1=单选题，2=多选题，3=是非题，4=填空题，5=问答题，6=完型填空题，7=综合题       
+def add_big_question_falsequestions(cfg, driver,qscore):
     driver.find_element_by_id("add_big_btn").click()
     driver.find_element_by_css_selector("span.cc-arrow").click()
-    driver.find_element_by_xpath("//div[10]/ul/li[3]").click()
-    driver.find_element_by_id("add_q_description_input").clear()
-    driver.find_element_by_id("add_q_description_input").send_keys(u"是非题")
+    driver.find_element_by_xpath("//div[10]/ul/li[1]").click()
+    #driver.find_element_by_id("add_q_description_input").clear()
+    #driver.find_element_by_id("add_q_description_input").send_keys(u"是非题")
     driver.find_element_by_id("add_q_score_input").clear()
     driver.find_element_by_id("add_q_score_input").send_keys(qscore)
     driver.find_element_by_css_selector("button[type=\"button\"]").click()
+    time.sleep(2)
     
     
     
 #自动创建大题
-#def auto_creatquestion(cfg,driver,q_num):
-
+def auto_creatquestion(cfg,driver,q_num):
+    #prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
+    for i in range(q_num):
+        qscore = '3'
+        add_big_question_falsequestions(cfg, driver, qscore)
+        print i
+ 
     
 #自动创建试卷
 def auto_createpaper(cfg,driver,base_url,exam_num):
@@ -85,6 +85,7 @@ def auto_createpaper(cfg,driver,base_url,exam_num):
         exam_time = '120'
         qscore = '3'
         create_paper(cfg, driver, base_url, exam_name, exam_time)
+        print i
       
         
     

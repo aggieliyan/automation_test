@@ -16,7 +16,7 @@ class Test(unittest.TestCase):
     def setUp(self):
         
         self.browser = "firefox"
-        self.test_enviroment = "omega" 
+        self.test_enviroment = "beta" 
         self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
@@ -755,9 +755,8 @@ class Test(unittest.TestCase):
         
     def createpaper(self):
         self.total += 1
-        exam_num = 2
         try:
-            exam_paper.auto_createpaper(self.cfg,self.driver, self.base_url,exam_num) 
+            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 2) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to create paper")
@@ -774,9 +773,9 @@ class Test(unittest.TestCase):
         #self.release_normal()
         #self.release_three_video()
         #self.agency_course()
-        self.package_course() #等做成网络班
+        #self.package_course() #等做成网络班
         #self.add_cate()
-        self.presale_course()
+        #self.presale_course()
         #self.prepaid_cardgroup()
         #self.course_cardgroup()
         #self.delete_cate()

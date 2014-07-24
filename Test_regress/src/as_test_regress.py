@@ -7,6 +7,7 @@ Created on Sep. 24, 2012
 import unittest,ConfigParser,random,time,os,MySQLdb
 from selenium import webdriver
 import login, new_course_management, course_management, student_management, card_management,cate_management,admin_management,user_management,exam_paper
+import exam_user_management
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
@@ -20,7 +21,7 @@ class Test(unittest.TestCase):
         self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
-        self.user_password = "123456aa"
+        self.user_password = "1234"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、omega数据库：192.168.190.74 beta数据库192.168.3.50
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
@@ -767,7 +768,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        self.login_from_index()
+        #self.login_from_index()
         #self.register()
         #self.login_from_index()
         #self.release_normal()
@@ -795,7 +796,7 @@ class Test(unittest.TestCase):
         #self.change_headpic()
         #self.verify_all_course_convert()
         #login.logout(self.driver, self.base_url)
-        #self.login_user()
+        self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()       
@@ -803,7 +804,14 @@ class Test(unittest.TestCase):
         #self.buy_course_use_card()
         self.createpaper() 
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）")
+<<<<<<< HEAD
         #exam_paper.send_paper(self.cfg, self.driver, self.base_url)
+=======
+
+        #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url)
+        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
+        
+>>>>>>> origin/master
        
     def tearDown(self):
         self.driver.quit()

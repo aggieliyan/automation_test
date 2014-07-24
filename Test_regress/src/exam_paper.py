@@ -8,7 +8,7 @@ Created on Jul 23, 2014
 from selenium.webdriver.common.by import By
 import random, time
 
-def create_paper(cfg, driver, base_url, exam_name, exam_time):
+def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erandom, eopen):
     driver.get("%sexam/" %(base_url))
     time.sleep(1)
     driver.find_element_by_xpath("//a[2]").click()
@@ -23,6 +23,22 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time):
     driver.find_element_by_id("paper_name_input").send_keys(exam_name)
     driver.find_element_by_id("exam_len").clear()
     driver.find_element_by_id("exam_len").send_keys(exam_time)
+    if eoperation == 0:
+        driver.find_element_by_id("exam_q_open_true").click()
+    elif eoperation == 1:
+        driver.find_element_by_id("exam_submit_m").click()
+    if erandom == 0:
+        driver.find_element_by_id("exam_q_random_false").click()
+    elif erandom == 1:
+        driver.find_element_by_id("exam_q_random_true").click()
+    if eopen == 0:
+        driver.find_element_by_id("exam_q_open_false").click()
+    elif eopen == 1:
+        driver.find_element_by_id("exam_q_open_true").click()
+        driver.find_element_by_xpath("(//form[@id='combobox-container']/div/span)[2]").click()
+        driver.find_element_by_xpath("//div[5]/ul/li[3]").click()
+        driver.find_element_by_id("exam_price").clear()
+        driver.find_element_by_id("exam_price").send_keys("10")
     driver.find_element_by_id("create_step_one").click()
     time.sleep(2)
     #添加大题
@@ -84,12 +100,12 @@ def exam_export_question(cfg, driver,qscore, qtype):
     time.sleep(2) 
     
 #自动创建试卷
-def auto_createpaper(cfg,driver,base_url,exam_num):
+def auto_createpaper(cfg,driver,base_url,eoperation, erandom, eopen, exam_num):
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
     for i in range(exam_num):
         exam_name = 'testpaper_' + prefix + str(i) 
         exam_time = '120'
-        create_paper(cfg, driver, base_url, exam_name, exam_time)
+        create_paper(cfg, driver, base_url, exam_name, exam_time,eoperation, erandom, eopen)
         print i
       
 

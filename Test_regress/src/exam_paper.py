@@ -128,7 +128,10 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
     time.sleep(5)
     return True
 
-def send_paper(cfg, driver, base_url, username=""):
+def send_close_paper(cfg, driver, base_url, username="", atype=2):
+    """
+    参数atype为1表示为学员开通试卷，2表示为学员关闭试卷
+    """
     username = "sunmin1990\n"
     driver.get("%sexam/" %(base_url))
     time.sleep(1)
@@ -136,9 +139,13 @@ def send_paper(cfg, driver, base_url, username=""):
     time.sleep(2)
     driver.find_element("class name", "sec-txt").clear()
     driver.find_element("class name", "sec-txt").send_keys(username)
-    time.sleep(5)
-    driver.find_element_by_link_text(u"分发试卷").click()
+    time.sleep(1)
+    if atype == 1:
+        driver.find_element_by_link_text(u"分发试卷").click()
+    else:
+        driver.find_element_by_link_text(u"关闭试卷").click()
     driver.find_element("id", "J_selectAll").click()
+    time.sleep(1)
     driver.find_element("xpath", "//button").click()
     time.sleep(5)
 

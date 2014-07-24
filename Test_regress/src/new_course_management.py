@@ -4,6 +4,7 @@ Created on Aug 12, 2013
 
 @author: yilulu
 '''
+import re
 import time
 import login
 
@@ -115,6 +116,36 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', ctype=1, pric
     driver.execute_script("$(\'li.level3.selected\').click()") 
     driver.execute_script("$('.greenbtn25_text').click()")
     time.sleep(2)
+
+#发布代理课程-没有发布了现在代理人只能编辑代理的课程    
+def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
+    
+    driver.get("%smyOffice.do" %(base_url))
+    time.sleep(1)  
+    driver.find_element_by_link_text(u"管理我申请的代理").click()
+    driver.find_element_by_link_text(u"管理课程").click()
+    driver.find_element_by_link_text(u"编辑").click()
+    time.sleep(1)
+    driver.find_element(cfg.get('courseRedirect','agency_title_by'), cfg.get('courseRedirect','agency_title')).clear()
+    driver.find_element(cfg.get('courseRedirect','agency_title_by'), cfg.get('courseRedirect','agency_title')).send_keys(course_title)
+    
+    try:
+        str_price = driver.execute_script("return $('.ablableSNew .colorGreen').text()")
+        temp = re.search(r'\d{1,10}.\d',str_price) 
+        price = temp.group(0)
+        print str_price, price
+    
+        driver.find_element(cfg.get('courseRedirect','agency_price_by'), cfg.get('courseRedirect','agency_price')).clear()
+        driver.find_element(cfg.get('courseRedirect','agency_price_by'), cfg.get('courseRedirect','agency_price')).send_keys(price)
+        driver.find_element(cfg.get('courseRedirect','agency_rank_by'), cfg.get('courseRedirect','agency_rank')).clear()
+        driver.find_element(cfg.get('courseRedirect','agency_rank_by'), cfg.get('courseRedirect','agency_rank')).send_keys(100)
+        time.sleep(1)
+    except Exception, e:#如果是免费的代理课程会在上面取价格的时候就会报错，免费的直接点发布即可
+        pass
+    finally:
+        driver.find_element(cfg.get('courseRedirect','finish_btn_by'), cfg.get('courseRedirect','finish_btn')).click()
+        time.sleep(2)
+
 
 def forsale_couse(driver, base_url):
     filepath = "W:\Testing\auto_test_file\headpic.jpg"

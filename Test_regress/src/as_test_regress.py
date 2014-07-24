@@ -15,8 +15,13 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
+<<<<<<< HEAD
         self.browser = "firefox"
         self.test_enviroment = "beta" 
+=======
+        self.browser = "Chrome"
+        self.test_enviroment = "gamma" 
+>>>>>>> origin/master
         self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
@@ -249,7 +254,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000,9999))
         title = u"agencycourse"+rand_name
         #try:
-        course_management.release_agency_course(self.cfg, self.driver, self.base_url, self.org_name, course_title=title)
+        new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
         #except Exception,e:
         #    print e
         #finally:
@@ -767,7 +772,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        #self.login_from_index()
+        self.login_from_index()
         #self.register()
         #self.login_from_index()
         #self.release_normal()
@@ -801,7 +806,8 @@ class Test(unittest.TestCase):
         #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
-        self.createpaper()
+        #self.createpaper()
+        exam_paper.export_exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）")
        
     def tearDown(self):
         self.driver.quit()

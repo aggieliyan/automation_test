@@ -86,7 +86,31 @@ def auto_createpaper(cfg,driver,base_url,exam_num):
         qscore = '3'
         create_paper(cfg, driver, base_url, exam_name, exam_time)
       
-        
+
+def export_exam_result(cfg, driver, base_url, exam_name, etype=1):
+    """
+    etype表示试卷类型，1为分发给学员的，2为作为开放试卷的
+    """
+    #exam_name = u"未作答（主观题，免费）"
+    driver.get("%sexam/" %(base_url))
+    driver.find_element_by_link_text(u"试卷库").click()
+    driver.find_element("id", "search_text").send_keys(exam_name)
+    time.sleep(1)
+    exam_href = driver.execute_script("return $(\"a:contains(\'"+exam_name+"\')\").attr('href')")
+    driver.get("%sexam/%s" % (base_url, exam_href))
+    driver.find_element_by_link_text("学员信息").click()
+    if etype == 2:
+        driver.find_element_by_link_text(u"作为开放试卷的统计结果").click()
+        driver.find_element("id", "select_all_btn").click()
+        driver.find_element("id", "output_btn_open").click()
+        time.sleep(2)
+    else:
+        driver.find_element("id", "select_all_btn").click()
+        driver.find_element("id", "output_btn").click()
+ 
+    time.sleep(5)
+
+    
     
     
         

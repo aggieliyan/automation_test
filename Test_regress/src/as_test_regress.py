@@ -773,7 +773,7 @@ class Test(unittest.TestCase):
         #self.login_from_index()
         #self.release_normal()
         #self.release_three_video()
-        self.agency_course()
+        #self.agency_course()
         #self.package_course() #等做成网络班
         #self.add_cate()
         #self.presale_course()
@@ -802,7 +802,8 @@ class Test(unittest.TestCase):
         #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
-        self.createpaper()
+        #self.createpaper()
+        exam_paper.export_exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）")
        
     def tearDown(self):
         self.driver.quit()

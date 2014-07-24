@@ -804,14 +804,8 @@ class Test(unittest.TestCase):
         #self.buy_course_use_card()
         self.createpaper() 
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）")
-<<<<<<< HEAD
-        #exam_paper.send_paper(self.cfg, self.driver, self.base_url)
-=======
-
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
-        
->>>>>>> origin/master
        
     def tearDown(self):
         self.driver.quit()

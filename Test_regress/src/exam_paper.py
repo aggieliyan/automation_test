@@ -9,6 +9,14 @@ from selenium.webdriver.common.by import By
 import random, time
 
 def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erandom, eopen):
+    """
+    operation 代表考试时间结束后操作 0代表默认值，自动交卷
+                                 1代表 继续答题
+    random 代表试题是否随机排序  0代表 否，不随机排序
+                             1代表 是，随机排序
+    eopen 代表试卷是否对外开放   0 代表否，不对外开放
+                             1代表对外开放 
+    """
     driver.get("%sexam/" %(base_url))
     time.sleep(1)
     driver.find_element_by_xpath("//a[2]").click()
@@ -42,7 +50,7 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erando
     driver.find_element_by_id("create_step_one").click()
     time.sleep(2)
     #添加大题
-    auto_creatquestion(cfg,driver,3)
+    auto_creatquestion(cfg,driver,7)
     #生成试卷
     driver.find_element_by_id("bulid_paper_btn").click()
     time.sleep(2)    
@@ -53,9 +61,10 @@ def add_big_question(cfg, driver,qscore, qtype):
     qtype表示大题类型，1=单选题，2=多选题，3=是非题，4=填空题，5=问答题，6=完型填空题，7=综合题
     """
     driver.find_element_by_id("add_big_btn").click()
-    driver.find_element_by_css_selector("span.cc-arrow").click()
+    driver.find_element("xpath","//form/div/span").click()
+    time.sleep(1)
     if qtype == 1:
-        driver.find_element_by_xpath("//div[10]/ul/li[1]").click()
+        pass
     if qtype == 2:
         driver.find_element_by_xpath("//div[10]/ul/li[2]").click()
     if qtype == 3:
@@ -70,7 +79,7 @@ def add_big_question(cfg, driver,qscore, qtype):
         driver.find_element_by_xpath("//div[10]/ul/li[7]").click()
     #driver.find_element_by_id("add_q_description_input").clear()
     #driver.find_element_by_id("add_q_description_input").send_keys(u"是非题")
-    time.sleep(2)
+    #time.sleep(2)
     driver.find_element_by_id("add_q_score_input").clear()
     driver.find_element_by_id("add_q_score_input").send_keys(qscore)
     driver.find_element_by_css_selector("button[type=\"button\"]").click()

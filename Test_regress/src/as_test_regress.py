@@ -16,8 +16,8 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "Chrome"
-        self.test_enviroment = "gamma"  
+        self.browser = "firefox"
+        self.test_enviroment = "beta"  
         self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
@@ -768,7 +768,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        #self.login_from_index()
+        self.login_from_index()
         #self.register()
         #self.login_from_index()
         #self.release_normal()
@@ -796,7 +796,7 @@ class Test(unittest.TestCase):
         #self.change_headpic()
         #self.verify_all_course_convert()
         #login.logout(self.driver, self.base_url)
-        self.login_user()
+        #self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()       

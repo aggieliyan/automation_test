@@ -31,7 +31,7 @@ def buy_course_usecard(cfg, driver, course_url):
     #ch = driver.current_window_handle
     driver.switch_to_window(h[-1])
             
-    driver.find_element_by_css_selector(cfg.get('org_index','pay_ok_css')).click()
+    driver.find_element(cfg.get('org_index','pay_ok_by'), cfg.get('org_index','pay_ok')).click()
     time.sleep(5)
 
 #个人发照片 数量最大10

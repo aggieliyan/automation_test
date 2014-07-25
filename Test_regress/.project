@@ -3,6 +3,7 @@
 	<name>Test_regress</name>
 	<comment></comment>
 	<projects>
+		<project>PydevTest</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

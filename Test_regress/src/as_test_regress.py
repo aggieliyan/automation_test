@@ -7,6 +7,7 @@ Created on Sep. 24, 2012
 import unittest,ConfigParser,random,time,os,MySQLdb
 from selenium import webdriver
 import login, new_course_management, course_management, student_management, card_management,cate_management,admin_management,user_management,exam_paper, exam_questions
+import exam_user_management
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
@@ -15,13 +16,13 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "Chrome"
-        self.test_enviroment = "gamma" 
+        self.browser = "firefox"
+        self.test_enviroment = "gamma"  
         self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "123456aa"
-        self.dbhost = "192.168.120.110" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110
+        self.dbhost = "192.168.120.110" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
          
@@ -561,6 +562,27 @@ class Test(unittest.TestCase):
             
         #验证
         
+    def add_subject(self):#新建科目
+        
+        self.total += 1
+        try:
+            subject_info = admin_subject.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num=2)
+        
+            #验证
+            for subject in subject_info:
+                xpath = "//div[text()=\'"+subject+"\']"
+                time.sleep(2)
+                rs = self.is_element_present(By.XPATH, xpath)
+                if rs == False:
+                    self.verificationErrors.append("fail to create subject!")
+                    
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to create subject!")
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/add_subject.png")
+
+
     def release_announcement(self):
         
         self.total += 1
@@ -769,9 +791,8 @@ class Test(unittest.TestCase):
         
     def createpaper(self):
         self.total += 1
-        exam_num = 2
         try:
-            exam_paper.auto_createpaper(self.cfg,self.driver, self.base_url,exam_num) 
+            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 ,1, 1,1) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to create paper")
@@ -817,7 +838,14 @@ class Test(unittest.TestCase):
         #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
-        #self.createpaper()
+        self.createpaper() 
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
+        #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
+        #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
+        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
+
        
     def tearDown(self):
         self.driver.quit()

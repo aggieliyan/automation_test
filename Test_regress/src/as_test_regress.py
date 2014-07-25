@@ -6,7 +6,7 @@ Created on Sep. 24, 2012
 '''
 import unittest,ConfigParser,random,time,os,MySQLdb
 from selenium import webdriver
-import login, new_course_management, course_management, student_management, card_management,cate_management,admin_management,user_management,exam_paper
+import login, new_course_management, course_management, student_management, card_management,cate_management,admin_management,user_management,exam_paper, exam_questions
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "123456aa"
-        self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、omega数据库：192.168.190.74 beta数据库192.168.3.50
+        self.dbhost = "192.168.120.110" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
          
@@ -752,6 +752,20 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/add_photot.png")
             
         #验证
+   
+    def import_questions(self):
+       
+       self.total += 1
+       self.template = '//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/createquestions.xls'
+       try:
+            exam_questions.importquestions(self) 
+       except Exception,e:
+            print e
+            self.verificationErrors.append("fail to import questions..")
+       finally:
+            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+   
+        
         
     def createpaper(self):
         self.total += 1
@@ -769,11 +783,12 @@ class Test(unittest.TestCase):
     def test_regress(self):
         #self.register()
         self.login_from_index()
+        self.import_questions()
         #self.register()
         #self.login_from_index()
         #self.release_normal()
         #self.release_three_video()
-        self.agency_course()
+        #self.agency_course()
         #self.package_course() #等做成网络班
         #self.add_cate()
         #self.presale_course()
@@ -802,7 +817,7 @@ class Test(unittest.TestCase):
         #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
-        self.createpaper()
+        #self.createpaper()
        
     def tearDown(self):
         self.driver.quit()

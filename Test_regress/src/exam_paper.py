@@ -178,4 +178,5 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     driver.find_element(cfg.get('exam', 'open_paper_by'), cfg.get('exam', 'open_paper')).click()
     time.sleep(1)
     driver.find_element(cfg.get('exam', 'open_paper_ok_by'), cfg.get('exam', 'open_paper_ok')).click()
-    time.sleep(5)     
+    time.sleep(5)
+         

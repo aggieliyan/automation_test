@@ -562,6 +562,27 @@ class Test(unittest.TestCase):
             
         #验证
         
+    def add_subject(self):#新建科目
+        
+        self.total += 1
+        try:
+            subject_info = admin_subject.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num=2)
+        
+            #验证
+            for subject in subject_info:
+                xpath = "//div[text()=\'"+subject+"\']"
+                time.sleep(2)
+                rs = self.is_element_present(By.XPATH, xpath)
+                if rs == False:
+                    self.verificationErrors.append("fail to create subject!")
+                    
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to create subject!")
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/add_subject.png")
+
+
     def release_announcement(self):
         
         self.total += 1

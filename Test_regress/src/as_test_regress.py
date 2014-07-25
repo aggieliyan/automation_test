@@ -16,7 +16,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "firefox"
+        self.browser = "Chrome"
         self.test_enviroment = "gamma"  
         self.org_name = "salesdemo"
         self.org_password = "1234"

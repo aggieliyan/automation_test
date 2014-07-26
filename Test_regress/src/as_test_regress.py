@@ -20,8 +20,8 @@ class Test(unittest.TestCase):
         self.test_enviroment = "beta"  
         self.org_name = "salesdemo"
         self.org_password = "1234"
-        self.user_name = "yilu282"
-        self.user_password = "123456aa"
+        self.user_name = "stu_gy50"
+        self.user_password = "gy0411"
         self.dbhost = "192.168.120.110" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
@@ -365,7 +365,30 @@ class Test(unittest.TestCase):
             
         return card_num,card_pwd
     
-    
+        #添加试听卡并返回第一个卡号
+    def add_exam_card(self):
+        self.total += 1
+        try:
+            examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url)
+        except Exception,e:
+            print e
+            self.verificationErrors.append('fail to add exam card!')
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/add_exam_card.png")
+            return examcard_num
+    #使用试听卡
+    def use_exam_card(self):
+        self.total += 1
+        examcard_num = self.add_exam_card()
+        self.login_user()
+        try:
+            card_management.user_usexamcard(self.cfg, self.driver, self.base_url,examcard_num)
+        except Exception,e:
+            print e
+            self.verificationErrors.append('fail to use exam card!')
+        finally: 
+            self.driver.save_screenshot("D:/test_rs_pic/user_exam_card.png") 
+            
     
     def delete_cate(self):
     
@@ -837,7 +860,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        #self.login_from_index()
+        self.login_from_index()
         #self.import_questions()
         #self.register()
         #self.login_from_index()
@@ -866,7 +889,7 @@ class Test(unittest.TestCase):
         #self.change_headpic()
         #self.verify_all_course_convert()
         #login.logout(self.driver, self.base_url)
-        self.login_user()
+        #self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()       
@@ -881,7 +904,8 @@ class Test(unittest.TestCase):
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
-        self.exam_user()
+        #self.exam_user()
+        self.use_exam_card()
        
     def tearDown(self):
         self.driver.quit()

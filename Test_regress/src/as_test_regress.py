@@ -16,7 +16,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "Chrome"
+        self.browser = "firefox"
         self.test_enviroment = "gamma"  
         self.org_name = "salesdemo"
         self.org_password = "1234"
@@ -819,12 +819,26 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to manage course num")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/manage_course_num.png")     
-        
+    #学员参加考试
+    def exam_user(self):
+        self.total += 1
+        # operation =0 自动提交  operation =1 继续答题
+        operation = 1
+        question_answer ='123'
+        # =1 是白卷 =0 是做了一个题
+        blank_pager = 0
+        try:
+            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
+        except Exception,e:
+            print e
+            self.verificationErrors.append('fail to exam!')
+        finally: 
+            self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")        
     
     def test_regress(self):
         #self.register()
-        self.login_from_index()
-        self.import_questions()
+        #self.login_from_index()
+        #self.import_questions()
         #self.register()
         #self.login_from_index()
         #self.release_normal()
@@ -852,13 +866,13 @@ class Test(unittest.TestCase):
         #self.change_headpic()
         #self.verify_all_course_convert()
         #login.logout(self.driver, self.base_url)
-        #self.login_user()
+        self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
-        self.createpaper() 
+        #self.createpaper() 
         #self.exam_questions()
         #self.manage_course_num()
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
@@ -867,7 +881,7 @@ class Test(unittest.TestCase):
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
-
+        self.exam_user()
        
     def tearDown(self):
         self.driver.quit()

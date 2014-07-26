@@ -6,7 +6,7 @@ Created on Sep. 24, 2012
 '''
 import unittest,ConfigParser,random,time,os,MySQLdb
 from selenium import webdriver
-import login, new_course_management, course_management, student_management, card_management,cate_management,admin_management,user_management,exam_paper, exam_questions
+import login, new_course_management, course_management, student_management, card_management,cate_management,admin_management,user_management,exam_paper, exam_questions,exam_cate_management
 import exam_user_management
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -589,7 +589,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            subject_info = admin_subject.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num=2)
+            subject_info = exam_cate_management.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num=2)
         
             #验证
             for subject in subject_info:
@@ -604,6 +604,106 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to create subject!")
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_subject.png")
+            
+            
+            
+    def modify_subject(self):#编辑科目
+        
+        self.total += 1
+        try:
+            subject_name = exam_cate_management.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to modify subject!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/modify_subject.png")
+            
+        #验证
+        xpath = "//div[text()=\'"+subject_name+"\']"
+        time.sleep(2)
+        rs = self.is_element_present(By.XPATH, xpath)
+        if rs == False:
+            self.verificationErrors.append("fail to modify subject!")
+        
+    def delete_subject(self):
+        
+        self.total += 1
+        try:
+            exam_cate_management.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to delete subject!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/delete_subject.png")
+            
+    def create_cate(self):
+        self.total += 1
+        try:
+            cate_info = exam_cate_management.auto_create_exam_cate(self.cfg, self.driver, self.base_url, self.org_name, cate_num=1)
+        
+            #验证
+            for cate in cate_info:
+                xpath = "//div[text()=\'"+cate+"\']"
+                time.sleep(2)
+                rs = self.is_element_present(By.XPATH, xpath)
+                if rs == False:
+                    self.verificationErrors.append("fail to create cate!")
+                    
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to create cate!")
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/add_cate.png")
+            
+    def add_exam_point(self):
+        self.total += 1
+        try:
+            point_info = exam_cate_management.auto_create_exam_point(self.cfg, self.driver, self.base_url, self.org_name, point_num=1)
+        
+            #验证
+            for point in point_info:
+                xpath = "//div[text()=\'"+point+"\']"
+                time.sleep(2)
+                rs = self.is_element_present(By.XPATH, xpath)
+                if rs == False:
+                    self.verificationErrors.append("fail to create point!")
+                    
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to create point!")
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/add_point.png")
+            
+            
+            
+            
+    def modify_exam_point(self):#编辑考点
+        
+        self.total += 1
+        try:
+            point_name = exam_cate_management.modify_exam_point(self.cfg,self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to modify point!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/modify_point.png")
+            
+        #验证
+        #xpath = "//div[text()=\'"+point_name+"\']"
+        time.sleep(2)
+        #rs = self.is_element_present(By.XPATH, xpath)
+        #if rs == False:
+            #self.verificationErrors.append("fail to modify subject!")
+            
+    def delete_exam_point(self):#删除考点
+        self.total += 1
+        try:
+            exam_cate_management.delete_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to delete point!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/delete_point.png")
 
 
     def release_announcement(self):
@@ -880,6 +980,13 @@ class Test(unittest.TestCase):
         #self.create_multi_student()
         #self.add_admin()
         #self.delete_admin()
+        #self.add_subject()
+        #self.modify_subject()
+        #self.delete_subject()
+        #self.create_cate()
+        #self.add_exam_point()
+        #self.modify_exam_point()
+        #self.delete_exam_point()
         #self.buy_open_num()
         #self.release_announcement()
         #self.release_href_course()

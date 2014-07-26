@@ -77,13 +77,13 @@ def open_course_for_one(cfg,driver,base_url, org_name,stu_num = 1):
     time.sleep(2)
     driver.find_element_by_xpath("//div["+str(stu_num)+"]/table/tbody/tr/td[2]/div/p/a").click() #开通知识资料
     time.sleep(4)
-    driver.find_element_by_xpath(cfg.get('org_manage','open_cate_xpath')).click()#未归类内容，展开资料
+    driver.find_element(cfg.get('org_manage',"open_cate_by"),cfg.get('org_manage',"open_cate")).click()#未归类内容，展开资料
     time.sleep(3)
-    driver.find_element_by_xpath(cfg.get('org_manage','open_course_1_xpath')).click()#选中资料
+    driver.find_element(cfg.get('org_manage',"open_course_1_by"),cfg.get('org_manage',"open_course_1")).click()#选中资料
     #driver.find_element_by_xpath(cfg.get('org_manage','open_course_2_xpath')).click()#选中资料
-    driver.find_element_by_xpath(cfg.get('org_manage','open_ok_xpath')).click()#确认开通
+    driver.find_element(cfg.get('org_manage',"open_ok_by"),cfg.get('org_manage',"open_ok")).click()#确认开通
     time.sleep(2)
-    driver.find_element_by_xpath(cfg.get('org_manage','open_popup_xpath')).click()#弹出框中确认       
+    driver.find_element(cfg.get('org_manage',"open_popup_by"),cfg.get('org_manage',"open_popup")).click()#弹出框中确认      
     time.sleep(3)
 
 def open_course_for_multi(cfg,driver,base_url, org_name):

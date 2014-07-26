@@ -261,7 +261,7 @@ class Test(unittest.TestCase):
             self.assertEqual(True, rs,"fail to release agency course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
-            
+    ######      
     def prepaid_cardgroup(self):#充值卡
         
         self.total += 1
@@ -495,8 +495,11 @@ class Test(unittest.TestCase):
         rs = self.is_element_present(By.LINK_TEXT, classname)
         return rs
     
-    def use_prepaidcard(self):
-        
+    
+    
+    
+#####
+    def use_prepaidcard(self):     
         self.total += 1
         try:
             card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.p_card_num, self.p_card_pwd)
@@ -531,6 +534,11 @@ class Test(unittest.TestCase):
             self.verificationErrors.append('fail to use category card!')
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/use_catecard.png")
+            
+            
+            
+            
+            
     
     def add_admin(self):
         
@@ -970,11 +978,11 @@ class Test(unittest.TestCase):
         #self.package_course() #等做成网络班
         #self.add_cate()
         #self.presale_course()
-        #self.prepaid_cardgroup()
-        #self.course_cardgroup()
+        self.prepaid_cardgroup()
+        self.course_cardgroup()
         #self.delete_cate()
         #self.add_course_to_cate()
-        #self.cate_cardgroup()
+        self.cate_cardgroup()
         #self.import_one_stu()
         #self.import_multi_student()
         #self.create_multi_student()
@@ -1012,7 +1020,7 @@ class Test(unittest.TestCase):
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
         #self.exam_user()
-        self.use_exam_card()
+        #self.use_exam_card()
        
     def tearDown(self):
         self.driver.quit()

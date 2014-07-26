@@ -261,7 +261,7 @@ class Test(unittest.TestCase):
             self.assertEqual(True, rs,"fail to release agency course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
-    ######      
+    
     def prepaid_cardgroup(self):#充值卡
         
         self.total += 1
@@ -287,7 +287,7 @@ class Test(unittest.TestCase):
         self.p_card_num = card_info[0]
         self.p_card_pwd = card_info[1]
         #考号
-        
+     
     def course_cardgroup(self):
         
         self.total += 1
@@ -330,7 +330,7 @@ class Test(unittest.TestCase):
         time.sleep(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
-            self.assertEqual(True, rs,"fail to create course cardgroup!")
+            self.assertEqual(True, rs,"fail to create cate cardgroup!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
         #建卡,取考号密码
@@ -495,10 +495,6 @@ class Test(unittest.TestCase):
         rs = self.is_element_present(By.LINK_TEXT, classname)
         return rs
     
-    
-    
-    
-#####
     def use_prepaidcard(self):     
         self.total += 1
         try:
@@ -534,10 +530,7 @@ class Test(unittest.TestCase):
             self.verificationErrors.append('fail to use category card!')
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/use_catecard.png")
-            
-            
-            
-            
+                    
             
     
     def add_admin(self):
@@ -968,7 +961,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        self.login_from_index()
+        #self.login_from_index()
         #self.import_questions()
         #self.register()
         #self.login_from_index()

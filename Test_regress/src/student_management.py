@@ -33,8 +33,8 @@ def import_multi_student(cfg,driver,base_url, org_name, stu_txt):
     time.sleep(2)
     driver.find_element_by_link_text(u"批量导入学员").click()
     time.sleep(2)
-    driver.find_element_by_id(cfg.get('org_manage','stu_file_id')).send_keys(stu_txt)
-    driver.find_element_by_xpath(cfg.get('org_manage','stu_file_ok_xpath')).click()
+    driver.find_element(cfg.get('org_manage',"stu_file_by"),cfg.get('org_manage',"stu_file")).send_keys(stu_txt)
+    driver.find_element(cfg.get('org_manage',"stu_file_ok_by"),cfg.get('org_manage',"stu_file_ok")).click()
     count = 0
     while is_element_present(driver,By.LINK_TEXT, u"继续批量导入学员")!= True or count >= 30:
         time.sleep(3)

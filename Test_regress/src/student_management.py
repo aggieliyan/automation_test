@@ -91,20 +91,24 @@ def open_course_for_multi(cfg,driver,base_url, org_name):
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
     driver.find_element_by_link_text(u"学员管理").click()
+    time.sleep(5)
+    driver.find_element(cfg.get('org_manage',"all_open_list_by"),cfg.get('org_manage',"all_open_list")).click()#点击下拉框
     time.sleep(2)
-    driver.find_element_by_xpath(cfg.get('org_manage','all_open_list_xpath')).click()#点击下拉框
-    driver.find_element_by_xpath(cfg.get('org_manage','all_open_xpath')).click()#选择批量开通资料
-    driver.find_element_by_xpath(cfg.get('org_manage','all_open_check_xpath')).click()#全选
+    driver.find_element(cfg.get('org_manage',"all_open_by"),cfg.get('org_manage',"all_open")).click()#选择批量开通课程
+    time.sleep(2)
+    driver.find_element(cfg.get('org_manage',"all_open_check_by"),cfg.get('org_manage',"all_open_check")).click()#全选
+    time.sleep(2)
     #driver.find_element_by_xpath(u"//a[contains(text(),'应用')]").click()
-    driver.execute_script("$('#studentListDiv .ls_openClose').click()")
+    #driver.execute_script("$('#studentListDiv .ls_openClose').click()")
+    driver.find_element(cfg.get('org_manage',"all_open_apply_by"),cfg.get('org_manage',"all_open_apply")).click()#应用
     time.sleep(6)
-    driver.find_element_by_xpath(cfg.get('org_manage','open_cate_xpath')).click()#未归类内容，展开资料
+    driver.find_element(cfg.get('org_manage',"open_cate_by"),cfg.get('org_manage',"open_cate")).click()#未归类内容，展开资料
     time.sleep(3)
-    driver.find_element_by_xpath(cfg.get('org_manage','open_course_1_xpath')).click()#选中资料
+    driver.find_element(cfg.get('org_manage',"open_course_1_by"),cfg.get('org_manage',"open_course_1")).click()#选中资料
     #driver.find_element_by_xpath(cfg.get('org_manage','open_course_2_xpath')).click()#选中资料
-    driver.find_element_by_xpath(cfg.get('org_manage','open_ok_xpath')).click()#确认开通
+    driver.find_element(cfg.get('org_manage',"open_ok_by"),cfg.get('org_manage',"open_ok")).click()#确认开通
     time.sleep(2)
-    driver.find_element_by_xpath(cfg.get('org_manage','open_popup_xpath')).click()#弹出框中确认
+    driver.find_element(cfg.get('org_manage',"open_popup_by"),cfg.get('org_manage',"open_popup")).click()#弹出框中确认
     time.sleep(6)
        
 #购买开通授权数 bnum为购买的数量    

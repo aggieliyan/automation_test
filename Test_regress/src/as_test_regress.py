@@ -978,8 +978,8 @@ class Test(unittest.TestCase):
         #self.package_course() #等做成网络班
         #self.add_cate()
         #self.presale_course()
-        self.prepaid_cardgroup()
-        self.course_cardgroup()
+        #self.prepaid_cardgroup()
+        #self.course_cardgroup()
         #self.delete_cate()
         #self.add_course_to_cate()
         self.cate_cardgroup()

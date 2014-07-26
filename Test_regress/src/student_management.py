@@ -118,4 +118,22 @@ def buy_open_num(cfg,driver, base_url, org_name, bnum):
     driver.find_element_by_class_name("payBtn").click()
     driver.find_element_by_css_selector(cfg.get('org_index','pay_ok_css')).click()
     time.sleep(3)
+    
+#管理播放授权数
+def manage_course_num(cfg, driver, base_url):
+    driver.get(base_url + "myOffice.do")
+    time.sleep(2)
+    driver.find_element_by_link_text(u"学员管理").click()
+    time.sleep(2)
+    driver.find_element_by_link_text("管理播放授权数").click()
+    time.sleep(2)
+    driver.find_element(cfg.get('manage_course_num',"manage_coursenum_opencouse_xpath_by"),cfg.get('manage_course_num',"manage_coursenum_opencouse_xpath")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('manage_course_num',"manage_coursenum_opennum_xpath_by"),cfg.get('manage_course_num',"manage_coursenum_opennum_xpath")).click()
+    time.sleep(2)
+    driver.find_element_by_link_text("修改剩余播放次数").click()
+    time.sleep(2)
+    driver.find_element(cfg.get('manage_course_num','manage_coursenum_change_xpath_by'),cfg.get('manage_course_num','manage_coursenum_change_xpath')).send_keys("1")
+    time.sleep(2)
+    driver.find_element_by_link_text("保存").click()
  

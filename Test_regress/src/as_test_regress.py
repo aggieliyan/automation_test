@@ -798,7 +798,27 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to create paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-        
+    
+    def exam_questions(self):
+        self.total += 1
+        question_ansa='123'
+        try:
+            exam_questions.exam_questions(self.cfg, self.driver, self.base_url, question_ansa) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to exam questions")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
+            
+    def manage_course_num(self):
+        self.total += 1
+        try:
+            student_management.manage_course_num(self.cfg, self.driver, self.base_url) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to manage course num")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/manage_course_num.png")     
         
     
     def test_regress(self):
@@ -839,6 +859,8 @@ class Test(unittest.TestCase):
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
         self.createpaper() 
+        #self.exam_questions()
+        #self.manage_course_num()
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)

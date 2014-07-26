@@ -20,9 +20,9 @@ def import_one_student(cfg,driver, base_url, org_name, stu_name):
     time.sleep(2)
     driver.find_element_by_link_text(u"学员管理").click()
     time.sleep(2)
-    driver.find_element_by_id(cfg.get('org_manage','stu_input_id')).send_keys(stu_name)
+    driver.find_element(cfg.get('org_manage',"stu_input_by"),cfg.get('org_manage',"stu_input")).send_keys(stu_name)
     time.sleep(1)
-    driver.find_element_by_xpath(cfg.get('org_manage','stu_import_btn_xpath')).click()
+    driver.find_element(cfg.get('org_manage',"stu_import_btn_by"),cfg.get('org_manage',"stu_import_btn")).click()
     time.sleep(3)
     
 def import_multi_student(cfg,driver,base_url, org_name, stu_txt):

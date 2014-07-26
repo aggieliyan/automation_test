@@ -17,11 +17,11 @@ class Test(unittest.TestCase):
     def setUp(self):
         
         self.browser = "firefox"
-        self.test_enviroment = "gamma"  
+        self.test_enviroment = "beta"  
         self.org_name = "salesdemo"
         self.org_password = "1234"
-        self.user_name = "yilu282"
-        self.user_password = "123456aa"
+        self.user_name = "stu_gy50"
+        self.user_password = "gy0411"
         self.dbhost = "192.168.120.110" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"

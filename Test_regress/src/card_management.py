@@ -176,4 +176,4 @@ def user_usexamcard(cfg, driver, base_url,examcard_num):
     driver.find_element(cfg.get('use_card','exam_start_by'),cfg.get('use_card','exam_start')).click()#点击开始考试
     time.sleep(2)
     driver.find_element(cfg.get('use_card','exam_paper_by'),cfg.get('use_card','exam_paper')).text#标题  
-    time.sleep(300)   
+    time.sleep(2)   

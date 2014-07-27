@@ -368,20 +368,20 @@ class Test(unittest.TestCase):
     def add_exam_card(self):
         self.total += 1
         try:
-            examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url)
+            self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url)
         except Exception,e:
             print e
             self.verificationErrors.append('fail to add exam card!')
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_exam_card.png")
-            return examcard_num
+            #return examcard_num
     #使用试听卡
     def use_exam_card(self):
         self.total += 1
-        examcard_num = self.add_exam_card()
-        self.login_user()
+        #examcard_num = self.add_exam_card()
+        #self.login_user()
         try:
-            card_management.user_usexamcard(self.cfg, self.driver, self.base_url,examcard_num)
+            card_management.user_usexamcard(self.cfg, self.driver, self.base_url,self.examcard_num)
         except Exception,e:
             print e
             self.verificationErrors.append('fail to use exam card!')
@@ -974,7 +974,7 @@ class Test(unittest.TestCase):
         #self.course_cardgroup()
         #self.delete_cate()
         #self.add_course_to_cate()
-        self.cate_cardgroup()
+        #self.cate_cardgroup()
         #self.import_one_stu()
         #self.import_multi_student()
         #self.create_multi_student()
@@ -996,10 +996,11 @@ class Test(unittest.TestCase):
         #self.change_headpic()
         #self.verify_all_course_convert()
         #login.logout(self.driver, self.base_url)
+        self.add_exam_card()
         self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
-        self.use_catecard()       
+        #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
         #self.createpaper() 
@@ -1012,7 +1013,7 @@ class Test(unittest.TestCase):
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
         #self.exam_user()
-        #self.use_exam_card()
+        self.use_exam_card()
        
     def tearDown(self):
         self.driver.quit()

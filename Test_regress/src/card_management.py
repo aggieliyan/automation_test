@@ -11,11 +11,11 @@ def use_prepaid_card(cfg, driver, base_url, card_num, card_psw):
         
     driver.get(base_url+"useCard.do?action=toStudyCard")
     time.sleep(1)
-    driver.find_element_by_id(cfg.get('use_card','card_num_id')).send_keys(card_num)
-    driver.find_element_by_id(cfg.get('use_card','card_psw_id')).send_keys(card_psw)
-    driver.find_element_by_css_selector(cfg.get('use_card','card_ok_css')).click()
+    driver.find_element(cfg.get('use_card','card_num_id_by'),cfg.get('use_card','card_num_id')).send_keys(card_num)
+    driver.find_element(cfg.get('use_card','card_psw_id_by'),cfg.get('use_card','card_psw_id')).send_keys(card_psw)
+    driver.find_element(cfg.get('use_card','card_ok_css_by'),cfg.get('use_card','card_ok_css')).click()
     time.sleep(2)
-    driver.find_element_by_css_selector(cfg.get('use_card','prepaid_ok_css')).click()
+    driver.find_element(cfg.get('use_card','prepaid_ok_css_by'),cfg.get('use_card','prepaid_ok_css')).click()
     time.sleep(2)
     
 #使用补课卡
@@ -23,16 +23,16 @@ def use_course_card(cfg,driver, base_url, card_num, card_psw):
     
     driver.get(base_url+"useCard.do?action=toStudyCard")
     time.sleep(1)
-    driver.find_element_by_id(cfg.get('use_card','card_num_id')).send_keys(card_num)
-    driver.find_element_by_id(cfg.get('use_card','card_psw_id')).send_keys(card_psw)
-    driver.find_element_by_css_selector(cfg.get('use_card','card_ok_css')).click()
+    driver.find_element(cfg.get('use_card','card_num_id_by'),cfg.get('use_card','card_num_id')).send_keys(card_num)
+    driver.find_element(cfg.get('use_card','card_psw_id_by'),cfg.get('use_card','card_psw_id')).send_keys(card_psw)
+    driver.find_element(cfg.get('use_card','card_ok_css_by'),cfg.get('use_card','card_ok_css')).click()
     time.sleep(2)
-    driver.find_element_by_name(cfg.get('use_card','course_check_1_name')).click()
-    driver.find_element_by_xpath(cfg.get('use_card','course_check_2_xpath')).click()
+    driver.find_element(cfg.get('use_card','course_check_1_name_by'),cfg.get('use_card','course_check_1_name')).click()
+    driver.find_element(cfg.get('use_card','course_check_2_xpath_by'),cfg.get('use_card','course_check_2_xpath')).click()
     time.sleep(2)
-    driver.find_element_by_css_selector(cfg.get('use_card','add_ok_css')).click()
+    driver.find_element(cfg.get('use_card','add_ok_css_by'),cfg.get('use_card','add_ok_css')).click()
     time.sleep(2)
-    driver.find_element_by_css_selector(cfg.get('use_card','course_ok_css')).click()
+    driver.find_element(cfg.get('use_card','course_ok_css_by'),cfg.get('use_card','course_ok_css')).click()
     time.sleep(2)
   
 #添加卡组-充值卡  

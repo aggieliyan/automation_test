@@ -25,7 +25,6 @@ class Test(unittest.TestCase):
         self.dbhost = "192.168.120.110" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
-         
         
         cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
@@ -286,6 +285,8 @@ class Test(unittest.TestCase):
         card_info=self.add_and_get_card()
         self.p_card_num = card_info[0]
         self.p_card_pwd = card_info[1]
+        print self.p_card_num
+        print self.p_card_pwd
         #考号
      
     def course_cardgroup(self):
@@ -355,9 +356,7 @@ class Test(unittest.TestCase):
                 card_num = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().text()")
                 #print 'card_num:',card_num
                 card_pwd = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().parent().next().children().text()") 
-                #print 'card_pwd', card_pwd
-                
-                          
+                #print 'card_pwd', card_pwd        
         except Exception,e:
             print e
             card_num = 0#确保有返回值不会报错
@@ -961,7 +960,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        #self.login_from_index()
+        self.login_from_index()
         #self.import_questions()
         #self.register()
         #self.login_from_index()
@@ -997,10 +996,10 @@ class Test(unittest.TestCase):
         #self.change_headpic()
         #self.verify_all_course_convert()
         #login.logout(self.driver, self.base_url)
-        #self.login_user()
+        self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
-        #self.use_catecard()       
+        self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
         #self.createpaper() 

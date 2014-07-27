@@ -260,7 +260,7 @@ class Test(unittest.TestCase):
             self.assertEqual(True, rs,"fail to release agency course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
-    
+    #充值卡 
     def prepaid_cardgroup(self):#充值卡
         
         self.total += 1
@@ -288,7 +288,7 @@ class Test(unittest.TestCase):
         print self.p_card_num
         print self.p_card_pwd
         #考号
-     
+    #添加卡组-充课卡   
     def course_cardgroup(self):
         
         self.total += 1
@@ -313,7 +313,7 @@ class Test(unittest.TestCase):
         self.c_card_num = card_info[0]
         self.c_card_pwd = card_info[1]
         # print card_info
-        
+     #添加卡组-补课卡         
     def cate_cardgroup(self):
         
         self.total += 1
@@ -493,24 +493,28 @@ class Test(unittest.TestCase):
         time.sleep(1) 
         rs = self.is_element_present(By.LINK_TEXT, classname)
         return rs
-    
-    def use_prepaidcard(self):     
+    #充值卡
+    def use_prepaidcard(self):
+
         self.total += 1
         try:
-            card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.p_card_num, self.p_card_pwd)
+            confirm_num = card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.p_card_num, self.p_card_pwd)
+            #验证
+            if self.p_card_num != confirm_num :
+              self.verificationErrors.append('fail to use prepaid card!')  
         except Exception,e:
             print e
             self.verificationErrors.append('fail to use prepaid card!')
         finally: 
             self.driver.save_screenshot("C:/test_rs_pic/use_prepaidcard.png")
-            
-        #验证，待完成
     
     def use_coursecard(self):#充课卡
-        
         self.total += 1
         try:
-            card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.c_card_num, self.c_card_pwd)
+            confirm_num = card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.c_card_num, self.c_card_pwd)
+            #验证
+            if self.c_card_num != confirm_num :
+               self.verificationErrors.append('fail to use course card!')             
         except Exception,e:
             print e
             self.verificationErrors.append('fail to use course card!')
@@ -523,7 +527,10 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            card_management.use_course_card(self.cfg, self.driver, self.base_url, self.ca_card_num, self.ca_card_pwd)
+            course_num = card_management.use_course_card(self.cfg, self.driver, self.base_url, self.ca_card_num, self.ca_card_pwd)
+            #验证
+            if self.ca_card_num != course_num :
+              self.verificationErrors.append('fail to use category card!')  
         except Exception,e:
             print e
             self.verificationErrors.append('fail to use category card!')
@@ -960,7 +967,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        self.login_from_index()
+        #self.login_from_index()
         #self.import_questions()
         #self.register()
         #self.login_from_index()
@@ -996,7 +1003,7 @@ class Test(unittest.TestCase):
         #self.change_headpic()
         #self.verify_all_course_convert()
         #login.logout(self.driver, self.base_url)
-        self.add_exam_card()
+        #self.add_exam_card()
         self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
@@ -1013,7 +1020,7 @@ class Test(unittest.TestCase):
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
         #self.exam_user()
-        self.use_exam_card()
+        #self.use_exam_card()
        
     def tearDown(self):
         self.driver.quit()

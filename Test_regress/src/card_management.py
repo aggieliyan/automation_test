@@ -17,6 +17,8 @@ def use_prepaid_card(cfg, driver, base_url, card_num, card_psw):
     time.sleep(2)
     driver.find_element(cfg.get('use_card','prepaid_ok_css_by'),cfg.get('use_card','prepaid_ok_css')).click()
     time.sleep(2)
+    prepaid_num = driver.find_element(cfg.get('use_card','confirm_prepaid_num_by'),cfg.get('use_card','confirm_prepaid_num')).text
+    return prepaid_num
     
 #使用补课卡
 def use_course_card(cfg,driver, base_url, card_num, card_psw):
@@ -34,6 +36,8 @@ def use_course_card(cfg,driver, base_url, card_num, card_psw):
     time.sleep(2)
     driver.find_element(cfg.get('use_card','course_ok_css_by'),cfg.get('use_card','course_ok_css')).click()
     time.sleep(2)
+    course_num = driver.find_element(cfg.get('use_card','confirm_course_num_by'),cfg.get('use_card','confirm_course_num')).text
+    return course_num    
   
 #添加卡组-充值卡  
 def add_prepaid_cardgroup(cfg, driver, base_url, org_name, group_name = u'prepaidcard100', group_price = 100):
@@ -72,7 +76,7 @@ def add_course_cardgroup(cfg,driver, base_url, org_name , group_name = u'coursec
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")
 
 #添加卡组-补课卡 
-def add_cate_cardgroup(cfg,driver, base_url, org_name,group_name = u'catecard-200', group_price = 200):
+def add_cate_cardgroup(cfg,driver, base_url, org_name,group_name = u'catecard-200', group_price = 500):
     
     driver.get(base_url + "myOffice.do")
     time.sleep(2)

@@ -338,6 +338,41 @@ class Test(unittest.TestCase):
         card_info=self.add_and_get_card()
         self.ca_card_num = card_info[0]
         self.ca_card_pwd = card_info[1]
+    #购买试听卡
+    def bug_listen_card(self):
+        self.total += 1
+        try:
+            card_management.bug_listen_card(self.cfg, self.driver, self.base_url)
+        except Exception,e:
+            print e
+            self.verificationErrors.append('fail to bug listen card!')
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/bug_listen_card.png")
+    #添加试听卡组
+    def listen_cardgroup(self):
+        
+        self.total += 1
+        rand_name = str(random.randint(1000,9999))
+        title = u"listencard"+rand_name
+        
+        try:
+            card_management.add_listen_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title)
+        except Exception,e:
+            print e
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/12_listen_cardgroup.png")  
+        time.sleep(2)
+        rs = self.is_element_present(By.LINK_TEXT, title)
+        try:
+            self.assertEqual(True, rs,"fail to create listen cardgroup!")
+        except AssertionError,e:
+            self.verificationErrors.append(str(e))
+        #建卡,取考号密码
+        card_info=self.add_and_get_card()
+        self.l_card_num = card_info[0]
+        self.l_card_pwd = card_info[1]
+        print self.l_card_num
+        #######
         
     def add_and_get_card(self, card_type=0):#添加卡并返回第一个卡号和密码
         
@@ -364,7 +399,7 @@ class Test(unittest.TestCase):
             
         return card_num,card_pwd
     
-        #添加考试并返回第一个卡号
+        #添加考试卡并返回第一个卡号
     def add_exam_card(self):
         self.total += 1
         try:

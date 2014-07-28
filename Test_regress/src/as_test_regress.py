@@ -661,6 +661,32 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to create cate!")
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_cate.png")
+
+
+
+    def modify_exam_cate(self):#编辑类目
+        
+        self.total += 1
+        try:
+            exam_cate_management.modify_exam_cate(self.cfg,self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to modify cate!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/modify_cate.png")
+            
+        time.sleep(2)       
+        
+        
+    def delete_exam_cate(self):
+        self.total += 1
+        try:
+            exam_cate_management.delete_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to delete cate!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/delete_cate.png")
             
     def add_exam_point(self):
         self.total += 1

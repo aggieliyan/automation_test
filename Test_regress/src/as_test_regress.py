@@ -1011,23 +1011,16 @@ class Test(unittest.TestCase):
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
         #self.createpaper() 
-<<<<<<< HEAD
-=======
         #self.exam_questions()
         #self.manage_course_num()
->>>>>>> origin/master
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
-<<<<<<< HEAD
-                
-=======
         #self.exam_user()
         #self.use_exam_card()
->>>>>>> origin/master
        
     def tearDown(self):
         self.driver.quit()

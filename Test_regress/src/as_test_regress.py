@@ -431,7 +431,7 @@ class Test(unittest.TestCase):
      
     
             
-    def import_one_stu(self):
+    def import_one_student(self):
         
         self.total += 1
         #单个导入学员
@@ -982,7 +982,7 @@ class Test(unittest.TestCase):
         #self.delete_cate()
         #self.add_course_to_cate()
         #self.cate_cardgroup()
-        #self.import_one_stu()
+        #self.import_one_student()
         #self.import_multi_student()
         #self.create_multi_student()
         #self.add_admin()

@@ -6,7 +6,7 @@ Created on Sep. 24, 2012
 '''
 import unittest,ConfigParser,random,time,os,MySQLdb
 from selenium import webdriver
-import login, new_course_management, course_management, student_management, card_management,cate_management,admin_management,user_management,exam_paper
+import login, new_course_management, course_management, student_management, card_management,cate_management,admin_management,user_management,exam_paper, exam_questions,exam_cate_management
 import exam_user_management
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -20,12 +20,11 @@ class Test(unittest.TestCase):
         self.test_enviroment = "beta"  
         self.org_name = "salesdemo"
         self.org_password = "1234"
-        self.user_name = "yilu282"
-        self.user_password = "1234"
-        self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、omega数据库：192.168.190.74 beta数据库192.168.3.50
+        self.user_name = "stu_gy50"
+        self.user_password = "gy0411"
+        self.dbhost = "192.168.120.110" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
-         
         
         cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
@@ -261,7 +260,7 @@ class Test(unittest.TestCase):
             self.assertEqual(True, rs,"fail to release agency course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
-            
+    #充值卡 
     def prepaid_cardgroup(self):#充值卡
         
         self.total += 1
@@ -286,8 +285,10 @@ class Test(unittest.TestCase):
         card_info=self.add_and_get_card()
         self.p_card_num = card_info[0]
         self.p_card_pwd = card_info[1]
+        print self.p_card_num
+        print self.p_card_pwd
         #考号
-        
+    #添加卡组-充课卡   
     def course_cardgroup(self):
         
         self.total += 1
@@ -312,7 +313,7 @@ class Test(unittest.TestCase):
         self.c_card_num = card_info[0]
         self.c_card_pwd = card_info[1]
         # print card_info
-        
+     #添加卡组-补课卡         
     def cate_cardgroup(self):
         
         self.total += 1
@@ -330,7 +331,7 @@ class Test(unittest.TestCase):
         time.sleep(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
-            self.assertEqual(True, rs,"fail to create course cardgroup!")
+            self.assertEqual(True, rs,"fail to create cate cardgroup!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
         #建卡,取考号密码
@@ -355,9 +356,7 @@ class Test(unittest.TestCase):
                 card_num = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().text()")
                 #print 'card_num:',card_num
                 card_pwd = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().parent().next().children().text()") 
-                #print 'card_pwd', card_pwd
-                
-                          
+                #print 'card_pwd', card_pwd        
         except Exception,e:
             print e
             card_num = 0#确保有返回值不会报错
@@ -365,7 +364,30 @@ class Test(unittest.TestCase):
             
         return card_num,card_pwd
     
-    
+        #添加试听卡并返回第一个卡号
+    def add_exam_card(self):
+        self.total += 1
+        try:
+            self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url)
+        except Exception,e:
+            print e
+            self.verificationErrors.append('fail to add exam card!')
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/add_exam_card.png")
+            #return examcard_num
+    #使用试听卡
+    def use_exam_card(self):
+        self.total += 1
+        #examcard_num = self.add_exam_card()
+        #self.login_user()
+        try:
+            card_management.user_usexamcard(self.cfg, self.driver, self.base_url,self.examcard_num)
+        except Exception,e:
+            print e
+            self.verificationErrors.append('fail to use exam card!')
+        finally: 
+            self.driver.save_screenshot("D:/test_rs_pic/user_exam_card.png") 
+            
     
     def delete_cate(self):
     
@@ -409,7 +431,7 @@ class Test(unittest.TestCase):
      
     
             
-    def import_one_stu(self):
+    def import_one_student(self):
         
         self.total += 1
         #单个导入学员
@@ -471,25 +493,28 @@ class Test(unittest.TestCase):
         time.sleep(1) 
         rs = self.is_element_present(By.LINK_TEXT, classname)
         return rs
-    
+    #充值卡
     def use_prepaidcard(self):
-        
+
         self.total += 1
         try:
-            card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.p_card_num, self.p_card_pwd)
+            confirm_num = card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.p_card_num, self.p_card_pwd)
+            #验证
+            if self.p_card_num != confirm_num :
+              self.verificationErrors.append('fail to use prepaid card!')  
         except Exception,e:
             print e
             self.verificationErrors.append('fail to use prepaid card!')
         finally: 
             self.driver.save_screenshot("C:/test_rs_pic/use_prepaidcard.png")
-            
-        #验证，待完成
     
     def use_coursecard(self):#充课卡
-        
         self.total += 1
         try:
-            card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.c_card_num, self.c_card_pwd)
+            confirm_num = card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.c_card_num, self.c_card_pwd)
+            #验证
+            if self.c_card_num != confirm_num :
+               self.verificationErrors.append('fail to use course card!')             
         except Exception,e:
             print e
             self.verificationErrors.append('fail to use course card!')
@@ -502,12 +527,17 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            card_management.use_course_card(self.cfg, self.driver, self.base_url, self.ca_card_num, self.ca_card_pwd)
+            course_num = card_management.use_course_card(self.cfg, self.driver, self.base_url, self.ca_card_num, self.ca_card_pwd)
+            #验证
+            if self.ca_card_num != course_num :
+              self.verificationErrors.append('fail to use category card!')  
         except Exception,e:
             print e
             self.verificationErrors.append('fail to use category card!')
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/use_catecard.png")
+                    
+            
     
     def add_admin(self):
         
@@ -566,7 +596,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            subject_info = admin_subject.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num=2)
+            subject_info = exam_cate_management.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num=2)
         
             #验证
             for subject in subject_info:
@@ -581,6 +611,106 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to create subject!")
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_subject.png")
+            
+            
+            
+    def modify_subject(self):#编辑科目
+        
+        self.total += 1
+        try:
+            subject_name = exam_cate_management.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to modify subject!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/modify_subject.png")
+            
+        #验证
+        xpath = "//div[text()=\'"+subject_name+"\']"
+        time.sleep(2)
+        rs = self.is_element_present(By.XPATH, xpath)
+        if rs == False:
+            self.verificationErrors.append("fail to modify subject!")
+        
+    def delete_subject(self):
+        
+        self.total += 1
+        try:
+            exam_cate_management.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to delete subject!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/delete_subject.png")
+            
+    def create_cate(self):
+        self.total += 1
+        try:
+            cate_info = exam_cate_management.auto_create_exam_cate(self.cfg, self.driver, self.base_url, self.org_name, cate_num=1)
+        
+            #验证
+            for cate in cate_info:
+                xpath = "//div[text()=\'"+cate+"\']"
+                time.sleep(2)
+                rs = self.is_element_present(By.XPATH, xpath)
+                if rs == False:
+                    self.verificationErrors.append("fail to create cate!")
+                    
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to create cate!")
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/add_cate.png")
+            
+    def add_exam_point(self):
+        self.total += 1
+        try:
+            point_info = exam_cate_management.auto_create_exam_point(self.cfg, self.driver, self.base_url, self.org_name, point_num=1)
+        
+            #验证
+            for point in point_info:
+                xpath = "//div[text()=\'"+point+"\']"
+                time.sleep(2)
+                rs = self.is_element_present(By.XPATH, xpath)
+                if rs == False:
+                    self.verificationErrors.append("fail to create point!")
+                    
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to create point!")
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/add_point.png")
+            
+            
+            
+            
+    def modify_exam_point(self):#编辑考点
+        
+        self.total += 1
+        try:
+            point_name = exam_cate_management.modify_exam_point(self.cfg,self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to modify point!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/modify_point.png")
+            
+        #验证
+        #xpath = "//div[text()=\'"+point_name+"\']"
+        time.sleep(2)
+        #rs = self.is_element_present(By.XPATH, xpath)
+        #if rs == False:
+            #self.verificationErrors.append("fail to modify subject!")
+            
+    def delete_exam_point(self):#删除考点
+        self.total += 1
+        try:
+            exam_cate_management.delete_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to delete point!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/delete_point.png")
 
 
     def release_announcement(self):
@@ -774,6 +904,20 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/add_photot.png")
             
         #验证
+   
+    def import_questions(self):
+       
+       self.total += 1
+       self.template = '//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/createquestions.xls'
+       try:
+            exam_questions.importquestions(self) 
+       except Exception,e:
+            print e
+            self.verificationErrors.append("fail to import questions..")
+       finally:
+            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+   
+        
         
     def createpaper(self):
         self.total += 1
@@ -784,12 +928,47 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to create paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-        
-        
+    
+    def exam_questions(self):
+        self.total += 1
+        question_ansa='123'
+        try:
+            exam_questions.exam_questions(self.cfg, self.driver, self.base_url, question_ansa) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to exam questions")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
+            
+    def manage_course_num(self):
+        self.total += 1
+        try:
+            student_management.manage_course_num(self.cfg, self.driver, self.base_url) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to manage course num")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/manage_course_num.png")     
+    #学员参加考试
+    def exam_user(self):
+        self.total += 1
+        # operation =0 自动提交  operation =1 继续答题
+        operation = 1
+        question_answer ='123'
+        # =1 是白卷 =0 是做了一个题
+        blank_pager = 0
+        try:
+            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
+        except Exception,e:
+            print e
+            self.verificationErrors.append('fail to exam!')
+        finally: 
+            self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")        
     
     def test_regress(self):
         #self.register()
-        self.login_from_index()
+        #self.login_from_index()
+        #self.import_questions()
         #self.register()
         #self.login_from_index()
         #self.release_normal()
@@ -803,11 +982,18 @@ class Test(unittest.TestCase):
         #self.delete_cate()
         #self.add_course_to_cate()
         #self.cate_cardgroup()
-        #self.import_one_stu()
+        #self.import_one_student()
         #self.import_multi_student()
         #self.create_multi_student()
         #self.add_admin()
         #self.delete_admin()
+        #self.add_subject()
+        #self.modify_subject()
+        #self.delete_subject()
+        #self.create_cate()
+        #self.add_exam_point()
+        #self.modify_exam_point()
+        #self.delete_exam_point()
         #self.buy_open_num()
         #self.release_announcement()
         #self.release_href_course()
@@ -817,20 +1003,31 @@ class Test(unittest.TestCase):
         #self.change_headpic()
         #self.verify_all_course_convert()
         #login.logout(self.driver, self.base_url)
-        #self.login_user()
+        #self.add_exam_card()
+        self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
         #self.createpaper() 
+<<<<<<< HEAD
+=======
+        #self.exam_questions()
+        #self.manage_course_num()
+>>>>>>> origin/master
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
+<<<<<<< HEAD
                 
+=======
+        #self.exam_user()
+        #self.use_exam_card()
+>>>>>>> origin/master
        
     def tearDown(self):
         self.driver.quit()

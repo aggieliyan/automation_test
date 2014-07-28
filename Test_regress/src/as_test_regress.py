@@ -399,17 +399,20 @@ class Test(unittest.TestCase):
             
         return card_num,card_pwd
     
-        #添加考试卡并返回第一个卡号
+    #添加考试卡并返回第一个卡号
     def add_exam_card(self):
         self.total += 1
+        count = 5
         try:
-            self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url)
+            self.page_catename = card_management.get_academy_catename(self.cfg, self.driver, self.base_url)
+            exam_paper.create_paper(self.cfg, self.driver, self.base_url, self.page_catename, 1, 1, 1, 1)
+            self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url,count)
+            #self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url)
         except Exception,e:
             print e
             self.verificationErrors.append('fail to add exam card!')
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_exam_card.png")
-            #return examcard_num
     #使用考试卡
     def use_exam_card(self):
         self.total += 1

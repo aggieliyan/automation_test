@@ -364,7 +364,7 @@ class Test(unittest.TestCase):
             
         return card_num,card_pwd
     
-        #添加试听卡并返回第一个卡号
+        #添加考试并返回第一个卡号
     def add_exam_card(self):
         self.total += 1
         try:
@@ -375,7 +375,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_exam_card.png")
             #return examcard_num
-    #使用试听卡
+    #使用考试卡
     def use_exam_card(self):
         self.total += 1
         #examcard_num = self.add_exam_card()

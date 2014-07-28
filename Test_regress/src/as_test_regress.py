@@ -98,7 +98,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
+            login.login_by_as(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
         except Exception,e:
             print e
         finally:
@@ -338,6 +338,41 @@ class Test(unittest.TestCase):
         card_info=self.add_and_get_card()
         self.ca_card_num = card_info[0]
         self.ca_card_pwd = card_info[1]
+    #购买试听卡
+    def bug_listen_card(self):
+        self.total += 1
+        try:
+            card_management.bug_listen_card(self.cfg, self.driver, self.base_url)
+        except Exception,e:
+            print e
+            self.verificationErrors.append('fail to bug listen card!')
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/bug_listen_card.png")
+    #添加试听卡组
+    def listen_cardgroup(self):
+        
+        self.total += 1
+        rand_name = str(random.randint(1000,9999))
+        title = u"listencard"+rand_name
+        
+        try:
+            card_management.add_listen_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title)
+        except Exception,e:
+            print e
+        finally:
+            self.driver.save_screenshot("D:/test_rs_pic/12_listen_cardgroup.png")  
+        time.sleep(2)
+        rs = self.is_element_present(By.LINK_TEXT, title)
+        try:
+            self.assertEqual(True, rs,"fail to create listen cardgroup!")
+        except AssertionError,e:
+            self.verificationErrors.append(str(e))
+        #建卡,取考号密码
+        card_info=self.add_and_get_card()
+        self.l_card_num = card_info[0]
+        self.l_card_pwd = card_info[1]
+        print self.l_card_num
+        #######
         
     def add_and_get_card(self, card_type=0):#添加卡并返回第一个卡号和密码
         
@@ -364,7 +399,7 @@ class Test(unittest.TestCase):
             
         return card_num,card_pwd
     
-        #添加试听卡并返回第一个卡号
+        #添加考试卡并返回第一个卡号
     def add_exam_card(self):
         self.total += 1
         try:
@@ -375,7 +410,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_exam_card.png")
             #return examcard_num
-    #使用试听卡
+    #使用考试卡
     def use_exam_card(self):
         self.total += 1
         #examcard_num = self.add_exam_card()
@@ -661,6 +696,32 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to create cate!")
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_cate.png")
+
+
+
+    def modify_exam_cate(self):#编辑类目
+        
+        self.total += 1
+        try:
+            exam_cate_management.modify_exam_cate(self.cfg,self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to modify cate!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/modify_cate.png")
+            
+        time.sleep(2)       
+        
+        
+    def delete_exam_cate(self):
+        self.total += 1
+        try:
+            exam_cate_management.delete_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to delete cate!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/delete_cate.png")
             
     def add_exam_point(self):
         self.total += 1
@@ -967,7 +1028,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        #self.login_from_index()
+        self.login_from_index()
         #self.import_questions()
         #self.register()
         self.login_from_index()
@@ -1002,10 +1063,10 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
-        
-        self.add_exam_card()
-        login.logout(self.driver, self.base_url)
-        self.login_user()
+        #login.logout(self.driver, self.base_url)
+        #self.add_exam_card()
+        #self.login_user()
+
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()       
@@ -1021,8 +1082,9 @@ class Test(unittest.TestCase):
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
         #self.exam_user()
-        self.use_exam_card()
-       
+        #self.use_exam_card()
+        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
+
     def tearDown(self):
         self.driver.quit()
         fail_num = len(self.verificationErrors)

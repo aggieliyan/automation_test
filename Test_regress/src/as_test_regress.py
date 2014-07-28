@@ -364,7 +364,7 @@ class Test(unittest.TestCase):
             
         return card_num,card_pwd
     
-        #添加试听卡并返回第一个卡号
+        #添加考试并返回第一个卡号
     def add_exam_card(self):
         self.total += 1
         try:
@@ -375,7 +375,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_exam_card.png")
             #return examcard_num
-    #使用试听卡
+    #使用考试卡
     def use_exam_card(self):
         self.total += 1
         #examcard_num = self.add_exam_card()
@@ -1037,24 +1037,20 @@ class Test(unittest.TestCase):
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
         #self.createpaper() 
-<<<<<<< HEAD
-=======
         #self.exam_questions()
         #self.manage_course_num()
->>>>>>> origin/master
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
-<<<<<<< HEAD
-                
-=======
         #self.exam_user()
         #self.use_exam_card()
->>>>>>> origin/master
-       
+        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
+        #self.exam_user()
+        #self.use_exam_card()
+  
     def tearDown(self):
         self.driver.quit()
         fail_num = len(self.verificationErrors)

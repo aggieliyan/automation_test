@@ -91,7 +91,38 @@ def add_cate_cardgroup(cfg,driver, base_url, org_name,group_name = u'catecard-20
     driver.find_element(cfg.get('org_manage','cate_price_id_by'),cfg.get('org_manage','cate_price_id')).send_keys(group_price)
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")
     time.sleep(2)
-      
+ #购买试听卡
+def bug_listen_card(cfg,driver, base_url):
+    driver.get(base_url + "myOffice.do")
+    time.sleep(2)
+    driver.find_element_by_link_text(u"管理卡组").click()
+    time.sleep(2)
+    driver.find_element_by_link_text(u"购买试听卡").click()
+    time.sleep(2)
+    driver.find_element(cfg.get('org_manage','listen_count_by'),cfg.get('org_manage','listen_count')).send_keys('1')
+    time.sleep(2)
+    driver.find_element(cfg.get('org_manage','listen_buttion_by'),cfg.get('org_manage','listen_buttion')).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('org_manage','listen_buttion_confirm_by'),cfg.get('org_manage','listen_buttion_confirm')).click()
+    time.sleep(2)
+#添加卡组-试听卡
+def add_listen_cardgroup(cfg,driver, base_url, org_name , group_name = u'listencard'): 
+    driver.get(base_url + "myOffice.do")
+    time.sleep(2)
+    driver.find_element_by_link_text(u"管理卡组").click()
+    time.sleep(2)
+    driver.find_element_by_link_text(u"添加卡组").click()
+    time.sleep(2)
+    driver.find_element(cfg.get('org_manage','listen_card_xpath_by'),cfg.get('org_manage','listen_card_xpath')).click()#选择试听卡
+    driver.find_element(cfg.get('org_manage','grouptitle_id_by'),cfg.get('org_manage','grouptitle_id')).send_keys(group_name)
+    time.sleep(2)
+    driver.find_element(cfg.get('org_manage','listen_spread_xpath_by'),cfg.get('org_manage','listen_spread_xpath')).click()#展开默认类目下资料
+    time.sleep(5)
+    driver.find_element(cfg.get('org_manage','listen_course_xpath_by'),cfg.get('org_manage','listen_course_xpath')).click()#勾选第一个课程
+    time.sleep(3)
+    driver.execute_script("$(\".x-btn-text\").eq(0).click()")
+    time.sleep(2)
+    driver.execute_script("$(\".x-btn-text\").eq(2).click()")       
 
 #添加卡
 def add_card(cfg, driver, base_url, org_name, cgroup_num = 1,card_prifix='auto',card_num = 50):

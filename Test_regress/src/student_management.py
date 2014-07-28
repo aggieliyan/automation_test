@@ -117,10 +117,14 @@ def buy_open_num(cfg,driver, base_url, org_name, bnum):
     driver.get(base_url + "myOffice.do")
     time.sleep(3)
     driver.find_element_by_link_text("在线购买授权数").click()
+    time.sleep(3)
     h = driver.window_handles
     driver.switch_to_window(h[-1])
     driver.find_element_by_class_name("payBtn").click()
-    driver.find_element_by_css_selector(cfg.get('org_index','pay_ok_css')).click()
+    time.sleep(3)
+    driver.find_element(cfg.get('org_manage',"buy_open_num_sure_by"),cfg.get('org_manage',"buy_open_num_sure")).click()
+    time.sleep(3)
+    driver.find_element_by_link_text(u"继续购买授权").click()
     time.sleep(3)
     
 #管理播放授权数

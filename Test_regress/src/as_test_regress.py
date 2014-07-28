@@ -830,8 +830,7 @@ class Test(unittest.TestCase):
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
-        exam_paper.test_kemu(self.cfg, self.driver, self.base_url)
-        
+                
        
     def tearDown(self):
         self.driver.quit()

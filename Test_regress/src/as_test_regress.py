@@ -98,7 +98,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
+            login.login_by_as(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
         except Exception,e:
             print e
         finally:
@@ -967,7 +967,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        #self.login_from_index()
+        self.login_from_index()
         #self.import_questions()
         #self.register()
         #self.login_from_index()
@@ -1004,7 +1004,7 @@ class Test(unittest.TestCase):
         #self.verify_all_course_convert()
         #login.logout(self.driver, self.base_url)
         #self.add_exam_card()
-        self.login_user()
+        #self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()       

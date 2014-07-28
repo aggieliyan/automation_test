@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 import time
 
-def importquestions(self):
+def shia (self):
     db = 'ablesky_examsystem'
     conn = self.connect_db(db)
     cursor = conn.cursor()

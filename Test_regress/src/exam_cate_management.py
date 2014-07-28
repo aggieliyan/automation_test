@@ -86,6 +86,35 @@ def auto_create_exam_cate(cfg,driver, base_url,org_name,cate_num):
         cate_info.append(cate_name,cate_detail)
     return cate_info
 
+def modify_exam_cate(cfg,driver, base_url,org_name):
+    driver.get(base_url + "myOffice.do")
+    time.sleep(2)
+    driver.get("%sexam/" %(base_url))
+    time.sleep(2) 
+    driver.find_element_by_link_text(u"类目管理").click()
+    time.sleep(1)
+    cate_name = 'cate001'
+    cate_detail = 'cate001describe'
+    driver.find_element_by_xpath(cfg.get('exam','cate_mod_xpath')).click()
+    driver.find_element_by_name(cfg.get('exam','cate_addname')).clear()
+    driver.find_element_by_name(cfg.get('exam','cate_addname')).send_keys(cate_name)
+    driver.find_element_by_name(cfg.get('exam','cate_desname')).clear()
+    driver.find_element_by_name(cfg.get('exam','cate_desname')).send_keys(cate_detail)
+    time.sleep(1)
+    driver.find_element_by_xpath(cfg.get('exam','cate_oknew_button')).click()
+    time.sleep(3)
+    
+def delete_exam_cate(cfg,driver, base_url,org_name):
+    driver.get(base_url + "myOffice.do")
+    time.sleep(2)
+    driver.get("%sexam/" %(base_url))
+    time.sleep(2) 
+    driver.find_element_by_link_text(u"类目管理").click()
+    time.sleep(1)
+    driver.find_element_by_xpath(cfg.get('exam','cate_del_xpath')).click()
+    time.sleep(1)
+    driver.find_element_by_xpath(cfg.get('exam','cate_oknew_button')).click()
+    time.sleep(3)
 
 
 def create_exam_point(cfg,driver, base_url,org_name,point_name,point_detail,other_groom):

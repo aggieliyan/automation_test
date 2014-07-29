@@ -7,7 +7,7 @@ Created on May 28, 2012
 
 import time, random
 
-def create_admin(cfg,driver, base_url,org_name,admin_name,admin_username,admin_psw,admin_email):
+def create_admin(cfg,driver, base_url,admin_name,admin_username,admin_psw,admin_email):
     
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
@@ -31,7 +31,7 @@ def create_admin(cfg,driver, base_url,org_name,admin_name,admin_username,admin_p
     driver.execute_script("$('.x-btn-text').eq(0).click()")
     time.sleep(1)
 
-def auto_create_admin(cfg,driver, base_url, org_name, adm_num):
+def auto_create_admin(cfg,driver, base_url, adm_num,org_name):
     
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
     admin_info = []  
@@ -41,12 +41,12 @@ def auto_create_admin(cfg,driver, base_url, org_name, adm_num):
         admin_username = admin_name
         admin_psw ='123456aa'
         admin_email = admin_name+"@ablesky.com"
-        create_admin(cfg,driver, base_url,org_name,admin_name,admin_username,admin_psw,admin_email)
+        create_admin(cfg,driver, base_url,admin_name,admin_username,admin_psw,admin_email)
         admin_info.append(admin_name)
         
     return admin_info
     
-def delete_admin(cfg,driver, base_url, org_name, admin_num=1):
+def delete_admin(cfg,driver, base_url, admin_num=1):
         
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
@@ -63,7 +63,7 @@ def delete_admin(cfg,driver, base_url, org_name, admin_num=1):
     time.sleep(2)
     
     
-def modify_admin(cfg,driver, base_url, org_name):
+def modify_admin(cfg,driver, base_url):
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
     driver.find_element_by_link_text(u"系统设置").click()

@@ -35,25 +35,22 @@ def exam(cfg, driver, base_url, operation, blank_pager, question_answer):
     if blank_pager == 0:
         #单选 多选
         if question_title == u"单选题" or question_title == u"多选题":
-            driver.find_element(cfg.get('exam','exam_selectque_by'),cfg.get('exam','exam_selectque')).click()
+                driver.find_element(cfg.get('exam','exam_selectque_by'),cfg.get('exam','exam_selectque')).click()     
         #是非题
         elif question_title == u"是非题":
-            driver.find_element(cfg.get('exam','exam_yesnoque_by'),cfg.get('exam','exam_yesnoque')).click()    
+                driver.find_element(cfg.get('exam','exam_yesnoque_by'),cfg.get('exam','exam_yesnoque')).click()     
         #填空题
         elif question_title == u"填空题":
-            driver.find_element(cfg.get('exam','exam_blankque_by'),cfg.get('exam','exam_blankque')).send_keys(question_answer)    
+                driver.find_element(cfg.get('exam','exam_blankque_by'),cfg.get('exam','exam_blankque')).send_keys(question_answer)   
         #问答题  
-        elif question_title == u"问答题":
-            iframe_id = driver.execute_script("return $('#J_examWrapper iframe:eq(0)').attr('id')")
-            driver.execute_script("var element=window.document.getElementById('" + iframe_id + "');\
-            idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
-            element.innerHTML =\'"+question_answer+"\';")
+        elif question_title == u"问答题":        
+                 iframe_id = driver.execute_script("return $('#J_examWrapper iframe:eq(0)').attr('id')")
+                 driver.execute_script("var element=window.document.getElementById('" + iframe_id + "');\
+                 idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
+                 element.innerHTML =\'"+question_answer+"\';")
         #完形填空题
         elif question_title == u"完形填空题":
-            try:
                 driver.find_element(cfg.get('exam','exam_clozeque_by'),cfg.get('exam','exam_clozeque')).click()
-            except:
-                None
         #综合题
         elif question_title == u"综合题":
             #第一个是单选 or 多选

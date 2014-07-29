@@ -83,7 +83,7 @@ def auto_create_exam_cate(cfg,driver, base_url,org_name,cate_num):
         cate_name = org_name[0] +"cate_" +prefix+str(i)
         cate_detail = org_name[0] +"cate_" +prefix+str(i)
         create_exam_cate(cfg,driver, base_url,org_name,cate_name,cate_detail)
-        cate_info.append(cate_name,cate_detail)
+        cate_info.append(cate_name)
     return cate_info
 
 def modify_exam_cate(cfg,driver, base_url,org_name):
@@ -152,7 +152,7 @@ def auto_create_exam_point(cfg,driver, base_url,org_name,point_num):
         point_detail = org_name[0] +"point_" +prefix+str(i)
         other_groom = org_name[0] +"point_" +prefix+str(i)
         create_exam_point(cfg,driver, base_url,org_name,point_name,point_detail,other_groom)
-        point_info.append(point_name,point_detail,other_groom)
+        point_info.append(point_name)
     return point_info
 
 

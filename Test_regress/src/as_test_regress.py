@@ -16,7 +16,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "Chrome"
+        self.browser = "firefox"
         self.test_enviroment = "beta"  
         self.org_name = "salesdemo"
         self.org_password = "1234"
@@ -31,7 +31,7 @@ class Test(unittest.TestCase):
         self.cfg.read(cfg_file)
         self.verificationErrors = []
         
-        self.total = 0       
+        self.total = 0
         
         if self.browser == 'ie':      
             self.driver = webdriver.Ie()
@@ -92,7 +92,7 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to register!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/1_register.png')
-                      
+          
         self.import_name = user_name #待单个导入学员使用
     
     def login_from_index(self):
@@ -340,15 +340,15 @@ class Test(unittest.TestCase):
         self.ca_card_num = card_info[0]
         self.ca_card_pwd = card_info[1]
     #购买试听卡
-    def buy_listen_card(self):
+    def bug_listen_card(self):
         self.total += 1
         try:
-            card_management.buy_listen_card(self.cfg, self.driver, self.base_url)
+            card_management.bug_listen_card(self.cfg, self.driver, self.base_url)
         except Exception,e:
             print e
-            self.verificationErrors.append('fail to buy listen card!')
+            self.verificationErrors.append('fail to bug listen card!')
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/buy_listen_card.png")
+            self.driver.save_screenshot("D:/test_rs_pic/bug_listen_card.png")
     #添加试听卡组
     def listen_cardgroup(self):
         
@@ -692,7 +692,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/delete_subject.png")
             
-    def create_exam_cate(self):
+    def create_cate(self):
         self.total += 1
         try:
             cate_info = exam_cate_management.auto_create_exam_cate(self.cfg, self.driver, self.base_url, self.org_name, cate_num=1)
@@ -779,6 +779,7 @@ class Test(unittest.TestCase):
             
     def delete_exam_point(self):#删除考点
         self.total += 1
+        self.total += 1
         try:
             exam_cate_management.delete_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception,e:
@@ -795,19 +796,12 @@ class Test(unittest.TestCase):
         title = u"自动化公告"+rand_name
         try:
             title = user_management.release_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
-            title = title +' new'
         except Exception,e:
             print e
             self.verificationErrors.append("fail to release announcement!")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")
+            self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")  
             
-        #验证
-        self.driver.get(self.base_url+self.org_name)
-        rs = self.is_element_present(By.LINK_TEXT,title)
-        if rs == False:
-            self.verificationErrors.append("fail to release announcement!")
-                   
     def release_href_course(self):
         
         self.total += 1
@@ -917,7 +911,17 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/change_headpic.png")
             
         #验证
-            
+    def change_homelogo(self):
+        
+        self.total += 1
+        try:
+            user_management.change_homelogo(self.cfg, self.driver, self.base_url, self.org_name)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to change headpic!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/change_homelogo.png")   
+                 
     def change_banner(self):
         
         self.total += 1
@@ -934,8 +938,10 @@ class Test(unittest.TestCase):
     def modify_pagefoot(self):
        
         self.total += 1
+        foot_info = '12'
+        foot_icp = '12'
         try:
-            user_management.modify_pagefoot(self.cfg, self.driver, self.independent_url) 
+            user_management.modify_pagefoot(self.cfg, self.driver, self.base_url, self.org_name, foot_info, foot_icp) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to modify_pagefoot")
@@ -997,7 +1003,7 @@ class Test(unittest.TestCase):
     def createpaper(self):
         self.total += 1
         try:
-            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 ,0, 0, 1) 
+            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 ,1, 1,1) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to create paper")
@@ -1030,15 +1036,24 @@ class Test(unittest.TestCase):
         # operation =0 自动提交  operation =1 继续答题
         operation = 1
         question_answer ='123'
-        # blank_pager=1 是白卷 ;blank_pager=0 是做了一个题
+        # =1 是白卷 =0 是做了一个题
         blank_pager = 0
         try:
-            exam_user_management.exam(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
+            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
         except Exception,e:
             print e
             self.verificationErrors.append('fail to exam!')
         finally: 
-            self.driver.save_screenshot("C:/test_rs_pic/exam_user.png")        
+            self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")
+    def wailian_video(self):
+        self.total += 1
+        try:
+            user_management.wailian_video(self.cfg, self.driver, self.base_url, self.test_enviroment) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to use wailian")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/user_management_wailian.png")    
     
     def test_regress(self):
         
@@ -1072,6 +1087,7 @@ class Test(unittest.TestCase):
         self.open_course_for_multi()
         #self.change_banner()
         #self.change_headpic()
+
         self.verify_all_course_convert()
 
         #考试系统部分
@@ -1083,18 +1099,33 @@ class Test(unittest.TestCase):
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         #login.logout(self.driver, self.base_url)
-        #self.login_user()     
 
+        #self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()
         #self.use_listencard()
+        #self.use_exam_card() 
+          
+        self.release_announcement()
+        #self.modify_pagefoot()  
+        #self.change_headpic()
+        #self.change_homelogo()
+        #self.wailian_video()
+          
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
-        #self.manage_course_num()        
-        
-        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)        
+        #self.createpaper()
+        #self.exam_questions()
+        #self.manage_course_num()
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
+        #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
+        #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
+        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
         #self.exam_user()
+
         #self.use_exam_card() 
         #self.import_questions()
         #self.add_subject()

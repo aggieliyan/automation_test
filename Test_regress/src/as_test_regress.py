@@ -22,7 +22,7 @@ class Test(unittest.TestCase):
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
-        self.dbhost = "192.168.120.110" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
+        self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
         
@@ -84,6 +84,7 @@ class Test(unittest.TestCase):
     def register(self):#注册改啦要改
         
         self.total += 1
+        user_name = ""
         try:
             user_name = login.auto_register(self.cfg, self.driver, self.base_url, 2, 1)
         except Exception,e:
@@ -91,8 +92,13 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to register!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/1_register.png')
+<<<<<<< HEAD
             
         #self.import_name = user_name #待单个导入学员使用
+=======
+          
+        self.import_name = user_name #待单个导入学员使用
+>>>>>>> origin/master
     
     def login_from_index(self):
         
@@ -339,15 +345,15 @@ class Test(unittest.TestCase):
         self.ca_card_num = card_info[0]
         self.ca_card_pwd = card_info[1]
     #购买试听卡
-    def bug_listen_card(self):
+    def buy_listen_card(self):
         self.total += 1
         try:
-            card_management.bug_listen_card(self.cfg, self.driver, self.base_url)
+            card_management.buy_listen_card(self.cfg, self.driver, self.base_url)
         except Exception,e:
             print e
-            self.verificationErrors.append('fail to bug listen card!')
+            self.verificationErrors.append('fail to buy listen card!')
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/bug_listen_card.png")
+            self.driver.save_screenshot("D:/test_rs_pic/buy_listen_card.png")
     #添加试听卡组
     def listen_cardgroup(self):
         
@@ -493,7 +499,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            student_management.import_multi_student(self.cfg, self.driver, self.base_url, self.org_name, r"C:\register_user_list.txt")
+            student_management.import_multi_student(self.cfg, self.driver, self.base_url, self.org_name, r"C:/register_user_list.txt")
         except Exception,e:
             print e
             self.verificationErrors.append("fail to import multi student!")
@@ -575,7 +581,17 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/use_catecard.png")
                     
-            
+    def use_listencard(self):#试听卡
+        
+        self.total += 1
+        try:
+            login.login_by_logindo(self.cfg, self.driver, self.base_url, self.l_card_num, self.l_card_pwd)
+        except Exception,e:
+            print e
+            self.verificationErrors.append('fail to use listen card!')
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/use_listencard.png")
+                               
     
     def add_admin(self):
         
@@ -681,7 +697,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/delete_subject.png")
             
-    def create_cate(self):
+    def create_exam_cate(self):
         self.total += 1
         try:
             cate_info = exam_cate_management.auto_create_exam_cate(self.cfg, self.driver, self.base_url, self.org_name, cate_num=1)
@@ -817,7 +833,7 @@ class Test(unittest.TestCase):
             
     def verify_all_course_convert(self):
         self.verify_convert(self.normal_course,"fail to convert normal course!")
-        #self.verify_convert(self.three_title, "fail to convert three video course!")
+        self.verify_convert(self.three_title, "fail to convert three video course!")
         #self.verify_convert(self.two_title, "fail to convert three video course!")
         #self.verify_convert(self.space_course, "fail to convert course from space!")
     
@@ -1019,7 +1035,7 @@ class Test(unittest.TestCase):
         # operation =0 自动提交  operation =1 继续答题
         operation = 1
         question_answer ='123'
-        # =1 是白卷 =0 是做了一个题
+        # blank_pager=1 是白卷 ;blank_pager=0 是做了一个题
         blank_pager = 0
         try:
             exam_user_management.exam(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
@@ -1031,19 +1047,22 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        self.login_from_index()
+        #self.login_from_index()
         #self.import_questions()
         #self.release_normal()
         #self.release_three_video()
         #self.agency_course()
         #self.package_course() #等做成网络班
         #self.add_cate()
+        #self.delete_cate()
+        #self.add_course_to_cate()
         #self.presale_course()
         #self.prepaid_cardgroup()
         #self.course_cardgroup()
-        #self.delete_cate()
-        #self.add_course_to_cate()
         #self.cate_cardgroup()
+        #self.buy_listen_card()
+        #self.listen_cardgroup()
+        #self.add_exam_card()
         #self.import_one_student()
         #self.import_multi_student()
         #self.create_multi_student()
@@ -1052,7 +1071,7 @@ class Test(unittest.TestCase):
         #self.add_subject()
         #self.modify_subject()
         #self.delete_subject()
-        #self.create_cate()
+        #self.create_exam_cate()
         #self.add_exam_point()
         #self.modify_exam_point()
         #self.delete_exam_point()
@@ -1064,13 +1083,22 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
+<<<<<<< HEAD
         login.logout(self.driver, self.base_url)
         #self.add_exam_card()
         #self.login_user()
+=======
+        #login.logout(self.driver, self.base_url)
+>>>>>>> origin/master
 
+        self.login_user()
+     
         #self.use_prepaidcard()
         #self.use_coursecard()
-        #self.use_catecard()       
+        #self.use_catecard()
+        #self.use_listencard()
+        #self.use_exam_card()     
+
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
         #self.manage_course_num()
@@ -1079,11 +1107,16 @@ class Test(unittest.TestCase):
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
+<<<<<<< HEAD
         #self.exam_user()
         #self.use_exam_card()                
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)  
+=======
+        self.exam_user()
+        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
+>>>>>>> origin/master
 
     def tearDown(self):
         self.driver.quit()

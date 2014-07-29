@@ -1041,7 +1041,7 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/exam_user.png")        
     
     def test_regress(self):
-        #self.register()
+        self.register()
         #self.login_from_index()
         #self.import_questions()
         #self.release_normal()
@@ -1087,7 +1087,7 @@ class Test(unittest.TestCase):
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         #login.logout(self.driver, self.base_url)
-        self.login_user()     
+        #self.login_user()     
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()

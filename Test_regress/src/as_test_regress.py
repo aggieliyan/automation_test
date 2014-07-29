@@ -576,7 +576,17 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/use_catecard.png")
                     
-            
+    def use_listencard(self):#试听卡
+        
+        self.total += 1
+        try:
+            login.login_by_logindo(self.cfg, self.driver, self.base_url, self.l_card_num, self.l_card_pwd)
+        except Exception,e:
+            print e
+            self.verificationErrors.append('fail to use listen card!')
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/use_listencard.png")
+                               
     
     def add_admin(self):
         
@@ -1039,12 +1049,14 @@ class Test(unittest.TestCase):
         #self.agency_course()
         #self.package_course() #等做成网络班
         #self.add_cate()
-        #self.presale_course()
-        #self.prepaid_cardgroup()
-        self.course_cardgroup()
         #self.delete_cate()
         #self.add_course_to_cate()
+        #self.presale_course()
+        #self.prepaid_cardgroup()
+        #self.course_cardgroup()
         #self.cate_cardgroup()
+        self.bug_listen_card()
+        self.listen_cardgroup()
         #self.import_one_student()
         #self.import_multi_student()
         #self.create_multi_student()
@@ -1067,11 +1079,12 @@ class Test(unittest.TestCase):
         #self.verify_all_course_convert()
         #login.logout(self.driver, self.base_url)
         #self.add_exam_card()
-        #self.login_user()
-
+        self.login_user()
+     
         #self.use_prepaidcard()
         #self.use_coursecard()
-        #self.use_catecard()       
+        #self.use_catecard()
+        self.use_listencard()     
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
         #self.createpaper()

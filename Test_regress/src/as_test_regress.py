@@ -22,7 +22,7 @@ class Test(unittest.TestCase):
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
-        self.dbhost = "192.168.120.110" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
+        self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
         
@@ -818,7 +818,7 @@ class Test(unittest.TestCase):
             
     def verify_all_course_convert(self):
         self.verify_convert(self.normal_course,"fail to convert normal course!")
-        #self.verify_convert(self.three_title, "fail to convert three video course!")
+        self.verify_convert(self.three_title, "fail to convert three video course!")
         #self.verify_convert(self.two_title, "fail to convert three video course!")
         #self.verify_convert(self.space_course, "fail to convert course from space!")
     
@@ -1038,16 +1038,16 @@ class Test(unittest.TestCase):
         #self.release_three_video()
         #self.agency_course()
         #self.package_course() #等做成网络班
-        self.add_cate()
+        #self.add_cate()
         #self.presale_course()
-        self.prepaid_cardgroup()
-        self.course_cardgroup()
-        self.delete_cate()
-        self.add_course_to_cate()
-        self.cate_cardgroup()
+        #self.prepaid_cardgroup()
+        #self.course_cardgroup()
+        #self.delete_cate()
+        #self.add_course_to_cate()
+        #self.cate_cardgroup()
         #self.import_one_student()
         #self.import_multi_student()
-        #self.create_multi_student()
+        self.create_multi_student()
         #self.add_admin()
         #self.delete_admin()
         #self.add_subject()
@@ -1065,13 +1065,13 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
-        login.logout(self.driver, self.base_url)
+        #login.logout(self.driver, self.base_url)
         #self.add_exam_card()
-        self.login_user()
+        #self.login_user()
 
-        self.use_prepaidcard()
-        self.use_coursecard()
-        self.use_catecard()       
+        #self.use_prepaidcard()
+        #self.use_coursecard()
+        #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
         #self.createpaper()

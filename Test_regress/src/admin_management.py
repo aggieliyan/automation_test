@@ -61,17 +61,22 @@ def delete_admin(cfg,driver, base_url, org_name, admin_num=1):
     
 def modify_admin(cfg,driver, base_url, org_name):
     
-    admin_name = "subadmin001"
-    driver.get(base_url + org_name)
+    driver.get(base_url + "myOffice.do")
     time.sleep(2)
-    driver.find_element(cfg.get('org_index','org_manage_xpath_by'),cfg.get('org_index','org_manage_xpath')).click()
+    driver.find_element_by_link_text(u"系统设置").click()
+    time.sleep(2)
+    driver.find_element_by_link_text(u"网校管理员").click()
+    time.sleep(2)
+    admin_name="subadmin003"
+    #driver.find_element(cfg.get('org_index','org_manage_xpath_by'),cfg.get('org_index','org_manage_xpath')).click()
     time.sleep(2)
     driver.find_element_by_link_text(u"编辑管理员").click()   
     driver.find_element(cfg.get('org_manage','ad_name_id_by'),cfg.get('org_manage','ad_name_id')).clear()
     driver.find_element(cfg.get('org_manage','ad_name_id_by'),cfg.get('org_manage','ad_name_id')).send_keys(admin_name)
+    time.sleep(2)
+    driver.find_element(cfg.get('org_manage','admin_modify_xpath_by'),cfg.get('org_manage','admin_modify_xpath')).click()
+    time.sleep(2)
     return admin_name
-    
-        
         
         
         

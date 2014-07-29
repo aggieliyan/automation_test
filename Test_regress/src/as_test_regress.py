@@ -16,9 +16,9 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "firefox"
+        self.browser = "Chrome"
         self.test_enviroment = "beta"  
-        self.org_name = "haitian"
+        self.org_name = "sadm001"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -1041,6 +1041,7 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/exam_user.png")        
     
     def test_regress(self):
+
         self.register()
         #self.login_from_index()
         #self.import_questions()
@@ -1061,8 +1062,8 @@ class Test(unittest.TestCase):
         #self.import_one_student()
         #self.import_multi_student()
         #self.create_multi_student()
-        #self.add_admin()
-        #self.delete_admin()
+        self.add_admin()
+        self.delete_admin()
         #self.add_subject()
         #self.modify_subject()
         #self.delete_subject()
@@ -1078,6 +1079,7 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
+
         #考试系统部分
         #self.exam_questions()
         #self.createpaper()
@@ -1088,6 +1090,7 @@ class Test(unittest.TestCase):
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         #login.logout(self.driver, self.base_url)
         #self.login_user()     
+
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()

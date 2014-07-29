@@ -92,13 +92,8 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to register!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/1_register.png')
-<<<<<<< HEAD
-            
-        #self.import_name = user_name #待单个导入学员使用
-=======
-          
+                      
         self.import_name = user_name #待单个导入学员使用
->>>>>>> origin/master
     
     def login_from_index(self):
         
@@ -1083,40 +1078,27 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
-<<<<<<< HEAD
-        login.logout(self.driver, self.base_url)
-        #self.add_exam_card()
-        #self.login_user()
-=======
-        #login.logout(self.driver, self.base_url)
->>>>>>> origin/master
-
-        self.login_user()
-     
-        #self.use_prepaidcard()
-        #self.use_coursecard()
-        #self.use_catecard()
-        #self.use_listencard()
-        #self.use_exam_card()     
-
-        #self.buy_course_use_RMB()
-        #self.buy_course_use_card()
-        #self.manage_course_num()
+        #考试系统部分
         #self.exam_questions()
         #self.createpaper()
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
-        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
-<<<<<<< HEAD
-        #self.exam_user()
-        #self.use_exam_card()                
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
-        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)  
-=======
-        self.exam_user()
-        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
->>>>>>> origin/master
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
+        #login.logout(self.driver, self.base_url)
+        self.login_user()     
+        #self.use_prepaidcard()
+        #self.use_coursecard()
+        #self.use_catecard()
+        #self.use_listencard()
+        #self.buy_course_use_RMB()
+        #self.buy_course_use_card()
+        #self.manage_course_num()        
+        
+        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)        
+        #self.exam_user()
+        #self.use_exam_card()                
 
     def tearDown(self):
         self.driver.quit()

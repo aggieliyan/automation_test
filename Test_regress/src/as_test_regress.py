@@ -86,7 +86,7 @@ class Test(unittest.TestCase):
         self.total += 1
         user_name = ""
         try:
-            user_name = login.auto_register(self.cfg, self.driver, self.base_url, 2, 1)
+            user_name = login.auto_register(self.cfg, self.driver, self.base_url, 2, 2)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to register!")

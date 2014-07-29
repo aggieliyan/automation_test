@@ -91,7 +91,7 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to register!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/1_register.png')
-            
+        user_name = ""  
         self.import_name = user_name #待单个导入学员使用
     
     def login_from_index(self):
@@ -493,7 +493,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            student_management.import_multi_student(self.cfg, self.driver, self.base_url, self.org_name, r"C:\register_user_list.txt")
+            student_management.import_multi_student(self.cfg, self.driver, self.base_url, self.org_name, r"C:/register_user_list.txt")
         except Exception,e:
             print e
             self.verificationErrors.append("fail to import multi student!")
@@ -1033,19 +1033,17 @@ class Test(unittest.TestCase):
         #self.register()
         self.login_from_index()
         #self.import_questions()
-        #self.register()
-        self.login_from_index()
         #self.release_normal()
         #self.release_three_video()
         #self.agency_course()
         #self.package_course() #等做成网络班
-        #self.add_cate()
+        self.add_cate()
         #self.presale_course()
-        #self.prepaid_cardgroup()
-        #self.course_cardgroup()
-        #self.delete_cate()
-        #self.add_course_to_cate()
-        #self.cate_cardgroup()
+        self.prepaid_cardgroup()
+        self.course_cardgroup()
+        self.delete_cate()
+        self.add_course_to_cate()
+        self.cate_cardgroup()
         #self.import_one_student()
         #self.import_multi_student()
         #self.create_multi_student()
@@ -1066,13 +1064,13 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
-        #login.logout(self.driver, self.base_url)
+        login.logout(self.driver, self.base_url)
         #self.add_exam_card()
-        #self.login_user()
+        self.login_user()
 
-        #self.use_prepaidcard()
-        #self.use_coursecard()
-        #self.use_catecard()       
+        self.use_prepaidcard()
+        self.use_coursecard()
+        self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
         #self.createpaper() 

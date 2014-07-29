@@ -86,8 +86,8 @@ def register_by_email_index(cfg,driver, base_url,r_username, r_email, r_psw):
     driver.find_element(cfg.get('as_index','register_email_psw_by'),cfg.get('as_index','register_email_psw')).send_keys(r_psw)
     driver.find_element(cfg.get('as_index','register_email_confirm_psw_by'),cfg.get('as_index','register_email_confirm_psw')).clear()
     driver.find_element(cfg.get('as_index','register_email_confirm_psw_by'),cfg.get('as_index','register_email_confirm_psw')).send_keys(r_psw)
-    driver.find_element_by_id("J_iCode").send_keys("aaaa")
-    time.sleep(3)
+    #driver.find_element_by_id("J_iCode").send_keys("aaaa")
+    time.sleep(8)
     driver.find_element(cfg.get('as_index','register_email_submit_by'),cfg.get('as_index','register_email_submit')).click()
     time.sleep(6)
     try:
@@ -164,7 +164,7 @@ def register_by_independent_domian(cfg,driver,base_url,r_username, r_email, r_ps
 def auto_register(cfg,driver, base_url,r_num):
     
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
-    user_file = open(r"register_user_list.txt",'w')
+    user_file = open(r"C:/register_user_list.txt",'w')
     for i in range(r_num):
         r_username = 'testlogin_' + prefix + str(i) 
         r_email = r_username+"@sohu.com"
@@ -172,8 +172,8 @@ def auto_register(cfg,driver, base_url,r_num):
         r_psw = '1234aa'
       
         #register_by_mobile_index(cfg,driver, base_url,r_username, r_mobile, r_psw)
-        #register_by_email_index(cfg,driver, base_url,r_username, r_email, r_psw)
-        register_by_independent_domian(cfg,driver, base_url,r_username, r_email, r_psw)
+        register_by_email_index(cfg,driver, base_url,r_username, r_email, r_psw)
+        #register_by_independent_domian(cfg,driver, base_url,r_username, r_email, r_psw)
         
         #except Exception,info:
             #print info

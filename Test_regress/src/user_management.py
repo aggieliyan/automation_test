@@ -118,19 +118,15 @@ def release_announcement(cfg,driver, base_url, org_name, an_title = u"自动化�
 #机构修改头像
 def org_chang_headpic(cfg,driver, base_url,org_name,head_pic = r"W:\Testing\Testing Files\Automation_test\headpic.jpg" ):
  
-    driver.get(base_url + "myOffice.do")
-    time.sleep(5)
-    #driver.find_element_by_name("photo").click()
-    #driver.execute_script("$(\"#J_oaiUploadTrigger input\").attr('style','display:opacity:1;display:block;')")
-    driver.find_element_by_name("photo").send_keys(head_pic)
-    time.sleep(10)
-    #driver.find_element_by_xpath(cfg.get('org_index','org_manage_xpath')).click()
-    #time.sleep(2)
-    #driver.find_element_by_css_selector(cfg.get('org_manage','change_headpic_css')).click()
-    #time.sleep(1)
-    #driver.find_element_by_id(cfg.get('org_manage','headpic_upload_id')).send_keys(head_pic)
-    #driver.find_element_by_xpath(cfg.get('org_manage','headpic_ok_xpath')).click()
-    #time.sleep(2)
+    driver.get(base_url + org_name)
+    time.sleep(2)
+    driver.find_element_by_xpath(cfg.get('org_index','org_manage_xpath')).click()
+    time.sleep(2)
+    driver.find_element_by_css_selector(cfg.get('org_manage','change_headpic_css')).click()
+    time.sleep(1)
+    driver.find_element_by_id(cfg.get('org_manage','headpic_upload_id')).send_keys(head_pic)
+    driver.find_element_by_xpath(cfg.get('org_manage','headpic_ok_xpath')).click()
+    time.sleep(2)
     
 def change_banner(cfg,driver, base_url, org_name):
   

@@ -16,9 +16,9 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "firefox"
+        self.browser = "Chrome"
         self.test_enviroment = "beta"  
-        self.org_name = "haitian"
+        self.org_name = "sadm001"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -92,13 +92,8 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to register!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/1_register.png')
-<<<<<<< HEAD
-            
-        #self.import_name = user_name #待单个导入学员使用
-=======
-          
+    
         self.import_name = user_name #待单个导入学员使用
->>>>>>> origin/master
     
     def login_from_index(self):
         
@@ -1047,7 +1042,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        #self.login_from_index()
+        self.login_from_index()
         #self.import_questions()
         #self.release_normal()
         #self.release_three_video()
@@ -1066,8 +1061,8 @@ class Test(unittest.TestCase):
         #self.import_one_student()
         #self.import_multi_student()
         #self.create_multi_student()
-        #self.add_admin()
-        #self.delete_admin()
+        self.add_admin()
+        self.delete_admin()
         #self.add_subject()
         #self.modify_subject()
         #self.delete_subject()
@@ -1083,16 +1078,8 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
-<<<<<<< HEAD
-        login.logout(self.driver, self.base_url)
-        #self.add_exam_card()
-        #self.login_user()
-=======
         #login.logout(self.driver, self.base_url)
->>>>>>> origin/master
-
-        self.login_user()
-     
+        #self.login_user()    
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()
@@ -1107,16 +1094,11 @@ class Test(unittest.TestCase):
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
-<<<<<<< HEAD
         #self.exam_user()
         #self.use_exam_card()                
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)  
-=======
-        self.exam_user()
-        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
->>>>>>> origin/master
 
     def tearDown(self):
         self.driver.quit()

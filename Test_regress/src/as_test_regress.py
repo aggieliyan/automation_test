@@ -16,7 +16,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "Chrome"
+        self.browser = "firefox"
         self.test_enviroment = "beta"  
         self.org_name = "sadm001"
         self.org_password = "1234"

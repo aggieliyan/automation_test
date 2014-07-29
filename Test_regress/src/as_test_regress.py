@@ -692,7 +692,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/delete_subject.png")
             
-    def create_cate(self):
+    def create_exam_cate(self):
         self.total += 1
         try:
             cate_info = exam_cate_management.auto_create_exam_cate(self.cfg, self.driver, self.base_url, self.org_name, cate_num=1)

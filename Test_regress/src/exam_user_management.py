@@ -30,7 +30,6 @@ def exam(cfg, driver, base_url, operation, blank_pager, question_answer):
     time.sleep(2)
     question_title = driver.execute_script("return $('#J_classification a:eq(0)').text()")
     time.sleep(2)
-     # operation =0 自动提交  operation =1 继续答题
      # blank_pager=1 是白卷 ;blank_pager=0 是做了一个题
     if blank_pager == 0:
         #单选 多选
@@ -85,6 +84,7 @@ def exam(cfg, driver, base_url, operation, blank_pager, question_answer):
             except:
                 None
         ###综合题结束
+    # operation =0 自动提交  operation =1 继续答题
     if operation == 0 :
         time.sleep(exam_time * 60 + 2)
     else: 

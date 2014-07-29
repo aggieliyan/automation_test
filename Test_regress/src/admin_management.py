@@ -11,6 +11,8 @@ def create_admin(cfg,driver, base_url,org_name,admin_name,admin_username,admin_p
     
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
+    driver.find_element_by_link_text(u"系统设置").click()
+    time.sleep(2)
     driver.find_element_by_link_text(u"网校管理员").click()
     time.sleep(2)
     driver.find_element_by_xpath(cfg.get('org_manage','add_admin_xpath')).click()#添加管理员
@@ -48,6 +50,8 @@ def delete_admin(cfg,driver, base_url, org_name, admin_num=1):
         
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
+    driver.find_element_by_link_text(u"系统设置").click()
+    time.sleep(2)
     driver.find_element_by_link_text(u"网校管理员").click()
     time.sleep(2)
     if admin_num == 1:
@@ -60,7 +64,6 @@ def delete_admin(cfg,driver, base_url, org_name, admin_num=1):
     
     
 def modify_admin(cfg,driver, base_url, org_name):
-    
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
     driver.find_element_by_link_text(u"系统设置").click()

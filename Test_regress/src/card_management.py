@@ -65,14 +65,13 @@ def add_course_cardgroup(cfg,driver, base_url, org_name , group_name = u'coursec
     driver.find_element(cfg.get('org_manage','course_card_by'),cfg.get('org_manage','course_card')).click()#选择充课卡
     driver.find_element(cfg.get('org_manage','grouptitle_id_by'),cfg.get('org_manage','grouptitle_id')).send_keys(group_name)
     time.sleep(2)
-    driver.find_element(cfg.get('org_manage','course_cate_xpath_by'),cfg.get('org_manage','course_cate_xpath')).click()#选择整个类目，类目下的课被选中
-    #driver.find_element_by_css_selector("span.disMore_btn").click()
-    #time.sleep(5)
-    #driver.execute_script("$('input[type=checkbox]:eq(2)').click()")
+    #driver.find_element(cfg.get('org_manage','course_cate_xpath_by'),cfg.get('org_manage','course_cate_xpath')).click()#选择整个类目，类目下的课被选中
+    driver.find_element_by_css_selector("span.disMore_btn").click()
+    time.sleep(5)
+    driver.execute_script("$('input[type=checkbox]:eq(2)').click()")#选择未归类类目下的一个课程
     time.sleep(3)
-    #driver.find_element_by_xpath(cfg.get('org_manage','course_ok_xpath')).click()
     driver.execute_script("$(\".x-btn-text\").eq(0).click()")
-    time.sleep(3)
+    time.sleep(2)
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")
 
 #添加卡组-补课卡 

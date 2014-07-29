@@ -84,6 +84,7 @@ class Test(unittest.TestCase):
     def register(self):#注册改啦要改
         
         self.total += 1
+        user_name = ""
         try:
             user_name = login.auto_register(self.cfg, self.driver, self.base_url, 3)
         except Exception,e:
@@ -91,7 +92,7 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to register!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/1_register.png')
-        user_name = ""  
+          
         self.import_name = user_name #待单个导入学员使用
     
     def login_from_index(self):
@@ -1073,7 +1074,7 @@ class Test(unittest.TestCase):
         self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
-        #self.createpaper() 
+        self.createpaper()
         #self.exam_questions()
         #self.manage_course_num()
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)

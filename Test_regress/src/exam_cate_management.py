@@ -15,11 +15,11 @@ def create_subject(cfg,driver, base_url,org_name,subject_name):
     time.sleep(2)
     driver.get("%sexam/" %(base_url))
     time.sleep(2)
-    driver.find_element_by_id(cfg.get('exam','new_subject_id')).click()
-    driver.find_element_by_id(cfg.get('exam','sub_name')).clear()
-    driver.find_element_by_id(cfg.get('exam','sub_name')).send_keys(subject_name)
+    driver.find_element(cfg.get('exam','new_subject_id_by'),cfg.get('exam','new_subject_id')).click()
+    driver.find_element(cfg.get('exam','sub_name_by'),cfg.get('exam','sub_name')).clear()
+    driver.find_element(cfg.get('exam','sub_name_by'),cfg.get('exam','sub_name')).send_keys(subject_name)
     time.sleep(3)
-    driver.find_element_by_xpath(cfg.get('exam','sub_ok_xpath')).click()
+    driver.find_element(cfg.get('exam','sub_ok_xpath_by'),cfg.get('exam','sub_ok_xpath')).click()
     time.sleep(1)
 
 def auto_create_subject(cfg,driver,base_url,org_name,sub_num):
@@ -38,12 +38,12 @@ def modify_subject(cfg,driver, base_url, org_name):
     driver.get("%sexam/" %(base_url))
     time.sleep(5)
     subject_name= "subject001"
-    driver.find_element_by_xpath(cfg.get('exam','sub_big_xpath')).click()
-    driver.find_element_by_xpath(cfg.get('exam','sub_small_xpath')).click()
+    driver.find_element(cfg.get('exam','sub_big_xpath_by'),cfg.get('exam','sub_big_xpath')).click()
+    driver.find_element(cfg.get('exam','sub_samll_xpath_by'),cfg.get('exam','sub_small_xpath')).click()
     time.sleep(5)
-    driver.find_element_by_id("subject_name").clear()
-    driver.find_element_by_id("subject_name").send_keys(subject_name)
-    driver.find_element_by_xpath(cfg.get('exam','sub_ok_xpath')).click()
+    driver.find_element(cfg.get('exam','sub_name_by'),cfg.get('exam','sub_name')).clear()
+    driver.find_element(cfg.get('exam','sub_name_by'),cfg.get('exam','sub_name')).send_keys(subject_name)
+    driver.find_element(cfg.get('exam','sub_ok_xpath_by'),cfg.get('exam','sub_ok_xpath')).click()
     return subject_name
 
 def delete_subject(cfg,driver, base_url, org_name, sub_num=1):
@@ -51,10 +51,10 @@ def delete_subject(cfg,driver, base_url, org_name, sub_num=1):
     time.sleep(2)
     driver.get("%sexam/" %(base_url))
     time.sleep(5)
-    driver.find_element_by_xpath(cfg.get('exam','sub_big_xpath')).click()
-    driver.find_element_by_xpath(cfg.get('exam','sub_del_xpath')).click()
+    driver.find_element(cfg.get('exam','sub_big_xpath_by'),cfg.get('exam','sub_big_xpath')).click()
+    driver.find_element(cfg.get('exam','sub_del_xpath_by'),cfg.get('exam','sub_del_xpath')).click()
     time.sleep(5)
-    driver.find_element_by_xpath(cfg.get('exam','sub_delok_xpath')).click()
+    driver.find_element(cfg.get('exam','sub_delok_xpath_by'),cfg.get('exam','sub_delok_xpath')).click()
     time.sleep(2)
     
     
@@ -65,7 +65,7 @@ def create_exam_cate(cfg,driver, base_url,org_name,cate_name,cate_detail):
     time.sleep(2) 
     driver.find_element_by_link_text(u"类目管理").click()
     time.sleep(1)
-    driver.find_element_by_id(cfg.get('exam','cate_newcateid')).click()
+    driver.find_element(cfg.get('exam','cate_newcateid_by'),cfg.get('exam','cate_newcateid')).click()
     time.sleep(1)
     driver.find_element_by_name(cfg.get('exam','cate_addname')).send_keys(cate_name)
     driver.find_element_by_name(cfg.get('exam','cate_desname')).clear()

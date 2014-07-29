@@ -37,7 +37,8 @@ def modify_subject(cfg,driver, base_url, org_name):
     time.sleep(2)
     driver.get("%sexam/" %(base_url))
     time.sleep(5)
-    subject_name= "subject001" 
+    prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
+    subject_name = org_name[0] +"sub_" +prefix
     driver.find_element(cfg.get('exam','sub_big_xpath_by'),cfg.get('exam','sub_big_xpath')).click()
     driver.find_element(cfg.get('exam','sub_small_xpath_by'),cfg.get('exam','sub_small_xpath')).click()
     time.sleep(5)
@@ -93,8 +94,9 @@ def modify_exam_cate(cfg,driver, base_url,org_name):
     time.sleep(2) 
     driver.find_element_by_link_text(u"类目管理").click()
     time.sleep(1)
-    cate_name = 'cate001'
-    cate_detail = 'cate001describe'
+    prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
+    cate_name = org_name[0] +"cate_" +prefix
+    cate_detail = org_name[0] +"cate_" +prefix
     driver.find_element(cfg.get('exam','cate_mod_xpath_by'),cfg.get('exam','cate_mod_xpath')).click()
     driver.find_element(cfg.get('exam','cate_addname_by'),cfg.get('exam','cate_addname')).clear()
     driver.find_element(cfg.get('exam','cate_addname_by'),cfg.get('exam','cate_addname')).send_keys(cate_name)

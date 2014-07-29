@@ -641,7 +641,7 @@ class Test(unittest.TestCase):
             
         #验证
         
-    def add_subject(self):#新建科目
+    def add_exam_subject(self):#新建科目
         
         self.total += 1
         try:
@@ -663,7 +663,7 @@ class Test(unittest.TestCase):
             
             
             
-    def modify_subject(self):#编辑科目
+    def modify_exam_subject(self):#编辑科目
         
         self.total += 1
         try:
@@ -681,7 +681,7 @@ class Test(unittest.TestCase):
         if rs == False:
             self.verificationErrors.append("fail to modify subject!")
         
-    def delete_subject(self):
+    def delete_exam_subject(self):
         
         self.total += 1
         try:
@@ -1128,9 +1128,9 @@ class Test(unittest.TestCase):
 
         #self.use_exam_card() 
         #self.import_questions()
-        #self.add_subject()
-        #self.modify_subject()
-        #self.delete_subject()
+        #self.add_exam_subject()
+        #self.modify_exam_subject()
+        #self.delete_exam_subject()
         #self.create_exam_cate()
         #self.add_exam_point()
         #self.modify_exam_point()

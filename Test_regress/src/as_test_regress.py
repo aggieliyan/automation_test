@@ -1030,10 +1030,10 @@ class Test(unittest.TestCase):
         # operation =0 自动提交  operation =1 继续答题
         operation = 1
         question_answer ='123'
-        # =1 是白卷 =0 是做了一个题
+        # blank_pager=1 是白卷 ;blank_pager=0 是做了一个题
         blank_pager = 0
         try:
-            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
+            exam_user_management.exam(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
         except Exception,e:
             print e
             self.verificationErrors.append('fail to exam!')

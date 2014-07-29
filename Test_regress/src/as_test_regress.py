@@ -16,9 +16,9 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "firefox"
+        self.browser = "Chrome"
         self.test_enviroment = "beta"  
-        self.org_name = "sadm001"
+        self.org_name = "offcn"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -1053,16 +1053,16 @@ class Test(unittest.TestCase):
         #self.add_course_to_cate()
         #self.presale_course()
         #self.prepaid_cardgroup()
-        self.course_cardgroup()
+        #self.course_cardgroup()
         #self.cate_cardgroup()
-        self.bug_listen_card()
-        self.listen_cardgroup()
+        #self.bug_listen_card()
+        #self.listen_cardgroup()
         #self.add_exam_card()
         #self.import_one_student()
         #self.import_multi_student()
-        self.create_multi_student()
-        #self.add_admin()
-        #self.delete_admin()
+        #self.create_multi_student()
+        self.add_admin()
+        self.delete_admin()
         #self.add_subject()
         #self.modify_subject()
         #self.delete_subject()
@@ -1078,14 +1078,16 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
+        #self.change_headpic()
         #login.logout(self.driver, self.base_url)
 
-        self.login_user()
+        #self.login_user()
      
         #self.use_prepaidcard()
-        self.use_coursecard()
+        #self.use_coursecard()
         #self.use_catecard()
-        self.use_listencard()
+        #
+        #self.use_listencard()
         #self.use_exam_card()     
 
         #self.buy_course_use_RMB()

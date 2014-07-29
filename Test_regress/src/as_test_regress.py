@@ -839,7 +839,7 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/add_photot.png")
             
        #验证
-    def add_exam_subject(self):#新建科目
+    def add_exam_subject(self):#新建考试科目
         
         self.total += 1
         try:
@@ -879,7 +879,7 @@ class Test(unittest.TestCase):
         if rs == False:
             self.verificationErrors.append("fail to modify subject!")
         
-    def delete_exam_subject(self):
+    def delete_exam_subject(self):#删除科目
         
         self.total += 1
         try:
@@ -890,7 +890,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/delete_subject.png")
             
-    def create_exam_cate(self):
+    def create_exam_cate(self):#新建类目
         self.total += 1
         try:
             cate_info = exam_cate_management.auto_create_exam_cate(self.cfg, self.driver, self.base_url, self.org_name, cate_num=1)
@@ -925,7 +925,7 @@ class Test(unittest.TestCase):
         time.sleep(2)       
         
         
-    def delete_exam_cate(self):
+    def delete_exam_cate(self):#删除类目
         self.total += 1
         try:
             exam_cate_management.delete_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
@@ -935,7 +935,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/delete_cate.png")
             
-    def add_exam_point(self):
+    def add_exam_point(self):#新建考点
         self.total += 1
         try:
             point_info = exam_cate_management.auto_create_exam_point(self.cfg, self.driver, self.base_url, self.org_name, point_num=1)
@@ -988,7 +988,7 @@ class Test(unittest.TestCase):
 
 
 
-       
+
     def import_questions(self):
        
        self.total += 1

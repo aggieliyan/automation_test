@@ -16,12 +16,12 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "firefox"
+        self.browser = "Chrome"
         self.test_enviroment = "beta"  
-        self.org_name = "salesdemo"
+        self.org_name = "sadm001"
         self.org_password = "1234"
-        self.user_name = "stu_gy50"
-        self.user_password = "gy0411"
+        self.user_name = "yilu282"
+        self.user_password = "1234"
         self.dbhost = "192.168.120.110" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
@@ -157,6 +157,10 @@ class Test(unittest.TestCase):
             self.assertEqual(True, rs, "fail to release tree video course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
+        
+        #取链接待后面购买
+        course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
+        self.course_href_2 = self.base_url + course_href
             
 
             
@@ -238,11 +242,7 @@ class Test(unittest.TestCase):
             self.assertEqual(True, rs,"fail to release presale course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
-            
-        course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
-        self.course_href_2 = self.base_url + course_href
-        
-    
+              
     def agency_course(self):
         
         self.total += 1
@@ -399,17 +399,20 @@ class Test(unittest.TestCase):
             
         return card_num,card_pwd
     
-        #添加考试卡并返回第一个卡号
+    #添加考试卡并返回第一个卡号
     def add_exam_card(self):
         self.total += 1
+        count = 5
         try:
-            self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url)
+            self.page_catename = card_management.get_academy_catename(self.cfg, self.driver, self.base_url)
+            exam_paper.create_paper(self.cfg, self.driver, self.base_url, self.page_catename, 1, 1, 1, 1)
+            self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url,count)
+            #self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url)
         except Exception,e:
             print e
             self.verificationErrors.append('fail to add exam card!')
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_exam_card.png")
-            #return examcard_num
     #使用考试卡
     def use_exam_card(self):
         self.total += 1
@@ -1031,7 +1034,7 @@ class Test(unittest.TestCase):
         self.login_from_index()
         #self.import_questions()
         #self.register()
-        #self.login_from_index()
+        self.login_from_index()
         #self.release_normal()
         #self.release_three_video()
         #self.agency_course()
@@ -1066,6 +1069,7 @@ class Test(unittest.TestCase):
         #login.logout(self.driver, self.base_url)
         #self.add_exam_card()
         #self.login_user()
+
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()       
@@ -1083,9 +1087,7 @@ class Test(unittest.TestCase):
         #self.exam_user()
         #self.use_exam_card()
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
-        #self.exam_user()
-        #self.use_exam_card()
-  
+
     def tearDown(self):
         self.driver.quit()
         fail_num = len(self.verificationErrors)

@@ -39,7 +39,7 @@ def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course
         
             driver.find_elements(cfg.get('courseRedirect','upload_btn_by'), cfg.get('courseRedirect','upload_btn'))[2].click()
             time.sleep(1)
-            driver.execute_script("$(\'.spacefile-name input\').eq(0).click()")
+            driver.execute_script("$(\'.spacefile-name input\').last().click()")
             driver.execute_script("$(\'.dialog-button-container button\').eq(0).click()")
             time.sleep(1)
             
@@ -49,9 +49,9 @@ def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course
                 driver.find_element_by_css_selector("span.greenbtn30_text").click()
                 time.sleep(1)
                 
-                #全选          
-                #driver.execute_script("$(\'.bottomInfo input\').eq(0).click()")
-                driver.find_element(cfg.get('courseRedirect','select_cfile_by'), cfg.get('courseRedirect','select_cfile')).click()
+                #全选 /选最后一个         
+                driver.execute_script("$(\'.spacefile-name input\').last().click()")
+                #driver.find_element(cfg.get('courseRedirect','select_cfile_by'), cfg.get('courseRedirect','select_cfile')).click()
                 
                 driver.execute_script("$(\'.dialog-button-container button\').eq(0).click()")
                 time.sleep(1)

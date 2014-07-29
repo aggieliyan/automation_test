@@ -18,6 +18,8 @@ def import_one_student(cfg,driver, base_url, org_name, stu_name):
     
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
+    driver.find_element_by_link_text(u"学员/员工").click()
+    time.sleep(2)
     driver.find_element_by_link_text(u"学员管理").click()
     time.sleep(2)
     driver.find_element(cfg.get('org_manage',"stu_input_by"),cfg.get('org_manage',"stu_input")).send_keys(stu_name)
@@ -28,6 +30,8 @@ def import_one_student(cfg,driver, base_url, org_name, stu_name):
 def import_multi_student(cfg,driver,base_url, org_name, stu_txt):
     
     driver.get(base_url + "myOffice.do")
+    time.sleep(2)
+    driver.find_element_by_link_text(u"学员/员工").click()
     time.sleep(2)
     driver.find_element_by_link_text(u"学员管理").click()
     time.sleep(2)
@@ -43,6 +47,8 @@ def import_multi_student(cfg,driver,base_url, org_name, stu_txt):
 def create_student(cfg,driver, base_url,org_name, stu_txt):
     
     driver.get(base_url + "myOffice.do")
+    time.sleep(2)
+    driver.find_element_by_link_text(u"学员/员工").click()
     time.sleep(2)
     driver.find_element_by_link_text(u"学员管理").click()
     time.sleep(2)
@@ -76,6 +82,8 @@ def open_course_for_one(cfg,driver,base_url, org_name,stu_num = 1):
     
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
+    driver.find_element_by_link_text(u"学员/员工").click()
+    time.sleep(2)
     driver.find_element_by_link_text(u"学员管理").click()
     time.sleep(2)
     driver.find_element_by_xpath("//div["+str(stu_num)+"]/table/tbody/tr/td[2]/div/p/a").click() #开通知识资料
@@ -92,6 +100,8 @@ def open_course_for_one(cfg,driver,base_url, org_name,stu_num = 1):
 def open_course_for_multi(cfg,driver,base_url, org_name):
       
     driver.get(base_url + "myOffice.do")
+    time.sleep(2)
+    driver.find_element_by_link_text(u"学员/员工").click()
     time.sleep(2)
     driver.find_element_by_link_text(u"学员管理").click()
     time.sleep(5)
@@ -133,6 +143,8 @@ def buy_open_num(cfg,driver, base_url, org_name, bnum):
 #管理播放授权数
 def manage_course_num(cfg, driver, base_url):
     driver.get(base_url + "myOffice.do")
+    time.sleep(2)
+    driver.find_element_by_link_text(u"学员/员工").click()
     time.sleep(2)
     driver.find_element_by_link_text(u"学员管理").click()
     time.sleep(2)

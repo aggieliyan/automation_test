@@ -791,11 +791,11 @@ class Test(unittest.TestCase):
     
     def modify_pagefoot(self):
        
-        self.total += 1
-        foot_info = '12'
-        foot_icp = '12'
+        #self.total += 1
+        #foot_info = '12'
+        #foot_icp = '12'
         try:
-            user_management.modify_pagefoot(self.cfg, self.driver, self.base_url, self.org_name, foot_info, foot_icp) 
+            user_management.modify_pagefoot(self.cfg, self.driver, self.base_url, self.org_name) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to modify_pagefoot")
@@ -1085,7 +1085,6 @@ class Test(unittest.TestCase):
         self.modify_admin()
         self.delete_admin()
         self.buy_open_num()
-        #self.release_announcement()
         #self.release_href_course()
         self.open_course_for_one()
         self.open_course_for_multi()

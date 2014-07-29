@@ -62,7 +62,7 @@ def add_course_cardgroup(cfg,driver, base_url, org_name , group_name = u'coursec
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
-    driver.find_element(cfg.get('org_manage','course_card_xpath_by'),cfg.get('org_manage','course_card_xpath')).click()#选择充课卡
+    driver.find_element(cfg.get('org_manage','course_card_by'),cfg.get('org_manage','course_card')).click()#选择充课卡
     driver.find_element(cfg.get('org_manage','grouptitle_id_by'),cfg.get('org_manage','grouptitle_id')).send_keys(group_name)
     time.sleep(2)
     driver.find_element(cfg.get('org_manage','course_cate_xpath_by'),cfg.get('org_manage','course_cate_xpath')).click()#选择整个类目，类目下的课被选中
@@ -85,7 +85,7 @@ def add_cate_cardgroup(cfg,driver, base_url, org_name,group_name = u'catecard-20
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
     driver.find_element(cfg.get('org_manage','grouptitle_id_by'),cfg.get('org_manage','grouptitle_id')).send_keys(group_name)
-    driver.find_element(cfg.get('org_manage','cate_card_xpath_by'),cfg.get('org_manage','cate_card_xpath')).click()
+    driver.find_element(cfg.get('org_manage','cate_card_by'),cfg.get('org_manage','cate_card')).click()
     time.sleep(3)
     driver.find_element(cfg.get('org_manage','cate_name_by'),cfg.get('org_manage','cate_name')).click()
     driver.find_element(cfg.get('org_manage','cate_price_id_by'),cfg.get('org_manage','cate_price_id')).send_keys(group_price)

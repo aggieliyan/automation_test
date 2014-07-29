@@ -1132,6 +1132,8 @@ class Test(unittest.TestCase):
         #self.modify_exam_subject()
         #self.delete_exam_subject()
         #self.create_exam_cate()
+        #self.modify_exam_cate()
+        #self.delete_exam_cate() 
         #self.add_exam_point()
         #self.modify_exam_point()
         #self.delete_exam_point()               

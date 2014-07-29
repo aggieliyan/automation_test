@@ -112,7 +112,7 @@ def add_listen_cardgroup(cfg,driver, base_url, org_name , group_name = u'listenc
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
-    driver.find_element(cfg.get('org_manage','listen_card_xpath_by'),cfg.get('org_manage','listen_card_xpath')).click()#选择试听卡
+    driver.find_element(cfg.get('org_manage','listen_card_by'),cfg.get('org_manage','listen_card')).click()#选择试听卡
     driver.find_element(cfg.get('org_manage','grouptitle_id_by'),cfg.get('org_manage','grouptitle_id')).send_keys(group_name)
     time.sleep(2)
     driver.find_element(cfg.get('org_manage','listen_spread_xpath_by'),cfg.get('org_manage','listen_spread_xpath')).click()#展开默认类目下资料

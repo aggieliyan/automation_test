@@ -91,7 +91,7 @@ def add_cate_cardgroup(cfg,driver, base_url, org_name,group_name = u'catecard-20
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")
     time.sleep(2)
  #购买试听卡
-def bug_listen_card(cfg,driver, base_url):
+def buy_listen_card(cfg,driver, base_url):
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
     driver.find_element_by_link_text(u"管理卡组").click()

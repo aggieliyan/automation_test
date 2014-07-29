@@ -25,11 +25,13 @@ def exam(cfg, driver, base_url, operation, blank_pager, question_answer):
     driver.find_element_by_link_text(u"立即考试").click()
     time.sleep(2)
     exam_time = driver.execute_script("return parseInt($('.pre-exam-outer li').eq(0).text().substring(5,6))")
+    print exam_time
     time.sleep(2)
     driver.find_element_by_link_text(u"开始考试").click()
     time.sleep(2)
     question_title = driver.execute_script("return $('#J_classification a:eq(0)').text()")
     time.sleep(2)
+     # blank_pager=1 是白卷 ;blank_pager=0 是做了一个题
     if blank_pager == 0:
         #单选 多选
         if question_title == u"单选题" or question_title == u"多选题":
@@ -83,6 +85,7 @@ def exam(cfg, driver, base_url, operation, blank_pager, question_answer):
             except:
                 None
         ###综合题结束
+    # operation =0 自动提交  operation =1 继续答题
     if operation == 0 :
         time.sleep(exam_time * 60 + 2)
     else: 

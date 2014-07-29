@@ -340,15 +340,15 @@ class Test(unittest.TestCase):
         self.ca_card_num = card_info[0]
         self.ca_card_pwd = card_info[1]
     #购买试听卡
-    def bug_listen_card(self):
+    def buy_listen_card(self):
         self.total += 1
         try:
-            card_management.bug_listen_card(self.cfg, self.driver, self.base_url)
+            card_management.buy_listen_card(self.cfg, self.driver, self.base_url)
         except Exception,e:
             print e
-            self.verificationErrors.append('fail to bug listen card!')
+            self.verificationErrors.append('fail to buy listen card!')
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/bug_listen_card.png")
+            self.driver.save_screenshot("D:/test_rs_pic/buy_listen_card.png")
     #添加试听卡组
     def listen_cardgroup(self):
         
@@ -1055,7 +1055,7 @@ class Test(unittest.TestCase):
         #self.prepaid_cardgroup()
         self.course_cardgroup()
         #self.cate_cardgroup()
-        self.bug_listen_card()
+        self.buy_listen_card()
         self.listen_cardgroup()
         #self.add_exam_card()
         #self.import_one_student()

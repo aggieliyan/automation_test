@@ -70,7 +70,9 @@ def modify_admin(cfg,driver, base_url):
     time.sleep(2)
     driver.find_element_by_link_text(u"网校管理员").click()
     time.sleep(2)
-    admin_name="subadmin003"
+    
+    prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
+    admin_name = org_name[0] +"adm_" +prefix
     #driver.find_element(cfg.get('org_index','org_manage_xpath_by'),cfg.get('org_index','org_manage_xpath')).click()
     time.sleep(2)
     driver.find_element_by_link_text(u"编辑管理员").click()   

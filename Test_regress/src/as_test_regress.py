@@ -1042,7 +1042,7 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         #self.register()
-        self.login_from_index()
+        #self.login_from_index()
         #self.import_questions()
         #self.release_normal()
         #self.release_three_video()
@@ -1053,14 +1053,14 @@ class Test(unittest.TestCase):
         #self.add_course_to_cate()
         #self.presale_course()
         #self.prepaid_cardgroup()
-        self.course_cardgroup()
+        #self.course_cardgroup()
         #self.cate_cardgroup()
-        self.buy_listen_card()
-        self.listen_cardgroup()
+        #self.buy_listen_card()
+        #self.listen_cardgroup()
         #self.add_exam_card()
         #self.import_one_student()
         #self.import_multi_student()
-        self.create_multi_student()
+        #self.create_multi_student()
         #self.add_admin()
         #self.delete_admin()
         #self.add_subject()
@@ -1083,9 +1083,9 @@ class Test(unittest.TestCase):
         self.login_user()
      
         #self.use_prepaidcard()
-        self.use_coursecard()
+        #self.use_coursecard()
         #self.use_catecard()
-        self.use_listencard()
+        #self.use_listencard()
         #self.use_exam_card()     
 
         #self.buy_course_use_RMB()
@@ -1099,7 +1099,7 @@ class Test(unittest.TestCase):
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
-        #self.exam_user()
+        self.exam_user()
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
 
     def tearDown(self):

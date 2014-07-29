@@ -25,6 +25,7 @@ def exam(cfg, driver, base_url, operation, blank_pager, question_answer):
     driver.find_element_by_link_text(u"立即考试").click()
     time.sleep(2)
     exam_time = driver.execute_script("return parseInt($('.pre-exam-outer li').eq(0).text().substring(5,6))")
+    print exam_time
     time.sleep(2)
     driver.find_element_by_link_text(u"开始考试").click()
     time.sleep(2)

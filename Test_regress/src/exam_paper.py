@@ -50,9 +50,9 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erando
     driver.find_element(cfg.get('exam','exam_next_one_by'),cfg.get('exam','exam_next_one')).click()
     time.sleep(2)
     #添加大题
-    auto_creatquestion(cfg,driver,7)
+    auto_creatquestion(cfg,driver,3)
     #生成试卷
-    driver.find_element_by_id(cfg.get('exam','exam_paper_build_btn_by'),cfg.get('exam','exam_paper_build_btn')).click()
+    driver.find_element(cfg.get('exam','exam_paper_build_btn_by'),cfg.get('exam','exam_paper_build_btn')).click()
     time.sleep(2)    
         
 #添加大题        
@@ -63,10 +63,11 @@ def add_big_question(cfg, driver,qscore, qtype):
     driver.find_element(cfg.get('exam','paper_add_big_question_by'),cfg.get('exam','paper_add_big_question')).click()    
     time.sleep(1)
     if qtype == 1:
-        #driver.find_element('xpath','//div[10]/ul/li').click()
+        
         time.sleep(2)
         driver.find_element_by_css_selector("span.cc-arrow").click()
-        driver.find_element_by_css_selector("li.cc-item.selectedItem").click()
+        driver.find_element('xpath','//div[10]/ul/li').click()
+        #driver.find_element_by_css_selector("li.cc-item.selectedItem").click()
         driver.find_element(cfg.get('exam','exam_question_score_by'),cfg.get('exam','exam_question_score')).clear()
         driver.find_element(cfg.get('exam','exam_question_score_by'),cfg.get('exam','exam_question_score')).send_keys(qscore)
         driver.find_element(cfg.get('exam','exam_add_big_question_ok_by'),cfg.get('exam','exam_add_big_question_ok')).click()
@@ -100,7 +101,7 @@ def add_big_question(cfg, driver,qscore, qtype):
     
 #自动添加题型
 def auto_creatquestion(cfg,driver,q_num):
-    type = [1,2,3,4,5,6,7]
+    type = [2,3,4,5,6,7]
     for i in range(q_num):
         qscore = '3'
         qtype=random.choice(type)

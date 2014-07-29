@@ -16,9 +16,9 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "Chrome"
+        self.browser = "firefox"
         self.test_enviroment = "beta"  
-        self.org_name = "sadm001"
+        self.org_name = "haitian"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -85,14 +85,14 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            user_name = login.auto_register(self.cfg, self.driver, self.base_url, 3, 1)
+            user_name = login.auto_register(self.cfg, self.driver, self.base_url, 2, 1)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to register!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/1_register.png')
             
-        self.import_name = user_name #待单个导入学员使用
+        #self.import_name = user_name #待单个导入学员使用
     
     def login_from_index(self):
         
@@ -986,7 +986,7 @@ class Test(unittest.TestCase):
     def createpaper(self):
         self.total += 1
         try:
-            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 ,1, 1,1) 
+            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 ,0, 0, 1) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to create paper")
@@ -1022,12 +1022,12 @@ class Test(unittest.TestCase):
         # =1 是白卷 =0 是做了一个题
         blank_pager = 0
         try:
-            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
+            exam_user_management.exam(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
         except Exception,e:
             print e
             self.verificationErrors.append('fail to exam!')
         finally: 
-            self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")        
+            self.driver.save_screenshot("C:/test_rs_pic/exam_user.png")        
     
     def test_regress(self):
         #self.register()
@@ -1064,7 +1064,7 @@ class Test(unittest.TestCase):
         #self.change_banner()
         #self.change_headpic()
         #self.verify_all_course_convert()
-        #login.logout(self.driver, self.base_url)
+        login.logout(self.driver, self.base_url)
         #self.add_exam_card()
         #self.login_user()
 
@@ -1073,18 +1073,17 @@ class Test(unittest.TestCase):
         #self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
-        #self.createpaper()
-        #self.exam_questions()
         #self.manage_course_num()
-        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
-        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
-        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
+        #self.exam_questions()
+        #self.createpaper()
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
         #self.exam_user()
-        #self.use_exam_card()
-        #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
+        #self.use_exam_card()                
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
+        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)  
 
     def tearDown(self):
         self.driver.quit()

@@ -37,7 +37,7 @@ def modify_subject(cfg,driver, base_url, org_name):
     time.sleep(2)
     driver.get("%sexam/" %(base_url))
     time.sleep(5)
-    subject_name= "subject001"
+    subject_name= "subject001" 
     driver.find_element(cfg.get('exam','sub_big_xpath_by'),cfg.get('exam','sub_big_xpath')).click()
     driver.find_element(cfg.get('exam','sub_samll_xpath_by'),cfg.get('exam','sub_small_xpath')).click()
     time.sleep(5)

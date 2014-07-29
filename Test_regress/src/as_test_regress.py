@@ -86,7 +86,7 @@ class Test(unittest.TestCase):
         self.total += 1
         user_name = ""
         try:
-            user_name = login.auto_register(self.cfg, self.driver, self.base_url, 3)
+            user_name = login.auto_register(self.cfg, self.driver, self.base_url, 3, 1)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to register!")
@@ -1074,7 +1074,7 @@ class Test(unittest.TestCase):
         self.use_catecard()       
         #self.buy_course_use_RMB()
         #self.buy_course_use_card()
-        self.createpaper()
+        #self.createpaper()
         #self.exam_questions()
         #self.manage_course_num()
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)

@@ -26,7 +26,7 @@ def test_create_student():
     user_name = "sadm001"
     user_psw = "1234"
     org_name = user_name
-    exam_name = u'未作答（主观题，免费）'
+    exam_name = u'未作答（主观+客观，收费）'
     for i in range(1):
         print 'wwwwwwwwwwwwwwwwwwwwwww'
         #chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
@@ -40,9 +40,13 @@ def test_create_student():
         time.sleep(5)
         #student_management.open_course_for_one(cfg,driver,base_url, org_name,stu_num = 1)
         #student_management.open_course_for_multi(cfg,driver,base_url, org_name)
-        student_management.manage_course_num(cfg, driver, base_url)
+        #student_management.manage_course_num(cfg, driver, base_url)
         #exam_paper.send_close_paper(cfg, driver, base_url, atype=1)
-        #exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=3)
+        exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123")
+        exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=2, username="sun125")
+        exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=3, username="sunmin1990")
+        exam_paper.send_close_paper(cfg, driver, base_url, atype=1)
+        exam_paper.send_close_paper(cfg, driver, base_url, atype=2)
         #admin_management.auto_create_admin(cfg,driver, base_url, org_name="zhongyan", adm_num=2)
         #admin_management.modify_admin(cfg,driver, base_url)
         #admin_management.delete_admin(cfg,driver, base_url, admin_num=1)

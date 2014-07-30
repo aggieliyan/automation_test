@@ -39,7 +39,7 @@ def importquestions (self):
     msg = "导入%d道试题,最后一个试题题目为%s"%(num, title)
     print msg
 
-def exam_questions(cfg,driver, base_url,question_ansa = '1'):
+def exam_questions(cfg,driver, base_url,question_ansa):
     time.sleep(2)
     driver.get(base_url + "exam/")
     driver.find_element_by_link_text("试题库").click()
@@ -141,7 +141,7 @@ def exam_questions(cfg,driver, base_url,question_ansa = '1'):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
     #driver.find_element_by_xpath(cfg.get('exam_questions','question_tiankonganswer_xpath_by')).send_keys("123")
-    driver.find_element(cfg.get('exam_questions',"question_tiankonganswer_xpath_by"),cfg.get('exam_questions',"question_tiankonganswer_xpath")).send_keys("daan")
+    driver.find_element(cfg.get('exam_questions',"question_tiankonganswer_xpath_by"),cfg.get('exam_questions',"question_tiankonganswer_xpath")).send_keys(question_ansa)
     time.sleep(2)
     driver.find_element(cfg.get('exam_questions',"question_save_id_by"),cfg.get('exam_questions',"question_save_id")).click()
     time.sleep(2)
@@ -158,13 +158,13 @@ def exam_questions(cfg,driver, base_url,question_ansa = '1'):
     driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions',"question_wanxinganswer1_xpath_by"),cfg.get('exam_questions',"question_wanxinganswer1_xpath")).send_keys(123)
+    driver.find_element(cfg.get('exam_questions',"question_wanxinganswer1_xpath_by"),cfg.get('exam_questions',"question_wanxinganswer1_xpath")).send_keys(question_ansa)
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions',"question_wanxinganswer2_xpath_by"),cfg.get('exam_questions',"question_wanxinganswer2_xpath")).send_keys(123)
+    driver.find_element(cfg.get('exam_questions',"question_wanxinganswer2_xpath_by"),cfg.get('exam_questions',"question_wanxinganswer2_xpath")).send_keys(question_ansa)
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions',"question_wanxinganswer3_xpath_by"),cfg.get('exam_questions',"question_wanxinganswer3_xpath")).send_keys(123)
+    driver.find_element(cfg.get('exam_questions',"question_wanxinganswer3_xpath_by"),cfg.get('exam_questions',"question_wanxinganswer3_xpath")).send_keys(question_ansa)
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions',"question_wanxinganswer4_xpath_by"),cfg.get('exam_questions',"question_wanxinganswer4_xpath")).send_keys(123)
+    driver.find_element(cfg.get('exam_questions',"question_wanxinganswer4_xpath_by"),cfg.get('exam_questions',"question_wanxinganswer4_xpath")).send_keys(question_ansa)
     time.sleep(2)
     driver.find_element(cfg.get('exam_questions',"question_save_id_by"),cfg.get('exam_questions',"question_save_id")).click()
     time.sleep(2)

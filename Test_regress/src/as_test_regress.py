@@ -1015,7 +1015,7 @@ class Test(unittest.TestCase):
     
     def exam_questions(self):
         self.total += 1
-        question_ansa='123'
+        question_ansa='exam'  + str(random.randint(1000,9999))
         try:
             exam_questions.exam_questions(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
@@ -1080,7 +1080,7 @@ class Test(unittest.TestCase):
         #self.listen_cardgroup()
         #self.add_exam_card()
         #self.import_one_student()
-        self.import_multi_student()
+        #self.import_multi_student()
         #self.create_multi_student()
         #self.add_admin()  
         #self.modify_admin()
@@ -1095,7 +1095,7 @@ class Test(unittest.TestCase):
         #self.verify_all_course_convert()
 
         #考试系统部分
-        #self.exam_questions()
+        self.exam_questions()
         #self.createpaper()
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)

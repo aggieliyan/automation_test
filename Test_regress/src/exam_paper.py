@@ -136,11 +136,13 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
     username = "sunmin1990"
     driver.get("%sexam/" %(base_url))
     driver.find_element_by_link_text(u"试卷库").click()
+    time.sleep(1)
     driver.find_element(cfg.get('exam', 'paper_search_by'), cfg.get('exam', 'paper_search')).send_keys(exam_name)
     time.sleep(1)
     exam_href = driver.execute_script("return $(\"a:contains(\'"+exam_name+"\')\").attr('href')")
     driver.get("%sexam/%s" % (base_url, exam_href))
     driver.find_element_by_link_text("学员信息").click()
+    time.sleep(1)
     if etype == 2:
         driver.find_element_by_link_text(u"作为开放试卷的统计结果").click()
         time.sleep(1)

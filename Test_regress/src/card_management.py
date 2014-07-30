@@ -48,7 +48,7 @@ def add_prepaid_cardgroup(cfg, driver, base_url, org_name, group_name = u'prepai
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
-    driver.find_element(cfg.get('org_manage','grouptitle_id_by'),cfg.get('org_manage','grouptitle_id')).send_keys(group_name)
+    driver.find_element(cfg.get('org_manage','grouptitle_by'),cfg.get('org_manage','grouptitle')).send_keys(group_name)
     driver.find_element(cfg.get('org_manage','prepaid_price_id_by'),cfg.get('org_manage','prepaid_price_id')).send_keys(group_price)
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")
     time.sleep(2)

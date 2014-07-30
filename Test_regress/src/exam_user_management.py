@@ -82,17 +82,16 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer):
             except:
                 None
         ###综合题结束
-    # operation =0 自动提交  operation =1 继续答题
-    if operation == 0 :
         time.sleep(exam_time * 60 + 2)
-    else: 
-        time.sleep(exam_time * 60 + 2)
-        driver.find_element(cfg.get('exam','exam_submit_by'),cfg.get('exam','exam_submit')).click()#提交
-        time.sleep(2)
-        driver.find_element(cfg.get('exam','exam_continue_by'),cfg.get('exam','exam_continue')).click()#弹窗-继续考试
-        time.sleep(2)
-        driver.find_element(cfg.get('exam','exam_submit_by'),cfg.get('exam','exam_submit')).click()#提交
-        time.sleep(2)
-        driver.find_element(cfg.get('exam','window_submit_by'),cfg.get('exam','window_submit')).click()#弹窗-提交
-        time.sleep(2)  
+        try:   
+            driver.find_element(cfg.get('exam','exam_submit_by'),cfg.get('exam','exam_submit')).click()#提交
+            time.sleep(2)
+            driver.find_element(cfg.get('exam','exam_continue_by'),cfg.get('exam','exam_continue')).click()#弹窗-继续考试
+            time.sleep(2)
+            driver.find_element(cfg.get('exam','exam_submit_by'),cfg.get('exam','exam_submit')).click()#提交
+            time.sleep(2)
+            driver.find_element(cfg.get('exam','window_submit_by'),cfg.get('exam','window_submit')).click()#弹窗-提交
+            time.sleep(2)  
+        except:
+             None
     

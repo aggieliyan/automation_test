@@ -49,7 +49,7 @@ def add_prepaid_cardgroup(cfg, driver, base_url, org_name, group_name = u'prepai
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
     driver.find_element(cfg.get('org_manage','grouptitle_by'),cfg.get('org_manage','grouptitle')).send_keys(group_name)
-    driver.find_element(cfg.get('org_manage','prepaid_price_id_by'),cfg.get('org_manage','prepaid_price_id')).send_keys(group_price)
+    driver.find_element(cfg.get('org_manage','prepaid_price_by'),cfg.get('org_manage','prepaid_price')).send_keys(group_price)
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")
     time.sleep(2)
 
@@ -63,7 +63,7 @@ def add_course_cardgroup(cfg,driver, base_url, org_name , group_name = u'coursec
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
     driver.find_element(cfg.get('org_manage','course_card_by'),cfg.get('org_manage','course_card')).click()#选择充课卡
-    driver.find_element(cfg.get('org_manage','grouptitle_id_by'),cfg.get('org_manage','grouptitle_id')).send_keys(group_name)
+    driver.find_element(cfg.get('org_manage','grouptitle_by'),cfg.get('org_manage','grouptitle')).send_keys(group_name)
     time.sleep(2)
     #driver.find_element(cfg.get('org_manage','course_cate_xpath_by'),cfg.get('org_manage','course_cate_xpath')).click()#选择整个类目，类目下的课被选中
     driver.find_element_by_css_selector("span.disMore_btn").click()
@@ -83,11 +83,11 @@ def add_cate_cardgroup(cfg,driver, base_url, org_name,group_name = u'catecard-20
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
-    driver.find_element(cfg.get('org_manage','grouptitle_id_by'),cfg.get('org_manage','grouptitle_id')).send_keys(group_name)
+    driver.find_element(cfg.get('org_manage','grouptitle_by'),cfg.get('org_manage','grouptitle')).send_keys(group_name)
     driver.find_element(cfg.get('org_manage','cate_card_by'),cfg.get('org_manage','cate_card')).click()
     time.sleep(3)
-    driver.find_element(cfg.get('org_manage','cate_name_by'),cfg.get('org_manage','cate_name')).click()
-    driver.find_element(cfg.get('org_manage','cate_price_id_by'),cfg.get('org_manage','cate_price_id')).send_keys(group_price)
+    driver.find_element(cfg.get('org_manage','cate_by'),cfg.get('org_manage','cate')).click()
+    driver.find_element(cfg.get('org_manage','cate_price_by'),cfg.get('org_manage','cate_price')).send_keys(group_price)
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")
     time.sleep(2)
  #购买试听卡
@@ -113,7 +113,7 @@ def add_listen_cardgroup(cfg,driver, base_url, org_name , group_name = u'listenc
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
     driver.find_element(cfg.get('org_manage','listen_card_by'),cfg.get('org_manage','listen_card')).click()#选择试听卡
-    driver.find_element(cfg.get('org_manage','grouptitle_id_by'),cfg.get('org_manage','grouptitle_id')).send_keys(group_name)
+    driver.find_element(cfg.get('org_manage','grouptitle_by'),cfg.get('org_manage','grouptitle')).send_keys(group_name)
     time.sleep(2)
     driver.find_element(cfg.get('org_manage','listen_spread_xpath_by'),cfg.get('org_manage','listen_spread_xpath')).click()#展开默认类目下资料
     time.sleep(5)
@@ -137,11 +137,11 @@ def add_card(cfg, driver, base_url, org_name, cgroup_num = 1,card_prifix='auto',
         driver.find_element_by_xpath("//div["+str(cgroup_num)+"]/table/tbody/tr/td[6]/div/div/a").click()
     
     time.sleep(2)
-    driver.find_element(cfg.get('org_manage','card_prefix_id_by'),cfg.get('org_manage','card_prefix_id')).send_keys(card_prifix)
+    driver.find_element(cfg.get('org_manage','card_prefix_by'),cfg.get('org_manage','card_prefix')).send_keys(card_prifix)
     time.sleep(3)
-    driver.find_element(cfg.get('org_manage','card_count_id_by'),cfg.get('org_manage','card_count_id')).send_keys(card_num)
+    driver.find_element(cfg.get('org_manage','card_count_by'),cfg.get('org_manage','card_count')).send_keys(card_num)
     time.sleep(3)
-    driver.find_element(cfg.get('org_manage','add_card_ok_css_by'),cfg.get('org_manage','add_card_ok_css')).click()
+    driver.find_element(cfg.get('org_manage','add_card_ok_by'),cfg.get('org_manage','add_card_ok')).click()
     time.sleep(2)
 
 #机构获取院校机构类目名称

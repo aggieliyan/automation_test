@@ -39,13 +39,15 @@ def importquestions (self):
     msg = "导入%d道试题,最后一个试题题目为%s"%(num, title)
     print msg
 
-def exam_questions(cfg,driver, base_url,question_ansa):
+#创建单选题 
+def exam_question_danxuan(cfg,driver, base_url,question_ansa):
     time.sleep(2)
     driver.get(base_url + "exam/")
+    time.sleep(2)
     driver.find_element_by_link_text("试题库").click()
+    time.sleep(2)
     driver.find_element_by_link_text("单选题").click()
-    time.sleep(2) 
-    #创建单选题   
+    time.sleep(2)  
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
     time.sleep(2)
@@ -75,7 +77,15 @@ def exam_questions(cfg,driver, base_url,question_ansa):
     driver.find_element_by_link_text("单选题").click()
     time.sleep(2)
     
-    #创建多选题   
+    #创建多选题
+def exam_question_duoxuan(cfg,driver, base_url,question_ansa):
+    time.sleep(2)
+    driver.get(base_url + "exam/")
+    time.sleep(2)
+    driver.find_element_by_link_text("试题库").click()
+    time.sleep(2)
+    driver.find_element_by_link_text("单选题").click()
+    time.sleep(2)     
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
     time.sleep(2)
@@ -106,7 +116,15 @@ def exam_questions(cfg,driver, base_url,question_ansa):
     driver.find_element_by_link_text("单选题").click()
     time.sleep(2)
     
-    #创建是非题
+#创建是非题
+def exam_question_shifei(cfg,driver, base_url,question_ansa):
+    time.sleep(2)
+    driver.get(base_url + "exam/")
+    time.sleep(2)
+    driver.find_element_by_link_text("试题库").click()
+    time.sleep(2)
+    driver.find_element_by_link_text("单选题").click()
+    time.sleep(2)  
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
     time.sleep(2)
@@ -127,7 +145,15 @@ def exam_questions(cfg,driver, base_url,question_ansa):
     driver.find_element_by_link_text("单选题").click()
 #    time.sleep(2)
     
-    #创建问答题
+#创建问答题
+def exam_question_wenda(cfg,driver, base_url,question_ansa):
+    time.sleep(2)
+    driver.get(base_url + "exam/")
+    time.sleep(2)
+    driver.find_element_by_link_text("试题库").click()
+    time.sleep(2)
+    driver.find_element_by_link_text("单选题").click()
+    time.sleep(2)      
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
     time.sleep(2)
@@ -152,7 +178,15 @@ def exam_questions(cfg,driver, base_url,question_ansa):
     time.sleep(2)
     driver.find_element_by_link_text("单选题").click()
     
-    #创建填空题
+#创建填空题
+def exam_question_tiankong(cfg,driver, base_url,question_ansa):
+    time.sleep(2)
+    driver.get(base_url + "exam/")
+    time.sleep(2)
+    driver.find_element_by_link_text("试题库").click()
+    time.sleep(2)
+    driver.find_element_by_link_text("单选题").click()
+    time.sleep(2)  
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
     time.sleep(2)
@@ -176,7 +210,15 @@ def exam_questions(cfg,driver, base_url,question_ansa):
     time.sleep(2)
     driver.find_element_by_link_text("单选题").click()
     
-    #创建完型填空题
+#创建完型填空题
+def exam_question_wanxing(cfg,driver, base_url,question_ansa):
+    time.sleep(2)
+    driver.get(base_url + "exam/")
+    time.sleep(2)
+    driver.find_element_by_link_text("试题库").click()
+    time.sleep(2)
+    driver.find_element_by_link_text("单选题").click()
+    time.sleep(2)  
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
     time.sleep(2)
@@ -208,7 +250,15 @@ def exam_questions(cfg,driver, base_url,question_ansa):
     time.sleep(2)
     driver.find_element_by_link_text("单选题").click()
     
-    #创建综合题
+#创建综合题
+def exam_question_zonghe(cfg,driver, base_url,question_ansa):
+    time.sleep(2)
+    driver.get(base_url + "exam/")
+    time.sleep(2)
+    driver.find_element_by_link_text("试题库").click()
+    time.sleep(2)
+    driver.find_element_by_link_text("单选题").click()
+    time.sleep(2)  
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
     time.sleep(2)

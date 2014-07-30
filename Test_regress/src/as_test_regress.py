@@ -18,7 +18,7 @@ class Test(unittest.TestCase):
         
         self.browser = "firefox"
         self.test_enviroment = "beta"  
-        self.org_name = "salesdemo"
+        self.org_name = "hjliu"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -1013,11 +1013,76 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
     
-    def exam_questions(self):
+    def exam_question_danxuan(self):
         self.total += 1
         question_ansa='exam'  + str(random.randint(1000,9999))
         try:
-            exam_questions.exam_questions(self.cfg, self.driver, self.base_url, question_ansa) 
+            exam_questions.exam_question_danxuan(self.cfg, self.driver, self.base_url, question_ansa) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to exam questions")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
+    def exam_question_duoxuan(self):
+        self.total += 1
+        question_ansa='exam'  + str(random.randint(1000,9999))
+        try:
+            exam_questions.exam_question_duoxuan(self.cfg, self.driver, self.base_url, question_ansa) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to exam questions")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
+ 
+    def exam_question_shifei(self):
+        self.total += 1
+        question_ansa='exam'  + str(random.randint(1000,9999))
+        try:
+            exam_questions.exam_question_shifei(self.cfg, self.driver, self.base_url, question_ansa) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to exam questions")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
+ 
+    def exam_question_tiankong(self):
+        self.total += 1
+        question_ansa='exam'  + str(random.randint(1000,9999))
+        try:
+            exam_questions.exam_question_tiankong(self.cfg, self.driver, self.base_url, question_ansa) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to exam questions")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
+
+    def exam_question_wenda(self):
+        self.total += 1
+        question_ansa='exam'  + str(random.randint(1000,9999))
+        try:
+            exam_questions.exam_question_wenda(self.cfg, self.driver, self.base_url, question_ansa) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to exam questions")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
+    
+    def exam_question_wanxing(self):
+        self.total += 1
+        question_ansa='exam'  + str(random.randint(1000,9999))
+        try:
+            exam_questions.exam_question_wanxing(self.cfg, self.driver, self.base_url, question_ansa) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to exam questions")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
+
+    def exam_question_zonghe(self):
+        self.total += 1
+        question_ansa='exam'  + str(random.randint(1000,9999))
+        try:
+            exam_questions.exam_question_zonghe(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to exam questions")
@@ -1095,7 +1160,13 @@ class Test(unittest.TestCase):
         #self.verify_all_course_convert()
 
         #考试系统部分
-        self.exam_questions()
+        self.exam_question_danxuan()
+        self.exam_question_duoxuan()
+        self.exam_question_shifei()
+        self.exam_question_tiankong()
+        self.exam_question_wenda()
+        self.exam_question_wanxing()
+        self.exam_question_zonghe()
         #self.createpaper()
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)

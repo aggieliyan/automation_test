@@ -1045,6 +1045,7 @@ class Test(unittest.TestCase):
             self.verificationErrors.append('fail to exam!')
         finally: 
             self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")
+            
     def wailian_video(self):
         self.total += 1
         try:
@@ -1058,7 +1059,7 @@ class Test(unittest.TestCase):
     def test_regress(self):
         
         #网站主站回归流程
-        self.register()
+        #self.register()
         self.login_from_index()
         self.release_normal()
         self.release_three_video()
@@ -1107,7 +1108,7 @@ class Test(unittest.TestCase):
         #self.use_listencard()
         #self.use_exam_card() 
           
-        self.release_announcement()
+        #self.release_announcement()
         #self.modify_pagefoot()  
         #self.change_headpic()
         #self.change_homelogo()
@@ -1128,13 +1129,13 @@ class Test(unittest.TestCase):
 
         #self.use_exam_card() 
         #self.import_questions()
-        #self.add_subject()
-        #self.modify_subject()
-        #self.delete_subject()
-        #self.create_exam_cate()
-        #self.add_exam_point()
-        #self.modify_exam_point()
-        #self.delete_exam_point()               
+        self.add_subject()
+        self.modify_subject()
+        self.delete_subject()
+        self.create_exam_cate()
+        self.add_exam_point()
+        self.modify_exam_point()
+        self.delete_exam_point()               
 
     def tearDown(self):
         self.driver.quit()

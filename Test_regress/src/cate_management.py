@@ -16,7 +16,7 @@ def add_cate(cfg,driver, base_url,org_name, cate_name=u'计算机'):
     #driver.find_element_by_link_text(u"课程类目").click()
     #time.sleep(2)
     driver.find_element(cfg.get('org_manage','add_topcate_by'),cfg.get('org_manage','add_topcate')).click()#新建一级类目
-    driver.find_element(cfg.get('org_manage','cate_name_id_by'),cfg.get('org_manage','cate_name_id')).send_keys(cate_name)
+    driver.find_element(cfg.get('org_manage','cate_addname_by'),cfg.get('org_manage','cate_addname')).send_keys(cate_name)
     driver.find_element(cfg.get('org_manage','add_cate_ok_by'),cfg.get('org_manage','add_cate_ok')).click()
     time.sleep(2)
  
@@ -47,7 +47,7 @@ def add_courese_to_cate(cfg,driver, base_url, org_name, cate_num = 0):
     time.sleep(3)
     driver.find_element_by_link_text(u"向类目添加知识资料").click()
     time.sleep(4)
-    driver.find_element(cfg.get('org_manage','course_add_1_name_by'),cfg.get('org_manage','course_add_1_name')).click()
+    driver.find_element(cfg.get('org_manage','course_add_1_by'),cfg.get('org_manage','course_add_1')).click()
     add_course_name = driver.execute_script("return $(\"input[name='win_groupCheck']:eq(0)\").parent().parent().next().children().text()")
     add_course_name = add_course_name.strip()
     #add_course_name = add_course_name.encode('UTF-8','ignore')

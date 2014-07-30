@@ -18,11 +18,11 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erando
                              1代表对外开放 
     """
     driver.get("%sexam/" %(base_url))
-    time.sleep(1)
+    driver.implicitly_wait(1)
     driver.find_element(cfg.get('exam','exam_subject_by'),cfg.get('exam','exam_subject')).click()
     now_handle = driver.current_window_handle #得到当前窗口句柄
     driver.find_element_by_link_text(u"新建试卷").click()
-    time.sleep(2)
+    driver.implicitly_wait(2)
     all_handles = driver.window_handles #获取所有窗口句柄
     for handle in all_handles:
         if handle != now_handle:
@@ -48,12 +48,12 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erando
         driver.find_element(cfg.get('exam','exam_paper_price_by'),cfg.get('exam','exam_paper_price')).clear()
         driver.find_element(cfg.get('exam','exam_paper_price_by'),cfg.get('exam','exam_paper_price')).send_keys("10")
     driver.find_element(cfg.get('exam','exam_next_one_by'),cfg.get('exam','exam_next_one')).click()
-    time.sleep(2)
+    driver.implicitly_wait(2)
     #添加大题
     auto_creatquestion(cfg,driver,3)
     #生成试卷
     driver.find_element(cfg.get('exam','exam_paper_build_btn_by'),cfg.get('exam','exam_paper_build_btn')).click()
-    time.sleep(2)    
+    driver.implicitly_wait(2)    
         
 #添加大题        
 def add_big_question(cfg, driver,qscore, qtype):
@@ -61,17 +61,17 @@ def add_big_question(cfg, driver,qscore, qtype):
     qtype表示大题类型，1=单选题，2=多选题，3=是非题，4=填空题，5=问答题，6=完型填空题，7=综合题
     """
     driver.find_element(cfg.get('exam','paper_add_big_question_by'),cfg.get('exam','paper_add_big_question')).click()    
-    time.sleep(1)
+    driver.implicitly_wait(1)
     if qtype == 1:
         
-        time.sleep(2)
+        driver.implicitly_wait(2)
         driver.find_element_by_css_selector("span.cc-arrow").click()
         driver.find_element('xpath','//div[10]/ul/li').click()
         #driver.find_element_by_css_selector("li.cc-item.selectedItem").click()
         driver.find_element(cfg.get('exam','exam_question_score_by'),cfg.get('exam','exam_question_score')).clear()
         driver.find_element(cfg.get('exam','exam_question_score_by'),cfg.get('exam','exam_question_score')).send_keys(qscore)
         driver.find_element(cfg.get('exam','exam_add_big_question_ok_by'),cfg.get('exam','exam_add_big_question_ok')).click()
-        time.sleep(2)
+        driver.implicitly_wait(2)
     else:
         driver.find_element(cfg.get('exam','exam_topic_dropdown_by'),cfg.get('exam','exam_topic_dropdown')).click()
         if qtype == 2:
@@ -89,15 +89,15 @@ def add_big_question(cfg, driver,qscore, qtype):
         driver.find_element(cfg.get('exam','exam_question_score_by'),cfg.get('exam','exam_question_score')).clear()
         driver.find_element(cfg.get('exam','exam_question_score_by'),cfg.get('exam','exam_question_score')).send_keys(qscore)
         driver.find_element(cfg.get('exam','exam_add_big_question_ok_by'),cfg.get('exam','exam_add_big_question_ok')).click()
-        time.sleep(2)
+        driver.implicitly_wait(2)
     #导入试题
     driver.find_element(cfg.get('exam','paper_import_question_by'),cfg.get('exam','paper_import_question')).click()
-    time.sleep(2)
+    driver.implicitly_wait(2)
     #勾选全部
     driver.find_element(cfg.get('exam','paper_selece_all_by'),cfg.get('exam','paper_selece_all')).click()
     #driver.find_element_by_css_selector("label.import-list-item.clearfix > input[type=\"checkbox\"]").click()
     driver.find_element(cfg.get('exam','exam_add_big_question_ok_by'),cfg.get('exam','exam_add_big_question_ok')).click()
-    time.sleep(3)        
+    driver.implicitly_wait(3)        
     
 #自动添加题型
 def auto_creatquestion(cfg,driver,q_num):
@@ -110,7 +110,7 @@ def auto_creatquestion(cfg,driver,q_num):
 #向试卷中导入试题        
 def exam_export_question(cfg, driver,qscore, qtype):
     driver.find_element(cfg.get('exam','paper_import_question_by'),cfg.get('exam','paper_import_question')).click()
-    time.sleep(2)
+    driver.implicitly_wait(2)
     #勾选全部
     driver.find_element(cfg.get('exam','paper_selece_all_by'),cfg.get('exam','paper_selece_all')).click()
     #driver.find_element_by_css_selector("label.import-list-item.clearfix > input[type=\"checkbox\"]").click()
@@ -133,14 +133,18 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
                              3代表为学员评分
     """
     #exam_name = u"未作答（主观题，免费）"
-    username = "sunmin1990"
+    #username = "sun122"
     driver.get("%sexam/" %(base_url))
+    time.sleep(1)
     driver.find_element_by_link_text(u"试卷库").click()
+    driver.implicitly_wait(1)
     driver.find_element(cfg.get('exam', 'paper_search_by'), cfg.get('exam', 'paper_search')).send_keys(exam_name)
     time.sleep(1)
     exam_href = driver.execute_script("return $(\"a:contains(\'"+exam_name+"\')\").attr('href')")
+    time.sleep(1)
     driver.get("%sexam/%s" % (base_url, exam_href))
     driver.find_element_by_link_text("学员信息").click()
+    time.sleep(1)
     if etype == 2:
         driver.find_element_by_link_text(u"作为开放试卷的统计结果").click()
         time.sleep(1)
@@ -149,9 +153,17 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
     elif etype == 1:
         driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
         driver.find_element(cfg.get('exam', 'output_by'), cfg.get('exam', 'output')).click()
+        time.sleep(2)
+        try:
+            save_alert = driver.switch_to_alert()
+            #print save_alert.text
+            save_alert.accept()
+        except:
+            pass
+
     else:
         #取评分链接
-        time.sleep(1)
+        time.sleep(2)
         grade_href = driver.execute_script("return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
         time.sleep(1)
         driver.get("%sexam/%s" % (base_url, grade_href))
@@ -171,24 +183,24 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     """
     参数atype为1表示为学员开通试卷，2表示为学员关闭试卷
     """
-    username = "sunmin1990"
+    #username = "sunmin1990"
     driver.get("%sexam/" %(base_url))
-    time.sleep(1)
+    driver.implicitly_wait(1)
     driver.find_element("xpath", "//p[4]/a").click()
-    time.sleep(2)
+    driver.implicitly_wait(2)
     driver.find_element(cfg.get('exam', 'user_search_by'), cfg.get('exam', 'user_search')).clear()
     #driver.find_element(cfg.get('exam', 'user_search_by'), cfg.get('exam', 'user_search')).send_keys(username)
     #得一个字母一个字母的输入，否则因为输入太快得到的搜索结果不准确
     for letter in username:
         driver.find_element(cfg.get('exam', 'user_search_by'), cfg.get('exam', 'user_search')).send_keys(letter)
-    time.sleep(1)
+    driver.implicitly_wait(1)
     if atype == 1:
         driver.find_element_by_link_text(u"分发试卷").click()
     else:
         driver.find_element_by_link_text(u"关闭试卷").click()
-    time.sleep(1)
+    driver.implicitly_wait(1)
     driver.find_element(cfg.get('exam', 'open_paper_by'), cfg.get('exam', 'open_paper')).click()
-    time.sleep(1)
+    driver.implicitly_wait(1)
     driver.find_element(cfg.get('exam', 'open_paper_ok_by'), cfg.get('exam', 'open_paper_ok')).click()
-    time.sleep(5)
+    driver.implicitly_wait(5)
          

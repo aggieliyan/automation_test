@@ -133,7 +133,7 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
                              3代表为学员评分
     """
     #exam_name = u"未作答（主观题，免费）"
-    username = "sun123"
+    username = "sunmin1990"
     driver.get("%sexam/" %(base_url))
     driver.find_element_by_link_text(u"试卷库").click()
     driver.find_element(cfg.get('exam', 'paper_search_by'), cfg.get('exam', 'paper_search')).send_keys(exam_name)
@@ -146,19 +146,15 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
         time.sleep(1)
         driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
         driver.find_element(cfg.get('exam', 'output_open_by'), cfg.get('exam', 'output_open')).click()
-        
     elif etype == 1:
         driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
         driver.find_element(cfg.get('exam', 'output_by'), cfg.get('exam', 'output')).click()
-        a=driver.switch_to_alert()
-        a.accept()
     else:
         #取评分链接
-        time.sleep(5)
+        time.sleep(1)
         grade_href = driver.execute_script("return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
-        time.sleep(5)
+        time.sleep(1)
         driver.get("%sexam/%s" % (base_url, grade_href))
-        time.sleep(2)
         score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), cfg.get('exam', 'input_score'))
         score = "0.1"
         for item in score_input:

@@ -20,7 +20,7 @@ class Test(unittest.TestCase):
         self.test_enviroment = "beta"  
         self.org_name = "salesdemo"
         self.org_password = "1234"
-        self.user_name = "sun122"
+        self.user_name = "yilu282"
         self.user_password = "1234"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
@@ -38,7 +38,7 @@ class Test(unittest.TestCase):
         elif self.browser == 'firefox':
             self.driver = webdriver.Firefox()
         elif self.browser == 'Chrome':
-            chromedriver = "C:\Users\liwen\AppData\Local\Google\Chrome\Application\chromedriver.exe"
+            chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
             os.environ["webdriver.chrome.driver"] = chromedriver
             self.driver =  webdriver.Chrome(chromedriver)
         elif self.browser == "Html":
@@ -77,10 +77,10 @@ class Test(unittest.TestCase):
         #as_test_regress.modify_exam_cate()
         #as_test_regress.delete_exam_cate() 
         #as_test_regress.add_exam_point()
-        #as_test_regress.modify_exam_point() 
+        #as_test_regress.modify_exam_point()
         #as_test_regress.delete_exam_point()  
         #as_test_regress.exam_questions()
-        #exam_paper.auto_createpaper(self.cfg,self.driver,self.base_url,0, 0, 0, 1)
+        exam_paper.auto_createpaper(self.cfg,self.driver,self.base_url,0, 0, 0, 1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
@@ -88,8 +88,12 @@ class Test(unittest.TestCase):
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         #login.logout(self.driver, self.base_url)
 
-        #login.login_by_logindo(self.cfg, self.driver, self.base_url, self.user_name, self.user_password)
-        #self.use_exam_card()           
+        #as_test_regress.login_user()
+        #self.use_prepaidcard()
+        #self.use_coursecard()
+        #self.use_catecard()
+        #self.use_listencard()
+        #self.use_exam_card()          
         #self.release_announcement()
         #self.modify_pagefoot()  
         #self.change_headpic()
@@ -101,7 +105,7 @@ class Test(unittest.TestCase):
         
         #学员考试
         #exam_user_management.buy_paper(self.cfg, self.driver, self.base_url)
-        #exam_user_management.exam_user(self.cfg, self.driver, self.base_url, 1, 0, '123')
+        #self.exam_user()
 
                      
 

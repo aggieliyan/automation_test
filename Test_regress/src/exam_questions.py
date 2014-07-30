@@ -238,8 +238,8 @@ def exam_questions(cfg,driver, base_url,question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions',"question_save_id_by"),\
-        cfg.get('exam_questions',"question_save_id")).click()
+    driver.find_element(cfg.get('exam_questions',"question_save_by"),\
+        cfg.get('exam_questions',"question_save")).click()
     time.sleep(2)
     driver.find_element_by_link_text("单选题").click()
     time.sleep(2)

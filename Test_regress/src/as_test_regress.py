@@ -218,7 +218,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/7_add_cate.png')
         
-        time.sleep(1)
+        self.driver.implicitly_wait(1)
         actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
         try:
             self.assertEqual(cate_name, actul,"the categroy does not exist!")#若最后一个类目名称与新建类目的名称相等则证明新建类目成功
@@ -276,7 +276,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/9_prepaid_cardgroup.png')
         
-        time.sleep(2)
+        self.driver.implicitly_wait(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs,"fail to create prepaid cardgroup!")
@@ -303,7 +303,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/10_course_cardgroup.png")
         
-        time.sleep(2)
+        self.driver.implicitly_wait(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs,"fail to create course cardgroup!")
@@ -329,7 +329,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/11_cate_cardgroup.png")
         
-        time.sleep(2)
+        self.driver.implicitly_wait(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs,"fail to create cate cardgroup!")
@@ -362,7 +362,7 @@ class Test(unittest.TestCase):
             print e
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/12_listen_cardgroup.png")  
-        time.sleep(2)
+        self.driver.implicitly_wait(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs,"fail to create listen cardgroup!")
@@ -380,15 +380,15 @@ class Test(unittest.TestCase):
         self.total += 1
         try:
             card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name)
-            time.sleep(2)
+            self.driver.implicitly_wait(2)
             if card_type == 0:
                 self.driver.find_element_by_link_text(u"浏览卡").click()
-                time.sleep(2)
+                self.driver.implicitly_wait(2)
                 card_num = self.driver.execute_script("return $(\"input[name='groupCheck']:eq(0)\").parent().next().text()")
                 card_pwd = self.driver.execute_script("return $(\".textaligncenter\:eq(4)\").text()") 
             else:
                 self.driver.find_element_by_css_selector("span.greenbtn35_text").click()
-                time.sleep(2)
+                self.driver.implicitly_wait(2)
                 card_num = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().text()")
                 #print 'card_num:',card_num
                 card_pwd = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().parent().next().children().text()") 
@@ -439,7 +439,7 @@ class Test(unittest.TestCase):
             before_delete ="0"
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/12_delete_cate.png")           
-        time.sleep(1)
+        self.driver.implicitly_wait(1)
         after_delete = self.driver.execute_script("return $(\".categTitle:last\").text()")#取最后一个类目的名称
         print after_delete
   
@@ -524,12 +524,12 @@ class Test(unittest.TestCase):
     def verify_course(self,title): #去知识库检查是否存在
         
         self.driver.find_element_by_link_text(u"课程中心").click()
-        time.sleep(2) 
+        self.driver.implicitly_wait(2) 
         rs = self.is_element_present(By.LINK_TEXT, title)
         return rs
 
     def verify_onlineclass(self, classname):
-        time.sleep(1) 
+        self.driver.implicitly_wait(1) 
         rs = self.is_element_present(By.LINK_TEXT, classname)
         return rs
     #充值卡
@@ -596,7 +596,7 @@ class Test(unittest.TestCase):
             #验证
             for admin in admin_info:
                 xpath = "//div[text()=\'"+admin+"\']"
-                time.sleep(2)
+                self.driver.implicitly_wait(2)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
                     self.verificationErrors.append("fail to create admin!")
@@ -621,7 +621,7 @@ class Test(unittest.TestCase):
             
         #验证
         xpath = "//div[text()=\'"+admin_name+"\']"
-        time.sleep(2)
+        self.driver.implicitly_wait(2)
         rs = self.is_element_present(By.XPATH, xpath)
         if rs == False:
             self.verificationErrors.append("fail to modify admin!")
@@ -848,7 +848,7 @@ class Test(unittest.TestCase):
             #验证
             for subject in subject_info:
                 xpath = "//div[text()=\'"+subject+"\']"
-                time.sleep(2)
+                self.driver.implicitly_wait(2)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
                     self.verificationErrors.append("fail to create subject!")
@@ -874,7 +874,7 @@ class Test(unittest.TestCase):
             
         #验证
         xpath = "//div[text()=\'"+subject_name+"\']"
-        time.sleep(2)
+        self.driver.implicitly_wait(2)
         rs = self.is_element_present(By.XPATH, xpath)
         if rs == False:
             self.verificationErrors.append("fail to modify subject!")
@@ -898,7 +898,7 @@ class Test(unittest.TestCase):
             #验证
             for cate in cate_info:
                 xpath = "//div[text()=\'"+cate+"\']"
-                time.sleep(2)
+                self.driver.implicitly_wait(2)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
                     self.verificationErrors.append("fail to create cate!")
@@ -922,7 +922,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/modify_cate.png")
             
-        time.sleep(2)       
+        self.driver.implicitly_wait(2)       
         
         
     def delete_exam_cate(self):#删除类目
@@ -943,7 +943,7 @@ class Test(unittest.TestCase):
             #验证
             for point in point_info:
                 xpath = "//div[text()=\'"+point+"\']"
-                time.sleep(2)
+                self.driver.implicitly_wait(2)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
                     self.verificationErrors.append("fail to create point!")
@@ -970,7 +970,7 @@ class Test(unittest.TestCase):
             
         #验证
         #xpath = "//div[text()=\'"+point_name+"\']"
-        time.sleep(2)
+        self.driver.implicitly_wait(2)
         #rs = self.is_element_present(By.XPATH, xpath)
         #if rs == False:
             #self.verificationErrors.append("fail to modify subject!")

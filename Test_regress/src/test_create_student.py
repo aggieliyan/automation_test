@@ -21,7 +21,7 @@ def test_create_student():
 
     base_url = "http://www."+test_enviroment+".ablesky.com/"
     driver = webdriver.Firefox()
-    stu_txt = r"C:/register_user_list.txt"
+    stu_txt = r"C:\register_user_list.txt"
     #driver.implicitly_wait(30)
     user_name = "sadm001"
     user_psw = "1234"
@@ -35,8 +35,13 @@ def test_create_student():
         stu_num = 2
         #login.auto_register(cfg, driver, base_url, 2, 1)
         login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
+        student_management.buy_open_num(cfg,driver, base_url, org_name, bnum=1)
+        student_management.import_one_student(cfg,driver, base_url, org_name, stu_name="sumin1990")
+        student_management.open_course_for_one(cfg,driver,base_url, org_name,stu_num = 1)
+        student_management.open_course_for_multi(cfg,driver,base_url, org_name)
+        student_management.manage_course_num(cfg, driver, base_url)
         #exam_paper.send_close_paper(cfg, driver, base_url, atype=1)
-        exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=1)
+        #exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=3)
         #admin_management.auto_create_admin(cfg,driver, base_url, org_name="zhongyan", adm_num=2)
         #admin_management.modify_admin(cfg,driver, base_url)
         #admin_management.delete_admin(cfg,driver, base_url, admin_num=1)

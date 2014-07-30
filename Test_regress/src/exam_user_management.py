@@ -18,7 +18,7 @@ def buy_paper(cfg, driver, paper_url=""):
     time.sleep(5)
 
 #学员考试
-def exam(cfg, driver, base_url, operation, blank_pager, question_answer):
+def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer):
     time.sleep(2)
     driver.get(base_url+"exam/")
     time.sleep(2) 

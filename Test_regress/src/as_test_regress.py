@@ -1132,15 +1132,6 @@ class Test(unittest.TestCase):
 
         #self.use_exam_card() 
         #self.import_questions()
-<<<<<<< HEAD
-        self.add_subject()
-        self.modify_subject()
-        self.delete_subject()
-        self.create_exam_cate()
-        self.add_exam_point()
-        self.modify_exam_point()
-        self.delete_exam_point()               
-=======
         #self.add_exam_subject()
         #self.modify_exam_subject()
         #self.delete_exam_subject()
@@ -1150,7 +1141,6 @@ class Test(unittest.TestCase):
         #self.add_exam_point()
         #self.modify_exam_point()
         #self.delete_exam_point()               
->>>>>>> origin/master
 
     def tearDown(self):
         self.driver.quit()

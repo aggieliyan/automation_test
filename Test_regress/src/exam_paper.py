@@ -170,8 +170,11 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
         score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), cfg.get('exam', 'input_score'))
         score = "0.1"
         for item in score_input:
-            item.clear()
-            item.send_keys(score)
+            try:
+                item.clear()
+                item.send_keys(score)
+            except:
+                continue
         driver.find_element(cfg.get('exam', 'score_save_by'), cfg.get('exam', 'score_save')).click()
         total_score = len(score_input) * score
         return total_score
@@ -202,5 +205,5 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     driver.find_element(cfg.get('exam', 'open_paper_by'), cfg.get('exam', 'open_paper')).click()
     driver.implicitly_wait(1)
     driver.find_element(cfg.get('exam', 'open_paper_ok_by'), cfg.get('exam', 'open_paper_ok')).click()
-    driver.implicitly_wait(5)
+    time.sleep(2)
          

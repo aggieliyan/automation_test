@@ -11,11 +11,11 @@ def use_prepaid_card(cfg, driver, base_url, card_num, card_psw):
         
     driver.get(base_url+"useCard.do?action=toStudyCard")
     time.sleep(1)
-    driver.find_element(cfg.get('use_card','card_num_id_by'),cfg.get('use_card','card_num_id')).send_keys(card_num)
-    driver.find_element(cfg.get('use_card','card_psw_id_by'),cfg.get('use_card','card_psw_id')).send_keys(card_psw)
-    driver.find_element(cfg.get('use_card','card_ok_css_by'),cfg.get('use_card','card_ok_css')).click()
+    driver.find_element(cfg.get('use_card','card_num_by'),cfg.get('use_card','card_num')).send_keys(card_num)
+    driver.find_element(cfg.get('use_card','card_psw_by'),cfg.get('use_card','card_psw')).send_keys(card_psw)
+    driver.find_element(cfg.get('use_card','card_ok_by'),cfg.get('use_card','card_ok')).click()
     time.sleep(2)
-    driver.find_element(cfg.get('use_card','prepaid_ok_css_by'),cfg.get('use_card','prepaid_ok_css')).click()
+    driver.find_element(cfg.get('use_card','prepaid_ok_by'),cfg.get('use_card','prepaid_ok')).click()
     time.sleep(2)
     prepaid_num = driver.find_element(cfg.get('use_card','confirm_prepaid_num_by'),cfg.get('use_card','confirm_prepaid_num')).text
     return prepaid_num
@@ -25,16 +25,16 @@ def use_course_card(cfg,driver, base_url, card_num, card_psw):
     
     driver.get(base_url+"useCard.do?action=toStudyCard")
     time.sleep(1)
-    driver.find_element(cfg.get('use_card','card_num_id_by'),cfg.get('use_card','card_num_id')).send_keys(card_num)
-    driver.find_element(cfg.get('use_card','card_psw_id_by'),cfg.get('use_card','card_psw_id')).send_keys(card_psw)
-    driver.find_element(cfg.get('use_card','card_ok_css_by'),cfg.get('use_card','card_ok_css')).click()
+    driver.find_element(cfg.get('use_card','card_num_by'),cfg.get('use_card','card_num')).send_keys(card_num)
+    driver.find_element(cfg.get('use_card','card_psw_by'),cfg.get('use_card','card_psw')).send_keys(card_psw)
+    driver.find_element(cfg.get('use_card','card_ok_by'),cfg.get('use_card','card_ok')).click()
     time.sleep(2)
-    driver.find_element(cfg.get('use_card','course_check_1_name_by'),cfg.get('use_card','course_check_1_name')).click()
-    driver.find_element(cfg.get('use_card','course_check_2_xpath_by'),cfg.get('use_card','course_check_2_xpath')).click()
+    driver.find_element(cfg.get('use_card','course_check_1_by'),cfg.get('use_card','course_check_1')).click()
+    driver.find_element(cfg.get('use_card','course_check_2_by'),cfg.get('use_card','course_check_2')).click()
     time.sleep(2)
-    driver.find_element(cfg.get('use_card','add_ok_css_by'),cfg.get('use_card','add_ok_css')).click()
+    driver.find_element(cfg.get('use_card','add_ok_by'),cfg.get('use_card','add_ok')).click()
     time.sleep(2)
-    driver.find_element(cfg.get('use_card','course_ok_css_by'),cfg.get('use_card','course_ok_css')).click()
+    driver.find_element(cfg.get('use_card','course_ok_by'),cfg.get('use_card','course_ok')).click()
     time.sleep(2)
     course_num = driver.find_element(cfg.get('use_card','confirm_course_num_by'),cfg.get('use_card','confirm_course_num')).text
     return course_num    

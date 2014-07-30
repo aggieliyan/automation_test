@@ -79,7 +79,8 @@ def modify_admin(cfg,driver, base_url):
     driver.find_element(cfg.get('org_manage','ad_name_id_by'),cfg.get('org_manage','ad_name_id')).clear()
     driver.find_element(cfg.get('org_manage','ad_name_id_by'),cfg.get('org_manage','ad_name_id')).send_keys(admin_name)
     time.sleep(2)
-    driver.find_element(cfg.get('org_manage','admin_modify_xpath_by'),cfg.get('org_manage','admin_modify_xpath')).click()
+    #driver.find_element(cfg.get('org_manage','admin_modify_xpath_by'),cfg.get('org_manage','admin_modify_xpath')).click()
+    driver.execute_script("$(\"#editButton button\").eq(0).click()")
     time.sleep(2)
     return admin_name
         

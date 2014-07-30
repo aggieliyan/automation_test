@@ -8,6 +8,7 @@ from selenium import webdriver
 import os
 import admin_management
 import user_management
+import time
 
 def test_create_student():
     
@@ -30,8 +31,8 @@ def test_create_student():
         stu_num = 2
         login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
         #admin_management.auto_create_admin(cfg,driver, base_url, org_name="zhongyan", adm_num=2)
-        #admin_management.modify_admin(cfg,driver, base_url)
-        #admin_management.delete_admin(cfg,driver, base_url, admin_num=1)
+        admin_management.modify_admin(cfg,driver, base_url)
+        admin_management.delete_admin(cfg,driver, base_url, admin_num=1)
         time.sleep(10)
         #login.auto_register(cfg, driver, base_url, 2, 1)
         #student_management.auto_create_student(cfg, driver, base_url, user_name, stu_num)

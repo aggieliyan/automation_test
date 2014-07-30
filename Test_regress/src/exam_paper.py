@@ -32,7 +32,7 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erando
     driver.find_element(cfg.get('exam','exam_timelen_by'),cfg.get('exam','exam_timelen')).clear()
     driver.find_element(cfg.get('exam','exam_timelen_by'),cfg.get('exam','exam_timelen')).send_keys(exam_time)
     if eoperation == 0:
-        driver.find_element(cfg.get('exam','exam_operation_auto_by '),cfg.get('exam','exam_operation_auto')).click()
+        driver.find_element(cfg.get('exam','exam_operation_auto_by'),cfg.get('exam','exam_operation_auto')).click()
     elif eoperation == 1:
         driver.find_element(cfg.get('exam','exam_operation_continue_by'),cfg.get('exam','exam_operation_continue')).click()
     if erandom == 0:

@@ -8,7 +8,7 @@ Created on Jul 24, 2014
 import time
 
 def buy_paper(cfg, driver, paper_url=""):
-    paper_url = "http://www.gamma.ablesky.com/examRedirect.do?action=viewExamPaperInfo&examPaperId=6129"
+    paper_url = "http://www.beta.ablesky.com/examRedirect.do?action=viewExamPaperInfo&examPaperId=5458"
     driver.get(paper_url)
     time.sleep(1)
     driver.find_element(cfg.get('exam', 'buy_paper_by'), cfg.get('exam', 'buy_paper')).click()
@@ -38,9 +38,10 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer):
                 driver.find_element(cfg.get('exam','exam_selectque_by'),cfg.get('exam','exam_selectque')).click()     
         #是非题
         elif question_title == u"是非题":
-                driver.find_element(cfg.get('exam','exam_yesnoque_by'),cfg.get('exam','exam_yesnoque')).click()     
+            driver.implicitly_wait(30)
+            driver.find_element(cfg.get('exam','exam_yesnoque_by'),cfg.get('exam','exam_yesnoque')).click()     
         #填空题
-        elif question_title == u"填空题":
+        elif question_title == u"填空题": 
                 driver.find_element(cfg.get('exam','exam_blankque_by'),cfg.get('exam','exam_blankque')).send_keys(question_answer)   
         #问答题  
         elif question_title == u"问答题":        

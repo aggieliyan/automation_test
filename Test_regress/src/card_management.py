@@ -124,7 +124,7 @@ def add_listen_cardgroup(cfg,driver, base_url, org_name , group_name = u'listenc
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")       
 
 #添加卡
-def add_card(cfg, driver, base_url, org_name, cgroup_num = 1,card_prifix='auto',card_num = 50):
+def add_card(cfg, driver, base_url, org_name, cgroup_num = 1,card_prifix='auto',card_num = 10):
      
     driver.get(base_url + "myOffice.do")
     time.sleep(2)

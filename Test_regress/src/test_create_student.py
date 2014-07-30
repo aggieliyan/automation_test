@@ -9,6 +9,7 @@ import os
 import admin_management
 import user_management
 import time
+import exam_paper
 
 def test_create_student():
     
@@ -18,23 +19,24 @@ def test_create_student():
     cfg.read(cfg_file)  
 
     base_url = "http://www."+test_enviroment+".ablesky.com/"
-    #driver = webdriver.Firefox()
+    driver = webdriver.Firefox()
     #driver.implicitly_wait(30)
-    user_name = "zhongyan"
+    user_name = "sadm001"
     user_psw = "1234"
     org_name = user_name
     for i in range(1):
         print 'wwwwwwwwwwwwwwwwwwwwwww'
-        chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
-        os.environ["webdriver.chrome.driver"] = chromedriver
-        driver =  webdriver.Chrome(chromedriver)
+        #chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
+        #os.environ["webdriver.chrome.driver"] = chromedriver
+        #driver =  webdriver.Chrome(chromedriver)
         stu_num = 2
-        login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
-        #admin_management.auto_create_admin(cfg,driver, base_url, org_name="zhongyan", adm_num=2)
-        admin_management.modify_admin(cfg,driver, base_url)
-        admin_management.delete_admin(cfg,driver, base_url, admin_num=1)
-        time.sleep(10)
         #login.auto_register(cfg, driver, base_url, 2, 1)
+        login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
+        exam_paper.send_close_paper(cfg, driver, base_url, atype=1)
+        #admin_management.auto_create_admin(cfg,driver, base_url, org_name="zhongyan", adm_num=2)
+        #admin_management.modify_admin(cfg,driver, base_url)
+        #admin_management.delete_admin(cfg,driver, base_url, admin_num=1)
+        #time.sleep(10)
         #student_management.auto_create_student(cfg, driver, base_url, user_name, stu_num)
         driver.quit()
     

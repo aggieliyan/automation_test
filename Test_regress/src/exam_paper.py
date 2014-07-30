@@ -171,18 +171,22 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     """
     参数atype为1表示为学员开通试卷，2表示为学员关闭试卷
     """
-    username = "sunmin1990\n"
+    username = "sunmin1990"
     driver.get("%sexam/" %(base_url))
     time.sleep(1)
     driver.find_element("xpath", "//p[4]/a").click()
     time.sleep(2)
     driver.find_element(cfg.get('exam', 'user_search_by'), cfg.get('exam', 'user_search')).clear()
-    driver.find_element(cfg.get('exam', 'user_search_by'), cfg.get('exam', 'user_search')).send_keys(username)
+    #driver.find_element(cfg.get('exam', 'user_search_by'), cfg.get('exam', 'user_search')).send_keys(username)
+    #得一个字母一个字母的输入，否则因为输入太快得到的搜索结果不准确
+    for letter in username:
+        driver.find_element(cfg.get('exam', 'user_search_by'), cfg.get('exam', 'user_search')).send_keys(letter)
     time.sleep(1)
     if atype == 1:
         driver.find_element_by_link_text(u"分发试卷").click()
     else:
         driver.find_element_by_link_text(u"关闭试卷").click()
+    time.sleep(1)
     driver.find_element(cfg.get('exam', 'open_paper_by'), cfg.get('exam', 'open_paper')).click()
     time.sleep(1)
     driver.find_element(cfg.get('exam', 'open_paper_ok_by'), cfg.get('exam', 'open_paper_ok')).click()

@@ -1022,7 +1022,8 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
+               
     def exam_question_duoxuan(self):
         self.total += 1
         question_ansa='exam'  + str(random.randint(1000,9999))
@@ -1087,7 +1088,18 @@ class Test(unittest.TestCase):
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
+            
+    def exam_questions(self):
+        self.total += 1
+        question_ansa='exam'  + str(random.randint(1000,9999))
+        try:
+            exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa, 2) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to exam questions")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")            
             
     def manage_course_num(self):
         self.total += 1
@@ -1160,13 +1172,14 @@ class Test(unittest.TestCase):
         #self.verify_all_course_convert()
 
         #考试系统部分
-        self.exam_question_danxuan()
-        self.exam_question_duoxuan()
-        self.exam_question_shifei()
-        self.exam_question_tiankong()
-        self.exam_question_wenda()
-        self.exam_question_wanxing()
-        self.exam_question_zonghe()
+        #self.exam_question_danxuan()
+        #self.exam_question_duoxuan()
+        #self.exam_question_shifei()
+        #self.exam_question_tiankong()
+        #self.exam_question_wenda()
+        #self.exam_question_wanxing()
+        #self.exam_question_zonghe()
+        self.exam_questions()
         #self.createpaper()
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)

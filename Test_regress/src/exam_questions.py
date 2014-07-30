@@ -293,4 +293,14 @@ def exam_question_zonghe(cfg,driver, base_url,question_ansa):
     time.sleep(2)
     driver.find_element_by_link_text("单选题").click()
     time.sleep(2)
+    
+def auto_exam_questions(cfg,driver, base_url,question_ansa, num):
+    for i in range(num):
+        exam_question_danxuan(cfg,driver, base_url,question_ansa)
+        exam_question_duoxuan(cfg,driver, base_url,question_ansa)
+        exam_question_shifei(cfg,driver, base_url,question_ansa)
+        exam_question_tiankong(cfg,driver, base_url,question_ansa)
+        exam_question_wenda(cfg,driver, base_url,question_ansa)
+        exam_question_wanxing(cfg,driver, base_url,question_ansa)
+        exam_question_zonghe(cfg,driver, base_url,question_ansa)      
      

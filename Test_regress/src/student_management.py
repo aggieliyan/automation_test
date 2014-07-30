@@ -72,11 +72,11 @@ def create_student(cfg,driver, base_url,org_name, stu_txt):
 def auto_create_student(cfg,driver, base_url,org_name, stu_num):#自动生成用户名文件创建学员
     #stu_num为需要创建学员的数量
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
-    stu_txt = r"D:\create_stu.txt"
+    stu_txt = r"C:\create_stu.txt"
     stu_file = open(stu_txt,'w')
     for i in range(stu_num):
         stu_name = 'stu_' + prefix + str(i) 
-        stu_psw = '1234'
+        stu_psw = '1234aa'
         if i == 0:
             stu_file.writelines(" \n")
         stu_file.writelines(stu_name+" "+stu_psw+"\n")

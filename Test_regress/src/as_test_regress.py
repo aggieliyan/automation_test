@@ -1015,7 +1015,7 @@ class Test(unittest.TestCase):
     
     def exam_question_danxuan(self):
         self.total += 1
-        question_ansa='exam'  + str(random.randint(1000,9999))
+        question_ansa='exam' + str(random.randint(1000,9999))
         try:
             exam_questions.exam_question_danxuan(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
@@ -1026,7 +1026,7 @@ class Test(unittest.TestCase):
                
     def exam_question_duoxuan(self):
         self.total += 1
-        question_ansa='exam'  + str(random.randint(1000,9999))
+        question_ansa='exam' + str(random.randint(1000,9999))
         try:
             exam_questions.exam_question_duoxuan(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
@@ -1037,7 +1037,7 @@ class Test(unittest.TestCase):
  
     def exam_question_shifei(self):
         self.total += 1
-        question_ansa='exam'  + str(random.randint(1000,9999))
+        question_ansa='exam' + str(random.randint(1000,9999))
         try:
             exam_questions.exam_question_shifei(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
@@ -1048,7 +1048,7 @@ class Test(unittest.TestCase):
  
     def exam_question_tiankong(self):
         self.total += 1
-        question_ansa='exam'  + str(random.randint(1000,9999))
+        question_ansa='exam' + str(random.randint(1000,9999))
         try:
             exam_questions.exam_question_tiankong(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
@@ -1059,7 +1059,7 @@ class Test(unittest.TestCase):
 
     def exam_question_wenda(self):
         self.total += 1
-        question_ansa='exam'  + str(random.randint(1000,9999))
+        question_ansa='exam' + str(random.randint(1000,9999))
         try:
             exam_questions.exam_question_wenda(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
@@ -1070,7 +1070,7 @@ class Test(unittest.TestCase):
     
     def exam_question_wanxing(self):
         self.total += 1
-        question_ansa='exam'  + str(random.randint(1000,9999))
+        question_ansa='exam' + str(random.randint(1000,9999))
         try:
             exam_questions.exam_question_wanxing(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
@@ -1081,7 +1081,7 @@ class Test(unittest.TestCase):
 
     def exam_question_zonghe(self):
         self.total += 1
-        question_ansa='exam'  + str(random.randint(1000,9999))
+        question_ansa='exam' + str(random.randint(1000,9999))
         try:
             exam_questions.exam_question_zonghe(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
@@ -1092,7 +1092,7 @@ class Test(unittest.TestCase):
             
     def exam_questions(self):
         self.total += 1
-        question_ansa='exam'  + str(random.randint(1000,9999))
+        question_ansa='exam' + str(random.randint(1000,9999))
         try:
             exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa, 2) 
         except Exception,e:

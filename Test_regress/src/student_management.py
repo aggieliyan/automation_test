@@ -176,6 +176,8 @@ def manage_course_num(cfg, driver, base_url):
     driver.implicitly_wait(2)
     driver.find_element_by_link_text("修改剩余播放次数").click()
     driver.implicitly_wait(2)
+    driver.find_element(cfg.get('manage_course_num','manage_coursenum_change_by'),cfg.get('manage_course_num','manage_coursenum_change')).clear()
+    driver.implicitly_wait(2)    
     driver.find_element(cfg.get('manage_course_num','manage_coursenum_change_by'),cfg.get('manage_course_num','manage_coursenum_change')).send_keys("1")
     driver.implicitly_wait(2)
     driver.find_element_by_link_text("保存").click()

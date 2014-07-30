@@ -23,14 +23,13 @@ def buy_course(cfg, driver, base_url, org_name):
     time.sleep(10)
     h = driver.window_handles
     driver.switch_to_window(h[-1])
-    #driver.find_element_by_id("useRmb").click()
     driver.find_element(cfg.get('org_index','wl_buycou_id_by'),cfg.get('org_index','wl_buycou_id')).click()
     time.sleep(12)
-    driver.find_element_by_css_selector("span.greenbtn35_text").click()
+    driver.find_element(cfg.get('org_index','wl_buycou_css_by'),cfg.get('org_index','wl_buycou_css')).click()
     time.sleep(8)
-    driver.find_element_by_css_selector("span.greenbtn35_text").click()
+    driver.find_element(cfg.get('org_index','wl_buycou_css_by'),cfg.get('org_index','wl_buycou_css')).click()
     time.sleep(3)
-    driver.find_element_by_css_selector("span.greenbtn35_text").click()
+    driver.find_element(cfg.get('org_index','wl_buycou_css_by'),cfg.get('org_index','wl_buycou_css')).click()
     time.sleep(3)    
     
 #个人充值卡买课
@@ -49,7 +48,7 @@ def buy_course_usecard(cfg, driver, base_url, org_name):
     time.sleep(12)
     h = driver.window_handles
     driver.switch_to_window(h[-1])
-    driver.find_element_by_css_selector("span.greenbtn35_text").click()
+    driver.find_element(cfg.get('org_index','wl_buycou_css_by'),cfg.get('org_index','wl_buycou_css')).click()
     time.sleep(10)
     
 #个人发照片 数量最大10

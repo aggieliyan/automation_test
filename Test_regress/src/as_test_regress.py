@@ -16,9 +16,9 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         
-        self.browser = "firefox"
+        self.browser = "Chrome"
         self.test_enviroment = "beta"  
-        self.org_name = "hjliu"
+        self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -657,21 +657,14 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")  
             
     def release_href_course(self):
-        
         self.total += 1
         try:
-            title = course_management.release_href_course(self.cfg, self.driver, self.base_url, self.org_name)
+            user_management.release_href_course(self.cfg, self.driver, self.base_url, self.org_name) 
         except Exception,e:
             print e
-            self.verificationErrors.append("fail to release href course!")
+            self.verificationErrors.append("fail to use link")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/href_course.png")
-            
-        #验证
-        self.driver.get(self.base_url+self.org_name)
-        rs = self.is_element_present(By.LINK_TEXT,title)
-        if rs == False:
-            self.verificationErrors.append("fail to release href course!")
+            self.driver.save_screenshot("C:/test_rs_pic/user_management_link.png")
         
             
     def verify_all_course_convert(self):
@@ -684,7 +677,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            user_management.buy_course(self.cfg, self.driver, self.course_href)
+            user_management.buy_course(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to buy course use rmb!")
@@ -697,7 +690,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            user_management.buy_course_usecard(self.cfg, self.driver, self.course_href_2)
+            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to buy course use card!")
@@ -1126,17 +1119,6 @@ class Test(unittest.TestCase):
         finally: 
             self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")
             
-    def wailian_video(self):
-        self.total += 1
-        try:
-            user_management.wailian_video(self.cfg, self.driver, self.base_url, self.test_enviroment) 
-        except Exception,e:
-            print e
-            self.verificationErrors.append("fail to use wailian")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/user_management_wailian.png")
-
-    
     def test_regress(self):
         
         #网站主站回归流程
@@ -1163,7 +1145,7 @@ class Test(unittest.TestCase):
         #self.modify_admin()
         #self.delete_admin()
         #self.buy_open_num()
-        ##self.release_href_course()
+        self.release_href_course()
         #self.open_course_for_one()
         #self.open_course_for_multi()
         #self.change_banner()

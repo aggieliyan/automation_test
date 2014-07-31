@@ -405,10 +405,9 @@ class Test(unittest.TestCase):
         self.total += 1
         count = 5
         try:
-            self.page_catename = card_management.get_academy_catename(self.cfg, self.driver, self.base_url)
-            exam_paper.create_paper(self.cfg, self.driver, self.base_url, self.page_catename, 1, 1, 1, 1)
+            #self.page_catename = card_management.get_academy_catename(self.cfg, self.driver, self.base_url)
+            #exam_paper.create_paper(self.cfg, self.driver, self.base_url, self.page_catename, 1, 1, 1, 1)
             self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url,count)
-            #self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url)
         except Exception,e:
             print e
             self.verificationErrors.append('fail to add exam card!')

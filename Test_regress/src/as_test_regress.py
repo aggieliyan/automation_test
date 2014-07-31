@@ -639,7 +639,7 @@ class Test(unittest.TestCase):
         #before_num = self.driver.execute_script("return $(\"a[]\")")
         #print before_num
         try:
-            admin_management.delete_admin(self.cfg, self.driver, self.base_url, self.org_name)
+            admin_management.delete_admin(self.cfg, self.driver, self.base_url)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to delete admin!")

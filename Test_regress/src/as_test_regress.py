@@ -123,7 +123,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000,9999))
         title =u"course"+rand_name#在标题中加入随机数字确保课件标题的唯一性
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=0.1)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
         except Exception,e:
             print e
         finally:
@@ -149,7 +149,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000,9999))
         title = u"course-three"+rand_name
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, ctype=1, isthree=1, course_title=title, course_price=0.1)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, ctype=1, isthree=1, course_title=title, course_price=10)
         except Exception,e:
             print e
         finally:
@@ -1155,8 +1155,8 @@ class Test(unittest.TestCase):
         #网站主站回归流程
         #self.register()
         self.login_from_index()
-        #self.release_normal()
-        #self.release_three_video()
+        self.release_normal()
+        self.release_three_video()
         self.agency_course()
         self.package_course() 
         self.add_cate()

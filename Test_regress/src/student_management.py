@@ -20,8 +20,11 @@ def import_one_student(cfg,driver, base_url, org_name, stu_name):
     driver.implicitly_wait(2)
     driver.find_element_by_link_text(u"学员/员工").click()
     driver.implicitly_wait(2)
-    driver.find_element(cfg.get('org_manage',"stu_close_by"),\
-    	cfg.get('org_manage',"stu_close")).click()
+    try:
+        driver.find_element(cfg.get('org_manage',"stu_close_by"),\
+            cfg.get('org_manage',"stu_close")).click()
+    except:
+        pass
     driver.implicitly_wait(2)
     driver.find_element_by_link_text(u"学员管理").click()
     driver.find_element(cfg.get('org_manage',"stu_input_by"),\
@@ -37,8 +40,11 @@ def import_multi_student(cfg,driver,base_url, org_name, stu_txt):
     driver.implicitly_wait(2)
     driver.find_element_by_link_text(u"学员/员工").click()
     driver.implicitly_wait(2)
-    driver.find_element(cfg.get('org_manage',"stu_close_by"),\
-    	cfg.get('org_manage',"stu_close")).click()
+    try:
+        driver.find_element(cfg.get('org_manage',"stu_close_by"),\
+            cfg.get('org_manage',"stu_close")).click()
+    except:
+        pass
     driver.implicitly_wait(5)
     driver.find_element_by_link_text(u"学员管理").click()
     driver.implicitly_wait(2)
@@ -59,8 +65,11 @@ def create_student(cfg,driver, base_url,org_name, stu_txt):
     driver.implicitly_wait(2)
     driver.find_element_by_link_text(u"学员/员工").click()
     driver.implicitly_wait(2)
-    driver.find_element(cfg.get('org_manage',"stu_close_by"),\
-    	cfg.get('org_manage',"stu_close")).click()
+    try:
+        driver.find_element(cfg.get('org_manage',"stu_close_by"),\
+            cfg.get('org_manage',"stu_close")).click()
+    except:
+        pass
     driver.implicitly_wait(2)
     driver.find_element_by_link_text(u"学员管理").click()
     driver.implicitly_wait(2)

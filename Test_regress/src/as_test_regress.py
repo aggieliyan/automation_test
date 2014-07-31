@@ -1175,8 +1175,8 @@ class Test(unittest.TestCase):
         self.add_admin()  
         self.modify_admin()
         self.delete_admin()
-        self.buy_open_num()
-        self.release_href_course()
+        #self.buy_open_num()
+        #self.release_href_course()
         self.open_course_for_one()
         self.open_course_for_multi()
 
@@ -1187,7 +1187,7 @@ class Test(unittest.TestCase):
         #self.modify_pagefoot()  
         #self.change_headpic()
 
-        self.verify_all_course_convert()
+        #self.verify_all_course_convert()
 
         login.logout(self.driver, self.base_url)
         self.login_user()

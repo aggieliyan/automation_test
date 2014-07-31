@@ -667,18 +667,12 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            title = course_management.release_href_course(self.cfg, self.driver, self.base_url, self.org_name)
+            user_management.release_href_course(self.cfg, self.driver, self.base_url, self.org_name) 
         except Exception,e:
             print e
-            self.verificationErrors.append("fail to release href course!")
+            self.verificationErrors.append("fail to use link")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/href_course.png")
-            
-        #验证
-        self.driver.get(self.base_url+self.org_name)
-        rs = self.is_element_present(By.LINK_TEXT,title)
-        if rs == False:
-            self.verificationErrors.append("fail to release href course!")
+            self.driver.save_screenshot("C:/test_rs_pic/user_management_link.png")
         
             
     def verify_all_course_convert(self):
@@ -691,20 +685,19 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            user_management.buy_course(self.cfg, self.driver, self.course_href)
+            user_management.buy_course(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to buy course use rmb!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/href_course.png")
-            
         #验证待完成
         
     def buy_course_use_card(self):
         
         self.total += 1
         try:
-            user_management.buy_course_usecard(self.cfg, self.driver, self.course_href_2)
+            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to buy course use card!")

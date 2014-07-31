@@ -18,10 +18,10 @@ class Test(unittest.TestCase):
         
         self.browser = "Chrome"
         self.test_enviroment = "beta"  
-        self.org_name = "salesdemo"
+        self.org_name = "sadm001"
         self.org_password = "1234"
-        self.user_name = "yilu282"
-        self.user_password = "1234"
+        self.user_name = "stu_gy50"
+        self.user_password = "gy0411"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
@@ -129,8 +129,9 @@ class Test(unittest.TestCase):
             
         self.normal_course = title#待用-在数据库中查是否转换失败
         
-        rs = self.verify_course(title)
+        
         try:
+            rs = self.verify_course(title)
             self.assertEqual(True, rs,"fail to release course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
@@ -153,8 +154,9 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot(r'C:/test_rs_pic/4_three_video.png')
         
         self.three_title = title   
-        rs = self.verify_course(title)
+        
         try:
+            rs = self.verify_course(title)
             self.assertEqual(True, rs, "fail to release tree video course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
@@ -181,8 +183,9 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot(r'C:/test_rs_pic/5_two_video.png')
         
         self.two_title = title   
-        rs = self.verify_course(title)
+        
         try:
+            rs = self.verify_course(title)
             self.assertEqual(True, rs, "fail to release two video course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
@@ -249,15 +252,16 @@ class Test(unittest.TestCase):
         self.total += 1
         rand_name = str(random.randint(1000,9999))
         title = u"agencycourse"+rand_name
-        #try:
-        new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
-        #except Exception,e:
-        #    print e
-        #finally:
-        self.driver.save_screenshot(r'C:/test_rs_pic/9_agency_course.png')
-        
-        rs = self.verify_course(title)
         try:
+            new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
+        except Exception,e:
+            print e
+        finally:
+            self.driver.save_screenshot(r'C:/test_rs_pic/9_agency_course.png')
+        
+        
+        try:
+            rs = self.verify_course(title)
             self.assertEqual(True, rs,"fail to release agency course!")
         except AssertionError,e:
             self.verificationErrors.append(str(e))
@@ -1121,36 +1125,54 @@ class Test(unittest.TestCase):
     def test_regress(self):
         
         #网站主站回归流程
-        #self.register()
+        self.register()
         self.login_from_index()
-        #self.release_normal()
-        #self.release_three_video()
-        #self.agency_course()
-        #self.package_course() 
-        #self.add_cate()
-        #self.presale_course()  
-        #self.add_course_to_cate()   
-        #self.prepaid_cardgroup()
-        #self.course_cardgroup()
-        #self.cate_cardgroup()
-        #self.delete_cate()
-        #self.buy_listen_card()
-        #self.listen_cardgroup()
-        #self.add_exam_card()
-        #self.import_one_student()
-        #self.import_multi_student()
-        #self.create_multi_student()
-        #self.add_admin()  
-        #self.modify_admin()
-        #self.delete_admin()
-        #self.buy_open_num()
+        self.release_normal()
+        self.release_three_video()
+        self.agency_course()
+        self.package_course() 
+        self.add_cate()
+        self.presale_course()  
+        self.add_course_to_cate()   
+        self.prepaid_cardgroup()
+        self.course_cardgroup()
+        self.cate_cardgroup()
+        self.delete_cate()
+        self.buy_listen_card()
+        self.listen_cardgroup()
+        self.add_exam_card()
+        self.import_one_student()
+        self.import_multi_student()
+        self.create_multi_student()
+        self.add_admin()  
+        self.modify_admin()
+        self.delete_admin()
+        self.buy_open_num()
         self.release_href_course()
-        #self.open_course_for_one()
-        #self.open_course_for_multi()
+        self.open_course_for_one()
+        self.open_course_for_multi()
         #self.change_banner()
         #self.change_headpic()
+        #self.change_homelogo()
+        #self.release_announcement()
+        #self.modify_pagefoot()  
+        #self.change_headpic()
 
-        #self.verify_all_course_convert()
+        self.verify_all_course_convert()
+
+        login.logout(self.driver, self.base_url)
+        self.login_user()
+        self.use_prepaidcard()
+        self.use_coursecard()
+        self.use_catecard()
+        self.use_listencard()
+        self.use_exam_card()
+        self.buy_course_use_RMB()
+        self.buy_course_use_card() 
+          
+
+        
+        #self.wailian_video()
 
         #考试系统部分
         #self.exam_question_danxuan()

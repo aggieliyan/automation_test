@@ -62,6 +62,7 @@ def logout_by_independent_domian(driver,independent_url):
 def logout(driver,base_url):
     
     driver.get(base_url)
+    time.sleep(1)
     driver.find_element_by_link_text(u"[退出]").click()
     time.sleep(1)
     

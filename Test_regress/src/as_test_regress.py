@@ -18,10 +18,10 @@ class Test(unittest.TestCase):
         
         self.browser = "Chrome"
         self.test_enviroment = "beta"  
-        self.org_name = "sadm001"
-        self.org_password = "1234"
-        self.user_name = "stu_gy50"
-        self.user_password = "gy0411"
+        self.org_name = "salesdemo"
+        self.org_password = "salesdemo"
+        self.user_name = "yilu282"
+        self.user_password = "900225lulu"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
@@ -48,8 +48,9 @@ class Test(unittest.TestCase):
             self.driver = webdriver.Ie()
 
         self.driver.implicitly_wait(5)
-        self.base_url = "http://www."+self.test_enviroment+".ablesky.com/"
+        #self.base_url = "http://www."+self.test_enviroment+".ablesky.com/"
         #self.base_url = "http://www.zhongyan.com/"
+        self.base_url = "http://web1mb1.bp1.ablesky.com/"
         
         if os.path.exists("C:\\test_rs_pic")!= True:
             os.system("mkdir C:\\test_rs_pic")
@@ -122,7 +123,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000,9999))
         title =u"course"+rand_name#在标题中加入随机数字确保课件标题的唯一性
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=0.1)
         except Exception,e:
             print e
         finally:
@@ -148,7 +149,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000,9999))
         title = u"course-three"+rand_name
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, ctype=1, isthree=1, course_title=title)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, ctype=1, isthree=1, course_title=title, course_price=0.1)
         except Exception,e:
             print e
         finally:
@@ -1152,10 +1153,10 @@ class Test(unittest.TestCase):
     def test_regress(self):
         
         #网站主站回归流程
-        self.register()
+        #self.register()
         self.login_from_index()
-        self.release_normal()
-        self.release_three_video()
+        #self.release_normal()
+        #self.release_three_video()
         self.agency_course()
         self.package_course() 
         self.add_cate()

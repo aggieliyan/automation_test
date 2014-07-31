@@ -617,8 +617,9 @@ class Test(unittest.TestCase):
     def modify_admin(self):
         
         self.total += 1
+        admin_name = ""
         try:
-            admin_name = admin_management.modify_admin(self.cfg, self.driver, self.base_url, self.org_name)
+            admin_name = admin_management.modify_admin(self.cfg, self.driver, self.base_url)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to modify admin!")

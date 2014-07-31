@@ -1171,29 +1171,6 @@ class Test(unittest.TestCase):
         
         #网站主站回归流程
         #self.register()
-<<<<<<< HEAD
-        #self.login_from_index()
-        #self.release_normal()
-        #self.release_three_video()
-        #self.agency_course()
-        #self.package_course() 
-        #self.add_cate()
-        #self.presale_course()  
-        #self.add_course_to_cate()   
-        #self.prepaid_cardgroup()
-        #self.course_cardgroup()
-        #self.cate_cardgroup()
-        #self.delete_cate()
-        #self.buy_listen_card()
-        #self.listen_cardgroup()
-        #self.add_exam_card()
-        #self.import_one_student()
-        #self.import_multi_student()
-        #self.create_multi_student()
-        #self.add_admin()  
-        #self.modify_admin()
-        #self.delete_admin()
-=======
         self.login_from_index()
         self.release_normal()
         self.release_three_video()
@@ -1215,7 +1192,7 @@ class Test(unittest.TestCase):
         self.add_admin()  
         self.modify_admin()
         self.delete_admin()
->>>>>>> origin/master
+
         #self.buy_open_num()
         #self.release_href_course()
         #self.open_course_for_one()

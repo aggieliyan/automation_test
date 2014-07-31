@@ -6,7 +6,7 @@ Created on Jul 23, 2014
 '''
 
 from selenium.webdriver.common.by import By
-import random, time
+import random, time, os,sys
 
 def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erandom, eopen):
     """
@@ -50,7 +50,7 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erando
     driver.find_element(cfg.get('exam','exam_next_one_by'),cfg.get('exam','exam_next_one')).click()
     driver.implicitly_wait(2)
     #添加大题
-    auto_creatquestion(cfg,driver,3)
+    auto_creatquestion(cfg,driver,7)
     #生成试卷
     driver.find_element(cfg.get('exam','exam_paper_build_btn_by'),cfg.get('exam','exam_paper_build_btn')).click()
     driver.implicitly_wait(2)    
@@ -101,7 +101,7 @@ def add_big_question(cfg, driver,qscore, qtype):
     
 #自动添加题型
 def auto_creatquestion(cfg,driver,q_num):
-    type = [2,3,4,5,6,7]
+    type = [1,2,3,4,5,6,7]
     for i in range(q_num):
         qscore = '3'
         qtype=random.choice(type)
@@ -148,13 +148,19 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123"):
     if etype == 2:
         driver.find_element_by_link_text(u"作为开放试卷的统计结果").click()
         time.sleep(1)
-        driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
-        driver.find_element(cfg.get('exam', 'output_open_by'), cfg.get('exam', 'output_open')).click()
-        time.sleep(2)
+        try:
+            driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
+            driver.find_element(cfg.get('exam', 'output_open_by'), cfg.get('exam', 'output_open')).click()
+            time.sleep(2)
+        except:
+            print u'试卷暂时没有学员购买'
     elif etype == 1:
-        driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
-        driver.find_element(cfg.get('exam', 'output_by'), cfg.get('exam', 'output')).click()
-        time.sleep(2)
+        try:
+            driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
+            driver.find_element(cfg.get('exam', 'output_by'), cfg.get('exam', 'output')).click()
+            time.sleep(2)
+        except:
+            print u'试卷暂时没有分发给学员'
         
         try:
             save_alert = driver.switch_to_alert()
@@ -166,20 +172,24 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123"):
     else:
         #取评分链接
         time.sleep(2)
-        grade_href = driver.execute_script("return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
-        time.sleep(1)
-        driver.get("%sexam/%s" % (base_url, grade_href))
-        score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), cfg.get('exam', 'input_score'))
-        score = "0.1"
-        for item in score_input:
-            try:
-                item.clear()
-                item.send_keys(score)
-            except:
-                continue
-        driver.find_element(cfg.get('exam', 'score_save_by'), cfg.get('exam', 'score_save')).click()
-        total_score = len(score_input) * score
-        return total_score
+        stu_name = driver.execute_script("return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().text()")
+        if stu_name != username:
+            print username + u'该学员不存在,无法导出学员成绩。。'
+        else:
+            grade_href = driver.execute_script("return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
+            time.sleep(1)
+            driver.get("%sexam/%s" % (base_url, grade_href))
+            score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), cfg.get('exam', 'input_score'))
+            score = "0.1"
+            for item in score_input:
+                try:
+                    item.clear()
+                    item.send_keys(score)
+                except:
+                    continue
+            driver.find_element(cfg.get('exam', 'score_save_by'), cfg.get('exam', 'score_save')).click()
+            total_score = len(score_input) * score
+            return total_score 
 
     time.sleep(5)
     return True

@@ -1109,7 +1109,7 @@ class Test(unittest.TestCase):
         operation = 1
         question_answer ='123'
         # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
-        blank_pager = 0
+        blank_pager = 1
         try:
             exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
         except Exception,e:
@@ -1122,7 +1122,7 @@ class Test(unittest.TestCase):
         
         #网站主站回归流程
         #self.register()
-        self.login_from_index()
+        #self.login_from_index()
         #self.release_normal()
         #self.release_three_video()
         #self.agency_course()
@@ -1179,7 +1179,7 @@ class Test(unittest.TestCase):
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         #login.logout(self.driver, self.base_url)
 
-        #self.login_user()
+        self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()
@@ -1196,7 +1196,7 @@ class Test(unittest.TestCase):
         
         
         #self.buy_course_use_card()
-        #self.exam_user()
+        self.exam_user()
         #self.use_exam_card() 
                    
 

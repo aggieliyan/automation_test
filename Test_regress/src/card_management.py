@@ -6,6 +6,7 @@ Created on Jun 1, 2012
 '''
 import time
 import exam_paper
+import exam_user_management
 #使用充值卡和充课卡
 def use_prepaid_card(cfg, driver, base_url, card_num, card_psw):
         
@@ -115,9 +116,9 @@ def add_listen_cardgroup(cfg,driver, base_url, org_name , group_name = u'listenc
     driver.find_element(cfg.get('org_manage','listen_card_by'),cfg.get('org_manage','listen_card')).click()#选择试听卡
     driver.find_element(cfg.get('org_manage','grouptitle_by'),cfg.get('org_manage','grouptitle')).send_keys(group_name)
     time.sleep(2)
-    driver.find_element(cfg.get('org_manage','listen_spread_xpath_by'),cfg.get('org_manage','listen_spread_xpath')).click()#展开默认类目下资料
+    driver.find_element(cfg.get('org_manage','listen_spread_by'),cfg.get('org_manage','listen_spread')).click()#展开默认类目下资料
     time.sleep(5)
-    driver.find_element(cfg.get('org_manage','listen_course_xpath_by'),cfg.get('org_manage','listen_course_xpath')).click()#勾选第一个课程
+    driver.find_element(cfg.get('org_manage','listen_course_by'),cfg.get('org_manage','listen_course')).click()#勾选第一个课程
     time.sleep(3)
     driver.execute_script("$(\".x-btn-text\").eq(0).click()")
     time.sleep(2)
@@ -138,9 +139,9 @@ def add_card(cfg, driver, base_url, org_name, cgroup_num = 1,card_prifix='auto',
     
     time.sleep(2)
     driver.find_element(cfg.get('org_manage','card_prefix_by'),cfg.get('org_manage','card_prefix')).send_keys(card_prifix)
-    time.sleep(3)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage','card_count_by'),cfg.get('org_manage','card_count')).send_keys(card_num)
-    time.sleep(3)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage','add_card_ok_by'),cfg.get('org_manage','add_card_ok')).click()
     time.sleep(2)
 
@@ -234,7 +235,7 @@ def add_exam_card1(cfg, driver, base_url,count = 5):
     examcard_number =driver.execute_script("return $('.first-cell span:eq(1)').text()")
     time.sleep(2)
     return examcard_number
-def user_usexamcard(cfg, driver, base_url,examcard_num):
+def user_usexamcard_management(cfg, driver, base_url,examcard_num):
     time.sleep(2)
     driver.get(base_url + "qqhru")
     time.sleep(2)
@@ -251,4 +252,8 @@ def user_usexamcard(cfg, driver, base_url,examcard_num):
     driver.find_element(cfg.get('use_card','exam_start_by'),cfg.get('use_card','exam_start')).click()#点击开始考试
     time.sleep(2)
     driver.find_element(cfg.get('use_card','exam_paper_by'),cfg.get('use_card','exam_paper')).text#标题  
-    time.sleep(2)   
+    time.sleep(2)  
+def user_usexamcard(cfg, driver, base_url,examcard_num):  
+    user_usexamcard_management(cfg, driver, base_url,examcard_num)
+    # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
+    exam_user_management.exam_user(cfg, driver, base_url, operation = 0, blank_pager = 0, question_answer = '123')

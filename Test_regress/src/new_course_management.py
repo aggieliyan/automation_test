@@ -24,7 +24,7 @@ def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course
     #进入发课页面
     url = "%s/coursePostRedirect.do?action=courseStepOne"%(base_url)
     driver.get(url)
-    time.sleep(1)
+    driver.implicitly_wait(1)
     
     #发点播课程
     if ctype == 1:        
@@ -32,7 +32,7 @@ def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course
         if isthree == 1:#发三分屏
             driver.find_element(cfg.get('courseRedirect','threevideo_by'), cfg.get('courseRedirect','threevideo')).click()
             driver.find_elements(cfg.get('courseRedirect','upload_btn_by'), cfg.get('courseRedirect','upload_btn'))[1].click()
-            time.sleep(1)
+            time.sleep(3)
             driver.execute_script("$(\'.spacefile-name input\').last().click()")
             driver.execute_script("$(\'.dialog-button-container button\').eq(0).click()")
             time.sleep(1)
@@ -47,7 +47,7 @@ def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course
             #存储空间上传
             if upload == 1:
                 driver.find_element_by_css_selector("span.greenbtn30_text").click()
-                time.sleep(1)
+                time.sleep(3)
                 
                 #全选 /选最后一个         
                 driver.execute_script("$(\'.spacefile-name input\').last().click()")
@@ -59,13 +59,13 @@ def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course
             else:        
                 #把input显示出来才可以用否则会报当前元素不可见的错
                 driver.execute_script("$('.fileinput-button input').eq(0).attr('style','height:20px;opacity:1;display:block;position:static;transform:translate(0px, 0px) scale(1)')")
-                time.sleep(1)
+                driver.implicitly_wait(1)
                 input = driver.find_element_by_name("files").send_keys(course_file)
-                time.sleep(3)
+                time.sleep(1)
 
     driver.find_element(cfg.get('courseRedirect','next_btn_by'), cfg.get('courseRedirect','next_btn')).click()                                 
     #发课第二步-课程信息页面
-    time.sleep(2)
+    time.sleep(1)
     driver.find_element(cfg.get('courseRedirect','ctitle_by'), cfg.get('courseRedirect','ctitle')).click()
     driver.find_element(cfg.get('courseRedirect','ctitle_by'), cfg.get('courseRedirect','ctitle')).send_keys(course_title)
     #设置价格
@@ -75,9 +75,11 @@ def course_redirect(cfg, driver, base_url, ctype= 1, isthree=0, upload=1, course
     #填课程详情
     driver.execute_script("var element=window.document.getElementById('courseDesc-editor_ifr');\
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');element.innerHTML =\'"+course_describe+"\';")
+    time.sleep(1)
     #选择服务分类
     driver.execute_script("$(\'li.level2\').click()") 
-    driver.execute_script("$(\'li.level3.selected\').click()")  
+    driver.execute_script("$(\'li.level3.selected\').click()") 
+    time.sleep(1) 
     #填写课程标签
     driver.find_element(cfg.get('courseRedirect','tags_by'), cfg.get('courseRedirect','tags')).send_keys(course_tags)
     #完成
@@ -89,9 +91,11 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', ctype=1, pric
     ctype代表发课类型，1代表普通网络班（打包），2代表预售网络班
     '''
     driver.get("%smyOffice.do" %(base_url))
-    time.sleep(2)
+    driver.implicitly_wait(2)
+    driver.find_element_by_link_text(u"教学教务").click()
+    driver.implicitly_wait(2)
     driver.find_element_by_link_text(u"报班管理").click()
-    time.sleep(3)
+    driver.implicitly_wait(3)
     driver.find_element(cfg.get('classRedirect','redirect_btn_by'), cfg.get('classRedirect','redirect_btn')).click()
 
     if ctype == 1:
@@ -105,7 +109,7 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', ctype=1, pric
         driver.find_element(cfg.get('classRedirect','presell_price_by'), cfg.get('classRedirect','presell_price')).send_keys(price)
 
     driver.find_element(cfg.get('classRedirect','classname_by'), cfg.get('classRedirect','classname')).send_keys(classname)
-    time.sleep(1)
+    driver.implicitly_wait(1)
 
     #填课程详情
     driver.execute_script("var element=window.document.getElementById('courseDescribe-editor_ifr');\
@@ -115,17 +119,19 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', ctype=1, pric
     driver.execute_script("$(\'li.level2\').click()") 
     driver.execute_script("$(\'li.level3.selected\').click()") 
     driver.execute_script("$('.greenbtn25_text').click()")
-    time.sleep(2)
+    driver.implicitly_wait(2)
 
 #发布代理课程-没有发布了现在代理人只能编辑代理的课程    
 def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
     
     driver.get("%smyOffice.do" %(base_url))
-    time.sleep(1)  
+    driver.implicitly_wait(2) 
     driver.find_element_by_link_text(u"管理我申请的代理").click()
+    driver.implicitly_wait(5)
     driver.find_element_by_link_text(u"管理课程").click()
+    driver.implicitly_wait(5)
     driver.find_element_by_link_text(u"编辑").click()
-    time.sleep(1)
+    driver.implicitly_wait(2)
     driver.find_element(cfg.get('courseRedirect','agency_title_by'), cfg.get('courseRedirect','agency_title')).clear()
     driver.find_element(cfg.get('courseRedirect','agency_title_by'), cfg.get('courseRedirect','agency_title')).send_keys(course_title)
     
@@ -139,24 +145,24 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
         driver.find_element(cfg.get('courseRedirect','agency_price_by'), cfg.get('courseRedirect','agency_price')).send_keys(price)
         driver.find_element(cfg.get('courseRedirect','agency_rank_by'), cfg.get('courseRedirect','agency_rank')).clear()
         driver.find_element(cfg.get('courseRedirect','agency_rank_by'), cfg.get('courseRedirect','agency_rank')).send_keys(100)
-        time.sleep(1)
+        driver.implicitly_wait(1)
     except Exception, e:#如果是免费的代理课程会在上面取价格的时候就会报错，免费的直接点发布即可
         pass
     finally:
         driver.find_element(cfg.get('courseRedirect','finish_btn_by'), cfg.get('courseRedirect','finish_btn')).click()
-        time.sleep(2)
+        driver.implicitly_wait(2)
 
 
 def forsale_couse(driver, base_url):
     filepath = "W:\Testing\auto_test_file\headpic.jpg"
     driver.get(base_url + "myOffice.do")
-    time.sleep(2)
+    driver.implicitly_wait(2)
     driver.find_element_by_link_text(u"发布特惠课程").click()
-    time.sleep(3)
+    driver.implicitly_wait(3)
     driver.find_element_by_id("selectCourseBtn").click()
-    time.sleep(2)
+    driver.implicitly_wait(2)
     driver.find_element_by_xpath("//div[3]/div/div/table/tbody/tr/td[2]/em/button").click()
-    time.sleep(2)
+    driver.implicitly_wait(2)
     price = driver.execute_script("return $('#oldPrice').text()")
     driver.find_element_by_id("asprice_field").send_keys(price)
     driver.find_element_by_id("picFieldName-file").send_keys(filepath)

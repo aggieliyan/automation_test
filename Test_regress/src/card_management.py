@@ -116,9 +116,9 @@ def add_listen_cardgroup(cfg,driver, base_url, org_name , group_name = u'listenc
     driver.find_element(cfg.get('org_manage','listen_card_by'),cfg.get('org_manage','listen_card')).click()#选择试听卡
     driver.find_element(cfg.get('org_manage','grouptitle_by'),cfg.get('org_manage','grouptitle')).send_keys(group_name)
     time.sleep(2)
-    driver.find_element(cfg.get('org_manage','listen_spread_xpath_by'),cfg.get('org_manage','listen_spread_xpath')).click()#展开默认类目下资料
+    driver.find_element(cfg.get('org_manage','listen_spread_by'),cfg.get('org_manage','listen_spread')).click()#展开默认类目下资料
     time.sleep(5)
-    driver.find_element(cfg.get('org_manage','listen_course_xpath_by'),cfg.get('org_manage','listen_course_xpath')).click()#勾选第一个课程
+    driver.find_element(cfg.get('org_manage','listen_course_by'),cfg.get('org_manage','listen_course')).click()#勾选第一个课程
     time.sleep(3)
     driver.execute_script("$(\".x-btn-text\").eq(0).click()")
     time.sleep(2)

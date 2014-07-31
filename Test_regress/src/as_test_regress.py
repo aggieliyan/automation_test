@@ -384,11 +384,13 @@ class Test(unittest.TestCase):
             if card_type == 0:
                 self.driver.find_element_by_link_text(u"浏览卡").click()
                 self.driver.implicitly_wait(2)
+                time.sleep(2)
                 card_num = self.driver.execute_script("return $(\"input[name='groupCheck']:eq(0)\").parent().next().text()")
                 card_pwd = self.driver.execute_script("return $(\".textaligncenter\:eq(4)\").text()") 
             else:
                 self.driver.find_element_by_css_selector("span.greenbtn35_text").click()
                 self.driver.implicitly_wait(2)
+                time.sleep(2)
                 card_num = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().text()")
                 #print 'card_num:',card_num
                 card_pwd = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().parent().next().children().text()") 

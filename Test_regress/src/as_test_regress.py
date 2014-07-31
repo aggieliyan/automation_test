@@ -19,9 +19,9 @@ class Test(unittest.TestCase):
         self.browser = "Chrome"
         self.test_enviroment = "beta"  
         self.org_name = "salesdemo"
-        self.org_password = "salesdemo"
+        self.org_password = "1234"
         self.user_name = "yilu282"
-        self.user_password = "900225lulu"
+        self.user_password = "1234"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
@@ -48,9 +48,9 @@ class Test(unittest.TestCase):
             self.driver = webdriver.Ie()
 
         self.driver.implicitly_wait(5)
-        #self.base_url = "http://www."+self.test_enviroment+".ablesky.com/"
+        self.base_url = "http://www."+self.test_enviroment+".ablesky.com/"
         #self.base_url = "http://www.zhongyan.com/"
-        self.base_url = "http://web1mb1.bp1.ablesky.com/"
+        #self.base_url = "http://web1mb1.bp1.ablesky.com/"
         
         if os.path.exists("C:\\test_rs_pic")!= True:
             os.system("mkdir C:\\test_rs_pic")
@@ -1021,10 +1021,27 @@ class Test(unittest.TestCase):
             #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         except Exception,e:
             print e
-            self.verificationErrors.append("fail to import exam result")
+            self.verificationErrors.append("fail to export exam result")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-        
+            self.driver.save_screenshot("C:/test_rs_pic/exam_result.png")
+            
+    def exam_student_management(self):
+        self.total += 1
+        try:
+            exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to open paper")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/open_paper.png")
+            self.total += 1
+        try:
+            exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to close paper")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/close_paper.png")       
     
     def exam_question_danxuan(self):
         self.total += 1
@@ -1154,31 +1171,31 @@ class Test(unittest.TestCase):
         
         #网站主站回归流程
         #self.register()
-        self.login_from_index()
+        #self.login_from_index()
         #self.release_normal()
         #self.release_three_video()
-        self.agency_course()
-        self.package_course() 
-        self.add_cate()
-        self.presale_course()  
-        self.add_course_to_cate()   
-        self.prepaid_cardgroup()
-        self.course_cardgroup()
-        self.cate_cardgroup()
-        self.delete_cate()
-        self.buy_listen_card()
-        self.listen_cardgroup()
-        self.add_exam_card()
-        self.import_one_student()
-        self.import_multi_student()
-        self.create_multi_student()
-        self.add_admin()  
-        self.modify_admin()
-        self.delete_admin()
+        #self.agency_course()
+        #self.package_course() 
+        #self.add_cate()
+        #self.presale_course()  
+        #self.add_course_to_cate()   
+        #self.prepaid_cardgroup()
+        #self.course_cardgroup()
+        #self.cate_cardgroup()
+        #self.delete_cate()
+        #self.buy_listen_card()
+        #self.listen_cardgroup()
+        #self.add_exam_card()
+        #self.import_one_student()
+        #self.import_multi_student()
+        #self.create_multi_student()
+        #self.add_admin()  
+        #self.modify_admin()
+        #self.delete_admin()
         #self.buy_open_num()
         #self.release_href_course()
-        self.open_course_for_one()
-        self.open_course_for_multi()
+        #self.open_course_for_one()
+        #self.open_course_for_multi()
 
         #self.change_banner()
         #self.change_headpic()
@@ -1189,15 +1206,15 @@ class Test(unittest.TestCase):
 
         #self.verify_all_course_convert()
 
-        login.logout(self.driver, self.base_url)
-        self.login_user()
-        self.use_prepaidcard()
-        self.use_coursecard()
-        self.use_catecard()
-        self.use_listencard()
-        self.use_exam_card()
-        self.buy_course_use_RMB()
-        self.buy_course_use_card() 
+        #login.logout(self.driver, self.base_url)
+        #self.login_user()
+        #self.use_prepaidcard()
+        #self.use_coursecard()
+        #self.use_catecard()
+        #self.use_listencard()
+        #self.use_exam_card()
+        #self.buy_course_use_RMB()
+        #self.buy_course_use_card() 
           
 
         
@@ -1213,7 +1230,7 @@ class Test(unittest.TestCase):
         #self.exam_question_wanxing()
         #self.exam_question_zonghe()
         #self.exam_questions()
-        self.import_questions()
+        #self.import_questions()
         #self.add_exam_subject()
         #self.modify_exam_subject()
         #self.delete_exam_subject()
@@ -1224,32 +1241,12 @@ class Test(unittest.TestCase):
         #self.modify_exam_point()
         #self.delete_exam_point()    
         self.createpaper()
-        #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
-        #exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
-        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
-        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
-        #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
+        self.exam_student_management()
         self.user_statistical_information()
-        #login.logout(self.driver, self.base_url)
+        login.logout(self.driver, self.base_url)
 
-        #self.login_user()
-        #self.use_prepaidcard()
-        #self.use_coursecard()
-        #self.use_catecard()
-        #self.use_listencard()
-        #self.use_exam_card() 
-          
-        #self.release_announcement()
-        #self.modify_pagefoot()  
-        #self.change_headpic()
-        #self.change_homelogo()
-        #self.wailian_video()
-          
-        #self.buy_course_use_RMB()
-        
-        
-        #self.buy_course_use_card()
-        #self.exam_user()
+        self.login_user()
+        self.exam_user()
         #self.use_exam_card()
                    
 

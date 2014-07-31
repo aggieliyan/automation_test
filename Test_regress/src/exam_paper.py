@@ -50,7 +50,7 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erando
     driver.find_element(cfg.get('exam','exam_next_one_by'),cfg.get('exam','exam_next_one')).click()
     driver.implicitly_wait(2)
     #添加大题
-    auto_creatquestion(cfg,driver,7)
+    auto_creatquestion(cfg,driver,4)
     #生成试卷
     driver.find_element(cfg.get('exam','exam_paper_build_btn_by'),cfg.get('exam','exam_paper_build_btn')).click()
     driver.implicitly_wait(2)    
@@ -62,8 +62,7 @@ def add_big_question(cfg, driver,qscore, qtype):
     """
     driver.find_element(cfg.get('exam','paper_add_big_question_by'),cfg.get('exam','paper_add_big_question')).click()    
     driver.implicitly_wait(1)
-    if qtype == 1:
-        
+    if qtype == 8:        
         driver.implicitly_wait(2)
         driver.find_element_by_css_selector("span.cc-arrow").click()
         driver.find_element('xpath','//div[10]/ul/li').click()
@@ -74,18 +73,25 @@ def add_big_question(cfg, driver,qscore, qtype):
         driver.implicitly_wait(2)
     else:
         driver.find_element(cfg.get('exam','exam_topic_dropdown_by'),cfg.get('exam','exam_topic_dropdown')).click()
+        driver.implicitly_wait(2)
         if qtype == 2:
             driver.find_element(cfg.get('exam','exam_topic_multiple_by'),cfg.get('exam','exam_topic_multiple')).click()
+            driver.implicitly_wait(2)
         if qtype == 3:
             driver.find_element(cfg.get('exam','exam_topic_true_or_false_by'),cfg.get('exam','exam_topic_true_or_false')).click()
+            driver.implicitly_wait(2)
         if qtype == 4:
             driver.find_element(cfg.get('exam','exam_topic_fills_by'),cfg.get('exam','exam_topic_fills')).click()
+            driver.implicitly_wait(2)
         if qtype == 5:
             driver.find_element(cfg.get('exam','exam_topic_question_by'),cfg.get('exam','exam_topic_question')).click()
+            driver.implicitly_wait(2)
         if qtype == 6:
             driver.find_element(cfg.get('exam','exam_topic_cloze_by'),cfg.get('exam','exam_topic_cloze')).click()
+            driver.implicitly_wait(2)
         if qtype == 7:
             driver.find_element(cfg.get('exam','exam_topic_comprehensive_by'),cfg.get('exam','exam_topic_comprehensive')).click()
+            driver.implicitly_wait(2)
         driver.find_element(cfg.get('exam','exam_question_score_by'),cfg.get('exam','exam_question_score')).clear()
         driver.find_element(cfg.get('exam','exam_question_score_by'),cfg.get('exam','exam_question_score')).send_keys(qscore)
         driver.find_element(cfg.get('exam','exam_add_big_question_ok_by'),cfg.get('exam','exam_add_big_question_ok')).click()
@@ -101,7 +107,7 @@ def add_big_question(cfg, driver,qscore, qtype):
     
 #自动添加题型
 def auto_creatquestion(cfg,driver,q_num):
-    type = [1,2,3,4,5,6,7]
+    type = [2,3,4,5,6,7]
     for i in range(q_num):
         qscore = '3'
         qtype=random.choice(type)

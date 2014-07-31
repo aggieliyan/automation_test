@@ -149,18 +149,12 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123"):
         driver.find_element_by_link_text(u"作为开放试卷的统计结果").click()
         time.sleep(1)
         driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
-        if driver.find_element(cfg.get('exam', 'output_open_by'), cfg.get('exam', 'output_open')).click():
-            driver.find_element(cfg.get('exam', 'output_open_by'), cfg.get('exam', 'output_open')).click()
-            time.sleep(2)
-        else:
-            print u'该试卷暂时没有学员购买'        
+        driver.find_element(cfg.get('exam', 'output_open_by'), cfg.get('exam', 'output_open')).click()
+        time.sleep(2)
     elif etype == 1:
         driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
-        if driver.find_element(cfg.get('exam', 'output_by'), cfg.get('exam', 'output')).click():
-            driver.find_element(cfg.get('exam', 'output_by'), cfg.get('exam', 'output')).click()
-            time.sleep(2)
-        else:
-            print u'该试卷暂时没有分发'
+        driver.find_element(cfg.get('exam', 'output_by'), cfg.get('exam', 'output')).click()
+        time.sleep(2)
         
         try:
             save_alert = driver.switch_to_alert()

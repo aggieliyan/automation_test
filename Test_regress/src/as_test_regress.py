@@ -388,16 +388,22 @@ class Test(unittest.TestCase):
             card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name)
             self.driver.implicitly_wait(2)
             if card_type == 0:
+                time.sleep(2)
                 self.driver.find_element_by_link_text(u"浏览卡").click()
                 time.sleep(2)
                 card_num = self.driver.execute_script("return $(\"input[name='groupCheck']:eq(0)\").parent().next().text()")
-                card_pwd = self.driver.execute_script("return $(\".textaligncenter\:eq(4)\").text()") 
+                time.sleep(2)
+                card_pwd = self.driver.execute_script("return $(\".textaligncenter\:eq(4)\").text()")
+                time.sleep(2) 
             else:
+                time.sleep(2)                
                 self.driver.find_element_by_css_selector("span.greenbtn35_text").click()
                 time.sleep(2)
                 card_num = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().text()")
+                time.sleep(2)
                 #print 'card_num:',card_num
                 card_pwd = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().parent().next().children().text()") 
+                time.sleep(2)
                 #print 'card_pwd', card_pwd        
         except Exception,e:
             print e

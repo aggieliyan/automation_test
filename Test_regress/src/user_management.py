@@ -134,16 +134,17 @@ def release_announcement(cfg,driver, base_url, org_name, title, an_content=u'这
 def release_href_course(cfg, driver, base_url, org_name):
     
     driver.get(base_url+org_name)
-    time.sleep(8)
+    time.sleep(5)
     driver.find_element_by_xpath(u"(//a[contains(text(),'课程中心')])[2]").click()
     time.sleep(8)
-    driver.find_element(cfg.get('org_index','wl_href_css_by'),cfg.get('org_index','wl_href_css')).click()
+    driver.find_element_by_css_selector("div.coursecenter-details-pic > a > img").click()
+    #driver.find_element(cfg.get('org_index','wl_href_css'),cfg.get('org_index','wl_href_css')).click()
     time.sleep(8)
     h = driver.window_handles
     driver.switch_to_window(h[-1])
-    driver.find_element(cfg.get('org_index','wl_ann_id1_by'),cfg.get('org_index','wl_ann_id1')).click()
-    time.sleep(12)
-    driver.find_element(cfg.get('org_index','wl_ann_id2_by'),cfg.get('org_index','wl_ann_id2')).click()
+    driver.find_element(cfg.get('org_index','wl_ann_id1_by'),cfg.get('org_index','wl_ann_id1')).click() 
+    time.sleep(4)
+    textarea = driver.execute_script("return $('textarea:eq(2)').text()")
     time.sleep(8)
     driver.find_element_by_css_selector("button[type=\"button\"]").click()
     time.sleep(8)
@@ -152,16 +153,16 @@ def release_href_course(cfg, driver, base_url, org_name):
     driver.find_element_by_link_text(u"新增公告").click()
     time.sleep(2)
     driver.find_element(cfg.get('org_index','wl_ann_css2_by'),cfg.get('org_index','wl_ann_css2')).click()
-    time.sleep(2)
-    driver.find_element(cfg.get('org_index','wl_ann_css3_by'),cfg.get('org_index','wl_ann_css3')).click()
-    time.sleep(2)
+    time.sleep(5)
     driver.find_element(cfg.get('org_index','wl_ann_css2_by'),cfg.get('org_index','wl_ann_css2')).clear()
     time.sleep(5)
-    driver.find_element(cfg.get('org_index','ann_select_css_by'),cfg.get('org_index','ann_select_css')).send_keys(u"公告")
-    #driver.find_element(cfg.get('org_index','wl_ann_css2_by'),cfg.get('org_index','wl_ann_css2')).send_keys(u"外链")
+    driver.find_element(cfg.get('org_index','ann_select_css_by'),cfg.get('org_index','ann_select_css')).send_keys(u"公告neitdjsf")
     time.sleep(5)
+    driver.find_element(cfg.get('org_index','wl_ann_css3_by'),cfg.get('org_index','wl_ann_css3')).click()
+    time.sleep(2)
     driver.find_element(cfg.get('org_index','wl_ann_name_by'),cfg.get('org_index','wl_ann_name')).clear()
-    driver.find_element(cfg.get('org_index','wl_href_names_by'),cfg.get('org_index','wl_href_names')).send_keys("<iframe height=480 width=640 src=\"http://www.gamma.ablesky.com/orgContentUrlAccess.do?action=getContentUrlEmbeddedPage&id=715200&courseId=251308&emKey=42fc457698c41bde60aa786f52a5c1c9\" frameborder=0 allowfullscreen></iframe>")
+    time.sleep(2)
+    driver.find_element(cfg.get('org_index','wl_href_names_by'),cfg.get('org_index','wl_href_names')).send_keys(textarea)
     time.sleep(2)
     driver.find_element_by_css_selector("div.dialog-button-container > button[type=\"button\"]").click()
     time.sleep(2)
@@ -171,7 +172,6 @@ def release_href_course(cfg, driver, base_url, org_name):
     time.sleep(2)
     driver.find_element(cfg.get('org_index','wl_ann_css6_by'),cfg.get('org_index','wl_ann_css6')).click()
     time.sleep(2)
-
 #机构修改头像
 def org_chang_headpic(cfg, driver, base_url, org_name, head_pic = r"W:\Testing\Testing Files\Automation_test\headpic.jpg"):
     

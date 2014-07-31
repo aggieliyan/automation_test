@@ -31,7 +31,7 @@ def create_admin(cfg,driver, base_url,admin_name,admin_username,admin_psw,admin_
     driver.execute_script("$('.x-btn-text').eq(0).click()")
     driver.implicitly_wait(10)
 
-def auto_create_admin(cfg,driver, base_url, adm_num,org_name):
+def auto_create_admin(cfg, driver, base_url, org_name, adm_num):
     
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
     admin_info = []  

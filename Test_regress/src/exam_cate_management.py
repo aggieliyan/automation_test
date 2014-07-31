@@ -45,6 +45,15 @@ def modify_subject(cfg,driver, base_url, org_name):
     driver.find_element(cfg.get('exam','sub_name_by'),cfg.get('exam','sub_name')).clear()
     driver.find_element(cfg.get('exam','sub_name_by'),cfg.get('exam','sub_name')).send_keys(subject_name)
     driver.find_element(cfg.get('exam','sub_ok_by'),cfg.get('exam','sub_ok_xpath')).click()
+    try:
+        a=driver.switch_to_alert()
+        if a.text == u'默认科目不允许编辑' or a.text == '':
+            print a.text
+    except:
+        None
+        
+    
+    
     return subject_name
 
 def delete_subject(cfg,driver, base_url, org_name, sub_num=1):

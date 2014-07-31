@@ -120,20 +120,20 @@ def exam_export_question(cfg, driver,qscore, qtype):
 def auto_createpaper(cfg,driver,base_url,eoperation, erandom, eopen, exam_num):
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
     for i in range(exam_num):
-        exam_name = 'testpaper_' + prefix + str(i) 
+        exam_name = 'testpaper_' + prefix + str(i)+time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())) 
         exam_time = '120'
         create_paper(cfg, driver, base_url, exam_name, exam_time,eoperation, erandom, eopen)
         print i
       
 
-def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
+def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123"):
     """
     etype表示需要的操作类型，1为导出分发给学员的试卷统计结果，
                              2为导出作为开放试卷的统计结果,
                              3代表为学员评分
     """
     #exam_name = u"未作答（主观题，免费）"
-    #username = "sun122"
+    #username = "sun123"
     driver.get("%sexam/" %(base_url))
     time.sleep(1)
     driver.find_element_by_link_text(u"试卷库").click()
@@ -149,11 +149,19 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
         driver.find_element_by_link_text(u"作为开放试卷的统计结果").click()
         time.sleep(1)
         driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
-        driver.find_element(cfg.get('exam', 'output_open_by'), cfg.get('exam', 'output_open')).click()
+        if driver.find_element(cfg.get('exam', 'output_open_by'), cfg.get('exam', 'output_open')).click():
+            driver.find_element(cfg.get('exam', 'output_open_by'), cfg.get('exam', 'output_open')).click()
+            time.sleep(2)
+        else:
+            print u'该试卷暂时没有学员购买'        
     elif etype == 1:
         driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
-        driver.find_element(cfg.get('exam', 'output_by'), cfg.get('exam', 'output')).click()
-        time.sleep(2)
+        if driver.find_element(cfg.get('exam', 'output_by'), cfg.get('exam', 'output')).click():
+            driver.find_element(cfg.get('exam', 'output_by'), cfg.get('exam', 'output')).click()
+            time.sleep(2)
+        else:
+            print u'该试卷暂时没有分发'
+        
         try:
             save_alert = driver.switch_to_alert()
             #print save_alert.text

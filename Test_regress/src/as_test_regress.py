@@ -25,6 +25,7 @@ class Test(unittest.TestCase):
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
         self.import_name = "sun122"
+        self.username = "sun123"
         
         cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
@@ -877,11 +878,7 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/modify_subject.png")
             
         #验证
-        xpath = "//div[text()=\'"+subject_name+"\']"
-        self.driver.implicitly_wait(2)
-        rs = self.is_element_present(By.XPATH, xpath)
-        if rs == False:
-            self.verificationErrors.append("fail to modify subject!")
+        
         
     def delete_exam_subject(self):#删除科目
         
@@ -1014,6 +1011,19 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to create paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+            
+    def user_statistical_information(self):
+        self.total += 1
+        try:
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to import exam result")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+        
     
     def exam_question_danxuan(self):
         self.total += 1
@@ -1096,7 +1106,7 @@ class Test(unittest.TestCase):
         self.total += 1
         question_ansa='exam' + str(random.randint(1000,9999))
         try:
-            exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa, 2) 
+            exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa, 1) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to exam questions")
@@ -1193,6 +1203,7 @@ class Test(unittest.TestCase):
         #self.wailian_video()
 
         #考试系统部分
+        self.login_from_index()
         #self.exam_question_danxuan()
         #self.exam_question_duoxuan()
         #self.exam_question_shifei()
@@ -1237,7 +1248,7 @@ class Test(unittest.TestCase):
         
         #self.buy_course_use_card()
         #self.exam_user()
-        #self.use_exam_card() 
+        #self.use_exam_card()
                    
 
     def tearDown(self):

@@ -5,6 +5,7 @@ Created on Jun 1, 2012
 @author: yilulu
 '''
 import time
+import exam_paper
 #使用充值卡和充课卡
 def use_prepaid_card(cfg, driver, base_url, card_num, card_psw):
         
@@ -178,10 +179,12 @@ def add_exam_card_management(cfg, driver, base_url,count):
     examcard_number =driver.execute_script("return $('.first-cell span:eq(1)').text()")
     time.sleep(2)
     return examcard_number
+#总调用方法
 def add_exam_card(cfg, driver, base_url,count):
     page_catename = get_academy_catename(cfg, driver, base_url)
     exam_paper.create_paper(cfg, driver, base_url, page_catename, 1, 1, 1, 1)
-    add_exam_card_management(cfg, driver, base_url, count)
+    examcard_number = add_exam_card_management(cfg, driver, base_url, count)
+    return examcard_number
 #获取院校机构课程类目名并创建试卷后，创建卡号，并返回    
 def add_exam_card1(cfg, driver, base_url,count = 5):
     time.sleep(2)

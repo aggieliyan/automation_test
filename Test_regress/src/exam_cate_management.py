@@ -33,36 +33,39 @@ def auto_create_subject(cfg,driver,base_url,org_name,sub_num):
 
 
 def modify_subject(cfg,driver, base_url, org_name):
-    driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(10)
+    #driver.get(base_url + "myOffice.do")
+    #driver.implicitly_wait(10)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10)
-    prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
+    prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))    
+    edit_name = driver.execute_script("return $('.subject-item-con').eq(0).children().eq(0).text()")
     subject_name = org_name[0] +"sub_" +prefix
-    driver.find_element(cfg.get('exam','sub_big_by'),cfg.get('exam','sub_big_xpath')).click()
-    driver.find_element(cfg.get('exam','sub_small_by'),cfg.get('exam','sub_small_xpath')).click()
-    driver.implicitly_wait(10)
+    if edit_name != u'默认科目':        
+        driver.find_element(cfg.get('exam','sub_big1_by'),cfg.get('exam','sub_big1_xpath')).click()
+        driver.find_element(cfg.get('exam','sub_small1_by'),cfg.get('exam','sub_small1_xpath')).click()
+    else:
+        driver.implicitly_wait(10)
+        driver.find_element(cfg.get('exam','sub_big2_by'),cfg.get('exam','sub_big2_xpath')).click()
+        driver.find_element(cfg.get('exam','sub_small2_by'),cfg.get('exam','sub_small2_xpath')).click() 
     driver.find_element(cfg.get('exam','sub_name_by'),cfg.get('exam','sub_name')).clear()
     driver.find_element(cfg.get('exam','sub_name_by'),cfg.get('exam','sub_name')).send_keys(subject_name)
     driver.find_element(cfg.get('exam','sub_ok_by'),cfg.get('exam','sub_ok_xpath')).click()
-    try:
-        a=driver.switch_to_alert()
-        if a.text == u'默认科目不允许编辑' or a.text == '':
-            print a.text
-    except:
-        None
-        
-    
-    
+    driver.implicitly_wait(10)   
     return subject_name
 
 def delete_subject(cfg,driver, base_url, org_name, sub_num=1):
-    driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(10)
+    #driver.get(base_url + "myOffice.do")
+    #driver.implicitly_wait(10)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam','sub_big_by'),cfg.get('exam','sub_big_xpath')).click()
-    driver.find_element(cfg.get('exam','sub_del_by'),cfg.get('exam','sub_del_xpath')).click()
+    del_name = driver.execute_script("return $('.subject-item-con').eq(0).children().eq(0).text()")
+    if del_name != u'默认科目':        
+        driver.find_element(cfg.get('exam','sub_big1_by'),cfg.get('exam','sub_big1_xpath')).click()
+        driver.find_element(cfg.get('exam','sub_del1_by'),cfg.get('exam','sub_del1_xpath')).click()
+    else:
+        driver.implicitly_wait(10)
+        driver.find_element(cfg.get('exam','sub_big2_by'),cfg.get('exam','sub_big2_xpath')).click()
+        driver.find_element(cfg.get('exam','sub_del2_by'),cfg.get('exam','sub_del2_xpath')).click()
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam','sub_delok_by'),cfg.get('exam','sub_delok_xpath')).click()
     driver.implicitly_wait(10)

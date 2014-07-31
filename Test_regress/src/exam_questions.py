@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 import time
 
-def importquestions (self):
+def importquestions(self,cfg,driver, base_url,template):
     db = 'ablesky_examsystem'
     conn = self.connect_db(db)
     cursor = conn.cursor()
@@ -10,24 +10,22 @@ def importquestions (self):
     num1 = cursor.fetchall()[0][0]
     cursor.close()
     #以下部分可删除,要求调用此函数的同学保证停在试题库页面
-    self.driver.get \
-        ("%s/exam/subjectRedirect.do?action=toSubjectList&organizationId=2249" \
-         %(self.base_url))
-    self.driver.find_element("partial link text", "点击这里").click()
-    self.driver.implicitly_wait(30)
-    self.driver.find_element("link text", "试题库").click()
-    self.driver.implicitly_wait(30)
-    self.driver.find_element("link text", "单选题").click()
-    self.driver.implicitly_wait(30)
-    
-    self.driver.find_element(self.cfg.get('exam', "import_questions_by"), \
-                             self.cfg.get('exam', 'import_questions')).click()
-    self.driver.find_element(self.cfg.get('exam', "path_by"), \
-                             self.cfg.get('exam', "path")).send_keys(self.template)
-    self.driver.find_element(self.cfg.get('exam', "upload_button_by"), \
-                             self.cfg.get('exam', "upload_button")).click()
-    self.driver.find_element(self.cfg.get('exam', "close_button_by"), \
-                             self.cfg.get('exam', "close_button")).click()
+    driver.get(base_url + "exam/")
+    #driver.find_element("partial link text", "点击这里").click()
+    driver.implicitly_wait(30)
+    driver.find_element("link text", u"试题库").click()
+    driver.implicitly_wait(30)
+    driver.find_element("link text", u"单选题").click()
+    driver.implicitly_wait(30)
+    driver.find_element(cfg.get('exam', "import_questions_by"), \
+                             cfg.get('exam', 'import_questions')).click()
+    driver.find_element(cfg.get('exam', "path_by"), \
+                             cfg.get('exam', "path")).send_keys(template)
+    driver.find_element(cfg.get('exam', "upload_button_by"), \
+                             cfg.get('exam', "upload_button")).click()
+    driver.implicitly_wait(30)
+    driver.find_element(cfg.get('exam', "close_button_by"), \
+                             cfg.get('exam', "close_button")).click()
     conn = self.connect_db(db)
     cursor = conn.cursor()
     cursor.execute(sql)
@@ -36,7 +34,7 @@ def importquestions (self):
     cursor.execute \
         ("SELECT content_q,content_q FROM e_question_q ORDER BY id_q DESC LIMIT 1")
     title = cursor.fetchall()[0][0]
-    msg = "导入%d道试题,最后一个试题题目为%s"%(num, title)
+    msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
     print msg
 
 #创建单选题 
@@ -58,9 +56,10 @@ def exam_question_danxuan(cfg,driver, base_url,question_ansa):
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
     #添加音频
-    #driver.find_element(cfg.get('exam_questions',"question_yinpin_by"),\
-    #    cfg.get('exam_questions',"question_yinpin")).send_keys("C:\123.mp3")
-
+    #driver.find_element_by_xpath("//html/body/div[2]/div[3]/div/div/div[2]/div/dl[3]/dd/div/p[1]/a").click()
+    #driver.find_element_by_xpath("//html/body/div[2]/div[3]/div/div/div[2]/div/dl[3]/dd/div/p[1]/a").clear()
+    #driver.find_element_by_xpath("//html/body/div[2]/div[3]/div/div/div[2]/div/dl[3]/dd/div/p[1]/a").send_keys("C:\\Users\\liuhongjiao\\Desktop\\11234567890123456789012345678901234567891.mp3")
+    
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)').attr('id')")    
     driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');\

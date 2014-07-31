@@ -18,7 +18,7 @@ class Test(unittest.TestCase):
         
         self.browser = "Chrome"
         self.test_enviroment = "beta"  
-        self.org_name = "salesdemo"
+        self.org_name = "sadm001"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -405,9 +405,10 @@ class Test(unittest.TestCase):
         self.total += 1
         count = 5
         try:
-            #self.page_catename = card_management.get_academy_catename(self.cfg, self.driver, self.base_url)
-            #exam_paper.create_paper(self.cfg, self.driver, self.base_url, self.page_catename, 1, 1, 1, 1)
+            self.page_catename = card_management.get_academy_catename(self.cfg, self.driver, self.base_url)
+            exam_paper.create_paper(self.cfg, self.driver, self.base_url, self.page_catename, 1, 1, 1, 1)
             self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url,count)
+            #self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url)
         except Exception,e:
             print e
             self.verificationErrors.append('fail to add exam card!')
@@ -656,14 +657,21 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")  
             
     def release_href_course(self):
+        
         self.total += 1
         try:
-            user_management.release_href_course(self.cfg, self.driver, self.base_url, self.org_name) 
+            title = course_management.release_href_course(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception,e:
             print e
-            self.verificationErrors.append("fail to use link")
+            self.verificationErrors.append("fail to release href course!")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/user_management_link.png")
+            self.driver.save_screenshot("C:/test_rs_pic/href_course.png")
+            
+        #验证
+        self.driver.get(self.base_url+self.org_name)
+        rs = self.is_element_present(By.LINK_TEXT,title)
+        if rs == False:
+            self.verificationErrors.append("fail to release href course!")
         
             
     def verify_all_course_convert(self):
@@ -676,7 +684,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            user_management.buy_course(self.cfg, self.driver, self.base_url, self.org_name)
+            user_management.buy_course(self.cfg, self.driver, self.course_href)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to buy course use rmb!")
@@ -689,7 +697,7 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.org_name)
+            user_management.buy_course_usecard(self.cfg, self.driver, self.course_href_2)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to buy course use card!")
@@ -982,17 +990,15 @@ class Test(unittest.TestCase):
 
 
     def import_questions(self):
-       
-       self.total += 1
-       self.template = '//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/createquestions.xls'
-       try:
-            exam_questions.importquestions(self) 
-       except Exception,e:
+        self.total += 1
+        self.template = '//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/createquestions.xls'
+        try:
+            exam_questions.importquestions(self, self.cfg,self.driver, self.base_url,self.template)
+        except Exception,e:
             print e
             self.verificationErrors.append("fail to import questions..")
-       finally:
+        finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-   
         
         
     def createpaper(self):
@@ -1109,7 +1115,7 @@ class Test(unittest.TestCase):
         operation = 1
         question_answer ='123'
         # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
-        blank_pager = 1
+        blank_pager = 0
         try:
             exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
         except Exception,e:
@@ -1118,11 +1124,22 @@ class Test(unittest.TestCase):
         finally: 
             self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")
             
+    def wailian_video(self):
+        self.total += 1
+        try:
+            user_management.wailian_video(self.cfg, self.driver, self.base_url, self.test_enviroment) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to use wailian")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/user_management_wailian.png")
+
+    
     def test_regress(self):
         
         #网站主站回归流程
         #self.register()
-        #self.login_from_index()
+        self.login_from_index()
         #self.release_normal()
         #self.release_three_video()
         #self.agency_course()
@@ -1144,7 +1161,7 @@ class Test(unittest.TestCase):
         #self.modify_admin()
         #self.delete_admin()
         #self.buy_open_num()
-        self.release_href_course()
+        ##self.release_href_course()
         #self.open_course_for_one()
         #self.open_course_for_multi()
         #self.change_banner()
@@ -1161,7 +1178,7 @@ class Test(unittest.TestCase):
         #self.exam_question_wanxing()
         #self.exam_question_zonghe()
         #self.exam_questions()
-        #self.import_questions()
+        self.import_questions()
         #self.add_exam_subject()
         #self.modify_exam_subject()
         #self.delete_exam_subject()
@@ -1179,7 +1196,7 @@ class Test(unittest.TestCase):
         #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         #login.logout(self.driver, self.base_url)
 
-        self.login_user()
+        #self.login_user()
         #self.use_prepaidcard()
         #self.use_coursecard()
         #self.use_catecard()
@@ -1196,7 +1213,7 @@ class Test(unittest.TestCase):
         
         
         #self.buy_course_use_card()
-        self.exam_user()
+        #self.exam_user()
         #self.use_exam_card() 
                    
 

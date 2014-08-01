@@ -1040,77 +1040,77 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/close_paper.png")       
     
-    def exam_question_danxuan(self):
+    def exam_question_Single(self):
         self.total += 1
         question_ansa='exam' + str(random.randint(1000,9999))
         try:
-            exam_questions.exam_question_danxuan(self.cfg, self.driver, self.base_url, question_ansa) 
+            exam_questions.exam_question_Single(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
                
-    def exam_question_duoxuan(self):
+    def exam_question_Multiple(self):
         self.total += 1
         question_ansa='exam' + str(random.randint(1000,9999))
         try:
-            exam_questions.exam_question_duoxuan(self.cfg, self.driver, self.base_url, question_ansa) 
+            exam_questions.exam_question_Multiple(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
  
-    def exam_question_shifei(self):
+    def exam_question_TrueOrFalse(self):
         self.total += 1
         question_ansa='exam' + str(random.randint(1000,9999))
         try:
-            exam_questions.exam_question_shifei(self.cfg, self.driver, self.base_url, question_ansa) 
+            exam_questions.exam_question_TrueOrFalse(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
  
-    def exam_question_tiankong(self):
+    def exam_question_Blank(self):
         self.total += 1
         question_ansa='exam' + str(random.randint(1000,9999))
         try:
-            exam_questions.exam_question_tiankong(self.cfg, self.driver, self.base_url, question_ansa) 
+            exam_questions.exam_question_Blank(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
 
-    def exam_question_wenda(self):
+    def exam_question_Answer(self):
         self.total += 1
         question_ansa='exam' + str(random.randint(1000,9999))
         try:
-            exam_questions.exam_question_wenda(self.cfg, self.driver, self.base_url, question_ansa) 
+            exam_questions.exam_question_Answer(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
     
-    def exam_question_wanxing(self):
+    def exam_question_cloze(self):
         self.total += 1
         question_ansa='exam' + str(random.randint(1000,9999))
         try:
-            exam_questions.exam_question_wanxing(self.cfg, self.driver, self.base_url, question_ansa) 
+            exam_questions.exam_question_cloze(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
 
-    def exam_question_zonghe(self):
+    def exam_question_Composite(self):
         self.total += 1
         question_ansa='exam' + str(random.randint(1000,9999))
         try:
-            exam_questions.exam_question_zonghe(self.cfg, self.driver, self.base_url, question_ansa) 
+            exam_questions.exam_question_Composite(self.cfg, self.driver, self.base_url, question_ansa) 
         except Exception,e:
             print e
             self.verificationErrors.append("fail to exam questions")
@@ -1216,13 +1216,13 @@ class Test(unittest.TestCase):
 
         #考试系统部分
         self.login_from_index()
-        #self.exam_question_danxuan()
-        #self.exam_question_duoxuan()
-        #self.exam_question_shifei()
-        #self.exam_question_tiankong()
-        #self.exam_question_wenda()
-        #self.exam_question_wanxing()
-        #self.exam_question_zonghe()
+        #self.exam_question_Single()
+        #self.exam_question_Multiple()
+        #self.exam_question_TrueOrFalse()
+        #self.exam_question_Blank()
+        #self.exam_question_Answer()
+        #self.exam_question_cloze()
+        #self.exam_question_Composite()
         #self.exam_questions()
         #self.import_questions()
         #self.add_exam_subject()

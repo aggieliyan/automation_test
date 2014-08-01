@@ -38,7 +38,7 @@ def importquestions(self,cfg,driver, base_url,template):
     print msg
 
 #创建单选题 
-def exam_question_danxuan(cfg,driver, base_url,question_ansa):
+def exam_question_Single(cfg,driver, base_url,question_ansa):
     #question_ansa为创建试题时，题目和答案的内容，现在是用exam加随机数组成 
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
@@ -70,7 +70,7 @@ def exam_question_danxuan(cfg,driver, base_url,question_ansa):
     time.sleep(2)
     
     #创建多选题
-def exam_question_duoxuan(cfg,driver, base_url,question_ansa):
+def exam_question_Multiple(cfg,driver, base_url,question_ansa):
     #question_ansa为创建试题时，题目和答案的内容，现在是用exam加随机数组成     
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
@@ -103,7 +103,7 @@ def exam_question_duoxuan(cfg,driver, base_url,question_ansa):
     time.sleep(2)
     
 #创建是非题
-def exam_question_shifei(cfg,driver, base_url,question_ansa):
+def exam_question_TrueOrFalse(cfg,driver, base_url,question_ansa):
     #question_ansa为创建试题时，题目和答案的内容，现在是用exam加随机数组成  
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
@@ -126,7 +126,7 @@ def exam_question_shifei(cfg,driver, base_url,question_ansa):
 #    time.sleep(2)
     
 #创建问答题
-def exam_question_wenda(cfg,driver, base_url,question_ansa):
+def exam_question_Answer(cfg,driver, base_url,question_ansa):
     #question_ansa为创建试题时，题目和答案的内容，现在是用exam加随机数组成      
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
@@ -153,7 +153,7 @@ def exam_question_wenda(cfg,driver, base_url,question_ansa):
     driver.find_element_by_link_text("单选题").click()
     
 #创建填空题
-def exam_question_tiankong(cfg,driver, base_url,question_ansa):
+def exam_question_Blank(cfg,driver, base_url,question_ansa):
     #question_ansa为创建试题时，题目和答案的内容，现在是用exam加随机数组成  
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
@@ -179,7 +179,7 @@ def exam_question_tiankong(cfg,driver, base_url,question_ansa):
     driver.find_element_by_link_text("单选题").click()
     
 #创建完型填空题
-def exam_question_wanxing(cfg,driver, base_url,question_ansa):
+def exam_question_Cloze(cfg,driver, base_url,question_ansa):
     #question_ansa为创建试题时，题目和答案的内容，现在是用exam加随机数组成  
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
@@ -213,7 +213,7 @@ def exam_question_wanxing(cfg,driver, base_url,question_ansa):
     driver.find_element_by_link_text("单选题").click()
     
 #创建综合题
-def exam_question_zonghe(cfg,driver, base_url,question_ansa):
+def exam_question_Composite(cfg,driver, base_url,question_ansa):
     #question_ansa为创建试题时，题目和答案的内容，现在是用exam加随机数组成  
     driver.find_element(cfg.get('exam_questions',"question_creat_by"),\
         cfg.get('exam_questions',"question_creat")).click()
@@ -253,6 +253,14 @@ def exam_question_zonghe(cfg,driver, base_url,question_ansa):
 def auto_exam_questions(cfg,driver, base_url,question_ansa, num):
     #question_ansa为创建试题时，题目和答案的内容，现在是用exam加随机数组成
     #num为循环次数
+    # 试题名称：
+    # Single:单选题
+    # Multiple：多选题
+    # TrueOrFalse：是非题
+    # Blank：填空题
+    # Answer：问答题
+    # cloze：完型题
+    # Composite：综合题
     time.sleep(2)
     driver.get(base_url + "exam/")
     time.sleep(2)
@@ -261,11 +269,11 @@ def auto_exam_questions(cfg,driver, base_url,question_ansa, num):
     driver.find_element_by_link_text("单选题").click()
     time.sleep(2) 
     for i in range(num):
-        exam_question_danxuan(cfg,driver, base_url,question_ansa)
-        exam_question_duoxuan(cfg,driver, base_url,question_ansa)
-        exam_question_shifei(cfg,driver, base_url,question_ansa)
-        exam_question_tiankong(cfg,driver, base_url,question_ansa)
-        exam_question_wenda(cfg,driver, base_url,question_ansa)
-        exam_question_wanxing(cfg,driver, base_url,question_ansa)
-        exam_question_zonghe(cfg,driver, base_url,question_ansa)      
+        exam_question_Single(cfg,driver, base_url,question_ansa)
+        exam_question_Multiple(cfg,driver, base_url,question_ansa)
+        exam_question_TrueOrFalse(cfg,driver, base_url,question_ansa)
+        exam_question_Blank(cfg,driver, base_url,question_ansa)
+        exam_question_Answer(cfg,driver, base_url,question_ansa)
+        exam_question_Cloze(cfg,driver, base_url,question_ansa)
+        exam_question_Composite(cfg,driver, base_url,question_ansa)      
      

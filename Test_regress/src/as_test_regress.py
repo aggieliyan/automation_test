@@ -417,10 +417,9 @@ class Test(unittest.TestCase):
         self.total += 1
         count = 5
         try:
-            self.page_catename = card_management.get_academy_catename(self.cfg, self.driver, self.base_url)
-            exam_paper.create_paper(self.cfg, self.driver, self.base_url, self.page_catename, 1, 1, 1, 1)
+            #self.page_catename = card_management.get_academy_catename(self.cfg, self.driver, self.base_url)
+            #exam_paper.create_paper(self.cfg, self.driver, self.base_url, self.page_catename, 1, 1, 1, 1)
             self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url,count)
-            #self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url)
         except Exception,e:
             print e
             self.verificationErrors.append('fail to add exam card!')
@@ -429,8 +428,6 @@ class Test(unittest.TestCase):
     #使用考试卡
     def use_exam_card(self):
         self.total += 1
-        #examcard_num = self.add_exam_card()
-        #self.login_user()
         try:
             card_management.user_usexamcard(self.cfg, self.driver, self.base_url,self.examcard_num)
         except Exception,e:

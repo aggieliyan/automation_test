@@ -1178,13 +1178,8 @@ class Test(unittest.TestCase):
     def test_regress(self):
         
         #网站主站回归流程
-<<<<<<< HEAD
-        #self.register()
-        #self.login_from_index()
-=======
         #self.register()
         self.login_from_index()
->>>>>>> origin/master
         #self.release_normal()
         #self.release_three_video()
         #self.agency_course()
@@ -1199,19 +1194,6 @@ class Test(unittest.TestCase):
         #self.buy_listen_card()
         #self.listen_cardgroup()
         #self.add_exam_card()
-<<<<<<< HEAD
-        #self.import_one_student()
-        #self.import_multi_student()
-        #self.create_multi_student()
-        #self.add_admin()  
-        #self.modify_admin()
-        #self.delete_admin()
-
-        #self.buy_open_num()
-        #self.release_href_course()
-        #self.open_course_for_one()
-        #self.open_course_for_multi()
-=======
         self.import_one_student()
         self.import_multi_student()
         self.create_multi_student()
@@ -1226,7 +1208,6 @@ class Test(unittest.TestCase):
         self.release_announcement()
         self.modify_pagefoot()  
         self.change_headpic()
->>>>>>> origin/master
 
         self.verify_all_course_convert()
 
@@ -1238,9 +1219,7 @@ class Test(unittest.TestCase):
         self.use_listencard()
         self.use_exam_card()
         self.buy_course_use_RMB()
-        self.buy_course_use_card() 
-          
-
+        self.buy_course_use_card()
         
         #self.wailian_video()
 
@@ -1267,11 +1246,7 @@ class Test(unittest.TestCase):
         #self.add_exam_point()
         #self.modify_exam_point()
         #self.delete_exam_point()    
-<<<<<<< HEAD
-        self.createpaper()
-=======
         #self.createpaper()
->>>>>>> origin/master
         #self.exam_student_management()
         #self.user_statistical_information()
         #login.logout(self.driver, self.base_url)

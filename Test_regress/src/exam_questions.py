@@ -278,6 +278,14 @@ def auto_exam_questions(cfg,driver, base_url,question_ansa, num):
         exam_question_Composite(cfg,driver, base_url,question_ansa)
         
 def auto_exam_onequestion(cfg,driver, base_url,question_ansa, onetype):
+    #question_ansa为创建试题时，题目和答案的内容，现在是用exam加随机数组成
+    #onetype == 1:创建单选题
+    #onetype == 2:创建多选题
+    #onetype == 3:创建是非题
+    #onetype == 4:创建填空题
+    #onetype == 5:创建问答题
+    #onetype == 6:创建完型题
+    #onetype == 7:创建综合题
     time.sleep(2)
     driver.get(base_url + "exam/")
     time.sleep(2)

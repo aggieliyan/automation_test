@@ -144,7 +144,7 @@ def create_exam_point(cfg, driver, base_url, org_name, point_name, point_detail,
     driver.implicitly_wait(10)
 
 def auto_create_exam_point(cfg, driver, base_url, org_name, point_num):
-    
+
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
     point_info = []
     for i in range(point_num):

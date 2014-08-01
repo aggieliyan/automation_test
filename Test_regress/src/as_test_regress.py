@@ -18,8 +18,8 @@ class Test(unittest.TestCase):
         
         self.browser = "Chrome"
         self.test_enviroment = "beta"  
-        self.org_name = "salesdemo"
-        self.org_password = "1234"
+        self.org_name = "sadm001"
+        self.org_password = "123456lulu"
         self.user_name = "yilu282"
         self.user_password = "1234"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
@@ -1192,7 +1192,7 @@ class Test(unittest.TestCase):
         self.add_admin()  
         self.modify_admin()
         self.delete_admin()
-        self.buy_open_num()
+        #self.buy_open_num()
         self.release_href_course()
         self.open_course_for_one()
         self.open_course_for_multi()
@@ -1210,7 +1210,7 @@ class Test(unittest.TestCase):
         self.use_catecard()
         self.use_listencard()
         self.use_exam_card()
-        self.buy_course_use_RMB()
+        #self.buy_course_use_RMB()
         self.buy_course_use_card() 
           
 

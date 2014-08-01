@@ -55,7 +55,7 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
                 #driver.find_element(cfg.get('courseRedirect','select_cfile_by'), cfg.get('courseRedirect','select_cfile')).click()
 
                 driver.execute_script("$(\'.dialog-button-container button\').eq(0).click()")
-                time.sleep(1)
+                time.sleep(2)
             #本地上传
             else:
                 #把input显示出来才可以用否则会报当前元素不可见的错
@@ -108,11 +108,13 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
     driver.implicitly_wait(3)
     driver.find_element(cfg.get('classRedirect', 'redirect_btn_by'), \
         cfg.get('classRedirect', 'redirect_btn')).click()
+    time.sleep(5)
 
     if ctype == 1:
         #classname = "onlineclass"
         driver.find_element(cfg.get('classRedirect', 'select_course_by'), \
             cfg.get('classRedirect', 'select_course')).click()
+        time.sleep(1)
     else:
         driver.find_element_by_link_text(u"课程预售").click()
         time.sleep(2)
@@ -123,7 +125,7 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
 
     driver.find_element(cfg.get('classRedirect', 'classname_by'), \
         cfg.get('classRedirect', 'classname')).send_keys(classname)
-    driver.implicitly_wait(1)
+    time.sleep(2)
 
     #填课程详情
     driver.execute_script("var element=window.document.getElementById('courseDescribe-editor_ifr');\

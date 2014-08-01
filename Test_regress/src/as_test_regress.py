@@ -18,9 +18,9 @@ class Test(unittest.TestCase):
         
         self.browser = "Chrome"
         self.test_enviroment = "beta"  
-        self.org_name = "salesdemo"
-        self.org_password = "1234"
-        self.user_name = "yilu282"
+        self.org_name = "adm_guo"
+        self.org_password = "1234aa"
+        self.user_name = "wudingzhiying"
         self.user_password = "1234"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
@@ -1170,22 +1170,22 @@ class Test(unittest.TestCase):
     def test_regress(self):
         
         #网站主站回归流程
-        self.register()
+        #self.register()
         self.login_from_index()
-        self.release_normal()
-        self.release_three_video()
-        self.agency_course()
-        self.package_course() 
-        self.add_cate()
-        self.presale_course()  
-        self.add_course_to_cate()   
-        self.prepaid_cardgroup()
-        self.course_cardgroup()
-        self.cate_cardgroup()
-        self.delete_cate()
-        self.buy_listen_card()
-        self.listen_cardgroup()
-        self.add_exam_card()
+        #self.release_normal()
+        #self.release_three_video()
+        #self.agency_course()
+        #self.package_course() 
+        #self.add_cate()
+        #self.presale_course()  
+        #self.add_course_to_cate()   
+        #self.prepaid_cardgroup()
+        #self.course_cardgroup()
+        #self.cate_cardgroup()
+        #self.delete_cate()
+        #self.buy_listen_card()
+        #self.listen_cardgroup()
+        #self.add_exam_card()
         self.import_one_student()
         self.import_multi_student()
         self.create_multi_student()
@@ -1218,7 +1218,7 @@ class Test(unittest.TestCase):
         #self.wailian_video()
 
         #考试系统部分
-        self.login_from_index()
+        #self.login_from_index()
         #self.exam_question_danxuan()
         #self.exam_question_duoxuan()
         #self.exam_question_shifei()
@@ -1237,13 +1237,13 @@ class Test(unittest.TestCase):
         #self.add_exam_point()
         #self.modify_exam_point()
         #self.delete_exam_point()    
-        self.createpaper()
-        self.exam_student_management()
-        self.user_statistical_information()
-        login.logout(self.driver, self.base_url)
+        #self.createpaper()
+        #self.exam_student_management()
+        #self.user_statistical_information()
+        #login.logout(self.driver, self.base_url)
 
-        self.login_user()
-        self.exam_user()
+        #self.login_user()
+        #self.exam_user()
         #self.use_exam_card()
                    
 

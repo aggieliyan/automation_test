@@ -10,7 +10,7 @@ import unittest, time, re,random
 
 
     
-def create_subject(cfg,driver, base_url,org_name,subject_name):
+def create_subject(cfg, driver, base_url, org_name, subject_name):
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam','new_subject_by'),cfg.get('exam','new_subject_id')).click()
@@ -20,7 +20,7 @@ def create_subject(cfg,driver, base_url,org_name,subject_name):
     driver.find_element(cfg.get('exam','sub_ok_by'),cfg.get('exam','sub_ok_xpath')).click()
     driver.implicitly_wait(10)
 
-def auto_create_subject(cfg,driver,base_url,org_name,sub_num):
+def auto_create_subject(cfg, driver, base_url, org_name, sub_num):
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
     subject_info = []
     for i in range(sub_num):
@@ -30,7 +30,7 @@ def auto_create_subject(cfg,driver,base_url,org_name,sub_num):
     return subject_info
 
 
-def modify_subject(cfg,driver, base_url, org_name):
+def modify_subject(cfg, driver, base_url, org_name):
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10)
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))    
@@ -49,7 +49,7 @@ def modify_subject(cfg,driver, base_url, org_name):
     driver.implicitly_wait(10)   
     return subject_name
 
-def delete_subject(cfg,driver, base_url, org_name, sub_num=1):
+def delete_subject(cfg, driver, base_url, org_name, sub_num=1):
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10)
     del_name = driver.execute_script("return $('.subject-item-con').eq(0).children().eq(0).text()")
@@ -65,7 +65,7 @@ def delete_subject(cfg,driver, base_url, org_name, sub_num=1):
     driver.implicitly_wait(10)
     
     
-def create_exam_cate(cfg,driver, base_url,org_name,cate_name,cate_detail):
+def create_exam_cate(cfg, driver, base_url, org_name, cate_name, cate_detail):
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"类目管理").click()
@@ -80,7 +80,7 @@ def create_exam_cate(cfg,driver, base_url,org_name,cate_name,cate_detail):
     driver.implicitly_wait(10)
     
 
-def auto_create_exam_cate(cfg,driver, base_url,org_name,cate_num):
+def auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num):
     
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
     cate_info = []
@@ -91,7 +91,7 @@ def auto_create_exam_cate(cfg,driver, base_url,org_name,cate_num):
         cate_info.append(cate_name)
     return cate_info
 
-def modify_exam_cate(cfg,driver, base_url,org_name):
+def modify_exam_cate(cfg, driver, base_url, org_name):
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"类目管理").click()
@@ -108,7 +108,7 @@ def modify_exam_cate(cfg,driver, base_url,org_name):
     driver.find_element(cfg.get('exam','cate_oknew_button_by'),cfg.get('exam','cate_oknew_button')).click()
     driver.implicitly_wait(10)
     
-def delete_exam_cate(cfg,driver, base_url,org_name):
+def delete_exam_cate(cfg, driver, base_url, org_name):
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"类目管理").click()
@@ -119,7 +119,7 @@ def delete_exam_cate(cfg,driver, base_url,org_name):
     driver.implicitly_wait(10)
 
 
-def create_exam_point(cfg,driver, base_url,org_name,point_name,point_detail,other_groom):
+def create_exam_point(cfg, driver, base_url, org_name, point_name, point_detail, other_groom):
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"考点库").click()
@@ -143,7 +143,7 @@ def create_exam_point(cfg,driver, base_url,org_name,point_name,point_detail,othe
     driver.find_element(cfg.get('exam','point_okbotton_by'),cfg.get('exam','point_okbotton')).click()
     driver.implicitly_wait(10)
 
-def auto_create_exam_point(cfg,driver, base_url,org_name,point_num):
+def auto_create_exam_point(cfg, driver, base_url, org_name, point_num):
     
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
     point_info = []
@@ -156,7 +156,7 @@ def auto_create_exam_point(cfg,driver, base_url,org_name,point_num):
     return point_info
 
 
-def modify_exam_point(cfg,driver, base_url, org_name):
+def modify_exam_point(cfg, driver, base_url, org_name):
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"考点库").click()
@@ -188,7 +188,7 @@ def modify_exam_point(cfg,driver, base_url, org_name):
     driver.implicitly_wait(10)
 
 
-def delete_exam_point(cfg,driver, base_url, org_name):
+def delete_exam_point(cfg, driver, base_url, org_name):
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"考点库").click()
@@ -197,9 +197,3 @@ def delete_exam_point(cfg,driver, base_url, org_name):
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam','point_delokbot_by'),cfg.get('exam','point_delokbot_xpath')).click()
     driver.implicitly_wait(10)
-    
-    
-    
-    
-    
-    

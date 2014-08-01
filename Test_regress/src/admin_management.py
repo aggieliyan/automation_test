@@ -7,7 +7,7 @@ Created on May 28, 2012
 
 import time, random
 
-def create_admin(cfg,driver, base_url,admin_name,admin_username,admin_psw,admin_email):
+def create_admin(cfg, driver, base_url, admin_name, admin_username, admin_psw, admin_email):
     
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(10)
@@ -15,7 +15,7 @@ def create_admin(cfg,driver, base_url,admin_name,admin_username,admin_psw,admin_
     driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"网校管理员").click()
     driver.implicitly_wait(10)
-    driver.find_element_by_xpath(cfg.get('org_manage','add_admin_xpath')).click()#添加管理员
+    driver.find_element_by_xpath(cfg.get('org_manage', 'add_admin_xpath')).click()#添加管理员
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_manage','ad_name_by'),cfg.get('org_manage','ad_name_id')).send_keys(admin_name)
     driver.find_element(cfg.get('org_manage','ad_username_by'),cfg.get('org_manage','ad_username_id')).send_keys(admin_username)
@@ -46,7 +46,7 @@ def auto_create_admin(cfg, driver, base_url, org_name, adm_num):
         
     return admin_info
     
-def delete_admin(cfg,driver, base_url, admin_num=1):
+def delete_admin(cfg, driver, base_url, admin_num=1):
         
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(10)
@@ -63,7 +63,7 @@ def delete_admin(cfg,driver, base_url, admin_num=1):
     driver.implicitly_wait(10)
     
     
-def modify_admin(cfg,driver, base_url):
+def modify_admin(cfg, driver, base_url):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"系统设置").click()

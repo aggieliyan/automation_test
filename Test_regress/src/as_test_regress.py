@@ -778,7 +778,7 @@ class Test(unittest.TestCase):
             user_management.change_homelogo(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception,e:
             print e
-            self.verificationErrors.append("fail to change headpic!")
+            self.verificationErrors.append("fail to change homelogo!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/change_homelogo.png")   
                  

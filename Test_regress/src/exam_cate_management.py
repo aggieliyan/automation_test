@@ -11,8 +11,6 @@ import unittest, time, re,random
 
     
 def create_subject(cfg,driver, base_url,org_name,subject_name):
-    driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(10)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam','new_subject_by'),cfg.get('exam','new_subject_id')).click()
@@ -33,8 +31,6 @@ def auto_create_subject(cfg,driver,base_url,org_name,sub_num):
 
 
 def modify_subject(cfg,driver, base_url, org_name):
-    #driver.get(base_url + "myOffice.do")
-    #driver.implicitly_wait(10)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10)
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))    
@@ -54,8 +50,6 @@ def modify_subject(cfg,driver, base_url, org_name):
     return subject_name
 
 def delete_subject(cfg,driver, base_url, org_name, sub_num=1):
-    #driver.get(base_url + "myOffice.do")
-    #driver.implicitly_wait(10)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10)
     del_name = driver.execute_script("return $('.subject-item-con').eq(0).children().eq(0).text()")
@@ -72,8 +66,6 @@ def delete_subject(cfg,driver, base_url, org_name, sub_num=1):
     
     
 def create_exam_cate(cfg,driver, base_url,org_name,cate_name,cate_detail):
-    driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(10)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"类目管理").click()
@@ -100,8 +92,6 @@ def auto_create_exam_cate(cfg,driver, base_url,org_name,cate_num):
     return cate_info
 
 def modify_exam_cate(cfg,driver, base_url,org_name):
-    driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(10)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"类目管理").click()
@@ -119,8 +109,6 @@ def modify_exam_cate(cfg,driver, base_url,org_name):
     driver.implicitly_wait(10)
     
 def delete_exam_cate(cfg,driver, base_url,org_name):
-    driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(10)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"类目管理").click()
@@ -132,8 +120,6 @@ def delete_exam_cate(cfg,driver, base_url,org_name):
 
 
 def create_exam_point(cfg,driver, base_url,org_name,point_name,point_detail,other_groom):
-    driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(10)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"考点库").click()
@@ -171,8 +157,6 @@ def auto_create_exam_point(cfg,driver, base_url,org_name,point_num):
 
 
 def modify_exam_point(cfg,driver, base_url, org_name):
-    driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(10)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"考点库").click()
@@ -205,8 +189,6 @@ def modify_exam_point(cfg,driver, base_url, org_name):
 
 
 def delete_exam_point(cfg,driver, base_url, org_name):
-    driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(10)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10) 
     driver.find_element_by_link_text(u"考点库").click()

@@ -49,10 +49,9 @@ def exam_question_Single(cfg,driver, base_url,question_ansa):
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
     #添加音频
-    #driver.find_element_by_xpath("//html/body/div[2]/div[3]/div/div/div[2]/div/dl[3]/dd/div/p[1]/a").click()
-    #driver.find_element_by_xpath("//html/body/div[2]/div[3]/div/div/div[2]/div/dl[3]/dd/div/p[1]/a").clear()
-    #driver.find_element_by_xpath("//html/body/div[2]/div[3]/div/div/div[2]/div/dl[3]/dd/div/p[1]/a").send_keys("C:\\Users\\liuhongjiao\\Desktop\\11234567890123456789012345678901234567891.mp3")
-    
+    driver.find_element(cfg.get('exam_questions',"question_yinpin_by"),\
+        cfg.get('exam_questions',"question_yinpin")).send_keys("C:\\123.mp3")    
+    time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)').attr('id')")    
     driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');\

@@ -53,7 +53,7 @@ def test_create_student():
         #user_management.release_announcement(cfg,driver, base_url, org_name, title="aaa")
         #user_management.org_chang_headpic(cfg, driver, base_url, org_name)
         #admin_management.auto_create_admin(cfg,driver, base_url, org_name="zhongyan", adm_num=2)
-        admin_management.modify_admin(cfg,driver, base_url)
+        #admin_management.modify_admin(cfg,driver, base_url)
         admin_management.delete_admin(cfg,driver, base_url, admin_num=1)
         #time.sleep(10)
         #student_management.auto_create_student(cfg, driver, base_url, user_name, stu_num)

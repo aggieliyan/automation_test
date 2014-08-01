@@ -151,9 +151,11 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123"):
     time.sleep(1)
     driver.find_element_by_link_text(u"试卷库").click()
     driver.implicitly_wait(1)
-    driver.find_element(cfg.get('exam', 'paper_search_by'), cfg.get('exam', 'paper_search')).send_keys(exam_name)
+    driver.find_element(cfg.get('exam', 'paper_search_by'), \
+        cfg.get('exam', 'paper_search')).send_keys(exam_name)
     time.sleep(1)
-    exam_href = driver.execute_script("return $(\"a:contains(\'"+exam_name+"\')\").attr('href')")
+    exam_href = driver.execute_script(\
+        "return $(\"a:contains(\'"+exam_name+"\')\").attr('href')")
     time.sleep(1)
     driver.get("%sexam/%s" % (base_url, exam_href))
     driver.find_element_by_link_text("学员信息").click()
@@ -162,15 +164,19 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123"):
         driver.find_element_by_link_text(u"作为开放试卷的统计结果").click()
         time.sleep(1)
         try:
-            driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
-            driver.find_element(cfg.get('exam', 'output_open_by'), cfg.get('exam', 'output_open')).click()
+            driver.find_element(cfg.get('exam', 'select_paper_by'), \
+                cfg.get('exam', 'select_paper')).click()
+            driver.find_element(cfg.get('exam', 'output_open_by'), \
+                cfg.get('exam', 'output_open')).click()
             time.sleep(2)
         except:
             print u'试卷暂时没有学员购买'
     elif etype == 1:
         try:
-            driver.find_element(cfg.get('exam', 'select_paper_by'), cfg.get('exam', 'select_paper')).click()
-            driver.find_element(cfg.get('exam', 'output_by'), cfg.get('exam', 'output')).click()
+            driver.find_element(cfg.get('exam', 'select_paper_by'), \
+                cfg.get('exam', 'select_paper')).click()
+            driver.find_element(cfg.get('exam', 'output_by'), \
+                cfg.get('exam', 'output')).click()
             time.sleep(2)
         except:
             print u'试卷暂时没有分发给学员'
@@ -185,14 +191,17 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123"):
     else:
         #取评分链接
         time.sleep(2)
-        stu_name = driver.execute_script("return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().text()")
+        stu_name = driver.execute_script(\
+            "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().text()")
         if stu_name != username:
             print username + u'该学员不存在,无法导出学员成绩。。'
         else:
-            grade_href = driver.execute_script("return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
+            grade_href = driver.execute_script(\
+                "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
             time.sleep(1)
             driver.get("%sexam/%s" % (base_url, grade_href))
-            score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), cfg.get('exam', 'input_score'))
+            score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), \
+                cfg.get('exam', 'input_score'))
             score = "0.1"
             for item in score_input:
                 try:
@@ -200,7 +209,8 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123"):
                     item.send_keys(score)
                 except:
                     continue
-            driver.find_element(cfg.get('exam', 'score_save_by'), cfg.get('exam', 'score_save')).click()
+            driver.find_element(cfg.get('exam', 'score_save_by'), \
+                cfg.get('exam', 'score_save')).click()
             total_score = len(score_input) * score
             return total_score 
 
@@ -216,18 +226,21 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     driver.implicitly_wait(1)
     driver.find_element("xpath", "//p[4]/a").click()
     driver.implicitly_wait(2)
-    driver.find_element(cfg.get('exam', 'user_search_by'), cfg.get('exam', 'user_search')).clear()
-    #driver.find_element(cfg.get('exam', 'user_search_by'), cfg.get('exam', 'user_search')).send_keys(username)
+    driver.find_element(cfg.get('exam', 'user_search_by'), \
+        cfg.get('exam', 'user_search')).clear()
     #得一个字母一个字母的输入，否则因为输入太快得到的搜索结果不准确
     for letter in username:
-        driver.find_element(cfg.get('exam', 'user_search_by'), cfg.get('exam', 'user_search')).send_keys(letter)
+        driver.find_element(cfg.get('exam', 'user_search_by'), \
+            cfg.get('exam', 'user_search')).send_keys(letter)
     driver.implicitly_wait(1)
     if atype == 1:
         driver.find_element_by_link_text(u"分发试卷").click()
     else:
         driver.find_element_by_link_text(u"关闭试卷").click()
     driver.implicitly_wait(1)
-    driver.find_element(cfg.get('exam', 'open_paper_by'), cfg.get('exam', 'open_paper')).click()
+    driver.find_element(cfg.get('exam', 'open_paper_by'), \
+        cfg.get('exam', 'open_paper')).click()
     driver.implicitly_wait(1)
-    driver.find_element(cfg.get('exam', 'open_paper_ok_by'), cfg.get('exam', 'open_paper_ok')).click()
+    driver.find_element(cfg.get('exam', 'open_paper_ok_by'), \
+        cfg.get('exam', 'open_paper_ok')).click()
     time.sleep(2)      

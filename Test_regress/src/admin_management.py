@@ -58,9 +58,9 @@ def delete_admin(cfg, driver, base_url, admin_num=1):
         driver.find_element_by_link_text(u"删除管理员").click()
     else:
         driver.find_element_by_xpath("//div["+str(2+admin_num)+"]/div/div/div[2]/div[3]/a").click()
-    driver.implicitly_wait(10)   
+    time.sleep(1) 
     driver.find_element(cfg.get('org_manage','delete_ad_ok_xpath_by'),cfg.get('org_manage','delete_ad_ok_xpath')).click()
-    driver.implicitly_wait(10)
+    time.sleep(3)
     
     
 def modify_admin(cfg, driver, base_url):
@@ -81,7 +81,7 @@ def modify_admin(cfg, driver, base_url):
     driver.implicitly_wait(10)
     #driver.find_element(cfg.get('org_manage','admin_modify_xpath_by'),cfg.get('org_manage','admin_modify_xpath')).click()
     driver.execute_script("$(\"#editButton button\").eq(0).click()")
-    driver.implicitly_wait(10)
+    time.sleep(1)
     return admin_name
         
         

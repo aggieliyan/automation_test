@@ -1116,6 +1116,17 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to exam questions")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
+
+    def exam_onequestion(self):
+        self.total += 1
+        question_ansa='exam'  + str(random.randint(1000,9999))
+        try:
+            exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa, onetype = 2) 
+        except Exception,e:
+            print e
+            self.verificationErrors.append("fail to exam questions")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png") 
             
     def exam_questions(self):
         self.total += 1
@@ -1225,13 +1236,7 @@ class Test(unittest.TestCase):
         #self.exam_question_wanxing()
         #self.exam_question_zonghe()
         self.login_from_index()
-        #self.exam_question_Single()
-        #self.exam_question_Multiple()
-        #self.exam_question_TrueOrFalse()
-        #self.exam_question_Blank()
-        #self.exam_question_Answer()
-        #self.exam_question_cloze()
-        #self.exam_question_Composite()
+        self.exam_onequestion()
         #self.exam_questions()
         #self.import_questions()
         #self.add_exam_subject()

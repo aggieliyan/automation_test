@@ -275,5 +275,28 @@ def auto_exam_questions(cfg,driver, base_url,question_ansa, num):
         exam_question_Blank(cfg,driver, base_url,question_ansa)
         exam_question_Answer(cfg,driver, base_url,question_ansa)
         exam_question_Cloze(cfg,driver, base_url,question_ansa)
-        exam_question_Composite(cfg,driver, base_url,question_ansa)      
+        exam_question_Composite(cfg,driver, base_url,question_ansa)
+        
+def auto_exam_onequestion(cfg,driver, base_url,question_ansa, onetype):
+    time.sleep(2)
+    driver.get(base_url + "exam/")
+    time.sleep(2)
+    driver.find_element_by_link_text("试题库").click()
+    time.sleep(2)
+    driver.find_element_by_link_text("单选题").click()
+    time.sleep(2) 
+    if onetype == 1:
+        exam_question_Single(cfg,driver, base_url,question_ansa)
+    elif onetype == 2:
+        exam_question_Multiple(cfg,driver, base_url,question_ansa)
+    elif onetype == 3:
+        exam_question_TrueOrFalse(cfg,driver, base_url,question_ansa)
+    elif onetype == 4:
+        exam_question_Blank(cfg,driver, base_url,question_ansa)
+    elif onetype == 5:
+        exam_question_Answer(cfg,driver, base_url,question_ansa)
+    elif onetype == 6:
+        exam_question_Cloze(cfg,driver, base_url,question_ansa)
+    elif onetype == 7:
+        exam_question_Composite(cfg,driver, base_url,question_ansa)       
      

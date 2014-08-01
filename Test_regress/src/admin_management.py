@@ -53,11 +53,14 @@ def delete_admin(cfg, driver, base_url, admin_num=1):
     driver.find_element_by_link_text(u"系统设置").click()
     driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"网校管理员").click()
-    driver.implicitly_wait(10)
-    if admin_num == 1:
-        driver.find_element_by_link_text(u"删除管理员").click()
-    else:
-        driver.find_element_by_xpath("//div["+str(2+admin_num)+"]/div/div/div[2]/div[3]/a").click()
+    time.sleep(2)
+    alist = driver.find_elements_by_link_text(u"删除管理员")
+    alist[-1].click()
+
+    #if admin_num == 1:
+     #   driver.find_element_by_link_text(u"删除管理员").click()
+    #else:
+    #    driver.find_element_by_xpath("//div["+str(2+admin_num)+"]/div/div/div[2]/div[3]/a").click()
     time.sleep(1) 
     driver.find_element(cfg.get('org_manage','delete_ad_ok_xpath_by'),cfg.get('org_manage','delete_ad_ok_xpath')).click()
     driver.implicitly_wait(10)

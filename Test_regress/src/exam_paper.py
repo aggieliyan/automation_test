@@ -18,9 +18,8 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erando
     eopen 代表试卷是否对外开放   0 代表否，不对外开放
                              1代表对外开放 
     """
-    driver.implicitly_wait(10)
-    new_href = driver.execute_script("return $('.exam-new-btn').attr('href')")
-    
+    time.sleep(5)
+    new_href = driver.execute_script("return $('.exam-new-btn').attr('href')")    
     driver.get("%sexam/%s" %(base_url,new_href))
     driver.find_element(cfg.get('exam','exam_paper_name_by'),cfg.get('exam','exam_paper_name')).clear()
     driver.find_element(cfg.get('exam','exam_paper_name_by'),cfg.get('exam','exam_paper_name')).send_keys(exam_name)
@@ -45,8 +44,9 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erando
     driver.find_element(cfg.get('exam','exam_next_one_by'),cfg.get('exam','exam_next_one')).click()
     driver.implicitly_wait(2)
     #添加大题
-    auto_creatquestion(cfg,driver,4)
+    auto_creatquestion(cfg,driver,2)
     #生成试卷
+    driver.implicitly_wait(2)
     driver.find_element(cfg.get('exam','exam_paper_build_btn_by'),cfg.get('exam','exam_paper_build_btn')).click()
     driver.implicitly_wait(2)    
         
@@ -64,15 +64,13 @@ def add_big_question(cfg, driver,qscore, qtype):
         #driver.find_element_by_css_selector("span.cc-arrow").click()
         driver.find_element('xpath','//div[10]/ul/li').click()
         #driver.find_element_by_css_selector("li.cc-item.selectedItem").click()
-        time.sleep(2)
     else:
-        time.sleep(2)
         driver.find_element(cfg.get('exam','exam_topic_dropdown_by'),cfg.get('exam','exam_topic_dropdown')).click()
         #driver.find_element_by_css_selector("span.cc-arrow").click()
-        time.sleep(2)
+        driver.implicitly_wait(2)
         if qtype == 2:
             driver.find_element(cfg.get('exam','exam_topic_multiple_by'),cfg.get('exam','exam_topic_multiple')).click()
-            time.sleep(2)            
+            driver.implicitly_wait(2)            
         if qtype == 3:
             time.sleep(2)
             driver.find_element(cfg.get('exam','exam_topic_true_or_false_by'),cfg.get('exam','exam_topic_true_or_false')).click()
@@ -100,20 +98,20 @@ def add_big_question(cfg, driver,qscore, qtype):
     time.sleep(2)
     #导入试题
     driver.find_element(cfg.get('exam','paper_import_question_by'),cfg.get('exam','paper_import_question')).click()
-    time.sleep(2)
+    driver.implicitly_wait(2)
     #勾选全部
     driver.find_element(cfg.get('exam','paper_selece_all_by'),cfg.get('exam','paper_selece_all')).click()
-    time.sleep(2)
+    driver.implicitly_wait(2)
     #driver.find_element_by_css_selector("label.import-list-item.clearfix > input[type=\"checkbox\"]").click()
     driver.find_element(cfg.get('exam','exam_add_big_question_ok_by'),cfg.get('exam','exam_add_big_question_ok')).click()
     time.sleep(2)        
     
 #自动添加题
 def auto_creatquestion(cfg,driver,q_num):
-    typel = [1,2,3,4,5,6,7]
+    #typel = [1,2,3,4,5,6,7]
     for i in range(q_num):
         qscore = '5'
-        qtype=random.choice(typel)
+        qtype=random.randint(1,7)
         print qtype
         add_big_question(cfg, driver, qscore, qtype)
         

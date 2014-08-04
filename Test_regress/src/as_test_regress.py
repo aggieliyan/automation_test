@@ -20,7 +20,7 @@ class Test(unittest.TestCase):
         self.browser = "Chrome"
 
         self.test_enviroment = "beta"
-        self.org_name = "adm_liwen01"
+        self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -1159,10 +1159,55 @@ class Test(unittest.TestCase):
     
     def test_regress(self):
         
-       
+        #网站主站回归流程
+        self.register()
+        self.login_from_index()
+        self.release_normal()
+        self.release_three_video()
+        self.agency_course()
+        self.package_course() 
+        self.add_cate()
+        self.presale_course()  
+        self.add_course_to_cate()   
+        self.prepaid_cardgroup()
+        self.course_cardgroup()
+        self.cate_cardgroup()
+        self.delete_cate()
+        self.buy_listen_card()
+        self.listen_cardgroup()
+        self.add_exam_card()
+        self.import_one_student()
+        self.import_multi_student()
+        self.create_multi_student()
+        self.add_admin()  
+        self.modify_admin()
+        self.delete_admin()
+        self.buy_open_num()
+        self.release_href_course()
+        self.open_course_for_one()
+        self.open_course_for_multi()
+        self.change_homelogo()
+        self.release_announcement()
+        self.modify_pagefoot()  
+        self.change_headpic()
+
+        #self.verify_all_course_convert()
+
+        #login.logout(self.driver, self.base_url)
+        #self.login_user()
+        #self.use_prepaidcard()
+        #self.use_coursecard()
+        #self.use_catecard()
+        #self.use_listencard()
+        #self.use_exam_card()
+        #self.buy_course_use_RMB()
+        #self.buy_course_use_card()
+        
+        #self.wailian_video()
+
         #考试系统部分
 
-        self.login_from_index()
+        #self.login_from_index()
         #self.exam_onequestion()
         #self.exam_questions()
         #self.import_questions()

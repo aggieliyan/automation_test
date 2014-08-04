@@ -141,7 +141,7 @@ def auto_createpaper(cfg,driver,base_url,eoperation, erandom, eopen, exam_num):
         print i
       
 
-def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123"):
+def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun122"):
     """
     etype表示需要的操作类型，1为导出分发给学员的试卷统计结果，
                              2为导出作为开放试卷的统计结果,
@@ -194,8 +194,9 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123"):
         #取评分链接
         time.sleep(2)
         stu_name = driver.execute_script(\
-            "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().text()")
-        if stu_name != username:
+            "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(0).children().text()")
+        print stu_name
+        if username not in stu_name:
             print username + u'该学员不存在,无法导出学员成绩。。'
         else:
             grade_href = driver.execute_script(\
@@ -239,7 +240,7 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
         driver.find_element_by_link_text(u"分发试卷").click()
     else:
         driver.find_element_by_link_text(u"关闭试卷").click()
-    driver.implicitly_wait(1)
+    time.sleep(2)
     driver.find_element(cfg.get('exam', 'open_paper_by'), \
         cfg.get('exam', 'open_paper')).click()
     driver.implicitly_wait(1)

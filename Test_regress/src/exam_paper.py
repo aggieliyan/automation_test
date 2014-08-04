@@ -18,9 +18,16 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time, eoperation, erando
     eopen 代表试卷是否对外开放   0 代表否，不对外开放
                              1代表对外开放 
     """
-    time.sleep(5)
-    new_href = driver.execute_script("return $('.exam-new-btn').attr('href')")    
-    driver.get("%sexam/%s" %(base_url,new_href))
+    driver.get("%sexam/" %(base_url))
+    driver.implicitly_wait(1)
+    driver.find_element(cfg.get('exam','exam_subject_by'),cfg.get('exam','exam_subject')).click()
+    now_handle = driver.current_window_handle #得到当前窗口句柄
+    driver.find_element_by_link_text(u"新建试卷").click()
+    driver.implicitly_wait(2)
+    all_handles = driver.window_handles #获取所有窗口句柄
+    for handle in all_handles:
+        if handle != now_handle:
+            driver.switch_to_window(handle)
     driver.find_element(cfg.get('exam','exam_paper_name_by'),cfg.get('exam','exam_paper_name')).clear()
     driver.find_element(cfg.get('exam','exam_paper_name_by'),cfg.get('exam','exam_paper_name')).send_keys(exam_name)
     driver.find_element(cfg.get('exam','exam_timelen_by'),cfg.get('exam','exam_timelen')).clear()
@@ -98,10 +105,10 @@ def add_big_question(cfg, driver,qscore, qtype):
     time.sleep(2)
     #导入试题
     driver.find_element(cfg.get('exam','paper_import_question_by'),cfg.get('exam','paper_import_question')).click()
-    driver.implicitly_wait(2)
+    time.sleep(2)
     #勾选全部
     driver.find_element(cfg.get('exam','paper_selece_all_by'),cfg.get('exam','paper_selece_all')).click()
-    driver.implicitly_wait(2)
+    time.sleep(2)
     #driver.find_element_by_css_selector("label.import-list-item.clearfix > input[type=\"checkbox\"]").click()
     driver.find_element(cfg.get('exam','exam_add_big_question_ok_by'),cfg.get('exam','exam_add_big_question_ok')).click()
     time.sleep(2)        
@@ -126,9 +133,6 @@ def exam_export_question(cfg, driver,qscore, qtype):
     
 #自动创建试卷
 def auto_createpaper(cfg,driver,base_url,eoperation, erandom, eopen, exam_num):
-    driver.get("%sexam/" %(base_url))
-    driver.implicitly_wait(1)
-    driver.find_element(cfg.get('exam','exam_subject_by'),cfg.get('exam','exam_subject')).click()
     prefix = chr(random.randint(97,122))+chr(random.randint(97,122))+chr(random.randint(97,122))
     for i in range(exam_num):
         exam_name = 'testpaper_' + prefix + str(i)+time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())) 

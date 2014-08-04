@@ -995,9 +995,9 @@ class Test(unittest.TestCase):
     def user_statistical_information(self):
         self.total += 1
         try:
-            #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
             #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
-            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
+            #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         except Exception, e:
             print e
             self.verificationErrors.append("fail to export exam result")
@@ -1146,14 +1146,66 @@ class Test(unittest.TestCase):
         finally: 
             self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")
             
+    def wailian_video(self):
+        self.total += 1
+        try:
+            user_management.wailian_video(self.cfg, self.driver, self.base_url, self.test_enviroment) 
+        except Exception, e:
+            print e
+            self.verificationErrors.append("fail to use wailian")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/user_management_wailian.png")
+
     
     def test_regress(self):
         
-       
+        #网站主站回归流程
+        self.register()
+        self.login_from_index()
+        self.release_normal()
+        self.release_three_video()
+        self.agency_course()
+        self.package_course() 
+        self.add_cate()
+        self.presale_course()  
+        self.add_course_to_cate()   
+        self.prepaid_cardgroup()
+        self.course_cardgroup()
+        self.cate_cardgroup()
+        self.delete_cate()
+        self.buy_listen_card()
+        self.listen_cardgroup()
+        self.add_exam_card()
+        self.import_one_student()
+        self.import_multi_student()
+        self.create_multi_student()
+        self.add_admin()  
+        self.modify_admin()
+        self.delete_admin()
+        self.buy_open_num()
+        self.release_href_course()
+        self.open_course_for_one()
+        self.open_course_for_multi()
+        self.change_homelogo()
+        self.release_announcement()
+        self.modify_pagefoot()  
+        self.change_headpic()
+
+        #self.verify_all_course_convert()
+
+        #login.logout(self.driver, self.base_url)
+        #self.login_user()
+        #self.use_prepaidcard()
+        #self.use_coursecard()
+        #self.use_catecard()
+        #self.use_listencard()
+        #self.use_exam_card()
+        #self.buy_course_use_RMB()
+        #self.buy_course_use_card()
         
+        #self.wailian_video()
 
         #考试系统部分
-
         self.login_from_index()
         #self.exam_onequestion()
         #self.exam_questions()
@@ -1168,10 +1220,10 @@ class Test(unittest.TestCase):
         #self.modify_exam_point()
 
         #self.delete_exam_point()    
-        #self.createpaper()
+        self.createpaper()
         #self.exam_student_management()
 
-        self.user_statistical_information()
+        #self.user_statistical_information()
         #login.logout(self.driver, self.base_url)
 
         #self.login_user()

@@ -1208,14 +1208,6 @@ class Test(unittest.TestCase):
         #考试系统部分
 
         #self.login_from_index()
-        #self.exam_question_danxuan()
-        #self.exam_question_duoxuan()
-        #self.exam_question_shifei()
-        #self.exam_question_tiankong()
-        #self.exam_question_wenda()
-        #self.exam_question_wanxing()
-        #self.exam_question_zonghe()
-        self.login_from_index()
         #self.exam_onequestion()
         #self.exam_questions()
         #self.import_questions()

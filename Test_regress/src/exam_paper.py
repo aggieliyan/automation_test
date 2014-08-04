@@ -119,7 +119,7 @@ def auto_creatquestion(cfg,driver,q_num):
     for i in range(q_num):
         qscore = '5'
         qtype=random.randint(1,7)
-        print qtype
+        #print qtype
         add_big_question(cfg, driver, qscore, qtype)
         
 #向试卷中导入试题        
@@ -128,7 +128,6 @@ def exam_export_question(cfg, driver,qscore, qtype):
     driver.implicitly_wait(2)
     #勾选全部
     driver.find_element(cfg.get('exam','paper_selece_all_by'),cfg.get('exam','paper_selece_all')).click()
-    #driver.find_element_by_css_selector("label.import-list-item.clearfix > input[type=\"checkbox\"]").click()
     driver.find_element(cfg.get('exam','exam_add_question_ok_by'),cfg.get('exam','exam_add_question_ok')).click() 
     
 #自动创建试卷
@@ -138,7 +137,7 @@ def auto_createpaper(cfg,driver,base_url,eoperation, erandom, eopen, exam_num):
         exam_name = 'testpaper_' + prefix + str(i)+time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())) 
         exam_time = '120'
         create_paper(cfg, driver, base_url, exam_name, exam_time,eoperation, erandom, eopen)
-        print i
+        #print i
       
 
 def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun122"):

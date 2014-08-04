@@ -1146,16 +1146,6 @@ class Test(unittest.TestCase):
         finally: 
             self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")
             
-    def wailian_video(self):
-        self.total += 1
-        try:
-            user_management.wailian_video(self.cfg, self.driver, self.base_url, self.test_enviroment) 
-        except Exception, e:
-            print e
-            self.verificationErrors.append("fail to use wailian")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/user_management_wailian.png")
-
     
     def test_regress(self):
         
@@ -1191,19 +1181,18 @@ class Test(unittest.TestCase):
         self.modify_pagefoot()  
         self.change_headpic()
 
-        #self.verify_all_course_convert()
+        self.verify_all_course_convert()
 
-        #login.logout(self.driver, self.base_url)
-        #self.login_user()
-        #self.use_prepaidcard()
-        #self.use_coursecard()
-        #self.use_catecard()
-        #self.use_listencard()
-        #self.use_exam_card()
-        #self.buy_course_use_RMB()
-        #self.buy_course_use_card()
+        login.logout(self.driver, self.base_url)
+        self.login_user()
+        self.use_prepaidcard()
+        self.use_coursecard()
+        self.use_catecard()
+        self.use_listencard()
+        self.use_exam_card()
+        self.buy_course_use_RMB()
+        self.buy_course_use_card()
         
-        #self.wailian_video()
 
         #考试系统部分
 

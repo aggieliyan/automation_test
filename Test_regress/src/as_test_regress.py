@@ -1146,16 +1146,6 @@ class Test(unittest.TestCase):
         finally: 
             self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")
             
-    def wailian_video(self):
-        self.total += 1
-        try:
-            user_management.wailian_video(self.cfg, self.driver, self.base_url, self.test_enviroment) 
-        except Exception, e:
-            print e
-            self.verificationErrors.append("fail to use wailian")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/user_management_wailian.png")
-
     
     def test_regress(self):
         

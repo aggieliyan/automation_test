@@ -17,7 +17,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
 
-        self.browser = "Chrome"
+        self.browser = "ie"
 
         self.test_enviroment = "beta"
         self.org_name = "salesdemo"
@@ -1021,83 +1021,6 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to close paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/close_paper.png")       
-    
-    def exam_question_Single(self):
-        self.total += 1
-        question_ansa='exam' + str(random.randint(1000,9999))
-        try:
-            exam_questions.exam_question_Single(self.cfg, self.driver, self.base_url, question_ansa) 
-        except Exception,e:
-            print e
-            self.verificationErrors.append("fail to exam questions")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
-               
-    def exam_question_Multiple(self):
-        self.total += 1
-        question_ansa='exam' + str(random.randint(1000,9999))
-        try:
-            exam_questions.exam_question_Multiple(self.cfg, self.driver, self.base_url, question_ansa) 
-        except Exception, e:
-            print e
-            self.verificationErrors.append("fail to exam questions")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
- 
-    def exam_question_TrueOrFalse(self):
-        self.total += 1
-        question_ansa='exam' + str(random.randint(1000,9999))
-        try:
-            exam_questions.exam_question_TrueOrFalse(self.cfg, self.driver, self.base_url, question_ansa) 
-        except Exception,e:
-            print e
-            self.verificationErrors.append("fail to exam questions")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
- 
-    def exam_question_Blank(self):
-        self.total += 1
-        question_ansa='exam' + str(random.randint(1000,9999))
-        try:
-            exam_questions.exam_question_Blank(self.cfg, self.driver, self.base_url, question_ansa) 
-        except Exception,e:
-            print e
-            self.verificationErrors.append("fail to exam questions")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
-
-    def exam_question_Answer(self):
-        self.total += 1
-        question_ansa='exam' + str(random.randint(1000,9999))
-        try:
-            exam_questions.exam_question_Answer(self.cfg, self.driver, self.base_url, question_ansa) 
-        except Exception,e:
-            print e
-            self.verificationErrors.append("fail to exam questions")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
-    
-    def exam_question_cloze(self):
-        self.total += 1
-        question_ansa='exam' + str(random.randint(1000,9999))
-        try:
-            exam_questions.exam_question_cloze(self.cfg, self.driver, self.base_url, question_ansa) 
-        except Exception,e:
-            print e
-            self.verificationErrors.append("fail to exam questions")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")   
-
-    def exam_question_Composite(self):
-        self.total += 1
-        question_ansa='exam' + str(random.randint(1000,9999))
-        try:
-            exam_questions.exam_question_Composite(self.cfg, self.driver, self.base_url, question_ansa) 
-        except Exception,e:
-            print e
-            self.verificationErrors.append("fail to exam questions")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
 
     def exam_onequestion(self):
         self.total += 1
@@ -1158,8 +1081,11 @@ class Test(unittest.TestCase):
 
     
     def test_regress(self):
+
         
-        #网站主站回归流程
+        
+       #网站主站回归流程
+
         self.register()
         self.login_from_index()
         self.release_normal()
@@ -1207,6 +1133,7 @@ class Test(unittest.TestCase):
 
         #考试系统部分
 
+
         #self.login_from_index()
         #self.exam_question_danxuan()
         #self.exam_question_duoxuan()
@@ -1238,6 +1165,28 @@ class Test(unittest.TestCase):
         #self.login_user()
         #self.exam_user()
         #self.use_exam_card()
+
+        self.login_from_index()
+        self.exam_onequestion()
+        self.exam_questions()
+        self.import_questions()
+        self.add_exam_subject()
+        self.modify_exam_subject()
+        self.delete_exam_subject()
+        self.create_exam_cate()
+        self.modify_exam_cate()
+        self.delete_exam_cate() 
+        self.add_exam_point()
+        self.modify_exam_point()
+        self.delete_exam_point()    
+        self.createpaper()
+        self.exam_student_management()
+        self.user_statistical_information()
+        login.logout(self.driver, self.base_url)
+        
+        self.login_user()
+        self.exam_user()
+
                    
 
     def tearDown(self):

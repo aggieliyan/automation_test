@@ -50,7 +50,8 @@ def exam_question_Single(cfg,driver, base_url,question_ansa):
     time.sleep(2)
     #添加音频
     driver.find_element(cfg.get('exam_questions',"question_yinpin_by"),\
-        cfg.get('exam_questions',"question_yinpin")).send_keys("C:\\123.mp3")    
+        cfg.get('exam_questions',"question_yinpin")).send_keys\
+        ("//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/123.mp3")    
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)').attr('id')")    
     driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\

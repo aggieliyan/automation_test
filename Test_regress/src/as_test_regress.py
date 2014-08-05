@@ -20,8 +20,8 @@ class Test(unittest.TestCase):
         self.browser = "Chrome"
 
         self.test_enviroment = "beta"
-        self.org_name = "salesdemo"
-        self.org_password = "1234"
+        self.org_name = "adm_guo"
+        self.org_password = "1234aa"
         self.user_name = "yilu282"
         self.user_password = "1234"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
@@ -1191,19 +1191,19 @@ class Test(unittest.TestCase):
         self.modify_pagefoot()  
         self.change_headpic()
 
-        #self.verify_all_course_convert()
+        self.verify_all_course_convert()
 
-        #login.logout(self.driver, self.base_url)
-        #self.login_user()
-        #self.use_prepaidcard()
-        #self.use_coursecard()
-        #self.use_catecard()
-        #self.use_listencard()
-        #self.use_exam_card()
-        #self.buy_course_use_RMB()
-        #self.buy_course_use_card()
+        login.logout(self.driver, self.base_url)
+        self.login_user()
+        self.use_prepaidcard()
+        self.use_coursecard()
+        self.use_catecard()
+        self.use_listencard()
+        self.use_exam_card()
+        self.buy_course_use_RMB()
+        self.buy_course_use_card()
         
-        #self.wailian_video()
+        self.wailian_video()
 
         #考试系统部分
 
@@ -1215,7 +1215,7 @@ class Test(unittest.TestCase):
         #self.exam_question_wenda()
         #self.exam_question_wanxing()
         #self.exam_question_zonghe()
-        self.login_from_index()
+        #self.login_from_index()
         #self.exam_onequestion()
         #self.exam_questions()
         #self.import_questions()

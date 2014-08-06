@@ -168,7 +168,7 @@ def exam_question_Blank(cfg, driver, base_url, question_ansa):
     driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\'); \
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
-    time.sleep(2
+    time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_tiankonganswer_by"), \
         cfg.get('exam_questions', "question_tiankonganswer")).send_keys(question_ansa)
     time.sleep(2)

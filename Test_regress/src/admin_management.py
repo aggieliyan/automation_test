@@ -62,7 +62,7 @@ def delete_admin(cfg, driver, base_url, admin_num=1):
     #else:
     #    driver.find_element_by_xpath("//div["+str(2+admin_num)+"]/div/div/div[2]/div[3]/a").click()
     time.sleep(1) 
-    driver.find_element(cfg.get('org_manage', 'delete_ad_ok_xpath_by'),cfg.get('org_manage', 'delete_ad_ok_xpath')).click()
+    driver.find_element(cfg.get('org_manage', 'delete_ad_ok_by'),cfg.get('org_manage', 'delete_ad_ok_xpath')).click()
     driver.implicitly_wait(10)
     time.sleep(3)
 

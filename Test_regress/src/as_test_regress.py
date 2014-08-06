@@ -475,11 +475,11 @@ class Test(unittest.TestCase):
             self.verificationErrors.append(str(e))   
 
     def import_one_student(self):
-
         self.total += 1
         #单个导入学员
         try:
-            student_management.import_one_student(self.cfg, self.driver, self.base_url, self.org_name, self.import_name)
+            student_management.import_one_student(self.cfg, self.driver, \
+                self.base_url, self.org_name, self.import_name)
         except Exception, e:
             print e
             self.verificationErrors.append("fail to import one student!")
@@ -488,17 +488,18 @@ class Test(unittest.TestCase):
 
         #验证
         self.driver.refresh()
-        rs = self.is_element_present(By.XPATH, "//span[@title=\'"+self.import_name+"\']")
+        rs = self.is_element_present(By.XPATH, \
+            "//span[@title=\'"+self.import_name+"\']")
         try:
             self.assertEqual(True, rs, "fail to import one student!")
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 
     def import_multi_student(self):
-        
         self.total += 1
         try:
-            student_management.import_multi_student(self.cfg, self.driver, self.base_url, self.org_name, r"C:\register_user_list.txt")
+            student_management.import_multi_student(self.cfg, self.driver, \
+                self.base_url, self.org_name, r"C:\register_user_list.txt")
         except Exception, e:
             print e
             self.verificationErrors.append("fail to import multi student!")
@@ -511,7 +512,8 @@ class Test(unittest.TestCase):
         self.total += 1
         stu_num = 5
         try:
-            student_management.auto_create_student(self.cfg, self.driver, self.base_url, self.org_name, stu_num)
+            student_management.auto_create_student(self.cfg, self.driver, \
+                self.base_url, self.org_name, stu_num)
         except Exception, e:
             print e
             self.verificationErrors.append("fail to create multi student!")
@@ -519,11 +521,11 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/create_student.png")
 
     #验证，待完成
-      
+
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
         except NoSuchElementException, e: return False
-        return True 
+        return True
 
     def verify_course(self, title): #去知识库检查是否存在
 
@@ -533,7 +535,7 @@ class Test(unittest.TestCase):
         return rs
 
     def verify_onlineclass(self, classname):
-        self.driver.implicitly_wait(1) 
+        self.driver.implicitly_wait(1)
         rs = self.is_element_present(By.LINK_TEXT, classname)
         return rs
     #充值卡
@@ -544,11 +546,11 @@ class Test(unittest.TestCase):
             confirm_num = card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.p_card_num, self.p_card_pwd)
             #验证
             if self.p_card_num!=confirm_num:
-                self.verificationErrors.append('fail to use prepaid card!')  
+                self.verificationErrors.append('fail to use prepaid card!')
         except Exception, e:
             print e
             self.verificationErrors.append('fail to use prepaid card!')
-        finally: 
+        finally:
             self.driver.save_screenshot("C:/test_rs_pic/use_prepaidcard.png")
 
     def use_coursecard(self):#充课卡
@@ -975,7 +977,8 @@ class Test(unittest.TestCase):
         self.total += 1
         self.template = '//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/createquestions.xls'
         try:
-            exam_questions.importquestions(self, self.cfg, self.driver, self.base_url,self.template)
+            exam_questions.importquestions(self, self.cfg, self.driver, \
+                self.base_url, self.template)
         except Exception, e:
             print e
             self.verificationErrors.append("fail to import questions..")
@@ -1024,26 +1027,28 @@ class Test(unittest.TestCase):
 
     def exam_onequestion(self):
         self.total += 1
-        question_ansa='exam'  + str(random.randint(1000,9999))
+        question_ansa = 'exam' + str(random.randint(1000, 9999))
         try:
-            exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa, onetype = 2) 
+            exam_questions.auto_exam_onequestion(self.cfg, self.driver, \
+                self.base_url, question_ansa, onetype=2)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png") 
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
             
     def exam_questions(self):
         self.total += 1
-        question_ansa='exam' + str(random.randint(1000,9999))
+        question_ansa = 'exam' + str(random.randint(1000, 9999))
         try:
-            exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa, 1) 
+            exam_questions.auto_exam_questions(self.cfg, self.driver, \
+                self.base_url, question_ansa, 1) 
         except Exception, e:
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")            
-            
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
+
     def manage_course_num(self):
         self.total += 1
         try:

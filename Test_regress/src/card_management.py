@@ -143,12 +143,20 @@ def add_listen_cardgroup(cfg, driver, base_url, \
     driver.find_element(cfg.get('org_manage', 'listen_course_by'), \
         cfg.get('org_manage', 'listen_course')).click()#勾选第一个课程
     time.sleep(3)
+    try:
+        if driver.find_element(cfg.get('org_manage', 'listen_warn_by'), \
+                cfg.get('org_manage', 'listen_warn')):
+            print driver.find_element(cfg.get('org_manage', 'listen_warn_by'), \
+                cfg.get('org_manage', 'listen_warn')).text
+    except:
+        None
+    time.sleep(2)
     driver.execute_script("$(\".x-btn-text\").eq(0).click()")
     time.sleep(2)
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")       
 #添加卡
 def add_card(cfg, driver, base_url, org_name, \
-        cgroup_num=1, card_prifix='auto1', card_num=5):
+        cgroup_num=1, card_prifix='autoauto1', card_num=5):
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
     driver.find_element_by_link_text(u"管理卡组").click()

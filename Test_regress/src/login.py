@@ -75,7 +75,7 @@ def is_element_present(driver, how, what):
 def register_by_email_index(cfg, driver, base_url, r_username, r_email, r_psw):
     driver.get(base_url + "/index.do")
     time.sleep(2)
-    driver.find_element_by_link_text(u"注册").click()
+    driver.find_element_by_link_text(u"[注册]").click()
     driver.find_element(cfg.get('as_index', 'register_email_username_by'), \
                         cfg.get('as_index', 'register_email_username')).clear()
     driver.find_element(cfg.get('as_index', 'register_email_username_by'), \
@@ -108,7 +108,7 @@ def register_by_email_index(cfg, driver, base_url, r_username, r_email, r_psw):
 def register_by_mobile_index(cfg, driver, base_url, r_username, r_mobile, r_psw):
     driver.get(base_url + "/index.do")
     time.sleep(2)
-    driver.find_element_by_link_text(u"注册").click()
+    driver.find_element_by_link_text(u"[注册]").click()
     driver.find_element(cfg.get('as_index', 'register_mobile_type_by'), \
                         cfg.get('as_index', 'register_mobile_type')).click()
     driver.find_element(cfg.get('as_index', 'register_mobile_username_by'), \

@@ -179,12 +179,20 @@ def buy_open_num(cfg, driver, base_url, org_name, bnum):
     driver.implicitly_wait(3)
     h = driver.window_handles
     driver.switch_to_window(h[-1])
-    driver.find_element_by_class_name("payBtn").click()
+    driver.find_element(cfg.get('org_manage', "buy_open_num_input_by"), \
+        cfg.get('org_manage', "buy_open_num_input")).click()
     driver.implicitly_wait(3)
-    driver.find_element(cfg.get('org_manage', "buy_open_num_sure_by"), \
-    	cfg.get('org_manage', "buy_open_num_sure")).click()
+    driver.find_element(cfg.get('org_manage', "buy_open_num_input_by"), \
+        cfg.get('org_manage', "buy_open_num_input")).clear()
     driver.implicitly_wait(3)
-    driver.find_element_by_link_text(u"继续购买授权").click()
+    driver.find_element(cfg.get('org_manage', "buy_open_num_input_by"), \
+        cfg.get('org_manage', "buy_open_num_input")).send_keys("1")
+    driver.implicitly_wait(3)
+    driver.find_element(cfg.get('org_manage', "buy_open_num_sure1_by"), \
+        cfg.get('org_manage', "buy_open_num_sure1")).click()
+    driver.implicitly_wait(3)
+    driver.find_element(cfg.get('org_manage', "buy_open_num_sure2_by"), \
+        cfg.get('org_manage', "buy_open_num_sure2")).click()
     driver.implicitly_wait(3)
 
 #管理播放授权数

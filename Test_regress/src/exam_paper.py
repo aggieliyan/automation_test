@@ -18,13 +18,14 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     eopen 代表试卷是否对外开放   0 代表否，不对外开放
                              1代表对外开放
     """
+    time.sleep(2)
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(1)
     driver.find_element(cfg.get('exam', 'exam_subject_by'), \
                         cfg.get('exam', 'exam_subject')).click()
     now_handle = driver.current_window_handle #得到当前窗口句柄
     driver.find_element_by_link_text(u"新建试卷").click()
-    driver.implicitly_wait(2)
+    time.sleep(2)
     all_handles = driver.window_handles #获取所有窗口句柄
     for handle in all_handles:
         if handle != now_handle:

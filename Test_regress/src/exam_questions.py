@@ -53,7 +53,7 @@ def exam_question_Single(cfg, driver, base_url, question_ansa):
     #添加音频
     driver.find_element(cfg.get('exam_questions', "question_music_by"), \
         cfg.get('exam_questions', "question_music")).send_keys \
-        ("//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/123.mp3")
+        (r"C:\123.mp3")
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)') \
         .attr('id')")
@@ -215,7 +215,7 @@ def exam_question_Cloze(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_Cloze1_by"), \
         cfg.get('exam_questions', "question_Cloze1")).send_keys(question_ansa)
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_Cloze_by"), \
+    driver.find_element(cfg.get('exam_questions', "question_Cloze2_by"), \
         cfg.get('exam_questions', "question_Cloze2")).send_keys(question_ansa)
     time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_Cloze3_by"), \

@@ -183,8 +183,8 @@ def get_academy_catename(cfg, driver, base_url):
     time.sleep(2)
     driver.find_element_by_link_text(u"跳过").click()#点击跳过
     time.sleep(2)
-    driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
-        cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
+    #driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
+        #cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
     time.sleep(2)
     academy_catename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
     time.sleep(2) 

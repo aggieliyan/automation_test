@@ -336,7 +336,7 @@ class Test(unittest.TestCase):
             card_management.add_cate_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, title)
         except Exception, e:
             print e
-            self.verificationErrors.append('fail to create course cardgroup!')
+            self.verificationErrors.append('fail to create cate cardgroup!')
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/11_cate_cardgroup.png")
 

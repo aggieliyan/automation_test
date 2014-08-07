@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 import time
 
-def importquestions(self,cfg,driver, base_url,template):
+def importquestions(self, cfg, driver, base_url, template):
     db = 'ablesky_examsystem'
     conn = self.connect_db(db)
     cursor = conn.cursor()

@@ -208,10 +208,10 @@ class Test(unittest.TestCase):
             print e
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/6_package.png')
-        self.package_title = title   
+        self.package_title = title  
         rs = self.verify_onlineclass(title)
         try:
-            self.assertEqual(True, rs)
+            self.assertEqual(True, rs, "fail to release package course!")
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 
@@ -542,7 +542,7 @@ class Test(unittest.TestCase):
         return rs
 
     def verify_onlineclass(self, classname):
-        self.driver.implicitly_wait(1)
+        time.sleep(1)
         rs = self.is_element_present(By.LINK_TEXT, classname)
         return rs
     #充值卡
@@ -1142,7 +1142,6 @@ class Test(unittest.TestCase):
         self.buy_course_use_RMB()
         self.buy_course_use_card()
         
-        self.wailian_video()
 
         #考试系统部分
 

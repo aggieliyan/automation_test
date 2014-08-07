@@ -141,7 +141,10 @@ class Test(unittest.TestCase):
             
         #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
-        self.course_href = self.base_url+course_href
+        if course_href:
+            self.course_href_2 = self.base_url + course_href
+        else:
+            self.course_href_2 = ""
 
 
     def release_three_video(self):
@@ -166,7 +169,10 @@ class Test(unittest.TestCase):
         
         #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
-        self.course_href_2 = self.base_url + course_href
+        if course_href:
+            self.course_href_2 = self.base_url + course_href
+        else:
+            self.course_href_2 = ""
 
 #现在不好判断是不是双视频了           
     def release_two_video(self):
@@ -458,6 +464,7 @@ class Test(unittest.TestCase):
     def add_course_to_cate(self):
 
         self.total += 1
+        course_name = ""
         try:
             course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url, self.org_name)
             actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")
@@ -475,11 +482,11 @@ class Test(unittest.TestCase):
             self.verificationErrors.append(str(e))   
 
     def import_one_student(self):
-
         self.total += 1
         #单个导入学员
         try:
-            student_management.import_one_student(self.cfg, self.driver, self.base_url, self.org_name, self.import_name)
+            student_management.import_one_student(self.cfg, self.driver, \
+                self.base_url, self.org_name, self.import_name)
         except Exception, e:
             print e
             self.verificationErrors.append("fail to import one student!")
@@ -488,17 +495,18 @@ class Test(unittest.TestCase):
 
         #验证
         self.driver.refresh()
-        rs = self.is_element_present(By.XPATH, "//span[@title=\'"+self.import_name+"\']")
+        rs = self.is_element_present(By.XPATH, \
+            "//span[@title=\'"+self.import_name+"\']")
         try:
             self.assertEqual(True, rs, "fail to import one student!")
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 
     def import_multi_student(self):
-        
         self.total += 1
         try:
-            student_management.import_multi_student(self.cfg, self.driver, self.base_url, self.org_name, r"C:\register_user_list.txt")
+            student_management.import_multi_student(self.cfg, self.driver, \
+                self.base_url, self.org_name, r"C:\register_user_list.txt")
         except Exception, e:
             print e
             self.verificationErrors.append("fail to import multi student!")
@@ -511,7 +519,8 @@ class Test(unittest.TestCase):
         self.total += 1
         stu_num = 5
         try:
-            student_management.auto_create_student(self.cfg, self.driver, self.base_url, self.org_name, stu_num)
+            student_management.auto_create_student(self.cfg, self.driver, \
+                self.base_url, self.org_name, stu_num)
         except Exception, e:
             print e
             self.verificationErrors.append("fail to create multi student!")
@@ -519,11 +528,11 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/create_student.png")
 
     #验证，待完成
-      
+
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
         except NoSuchElementException, e: return False
-        return True 
+        return True
 
     def verify_course(self, title): #去知识库检查是否存在
 
@@ -533,7 +542,7 @@ class Test(unittest.TestCase):
         return rs
 
     def verify_onlineclass(self, classname):
-        self.driver.implicitly_wait(1) 
+        self.driver.implicitly_wait(1)
         rs = self.is_element_present(By.LINK_TEXT, classname)
         return rs
     #充值卡
@@ -544,11 +553,11 @@ class Test(unittest.TestCase):
             confirm_num = card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.p_card_num, self.p_card_pwd)
             #验证
             if self.p_card_num!=confirm_num:
-                self.verificationErrors.append('fail to use prepaid card!')  
+                self.verificationErrors.append('fail to use prepaid card!')
         except Exception, e:
             print e
             self.verificationErrors.append('fail to use prepaid card!')
-        finally: 
+        finally:
             self.driver.save_screenshot("C:/test_rs_pic/use_prepaidcard.png")
 
     def use_coursecard(self):#充课卡
@@ -975,7 +984,8 @@ class Test(unittest.TestCase):
         self.total += 1
         self.template = '//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/createquestions.xls'
         try:
-            exam_questions.importquestions(self, self.cfg, self.driver, self.base_url,self.template)
+            exam_questions.importquestions(self, self.cfg, self.driver, \
+                self.base_url, self.template)
         except Exception, e:
             print e
             self.verificationErrors.append("fail to import questions..")
@@ -1024,26 +1034,28 @@ class Test(unittest.TestCase):
 
     def exam_onequestion(self):
         self.total += 1
-        question_ansa='exam'  + str(random.randint(1000,9999))
+        question_ansa = 'exam' + str(random.randint(1000, 9999))
         try:
-            exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa, onetype = 2) 
+            exam_questions.auto_exam_onequestion(self.cfg, self.driver, \
+                self.base_url, question_ansa, onetype=2)
         except Exception,e:
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png") 
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
             
     def exam_questions(self):
         self.total += 1
-        question_ansa='exam' + str(random.randint(1000,9999))
+        question_ansa = 'exam' + str(random.randint(1000, 9999))
         try:
-            exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa, 1) 
+            exam_questions.auto_exam_questions(self.cfg, self.driver, \
+                self.base_url, question_ansa, 1) 
         except Exception, e:
             print e
             self.verificationErrors.append("fail to exam questions")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")            
-            
+            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
+
     def manage_course_num(self):
         self.total += 1
         try:
@@ -1081,8 +1093,11 @@ class Test(unittest.TestCase):
 
     
     def test_regress(self):
+
+        
         
        #网站主站回归流程
+
         self.register()
         self.login_from_index()
         self.release_normal()
@@ -1114,41 +1129,76 @@ class Test(unittest.TestCase):
         self.modify_pagefoot()  
         self.change_headpic()
 
-        #self.verify_all_course_convert()
+        self.verify_all_course_convert()
 
-        #login.logout(self.driver, self.base_url)
-        #self.login_user()
-        #self.use_prepaidcard()
-        #self.use_coursecard()
-        #self.use_catecard()
-        #self.use_listencard()
-        #self.use_exam_card()
-        #self.buy_course_use_RMB()
-        #self.buy_course_use_card()
+        login.logout(self.driver, self.base_url)
+        self.login_user()
+        self.use_prepaidcard()
+        self.use_coursecard()
+        self.use_catecard()
+        self.use_listencard()
+        self.use_exam_card()
+        self.buy_course_use_RMB()
+        self.buy_course_use_card()
         
-        #self.wailian_video()
+        self.wailian_video()
 
         #考试系统部分
-        self.login_from_index()
-        self.exam_onequestion()
-        self.exam_questions()
-        self.import_questions()
-        self.add_exam_subject()
-        self.modify_exam_subject()
-        self.delete_exam_subject()
-        self.create_exam_cate()
-        self.modify_exam_cate()
-        self.delete_exam_cate() 
-        self.add_exam_point()
-        self.modify_exam_point()
-        self.delete_exam_point()    
-        self.createpaper()
-        self.exam_student_management()
-        self.user_statistical_information()
-        login.logout(self.driver, self.base_url)
+
+
+        #self.login_from_index()
+        #self.exam_question_danxuan()
+        #self.exam_question_duoxuan()
+        #self.exam_question_shifei()
+        #self.exam_question_tiankong()
+        #self.exam_question_wenda()
+        #self.exam_question_wanxing()
+        #self.exam_question_zonghe()
+        #self.login_from_index()
+        #self.exam_onequestion()
+        #self.exam_questions()
+        #self.import_questions()
+        #self.add_exam_subject()
+        #self.modify_exam_subject()
+        #self.delete_exam_subject()
+        #self.create_exam_cate()
+        #self.modify_exam_cate()
+        #self.delete_exam_cate() 
+        #self.add_exam_point()
+        #self.modify_exam_point()
+
+        #self.delete_exam_point()    
+        #self.createpaper()
+        #self.exam_student_management()
+
+        #self.user_statistical_information()
+        #login.logout(self.driver, self.base_url)
+
+        #self.login_user()
+        #self.exam_user()
+        #self.use_exam_card()
+
+        #self.login_from_index()
+        #self.exam_onequestion()
+        #self.exam_questions()
+        #self.import_questions()
+        #self.add_exam_subject()
+        #self.modify_exam_subject()
+        #self.delete_exam_subject()
+        #self.create_exam_cate()
+        #self.modify_exam_cate()
+        #self.delete_exam_cate() 
+        #self.add_exam_point()
+        #self.modify_exam_point()
+        #self.delete_exam_point()    
+        #self.createpaper()
+        #self.exam_student_management()
+        #self.user_statistical_information()
+        #login.logout(self.driver, self.base_url)
         
-        self.login_user()
-        self.exam_user()
+        #self.login_user()
+        #self.exam_user()
+
                    
 
     def tearDown(self):

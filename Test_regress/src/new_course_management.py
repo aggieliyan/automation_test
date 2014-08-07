@@ -71,7 +71,7 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
                 driver.implicitly_wait(1)
                 driver.find_element_by_name("files").send_keys(course_file)
                 time.sleep(1)
-
+    print "2222"
     driver.find_element(cfg.get('courseRedirect', 'next_btn_by'), \
         cfg.get('courseRedirect', 'next_btn')).click()
     #发课第二步-课程信息页面

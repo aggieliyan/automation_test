@@ -141,7 +141,10 @@ class Test(unittest.TestCase):
             
         #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
-        self.course_href = self.base_url+course_href
+        if course_href:
+            self.course_href_2 = self.base_url + course_href
+        else:
+            self.course_href_2 = ""
 
 
     def release_three_video(self):
@@ -166,7 +169,10 @@ class Test(unittest.TestCase):
         
         #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
-        self.course_href_2 = self.base_url + course_href
+        if course_href:
+            self.course_href_2 = self.base_url + course_href
+        else:
+            self.course_href_2 = ""
 
 #现在不好判断是不是双视频了           
     def release_two_video(self):
@@ -458,6 +464,7 @@ class Test(unittest.TestCase):
     def add_course_to_cate(self):
 
         self.total += 1
+        course_name = ""
         try:
             course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url, self.org_name)
             actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")

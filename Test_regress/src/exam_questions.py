@@ -51,8 +51,8 @@ def exam_question_Single(cfg, driver, base_url, question_ansa):
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
     #添加音频
-    driver.find_element(cfg.get('exam_questions', "question_yinpin_by"), \
-        cfg.get('exam_questions', "question_yinpin")).send_keys \
+    driver.find_element(cfg.get('exam_questions', "question_music_by"), \
+        cfg.get('exam_questions', "question_music")).send_keys \
         ("//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/123.mp3")
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)') \
@@ -83,8 +83,8 @@ def exam_question_Multiple(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_type_by"), \
         cfg.get('exam_questions', "question_type")).click()
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_type_duoxuan_by"), \
-        cfg.get('exam_questions', "question_type_duoxuan")).click()
+    driver.find_element(cfg.get('exam_questions', "question_type_Multiple_by"), \
+        cfg.get('exam_questions', "question_type_Multiple")).click()
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(0)').attr('id')")
     driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\'); \
@@ -119,8 +119,8 @@ def exam_question_TrueOrFalse(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_type_by"), \
         cfg.get('exam_questions', "question_type")).click()
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_type_shifei_by"), \
-        cfg.get('exam_questions', "question_type_shifei")).click()
+    driver.find_element(cfg.get('exam_questions', "question_type_TrueOrFalse_by"), \
+        cfg.get('exam_questions', "question_type_TrueOrFalse")).click()
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(0)'). \
         attr('id')")
@@ -144,8 +144,8 @@ def exam_question_Answer(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_type_by"), \
         cfg.get('exam_questions', "question_type")).click()
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_type_wenda_by"), \
-        cfg.get('exam_questions', "question_type_wenda")).click()
+    driver.find_element(cfg.get('exam_questions', "question_type_Answer_by"), \
+        cfg.get('exam_questions', "question_type_Answer")).click()
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(0)'). \
         attr('id')")
@@ -175,8 +175,8 @@ def exam_question_Blank(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_type_by"), \
         cfg.get('exam_questions', "question_type")).click()
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_type_tiankong_by"), \
-        cfg.get('exam_questions', "question_type_tiankong")).click()
+    driver.find_element(cfg.get('exam_questions', "question_type_Blank_by"), \
+        cfg.get('exam_questions', "question_type_Blank")).click()
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(0)'). \
         attr('id')")
@@ -185,8 +185,8 @@ def exam_question_Blank(cfg, driver, base_url, question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_tiankonganswer_by"), \
-        cfg.get('exam_questions', "question_tiankonganswer")).send_keys(question_ansa)
+    driver.find_element(cfg.get('exam_questions', "question_Blank_by"), \
+        cfg.get('exam_questions', "question_Blank")).send_keys(question_ansa)
     time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
@@ -202,8 +202,8 @@ def exam_question_Cloze(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_type_by"), \
         cfg.get('exam_questions', "question_type")).click()
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_type_wanxing_by"), \
-        cfg.get('exam_questions', "question_type_wanxing")).click()
+    driver.find_element(cfg.get('exam_questions', "question_type_Cloze_by"), \
+        cfg.get('exam_questions', "question_type_Cloze")).click()
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(0)'). \
         attr('id')")
@@ -212,17 +212,17 @@ def exam_question_Cloze(cfg, driver, base_url, question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_wanxinganswer1_by"), \
-        cfg.get('exam_questions', "question_wanxinganswer1")).send_keys(question_ansa)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze1_by"), \
+        cfg.get('exam_questions', "question_Cloze1")).send_keys(question_ansa)
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_wanxinganswer2_by"), \
-        cfg.get('exam_questions', "question_wanxinganswer2")).send_keys(question_ansa)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_by"), \
+        cfg.get('exam_questions', "question_Cloze2")).send_keys(question_ansa)
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_wanxinganswer3_by"), \
-        cfg.get('exam_questions', "question_wanxinganswer3")).send_keys(question_ansa)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze3_by"), \
+        cfg.get('exam_questions', "question_Cloze3")).send_keys(question_ansa)
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_wanxinganswer4_by"), \
-        cfg.get('exam_questions', "question_wanxinganswer4")).send_keys(question_ansa)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze4_by"), \
+        cfg.get('exam_questions', "question_Cloze4")).send_keys(question_ansa)
     time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
@@ -238,8 +238,8 @@ def exam_question_Composite(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_type_by"), \
         cfg.get('exam_questions', "question_type")).click()
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_type_zonghe_by"), \
-        cfg.get('exam_questions', "question_type_zonghe")).click()
+    driver.find_element(cfg.get('exam_questions', "question_type_Composite_by"), \
+        cfg.get('exam_questions', "question_type_Composite")).click()
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(0)'). \
         attr('id')")

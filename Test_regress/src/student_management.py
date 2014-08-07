@@ -113,12 +113,12 @@ def open_course_for_one(cfg, driver, base_url, org_name, stu_num=1):
         pass
     driver.implicitly_wait(2)
     driver.find_element_by_link_text(u"学员管理").click()
-    time.sleep(5)
+    time.sleep(8)
     # driver.find_element_by_xpath \
     # ("//div["+str(stu_num)+"]/table/tbody/tr/td[2]/div/p/a").click()
     driver.find_element(cfg.get('org_manage', "open_course_by"), \
     cfg.get('org_manage', "open_course")).click()
-    #开通知识资料
+    #开通课程
     time.sleep(4)
     driver.find_element(cfg.get('org_manage', "open_cate_by"), \
     cfg.get('org_manage', "open_cate")).click()#未归类内容，展开资料

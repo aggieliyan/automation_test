@@ -38,6 +38,7 @@ def use_course_card(cfg, driver, base_url, card_num, card_psw):
     time.sleep(2)
     driver.find_element(cfg.get('use_card', 'course_check_1_by'), \
         cfg.get('use_card', 'course_check_1')).click()
+    time.sleep(2)
     driver.find_element(cfg.get('use_card', 'course_check_2_by'), \
         cfg.get('use_card', 'course_check_2')).click()
     time.sleep(2)
@@ -223,12 +224,14 @@ def add_exam_card_management(cfg, driver, base_url, count):
     return examcard_number
 #总调用方法
 def add_exam_card(cfg, driver, base_url, count):
-    page_catename = get_academy_catename(cfg, driver, base_url)
-    driver.get(base_url + "exam/")#考试系统链接     
     time.sleep(2)
+    page_catename = get_academy_catename(cfg, driver, base_url)
+    time.sleep(3)
+    driver.get(base_url + "exam/")#考试系统链接     
+    time.sleep(3)
     driver.find_element(cfg.get('org_manage', 'exam_list_by'), \
         cfg.get('org_manage', 'exam_list')).click()#点击试卷库
-    time.sleep(2)
+    time.sleep(3)
     exam_paper.create_paper(cfg, driver, base_url, page_catename, 1, 1, 1, 1)
     examcard_number = add_exam_card_management(cfg, driver, base_url, count)
     return examcard_number

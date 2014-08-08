@@ -244,6 +244,20 @@ def exam_question_Blank(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_Blank_by"), \
         cfg.get('exam_questions', "question_Blank")).send_keys(question_ansa)
     time.sleep(2)
+    #添加答案
+    driver.find_element(cfg.get('exam_questions', "question_Blank_1addanswer_by"), \
+        cfg.get('exam_questions', "question_Blank_1addanswer")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Blank_1addanswerc_by"), \
+        cfg.get('exam_questions', "question_Blank_1addanswerc")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Blank_2addanswer_by"), \
+        cfg.get('exam_questions', "question_Blank_2addanswer")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Blank_2addanswerc_by"), \
+        cfg.get('exam_questions', "question_Blank_2addanswerc")).send_keys(question_ansa)
+    time.sleep(2)
+    #保存
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)

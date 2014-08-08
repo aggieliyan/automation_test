@@ -110,19 +110,19 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer):
                 None
         ###综合题结束
         time.sleep(exam_time * 60 + 2)
-        try:   
+        try:        
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
                 cfg.get('exam', 'exam_submit')).click()#提交
-            time.sleep(2)
+            time.sleep(5)
             driver.find_element(cfg.get('exam', 'exam_continue_by'), \
                 cfg.get('exam', 'exam_continue')).click()#弹窗-继续考试
-            time.sleep(2)
+            time.sleep(5)
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
-                cfg.get('exam', 'exam_submit')).click()#提交
-            time.sleep(2)
+                 cfg.get('exam', 'exam_submit')).click()#提交
+            time.sleep(5)
             driver.find_element(cfg.get('exam', 'window_submit_by'), \
                 cfg.get('exam', 'window_submit')).click()#弹窗-提交
-            time.sleep(2)  
+            time.sleep(5)  
         except:
              None
     #学员提交白卷
@@ -131,15 +131,15 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer):
         try:   
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
                 cfg.get('exam', 'exam_submit')).click()#提交
-            time.sleep(2)
+            time.sleep(5)
             driver.find_element(cfg.get('exam', 'exam_continue_by'), \
                 cfg.get('exam', 'exam_continue')).click()#弹窗-继续考试
-            time.sleep(2)
+            time.sleep(5)
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
                 cfg.get('exam', 'exam_submit')).click()#提交
-            time.sleep(2)
+            time.sleep(5)
             driver.find_element(cfg.get('exam', 'window_submit_by'), \
                 cfg.get('exam', 'window_submit')).click()#弹窗-提交
-            time.sleep(2)  
+            time.sleep(5)  
         except:
              None

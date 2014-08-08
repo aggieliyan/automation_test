@@ -187,12 +187,12 @@ def get_academy_catename(cfg, driver, base_url):
         driver.find_element_by_link_text(u"跳过").click()#点击跳过
     except:
         pass
-    time.sleep(2)
+    time.sleep(5)
     driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
         cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
-    time.sleep(2)
+    time.sleep(5)
     academy_catename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
-    time.sleep(2) 
+    time.sleep(5) 
     driver.find_element(cfg.get('org_manage', 'exam_select_close_by'), \
         cfg.get('org_manage', 'exam_select_close')).click()#关闭窗口   
     time.sleep(2)
@@ -227,11 +227,11 @@ def add_exam_card(cfg, driver, base_url, count):
     time.sleep(2)
     page_catename = get_academy_catename(cfg, driver, base_url)
     time.sleep(3)
-    driver.get(base_url + "exam/")#考试系统链接     
-    time.sleep(3)
-    driver.find_element(cfg.get('org_manage', 'exam_list_by'), \
-        cfg.get('org_manage', 'exam_list')).click()#点击试卷库
-    time.sleep(3)
+    #driver.get(base_url + "exam/")#考试系统链接     
+    #time.sleep(3)
+    #driver.find_element(cfg.get('org_manage', 'exam_list_by'), \
+        #cfg.get('org_manage', 'exam_list')).click()#点击试卷库
+    #time.sleep(3)
     exam_paper.create_paper(cfg, driver, base_url, page_catename, 1, 1, 1, 1)
     examcard_number = add_exam_card_management(cfg, driver, base_url, count)
     return examcard_number

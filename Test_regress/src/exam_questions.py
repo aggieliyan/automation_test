@@ -149,6 +149,17 @@ def exam_question_Multiple(cfg, driver, base_url, question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
+    #添加选项
+    driver.find_element(cfg.get('exam_questions', "question_Single_addanswer_by"), \
+        cfg.get('exam_questions', "question_Single_addanswer")).click()
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(4)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    #保存
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)

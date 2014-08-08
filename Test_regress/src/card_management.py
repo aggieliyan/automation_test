@@ -23,6 +23,7 @@ def use_prepaid_card(cfg, driver, base_url, card_num, card_psw):
     time.sleep(2)
     prepaid_num = driver.find_element(cfg.get('use_card', 'confirm_prepaid_num_by'), \
         cfg.get('use_card', 'confirm_prepaid_num')).text
+    time.sleep(2)
     return prepaid_num
 #使用补课卡
 def use_course_card(cfg, driver, base_url, card_num, card_psw):

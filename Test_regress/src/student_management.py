@@ -209,7 +209,7 @@ def manage_course_num(cfg, driver, base_url):
     driver.implicitly_wait(2)
     driver.find_element_by_link_text(u"学员管理").click()
     time.sleep(5)
-    driver.find_element_by_link_text("管理播放授权数").click()
+    driver.find_element_by_link_text(u"管理播放授权数").click()
     driver.implicitly_wait(2)
     driver.find_element(cfg.get('manage_course_num', \
         "manage_coursenum_opencouse_by"), \
@@ -219,7 +219,7 @@ def manage_course_num(cfg, driver, base_url):
         "manage_coursenum_opennum_by"), \
     	cfg.get('manage_course_num', "manage_coursenum_opennum")).click()
     driver.implicitly_wait(2)
-    driver.find_element_by_link_text("修改剩余播放次数").click()
+    driver.find_element_by_link_text(u"修改剩余播放次数").click()
     driver.implicitly_wait(2)
     driver.find_element(cfg.get('manage_course_num', \
         'manage_coursenum_change_by'), \
@@ -229,5 +229,16 @@ def manage_course_num(cfg, driver, base_url):
         'manage_coursenum_change_by'), \
     	cfg.get('manage_course_num', 'manage_coursenum_change')).send_keys("1")
     driver.implicitly_wait(2)
-    driver.find_element_by_link_text("保存").click()
+    driver.find_element_by_link_text(u"保存").click()
+    driver.implicitly_wait(2)
+    driver.find_element(cfg.get('manage_course_num', \
+        'manage_coursenum_all_by'), \
+        cfg.get('manage_course_num', 'manage_coursenum_all')).click()
+    driver.implicitly_wait(2)
+    driver.find_element(cfg.get('manage_course_num', \
+        'manage_coursenum_allnum_by'), \
+        cfg.get('manage_course_num', 'manage_coursenum_allnum')).send_keys("1")
+    driver.implicitly_wait(2)
+    driver.find_element_by_link_text(u"应用").click()
+    driver.implicitly_wait(2)
  

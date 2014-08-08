@@ -346,6 +346,7 @@ def exam_question_Composite(cfg, driver, base_url, question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
+    #默认第一小题单选题
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)').attr('id')")
     driver.execute_script("var element=window.document.getElementById \
         (\'" + iframe_id + "\'); \
@@ -360,6 +361,57 @@ def exam_question_Composite(cfg, driver, base_url, question_ansa):
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(5)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById \
+        (\'" + iframe_id + "\'); \
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    #添加选项
+    driver.find_element(cfg.get('exam_questions', "question_Composite_Single_addanswer_by"), \
+        cfg.get('exam_questions', "question_Composite_Single_addanswer")).click()
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(6)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById \
+        (\'" + iframe_id + "\'); \
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
+    element.innerHTML =\'" + question_ansa + "\';")
+    #添加解析
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(7)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById \
+        (\'" + iframe_id + "\'); \
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    #添加第二题
+    driver.find_element(cfg.get('exam_questions', "question_Composite_add_by"), \
+        cfg.get('exam_questions', "question_Composite_add")).click()
+    time.sleep(2)
+    #第二小题多选题
+    driver.find_element(cfg.get('exam_questions', "question_Composite_addtype_by"), \
+        cfg.get('exam_questions', "question_Composite_addtype")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Composite_type_Multiple_by"), \
+        cfg.get('exam_questions', "question_Composite_type_Multiple")).click()
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(8)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById \
+        (\'" + iframe_id + "\'); \
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(10)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById \
+        (\'" + iframe_id + "\'); \
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(11)'). \
         attr('id')")
     driver.execute_script("var element=window.document.getElementById \
         (\'" + iframe_id + "\'); \

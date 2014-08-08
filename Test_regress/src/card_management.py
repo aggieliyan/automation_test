@@ -217,7 +217,7 @@ def add_exam_card_management(cfg, driver, base_url, count):
     lookcardnum_url = driver.execute_script("return $('#paper_list_con li:eq(1)').attr('data-url')")
     time.sleep(2)
     driver.get(lookcardnum_url)#定位查看卡号连接
-    time.sleep(2)
+    time.sleep(8)
     examcard_number = driver.execute_script("return $('.first-cell span:eq(1)').text()")
     time.sleep(2)
     return examcard_number

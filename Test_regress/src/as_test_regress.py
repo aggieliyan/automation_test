@@ -53,6 +53,7 @@ class Test(unittest.TestCase):
         self.base_url = "http://www."+self.test_enviroment+".ablesky.com/"
         #self.base_url = "http://www.zhongyan.com/"
         #self.base_url = "http://web1mb1.bp1.ablesky.com/"
+        #self.base_url = "http://www.ablesky.com/"
 
         if os.path.exists("C:\\test_rs_pic") != True:
             os.system("mkdir C:\\test_rs_pic")

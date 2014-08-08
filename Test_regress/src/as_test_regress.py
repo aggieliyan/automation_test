@@ -1040,9 +1040,9 @@ class Test(unittest.TestCase):
                 self.base_url, question_ansa, onetype=2)
         except Exception,e:
             print e
-            self.verificationErrors.append("fail to exam questions")
+            self.verificationErrors.append("fail to create exam onequestion")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
+            self.driver.save_screenshot("C:/test_rs_pic/exam_onequestion.png")
             
     def exam_questions(self):
         self.total += 1
@@ -1052,7 +1052,7 @@ class Test(unittest.TestCase):
                 self.base_url, question_ansa, 1) 
         except Exception, e:
             print e
-            self.verificationErrors.append("fail to exam questions")
+            self.verificationErrors.append("fail to create exam questions")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
 

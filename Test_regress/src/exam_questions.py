@@ -68,9 +68,54 @@ def exam_question_Single(cfg, driver, base_url, question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
+    #添加选项
+    driver.find_element(cfg.get('exam_questions', "question_Single_addanswer_by"), \
+        cfg.get('exam_questions', "question_Single_addanswer")).click()
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(4)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    #添加解析
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(5)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    #添加标签
+    driver.find_element(cfg.get('exam_questions', "question_Single_addlabel_by"), \
+        cfg.get('exam_questions', "question_Single_addlabel")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Single_addlabeladd_by"), \
+        cfg.get('exam_questions', "question_Single_addlabeladd")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Single_addlabel2_by"), \
+        cfg.get('exam_questions', "question_Single_addlabel2")).send_keys(question_ansa + question_ansa)
+    time.sleep(2)
+    #添加重要等级
+    driver.find_element(cfg.get('exam_questions', "question_Single_important_by"), \
+        cfg.get('exam_questions', "question_Single_important")).click()
+    time.sleep(2)
+    #添加难度
+    driver.find_element(cfg.get('exam_questions', "question_Single_difficulty_by"), \
+        cfg.get('exam_questions', "question_Single_difficulty")).click()
+    time.sleep(2)
+    #添加考频
+    driver.find_element(cfg.get('exam_questions', "question_Single_frequency_by"), \
+        cfg.get('exam_questions', "question_Single_frequency")).click()
+    time.sleep(2)
+    #添加相关推荐
+    driver.find_element(cfg.get('exam_questions', "question_Single_recommendation_by"), \
+        cfg.get('exam_questions', "question_Single_recommendation")).send_keys(question_ansa)
+    time.sleep(2)
+    #保存
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
+    #跳转页面
     driver.find_element_by_link_text(u"单选题").click()
     time.sleep(2)
 

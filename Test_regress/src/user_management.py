@@ -14,7 +14,7 @@ def buy_course(cfg, driver, base_url, org_name):
     time.sleep(8)
     driver.find_element_by_link_text(u"课程中心").click()
     time.sleep(10)
-    driver.find_element(cfg.get('org_index','buy_coursec1_by'),cfg.get('org_index','buy_coursec1')).click()
+    driver.find_element_by_xpath('//html/body/div[2]/div[3]/div/div[2]/div[1]/div/p/a').click()
     time.sleep(8)
     h = driver.window_handles
     driver.switch_to_window(h[-1])
@@ -39,8 +39,7 @@ def buy_course_usecard(cfg, driver, base_url, org_name):
     time.sleep(8)
     driver.find_element_by_link_text(u"课程中心").click()
     time.sleep(10)
-    driver.find_element(cfg.get('org_index','buy_coursec1_by'),cfg.get('org_index','buy_coursec1')).click()
-    #driver.find_element(cfg.get('org_index','wl_href_css_by'),cfg.get('org_index','wl_href_css')).click()
+    driver.find_element_by_xpath('//html/body/div[2]/div[3]/div/div[2]/div[1]/div/p/a').click()
     time.sleep(8)
     h = driver.window_handles
     driver.switch_to_window(h[-1])
@@ -49,8 +48,8 @@ def buy_course_usecard(cfg, driver, base_url, org_name):
     time.sleep(12)
     h = driver.window_handles
     driver.switch_to_window(h[-1])
-    #driver.find_element(cfg.get('org_index','wl_buycou_css_by'),cfg.get('org_index','wl_buycou_css')).click()
-    driver.find_element(cfg.get('org_index','buy_coursec2_by'),cfg.get('org_index','buy_coursec2')).click()
+    driver.find_element_by_xpath('//html/body/div[3]/div[1]/div[2]/div/div[5]/div[4]/a').click()
+    #driver.find_element(cfg.get('org_index','buy_coursec2_by'),cfg.get('org_index','buy_coursec2')).click()
     time.sleep(10)
     
 #个人发照片 数量最大10
@@ -166,7 +165,7 @@ def change_homelogo(cfg, driver, base_url, org_name, logo_pic = r"W:\Testing\Tes
     time.sleep(8)
 
 #修改页脚
-def modify_pagefoot(cfg,driver, base_url, org_name):
+def modify_pagefoot(cfg, driver, base_url, org_name):
    
     driver.get(base_url + org_name)
     time.sleep(4)

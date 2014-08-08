@@ -185,8 +185,18 @@ def exam_question_TrueOrFalse(cfg, driver, base_url, question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
+        #修改答案
+    driver.find_element(cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1_by'), \
+                        cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1')).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1_by'), \
+                        cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1')).clear()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1_by'), \
+                        cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1')).send_keys("right")
+    time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
-        cfg.get('exam_questions', "question_save")).click()
+                        cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
     driver.find_element_by_link_text(u"单选题").click()
 #    time.sleep(2)

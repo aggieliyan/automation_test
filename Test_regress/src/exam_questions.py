@@ -71,7 +71,7 @@ def exam_question_Single(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
     time.sleep(2)
 
     #创建多选题
@@ -107,7 +107,7 @@ def exam_question_Multiple(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
     time.sleep(2)
 
 #创建是非题
@@ -132,7 +132,7 @@ def exam_question_TrueOrFalse(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
 #    time.sleep(2)
 
 #创建问答题
@@ -164,7 +164,7 @@ def exam_question_Answer(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
 
 #创建填空题
 def exam_question_Blank(cfg, driver, base_url, question_ansa):
@@ -191,7 +191,7 @@ def exam_question_Blank(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
 
 #创建完型填空题
 def exam_question_Cloze(cfg, driver, base_url, question_ansa):
@@ -227,7 +227,7 @@ def exam_question_Cloze(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
 
 #创建综合题
 def exam_question_Composite(cfg, driver, base_url, question_ansa):
@@ -271,7 +271,7 @@ def exam_question_Composite(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
     time.sleep(2)
 
 def auto_exam_questions(cfg, driver, base_url, question_ansa, num):
@@ -288,9 +288,9 @@ def auto_exam_questions(cfg, driver, base_url, question_ansa, num):
     time.sleep(2)
     driver.get(base_url + "exam/")
     time.sleep(2)
-    driver.find_element_by_link_text("试题库").click()
+    driver.find_element_by_link_text(u"试题库").click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
     time.sleep(2)
     for i in range(num):
         exam_question_Single(cfg, driver, base_url, question_ansa)
@@ -313,9 +313,9 @@ def auto_exam_onequestion(cfg, driver, base_url, question_ansa, onetype):
     time.sleep(2)
     driver.get(base_url + "exam/")
     time.sleep(2)
-    driver.find_element_by_link_text("试题库").click()
+    driver.find_element_by_link_text(u"试题库").click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
     time.sleep(2)
     if onetype == 1:
         exam_question_Single(cfg, driver, base_url, question_ansa)

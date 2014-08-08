@@ -294,6 +294,34 @@ def exam_question_Cloze(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_Cloze4_by"), \
         cfg.get('exam_questions', "question_Cloze4")).send_keys(question_ansa)
     time.sleep(2)
+    #添加选项
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_1addanswer_by"), \
+        cfg.get('exam_questions', "question_Cloze_1addanswer")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_1addanswerc_by"), \
+        cfg.get('exam_questions', "question_Cloze_1addanswerc")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_2addanswer_by"), \
+        cfg.get('exam_questions', "question_Cloze_2addanswer")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_2addanswerc1_by"), \
+        cfg.get('exam_questions', "question_Cloze_2addanswerc1")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_2addanswerc2_by"), \
+        cfg.get('exam_questions', "question_Cloze_2addanswerc2")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_2addanswerc3_by"), \
+        cfg.get('exam_questions', "question_Cloze_2addanswerc3")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_2addanswerc4_by"), \
+        cfg.get('exam_questions', "question_Cloze_2addanswerc4")).send_keys(question_ansa)
+    time.sleep(2)
+    #添加解析
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_analysis1_by"), \
+        cfg.get('exam_questions', "question_Cloze_analysis1")).send_keys(question_ansa)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_analysis_by"), \
+        cfg.get('exam_questions', "question_Cloze_analysis")).send_keys(question_ansa)
+    #保存
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)

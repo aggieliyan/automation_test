@@ -1,42 +1,25 @@
 # -*- coding: UTF-8 -*-
 import time
+from selenium.webdriver.common.keys import Keys
 
-def importquestions(self, cfg, driver, base_url, template):
-    db = 'ablesky_examsystem'
-    conn = self.connect_db(db)
-    cursor = conn.cursor()
-    sql = "SELECT COUNT(*) FROM e_question_q"
-    cursor.execute(sql)
-    num1 = cursor.fetchall()[0][0]
-    cursor.close()
+def importquestions(cfg, driver, base_url, template):
+    
     #以下部分可删除,要求调用此函数的同学保证停在试题库页面
     driver.get(base_url + "exam/")
-    #driver.find_element("partial link text", "点击这里").click()
     driver.implicitly_wait(30)
     driver.find_element("link text", u"试题库").click()
-    driver.implicitly_wait(30)
-    driver.find_element("link text", u"单选题").click()
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('exam', "import_questions_by"), \
                              cfg.get('exam', 'import_questions')).click()
     driver.find_element(cfg.get('exam', "path_by"), \
-                             cfg.get('exam', "path")).send_keys(template)
+                             cfg.get('exam', "path")).send_keys("C:/createquestions.xls")
     driver.find_element(cfg.get('exam', "upload_button_by"), \
                              cfg.get('exam', "upload_button")).click()
-    driver.implicitly_wait(30)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', "close_button_by"), \
                              cfg.get('exam', "close_button")).click()
-    conn = self.connect_db(db)
-    cursor = conn.cursor()
-    cursor.execute(sql)
-    num2 = cursor.fetchall()[0][0]
-    num = num2 - num1
-    cursor.execute \
-        ("SELECT content_q,content_q FROM e_question_q ORDER BY id_q DESC LIMIT 1")
-    title = cursor.fetchall()[0][0]
-    msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
-    print msg
-
+    
+    
 #创建单选题
 def exam_question_Single(cfg, driver, base_url, question_ansa):
     #question_ansa为创建试题时，题目和答案的内容，现在是用exam加随机数组成
@@ -53,7 +36,7 @@ def exam_question_Single(cfg, driver, base_url, question_ansa):
     #添加音频
     driver.find_element(cfg.get('exam_questions', "question_music_by"), \
         cfg.get('exam_questions', "question_music")).send_keys \
-        (r"C:\123.mp3")
+        (r"//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/123.mp3")
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)') \
         .attr('id')")

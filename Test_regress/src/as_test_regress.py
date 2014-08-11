@@ -17,10 +17,10 @@ class Test(unittest.TestCase):
 
     def setUp(self):
 
-        self.browser = "ie"
+        self.browser = "Chrome"
 
         self.test_enviroment = "beta"
-        self.org_name = "salesdemo"
+        self.org_name = "lirenmba"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -984,15 +984,35 @@ class Test(unittest.TestCase):
     def import_questions(self):
         self.total += 1
         self.template = '//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/createquestions.xls'
+        #建立数据库连接查询当前试题总数并关闭连接,否则下面的查询会有缓存
+        db = 'ablesky_examsystem'
+        conn = self.connect_db(db)
+        cursor = conn.cursor()
+        sql = "SELECT COUNT(*) FROM e_question_q"
+        cursor.execute(sql)
+        num1 = cursor.fetchall()[0][0]
+        cursor.close()
+        #调用导入试题
         try:
-            exam_questions.importquestions(self, self.cfg, self.driver, \
+            exam_questions.importquestions(self.cfg, self.driver, \
                 self.base_url, self.template)
         except Exception, e:
             print e
             self.verificationErrors.append("fail to import questions..")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-
+        #重新建立数据库,查询导入试题后的总数,二者差即为导入总数
+        conn = self.connect_db(db)
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        num2 = cursor.fetchall()[0][0]
+        num = num2 - num1
+        cursor.execute \
+            ("SELECT content_q,content_q FROM e_question_q ORDER BY id_q DESC LIMIT 1")
+        title = cursor.fetchall()[0][0]
+        msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
+        print msg
+    
     def createpaper(self):
         self.total += 1
         try:
@@ -1094,11 +1114,8 @@ class Test(unittest.TestCase):
 
     
     def test_regress(self):
-
-        
-        
-       #网站主站回归流程
-
+        #网站主站回归流程
+        '''
         self.register()
         self.login_from_index()
         self.release_normal()
@@ -1142,13 +1159,15 @@ class Test(unittest.TestCase):
         self.use_exam_card()
         self.buy_course_use_RMB()
         self.buy_course_use_card()
+        '''
         
 
         #考试系统部分
         self.login_from_index()
-        self.exam_onequestion()
-        self.exam_questions()
+        #self.exam_onequestion()
+        #self.exam_questions()
         self.import_questions()
+        '''
         self.add_exam_subject()
         self.modify_exam_subject()
         self.delete_exam_subject()
@@ -1165,6 +1184,7 @@ class Test(unittest.TestCase):
         
         self.login_user()
         self.exam_user()
+        '''
 
                    
 

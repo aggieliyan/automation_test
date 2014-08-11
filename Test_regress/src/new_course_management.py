@@ -34,19 +34,23 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
             driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
                 cfg.get('courseRedirect', 'upload_btn'))[1].click()
             time.sleep(3)
-            driver.execute_script(\
-                "$(\'.spacefile-name input\').last().click()")
+            driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
+            time.sleep(1)
             driver.execute_script(\
                 "$(\'.dialog-button-container button\').eq(0).click()")
-            time.sleep(1)
+            #driver.find_element("xpath", "//button").click()
+            time.sleep(3)
             driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
                 cfg.get('courseRedirect', 'upload_btn'))[2].click()
-            time.sleep(1)
+            time.sleep(2)
             driver.execute_script(\
                 "$(\'.spacefile-name input\').last().click()")
+            driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
+            time.sleep(1)
             driver.execute_script(\
                 "$(\'.dialog-button-container button\').eq(0).click()")
-            time.sleep(1)
+            #driver.find_element("css selector", "")
+            time.sleep(3)
 
         else:#单视频
             #存储空间上传
@@ -56,12 +60,14 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
                 time.sleep(3)
 
                 #全选 /选最后一个
-                driver.execute_script(\
-                    "$(\'.spacefile-name input\').last().click()")
-
+                #driver.execute_script(\
+                 #   "$(\'.spacefile-name input\').last().click()")
+                driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
+                time.sleep(1)
                 driver.execute_script(\
                     "$(\'.dialog-button-container button\').eq(0).click()")
                 time.sleep(2)
+                #driver.find_element("xpath", "//button").click()
             #本地上传
             else:
                 #把input显示出来才可以用否则会报当前元素不可见的错

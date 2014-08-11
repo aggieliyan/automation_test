@@ -161,8 +161,10 @@ def change_homelogo(cfg, driver, base_url, org_name, logo_pic = r"W:\Testing\Tes
   
     driver.get(base_url + org_name)
     time.sleep(2)
+    driver.execute_script("$('[name=\"files\"]').eq(0).attr('style','height:20px;opacity:1;display:block;position:static;transform:translate(0px, 0px) scale(1)')")
+    time.sleep(1)
     driver.find_element(cfg.get('org_index','home_logoname_by'),cfg.get('org_index','home_logoname')).send_keys(logo_pic)
-    time.sleep(8)
+    time.sleep(2)
 
 #修改页脚
 def modify_pagefoot(cfg, driver, base_url, org_name):

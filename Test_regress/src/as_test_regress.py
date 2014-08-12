@@ -20,7 +20,7 @@ class Test(unittest.TestCase):
         self.browser = "Chrome"
 
         self.test_enviroment = "beta"
-        self.org_name = "lirenmba"
+        self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -982,7 +982,7 @@ class Test(unittest.TestCase):
 
     def import_questions(self):
         self.total += 1
-        self.template = '//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/createquestions.xls'
+        self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
         #建立数据库连接查询当前试题总数并关闭连接,否则下面的查询会有缓存
         db = 'ablesky_examsystem'
         conn = self.connect_db(db)

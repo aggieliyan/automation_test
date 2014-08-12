@@ -3,16 +3,16 @@ import time
 from selenium.webdriver.common.keys import Keys
 
 def importquestions(cfg, driver, base_url, template):
-    
-    #以下部分可删除,要求调用此函数的同学保证停在试题库页面
     driver.get(base_url + "exam/")
     driver.implicitly_wait(30)
     driver.find_element("link text", u"试题库").click()
     driver.implicitly_wait(30)
+    
     driver.find_element(cfg.get('exam', "import_questions_by"), \
-                             cfg.get('exam', 'import_questions')).click()
+                             cfg.get('exam', 'import_questions')).click()    
+    driver.execute_script("$('#J_uploadFileInput').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(0.5)')")
     driver.find_element(cfg.get('exam', "path_by"), \
-                             cfg.get('exam', "path")).send_keys("C:/createquestions.xls")
+                             cfg.get('exam', "path")).send_keys(template)
     driver.find_element(cfg.get('exam', "upload_button_by"), \
                              cfg.get('exam', "upload_button")).click()
     driver.implicitly_wait(10)

@@ -238,7 +238,7 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun122"):
             "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(0).children().text()")
         print stu_name
         if username not in stu_name:
-            print username + u'该学员不存在,无法导出学员成绩。。'
+            print username + u'该学员不存在,无法评分。。'
         else:
             grade_href = driver.execute_script(\
                 "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")

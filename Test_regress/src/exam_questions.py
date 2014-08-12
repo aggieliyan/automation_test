@@ -53,7 +53,7 @@ def exam_question_Single(cfg, driver, base_url, question_ansa):
     #添加音频
     driver.find_element(cfg.get('exam_questions', "question_music_by"), \
         cfg.get('exam_questions', "question_music")).send_keys \
-        (r"C:\123.mp3")
+        (r"D:\123.mp3")
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)') \
         .attr('id')")

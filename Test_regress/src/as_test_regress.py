@@ -1025,7 +1025,7 @@ class Test(unittest.TestCase):
     def user_statistical_information(self):
         self.total += 1
         try:
-            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费11）", etype=1)
             #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
             #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         except Exception, e:
@@ -1115,6 +1115,7 @@ class Test(unittest.TestCase):
     def test_regress(self):
 
         #网站主站回归流程
+        '''
         self.register()
         self.login_from_index()
         self.release_normal()
@@ -1157,24 +1158,25 @@ class Test(unittest.TestCase):
         self.use_listencard()
         self.use_exam_card()
         self.buy_course_use_RMB()
-        self.buy_course_use_card()        
+        self.buy_course_use_card()
+        '''        
 
         #考试系统部分
         self.login_from_index()
-        self.exam_onequestion()
-        self.exam_questions()
-        self.import_questions()
-        self.add_exam_subject()
-        self.modify_exam_subject()
-        self.delete_exam_subject()
-        self.create_exam_cate()
-        self.modify_exam_cate()
-        self.delete_exam_cate() 
-        self.add_exam_point()
-        self.modify_exam_point()
-        self.delete_exam_point()    
-        self.createpaper()
-        self.exam_student_management()
+#        self.exam_onequestion()
+#        self.exam_questions()
+#        self.import_questions()
+#        self.add_exam_subject()
+#        self.modify_exam_subject()
+#        self.delete_exam_subject()
+#        self.create_exam_cate()
+#        self.modify_exam_cate()
+#        self.delete_exam_cate() 
+#        self.add_exam_point()
+#        self.modify_exam_point()
+#        self.delete_exam_point()    
+#        self.createpaper()
+#        self.exam_student_management()
         self.user_statistical_information()
         login.logout(self.driver, self.base_url)
 

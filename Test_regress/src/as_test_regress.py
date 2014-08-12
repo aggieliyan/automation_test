@@ -17,7 +17,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
 
-        self.browser = "ie"
+        self.browser = "Chrome"
 
         self.test_enviroment = "beta"
         self.org_name = "adm_liwen01"
@@ -53,6 +53,7 @@ class Test(unittest.TestCase):
         self.base_url = "http://www."+self.test_enviroment+".ablesky.com/"
         #self.base_url = "http://www.zhongyan.com/"
         #self.base_url = "http://web1mb1.bp1.ablesky.com/"
+        #self.base_url = "http://www.ablesky.com/"
 
         if os.path.exists("C:\\test_rs_pic") != True:
             os.system("mkdir C:\\test_rs_pic")
@@ -420,10 +421,9 @@ class Test(unittest.TestCase):
     def add_exam_card(self):
         self.total += 1
         count = 5
+        academy = "qqhru"
         try:
-            #self.page_catename = card_management.get_academy_catename(self.cfg, self.driver, self.base_url)
-            #exam_paper.create_paper(self.cfg, self.driver, self.base_url, self.page_catename, 1, 1, 1, 1)
-            self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url,count)
+            self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url, count, academy)
         except Exception,e:
             print e
             self.verificationErrors.append('fail to add exam card!')
@@ -982,16 +982,36 @@ class Test(unittest.TestCase):
 
     def import_questions(self):
         self.total += 1
-        self.template = '//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/createquestions.xls'
+        self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
+        #建立数据库连接查询当前试题总数并关闭连接,否则下面的查询会有缓存
+        db = 'ablesky_examsystem'
+        conn = self.connect_db(db)
+        cursor = conn.cursor()
+        sql = "SELECT COUNT(*) FROM e_question_q"
+        cursor.execute(sql)
+        num1 = cursor.fetchall()[0][0]
+        cursor.close()
+        #调用导入试题
         try:
-            exam_questions.importquestions(self, self.cfg, self.driver, \
+            exam_questions.importquestions(self.cfg, self.driver, \
                 self.base_url, self.template)
         except Exception, e:
             print e
             self.verificationErrors.append("fail to import questions..")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-
+        #重新建立数据库,查询导入试题后的总数,二者差即为导入总数
+        conn = self.connect_db(db)
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        num2 = cursor.fetchall()[0][0]
+        num = num2 - num1
+        cursor.execute \
+            ("SELECT content_q,content_q FROM e_question_q ORDER BY id_q DESC LIMIT 1")
+        title = cursor.fetchall()[0][0]
+        msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
+        print msg
+    
     def createpaper(self):
         self.total += 1
         try:
@@ -1040,9 +1060,9 @@ class Test(unittest.TestCase):
                 self.base_url, question_ansa, onetype=2)
         except Exception,e:
             print e
-            self.verificationErrors.append("fail to exam questions")
+            self.verificationErrors.append("fail to create exam onequestion")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
+            self.driver.save_screenshot("C:/test_rs_pic/exam_onequestion.png")
             
     def exam_questions(self):
         self.total += 1
@@ -1052,7 +1072,7 @@ class Test(unittest.TestCase):
                 self.base_url, question_ansa, 1) 
         except Exception, e:
             print e
-            self.verificationErrors.append("fail to exam questions")
+            self.verificationErrors.append("fail to create exam questions")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
 
@@ -1093,14 +1113,64 @@ class Test(unittest.TestCase):
 
     
     def test_regress(self):
+<<<<<<< HEAD
         
       
+=======
+        #网站主站回归流程
+        '''
+        self.register()
+        self.login_from_index()
+        self.release_normal()
+        self.release_three_video()
+        self.agency_course()
+        self.package_course() 
+        self.add_cate()
+        self.presale_course()  
+        self.add_course_to_cate()   
+        self.prepaid_cardgroup()
+        self.course_cardgroup()
+        self.cate_cardgroup()
+        self.delete_cate()
+        self.buy_listen_card()
+        self.listen_cardgroup()
+        self.add_exam_card()
+        self.import_one_student()
+        self.import_multi_student()
+        self.create_multi_student()
+        self.add_admin()  
+        self.modify_admin()
+        self.delete_admin()
+        self.buy_open_num()
+        self.release_href_course()
+        self.open_course_for_one()
+        self.open_course_for_multi()
+        self.change_homelogo()
+        self.release_announcement()
+        self.modify_pagefoot()  
+        self.change_headpic()
+        self.manage_course_num()
+
+        self.verify_all_course_convert()
+
+        login.logout(self.driver, self.base_url)
+        self.login_user()
+        self.use_prepaidcard()
+        self.use_coursecard()
+        self.use_catecard()
+        self.use_listencard()
+        self.use_exam_card()
+        self.buy_course_use_RMB()
+        self.buy_course_use_card()
+        '''
+>>>>>>> origin/master
         
 
         #考试系统部分
 <<<<<<< HEAD
         self.login_from_index()
         #self.exam_onequestion()
+<<<<<<< HEAD
         self.exam_questions()
         
 =======
@@ -1151,6 +1221,28 @@ class Test(unittest.TestCase):
         #self.login_user()
         #self.exam_user()
 >>>>>>> parent of c614803... 修改考试的方法，把多余的删掉了
+=======
+        #self.exam_questions()
+        self.import_questions()
+        '''
+        self.add_exam_subject()
+        self.modify_exam_subject()
+        self.delete_exam_subject()
+        self.create_exam_cate()
+        self.modify_exam_cate()
+        self.delete_exam_cate() 
+        self.add_exam_point()
+        self.modify_exam_point()
+        self.delete_exam_point()    
+        self.createpaper()
+        self.exam_student_management()
+        self.user_statistical_information()
+        login.logout(self.driver, self.base_url)
+        
+        self.login_user()
+        self.exam_user()
+        '''
+>>>>>>> origin/master
 
                    
 

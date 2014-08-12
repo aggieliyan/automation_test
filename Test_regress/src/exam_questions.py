@@ -1,42 +1,25 @@
 # -*- coding: UTF-8 -*-
 import time
+from selenium.webdriver.common.keys import Keys
 
-def importquestions(self, cfg, driver, base_url, template):
-    db = 'ablesky_examsystem'
-    conn = self.connect_db(db)
-    cursor = conn.cursor()
-    sql = "SELECT COUNT(*) FROM e_question_q"
-    cursor.execute(sql)
-    num1 = cursor.fetchall()[0][0]
-    cursor.close()
-    #以下部分可删除,要求调用此函数的同学保证停在试题库页面
+def importquestions(cfg, driver, base_url, template):
     driver.get(base_url + "exam/")
-    #driver.find_element("partial link text", "点击这里").click()
     driver.implicitly_wait(30)
     driver.find_element("link text", u"试题库").click()
     driver.implicitly_wait(30)
-    driver.find_element("link text", u"单选题").click()
-    driver.implicitly_wait(30)
+    
     driver.find_element(cfg.get('exam', "import_questions_by"), \
-                             cfg.get('exam', 'import_questions')).click()
+                             cfg.get('exam', 'import_questions')).click()    
+    driver.execute_script("$('#J_uploadFileInput').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(0.5)')")
     driver.find_element(cfg.get('exam', "path_by"), \
                              cfg.get('exam', "path")).send_keys(template)
     driver.find_element(cfg.get('exam', "upload_button_by"), \
                              cfg.get('exam', "upload_button")).click()
-    driver.implicitly_wait(30)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', "close_button_by"), \
                              cfg.get('exam', "close_button")).click()
-    conn = self.connect_db(db)
-    cursor = conn.cursor()
-    cursor.execute(sql)
-    num2 = cursor.fetchall()[0][0]
-    num = num2 - num1
-    cursor.execute \
-        ("SELECT content_q,content_q FROM e_question_q ORDER BY id_q DESC LIMIT 1")
-    title = cursor.fetchall()[0][0]
-    msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
-    print msg
-
+    
+    
 #创建单选题
 def exam_question_Single(cfg, driver, base_url, question_ansa):
     #question_ansa为创建试题时，题目和答案的内容，现在是用exam加随机数组成
@@ -53,7 +36,11 @@ def exam_question_Single(cfg, driver, base_url, question_ansa):
     #添加音频
     driver.find_element(cfg.get('exam_questions', "question_music_by"), \
         cfg.get('exam_questions', "question_music")).send_keys \
+<<<<<<< HEAD
         (r"D:\123.mp3")
+=======
+        (r"//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/123.mp3")
+>>>>>>> origin/master
     time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)') \
         .attr('id')")
@@ -68,10 +55,55 @@ def exam_question_Single(cfg, driver, base_url, question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
+    #添加选项
+    driver.find_element(cfg.get('exam_questions', "question_Single_addanswer_by"), \
+        cfg.get('exam_questions', "question_Single_addanswer")).click()
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(4)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    #添加解析
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(5)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    #添加标签
+    driver.find_element(cfg.get('exam_questions', "question_Single_addlabel_by"), \
+        cfg.get('exam_questions', "question_Single_addlabel")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Single_addlabeladd_by"), \
+        cfg.get('exam_questions', "question_Single_addlabeladd")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Single_addlabel2_by"), \
+        cfg.get('exam_questions', "question_Single_addlabel2")).send_keys(question_ansa + question_ansa)
+    time.sleep(2)
+    #添加重要等级
+    driver.find_element(cfg.get('exam_questions', "question_Single_important_by"), \
+        cfg.get('exam_questions', "question_Single_important")).click()
+    time.sleep(2)
+    #添加难度
+    driver.find_element(cfg.get('exam_questions', "question_Single_difficulty_by"), \
+        cfg.get('exam_questions', "question_Single_difficulty")).click()
+    time.sleep(2)
+    #添加考频
+    driver.find_element(cfg.get('exam_questions', "question_Single_frequency_by"), \
+        cfg.get('exam_questions', "question_Single_frequency")).click()
+    time.sleep(2)
+    #添加相关推荐
+    driver.find_element(cfg.get('exam_questions', "question_Single_recommendation_by"), \
+        cfg.get('exam_questions', "question_Single_recommendation")).send_keys(question_ansa)
+    time.sleep(2)
+    #保存
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    #跳转页面
+    driver.find_element_by_link_text(u"单选题").click()
     time.sleep(2)
 
     #创建多选题
@@ -104,10 +136,21 @@ def exam_question_Multiple(cfg, driver, base_url, question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
+    #添加选项
+    driver.find_element(cfg.get('exam_questions', "question_Single_addanswer_by"), \
+        cfg.get('exam_questions', "question_Single_addanswer")).click()
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(4)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    #保存
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
     time.sleep(2)
 
 #创建是非题
@@ -129,10 +172,20 @@ def exam_question_TrueOrFalse(cfg, driver, base_url, question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
-    driver.find_element(cfg.get('exam_questions', "question_save_by"), \
-        cfg.get('exam_questions', "question_save")).click()
+        #修改答案
+    driver.find_element(cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1_by'), \
+                        cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1')).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element(cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1_by'), \
+                        cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1')).clear()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1_by'), \
+                        cfg.get('exam_questions', 'question_TrueOrFalse_changeanswer1')).send_keys("right")
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_save_by"), \
+                        cfg.get('exam_questions', "question_save")).click()
+    time.sleep(2)
+    driver.find_element_by_link_text(u"单选题").click()
 #    time.sleep(2)
 
 #创建问答题
@@ -164,7 +217,7 @@ def exam_question_Answer(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
 
 #创建填空题
 def exam_question_Blank(cfg, driver, base_url, question_ansa):
@@ -188,10 +241,24 @@ def exam_question_Blank(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_Blank_by"), \
         cfg.get('exam_questions', "question_Blank")).send_keys(question_ansa)
     time.sleep(2)
+    #添加答案
+    driver.find_element(cfg.get('exam_questions', "question_Blank_1addanswer_by"), \
+        cfg.get('exam_questions', "question_Blank_1addanswer")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Blank_1addanswerc_by"), \
+        cfg.get('exam_questions', "question_Blank_1addanswerc")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Blank_2addanswer_by"), \
+        cfg.get('exam_questions', "question_Blank_2addanswer")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Blank_2addanswerc_by"), \
+        cfg.get('exam_questions', "question_Blank_2addanswerc")).send_keys(question_ansa)
+    time.sleep(2)
+    #保存
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
 
 #创建完型填空题
 def exam_question_Cloze(cfg, driver, base_url, question_ansa):
@@ -224,10 +291,38 @@ def exam_question_Cloze(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_Cloze4_by"), \
         cfg.get('exam_questions', "question_Cloze4")).send_keys(question_ansa)
     time.sleep(2)
+    #添加选项
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_1addanswer_by"), \
+        cfg.get('exam_questions', "question_Cloze_1addanswer")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_1addanswerc_by"), \
+        cfg.get('exam_questions', "question_Cloze_1addanswerc")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_2addanswer_by"), \
+        cfg.get('exam_questions', "question_Cloze_2addanswer")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_2addanswerc1_by"), \
+        cfg.get('exam_questions', "question_Cloze_2addanswerc1")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_2addanswerc2_by"), \
+        cfg.get('exam_questions', "question_Cloze_2addanswerc2")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_2addanswerc3_by"), \
+        cfg.get('exam_questions', "question_Cloze_2addanswerc3")).send_keys(question_ansa)
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_2addanswerc4_by"), \
+        cfg.get('exam_questions', "question_Cloze_2addanswerc4")).send_keys(question_ansa)
+    time.sleep(2)
+    #添加解析
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_analysis1_by"), \
+        cfg.get('exam_questions', "question_Cloze_analysis1")).send_keys(question_ansa)
+    driver.find_element(cfg.get('exam_questions', "question_Cloze_analysis_by"), \
+        cfg.get('exam_questions', "question_Cloze_analysis")).send_keys(question_ansa)
+    #保存
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
 
 #创建综合题
 def exam_question_Composite(cfg, driver, base_url, question_ansa):
@@ -248,6 +343,7 @@ def exam_question_Composite(cfg, driver, base_url, question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
+    #默认第一小题单选题
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)').attr('id')")
     driver.execute_script("var element=window.document.getElementById \
         (\'" + iframe_id + "\'); \
@@ -268,10 +364,61 @@ def exam_question_Composite(cfg, driver, base_url, question_ansa):
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
     time.sleep(2)
+    #添加选项
+    driver.find_element(cfg.get('exam_questions', "question_Composite_Single_addanswer_by"), \
+        cfg.get('exam_questions', "question_Composite_Single_addanswer")).click()
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(6)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById \
+        (\'" + iframe_id + "\'); \
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
+    element.innerHTML =\'" + question_ansa + "\';")
+    #添加解析
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(7)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById \
+        (\'" + iframe_id + "\'); \
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    #添加第二题
+    driver.find_element(cfg.get('exam_questions', "question_Composite_add_by"), \
+        cfg.get('exam_questions', "question_Composite_add")).click()
+    time.sleep(2)
+    #第二小题多选题
+    driver.find_element(cfg.get('exam_questions', "question_Composite_addtype_by"), \
+        cfg.get('exam_questions', "question_Composite_addtype")).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam_questions', "question_Composite_type_Multiple_by"), \
+        cfg.get('exam_questions', "question_Composite_type_Multiple")).click()
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(8)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById \
+        (\'" + iframe_id + "\'); \
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(10)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById \
+        (\'" + iframe_id + "\'); \
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
+    iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(11)'). \
+        attr('id')")
+    driver.execute_script("var element=window.document.getElementById \
+        (\'" + iframe_id + "\'); \
+    idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
+    element.innerHTML =\'" + question_ansa + "\';")
+    time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_save_by"), \
         cfg.get('exam_questions', "question_save")).click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
     time.sleep(2)
 
 def auto_exam_questions(cfg, driver, base_url, question_ansa, num):
@@ -288,9 +435,9 @@ def auto_exam_questions(cfg, driver, base_url, question_ansa, num):
     time.sleep(2)
     driver.get(base_url + "exam/")
     time.sleep(2)
-    driver.find_element_by_link_text("试题库").click()
+    driver.find_element_by_link_text(u"试题库").click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
     time.sleep(2)
     for i in range(num):
         exam_question_Single(cfg, driver, base_url, question_ansa)
@@ -313,9 +460,9 @@ def auto_exam_onequestion(cfg, driver, base_url, question_ansa, onetype):
     time.sleep(2)
     driver.get(base_url + "exam/")
     time.sleep(2)
-    driver.find_element_by_link_text("试题库").click()
+    driver.find_element_by_link_text(u"试题库").click()
     time.sleep(2)
-    driver.find_element_by_link_text("单选题").click()
+    driver.find_element_by_link_text(u"单选题").click()
     time.sleep(2)
     if onetype == 1:
         exam_question_Single(cfg, driver, base_url, question_ansa)

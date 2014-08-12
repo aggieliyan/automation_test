@@ -17,7 +17,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
 
-        self.browser = "Chrome"
+        self.browser = "ie"
 
         self.test_enviroment = "beta"
         self.org_name = "adm_liwen01"
@@ -1100,6 +1100,9 @@ class Test(unittest.TestCase):
             self.verificationErrors.append('fail to exam!')
         finally: 
             self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")
+            
+        #获取学员提交试卷名称，待学员信息使用
+        
             
     def wailian_video(self):
         self.total += 1

@@ -23,13 +23,16 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     driver.implicitly_wait(1)
     driver.find_element(cfg.get('exam', 'exam_subject_by'), \
                         cfg.get('exam', 'exam_subject')).click()
-    now_handle = driver.current_window_handle #得到当前窗口句柄
-    driver.find_element_by_link_text(u"新建试卷").click()
-    time.sleep(2)
-    all_handles = driver.window_handles #获取所有窗口句柄
-    for handle in all_handles:
-        if handle != now_handle:
-            driver.switch_to_window(handle)
+#    now_handle = driver.current_window_handle #得到当前窗口句柄
+#    driver.find_element_by_link_text(u"新建试卷").click()
+#    time.sleep(2)
+#    all_handles = driver.window_handles #获取所有窗口句柄
+#    for handle in all_handles:
+#        if handle != now_handle:
+#            driver.switch_to_window(handle)
+    new_href = driver.execute_script("return $('.exam-new-btn').attr('href')")
+    time.sleep(2)    
+    driver.get("%sexam/%s" %(base_url,new_href))
     driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \
                         cfg.get('exam', 'exam_paper_name')).clear()
     driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \

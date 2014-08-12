@@ -201,65 +201,61 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun122"):
     exam_href = driver.execute_script(\
         "return $(\"a:contains(\'"+exam_name+"\')\").attr('href')")
     time.sleep(1)
-    try:
-        for exam_name in exam_href:
-            driver.get("%sexam/%s" % (base_url, exam_href))
-            driver.find_element_by_link_text("学员信息").click()
-            time.sleep(1)
-            if etype == 2:
-                driver.find_element_by_link_text(u"作为开放试卷的统计结果").click()
-                time.sleep(1)
+    driver.get("%sexam/%s" % (base_url, exam_href))
+    driver.find_element_by_link_text("学员信息").click()
+    time.sleep(1)
+    if etype == 2:
+        driver.find_element_by_link_text(u"作为开放试卷的统计结果").click()
+        time.sleep(1)
+        try:
+            driver.find_element(cfg.get('exam', 'select_paper_by'), \
+                cfg.get('exam', 'select_paper')).click()
+            driver.find_element(cfg.get('exam', 'output_open_by'), \
+                cfg.get('exam', 'output_open')).click()
+            time.sleep(2)
+        except:
+            print u'试卷暂时没有学员购买'
+    elif etype == 1:
+        try:
+            driver.find_element(cfg.get('exam', 'select_paper_by'), \
+                cfg.get('exam', 'select_paper')).click()
+            driver.find_element(cfg.get('exam', 'output_by'), \
+                cfg.get('exam', 'output')).click()
+            time.sleep(2)
+        except:
+            print u'试卷暂时没有分发给学员'
+        try:
+            save_alert = driver.switch_to_alert()
+            #print save_alert.text
+            save_alert.accept()
+        except:
+            pass
+
+    else:
+        #取评分链接
+        time.sleep(2)
+        stu_name = driver.execute_script(\
+            "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(0).children().text()")
+        print stu_name
+        if username not in stu_name:
+            print username + u'该学员不存在,无法评分。。'
+        else:
+            grade_href = driver.execute_script(\
+                "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
+            driver.get("%sexam/%s" % (base_url, grade_href))
+            score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), \
+                cfg.get('exam', 'input_score'))
+            score = "0.1"
+            for item in score_input:
                 try:
-                    driver.find_element(cfg.get('exam', 'select_paper_by'), \
-                                    cfg.get('exam', 'select_paper')).click()
-                driver.find_element(cfg.get('exam', 'output_open_by'), \
-                                    cfg.get('exam', 'output_open')).click()
-                time.sleep(2)
-            except:
-                print u'试卷暂时没有学员购买'
-                elif etype == 1:
-                try:
-                    driver.find_element(cfg.get('exam', 'select_paper_by'), \
-                                    cfg.get('exam', 'select_paper')).click()
-                driver.find_element(cfg.get('exam', 'output_by'), \
-                                    cfg.get('exam', 'output')).click()
-                time.sleep(2)
-            except:
-                print u'试卷暂时没有分发给学员'
-            try:
-                save_alert = driver.switch_to_alert()
-                #print save_alert.text
-                save_alert.accept()
-            except:
-                pass
-        else
-             #取评分链
-             time.sleep(2
-             stu_name = driver.execute_script(
-                  "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(0).children().text()"
-             print stu_nam
-             if username not in stu_name
-                 print username + u'该学员不存在,无法评分。。
-             else
-                 grade_href = driver.execute_script(
-                    "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')"
-                 time.sleep(1
-                 driver.get("%sexam/%s" % (base_url, grade_href)
-                 score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), 
-                                                    cfg.get('exam', 'input_score')
-                 score = "0.1
-                 for item in score_input
-                     try
-                         item.clear(
-                         item.send_keys(score
-                     except
-                         continu
-                    ddriver.find_element(cfg.get('exam', 'score_save_by'), 
-                                         cfg.get('exam', 'score_save')).click(
-                     total_score = len(score_input) * scor
-                     return total_scor
-     except
-         print exam_name + u'试卷不存在
+                    item.clear()
+                    item.send_keys(score)
+                except:
+                    continue
+            driver.find_element(cfg.get('exam', 'score_save_by'), \
+                cfg.get('exam', 'score_save')).click()
+            total_score = len(score_input) * score
+            return total_score       
 
     time.sleep(5)
     return True

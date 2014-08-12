@@ -242,6 +242,7 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun122"):
         else:
             grade_href = driver.execute_script(\
                 "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
+            time.sleep(1)
             driver.get("%sexam/%s" % (base_url, grade_href))
             score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), \
                 cfg.get('exam', 'input_score'))
@@ -255,7 +256,7 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun122"):
             driver.find_element(cfg.get('exam', 'score_save_by'), \
                 cfg.get('exam', 'score_save')).click()
             total_score = len(score_input) * score
-            return total_score       
+            return total_score 
 
     time.sleep(5)
     return True

@@ -1098,10 +1098,59 @@ class Test(unittest.TestCase):
         
 
         #考试系统部分
+<<<<<<< HEAD
         self.login_from_index()
         #self.exam_onequestion()
         self.exam_questions()
         
+=======
+
+
+        #self.login_from_index()
+        #self.exam_onequestion()
+        #self.exam_questions()
+        #self.import_questions()
+        #self.add_exam_subject()
+        #self.modify_exam_subject()
+        #self.delete_exam_subject()
+        #self.create_exam_cate()
+        #self.modify_exam_cate()
+        #self.delete_exam_cate() 
+        #self.add_exam_point()
+        #self.modify_exam_point()
+
+        #self.delete_exam_point()    
+        #self.createpaper()
+        #self.exam_student_management()
+
+        #self.user_statistical_information()
+        #login.logout(self.driver, self.base_url)
+
+        #self.login_user()
+        #self.exam_user()
+        #self.use_exam_card()
+
+        #self.login_from_index()
+        #self.exam_onequestion()
+        #self.exam_questions()
+        #self.import_questions()
+        #self.add_exam_subject()
+        #self.modify_exam_subject()
+        #self.delete_exam_subject()
+        #self.create_exam_cate()
+        #self.modify_exam_cate()
+        #self.delete_exam_cate() 
+        #self.add_exam_point()
+        #self.modify_exam_point()
+        #self.delete_exam_point()    
+        #self.createpaper()
+        #self.exam_student_management()
+        #self.user_statistical_information()
+        #login.logout(self.driver, self.base_url)
+        
+        #self.login_user()
+        #self.exam_user()
+>>>>>>> parent of c614803... 修改考试的方法，把多余的删掉了
 
                    
 

@@ -1113,12 +1113,8 @@ class Test(unittest.TestCase):
 
     
     def test_regress(self):
-<<<<<<< HEAD
-        
-      
-=======
+
         #网站主站回归流程
-        '''
         self.register()
         self.login_from_index()
         self.release_normal()
@@ -1161,70 +1157,13 @@ class Test(unittest.TestCase):
         self.use_listencard()
         self.use_exam_card()
         self.buy_course_use_RMB()
-        self.buy_course_use_card()
-        '''
->>>>>>> origin/master
-        
+        self.buy_course_use_card()        
 
         #考试系统部分
-<<<<<<< HEAD
         self.login_from_index()
-        #self.exam_onequestion()
-<<<<<<< HEAD
+        self.exam_onequestion()
         self.exam_questions()
-        
-=======
-
-
-        #self.login_from_index()
-        #self.exam_onequestion()
-        #self.exam_questions()
-        #self.import_questions()
-        #self.add_exam_subject()
-        #self.modify_exam_subject()
-        #self.delete_exam_subject()
-        #self.create_exam_cate()
-        #self.modify_exam_cate()
-        #self.delete_exam_cate() 
-        #self.add_exam_point()
-        #self.modify_exam_point()
-
-        #self.delete_exam_point()    
-        #self.createpaper()
-        #self.exam_student_management()
-
-        #self.user_statistical_information()
-        #login.logout(self.driver, self.base_url)
-
-        #self.login_user()
-        #self.exam_user()
-        #self.use_exam_card()
-
-        #self.login_from_index()
-        #self.exam_onequestion()
-        #self.exam_questions()
-        #self.import_questions()
-        #self.add_exam_subject()
-        #self.modify_exam_subject()
-        #self.delete_exam_subject()
-        #self.create_exam_cate()
-        #self.modify_exam_cate()
-        #self.delete_exam_cate() 
-        #self.add_exam_point()
-        #self.modify_exam_point()
-        #self.delete_exam_point()    
-        #self.createpaper()
-        #self.exam_student_management()
-        #self.user_statistical_information()
-        #login.logout(self.driver, self.base_url)
-        
-        #self.login_user()
-        #self.exam_user()
->>>>>>> parent of c614803... 修改考试的方法，把多余的删掉了
-=======
-        #self.exam_questions()
         self.import_questions()
-        '''
         self.add_exam_subject()
         self.modify_exam_subject()
         self.delete_exam_subject()
@@ -1238,12 +1177,12 @@ class Test(unittest.TestCase):
         self.exam_student_management()
         self.user_statistical_information()
         login.logout(self.driver, self.base_url)
-        
+
         self.login_user()
         self.exam_user()
-        '''
->>>>>>> origin/master
+        
 
+       
                    
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作

@@ -42,11 +42,11 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         if isthree == 2:
             #driver.execute_script(\
             #    "$(\'.spacefile-name input\').last().click()")
-            driver.execute_script("$(\"[filetype='pdf']\").eq(0).click()")#选一个视频课件
+            driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")#选一个视频课件
             #driver.execute_script(\
                 #"$(\'.spacefile-name input\').last().click()")
         else:
-            driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")#选一个视频课件
+            driver.execute_script("$(\"[filetype='pdf']\").eq(0).click()")#选一个pdf课件
             time.sleep(1)
         driver.execute_script(\
             "$(\'.dialog-button-container button\').eq(0).click()")

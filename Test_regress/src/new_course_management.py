@@ -54,8 +54,8 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
         else:#单视频
             #存储空间上传
             if upload == 1:
-                #driver.find_element(cfg.get('courseRedirect', 'upload_btn_by'), \
-                #    cfg.get('courseRedirect', 'upload_btn')).click()
+                driver.find_element(cfg.get('courseRedirect', 'upload_btn_by'), \
+                    cfg.get('courseRedirect', 'upload_btn')).click()
                 time.sleep(2)
 
                 #全选 /选最后一个

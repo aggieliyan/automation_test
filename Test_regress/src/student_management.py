@@ -50,6 +50,7 @@ def import_multi_student(cfg, driver, base_url, org_name, stu_txt):
     driver.implicitly_wait(2)
     driver.find_element_by_link_text(u"批量导入学员").click()
     driver.implicitly_wait(2)
+    driver.execute_script("$('#fileFieldName-file').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(0.5)')")
     driver.find_element(cfg.get('org_manage', "stu_file_by"), \
     	cfg.get('org_manage', "stu_file")).send_keys(stu_txt)
     driver.find_element(cfg.get('org_manage', "stu_file_ok_by"), \
@@ -74,6 +75,7 @@ def create_student(cfg, driver, base_url, org_name, stu_txt):
     driver.implicitly_wait(2)
     driver.find_element_by_link_text(u"批量创建学员").click()
     driver.implicitly_wait(2)
+    driver.execute_script("$('#fileFieldName-file').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(0.5)')")
     driver.find_element(cfg.get('org_manage', "stu_file_by"), \
     	cfg.get('org_manage', "stu_file")).send_keys(stu_txt)
     driver.implicitly_wait(2)

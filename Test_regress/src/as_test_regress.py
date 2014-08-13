@@ -493,12 +493,16 @@ class Test(unittest.TestCase):
 
         #验证
         self.driver.refresh()
-        rs = self.is_element_present(By.XPATH, \
-            "//span[@title=\'"+self.import_name+"\']")
-        try:
-            self.assertEqual(True, rs, "fail to import one student!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
+        time.sleep(3)
+        rs = self.is_element_present(By.XPATH, "//span[@title=\'"+self.import_name+"\']")
+        if rs == False:
+            self.verificationErrors.append("fail to import one student!")
+        else:
+            pass;
+#        try:
+#            self.assertEqual(False, rs, "fail to import one student!")
+#        except AssertionError, e:
+#            self.verificationErrors.append(str(e))
 
     def import_multi_student(self):
         self.total += 1

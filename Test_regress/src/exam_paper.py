@@ -273,7 +273,9 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     #username = "sunmin1990"
     driver.get("%sexam/" %(base_url))
     driver.implicitly_wait(10)
-    driver.find_element("xpath", "//p[4]/a").click()
+    #点击学员管理
+    driver.find_element(cfg.get('exam', 'stu_manage_by'), \
+            cfg.get('exam', 'stu_manage')).click()
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', 'user_search_by'), \
         cfg.get('exam', 'user_search')).clear()
@@ -290,9 +292,8 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     else:
         driver.find_element_by_link_text(u"关闭试卷").click()
         driver.implicitly_wait(10)
-        driver.find_element("css selector", "td.rowfirst > input").click()
-    
-
+        driver.find_element(cfg.get('exam', 'select_one_p_by'), \
+            cfg.get('exam', 'select_one_p')).click()
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', 'open_paper_ok_by'), \
         cfg.get('exam', 'open_paper_ok')).click()

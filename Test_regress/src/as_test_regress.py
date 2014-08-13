@@ -1045,7 +1045,8 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to open paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/open_paper.png")
-            self.total += 1
+
+        self.total += 1
         try:
             exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         except Exception, e:
@@ -1152,10 +1153,10 @@ class Test(unittest.TestCase):
         self.modify_pagefoot()  
         self.change_headpic()
         self.manage_course_num()
-
         self.verify_all_course_convert()
-
         login.logout(self.driver, self.base_url)
+
+        #个人用户部分
         self.login_user()
         self.use_prepaidcard()
         self.use_coursecard()
@@ -1163,7 +1164,8 @@ class Test(unittest.TestCase):
         self.use_listencard()
         self.use_exam_card()
         self.buy_course_use_RMB()
-        self.buy_course_use_card()        
+        self.buy_course_use_card()
+        login.logout(self.driver, self.base_url)        
 
         #考试系统部分
         self.login_from_index()

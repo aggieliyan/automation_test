@@ -20,7 +20,7 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     """
     time.sleep(2)
     driver.get("%sexam/" %(base_url))
-    driver.implicitly_wait(1)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', 'exam_subject_by'), \
                         cfg.get('exam', 'exam_subject')).click()
 #    now_handle = driver.current_window_handle #得到当前窗口句柄

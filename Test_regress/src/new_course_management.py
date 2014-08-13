@@ -7,13 +7,12 @@ Created on Aug 12, 2013
 import re
 import time
 
-def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
+def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
     course_file="", course_title=u"course", course_describe='hello world', \
     course_tags='english\n', course_price=0):
     """
-    ctype代表发课类型 1表示点播课程
     upload是发点播课程的时候需要用的，1是存储空间上传，2是本地上传
-    isthree代表是不是发三分屏，1代表发三分屏，0代表发的是单视频
+    isthree代表是不是发三分屏，1代表发三分屏，0代表发的是单视频, 2代表发双视频
     本地上传没了，先留着不去掉了。
     如果是本地上传的话 course_file 是要上传文件的本地路径
     course_title 是要发的课程的课程标题
@@ -25,57 +24,60 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
     url = "%s/coursePostRedirect.do?action=courseStepOne"%(base_url)
     driver.get(url)
     driver.implicitly_wait(10)
-    #发点播课程
-    if ctype == 1:
-        #从存储空间上传
-        if isthree == 1:#发三分屏
-            driver.find_element(cfg.get('courseRedirect', 'threevideo_by'), \
-                cfg.get('courseRedirect', 'threevideo')).click()
-            driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
-                cfg.get('courseRedirect', 'upload_btn'))[1].click()
+    #从存储空间上传
+    if isthree == 1 or isthree == 2:#发三分屏
+        driver.find_element(cfg.get('courseRedirect', 'threevideo_by'), \
+            cfg.get('courseRedirect', 'threevideo')).click()
+        driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
+            cfg.get('courseRedirect', 'upload_btn'))[1].click()
+        time.sleep(2)
+        driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")#选一个视频课件
+        time.sleep(1)
+        driver.execute_script(\
+            "$(\'.dialog-button-container button\').eq(0).click()")
+        time.sleep(3)
+        driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
+            cfg.get('courseRedirect', 'upload_btn'))[2].click()
+        time.sleep(2)
+        if isthree == 2:
+            #driver.execute_script(\
+            #    "$(\'.spacefile-name input\').last().click()")
+            driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")#选一个视频课件
+            #driver.execute_script(\
+                #"$(\'.spacefile-name input\').last().click()")
+        else:
+            driver.execute_script("$(\"[filetype='pdf']\").eq(0).click()")#选一个pdf课件
+            time.sleep(1)
+        driver.execute_script(\
+            "$(\'.dialog-button-container button\').eq(0).click()")
+        #driver.find_element("css selector", "")
+        time.sleep(3)
+
+    else:#单视频
+        #存储空间上传
+        if upload == 1:
+            driver.find_element(cfg.get('courseRedirect', 'upload_btn_by'), \
+                cfg.get('courseRedirect', 'upload_btn')).click()
             time.sleep(2)
+
+            #全选 /选最后一个
+            #driver.execute_script(\
+             #   "$(\'.spacefile-name input\').last().click()")
             driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
             time.sleep(1)
             driver.execute_script(\
                 "$(\'.dialog-button-container button\').eq(0).click()")
-            time.sleep(3)
-            driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
-                cfg.get('courseRedirect', 'upload_btn'))[2].click()
             time.sleep(2)
-            driver.execute_script(\
-                "$(\'.spacefile-name input\').last().click()")
-            driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
+            #driver.find_element("xpath", "//button").click()
+        #本地上传
+        else:
+            #把input显示出来才可以用否则会报当前元素不可见的错
+            driver.execute_script("$('.fileinput-button input').eq(0)\
+                .attr('style','height:20px;opacity:1;display:block;\
+                    position:static;transform:translate(0px, 0px) scale(1)')")
+            driver.implicitly_wait(10)
+            driver.find_element_by_name("files").send_keys(course_file)
             time.sleep(1)
-            driver.execute_script(\
-                "$(\'.dialog-button-container button\').eq(0).click()")
-            #driver.find_element("css selector", "")
-            time.sleep(3)
-
-        else:#单视频
-            #存储空间上传
-            if upload == 1:
-                driver.find_element(cfg.get('courseRedirect', 'upload_btn_by'), \
-                    cfg.get('courseRedirect', 'upload_btn')).click()
-                time.sleep(2)
-
-                #全选 /选最后一个
-                #driver.execute_script(\
-                 #   "$(\'.spacefile-name input\').last().click()")
-                driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
-                time.sleep(1)
-                driver.execute_script(\
-                    "$(\'.dialog-button-container button\').eq(0).click()")
-                time.sleep(2)
-                #driver.find_element("xpath", "//button").click()
-            #本地上传
-            else:
-                #把input显示出来才可以用否则会报当前元素不可见的错
-                driver.execute_script("$('.fileinput-button input').eq(0)\
-                    .attr('style','height:20px;opacity:1;display:block;\
-                        position:static;transform:translate(0px, 0px) scale(1)')")
-                driver.implicitly_wait(10)
-                driver.find_element_by_name("files").send_keys(course_file)
-                time.sleep(1)
 
      
     driver.find_element(cfg.get('courseRedirect', 'next_btn_by'), \

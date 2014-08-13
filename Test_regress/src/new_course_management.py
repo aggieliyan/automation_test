@@ -33,7 +33,7 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
                 cfg.get('courseRedirect', 'threevideo')).click()
             driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
                 cfg.get('courseRedirect', 'upload_btn'))[1].click()
-            driver.implicitly_wait(10)
+            time.sleep(2)
             driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
             time.sleep(1)
             driver.execute_script(\
@@ -54,9 +54,9 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
         else:#单视频
             #存储空间上传
             if upload == 1:
-                driver.find_element(cfg.get('courseRedirect', 'upload_btn_by'), \
-                    cfg.get('courseRedirect', 'upload_btn')).click()
-                driver.implicitly_wait(10)
+                #driver.find_element(cfg.get('courseRedirect', 'upload_btn_by'), \
+                #    cfg.get('courseRedirect', 'upload_btn')).click()
+                time.sleep(2)
 
                 #全选 /选最后一个
                 #driver.execute_script(\

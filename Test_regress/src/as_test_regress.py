@@ -5,6 +5,7 @@ Created on Sep. 24, 2012
 @author: yilulu
 '''
 import unittest, ConfigParser, random, time, os, MySQLdb
+import traceback
 from selenium import webdriver
 import login, new_course_management, course_management, student_management, \
 card_management, cate_management, admin_management, user_management, exam_paper, exam_questions, exam_cate_management
@@ -20,7 +21,7 @@ class Test(unittest.TestCase):
         self.browser = "ie"
 
         self.test_enviroment = "beta"
-        self.org_name = "adm_liwen01"
+        self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -62,7 +63,7 @@ class Test(unittest.TestCase):
         try:
             conn = MySQLdb.connect(host=self.dbhost, user='root', passwd='mysqlpwd1', db=database, charset='utf8')
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         return conn
 
     def verify_convert(self, course_title, msg):
@@ -93,7 +94,7 @@ class Test(unittest.TestCase):
         try:
             user_name = login.auto_register(self.cfg, self.driver, self.base_url, 2, 1)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to register!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/1_register.png')
@@ -106,7 +107,7 @@ class Test(unittest.TestCase):
         try:
             login.login_by_as(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/1_login.png')
 
@@ -115,7 +116,7 @@ class Test(unittest.TestCase):
         try:
             login.login_by_logindo(self.cfg, self.driver, self.base_url, self.user_name, self.user_password)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/1_login_user.png')
 
@@ -128,7 +129,7 @@ class Test(unittest.TestCase):
         try:
             new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
         except Exception, e:
-            print e
+            print print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/2_normal_course.png')
 
@@ -156,7 +157,7 @@ class Test(unittest.TestCase):
         try:
             new_course_management.course_redirect(self.cfg, self.driver, self.base_url, ctype=1, isthree=1, course_title=title, course_price=10)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/4_three_video.png')
 
@@ -186,7 +187,7 @@ class Test(unittest.TestCase):
         try:
             course_management.release_three_video(self.cfg, self.driver, self.base_url, self.org_name, video_file=v_file, pdf_file=p_file, course_title=title)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/5_two_video.png')
 
@@ -206,7 +207,7 @@ class Test(unittest.TestCase):
         try:
             new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/6_package.png')
         self.package_title = title  
@@ -225,7 +226,7 @@ class Test(unittest.TestCase):
         try:
             cate_management.add_cate(self.cfg, self.driver, self.base_url, self.org_name, cate_name=cate_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/7_add_cate.png')
         
@@ -244,7 +245,7 @@ class Test(unittest.TestCase):
         try:
             new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title, ctype=2)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/8_presale.png')
 
@@ -263,7 +264,7 @@ class Test(unittest.TestCase):
         try:
             new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/9_agency_course.png')
 
@@ -284,7 +285,7 @@ class Test(unittest.TestCase):
         try:
             card_management.add_prepaid_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title, group_price=price)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/9_prepaid_cardgroup.png')
         
@@ -311,7 +312,7 @@ class Test(unittest.TestCase):
         try:
             card_management.add_course_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/10_course_cardgroup.png")
 
@@ -336,7 +337,7 @@ class Test(unittest.TestCase):
         try:
             card_management.add_cate_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, title)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append('fail to create cate cardgroup!')
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/11_cate_cardgroup.png")
@@ -357,7 +358,7 @@ class Test(unittest.TestCase):
         try:
             card_management.buy_listen_card(self.cfg, self.driver, self.base_url)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append('fail to bug listen card!')
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/buy_listen_card.png")
@@ -371,7 +372,7 @@ class Test(unittest.TestCase):
         try:
             card_management.add_listen_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/12_listen_cardgroup.png")  
         self.driver.implicitly_wait(2)
@@ -411,7 +412,7 @@ class Test(unittest.TestCase):
                 time.sleep(2)
                 #print 'card_pwd', card_pwd        
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             card_num = 0#确保有返回值不会报错
             card_pwd = 0
 
@@ -425,7 +426,7 @@ class Test(unittest.TestCase):
         try:
             self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url, count, academy)
         except Exception,e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append('fail to add exam card!')
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_exam_card.png")
@@ -435,7 +436,7 @@ class Test(unittest.TestCase):
         try:
             card_management.user_usexamcard(self.cfg, self.driver, self.base_url, self.examcard_num)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append('fail to use exam card!')
         finally: 
             self.driver.save_screenshot("D:/test_rs_pic/user_exam_card.png") 
@@ -447,7 +448,7 @@ class Test(unittest.TestCase):
             before_delete = cate_management.delete_cate(self.cfg, self.driver, self.base_url, self.org_name)
             #print before_delete
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             before_delete = "0"
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/12_delete_cate.png")           
@@ -471,7 +472,7 @@ class Test(unittest.TestCase):
             actual_name = actual_name.strip()   
             #print course_name, actual_name
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append('fail to add course to category!') 
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/13_add_course_to_cate.png")
@@ -488,7 +489,7 @@ class Test(unittest.TestCase):
             student_management.import_one_student(self.cfg, self.driver, \
                 self.base_url, self.org_name, self.import_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to import one student!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/import_one_student.png")
@@ -508,7 +509,7 @@ class Test(unittest.TestCase):
             student_management.import_multi_student(self.cfg, self.driver, \
                 self.base_url, self.org_name, r"C:\register_user_list.txt")
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to import multi student!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/import_multi_student.png")
@@ -522,7 +523,7 @@ class Test(unittest.TestCase):
             student_management.auto_create_student(self.cfg, self.driver, \
                 self.base_url, self.org_name, stu_num)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to create multi student!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_student.png")
@@ -559,7 +560,7 @@ class Test(unittest.TestCase):
             if self.p_card_num!=confirm_num:
                 self.verificationErrors.append('fail to use prepaid card!')
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append('fail to use prepaid card!')
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/use_prepaidcard.png")
@@ -572,7 +573,7 @@ class Test(unittest.TestCase):
             if self.c_card_num!=confirm_num:
                self.verificationErrors.append('fail to use course card!')             
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append('fail to use course card!')
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/use_coursecard.png")
@@ -588,7 +589,7 @@ class Test(unittest.TestCase):
             if self.ca_card_num!=course_num:
               self.verificationErrors.append('fail to use category card!')  
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append('fail to use category card!')
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/use_catecard.png")
@@ -599,7 +600,7 @@ class Test(unittest.TestCase):
         try:
             login.login_by_logindo(self.cfg, self.driver, self.base_url, self.l_card_num, self.l_card_pwd)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append('fail to use listen card!')
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/use_listencard.png")
@@ -617,7 +618,7 @@ class Test(unittest.TestCase):
                 if rs == False:
                     self.verificationErrors.append("fail to create admin!")
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to create admin!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/add_admin.png")
@@ -629,7 +630,7 @@ class Test(unittest.TestCase):
         try:
             admin_name = admin_management.modify_admin(self.cfg, self.driver, self.base_url)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to modify admin!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/modify_admin.png")
@@ -649,7 +650,7 @@ class Test(unittest.TestCase):
         try:
             admin_management.delete_admin(self.cfg, self.driver, self.base_url)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to delete admin!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/delete_admin.png")
@@ -664,7 +665,7 @@ class Test(unittest.TestCase):
         try:
             title = user_management.release_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to release announcement!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")  
@@ -675,7 +676,7 @@ class Test(unittest.TestCase):
         try:
             user_management.release_href_course(self.cfg, self.driver, self.base_url, self.org_name) 
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to use link")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/user_management_link.png")
@@ -692,7 +693,7 @@ class Test(unittest.TestCase):
         try:
             user_management.buy_course(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use rmb!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/href_course.png")
@@ -704,7 +705,7 @@ class Test(unittest.TestCase):
         try:
             user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use card!")
             
     def open_course_for_one(self):
@@ -713,7 +714,7 @@ class Test(unittest.TestCase):
         try:
             student_management.open_course_for_one(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to open course for one!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/open_course_for_one.png")
@@ -726,7 +727,7 @@ class Test(unittest.TestCase):
         try:
             student_management.open_course_for_multi(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to open course for multi!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/open_course_for_multi.png")
@@ -739,7 +740,7 @@ class Test(unittest.TestCase):
         try:
             student_management.add_playnum(self.cfg, self.driver, self.base_url, self.org_name)  
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to add playnum!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/add_playnum.png")
@@ -753,7 +754,7 @@ class Test(unittest.TestCase):
         try:
             student_management.buy_open_num(self.cfg, self.driver, self.base_url, self.org_name, bnum)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to buy open num!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/buy_open_num.png")
@@ -764,7 +765,7 @@ class Test(unittest.TestCase):
         try:
             user_management.org_chang_headpic(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to change headpic!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/change_headpic.png")
@@ -776,7 +777,7 @@ class Test(unittest.TestCase):
         try:
             user_management.change_homelogo(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to change homelogo!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/change_homelogo.png")   
@@ -787,7 +788,7 @@ class Test(unittest.TestCase):
         try:
             user_management.change_banner(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to change banner!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/change_banner.png")
@@ -801,7 +802,7 @@ class Test(unittest.TestCase):
         try:
             user_management.modify_pagefoot(self.cfg, self.driver, self.base_url, self.org_name) 
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to modify_pagefoot")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/modify_pagefoot.png")
@@ -811,7 +812,7 @@ class Test(unittest.TestCase):
         try:
             login.logout_by_independent_domian(self.driver, self.independent_url)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to login from independent_domian!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/login_from_independent_domian.png")     
@@ -822,7 +823,7 @@ class Test(unittest.TestCase):
         try:
             login.logout_by_independent_domian(self.driver, self.independent_url)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to logout from independent domian!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/logout_from_independent_domian.png")
@@ -835,7 +836,7 @@ class Test(unittest.TestCase):
         try:
             user_management.auto_add_photo(self.cfg, self.driver, self.base_url, self.user_name, pic, pic_num)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to add photo!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/add_photot.png")
@@ -856,7 +857,7 @@ class Test(unittest.TestCase):
                     self.verificationErrors.append("fail to create subject!")
                     
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to create subject!")
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_subject.png")
@@ -867,7 +868,7 @@ class Test(unittest.TestCase):
         try:
             subject_name = exam_cate_management.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to modify subject!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/modify_subject.png")
@@ -881,7 +882,7 @@ class Test(unittest.TestCase):
         try:
             exam_cate_management.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to delete subject!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/delete_subject.png")
@@ -900,7 +901,7 @@ class Test(unittest.TestCase):
                     self.verificationErrors.append("fail to create cate!")
                     
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to create cate!")
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_cate.png")
@@ -913,7 +914,7 @@ class Test(unittest.TestCase):
         try:
             exam_cate_management.modify_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to modify cate!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/modify_cate.png")
@@ -925,7 +926,7 @@ class Test(unittest.TestCase):
         try:
             exam_cate_management.delete_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to delete cate!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/delete_cate.png")
@@ -944,7 +945,7 @@ class Test(unittest.TestCase):
                     self.verificationErrors.append("fail to create point!")
                     
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to create point!")
         finally:
             self.driver.save_screenshot("D:/test_rs_pic/add_point.png")
@@ -958,7 +959,7 @@ class Test(unittest.TestCase):
         try:
             point_name = exam_cate_management.modify_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to modify point!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/modify_point.png")
@@ -976,7 +977,7 @@ class Test(unittest.TestCase):
         try:
             exam_cate_management.delete_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to delete point!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/delete_point.png")
@@ -1000,7 +1001,7 @@ class Test(unittest.TestCase):
             exam_questions.importquestions(self.cfg, self.driver, \
                 self.base_url, self.template)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to import questions..")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
@@ -1021,7 +1022,7 @@ class Test(unittest.TestCase):
         try:
             exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 ,1, 1,2) 
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to create paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
@@ -1033,7 +1034,7 @@ class Test(unittest.TestCase):
             #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
             #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to export exam result")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_result.png")
@@ -1043,7 +1044,7 @@ class Test(unittest.TestCase):
         try:
             exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to open paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/open_paper.png")
@@ -1051,7 +1052,7 @@ class Test(unittest.TestCase):
         try:
             exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to close paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/close_paper.png")       
@@ -1063,7 +1064,7 @@ class Test(unittest.TestCase):
             exam_questions.auto_exam_onequestion(self.cfg, self.driver, \
                 self.base_url, question_ansa, onetype=2)
         except Exception,e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to create exam onequestion")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_onequestion.png")
@@ -1075,7 +1076,7 @@ class Test(unittest.TestCase):
             exam_questions.auto_exam_questions(self.cfg, self.driver, \
                 self.base_url, question_ansa, 1) 
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to create exam questions")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/exam_questions.png")
@@ -1085,7 +1086,7 @@ class Test(unittest.TestCase):
         try:
             student_management.manage_course_num(self.cfg, self.driver, self.base_url) 
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to manage course num")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/manage_course_num.png")     
@@ -1100,7 +1101,7 @@ class Test(unittest.TestCase):
         try:
             exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append('fail to exam!')
         finally: 
             self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")
@@ -1113,7 +1114,7 @@ class Test(unittest.TestCase):
         try:
             user_management.wailian_video(self.cfg, self.driver, self.base_url, self.test_enviroment) 
         except Exception, e:
-            print e
+            print traceback.format_exc() 
             self.verificationErrors.append("fail to use wailian")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/user_management_wailian.png")
@@ -1122,7 +1123,7 @@ class Test(unittest.TestCase):
     def test_regress(self):
 
         #网站主站回归流程
-        self.register()
+        #self.register()
         self.login_from_index()
         self.release_normal()
         self.release_three_video()

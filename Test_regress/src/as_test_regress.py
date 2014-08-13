@@ -18,10 +18,10 @@ class Test(unittest.TestCase):
 
     def setUp(self):
 
-        self.browser = "ie"
+        self.browser = "Chrome"
 
         self.test_enviroment = "beta"
-        self.org_name = "salesdemo"
+        self.org_name = "adm_liwen01"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -1019,20 +1019,22 @@ class Test(unittest.TestCase):
     
     def createpaper(self):
         self.total += 1
+        #paper_name = []
         try:
-            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 ,1, 1,2) 
+            self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1) 
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to create paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+            #print self.paper_name            
             
     def user_statistical_information(self):
         self.total += 1
         try:
-            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
-            #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
-            #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=1, username=self.user_name)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=2, username=self.user_name)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=3, username=self.user_name)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to export exam result")
@@ -1042,7 +1044,7 @@ class Test(unittest.TestCase):
     def exam_student_management(self):
         self.total += 1
         try:
-            exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
+            exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=1)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to open paper")
@@ -1050,7 +1052,7 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/open_paper.png")
             self.total += 1
         try:
-            exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
+            exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=2)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to close paper")
@@ -1104,11 +1106,19 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append('fail to exam!')
         finally: 
-            self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")
+            self.driver.save_screenshot("C:/test_rs_pic/exam_user.png")
             
         #获取学员提交试卷名称，待学员信息使用
-        
-            
+    def user_buy_paper(self):
+        self.total += 1
+        try:
+            exam_user_management.buy_paper(self.cfg, self.driver)
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append('fail to buy_paper!')
+        finally: 
+            self.driver.save_screenshot("C:/test_rs_pic/buy_paper.png")
+                        
     def wailian_video(self):
         self.total += 1
         try:
@@ -1124,70 +1134,73 @@ class Test(unittest.TestCase):
 
         #网站主站回归流程
         #self.register()
-        self.login_from_index()
-        self.release_normal()
-        self.release_three_video()
-        self.agency_course()
-        self.package_course() 
-        self.add_cate()
-        self.presale_course()  
-        self.add_course_to_cate()   
-        self.prepaid_cardgroup()
-        self.course_cardgroup()
-        self.cate_cardgroup()
-        self.delete_cate()
-        self.buy_listen_card()
-        self.listen_cardgroup()
-        self.add_exam_card()
-        self.import_one_student()
-        self.import_multi_student()
-        self.create_multi_student()
-        self.add_admin()  
-        self.modify_admin()
-        self.delete_admin()
-        self.buy_open_num()
-        self.release_href_course()
-        self.open_course_for_one()
-        self.open_course_for_multi()
-        self.change_homelogo()
-        self.release_announcement()
-        self.modify_pagefoot()  
-        self.change_headpic()
-        self.manage_course_num()
-
-        self.verify_all_course_convert()
-
-        login.logout(self.driver, self.base_url)
-        self.login_user()
-        self.use_prepaidcard()
-        self.use_coursecard()
-        self.use_catecard()
-        self.use_listencard()
-        self.use_exam_card()
-        self.buy_course_use_RMB()
-        self.buy_course_use_card()        
+#        self.login_from_index()
+#        self.release_normal()
+#        self.release_three_video()
+#        self.agency_course()
+#        self.package_course() 
+#        self.add_cate()
+#        self.presale_course()  
+#        self.add_course_to_cate()   
+#        self.prepaid_cardgroup()
+#        self.course_cardgroup()
+#        self.cate_cardgroup()
+#        self.delete_cate()
+#        self.buy_listen_card()
+#        self.listen_cardgroup()
+#        self.add_exam_card()
+#        self.import_one_student()
+#        self.import_multi_student()
+#        self.create_multi_student()
+#        self.add_admin()  
+#        self.modify_admin()
+#        self.delete_admin()
+#        self.buy_open_num()
+#        self.release_href_course()
+#        self.open_course_for_one()
+#        self.open_course_for_multi()
+#        self.change_homelogo()
+#        self.release_announcement()
+#        self.modify_pagefoot()  
+#        self.change_headpic()
+#        self.manage_course_num()
+#
+#        self.verify_all_course_convert()
+#
+#        login.logout(self.driver, self.base_url)
+#        self.login_user()
+#        self.use_prepaidcard()
+#        self.use_coursecard()
+#        self.use_catecard()
+#        self.use_listencard()
+#        self.use_exam_card()
+#        self.buy_course_use_RMB()
+#        self.buy_course_use_card()        
 
         #考试系统部分
         self.login_from_index()
-        self.exam_onequestion()
-        self.exam_questions()
-        self.import_questions()
-        self.add_exam_subject()
-        self.modify_exam_subject()
-        self.delete_exam_subject()
-        self.create_exam_cate()
-        self.modify_exam_cate()
-        self.delete_exam_cate() 
-        self.add_exam_point()
-        self.modify_exam_point()
-        self.delete_exam_point()    
+#        self.exam_onequestion()
+#        self.exam_questions()
+#        self.import_questions()
+#        self.add_exam_subject()
+#        self.modify_exam_subject()
+#        self.delete_exam_subject()
+#        self.create_exam_cate()
+#        self.modify_exam_cate()
+#        self.delete_exam_cate() 
+#        self.add_exam_point()
+#        self.modify_exam_point()
+#        self.delete_exam_point()    
         self.createpaper()
         self.exam_student_management()
-        self.user_statistical_information()
         login.logout(self.driver, self.base_url)
 
         self.login_user()
         self.exam_user()
+        login.logout(self.driver, self.base_url)       
+        
+        self.login_from_index()
+        self.user_statistical_information()
         
 
        

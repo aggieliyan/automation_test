@@ -17,22 +17,23 @@ def is_element_present(driver, how, what):
 def import_one_student(cfg, driver, base_url, org_name, stu_name):
 
     driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"学员/员工").click()
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     try:
         driver.find_element(cfg.get('org_manage', "stu_close_by"), \
             cfg.get('org_manage', "stu_close")).click()
     except:
         pass
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"学员管理").click()
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_manage', "stu_input_by"), \
     	cfg.get('org_manage', "stu_input")).send_keys(stu_name)
-    driver.implicitly_wait(1)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_manage', "stu_import_btn_by"), \
     	cfg.get('org_manage', "stu_import_btn")).click()
-    driver.implicitly_wait(3)
+    time.sleep(2)
 
 def import_multi_student(cfg, driver, base_url, org_name, stu_txt):
 

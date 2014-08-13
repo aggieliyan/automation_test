@@ -77,6 +77,8 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     driver.find_element(cfg.get('exam', 'exam_paper_build_btn_by'), \
                         cfg.get('exam', 'exam_paper_build_btn')).click()
     driver.implicitly_wait(2)
+    return exam_name
+
             
 #添加大题
 def add_big_question(cfg, driver, qscore, qtype):
@@ -182,11 +184,12 @@ def auto_createpaper(cfg, driver, base_url, eoperation, \
         exam_name = 'testpaper_' + prefix + str(i)\
         +time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         exam_time = '120'
-        create_paper(cfg, driver, base_url, exam_name, exam_time, \
+        paper_name = create_paper(cfg, driver, base_url, exam_name, exam_time, \
                      eoperation, erandom, eopen)
+    return paper_name
         #print i      
 
-def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun122"):
+def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
     """
     etype表示需要的操作类型，1为导出分发给学员的试卷统计结果，
                              2为导出作为开放试卷的统计结果,
@@ -286,7 +289,7 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     time.sleep(1)
     if atype == 1:
         driver.find_element_by_link_text(u"分发试卷").click()
-        driver.implicitly_wait(10)
+        time.sleep(2)
         driver.find_element(cfg.get('exam', 'open_paper_by'), \
             cfg.get('exam', 'open_paper')).click()
     else:

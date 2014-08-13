@@ -18,10 +18,10 @@ class Test(unittest.TestCase):
 
     def setUp(self):
 
-        self.browser = "ie"
+        self.browser = "Chrome"
 
         self.test_enviroment = "beta"
-        self.org_name = "salesdemo"
+        self.org_name = "adm_liwen01"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -1016,20 +1016,22 @@ class Test(unittest.TestCase):
     
     def createpaper(self):
         self.total += 1
+        #paper_name = []
         try:
-            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 ,1, 1,2) 
+            self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1) 
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to create paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+            #print self.paper_name            
             
     def user_statistical_information(self):
         self.total += 1
         try:
-            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=1)
-            #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=2)
-            #exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=u"未作答（主观题，免费）", etype=3)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=1, username=self.user_name)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=2, username=self.user_name)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=3, username=self.user_name)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to export exam result")
@@ -1039,7 +1041,7 @@ class Test(unittest.TestCase):
     def exam_student_management(self):
         self.total += 1
         try:
-            exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=1)
+            exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=1)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to open paper")
@@ -1048,7 +1050,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, atype=2)
+            exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=2)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to close paper")
@@ -1102,11 +1104,19 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append('fail to exam!')
         finally: 
-            self.driver.save_screenshot("D:/test_rs_pic/exam_user.png")
+            self.driver.save_screenshot("C:/test_rs_pic/exam_user.png")
             
         #获取学员提交试卷名称，待学员信息使用
-        
-            
+    def user_buy_paper(self):
+        self.total += 1
+        try:
+            exam_user_management.buy_paper(self.cfg, self.driver)
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append('fail to buy_paper!')
+        finally: 
+            self.driver.save_screenshot("C:/test_rs_pic/buy_paper.png")
+                        
     def wailian_video(self):
         self.total += 1
         try:
@@ -1183,11 +1193,14 @@ class Test(unittest.TestCase):
         self.delete_exam_point()    
         self.createpaper()
         self.exam_student_management()
-        self.user_statistical_information()
         login.logout(self.driver, self.base_url)
 
         self.login_user()
         self.exam_user()
+        login.logout(self.driver, self.base_url)       
+        
+        self.login_from_index()
+        self.user_statistical_information()
         
 
        

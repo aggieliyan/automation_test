@@ -128,8 +128,8 @@ class Test(unittest.TestCase):
         title = u"course" + rand_name#在标题中加入随机数字确保课件标题的唯一性
         try:
             new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
-        except Exception, e:
-            print print traceback.format_exc() 
+        except Exception, e:       
+            print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/2_normal_course.png')
 

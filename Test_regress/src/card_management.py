@@ -251,6 +251,7 @@ def user_usexamcard_management(cfg, driver, base_url, examcard_num):
     driver.find_element(cfg.get('use_card', 'exam_selectcourse_by'), \
         cfg.get('use_card', 'exam_selectcourse')).click()#点击选课
     time.sleep(2)
+    academy_catename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
     driver.execute_script("$('.wrap input').eq(0).click()")#选择第一个课程
     time.sleep(2)  
     driver.find_element(cfg.get('use_card', 'enter_study_center_by'), \
@@ -267,10 +268,11 @@ def user_usexamcard_management(cfg, driver, base_url, examcard_num):
     driver.find_element(cfg.get('use_card', 'exam_paper_by'), \
         cfg.get('use_card', 'exam_paper')).text#标题  
     time.sleep(2)  
+    return academy_catename
 def user_usexamcard(cfg, driver, base_url, examcard_num):  
-    user_usexamcard_management(cfg, driver, base_url, examcard_num)
+    academy_catename = user_usexamcard_management(cfg, driver, base_url, examcard_num)
     # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
-    exam_user_management.exam_user(cfg, driver, base_url, operation=0, blank_pager=0, question_answer='123')
+    exam_user_management.exam_user(cfg, driver, base_url, operation=0, blank_pager=0, question_answer='123', pager_name=academy_catename)
 #获取院校机构课程类目名并创建试卷后，创建卡号，并返回    
 def add_exam_card1(cfg, driver, base_url, count=5):
     time.sleep(2)

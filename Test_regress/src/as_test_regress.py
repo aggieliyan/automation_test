@@ -155,7 +155,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000, 9999))
         title = u"course-three"+rand_name
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, ctype=1, isthree=1, course_title=title, course_price=10)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, isthree=1, course_title=title, course_price=10)
         except Exception, e:
             print traceback.format_exc() 
         finally:
@@ -175,17 +175,14 @@ class Test(unittest.TestCase):
             self.course_href_2 = self.base_url + course_href
         else:
             self.course_href_2 = ""
-
-#现在不好判断是不是双视频了           
+         
     def release_two_video(self):
 
         self.total += 1
-        v_file = r"W:\Testing\Testing Files\Automation_test\OLAY.mpe.asc.flv"
-        p_file = r"W:\Testing\Testing Files\Automation_test\think.mpeg.asc.flv"
         rand_name = str(random.randint(1000, 9999))
-        title = u"自动化测试-双视频" + rand_name
+        title = u"two_video_course" + rand_name
         try:
-            course_management.release_three_video(self.cfg, self.driver, self.base_url, self.org_name, video_file=v_file, pdf_file=p_file, course_title=title)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, isthree=2)
         except Exception, e:
             print traceback.format_exc() 
         finally:
@@ -1123,10 +1120,11 @@ class Test(unittest.TestCase):
     def test_regress(self):
 
         #网站主站回归流程
-        #self.register()
+        self.register()
         self.login_from_index()
         self.release_normal()
         self.release_three_video()
+        self.release_two_video()
         self.agency_course()
         self.package_course() 
         self.add_cate()

@@ -23,7 +23,7 @@ def test_create_student():
     driver = webdriver.Ie()
     stu_txt = r"C:\register_user_list.txt"
     #driver.implicitly_wait(30)
-    user_name = "sadm001"
+    user_name = "salesdemo"
     user_psw = "1234"
     org_name = user_name
     exam_name = u'未作答（主观+客观，收费）'
@@ -43,9 +43,9 @@ def test_create_student():
         #student_management.open_course_for_multi(cfg,driver,base_url, org_name)
         #student_management.manage_course_num(cfg, driver, base_url)
         #exam_paper.send_close_paper(cfg, driver, base_url, atype=1)
-        exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123")
-        exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=2, username="sun125")
-        exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=3, username="sun123")
+        #exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun123")
+        #exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=2, username="sun125")
+        #exam_paper.exam_result(cfg, driver, base_url, exam_name, etype=3, username="sun123")
         exam_paper.send_close_paper(cfg, driver, base_url, atype=1)
         exam_paper.send_close_paper(cfg, driver, base_url, atype=2)
         #exam_user_management.buy_paper(cfg, driver)

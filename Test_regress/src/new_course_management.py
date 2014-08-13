@@ -24,7 +24,7 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
     #进入发课页面
     url = "%s/coursePostRedirect.do?action=courseStepOne"%(base_url)
     driver.get(url)
-    driver.implicitly_wait(1)
+    driver.implicitly_wait(10)
     #发点播课程
     if ctype == 1:
         #从存储空间上传
@@ -33,12 +33,11 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
                 cfg.get('courseRedirect', 'threevideo')).click()
             driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
                 cfg.get('courseRedirect', 'upload_btn'))[1].click()
-            time.sleep(3)
+            driver.implicitly_wait(10)
             driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
             time.sleep(1)
             driver.execute_script(\
                 "$(\'.dialog-button-container button\').eq(0).click()")
-            #driver.find_element("xpath", "//button").click()
             time.sleep(3)
             driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
                 cfg.get('courseRedirect', 'upload_btn'))[2].click()
@@ -57,7 +56,7 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
             if upload == 1:
                 driver.find_element(cfg.get('courseRedirect', 'upload_btn_by'), \
                     cfg.get('courseRedirect', 'upload_btn')).click()
-                time.sleep(3)
+                driver.implicitly_wait(10)
 
                 #全选 /选最后一个
                 #driver.execute_script(\
@@ -74,7 +73,7 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
                 driver.execute_script("$('.fileinput-button input').eq(0)\
                     .attr('style','height:20px;opacity:1;display:block;\
                         position:static;transform:translate(0px, 0px) scale(1)')")
-                driver.implicitly_wait(1)
+                driver.implicitly_wait(10)
                 driver.find_element_by_name("files").send_keys(course_file)
                 time.sleep(1)
 
@@ -83,7 +82,7 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
         cfg.get('courseRedirect', 'next_btn')).click()
 
     #发课第二步-课程信息页面
-    time.sleep(1)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('courseRedirect', 'ctitle_by'), \
         cfg.get('courseRedirect', 'ctitle')).click()
     driver.find_element(cfg.get('courseRedirect', 'ctitle_by'), \
@@ -100,11 +99,9 @@ def course_redirect(cfg, driver, base_url, ctype=1, isthree=0, upload=1, \
         idocument=element.contentDocument;\
         element=idocument.getElementById('tinymce');\
         element.innerHTML =\'"+course_describe+"\';")
-    time.sleep(1)
     #选择服务分类
     driver.execute_script("$(\'li.level2\').click()")
     driver.execute_script("$(\'li.level3.selected\').click()")
-    time.sleep(1)
     #填写课程标签
     driver.find_element(cfg.get('courseRedirect', 'tags_by'), \
         cfg.get('courseRedirect', 'tags')).send_keys(course_tags)
@@ -119,11 +116,11 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
     ctype代表发课类型，1代表普通网络班（打包），2代表预售网络班
     '''
     driver.get("%smyOffice.do" %(base_url))
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"教学教务").click()
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"报班管理").click()
-    driver.implicitly_wait(3)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('classRedirect', 'redirect_btn_by'), \
         cfg.get('classRedirect', 'redirect_btn')).click()
     time.sleep(5)
@@ -181,8 +178,7 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
             "return $('.ablableSNew .colorGreen').text()")
         temp = re.search(r'\d{1,10}.\d', str_price)
         price = temp.group(0)
-        print str_price, price
-
+        #print str_price, price
         driver.find_element(cfg.get('courseRedirect', 'agency_price_by'), \
             cfg.get('courseRedirect', 'agency_price')).clear()
         driver.find_element(cfg.get('courseRedirect', 'agency_price_by'), \

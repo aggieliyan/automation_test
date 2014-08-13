@@ -250,16 +250,18 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username="sun122"):
             score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), \
                 cfg.get('exam', 'input_score'))
             score = "0.1"
+            count = 0
             for item in score_input:
                 try:
                     item.clear()
                     item.send_keys(score)
+                    count += 1
                 except:
                     continue
             driver.find_element(cfg.get('exam', 'score_save_by'), \
                 cfg.get('exam', 'score_save')).click()
-            total_score = len(score_input) * score
-            return total_score 
+            total_score = count * score
+            return total_score
 
     time.sleep(5)
     return True
@@ -270,24 +272,28 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     """
     #username = "sunmin1990"
     driver.get("%sexam/" %(base_url))
-    driver.implicitly_wait(1)
+    driver.implicitly_wait(10)
     driver.find_element("xpath", "//p[4]/a").click()
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', 'user_search_by'), \
         cfg.get('exam', 'user_search')).clear()
     #得一个字母一个字母的输入，否则因为输入太快得到的搜索结果不准确
     for letter in username:
         driver.find_element(cfg.get('exam', 'user_search_by'), \
             cfg.get('exam', 'user_search')).send_keys(letter)
-    driver.implicitly_wait(1)
+    time.sleep(1)
     if atype == 1:
         driver.find_element_by_link_text(u"分发试卷").click()
+        driver.implicitly_wait(10)
+        driver.find_element(cfg.get('exam', 'open_paper_by'), \
+            cfg.get('exam', 'open_paper')).click()
     else:
         driver.find_element_by_link_text(u"关闭试卷").click()
-    time.sleep(2)
-    driver.find_element(cfg.get('exam', 'open_paper_by'), \
-        cfg.get('exam', 'open_paper')).click()
-    driver.implicitly_wait(1)
+        driver.implicitly_wait(10)
+        driver.find_element("css selector", "td.rowfirst > input").click()
+    
+
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', 'open_paper_ok_by'), \
         cfg.get('exam', 'open_paper_ok')).click()
     time.sleep(2)      

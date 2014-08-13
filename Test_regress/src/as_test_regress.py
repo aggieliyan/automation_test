@@ -535,9 +535,13 @@ class Test(unittest.TestCase):
         return True
 
     def verify_course(self, title): #去知识库检查是否存在
-
-        self.driver.find_element_by_link_text(u"课程中心").click()
-        self.driver.implicitly_wait(2)
+        
+        self.driver.get(self.base_url + "myOffice.do")
+        self.driver.implicitly_wait(10)
+        self.driver.find_element_by_link_text(u"教学教务").click()
+        self.driver.implicitly_wait(10)
+        self.driver.find_element_by_link_text(u"课程管理").click()
+        self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
         return rs
 

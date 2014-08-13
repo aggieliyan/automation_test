@@ -36,7 +36,7 @@ def exam_question_Single(cfg, driver, base_url, question_ansa):
     #添加音频
     driver.find_element(cfg.get('exam_questions', "question_music_by"), \
         cfg.get('exam_questions', "question_music")).send_keys \
-        (r"//data.ablesky.com/workspace/Testing/Testing Files/Automation_test/123.mp3")
+        (r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\123.mp3")
     driver.implicitly_wait(10)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)') \
         .attr('id')")

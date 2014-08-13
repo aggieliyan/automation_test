@@ -494,13 +494,17 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/import_one_student.png")
 
         #验证
-        # self.driver.refresh()
-        # rs = self.is_element_present(By.XPATH, "//span[@title=\'"+self.import_name+"\']")
-        rs = self.is_element_present(By.LINK_TEXT, self.import_name)
-        try:
-            self.assertEqual(False, rs, "fail to import one student!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
+         self.driver.refresh()
+         time.sleep(3)
+         rs = self.is_element_present(By.XPATH, "//span[@title=\'"+self.import_name+"\']")
+        # try:
+        #     self.assertEqual(False, rs, "fail to import one student!")
+        # except AssertionError, e:
+        #     self.verificationErrors.append(str(e))
+        if rs == False:
+            self.verificationErrors.append("fail to import one student!")
+        else:
+            pass;
 
     def import_multi_student(self):
         self.total += 1

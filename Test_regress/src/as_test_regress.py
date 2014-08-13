@@ -497,8 +497,6 @@ class Test(unittest.TestCase):
         rs = self.is_element_present(By.XPATH, "//span[@title=\'"+self.import_name+"\']")
         if rs == False:
             self.verificationErrors.append("fail to import one student!")
-        else:
-            pass;
 #        try:
 #            self.assertEqual(False, rs, "fail to import one student!")
 #        except AssertionError, e:

@@ -34,9 +34,8 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
             url = driver.execute_script("return $('.exampaper-list-li a:eq(" + str(count) + ")').attr('href')")
             driver.get(base_url + "exam/" + url)#立即考试链接
         count += 1
-    time.sleep(2)
+    time.sleep(4)
     exam_time = driver.execute_script("return parseInt($('.pre-exam-outer li').eq(0).text().substring(5,6))")
-    print exam_time
     time.sleep(2)
     driver.find_element_by_link_text(u"开始考试").click()
     time.sleep(2)

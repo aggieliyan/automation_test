@@ -58,6 +58,7 @@ def add_prepaid_cardgroup(cfg, driver, base_url, org_name, \
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"管理卡组").click()
     driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', 'grouptitle_by'), \
@@ -100,6 +101,7 @@ def add_cate_cardgroup(cfg, driver, base_url, org_name, \
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"管理卡组").click()
     driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', 'grouptitle_by'), \
@@ -140,6 +142,7 @@ def add_listen_cardgroup(cfg, driver, base_url, \
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"管理卡组").click()
     driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', 'listen_card_by'), \

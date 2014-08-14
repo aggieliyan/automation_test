@@ -83,7 +83,8 @@ def add_course_cardgroup(cfg, driver, base_url, org_name, group_name=u'coursecar
     driver.implicitly_wait(30)
     #driver.find_element(cfg.get('org_manage', 'course_cate_xpath_by'), \
     #cfg.get('org_manage', 'course_cate_xpath')).click()#选择整个类目，类目下的课被选中
-    driver.find_element_by_css_selector("span.disMore_btn").click()
+    driver.find_element(cfg.get('org_manage', 'course_dismore_by'), \
+        cfg.get('org_manage', 'course_dismore')).click()
     time.sleep(8)
     driver.execute_script("$('input[type=checkbox]:eq(2)').click()")#选择未归类类目下的一个课程
     time.sleep(2)
@@ -166,7 +167,7 @@ def add_listen_cardgroup(cfg, driver, base_url, \
     driver.implicitly_wait(30)     
 #添加卡
 def add_card(cfg, driver, base_url, org_name, \
-        cgroup_num=1, card_prifix='autoauto1', card_num=5):
+        card_prifix,cgroup_num=1,card_num=5):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"管理卡组").click()

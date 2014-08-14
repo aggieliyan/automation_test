@@ -388,8 +388,10 @@ class Test(unittest.TestCase):
     def add_and_get_card(self, card_type=0):#添加卡并返回第一个卡号和密码
 
         self.total += 1
+        card_prifix = "auto" + chr(random.randint(97, 122)) + \
+        chr(random.randint(97, 122)) + chr(random.randint(97, 122))
         try:
-            card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name)
+            card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name,card_prifix)
             self.driver.implicitly_wait(2)
             if card_type == 0:
                 time.sleep(2)

@@ -73,6 +73,7 @@ def add_course_cardgroup(cfg, driver, base_url, org_name, group_name=u'coursecar
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"管理卡组").click()
     driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', 'course_card_by'), \

@@ -125,6 +125,7 @@ def open_course_for_one(cfg, driver, base_url, org_name, stu_num=1):
     time.sleep(5)
     driver.find_element(cfg.get('org_manage', "open_course_1_by"), \
     cfg.get('org_manage', "open_course_1")).click()#选中资料
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', "open_ok_by"), \
     cfg.get('org_manage', "open_ok")).click()#确认开通
     time.sleep(2)
@@ -163,6 +164,7 @@ def open_course_for_multi(cfg, driver, base_url, org_name):
     time.sleep(5)
     driver.find_element(cfg.get('org_manage', "open_course_1_by"), \
     cfg.get('org_manage', "open_course_1")).click()#选中资料
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', "open_ok_by"), \
     cfg.get('org_manage', "open_ok")).click()#确认开通
     time.sleep(5)

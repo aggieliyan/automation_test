@@ -48,7 +48,7 @@ def use_course_card(cfg, driver, base_url, card_num, card_psw):
     time.sleep(2)
     driver.find_element(cfg.get('use_card', 'add_ok_by'), \
         cfg.get('use_card', 'add_ok')).click()
-    time.sleep(2)
+    time.sleep(5)
     driver.find_element(cfg.get('use_card', 'course_ok_by'), \
         cfg.get('use_card', 'course_ok')).click()
     time.sleep(2)
@@ -59,9 +59,9 @@ def use_course_card(cfg, driver, base_url, card_num, card_psw):
 def add_prepaid_cardgroup(cfg, driver, base_url, org_name, \
         group_name, group_price=300):
     driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element_by_link_text(u"管理卡组").click()
-    time.sleep(4)
+    time.sleep(3)
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'grouptitle_by'), \
@@ -78,15 +78,13 @@ def add_course_cardgroup(cfg, driver, base_url, org_name, group_name):
     driver.find_element_by_link_text(u"管理卡组").click()
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'course_card_by'), \
         cfg.get('org_manage', 'course_card')).click()#选择充课卡
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'grouptitle_by'), \
         cfg.get('org_manage', 'grouptitle')).send_keys(group_name)
-    driver.implicitly_wait(30)
-    #driver.find_element(cfg.get('org_manage', 'course_cate_xpath_by'), \
-    #cfg.get('org_manage', 'course_cate_xpath')).click()#选择整个类目，类目下的课被选中
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'course_dismore_by'), \
         cfg.get('org_manage', 'course_dismore')).click()
     time.sleep(5)
@@ -163,7 +161,7 @@ def add_listen_cardgroup(cfg, driver, base_url, \
         cfg.get('org_manage', 'listen_warn')).text
     except:
         None
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.execute_script("$(\".x-btn-text\").eq(0).click()")
     driver.implicitly_wait(30)
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")  
@@ -172,21 +170,20 @@ def add_listen_cardgroup(cfg, driver, base_url, \
 def add_card(cfg, driver, base_url, org_name, \
         card_prifix,cgroup_num=1,card_num=5):
     driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(30)
-    driver.find_element_by_link_text(u"管理卡组").click()
     time.sleep(2)
+    driver.find_element_by_link_text(u"管理卡组").click()
+    time.sleep(3)
     if cgroup_num == 1:
         driver.find_element_by_link_text(u"添加卡").click()
     else:  
         driver.find_element_by_xpath("//div["+str(cgroup_num)+ \
             "]/table/tbody/tr/td[6]/div/div/a").click()
-    time.sleep(3)
     driver.find_element(cfg.get('org_manage', 'card_prefix_by'), \
         cfg.get('org_manage', 'card_prefix')).send_keys(card_prifix)
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'card_count_by'), \
         cfg.get('org_manage', 'card_count')).send_keys(card_num)
-    time.sleep(3)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'add_card_ok_by'), \
         cfg.get('org_manage', 'add_card_ok')).click()
     driver.implicitly_wait(30)

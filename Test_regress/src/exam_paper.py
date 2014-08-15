@@ -69,14 +69,14 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
                             cfg.get('exam', 'exam_paper_price')).send_keys("10")
     driver.find_element(cfg.get('exam', 'exam_next_one_by'), \
                         cfg.get('exam', 'exam_next_one')).click()
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     #添加大题
     auto_creatquestion(cfg, driver, 2)
     #生成试卷
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', 'exam_paper_build_btn_by'), \
                         cfg.get('exam', 'exam_paper_build_btn')).click()
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     return exam_name
 
             
@@ -93,18 +93,15 @@ def add_big_question(cfg, driver, qscore, qtype):
         time.sleep(2)
         driver.find_element(cfg.get('exam', 'exam_topic_dropdown_by'), \
                             cfg.get('exam', 'exam_topic_dropdown')).click()
-        #driver.find_element_by_css_selector("span.cc-arrow").click()
         driver.find_element('xpath', '//div[10]/ul/li').click()
-        #driver.find_element_by_css_selector("li.cc-item.selectedItem").click()
     else:
         driver.find_element(cfg.get('exam', 'exam_topic_dropdown_by'), \
                             cfg.get('exam', 'exam_topic_dropdown')).click()
-        #driver.find_element_by_css_selector("span.cc-arrow").click()
-        driver.implicitly_wait(2)
+        driver.implicitly_wait(10)
         if qtype == 2:
             driver.find_element(cfg.get('exam', 'exam_topic_multiple_by'), \
                                 cfg.get('exam', 'exam_topic_multiple')).click()
-            driver.implicitly_wait(2)
+            driver.implicitly_wait(10)
         if qtype == 3:
             time.sleep(2)
             driver.find_element(cfg.get('exam', \
@@ -116,7 +113,7 @@ def add_big_question(cfg, driver, qscore, qtype):
             time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_topic_fills_by'), \
                                 cfg.get('exam', 'exam_topic_fills')).click()
-            driver.implicitly_wait(5)
+            driver.implicitly_wait(10)
         if qtype == 5:
             time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_topic_question_by'), \
@@ -169,7 +166,7 @@ def auto_creatquestion(cfg, driver, q_num):
 def exam_export_question(cfg, driver, qscore, qtype):
     driver.find_element(cfg.get('exam', 'paper_import_question_by'), \
                         cfg.get('exam', 'paper_import_question')).click()
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     #勾选全部
     driver.find_element(cfg.get('exam', 'paper_selece_all_by'), \
                         cfg.get('exam', 'paper_selece_all')).click()

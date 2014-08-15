@@ -1017,17 +1017,8 @@ class Test(unittest.TestCase):
     def createpaper(self):
         self.total += 1
         #paper_name = []
-        #对外试卷
         try:
             self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1) 
-        except Exception, e:
-            print traceback.format_exc() 
-            self.verificationErrors.append("fail to create paper")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-        #创建不对外试卷    
-        try:
-            self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 0, 1) 
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to create paper")

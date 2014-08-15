@@ -514,7 +514,13 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/import_multi_student.png")
 
-    #验证,待完成
+    #验证
+        time.sleep(5)
+        rs = self.is_element_present(By.LINK_TEXT, u"继续批量导入学员")
+        try:
+            self.assertEqual(True, rs, "fail to import multi student!")
+        except AssertionError, e:
+            self.verificationErrors.append(str(e))
     def create_multi_student(self):
 
         self.total += 1
@@ -528,7 +534,13 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_student.png")
 
-    #验证，待完成
+    #验证
+        time.sleep(5)
+        rs = self.is_element_present(By.LINK_TEXT, u"继续批量创建学员")
+        try:
+            self.assertEqual(True, rs, "fail to create multi student!")
+        except AssertionError, e:
+            self.verificationErrors.append(str(e))
 
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)

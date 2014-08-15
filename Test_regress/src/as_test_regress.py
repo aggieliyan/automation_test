@@ -771,6 +771,14 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/buy_open_num.png")
 
+        #验证   
+        time.sleep(5)
+        rs = self.is_element_present(By.LINK_TEXT, u"继续购买授权")
+        try:
+            self.assertEqual(True, rs, "fail to buy open num!")
+        except AssertionError, e:
+            self.verificationErrors.append(str(e))
+
     def change_headpic(self):
 
         self.total += 1

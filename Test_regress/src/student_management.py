@@ -101,6 +101,7 @@ def auto_create_student(cfg, driver, base_url, org_name, stu_num):
         stu_file.writelines(stu_name + " " + stu_psw + "\n")
     stu_file.close()
     create_student(cfg, driver, base_url, org_name, stu_txt)
+    time.sleep(5)
 
 def open_course_for_one(cfg, driver, base_url, org_name, stu_num=1):
     driver.get(base_url + "myOffice.do")

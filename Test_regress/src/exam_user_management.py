@@ -85,33 +85,26 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
             #第一个是单选 or 多选
             time.sleep(2)
             try:
-                if driver.find_element(cfg.get('exam', 'exam_all_selectque_by'), \
-                        cfg.get('exam', 'exam_all_selectque')):
-                    driver.find_element(cfg.get('exam', 'exam_all_selectque_by'), \
-                        cfg.get('exam', 'exam_all_selectque')).click()
+                driver.find_element(cfg.get('exam', 'exam_all_selectque_by'), \
+                    cfg.get('exam', 'exam_all_selectque')).click()
             except:
                 None
             #是非
             try:
-                if driver.find_element(cfg.get('exam', 'exam_all_yesque_by'), \
-                        cfg.get('exam', 'exam_all_yesque')):
-                    driver.find_element(cfg.get('exam', 'exam_all_yesque_by'), \
-                        cfg.get('exam', 'exam_all_yesque')).click()
+                driver.find_element(cfg.get('exam', 'exam_all_yesque_by'), \
+                    cfg.get('exam', 'exam_all_yesque')).click()
             except:
                 None
             #填空
             try:
-                if driver.find_element(cfg.get('exam', 'exam_all_blankque_by'), \
-                        cfg.get('exam', 'exam_all_blankque')):
-                    driver.find_element(cfg.get('exam', 'exam_all_blankque_by'), \
-                        cfg.get('exam', 'exam_all_blankque')).send_keys(question_answer)
+                driver.find_element(cfg.get('exam', 'exam_all_blankque_by'), \
+                    cfg.get('exam', 'exam_all_blankque')).send_keys(question_answer)
             except:  
                 None
             #问答
             try:
-                if driver.find_element(cfg.get('exam', 'exam_all_askque_by'), cfg.get('exam', 'exam_all_askque')):
-                    iframe_id = driver.execute_script("return $('#J_examWrapper iframe:eq(0)').attr('id')")
-                    driver.execute_script("var element=window.document.getElementById('" + iframe_id + "');\
+                iframe_id = driver.execute_script("return $('#J_examWrapper iframe:eq(0)').attr('id')")
+                driver.execute_script("var element=window.document.getElementById('" + iframe_id + "');\
                     idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
                     element.innerHTML =\'"+question_answer+"\';")
             except:

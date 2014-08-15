@@ -287,7 +287,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/9_prepaid_cardgroup.png')
         
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create prepaid cardgroup!")
@@ -314,7 +314,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/10_course_cardgroup.png")
 
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create course cardgroup!")
@@ -339,7 +339,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/11_cate_cardgroup.png")
 
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create cate cardgroup!")
@@ -372,7 +372,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/12_listen_cardgroup.png")  
-        self.driver.implicitly_wait(2)
+        time.sleep(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create listen cardgroup!")

@@ -205,7 +205,7 @@ def get_academy_catename(cfg, driver, base_url, academy):
         cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
     time.sleep(5)
     academy_catename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'exam_select_close_by'), \
         cfg.get('org_manage', 'exam_select_close')).click()#关闭窗口   
     driver.implicitly_wait(30)
@@ -219,7 +219,7 @@ def add_exam_card_management(cfg, driver, base_url, count, academy):
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'exam_subname_by'), \
         cfg.get('org_manage', 'exam_subname')).send_keys(academy)#添加机构名称 
-    time.sleep(2)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', 'exam_cardcount_by'), \
         cfg.get('org_manage', 'exam_cardcount')).send_keys(count)#填写考试卡数量
     time.sleep(2)
@@ -252,27 +252,27 @@ def add_exam_card(cfg, driver, base_url, count, academy):
 def user_usexamcard_management(cfg, driver, base_url, examcard_num):
     driver.implicitly_wait(30)
     driver.get(base_url + "qqhru")
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('use_card', 'exam_selectcourse_by'), \
         cfg.get('use_card', 'exam_selectcourse')).click()#点击选课
     time.sleep(2)
     academy_catename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
     driver.execute_script("$('.wrap input').eq(0).click()")#选择第一个课程
-    time.sleep(2)  
+    time.sleep(2)
     driver.find_element(cfg.get('use_card', 'enter_study_center_by'), \
         cfg.get('use_card', 'enter_study_center')).click()#将课程加入学习中心
-    time.sleep(2)
+    driver.implicitly_wait(30)
     driver.get(base_url + "examRedirect.do?action=toUseExamCard")#获取点击线上考试
     time.sleep(2)
     driver.find_element(cfg.get('use_card', 'exam_inputnumber_by'), \
         cfg.get('use_card', 'exam_inputnumber')).send_keys(examcard_num)#输入考号
-    time.sleep(2)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('use_card', 'exam_start_by'), \
         cfg.get('use_card', 'exam_start')).click()#点击开始考试
     time.sleep(2)
     driver.find_element(cfg.get('use_card', 'exam_paper_by'), \
         cfg.get('use_card', 'exam_paper')).text#标题  
-    time.sleep(2)  
+    driver.implicitly_wait(30) 
     return academy_catename
 def user_usexamcard(cfg, driver, base_url, examcard_num):  
     academy_catename = user_usexamcard_management(cfg, driver, base_url, examcard_num)

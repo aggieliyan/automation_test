@@ -38,24 +38,24 @@ def exam_question_Single(cfg, driver, base_url, question_ansa):
     driver.find_element(cfg.get('exam_questions', "question_music_by"), \
         cfg.get('exam_questions', "question_music")).send_keys \
         (r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\123.mp3")
-    driver.implicitly_wait(10)
+    time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)') \
         .attr('id')")
     driver.execute_script("var element=window.document.getElementById \
         (\'" + iframe_id + "\'); \
     idocument=element.contentDocument; element=idocument.getElementById('tinymce'); \
     element.innerHTML = \'" + question_ansa + "\';")
-    driver.implicitly_wait(30)
+    time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(3)'). \
         attr('id')")
     driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
     element.innerHTML =\'" + question_ansa + "\';")
-    driver.implicitly_wait(30)
+    time.sleep(2)
     #添加选项
     driver.find_element(cfg.get('exam_questions', "question_Single_addanswer_by"), \
         cfg.get('exam_questions', "question_Single_addanswer")).click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(4)'). \
         attr('id')")
     driver.execute_script("var element=window.document.getElementById(\'" + iframe_id + "\');\
@@ -111,7 +111,7 @@ def exam_question_Multiple(cfg, driver, base_url, question_ansa):
     time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_type_by"), \
         cfg.get('exam_questions', "question_type")).click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_type_Multiple_by"), \
         cfg.get('exam_questions', "question_type_Multiple")).click()
     time.sleep(2)
@@ -158,7 +158,7 @@ def exam_question_TrueOrFalse(cfg, driver, base_url, question_ansa):
     time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_type_by"), \
         cfg.get('exam_questions', "question_type")).click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_type_TrueOrFalse_by"), \
         cfg.get('exam_questions', "question_type_TrueOrFalse")).click()
     driver.implicitly_wait(30)
@@ -196,7 +196,7 @@ def exam_question_Answer(cfg, driver, base_url, question_ansa):
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('exam_questions', "question_type_Answer_by"), \
         cfg.get('exam_questions', "question_type_Answer")).click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(0)'). \
         attr('id')")
     driver.execute_script("var element=window.document.getElementById \
@@ -227,14 +227,14 @@ def exam_question_Blank(cfg, driver, base_url, question_ansa):
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('exam_questions', "question_type_Blank_by"), \
         cfg.get('exam_questions', "question_type_Blank")).click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(0)'). \
         attr('id')")
     driver.execute_script("var element=window.document.getElementById \
         (\'" + iframe_id + "\'); \
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_Blank_by"), \
         cfg.get('exam_questions', "question_Blank")).send_keys(question_ansa)
     driver.implicitly_wait(30)
@@ -268,7 +268,7 @@ def exam_question_Cloze(cfg, driver, base_url, question_ansa):
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('exam_questions', "question_type_Cloze_by"), \
         cfg.get('exam_questions', "question_type_Cloze")).click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(0)'). \
         attr('id')")
     driver.execute_script("var element=window.document.getElementById \
@@ -329,38 +329,38 @@ def exam_question_Composite(cfg, driver, base_url, question_ansa):
     time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_type_by"), \
         cfg.get('exam_questions', "question_type")).click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_type_Composite_by"), \
         cfg.get('exam_questions', "question_type_Composite")).click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(0)'). \
         attr('id')")
     driver.execute_script("var element=window.document.getElementById \
         (\'" + iframe_id + "\'); \
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
-    driver.implicitly_wait(30)
+    time.sleep(2)
     #默认第一小题单选题
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(2)').attr('id')")
     driver.execute_script("var element=window.document.getElementById \
         (\'" + iframe_id + "\'); \
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
-    driver.implicitly_wait(30)
+    time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(4)'). \
         attr('id')")
     driver.execute_script("var element=window.document.getElementById \
         (\'" + iframe_id + "\'); \
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
-    driver.implicitly_wait(30)
+    time.sleep(2)
     iframe_id = driver.execute_script("return $('#sbjFormCon iframe:eq(5)'). \
         attr('id')")
     driver.execute_script("var element=window.document.getElementById \
         (\'" + iframe_id + "\'); \
     idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
     element.innerHTML =\'" + question_ansa + "\';")
-    driver.implicitly_wait(30)
+    time.sleep(2)
     #添加选项
     driver.find_element(cfg.get('exam_questions', "question_Composite_Single_addanswer_by"), \
         cfg.get('exam_questions', "question_Composite_Single_addanswer")).click()

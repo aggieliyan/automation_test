@@ -297,8 +297,8 @@ class Test(unittest.TestCase):
         card_info = self.add_and_get_card()
         self.p_card_num = card_info[0]
         self.p_card_pwd = card_info[1]
-        print self.p_card_num
-        print self.p_card_pwd
+#        print self.p_card_num
+#        print self.p_card_pwd
         #考号
     #添加卡组-充课卡   
     def course_cardgroup(self):
@@ -382,7 +382,7 @@ class Test(unittest.TestCase):
         card_info = self.add_and_get_card()
         self.l_card_num = card_info[0]
         self.l_card_pwd = card_info[1]
-        print self.l_card_num
+#        print self.l_card_num
 
     def add_and_get_card(self, card_type=0):#添加卡并返回第一个卡号和密码
 
@@ -1121,7 +1121,7 @@ class Test(unittest.TestCase):
         blank_pager = 0
         paper_name = self.paper_name
         try:
-            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, pager_name)
+            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, paper_name)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append('fail to exam!')

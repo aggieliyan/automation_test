@@ -10,35 +10,39 @@ import exam_user_management
 #使用充值卡和充课卡
 def use_prepaid_card(cfg, driver, base_url, card_num, card_psw):
     driver.get(base_url+"useCard.do?action=toStudyCard")
-    time.sleep(1)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('use_card', 'card_num_by'), \
         cfg.get('use_card', 'card_num')).send_keys(card_num)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('use_card', 'card_psw_by'), \
         cfg.get('use_card', 'card_psw')).send_keys(card_psw)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('use_card', 'card_ok_by'), \
         cfg.get('use_card', 'card_ok')).click()
-    time.sleep(2)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('use_card', 'prepaid_ok_by'), \
         cfg.get('use_card', 'prepaid_ok')).click()
-    time.sleep(2)
+    driver.implicitly_wait(30)
     prepaid_num = driver.find_element(cfg.get('use_card', 'confirm_prepaid_num_by'), \
         cfg.get('use_card', 'confirm_prepaid_num')).text
-    time.sleep(2)
+    driver.implicitly_wait(30)
     return prepaid_num
 #使用补课卡
 def use_course_card(cfg, driver, base_url, card_num, card_psw):
     driver.get(base_url+"useCard.do?action=toStudyCard")
-    time.sleep(1)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('use_card', 'card_num_by'), \
         cfg.get('use_card', 'card_num')).send_keys(card_num)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('use_card', 'card_psw_by'), \
         cfg.get('use_card', 'card_psw')).send_keys(card_psw)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('use_card', 'card_ok_by'), \
         cfg.get('use_card', 'card_ok')).click()
-    time.sleep(2)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('use_card', 'course_check_1_by'), \
         cfg.get('use_card', 'course_check_1')).click()
-    time.sleep(2)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('use_card', 'course_check_2_by'), \
         cfg.get('use_card', 'course_check_2')).click()
     time.sleep(2)
@@ -53,11 +57,10 @@ def use_course_card(cfg, driver, base_url, card_num, card_psw):
     return course_num  
 #添加卡组-充值卡
 def add_prepaid_cardgroup(cfg, driver, base_url, org_name, \
-        group_name=u'prepaidcard300', group_price=300):
+        group_name, group_price=300):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"管理卡组").click()
-    driver.implicitly_wait(30)
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     driver.implicitly_wait(30)
@@ -69,11 +72,10 @@ def add_prepaid_cardgroup(cfg, driver, base_url, org_name, \
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")
     driver.implicitly_wait(30)
 #添加卡组-充课卡
-def add_course_cardgroup(cfg, driver, base_url, org_name, group_name=u'coursecard'):
+def add_course_cardgroup(cfg, driver, base_url, org_name, group_name):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"管理卡组").click()
-    driver.implicitly_wait(30)
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     driver.implicitly_wait(30)
@@ -96,11 +98,10 @@ def add_course_cardgroup(cfg, driver, base_url, org_name, group_name=u'coursecar
     driver.implicitly_wait(30)
 #添加卡组-补课卡 
 def add_cate_cardgroup(cfg, driver, base_url, org_name, \
-        group_name=u'catecard-200', group_price=500):
+        group_name, group_price=500):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"管理卡组").click()
-    driver.implicitly_wait(30)
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     driver.implicitly_wait(30)
@@ -123,7 +124,7 @@ def buy_listen_card(cfg, driver, base_url):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"管理卡组").click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element_by_link_text(u"购买试听卡").click()
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', 'listen_count_by'), \
@@ -134,17 +135,17 @@ def buy_listen_card(cfg, driver, base_url):
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', 'listen_buttion_confirm_by'), \
         cfg.get('org_manage', 'listen_buttion_confirm')).click()
-    driver.implicitly_wait(30)
+    time.sleep(5)
+    
 #添加卡组-试听卡
 def add_listen_cardgroup(cfg, driver, base_url, \
-        org_name, group_name=u'listencard'):
+        org_name, group_name):
     driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element_by_link_text(u"管理卡组").click()
-    driver.implicitly_wait(30)
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'listen_card_by'), \
         cfg.get('org_manage', 'listen_card')).click()#选择试听卡
     driver.implicitly_wait(30)
@@ -181,13 +182,13 @@ def add_card(cfg, driver, base_url, org_name, \
     else:  
         driver.find_element_by_xpath("//div["+str(cgroup_num)+ \
             "]/table/tbody/tr/td[6]/div/div/a").click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'card_prefix_by'), \
         cfg.get('org_manage', 'card_prefix')).send_keys(card_prifix)
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', 'card_count_by'), \
         cfg.get('org_manage', 'card_count')).send_keys(card_num)
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'add_card_ok_by'), \
         cfg.get('org_manage', 'add_card_ok')).click()
     driver.implicitly_wait(30)
@@ -195,7 +196,7 @@ def add_card(cfg, driver, base_url, org_name, \
 def get_academy_catename(cfg, driver, base_url, academy):
     driver.implicitly_wait(30)
     driver.get(base_url + academy)
-    driver.implicitly_wait(30)
+    time.sleep(2)
     try:
         driver.find_element_by_link_text(u"跳过").click()#点击跳过
     except:
@@ -203,7 +204,7 @@ def get_academy_catename(cfg, driver, base_url, academy):
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
         cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
-    time.sleep(5)
+    time.sleep(2)
     academy_catename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'exam_select_close_by'), \
@@ -247,6 +248,7 @@ def add_exam_card(cfg, driver, base_url, count, academy):
         #cfg.get('org_manage', 'exam_list')).click()#点击试卷库
     #time.sleep(3)
     exam_paper.create_paper(cfg, driver, base_url, page_catename, 1, 1, 1, 1)
+    driver.implicitly_wait(30)    
     examcard_number = add_exam_card_management(cfg, driver, base_url, count, academy)
     return examcard_number
 def user_usexamcard_management(cfg, driver, base_url, examcard_num):

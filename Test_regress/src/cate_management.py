@@ -7,6 +7,7 @@ Created on Jun 2, 2012
 import time
 #添加一级类目
 def add_cate(cfg, driver, base_url, org_name, cate_name=u'计算机'):
+    time.sleep(2)
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"教学教务").click()    
@@ -24,6 +25,7 @@ def add_cate(cfg, driver, base_url, org_name, cate_name=u'计算机'):
     driver.implicitly_wait(10)
 #删除类目   
 def delete_cate(cfg, driver, base_url, org_name):  
+    time.sleep(2)
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"教学教务").click() 
@@ -38,13 +40,13 @@ def delete_cate(cfg, driver, base_url, org_name):
     return before_delete #返回被删除的类目名 
 #向类目中加入课程  
 def add_courese_to_cate(cfg, driver, base_url, org_name, cate_num=0):
-    driver.implicitly_wait(10)
+    time.sleep(2)
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"教学教务").click()  
-    time.sleep(2)
+    time.sleep(3)
     url_add = driver.execute_script("return $('#categoryList .manageCategCourse:eq("+str(cate_num)+")').attr('href')")
-    driver.implicitly_wait(10)
+    time.sleep(2)
     driver.get(base_url + url_add)
     time.sleep(2)
     driver.find_element_by_link_text(u"向类目添加知识资料").click()

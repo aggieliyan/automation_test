@@ -116,13 +116,13 @@ def change_headpic(cfg,base_url,driver,headpic = "C:\\Users\\Public\\Pictures\\S
 def release_announcement(cfg,driver, base_url, org_name, title, an_content=u'这是公告内容公告内容'):
     
     driver.get(base_url+org_name)
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"网校公告").click()
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index','release_announcementx_by'),cfg.get('org_index','release_announcementx')).click()
     driver.find_element(cfg.get('org_index','release_announcementc_by'),cfg.get('org_index','release_announcementc')).send_keys(title)
     an_content = an_content.replace("\"","\\\"").replace("\'","\\\'")
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.execute_script("var element=window.document.getElementById('editNotice_ifr');\
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');element.innerHTML='" +an_content+ "'")
     time.sleep(2)
@@ -134,14 +134,13 @@ def release_announcement(cfg,driver, base_url, org_name, title, an_content=u'这
 def release_href_course(cfg, driver, base_url, org_name):
     
     driver.get(base_url+org_name)
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(10)
     driver.find_element_by_xpath(u"(//a[contains(text(),'课程中心')])[2]").click()
     time.sleep(2)
     chref = driver.execute_script("return $(\".coursecenter-details-pic a\").eq(0).attr('href')")
     time.sleep(1)
-    print chref
     driver.get("%s%s"%(base_url, chref)) 
-    time.sleep(1)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index','release_hrefi_by'),cfg.get('org_index','release_hrefi')).click() 
     time.sleep(2)
     an_content = driver.execute_script("return $('textarea:eq(2)').text()")

@@ -175,8 +175,9 @@ def open_course_for_multi(cfg, driver, base_url, org_name):
 #购买开通授权数 bnum为购买的数量
 def buy_open_num(cfg, driver, base_url, org_name, bnum):
     driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(30)
-    driver.find_element_by_link_text("在线购买授权数").click()
+    time.sleep(2)
+    driver.find_element(cfg.get('org_manage', "buy_open_num_by"), \
+        cfg.get('org_manage', "buy_open_num")).click()
     h = driver.window_handles
     driver.switch_to_window(h[-1])
     driver.implicitly_wait(30)

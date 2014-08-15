@@ -145,9 +145,9 @@ class Test(unittest.TestCase):
         #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
         if course_href:
-            self.course_href_2 = self.base_url + course_href
+            self.course_href = self.base_url + course_href
         else:
-            self.course_href_2 = ""
+            self.course_href = ""
 
 
     def release_three_video(self):
@@ -156,7 +156,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000, 9999))
         title = u"course-three"+rand_name
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, isthree=1, course_title=title, course_price=10)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, isthree=1, course_title=title)
         except Exception, e:
             print traceback.format_exc() 
         finally:
@@ -170,12 +170,7 @@ class Test(unittest.TestCase):
         except AssertionError, e:
             self.verificationErrors.append(str(e))
         
-        #取链接待后面购买
-        course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
-        if course_href:
-            self.course_href_2 = self.base_url + course_href
-        else:
-            self.course_href_2 = ""
+
          
     def release_two_video(self):
 
@@ -183,7 +178,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000, 9999))
         title = u"two_video_course" + rand_name
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, isthree=2)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, isthree=2, course_price=10)
         except Exception, e:
             print traceback.format_exc() 
         finally:
@@ -196,6 +191,13 @@ class Test(unittest.TestCase):
             self.assertEqual(True, rs, "fail to release two video course!")
         except AssertionError, e:
             self.verificationErrors.append(str(e))
+
+        #取链接待后面购买
+        course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
+        if course_href:
+            self.course_href_2 = self.base_url + course_href
+        else:
+            self.course_href_2 = ""
 
     def package_course(self):
         #打包课程，即网络班
@@ -703,7 +705,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            user_management.buy_course(self.cfg, self.driver, self.base_url, self.org_name)
+            user_management.buy_course(self.cfg, self.driver, self.base_url, self.course_href)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use rmb!")
@@ -715,7 +717,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.org_name)
+            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.course_href_2)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use card!")

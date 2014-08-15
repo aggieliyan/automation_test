@@ -86,6 +86,8 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
     #发课第二步-课程信息页面
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('courseRedirect', 'ctitle_by'), \
+        cfg.get('courseRedirect', 'ctitle')).clear()
+    driver.find_element(cfg.get('courseRedirect', 'ctitle_by'), \
         cfg.get('courseRedirect', 'ctitle')).click()
     driver.find_element(cfg.get('courseRedirect', 'ctitle_by'), \
         cfg.get('courseRedirect', 'ctitle')).send_keys(course_title)

@@ -8,49 +8,32 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 
 #个人人民币买课
-def buy_course(cfg, driver, base_url, org_name):
+def buy_course(cfg, driver, base_url, course_url):
     
-    driver.get(base_url+org_name)
-    time.sleep(8)
-    driver.find_element_by_link_text(u"课程中心").click()
-    time.sleep(10)
-    driver.find_element_by_xpath('//html/body/div[2]/div[3]/div/div[2]/div[1]/div/p/a').click()
-    time.sleep(8)
+    driver.get(course_url)
+    driver.implicitly_wait(10)
+    driver.find_element(cfg.get('org_index','buy_course_by'), cfg.get('org_index','buy_course')).click()
     h = driver.window_handles
     driver.switch_to_window(h[-1])
-    time.sleep(8)
-    driver.find_element_by_link_text(u"立即购买").click()
-    time.sleep(10)
-    h = driver.window_handles
-    driver.switch_to_window(h[-1])
-    driver.find_element(cfg.get('org_index','buy_coursei_by'),cfg.get('org_index','buy_coursei')).click()
-    time.sleep(12)
-    driver.find_element(cfg.get('org_index','buy_coursec2_by'),cfg.get('org_index','buy_coursec2')).click()
-    time.sleep(8)
-    driver.find_element(cfg.get('org_index','buy_coursec2_by'),cfg.get('org_index','buy_coursec2')).click()
-    time.sleep(3)
-    driver.find_element(cfg.get('org_index','buy_coursec2_by'),cfg.get('org_index','buy_coursec2')).click()
-    time.sleep(3)    
+    driver.find_element(cfg.get('org_index','use_rmb_by'), cfg.get('org_index','use_rmb')).click()
+    driver.implicitly_wait(10)
+    driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
+        cfg.get('org_index', 'pay_ok')).click()
+    time.sleep(1)
+  
     
 #个人充值卡买课
-def buy_course_usecard(cfg, driver, base_url, org_name):
+def buy_course_usecard(cfg, driver, base_url, course_url):
     
-    driver.get(base_url+org_name)
-    time.sleep(8)
-    driver.find_element_by_link_text(u"课程中心").click()
-    time.sleep(10)
-    driver.find_element_by_xpath('//html/body/div[2]/div[3]/div/div[2]/div[1]/div/p/a').click()
-    time.sleep(8)
+    driver.get(course_url)
+    driver.implicitly_wait(10)
+    driver.find_element(cfg.get('org_index','buy_course_by'), cfg.get('org_index','buy_course')).click()
     h = driver.window_handles
     driver.switch_to_window(h[-1])
-    time.sleep(8)
-    driver.find_element_by_link_text(u"立即购买").click()
-    time.sleep(12)
-    h = driver.window_handles
-    driver.switch_to_window(h[-1])
-    driver.find_element_by_xpath('//html/body/div[3]/div[1]/div[2]/div/div[5]/div[4]/a').click()
-    #driver.find_element(cfg.get('org_index','buy_coursec2_by'),cfg.get('org_index','buy_coursec2')).click()
-    time.sleep(10)
+    driver.implicitly_wait(10)
+    driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
+        cfg.get('org_index', 'pay_ok')).click()
+    time.sleep(1)
     
 #个人发照片 数量最大10
 def add_photo(cfg, driver, base_url, username,pic="C:\\Users\\Public\\Pictures\\Sample Pictures\\Tulips.jpg",pic_num = 1):
@@ -152,7 +135,12 @@ def release_href_course(cfg, driver, base_url, org_name):
 def org_chang_headpic(cfg, driver, base_url, org_name, head_pic = r"W:\Testing\Testing Files\Automation_test\headpic.jpg"):
     
     driver.get(base_url + "myOffice.do")
-    time.sleep(5)
+    time.sleep(2)
+    driver.execute_script("$('.oai-org-logo-upload').attr('style','display:block;');\
+        $('#J_oaiUploadTrigger').attr('style','display:block;'); \
+        $('.fileinput-button input').eq(0).attr('style',\
+            'height:300px;opacity:1;display:block;position:static;transform:translate(-2px,-50px) scale(1)')")
+    time.sleep(1)
     driver.find_element(cfg.get('org_index','head_picname_by'),cfg.get('org_index','head_picname')).send_keys(head_pic)
     time.sleep(8)
 #机构首页logo   
@@ -167,23 +155,22 @@ def change_homelogo(cfg, driver, base_url, org_name, logo_pic = r"W:\Testing\Tes
     time.sleep(2)
 
 #修改页脚
-def modify_pagefoot(cfg, driver, base_url, org_name):
+def modify_pagefoot(cfg, driver, base_url, org_name, foot_name=u"footname", foot_url=u"http://www.ablesky.com"):
    
     driver.get(base_url + org_name)
     time.sleep(4)
     driver.find_element_by_link_text(u"编辑页脚").click()
     h = driver.window_handles
     driver.switch_to_window(h[-1])
-    driver.find_element(cfg.get('org_index','pf_modx_by'),cfg.get('org_index','pf_modx')).click()
-    time.sleep(5)
+    #driver.find_element(cfg.get('org_index','pf_modx_by'),cfg.get('org_index','pf_modx')).click()
+    #time.sleep(5)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index','pf_modx2_by'),cfg.get('org_index','pf_modx2')).clear()
-    time.sleep(5)
-    driver.find_element(cfg.get('org_index','pf_modx3_by'),cfg.get('org_index','pf_modx3')).send_keys("0")
-    time.sleep(2)
-    driver.find_element(cfg.get('org_index','pf_modx4_by'),cfg.get('org_index','pf_modx4')).send_keys("sdfsdf")
-    time.sleep(2)
+    driver.find_element(cfg.get('org_index','pf_modx3_by'),cfg.get('org_index','pf_modx3')).send_keys(foot_name)
+    driver.find_element(cfg.get('org_index','pf_modx4_by'),cfg.get('org_index','pf_modx4')).clear()
+    driver.find_element(cfg.get('org_index','pf_modx4_by'),cfg.get('org_index','pf_modx4')).send_keys(foot_url)
     driver.find_element(cfg.get('org_index','pf_modc5_by'),cfg.get('org_index','pf_modc5')).click()
-    time.sleep(4)
+    time.sleep(1)
 
 
     

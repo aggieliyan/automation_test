@@ -15,7 +15,7 @@ def buy_paper(cfg, driver, paper_url):
         cfg.get('exam', 'buy_paper')).click()
     h = driver.window_handles
     driver.switch_to_window(h[-1])
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
         cfg.get('org_index', 'pay_ok')).click()
     time.sleep(5)

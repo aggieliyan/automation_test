@@ -50,7 +50,7 @@ class Test(unittest.TestCase):
         else:
             self.driver = webdriver.Ie()
 
-        self.driver.implicitly_wait(5)
+        self.driver.implicitly_wait(10)
         self.base_url = "http://www."+self.test_enviroment+".ablesky.com/"
         #self.base_url = "http://www.zhongyan.com/"
         #self.base_url = "http://web1mb1.bp1.ablesky.com/"
@@ -228,7 +228,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/7_add_cate.png')
         
-        self.driver.implicitly_wait(1)
+        self.driver.implicitly_wait(10)
         actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
         try:
             self.assertEqual(cate_name, actul, "the categroy does not exist!")#若最后一个类目名称与新建类目的名称相等则证明新建类目成功
@@ -391,7 +391,7 @@ class Test(unittest.TestCase):
         chr(random.randint(97, 122)) + chr(random.randint(97, 122))
         try:
             card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name,card_prifix)
-            self.driver.implicitly_wait(2)
+            self.driver.implicitly_wait(10)
             if card_type == 0:
                 time.sleep(2)
                 self.driver.find_element_by_link_text(u"浏览卡").click()
@@ -451,7 +451,7 @@ class Test(unittest.TestCase):
             before_delete = "0"
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/12_delete_cate.png")           
-        self.driver.implicitly_wait(1)
+        self.driver.implicitly_wait(10)
         after_delete = self.driver.execute_script("return $(\".categTitle:last\").text()")#取最后一个类目的名称
         print after_delete
 
@@ -625,7 +625,7 @@ class Test(unittest.TestCase):
             #验证
             for admin in admin_info:
                 xpath = "//div[text()=\'"+admin+"\']"
-                self.driver.implicitly_wait(2)
+                self.driver.implicitly_wait(10)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
                     self.verificationErrors.append("fail to create admin!")
@@ -649,7 +649,7 @@ class Test(unittest.TestCase):
 
         #验证
         xpath = "//div[text()=\'"+admin_name+"\']"
-        self.driver.implicitly_wait(2)
+        self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.XPATH, xpath)
         if rs == False:
             self.verificationErrors.append("fail to modify admin!")
@@ -871,7 +871,7 @@ class Test(unittest.TestCase):
             #验证
             for subject in subject_info:
                 xpath = "//div[text()=\'"+subject+"\']"
-                self.driver.implicitly_wait(2)
+                self.driver.implicitly_wait(10)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
                     self.verificationErrors.append("fail to create subject!")
@@ -915,7 +915,7 @@ class Test(unittest.TestCase):
             #验证
             for cate in cate_info:
                 xpath = "//div[text()=\'"+cate+"\']"
-                self.driver.implicitly_wait(2)
+                self.driver.implicitly_wait(10)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
                     self.verificationErrors.append("fail to create cate!")
@@ -939,7 +939,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/modify_cate.png")
             
-        self.driver.implicitly_wait(2)       
+        self.driver.implicitly_wait(10)       
    
     def delete_exam_cate(self):#删除类目
         self.total += 1
@@ -959,7 +959,7 @@ class Test(unittest.TestCase):
             #验证
             for point in point_info:
                 xpath = "//div[text()=\'"+point+"\']"
-                self.driver.implicitly_wait(2)
+                self.driver.implicitly_wait(10)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
                     self.verificationErrors.append("fail to create point!")
@@ -986,7 +986,7 @@ class Test(unittest.TestCase):
             
         #验证
         #xpath = "//div[text()=\'"+point_name+"\']"
-        self.driver.implicitly_wait(2)
+        self.driver.implicitly_wait(10)
         #rs = self.is_element_present(By.XPATH, xpath)
         #if rs == False:
             #self.verificationErrors.append("fail to modify subject!")

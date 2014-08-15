@@ -18,16 +18,16 @@ class Test(unittest.TestCase):
 
     def setUp(self):
 
-        self.browser = "Chrome"
+        self.browser = "ie"
 
         self.test_enviroment = "beta"
-        self.org_name = "adm_liwen01"
+        self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
-        self.import_name = "sun122"
+        self.import_name = ""#跑完成的回归不需要填，注册的时候会把第一个值赋给她
         self.username = "sun123"
 
         cfg_file = 'config.ini'
@@ -93,6 +93,7 @@ class Test(unittest.TestCase):
         user_name = ""
         try:
             user_name = login.auto_register(self.cfg, self.driver, self.base_url, 2, 1)
+            self.import_name = user_name
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to register!")
@@ -335,7 +336,6 @@ class Test(unittest.TestCase):
             card_management.add_cate_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, title)
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append('fail to create cate cardgroup!')
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/11_cate_cardgroup.png")
 
@@ -358,7 +358,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append('fail to bug listen card!')
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/buy_listen_card.png")
+            self.driver.save_screenshot("C:/test_rs_pic/buy_listen_card.png")
     #添加试听卡组
     def listen_cardgroup(self):
 
@@ -371,7 +371,7 @@ class Test(unittest.TestCase):
         except Exception, e:
             print traceback.format_exc() 
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/12_listen_cardgroup.png")  
+            self.driver.save_screenshot("C:/test_rs_pic/12_listen_cardgroup.png")  
         self.driver.implicitly_wait(2)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
@@ -387,8 +387,10 @@ class Test(unittest.TestCase):
     def add_and_get_card(self, card_type=0):#添加卡并返回第一个卡号和密码
 
         self.total += 1
+        card_prifix = "auto" + chr(random.randint(97, 122)) + \
+        chr(random.randint(97, 122)) + chr(random.randint(97, 122))
         try:
-            card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name)
+            card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name,card_prifix)
             self.driver.implicitly_wait(2)
             if card_type == 0:
                 time.sleep(2)
@@ -426,7 +428,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append('fail to add exam card!')
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/add_exam_card.png")
+            self.driver.save_screenshot("C:/test_rs_pic/add_exam_card.png")
     #使用考试卡
     def use_exam_card(self):
         self.total += 1
@@ -436,7 +438,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append('fail to use exam card!')
         finally: 
-            self.driver.save_screenshot("D:/test_rs_pic/user_exam_card.png") 
+            self.driver.save_screenshot("C:/test_rs_pic/user_exam_card.png") 
 
     def delete_cate(self):
 
@@ -493,6 +495,7 @@ class Test(unittest.TestCase):
 
         #验证
         self.driver.refresh()
+        time.sleep(5)
         rs = self.is_element_present(By.XPATH, \
             "//span[@title=\'"+self.import_name+"\']")
         try:
@@ -857,7 +860,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append("fail to create subject!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/add_subject.png")
+            self.driver.save_screenshot("C:/test_rs_pic/add_subject.png")
 
     def modify_exam_subject(self):#编辑科目
 
@@ -901,7 +904,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append("fail to create cate!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/add_cate.png")
+            self.driver.save_screenshot("C:/test_rs_pic/add_cate.png")
 
 
 
@@ -945,7 +948,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append("fail to create point!")
         finally:
-            self.driver.save_screenshot("D:/test_rs_pic/add_point.png")
+            self.driver.save_screenshot("C:/test_rs_pic/add_point.png")
             
             
             
@@ -1016,7 +1019,6 @@ class Test(unittest.TestCase):
     
     def createpaper(self):
         self.total += 1
-        #paper_name = []
         try:
             self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1) 
         except Exception, e:
@@ -1024,7 +1026,6 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to create paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-            #print self.paper_name            
             
     def user_statistical_information(self):
         self.total += 1
@@ -1047,7 +1048,8 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to open paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/open_paper.png")
-            self.total += 1
+
+        self.total += 1
         try:
             exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=2)
         except Exception, e:
@@ -1097,8 +1099,9 @@ class Test(unittest.TestCase):
         question_answer ='123'
         # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
         blank_pager = 0
+        paper_name = self.paper_name
         try:
-            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer)
+            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, pager_name)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append('fail to exam!')
@@ -1114,8 +1117,9 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append('fail to buy_paper!')
         finally: 
-            self.driver.save_screenshot("C:/test_rs_pic/buy_paper.png")
-                        
+            self.driver.save_screenshot("C:/test_rs_pic/buy_paper.png")       
+        
+            
     def wailian_video(self):
         self.total += 1
         try:
@@ -1162,10 +1166,10 @@ class Test(unittest.TestCase):
         self.modify_pagefoot()  
         self.change_headpic()
         self.manage_course_num()
-
         self.verify_all_course_convert()
-
         login.logout(self.driver, self.base_url)
+
+        #个人用户部分
         self.login_user()
         self.use_prepaidcard()
         self.use_coursecard()
@@ -1173,7 +1177,8 @@ class Test(unittest.TestCase):
         self.use_listencard()
         self.use_exam_card()
         self.buy_course_use_RMB()
-        self.buy_course_use_card()        
+        self.buy_course_use_card()
+        login.logout(self.driver, self.base_url)        
 
         #考试系统部分
         self.login_from_index()
@@ -1195,8 +1200,7 @@ class Test(unittest.TestCase):
 
         self.login_user()
         self.exam_user()
-        login.logout(self.driver, self.base_url)       
-        
+        login.logout(self.driver, self.base_url)            
         self.login_from_index()
         self.user_statistical_information()
         

@@ -39,10 +39,10 @@ def use_course_card(cfg, driver, base_url, card_num, card_psw):
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('use_card', 'card_ok_by'), \
         cfg.get('use_card', 'card_ok')).click()
-    time.sleep(2)
+    time.sleep(4)
     driver.find_element(cfg.get('use_card', 'course_check_1_by'), \
         cfg.get('use_card', 'course_check_1')).click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('use_card', 'course_check_2_by'), \
         cfg.get('use_card', 'course_check_2')).click()
     time.sleep(2)
@@ -61,7 +61,7 @@ def add_prepaid_cardgroup(cfg, driver, base_url, org_name, \
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"管理卡组").click()
-    time.sleep(2)
+    time.sleep(4)
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'grouptitle_by'), \
@@ -180,13 +180,13 @@ def add_card(cfg, driver, base_url, org_name, \
     else:  
         driver.find_element_by_xpath("//div["+str(cgroup_num)+ \
             "]/table/tbody/tr/td[6]/div/div/a").click()
-    time.sleep(2)
+    time.sleep(3)
     driver.find_element(cfg.get('org_manage', 'card_prefix_by'), \
         cfg.get('org_manage', 'card_prefix')).send_keys(card_prifix)
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', 'card_count_by'), \
         cfg.get('org_manage', 'card_count')).send_keys(card_num)
-    time.sleep(2)
+    time.sleep(3)
     driver.find_element(cfg.get('org_manage', 'add_card_ok_by'), \
         cfg.get('org_manage', 'add_card_ok')).click()
     driver.implicitly_wait(30)

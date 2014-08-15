@@ -47,19 +47,20 @@ def add_courese_to_cate(cfg, driver, base_url, org_name, cate_num=0):
     time.sleep(3)
     url_add = driver.execute_script("return $('#categoryList .manageCategCourse:eq("+str(cate_num)+")').attr('href')")
     time.sleep(2)
-    driver.get(base_url + url_add)
+    driver.get(base_url + str(url_add))
     time.sleep(2)
     driver.find_element_by_link_text(u"向类目添加知识资料").click()
-    driver.implicitly_wait(10)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'course_add_1_by'), \
         cfg.get('org_manage', 'course_add_1')).click()
     driver.implicitly_wait(10)
     add_course_name = driver.execute_script("return $(\"input[name='win_groupCheck']:eq(0)\").parent().parent().next().children().text()")
     driver.implicitly_wait(10)
     add_course_name = add_course_name.strip()
+    time.sleep(2)
     #add_course_name = add_course_name.encode('UTF-8','ignore')
     driver.find_element(cfg.get('org_manage', 'course_add_ok_by'), \
         cfg.get('org_manage', 'course_add_ok')).click()
-    time.sleep(1) 
+    time.sleep(2) 
     return add_course_name
     

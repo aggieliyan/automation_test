@@ -178,6 +178,7 @@ def add_card(cfg, driver, base_url, org_name, \
     else:  
         driver.find_element_by_xpath("//div["+str(cgroup_num)+ \
             "]/table/tbody/tr/td[6]/div/div/a").click()
+    time.sleep(3)
     driver.find_element(cfg.get('org_manage', 'card_prefix_by'), \
         cfg.get('org_manage', 'card_prefix')).send_keys(card_prifix)
     time.sleep(2)

@@ -558,6 +558,12 @@ class Test(unittest.TestCase):
         self.driver.find_element_by_link_text(u"课程管理").click()
         self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
+        if rs == False:
+            self.driver.find_element("name", "courseSearch").send_keys(title)
+            self.driver.find_element("class name", "searchBtn").click()
+            self.driver.implicitly_wait(10)
+            rs = self.is_element_present(By.LINK_TEXT, title)
+
         return rs
 
     def verify_onlineclass(self, classname):
@@ -1191,7 +1197,7 @@ class Test(unittest.TestCase):
         self.verify_all_course_convert()
         login.logout(self.driver, self.base_url)
 
-        # #个人用户部分
+        #个人用户部分
         self.login_user()
         self.use_prepaidcard()
         self.use_coursecard()
@@ -1202,7 +1208,7 @@ class Test(unittest.TestCase):
         self.buy_course_use_card()
         login.logout(self.driver, self.base_url)        
 
-        # #考试系统部分
+        #考试系统部分
         self.login_from_index()
         self.exam_onequestion()
         self.exam_questions()

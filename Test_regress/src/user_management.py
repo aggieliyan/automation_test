@@ -142,7 +142,7 @@ def org_chang_headpic(cfg, driver, base_url, org_name, head_pic = r"W:\Testing\T
             'height:300px;opacity:1;display:block;position:static;transform:translate(-2px,-50px) scale(1)')")
     time.sleep(1)
     driver.find_element(cfg.get('org_index','head_picname_by'),cfg.get('org_index','head_picname')).send_keys(head_pic)
-    time.sleep(8)
+    time.sleep(1)
 #机构首页logo   
 def change_homelogo(cfg, driver, base_url, org_name, logo_pic = r"W:\Testing\Testing Files\Automation_test\headpic.jpg"):
   
@@ -165,11 +165,11 @@ def modify_pagefoot(cfg, driver, base_url, org_name, foot_name=u"footname", foot
     #driver.find_element(cfg.get('org_index','pf_modx_by'),cfg.get('org_index','pf_modx')).click()
     #time.sleep(5)
     driver.implicitly_wait(10)
-    driver.find_element(cfg.get('org_index','pf_modx2_by'),cfg.get('org_index','pf_modx2')).clear()
-    driver.find_element(cfg.get('org_index','pf_modx3_by'),cfg.get('org_index','pf_modx3')).send_keys(foot_name)
-    driver.find_element(cfg.get('org_index','pf_modx4_by'),cfg.get('org_index','pf_modx4')).clear()
-    driver.find_element(cfg.get('org_index','pf_modx4_by'),cfg.get('org_index','pf_modx4')).send_keys(foot_url)
-    driver.find_element(cfg.get('org_index','pf_modc5_by'),cfg.get('org_index','pf_modc5')).click()
+    driver.find_element(cfg.get('org_index','pf_modx2_by'), cfg.get('org_index','pf_modx2')).clear()
+    driver.find_element(cfg.get('org_index','pf_modx3_by'), cfg.get('org_index','pf_modx3')).send_keys(foot_name)
+    driver.find_element(cfg.get('org_index','pf_modx4_by'), cfg.get('org_index','pf_modx4')).clear()
+    driver.find_element(cfg.get('org_index','pf_modx4_by'), cfg.get('org_index','pf_modx4')).send_keys(foot_url)
+    driver.find_element(cfg.get('org_index','pf_modc5_by'), cfg.get('org_index','pf_modc5')).click()
     time.sleep(1)
 
 

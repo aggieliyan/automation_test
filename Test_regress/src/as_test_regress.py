@@ -266,9 +266,8 @@ class Test(unittest.TestCase):
         except Exception, e:
             print traceback.format_exc() 
         finally:
-            self.driver.save_screenshot(r'C:/test_rs_pic/9_agency_course.png')
-
-        
+            self.driver.save_screenshot(r'C:/test_rs_pic/9_agency_course.png')      
+        time.sleep(1)
         try:
             rs = self.verify_course(title)
             self.assertEqual(True, rs, "fail to release agency course!")
@@ -702,8 +701,6 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to release href announcement")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/release_href_announcemen.png")
-
-    def verify_
 
     def verify_all_course_convert(self):
         self.verify_convert(self.normal_course, "fail to convert normal course!")

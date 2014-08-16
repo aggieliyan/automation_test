@@ -681,25 +681,29 @@ class Test(unittest.TestCase):
 
         self.total += 1
         rand_name = str(random.randint(1000, 9999))
-        title = u"自动化公告"+rand_name
+        title = u"announcement"+rand_name
         try:
             title = user_management.release_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to release announcement!")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")  
+            self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")
 
-    def release_href_course(self):
+    def release_href_announcement(self):
         
         self.total += 1
+        rand_name = str(random.randint(1000, 9999))
+        title = u"href_announcement"+rand_name
         try:
-            user_management.release_href_course(self.cfg, self.driver, self.base_url, self.org_name) 
+            user_management.release_href_announcement(self.cfg, self.driver, self.base_url, self.org_name, title) 
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to use link")
+            self.verificationErrors.append("fail to release href announcement")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/user_management_link.png")
+            self.driver.save_screenshot("C:/test_rs_pic/release_href_announcemen.png")
+
+    def verify_
 
     def verify_all_course_convert(self):
         self.verify_convert(self.normal_course, "fail to convert normal course!")
@@ -1186,7 +1190,7 @@ class Test(unittest.TestCase):
         self.modify_admin()
         self.delete_admin()
         self.buy_open_num()
-        self.release_href_course()
+        self.release_href_announcement()
         self.open_course_for_one()
         self.open_course_for_multi()
         self.change_homelogo()

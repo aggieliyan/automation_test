@@ -33,8 +33,8 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         time.sleep(2)
         driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")#选一个视频课件
         time.sleep(1)
-        driver.execute_script(\
-            "$(\'.dialog-button-container button\').eq(0).click()")
+        driver.find_element(cfg.get('courseRedirect', 'select_ok_by'), \
+            cfg.get('courseRedirect', 'select_ok')).click()
         time.sleep(3)
         driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
             cfg.get('courseRedirect', 'upload_btn'))[2].click()
@@ -44,8 +44,8 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         else:
             driver.execute_script("$(\"[filetype='pdf']\").eq(0).click()")#选一个pdf课件
             time.sleep(1)
-        driver.execute_script(\
-            "$(\'.dialog-button-container button\').eq(0).click()")
+            driver.find_element(cfg.get('courseRedirect', 'select_ok_by'), \
+                cfg.get('courseRedirect', 'select_ok')).click()
         time.sleep(3)
 
     else:#单视频
@@ -58,8 +58,8 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
             #选一个视频文件
             driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
             time.sleep(1)
-            driver.execute_script(\
-                "$(\'.dialog-button-container button\').eq(0).click()")
+            driver.find_element(cfg.get('courseRedirect', 'select_ok_by'), \
+                cfg.get('courseRedirect', 'select_ok')).click()
             time.sleep(2)
         #本地上传
         else:

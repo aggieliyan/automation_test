@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
         self.browser = "ie"
 
         self.test_enviroment = "beta"
-        self.org_name = "adm_liwen01"
+        self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"

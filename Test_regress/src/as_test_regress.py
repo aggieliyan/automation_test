@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
         self.browser = "Chrome"
 
         self.test_enviroment = "beta"
-        self.org_name = "adm_liwen01"
+        self.org_name = "success"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -628,11 +628,10 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            admin_info = admin_management.auto_create_admin(self.cfg, self.driver, self.base_url, self.org_name, adm_num=2)
+            admin_info = admin_management.auto_create_admin(self.cfg, self.driver, self.base_url, self.org_name, adm_num=4)
             #验证
             for admin in admin_info:
                 xpath = "//div[text()=\'"+admin+"\']"
-                self.driver.implicitly_wait(10)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
                     self.verificationErrors.append("fail to create admin!")

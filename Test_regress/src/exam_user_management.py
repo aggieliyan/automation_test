@@ -38,9 +38,9 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
     exam_time = driver.execute_script("return parseInt($('.pre-exam-outer li').eq(0).text().substring(5,6))")
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"开始考试").click()
-    driver.implicitly_wait(30)
-    question_title = driver.execute_script("return $('#J_classification a:eq(0)').text()")
     time.sleep(2)
+    question_title = driver.execute_script("return $('#J_classification a:eq(0)').text()")
+    driver.implicitly_wait(30)
      # blank_pager=1 是白卷 ;blank_pager=0 是做了一个题
     if blank_pager == 0:
         #单选 多选
@@ -83,6 +83,7 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
         #综合题
         elif question_title == u"综合题":
             #第一个是单选 or 多选
+            driver.implicitly_wait(30)
             try:
                 driver.find_element(cfg.get('exam', 'exam_all_selectque_by'), \
                     cfg.get('exam', 'exam_all_selectque')).click()

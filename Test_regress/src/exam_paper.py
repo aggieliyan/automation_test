@@ -77,6 +77,10 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     driver.find_element(cfg.get('exam', 'exam_paper_build_btn_by'), \
                         cfg.get('exam', 'exam_paper_build_btn')).click()
     driver.implicitly_wait(10)
+    paper_id = driver.execute_script(\
+                "return $(\"a:contains(\'"+exam_name+"\')\").parent().children().eq(0).attr('data-id')")
+    driver.implicitly_wait(10)
+    print paper_id
     return exam_name
 
             
@@ -283,7 +287,7 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     for letter in username:
         driver.find_element(cfg.get('exam', 'user_search_by'), \
             cfg.get('exam', 'user_search')).send_keys(letter)
-    time.sleep(1)
+        time.sleep(1)
     if atype == 1:
         driver.find_element_by_link_text(u"分发试卷").click()
         time.sleep(2)
@@ -294,7 +298,7 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
         driver.implicitly_wait(10)
         driver.find_element(cfg.get('exam', 'select_one_p_by'), \
             cfg.get('exam', 'select_one_p')).click()
-    driver.implicitly_wait(10)
+    time.sleep(2)
     driver.find_element(cfg.get('exam', 'open_paper_ok_by'), \
         cfg.get('exam', 'open_paper_ok')).click()
-    time.sleep(2)      
+    time.sleep(5)      

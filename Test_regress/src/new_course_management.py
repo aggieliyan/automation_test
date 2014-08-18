@@ -33,24 +33,19 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         time.sleep(2)
         driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")#选一个视频课件
         time.sleep(1)
-        driver.execute_script(\
-            "$(\'.dialog-button-container button\').eq(0).click()")
+        driver.find_element(cfg.get('courseRedirect', 'select_ok_by'), \
+            cfg.get('courseRedirect', 'select_ok')).click()
         time.sleep(3)
         driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
             cfg.get('courseRedirect', 'upload_btn'))[2].click()
         time.sleep(2)
         if isthree == 2:
-            #driver.execute_script(\
-            #    "$(\'.spacefile-name input\').last().click()")
             driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")#选一个视频课件
-            #driver.execute_script(\
-                #"$(\'.spacefile-name input\').last().click()")
         else:
             driver.execute_script("$(\"[filetype='pdf']\").eq(0).click()")#选一个pdf课件
             time.sleep(1)
-        driver.execute_script(\
-            "$(\'.dialog-button-container button\').eq(0).click()")
-        #driver.find_element("css selector", "")
+            driver.find_element(cfg.get('courseRedirect', 'select_ok_by'), \
+                cfg.get('courseRedirect', 'select_ok')).click()
         time.sleep(3)
 
     else:#单视频
@@ -60,15 +55,12 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
                 cfg.get('courseRedirect', 'upload_btn')).click()
             time.sleep(2)
 
-            #全选 /选最后一个
-            #driver.execute_script(\
-             #   "$(\'.spacefile-name input\').last().click()")
+            #选一个视频文件
             driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
             time.sleep(1)
-            driver.execute_script(\
-                "$(\'.dialog-button-container button\').eq(0).click()")
+            driver.find_element(cfg.get('courseRedirect', 'select_ok_by'), \
+                cfg.get('courseRedirect', 'select_ok')).click()
             time.sleep(2)
-            #driver.find_element("xpath", "//button").click()
         #本地上传
         else:
             #把input显示出来才可以用否则会报当前元素不可见的错
@@ -79,7 +71,7 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
             driver.find_element_by_name("files").send_keys(course_file)
             time.sleep(1)
 
-     
+    driver.implicitly_wait(10) 
     driver.find_element(cfg.get('courseRedirect', 'next_btn_by'), \
         cfg.get('courseRedirect', 'next_btn')).click()
 
@@ -91,10 +83,12 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         cfg.get('courseRedirect', 'ctitle')).click()
     driver.find_element(cfg.get('courseRedirect', 'ctitle_by'), \
         cfg.get('courseRedirect', 'ctitle')).send_keys(course_title)
+    driver.implicitly_wait(10)
     #设置价格
     if course_price != 0:
         driver.find_element(cfg.get('courseRedirect', 'chanrge_by'), \
             cfg.get('courseRedirect', 'chanrge')).click()
+        time.sleep(1)
         driver.find_element(cfg.get('courseRedirect', 'price_by'), \
             cfg.get('courseRedirect', 'price')).send_keys(course_price)
     #填课程详情

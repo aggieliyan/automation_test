@@ -1213,7 +1213,7 @@ class Test(unittest.TestCase):
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()
         fail_num = len(self.verificationErrors)
-        print "total case:%s,%s failures.detail:%s"%(self.total,fail_num,self.verificationErrors)
+        print "total case:%s, %s failures.detail:%s"%(self.total, fail_num, self.verificationErrors)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

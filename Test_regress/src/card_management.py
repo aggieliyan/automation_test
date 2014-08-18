@@ -187,7 +187,7 @@ def add_card(cfg, driver, base_url, org_name, \
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'add_card_ok_by'), \
         cfg.get('org_manage', 'add_card_ok')).click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
 #机构获取院校机构类目名称
 def get_academy_catename(cfg, driver, base_url, academy):
     driver.implicitly_wait(30)

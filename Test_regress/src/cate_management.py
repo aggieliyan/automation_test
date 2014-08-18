@@ -29,11 +29,11 @@ def delete_cate(cfg, driver, base_url, org_name):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"教学教务").click() 
-    time.sleep(2)   
+    time.sleep(5)   
     before_delete = driver.execute_script("return $(\".categTitle:last\").text()")#取最后一个类目的名称
-    driver.implicitly_wait(10) 
+    time.sleep(2)
     driver.execute_script("$(\".delete:last\").click()")
-    driver.implicitly_wait(10) 
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'delete_cate_ok_by'), \
         cfg.get('org_manage', 'delete_cate_ok')).click()
     driver.implicitly_wait(10) 

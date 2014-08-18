@@ -83,10 +83,12 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         cfg.get('courseRedirect', 'ctitle')).click()
     driver.find_element(cfg.get('courseRedirect', 'ctitle_by'), \
         cfg.get('courseRedirect', 'ctitle')).send_keys(course_title)
+    driver.implicitly_wait(10)
     #设置价格
     if course_price != 0:
         driver.find_element(cfg.get('courseRedirect', 'chanrge_by'), \
             cfg.get('courseRedirect', 'chanrge')).click()
+        time.sleep(1)
         driver.find_element(cfg.get('courseRedirect', 'price_by'), \
             cfg.get('courseRedirect', 'price')).send_keys(course_price)
     #填课程详情

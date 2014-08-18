@@ -79,7 +79,7 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
             driver.find_element_by_name("files").send_keys(course_file)
             time.sleep(1)
 
-     
+    driver.implicitly_wait(10) 
     driver.find_element(cfg.get('courseRedirect', 'next_btn_by'), \
         cfg.get('courseRedirect', 'next_btn')).click()
 

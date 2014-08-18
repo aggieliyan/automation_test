@@ -237,22 +237,21 @@ def manage_course_num(cfg, driver, base_url):
     	        cfg.get('manage_course_num', 'manage_coursenum_change')).send_keys("1")
             driver.implicitly_wait(30)
             driver.find_element_by_link_text(u"保存").click()
-            driver.implicitly_wait(30)
+            time.sleep(1)
         except:
             pass
-            driver.implicitly_wait(30)
+            time.sleep(1)
     except:
         pass
-    driver.implicitly_wait(30)
     #批量增加剩余授权数
     driver.find_element(cfg.get('manage_course_num', \
         'manage_coursenum_all_by'), \
         cfg.get('manage_course_num', 'manage_coursenum_all')).click()
-    driver.implicitly_wait(30)
+    time.sleep(1)
     driver.find_element(cfg.get('manage_course_num', \
         'manage_coursenum_allnum_by'), \
         cfg.get('manage_course_num', 'manage_coursenum_allnum')).send_keys("1")
-    driver.implicitly_wait(30)
+    time.sleep(1)
     driver.find_element_by_link_text(u"应用").click()
     time.sleep(2)
  

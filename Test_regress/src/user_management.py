@@ -143,7 +143,7 @@ def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_an
 
 #机构修改头像
 def org_chang_headpic(cfg, driver, base_url, org_name, \
-    head_pic = r"W:\Testing\Testing Files\Automation_test\headpic.jpg"):
+    head_pic = r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\headpic.jpg"):
     
     driver.get("%smyOffice.do" %(base_url))
     time.sleep(2)
@@ -159,7 +159,7 @@ def org_chang_headpic(cfg, driver, base_url, org_name, \
 
 #机构首页logo   
 def change_homelogo(cfg, driver, base_url, org_name, \
-    logo_pic = r"W:\Testing\Testing Files\Automation_test\headpic.jpg"):
+    logo_pic = r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test"):
   
     driver.get("%s%s"%(base_url, org_name))
     time.sleep(2)

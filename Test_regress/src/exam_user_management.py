@@ -20,7 +20,7 @@ def buy_paper(cfg, driver, paper_url):
         cfg.get('org_index', 'pay_ok')).click()
     time.sleep(5)
 #学员考试
-def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pager_name):
+def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, paper_name):
     driver.implicitly_wait(30)
     driver.get(base_url+"exam/")
     driver.implicitly_wait(30)
@@ -29,7 +29,7 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
     driver.implicitly_wait(30)
     for item in items:
         pager_name_get = driver.execute_script("return $('.exampaper-title').eq(" + str(count) + ").text()")
-        if pager_name_get == unicode(pager_name):
+        if pager_name_get == unicode(paper_name):
             driver.implicitly_wait(30)
             url = driver.execute_script("return $('.exampaper-list-li a:eq(" + str(count) + ")').attr('href')")
             driver.get(base_url + "exam/" + url)#立即考试链接
@@ -40,7 +40,7 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
     driver.find_element_by_link_text(u"开始考试").click()
     driver.implicitly_wait(30)
     question_title = driver.execute_script("return $('#J_classification a:eq(0)').text()")
-    driver.implicitly_wait(30)
+    time.sleep(2)
      # blank_pager=1 是白卷 ;blank_pager=0 是做了一个题
     if blank_pager == 0:
         #单选 多选
@@ -83,7 +83,6 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
         #综合题
         elif question_title == u"综合题":
             #第一个是单选 or 多选
-            time.sleep(2)
             try:
                 driver.find_element(cfg.get('exam', 'exam_all_selectque_by'), \
                     cfg.get('exam', 'exam_all_selectque')).click()

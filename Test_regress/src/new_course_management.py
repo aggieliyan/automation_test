@@ -76,8 +76,9 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
                 .attr('style','height:20px;opacity:1;display:block;\
                     position:static;transform:translate(0px, 0px) scale(1)')")
             driver.implicitly_wait(10)
+            time.sleep(2)
             driver.find_element_by_name("files").send_keys(course_file)
-            time.sleep(1)
+            time.sleep(2)
 
      
     driver.find_element(cfg.get('courseRedirect', 'next_btn_by'), \

@@ -25,7 +25,7 @@ def release_normal_course(cfg,driver,base_url,org_name,course_file =u"D:\\rename
     driver.find_element_by_id(cfg.get('courseRedirect','title_id')).send_keys(course_title)      
     driver.execute_script("var element=window.document.getElementById('introduce_field_ifr');\
     idocument=element.contentDocument;element=idocument.getElementById('tinymce');element.innerHTML =\'"+course_describe+"\';")
-    driver.execute_script("window.document.getElementById(\'"+cfg.get('courseRedirect','category_id')+"\').value = " + course_cate)
+    driver.execute_script("window.document.getElementById(\'"+cfg.get('courseRedirect','category_id')+"\').value = " + course_cate)z
     driver.find_element_by_id(cfg.get('courseRedirect','tags_id')).send_keys(course_tags)
     
     if course_price != 0:

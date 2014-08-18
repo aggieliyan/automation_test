@@ -157,7 +157,7 @@ def add_listen_cardgroup(cfg, driver, base_url, \
         cfg.get('org_manage', 'listen_course')).click()#勾选第一个课程
     time.sleep(3)
     try:
-        driver.find_element(cfg.get('org_manage', 'listen_warn_by'), \
+        print driver.find_element(cfg.get('org_manage', 'listen_warn_by'), \
         cfg.get('org_manage', 'listen_warn')).text
     except:
         None

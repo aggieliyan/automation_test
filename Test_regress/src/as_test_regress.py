@@ -1165,7 +1165,6 @@ class Test(unittest.TestCase):
         self.release_announcement()
         self.modify_pagefoot()  
         self.change_headpic()
-
         self.verify_all_course_convert()
         login.logout(self.driver, self.base_url)
 

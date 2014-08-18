@@ -127,7 +127,7 @@ def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_an
     
     driver.get("%s%s"%(base_url, org_name))
     driver.implicitly_wait(10)
-    driver.find_element_link_text(u"课程中心")
+    driver.find_element_by_link_text(u"课程中心")
     time.sleep(2)
     chref = driver.execute_script("return $(\".coursecenter-details-pic a\").eq(0).attr('href')")
     time.sleep(1)

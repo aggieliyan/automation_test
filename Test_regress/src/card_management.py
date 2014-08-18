@@ -275,7 +275,7 @@ def user_usexamcard_management(cfg, driver, base_url, examcard_num):
 def user_usexamcard(cfg, driver, base_url, examcard_num):  
     academy_catename = user_usexamcard_management(cfg, driver, base_url, examcard_num)
     # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
-    exam_user_management.exam_user(cfg, driver, base_url, operation=0, blank_pager=0, question_answer='123', pager_name=academy_catename)
+    exam_user_management.exam_user(cfg, driver, base_url, operation=0, blank_pager=0, question_answer='123', paper_name=academy_catename)
 #获取院校机构课程类目名并创建试卷后，创建卡号，并返回    
 def add_exam_card1(cfg, driver, base_url, count=5):
     time.sleep(2)

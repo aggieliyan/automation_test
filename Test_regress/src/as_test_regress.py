@@ -1173,11 +1173,13 @@ class Test(unittest.TestCase):
         self.use_prepaidcard()
         self.use_coursecard()
         self.use_catecard()
-        self.use_listencard()
         self.use_exam_card()
         self.buy_course_use_RMB()
         self.buy_course_use_card()
-        login.logout(self.driver, self.base_url)        
+        login.logout(self.driver, self.base_url) 
+        self.use_listencard()
+        login.logout(self.driver, self.base_url)
+
 
         #考试系统部分
         self.login_from_index()

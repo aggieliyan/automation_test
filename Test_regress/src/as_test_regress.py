@@ -1099,7 +1099,7 @@ class Test(unittest.TestCase):
         blank_pager = 0
         paper_name = self.paper_name
         try:
-            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, pager_name)
+            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, paper_name)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append('fail to exam!')

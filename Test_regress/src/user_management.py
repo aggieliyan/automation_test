@@ -16,6 +16,7 @@ def buy_course(cfg, driver, base_url, course_url):
         cfg.get('org_index','buy_course')).click()
     h = driver.window_handles
     driver.switch_to_window(h[-1])
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index','use_rmb_by'), \
         cfg.get('org_index','use_rmb')).click()
     driver.implicitly_wait(10)

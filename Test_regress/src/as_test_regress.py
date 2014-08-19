@@ -268,7 +268,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/9_agency_course.png')
         time.sleep(1)
-       
+        self.driver.implicitly_wait(10)
         try:
             rs = self.verify_course(title)
             self.assertEqual(True, rs, "fail to release agency course!")
@@ -544,6 +544,11 @@ class Test(unittest.TestCase):
         self.driver.find_element_by_link_text(u"课程管理").click()
         self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
+        if rs == False:
+            self.driver.find_element("name", "courseSearch").send_keys(title)
+            self.driver.find_element("class name", "searchBtn").click()
+            self.driver.implicitly_wait(10)
+            rs = self.is_element_present(By.LINK_TEXT, title)
         return rs
 
     def verify_onlineclass(self, classname):
@@ -660,7 +665,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         rand_name = str(random.randint(1000, 9999))
-        title = u"自动化公告"+rand_name
+        title = u"announcement"+rand_name
         try:
             title = user_management.release_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
         except Exception, e:

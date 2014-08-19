@@ -98,10 +98,5 @@ def modify_admin(cfg, driver, base_url):
     driver.implicitly_wait(10)
     #driver.find_element(cfg.get('org_manage','admin_modify_xpath_by'),cfg.get('org_manage','admin_modify_xpath')).click()
     driver.execute_script("$(\"#editButton button\").eq(0).click()")
-<<<<<<< HEAD
     time.sleep(1)
     return admin_name
-=======
-    driver.implicitly_wait(10)
-    return admin_name
->>>>>>> origin/master

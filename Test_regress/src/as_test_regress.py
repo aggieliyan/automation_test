@@ -1100,8 +1100,8 @@ class Test(unittest.TestCase):
     #学员参加考试
     def exam_user(self):
         self.total += 1
-        # operation =0 自动提交  operation =1 继续答题
-        operation = 1
+        # operation = '0' 自动提交  operation = '1' 继续答题
+        operation = '1'
         question_answer ='123'
         # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
         blank_pager = 0

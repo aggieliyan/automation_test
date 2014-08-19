@@ -125,18 +125,22 @@ def release_announcement(cfg,driver, base_url, org_name, title, an_content=u'ann
 #获取视频外链发公告    
 def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_announcement'):
     
-    driver.get("%s%s"%(base_url, org_name))
+    driver.get("%smyOffice.do" %(base_url))
     driver.implicitly_wait(10)
-    driver.find_element_by_link_text(u"课程中心")
-    time.sleep(2)
-    chref = driver.execute_script("return $(\".coursecenter-details-pic a\").eq(0).attr('href')")
-    time.sleep(1)
-    driver.get("%s%s"%(base_url, chref)) 
+    driver.find_element_by_link_text(u"教学教务").click()
     driver.implicitly_wait(10)
-    driver.find_element(cfg.get('org_index', 'release_hrefi_by'), \
-        cfg.get('org_index', 'release_hrefi')).click() 
+    driver.find_element_by_link_text(u"课程管理").click()
+    driver.implicitly_wait(30)
+    driver.find_element_by_link_text(u"获取视频链接").click()
     time.sleep(2)
-    an_content = driver.execute_script("return $('textarea:eq(2)').text()")
+    #chref = driver.execute_script("return $(\".coursecenter-details-pic a\").eq(0).attr('href')")
+    #time.sleep(1)
+    #driver.get("%s%s"%(base_url, chref)) 
+    #driver.implicitly_wait(10)
+    #driver.find_element(cfg.get('org_index', 'release_hrefi_by'), \
+    #    cfg.get('org_index', 'release_hrefi')).click() 
+    #time.sleep(2)
+    an_content = driver.execute_script("return $('textarea:eq(1)').text()")
     time.sleep(1)  
     release_announcement(cfg,driver, base_url, org_name, title, an_content)
     time.sleep(2)

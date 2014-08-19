@@ -681,7 +681,7 @@ class Test(unittest.TestCase):
             user_management.release_href_announcement(self.cfg, self.driver, self.base_url, self.org_name) 
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to use link")
+            self.verificationErrors.append("fail to release href announcement")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/release_href_announcement.png")
 

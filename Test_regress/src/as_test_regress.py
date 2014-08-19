@@ -610,11 +610,12 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            admin_info = admin_management.auto_create_admin(self.cfg, self.driver, self.base_url, self.org_name, adm_num=4)
+            admin_info = admin_management.auto_create_admin(self.cfg, self.driver, self.base_url, self.org_name, adm_num=2)
             #验证
             for admin in admin_info:
                 xpath = "//div[text()=\'"+admin+"\']"
                 rs = self.is_element_present(By.XPATH, xpath)
+                time.sleep(1)
                 if rs == False:
                     self.verificationErrors.append("fail to create admin!")
         except Exception, e:
@@ -629,6 +630,11 @@ class Test(unittest.TestCase):
         admin_name = ""
         try:
             admin_name = admin_management.modify_admin(self.cfg, self.driver, self.base_url)
+            xpath = "//div[text()=\'"+admin_name+"\']"
+            time.sleep(1)
+            rs = self.is_element_present(By.XPATH, xpath)
+            if rs == False:
+                self.verificationErrors.append("fail to modify admin!")
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to modify admin!")
@@ -648,7 +654,9 @@ class Test(unittest.TestCase):
         #before_num = self.driver.execute_script("return $(\"a[]\")")
         #print before_num
         try:
-            admin_management.delete_admin(self.cfg, self.driver, self.base_url)
+            rs = admin_management.delete_admin(self.cfg, self.driver, self.base_url)
+            if rs == False:
+                self.verificationErrors.append("fail to delete admin!")
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to delete admin!")

@@ -54,16 +54,20 @@ def delete_admin(cfg, driver, base_url, admin_num=1):
     driver.find_element_by_link_text(u"网校管理员").click()
     driver.implicitly_wait(30)
     alist = driver.find_elements_by_link_text(u"删除管理员")
-    print alist[-1]
     alist[-1].click()
-
     #if admin_num == 1:
      #   driver.find_element_by_link_text(u"删除管理员").click()
     #else:
     #    driver.find_element_by_xpath("//div["+str(2+admin_num)+"]/div/div/div[2]/div[3]/a").click()
     time.sleep(1) 
     driver.find_element(cfg.get('org_manage', 'delete_ad_ok_by'),cfg.get('org_manage', 'delete_ad_ok_xpath')).click()
-    driver.implicitly_wait(30)
+    time.sleep(5)
+    blist = driver.find_elements_by_link_text(u"删除管理员")
+    if len(alist) == len(blist):
+        return False
+    else:
+        return True
+
 
 
 def modify_admin(cfg, driver, base_url):
@@ -80,8 +84,8 @@ def modify_admin(cfg, driver, base_url):
     driver.find_element_by_link_text(u"编辑管理员").click()   
     driver.find_element(cfg.get('org_manage', 'ad_name_by'),cfg.get('org_manage', 'ad_name_id')).clear()
     driver.find_element(cfg.get('org_manage', 'ad_name_by'),cfg.get('org_manage', 'ad_name_id')).send_keys(admin_name)
-    driver.implicitly_wait(10)
     #driver.find_element(cfg.get('org_manage','admin_modify_xpath_by'),cfg.get('org_manage','admin_modify_xpath')).click()
     driver.execute_script("$(\"#editButton button\").eq(0).click()")
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(30)
+    print admin_name
     return admin_name

@@ -9,7 +9,7 @@ import time
 def add_cate(cfg, driver, base_url, org_name, cate_name=u'计算机'):
     time.sleep(2)
     driver.get(base_url + "myOffice.do")
-    time.sleep(2)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"教学教务").click()    
     time.sleep(3)
     driver.find_element(cfg.get('org_manage', 'add_topcate_by'), \

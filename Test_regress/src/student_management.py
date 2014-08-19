@@ -72,7 +72,8 @@ def create_student(cfg, driver, base_url, org_name, stu_txt):
         pass
     driver.find_element_by_link_text(u"学员管理").click()
     driver.implicitly_wait(30)
-    driver.find_element_by_link_text(u"批量创建学员").click()
+    driver.find_element(cfg.get('org_manage', "create_multi_by"), \
+        cfg.get('org_manage', "create_multi")).click()
     driver.implicitly_wait(30)
     driver.execute_script("$('#fileFieldName-file').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(0.5)')")
     driver.find_element(cfg.get('org_manage', "stu_file_by"), \
@@ -100,6 +101,7 @@ def auto_create_student(cfg, driver, base_url, org_name, stu_num):
             stu_file.writelines(" \n")
         stu_file.writelines(stu_name + " " + stu_psw + "\n")
     stu_file.close()
+    time.sleep(2)
     create_student(cfg, driver, base_url, org_name, stu_txt)
     time.sleep(5)
 
@@ -252,6 +254,8 @@ def manage_course_num(cfg, driver, base_url):
         'manage_coursenum_allnum_by'), \
         cfg.get('manage_course_num', 'manage_coursenum_allnum')).send_keys("1")
     time.sleep(1)
-    driver.find_element_by_link_text(u"应用").click()
+    driver.find_element(cfg.get('manage_course_num', \
+        'manage_coursenum_apply_by'), \
+        cfg.get('manage_course_num', 'manage_coursenum_apply')).click()
     time.sleep(2)
  

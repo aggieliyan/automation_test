@@ -700,7 +700,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use rmb!")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/href_course.png")
+            self.driver.save_screenshot("C:/test_rs_pic/buy_course_use_RMB.png")
         #验证待完成
 
     def buy_course_use_card(self):
@@ -711,6 +711,8 @@ class Test(unittest.TestCase):
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use card!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/buy_course_use_card.png")
             
     def open_course_for_one(self):
         

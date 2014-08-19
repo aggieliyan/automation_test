@@ -123,16 +123,15 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
     time.sleep(5)
 
     if ctype == 1:
-        #classname = "onlineclass"
         driver.find_element(cfg.get('classRedirect', 'select_course_by'), \
             cfg.get('classRedirect', 'select_course')).click()
         time.sleep(1)
     else:
         driver.find_element_by_link_text(u"课程预售").click()
         time.sleep(2)
-        #classname = "onlineclass-presale"
         driver.execute_script("$(\".comp-presell input\").eq(0).\
             attr(\"checked\",\"checked\")")
+        time.sleep(1)
         driver.find_element(cfg.get('classRedirect', 'presell_price_by'), \
             cfg.get('classRedirect', 'presell_price')).send_keys(price)
 

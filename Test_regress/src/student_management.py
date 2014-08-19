@@ -100,6 +100,7 @@ def auto_create_student(cfg, driver, base_url, org_name, stu_num):
             stu_file.writelines(" \n")
         stu_file.writelines(stu_name + " " + stu_psw + "\n")
     stu_file.close()
+    time.sleep(2)
     create_student(cfg, driver, base_url, org_name, stu_txt)
     time.sleep(5)
 

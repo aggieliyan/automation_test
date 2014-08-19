@@ -145,9 +145,9 @@ class Test(unittest.TestCase):
         #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
         if course_href:
-            self.course_href_2 = self.base_url + course_href
+            self.course_href = self.base_url + course_href
         else:
-            self.course_href_2 = ""
+            self.course_href = ""
 
 
     def release_three_video(self):
@@ -156,7 +156,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000, 9999))
         title = u"course-three"+rand_name
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, isthree=1, course_title=title, course_price=10)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, isthree=1, course_title=title)
         except Exception, e:
             print traceback.format_exc() 
         finally:
@@ -170,12 +170,7 @@ class Test(unittest.TestCase):
         except AssertionError, e:
             self.verificationErrors.append(str(e))
         
-        #取链接待后面购买
-        course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
-        if course_href:
-            self.course_href_2 = self.base_url + course_href
-        else:
-            self.course_href_2 = ""
+
          
     def release_two_video(self):
 
@@ -183,7 +178,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000, 9999))
         title = u"two_video_course" + rand_name
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, isthree=2)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, isthree=2, course_price=10)
         except Exception, e:
             print traceback.format_exc() 
         finally:
@@ -196,6 +191,13 @@ class Test(unittest.TestCase):
             self.assertEqual(True, rs, "fail to release two video course!")
         except AssertionError, e:
             self.verificationErrors.append(str(e))
+
+         #取链接待后面购买
+        course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
+        if course_href:
+            self.course_href_2 = self.base_url + course_href
+        else:
+            self.course_href_2 = ""
 
     def package_course(self):
         #打包课程，即网络班
@@ -228,7 +230,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/7_add_cate.png')
         
-        self.driver.implicitly_wait(1)
+        self.driver.implicitly_wait(10)
         actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
         try:
             self.assertEqual(cate_name, actul, "the categroy does not exist!")#若最后一个类目名称与新建类目的名称相等则证明新建类目成功
@@ -265,8 +267,8 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/9_agency_course.png')
-
-        
+        time.sleep(1)
+       
         try:
             rs = self.verify_course(title)
             self.assertEqual(True, rs, "fail to release agency course!")
@@ -287,7 +289,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/9_prepaid_cardgroup.png')
         
-        self.driver.implicitly_wait(2)
+        self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create prepaid cardgroup!")
@@ -314,7 +316,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/10_course_cardgroup.png")
 
-        self.driver.implicitly_wait(2)
+        self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create course cardgroup!")
@@ -339,7 +341,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/11_cate_cardgroup.png")
 
-        self.driver.implicitly_wait(2)
+        self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create cate cardgroup!")
@@ -668,16 +670,16 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")  
 
-    def release_href_course(self):
+    def release_href_announcement(self):
         
         self.total += 1
         try:
-            user_management.release_href_course(self.cfg, self.driver, self.base_url, self.org_name) 
+            user_management.release_href_announcement(self.cfg, self.driver, self.base_url, self.org_name) 
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to use link")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/user_management_link.png")
+            self.driver.save_screenshot("C:/test_rs_pic/release_href_announcement.png")
 
     def verify_all_course_convert(self):
         self.verify_convert(self.normal_course, "fail to convert normal course!")
@@ -689,7 +691,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            user_management.buy_course(self.cfg, self.driver, self.base_url, self.org_name)
+            user_management.buy_course(self.cfg, self.driver, self.base_url, self.course_href)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use rmb!")
@@ -701,7 +703,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.org_name)
+            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.course_href_2)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use card!")
@@ -1159,7 +1161,7 @@ class Test(unittest.TestCase):
         self.add_admin()  
         self.modify_admin()
         self.delete_admin()
-        self.release_href_course()
+        self.release_href_announcement()
         self.change_homelogo()
         self.release_announcement()
         self.modify_pagefoot()  

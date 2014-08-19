@@ -110,37 +110,40 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
             except:
                 None
         ###综合题结束
-        time.sleep(exam_time * 60 + 2)
+        #等于0是自动提交
+        if operation == 0:
+             time.sleep(exam_time * 60 + 2)
         try:        
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
                 cfg.get('exam', 'exam_submit')).click()#提交
-            driver.implicitly_wait(30)
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_continue_by'), \
                 cfg.get('exam', 'exam_continue')).click()#弹窗-继续考试
-            driver.implicitly_wait(30)
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
                  cfg.get('exam', 'exam_submit')).click()#提交
-            driver.implicitly_wait(30)
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'window_submit_by'), \
                 cfg.get('exam', 'window_submit')).click()#弹窗-提交
-            driver.implicitly_wait(30) 
+            time.sleep(2) 
         except:
              None
     #学员提交白卷
     else:
-        time.sleep(exam_time * 60 + 2)
+        if operation == 0:
+             time.sleep(exam_time * 60 + 2)
         try:   
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
                 cfg.get('exam', 'exam_submit')).click()#提交
-            driver.implicitly_wait(30) 
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_continue_by'), \
                 cfg.get('exam', 'exam_continue')).click()#弹窗-继续考试
-            driver.implicitly_wait(30) 
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
                 cfg.get('exam', 'exam_submit')).click()#提交
-            driver.implicitly_wait(30) 
+            time.sleep(2) 
             driver.find_element(cfg.get('exam', 'window_submit_by'), \
                 cfg.get('exam', 'window_submit')).click()#弹窗-提交
-            driver.implicitly_wait(30)  
+            time.sleep(2)  
         except:
              None

@@ -872,8 +872,7 @@ class Test(unittest.TestCase):
                 time.sleep(1)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
-                    self.verificationErrors.append("fail to create exam subject!")
-                    
+                    self.verificationErrors.append("fail to create exam subject!")                    
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to create subject!")
@@ -885,9 +884,14 @@ class Test(unittest.TestCase):
         self.total += 1
         try:
             subject_name = exam_cate_management.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
+            xpath = "//li/p[text()=\'"+subject_name+"\']"
+            time.sleep(1)
+            rs = self.is_element_present(By.XPATH, xpath)
+            if rs == False:
+                self.verificationErrors.append("fail to modify exam subject!")
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to modify subject!")
+            self.verificationErrors.append("fail to modify exam subject!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/modify_subject.png")
 
@@ -898,10 +902,17 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            exam_cate_management.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
+            del_name = exam_cate_management.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
+            if del_name == False:
+                self.verificationErrors.append("fail to delete exam subject!")
+            else:
+                xpath = "//li/p[text()=\'"+ del_name +"\']"
+                rs = self.is_element_present(By.XPATH, xpath)
+                if rs == True:
+                    self.verificationErrors.append("fail to delete exam subject!")
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to delete subject!")
+            self.verificationErrors.append("fail to delete exam subject!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/delete_subject.png")
     
@@ -1223,7 +1234,7 @@ class Test(unittest.TestCase):
                     
         self.login_from_index()
         self.user_statistical_information()
-        
+#        
 
        
                    

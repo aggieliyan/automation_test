@@ -144,6 +144,7 @@ class Test(unittest.TestCase):
             
         #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
+        time.sleep(1)
         if course_href:
             self.course_href = self.base_url + course_href
         else:
@@ -192,8 +193,9 @@ class Test(unittest.TestCase):
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 
-         #取链接待后面购买
+        #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
+        time.sleep(1)
         if course_href:
             self.course_href_2 = self.base_url + course_href
         else:
@@ -1151,8 +1153,8 @@ class Test(unittest.TestCase):
         self.register()
         self.login_from_index()
         self.release_normal()
-        self.release_three_video()
         self.release_two_video()
+        self.release_three_video()
         self.agency_course()
         self.package_course() 
         self.add_cate()

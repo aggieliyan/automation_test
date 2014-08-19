@@ -28,6 +28,7 @@ def buy_course(cfg, driver, base_url, course_url):
 def buy_course_usecard(cfg, driver, base_url, course_url):
     
     driver.get(course_url)
+    print course_url
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index','buy_course_by'), \
         cfg.get('org_index','buy_course')).click()

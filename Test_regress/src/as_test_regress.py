@@ -1044,18 +1044,41 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to create paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-            
-    def user_statistical_information(self):
+    
+    #为学员评分        
+    def score_paper(self):
+
         self.total += 1
         try:
-            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=1, username=self.user_name)
-            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=2, username=self.user_name)
-            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=3, username=self.user_name)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=3, username=self.user_name)        
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to export exam result")
+            self.verificationErrors.append("fail to score!")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_result.png")
+            self.driver.save_screenshot("C:/test_rs_pic/exam_score.png")
+    
+    #导出开放试卷的结果
+    def export_openpaper_result(self):
+        self.total += 1
+        try:
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=2, username=self.user_name)        
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append("fail to export openpaper result!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/openpaper_result.png")
+    
+    #导出分发试卷的结果
+    def export_sendpaper_result(self):
+        self.total += 1
+        try:
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=1, username=self.user_name)        
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append("fail to export sendpaper result!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/sendpaper_result.png")
+   
             
     def exam_student_management(self):
         self.total += 1
@@ -1222,7 +1245,10 @@ class Test(unittest.TestCase):
         login.logout(self.driver, self.base_url)
                     
         self.login_from_index()
-        self.user_statistical_information()
+        self.score_paper()
+        #IE下不能导出
+        #self.export_openpaper_result()
+        #self.export_sendpaper_result()
         
 
        

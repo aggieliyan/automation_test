@@ -4,9 +4,12 @@ Created on Jul 23, 2014
 
 @author: liwen
 '''
+import random, time
 
 from selenium.webdriver.common.by import By
-import random, time
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 def create_paper(cfg, driver, base_url, exam_name, exam_time,\
                   eoperation, erandom, eopen):
@@ -220,8 +223,12 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
             driver.find_element(cfg.get('exam', 'output_open_by'), \
                 cfg.get('exam', 'output_open')).click()
             time.sleep(2)
+
         except:
             print u'试卷暂时没有学员购买'
+
+        #ActionChains(driver).send_keys(Keys.DOWN)
+        #ActionChains(driver).send_keys(Keys.ENTER)
     elif etype == 1:
         try:
             driver.find_element(cfg.get('exam', 'select_paper_by'), \
@@ -231,12 +238,15 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
             time.sleep(2)
         except:
             print u'试卷暂时没有分发给学员'
-        try:
-            save_alert = driver.switch_to_alert()
+
+        #ActionChains(driver).send_keys(Keys.DOWN)
+        #ActionChains(driver).send_keys(Keys.ENTER)
+        #try:
+        #    save_alert = driver.switch_to_alert()
             #print save_alert.text
-            save_alert.accept()
-        except:
-            pass
+        #    save_alert.accept()
+        #except:
+        #    pass
 
     else:
         #取评分链接

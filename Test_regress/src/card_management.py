@@ -197,7 +197,7 @@ def get_academy_catename(cfg, driver, base_url, academy):
         driver.find_element_by_link_text(u"跳过").click()#点击跳过
     except:
         pass
-    time.sleep(2)
+    driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
         cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
     time.sleep(2)

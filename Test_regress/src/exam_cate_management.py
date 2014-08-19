@@ -7,7 +7,7 @@ Created on 2014-7-23
 
 
 import unittest, time, re,random
-
+from selenium.common.exceptions import NoSuchElementException
 
 
 def create_subject(cfg, driver, base_url, org_name, subject_name):
@@ -15,28 +15,38 @@ def create_subject(cfg, driver, base_url, org_name, subject_name):
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', 'new_subject_by'), \
         cfg.get('exam', 'new_subject_id')).click()
-    driver.find_element(cfg.get('exam', 'sub_name_by'), \
-        cfg.get('exam', 'sub_name')).clear()
-    driver.find_element(cfg.get('exam', 'sub_name_by'), \
-        cfg.get('exam', 'sub_name')).send_keys(subject_name)
     driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'sub_ok_by'), \
-        cfg.get('exam', 'sub_ok_xpath')).click()
-    driver.implicitly_wait(10)
+    try:
+        driver.find_element(cfg.get('exam', 'sub_name_by'), \
+                            cfg.get('exam', 'sub_name')).clear()
+    except NoSuchElementException, e:
+        print u"创建考试科目失败原因: 最多只能建10个科目,请删除一些科目再来创建!"
+        return False
+    else:
+        driver.find_element(cfg.get('exam', 'sub_name_by'), \
+                            cfg.get('exam', 'sub_name')).send_keys(subject_name)
+        driver.find_element(cfg.get('exam', 'sub_ok_by'), \
+                            cfg.get('exam', 'sub_ok_xpath')).click()
+        driver.implicitly_wait(30)
+        
+    
 
 def auto_create_subject(cfg, driver, base_url, org_name, sub_num):
+    driver.get("%sexam/" %(base_url))
+    driver.implicitly_wait(10)
     prefix = chr(random.randint(97,122)) + chr(random.randint(97,122)) + chr(random.randint(97,122))
     subject_info = []
     for i in range(sub_num):
         subject_name = org_name[0] + "sub_" + prefix + str(i)
-        create_subject(cfg,driver, base_url,org_name,subject_name)
+        rs = create_subject(cfg, driver, base_url, org_name, subject_name)
         subject_info.append(subject_name)
+        if rs == False:
+            break
     return subject_info
 
 
 def modify_subject(cfg, driver, base_url, org_name):
-    driver.get("%sexam/" %(base_url))
-    driver.implicitly_wait(10)
+
     prefix = chr(random.randint(97,122)) + chr(random.randint(97,122)) + chr(random.randint(97,122))    
     edit_name = driver.execute_script("return $('.subject-item-con').eq(0).children().eq(0).text()")
     subject_name = org_name[0] + "sub_" + prefix

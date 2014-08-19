@@ -866,11 +866,11 @@ class Test(unittest.TestCase):
         
             #验证
             for subject in subject_info:
-                xpath = "//div[text()=\'"+subject+"\']"
-                self.driver.implicitly_wait(2)
+                xpath = "//li/p[text()=\'"+subject+"\']"
+                time.sleep(1)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
-                    self.verificationErrors.append("fail to create subject!")
+                    self.verificationErrors.append("fail to create exam subject!")
                     
         except Exception, e:
             print traceback.format_exc() 

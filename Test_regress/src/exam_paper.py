@@ -296,8 +296,8 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     else:
         driver.find_element_by_link_text(u"关闭试卷").click()
         driver.implicitly_wait(10)
-        driver.find_element(cfg.get('exam', 'select_one_p_by'), \
-            cfg.get('exam', 'select_one_p')).click()
+        driver.find_elements(cfg.get('exam', 'select_one_p_by'), \
+            cfg.get('exam', 'select_one_p'))[-1].click()
     time.sleep(2)
     driver.find_element(cfg.get('exam', 'open_paper_ok_by'), \
         cfg.get('exam', 'open_paper_ok')).click()

@@ -159,7 +159,7 @@ def org_chang_headpic(cfg, driver, base_url, org_name, \
 
 #机构首页logo   
 def change_homelogo(cfg, driver, base_url, org_name, \
-    logo_pic = r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test"):
+    logo_pic = r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\headpic.jpg"):
   
     driver.get("%s%s"%(base_url, org_name))
     time.sleep(2)
@@ -178,9 +178,9 @@ def modify_pagefoot(cfg, driver, base_url, org_name, \
    
     driver.get("%s%s"%(base_url, org_name))
     driver.implicitly_wait(10)
-    driver.find_element_by_link_text(u"编辑页脚").click()
-    h = driver.window_handles
-    driver.switch_to_window(h[-1])
+    foot_href = driver.execute_script("return $('#J_dressNav_warp a').eq(6).attr('href')")
+    time.sleep(1)
+    driver.get("%s%s"%(base_url, foot_href))
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index', 'pf_modx2_by'), \
         cfg.get('org_index', 'pf_modx2')).clear()

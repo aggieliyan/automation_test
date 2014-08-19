@@ -268,7 +268,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/9_agency_course.png')
         time.sleep(1)
-       
+        self.driver.implicitly_wait(10)
         try:
             rs = self.verify_course(title)
             self.assertEqual(True, rs, "fail to release agency course!")
@@ -490,7 +490,6 @@ class Test(unittest.TestCase):
                 self.base_url, self.org_name, self.import_name)
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to import one student!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/import_one_student.png")
 
@@ -545,6 +544,11 @@ class Test(unittest.TestCase):
         self.driver.find_element_by_link_text(u"课程管理").click()
         self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
+        if rs == False:
+            self.driver.find_element("name", "courseSearch").send_keys(title)
+            self.driver.find_element("class name", "searchBtn").click()
+            self.driver.implicitly_wait(10)
+            rs = self.is_element_present(By.LINK_TEXT, title)
         return rs
 
     def verify_onlineclass(self, classname):
@@ -669,7 +673,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         rand_name = str(random.randint(1000, 9999))
-        title = u"自动化公告"+rand_name
+        title = u"announcement"+rand_name
         try:
             title = user_management.release_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
         except Exception, e:
@@ -685,7 +689,7 @@ class Test(unittest.TestCase):
             user_management.release_href_announcement(self.cfg, self.driver, self.base_url, self.org_name) 
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to use link")
+            self.verificationErrors.append("fail to release href announcement")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/release_href_announcement.png")
 
@@ -704,7 +708,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use rmb!")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/href_course.png")
+            self.driver.save_screenshot("C:/test_rs_pic/buy_course_use_RMB.png")
         #验证待完成
 
     def buy_course_use_card(self):
@@ -715,6 +719,8 @@ class Test(unittest.TestCase):
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use card!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/buy_course_use_card.png")
             
     def open_course_for_one(self):
         
@@ -1102,8 +1108,8 @@ class Test(unittest.TestCase):
     #学员参加考试
     def exam_user(self):
         self.total += 1
-        # operation =0 自动提交  operation =1 继续答题
-        operation = 1
+        # operation = '0' 自动提交  operation = '1' 继续答题
+        operation = '1'
         question_answer ='123'
         # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
         blank_pager = 0

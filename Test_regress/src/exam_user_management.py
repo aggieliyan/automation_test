@@ -40,7 +40,7 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
     driver.find_element_by_link_text(u"开始考试").click()
     time.sleep(2)
     question_title = driver.execute_script("return $('#J_classification a:eq(0)').text()")
-    driver.implicitly_wait(30)
+    time.sleep(5)
      # blank_pager=1 是白卷 ;blank_pager=0 是做了一个题
     if blank_pager == 0:
         #单选 多选
@@ -83,7 +83,6 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
         #综合题
         elif question_title == u"综合题":
             #第一个是单选 or 多选
-            driver.implicitly_wait(30)
             try:
                 driver.find_element(cfg.get('exam', 'exam_all_selectque_by'), \
                     cfg.get('exam', 'exam_all_selectque')).click()
@@ -110,37 +109,42 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
             except:
                 None
         ###综合题结束
-        time.sleep(exam_time * 60 + 2)
+        #等于0是自动提交
+        time.sleep(2)
+        if operation == '0':
+             time.sleep(exam_time * 60 + 2)
         try:        
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
                 cfg.get('exam', 'exam_submit')).click()#提交
-            driver.implicitly_wait(30)
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_continue_by'), \
                 cfg.get('exam', 'exam_continue')).click()#弹窗-继续考试
-            driver.implicitly_wait(30)
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
                  cfg.get('exam', 'exam_submit')).click()#提交
-            driver.implicitly_wait(30)
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'window_submit_by'), \
                 cfg.get('exam', 'window_submit')).click()#弹窗-提交
-            driver.implicitly_wait(30) 
+            time.sleep(2) 
         except:
              None
     #学员提交白卷
     else:
-        time.sleep(exam_time * 60 + 2)
+        time.sleep(2)
+        if operation == '0':
+             time.sleep(exam_time * 60 + 2)
         try:   
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
                 cfg.get('exam', 'exam_submit')).click()#提交
-            driver.implicitly_wait(30) 
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_continue_by'), \
                 cfg.get('exam', 'exam_continue')).click()#弹窗-继续考试
-            driver.implicitly_wait(30) 
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_submit_by'), \
                 cfg.get('exam', 'exam_submit')).click()#提交
-            driver.implicitly_wait(30) 
+            time.sleep(2) 
             driver.find_element(cfg.get('exam', 'window_submit_by'), \
                 cfg.get('exam', 'window_submit')).click()#弹窗-提交
-            driver.implicitly_wait(30)  
+            time.sleep(2)  
         except:
              None

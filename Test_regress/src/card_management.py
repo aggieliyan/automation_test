@@ -197,7 +197,7 @@ def get_academy_catename(cfg, driver, base_url, academy):
         driver.find_element_by_link_text(u"跳过").click()#点击跳过
     except:
         pass
-    driver.implicitly_wait(30)
+    time.sleep(5)
     driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
         cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
     time.sleep(2)
@@ -259,7 +259,10 @@ def user_usexamcard_management(cfg, driver, base_url, examcard_num):
     time.sleep(2)
     driver.find_element(cfg.get('use_card', 'enter_study_center_by'), \
         cfg.get('use_card', 'enter_study_center')).click()#将课程加入学习中心
-    driver.implicitly_wait(30)
+    time.sleep(2)
+    h = driver.window_handles
+    driver.switch_to_window(h[-1])
+    time.sleep(2)
     driver.get(base_url + "examRedirect.do?action=toUseExamCard")#获取点击线上考试
     time.sleep(2)
     driver.find_element(cfg.get('use_card', 'exam_inputnumber_by'), \

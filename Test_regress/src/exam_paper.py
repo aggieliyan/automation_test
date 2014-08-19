@@ -25,7 +25,7 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
                         cfg.get('exam', 'exam_subject')).click()
 #    now_handle = driver.current_window_handle #得到当前窗口句柄
 #    driver.find_element_by_link_text(u"新建试卷").click()
-#    time.sleep(2)
+    time.sleep(2)
 #    all_handles = driver.window_handles #获取所有窗口句柄
 #    for handle in all_handles:
 #        if handle != now_handle:
@@ -296,8 +296,8 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     else:
         driver.find_element_by_link_text(u"关闭试卷").click()
         driver.implicitly_wait(10)
-        driver.find_element(cfg.get('exam', 'select_one_p_by'), \
-            cfg.get('exam', 'select_one_p')).click()
+        driver.find_elements(cfg.get('exam', 'select_one_p_by'), \
+            cfg.get('exam', 'select_one_p'))[-1].click()
     time.sleep(2)
     driver.find_element(cfg.get('exam', 'open_paper_ok_by'), \
         cfg.get('exam', 'open_paper_ok')).click()

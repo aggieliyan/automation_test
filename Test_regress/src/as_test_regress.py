@@ -21,9 +21,9 @@ class Test(unittest.TestCase):
         self.browser = "ie"
 
         self.test_enviroment = "beta"
-        self.org_name = "salesdemo"
+        self.org_name = "lirenmba"
         self.org_password = "1234"
-        self.user_name = "yilu282"
+        self.user_name = "mba"
         self.user_password = "1234"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
 
         self.total = 0
 
-        if self.browser == 'ie':
+        if self.browser == 'Chrome':
             self.driver = webdriver.Ie()
         elif self.browser == 'firefox':
             self.driver = webdriver.Firefox()
@@ -663,6 +663,7 @@ class Test(unittest.TestCase):
         #print before_num
         try:
             rs = admin_management.delete_admin(self.cfg, self.driver, self.base_url)
+            time.sleep(1)
             if rs == False:
                 self.verificationErrors.append("fail to delete admin!")
         except Exception, e:
@@ -907,6 +908,7 @@ class Test(unittest.TestCase):
                 self.verificationErrors.append("fail to delete exam subject!")
             else:
                 xpath = "//li/p[text()=\'"+ del_name +"\']"
+                time.sleep(1)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == True:
                     self.verificationErrors.append("fail to delete exam subject!")
@@ -1210,6 +1212,7 @@ class Test(unittest.TestCase):
         self.use_listencard()
 
 
+
         #考试系统部分
         self.login_from_index()
         self.exam_onequestion()
@@ -1234,7 +1237,7 @@ class Test(unittest.TestCase):
                     
         self.login_from_index()
         self.user_statistical_information()
-#        
+       
 
        
                    

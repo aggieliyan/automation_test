@@ -73,7 +73,7 @@ def delete_admin(cfg, driver, base_url, admin_num=1):
     #    driver.find_element_by_xpath("//div["+str(2+admin_num)+"]/div/div/div[2]/div[3]/a").click()
     time.sleep(1) 
     driver.find_element(cfg.get('org_manage', 'delete_ad_ok_by'), \
-                        cfg.get('org_manage', 'delete_ad_ok_xpath')).click()
+                        cfg.get('org_manage', 'delete_ad_ok')).click()
     time.sleep(5)
     blist = driver.find_elements_by_link_text(u"删除管理员")
     if len(alist) == len(blist):

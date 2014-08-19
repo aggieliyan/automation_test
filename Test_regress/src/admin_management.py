@@ -8,7 +8,7 @@ Created on May 28, 2012
 import time, random
 
 def create_admin(cfg, driver, base_url, admin_name, admin_username, admin_psw, admin_email):
-
+    
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"系统设置").click()
@@ -17,6 +17,7 @@ def create_admin(cfg, driver, base_url, admin_name, admin_username, admin_psw, a
     driver.implicitly_wait(10)
     driver.find_element_by_xpath(cfg.get('org_manage', 'add_admin_xpath')).click()#添加管理员
     driver.implicitly_wait(10)
+
     driver.find_element(cfg.get('org_manage', 'ad_name_by'), \
         cfg.get('org_manage', 'ad_name_id')).send_keys(admin_name)
     driver.find_element(cfg.get('org_manage', 'ad_username_by'), \
@@ -39,8 +40,8 @@ def create_admin(cfg, driver, base_url, admin_name, admin_username, admin_psw, a
         cfg.get('org_manage', 'per_admin_id')).click()
     driver.implicitly_wait(10)
     driver.execute_script("$('.x-btn-text').eq(0).click()")
-    driver.implicitly_wait(10)
-
+    driver.implicitly_wait(30)
+    
 def auto_create_admin(cfg, driver, base_url, org_name, adm_num):
 
     prefix = chr(random.randint(97,122)) + chr(random.randint(97,122)) + chr(random.randint(97,122))
@@ -59,12 +60,13 @@ def auto_create_admin(cfg, driver, base_url, org_name, adm_num):
 def delete_admin(cfg, driver, base_url, admin_num=1):
         
     driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"系统设置").click()
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"网校管理员").click()
-    time.sleep(2)
+    driver.implicitly_wait(30)
     alist = driver.find_elements_by_link_text(u"删除管理员")
+    print alist[-1]
     alist[-1].click()
 
     #if admin_num == 1:
@@ -79,7 +81,7 @@ def delete_admin(cfg, driver, base_url, admin_num=1):
 
 def modify_admin(cfg, driver, base_url):
     driver.get(base_url + "myOffice.do")
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"系统设置").click()
     driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"网校管理员").click()
@@ -96,5 +98,10 @@ def modify_admin(cfg, driver, base_url):
     driver.implicitly_wait(10)
     #driver.find_element(cfg.get('org_manage','admin_modify_xpath_by'),cfg.get('org_manage','admin_modify_xpath')).click()
     driver.execute_script("$(\"#editButton button\").eq(0).click()")
+<<<<<<< HEAD
     time.sleep(1)
     return admin_name
+=======
+    driver.implicitly_wait(10)
+    return admin_name
+>>>>>>> origin/master

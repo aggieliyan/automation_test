@@ -468,6 +468,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         course_name = ""
+        actual_name = "0"
         try:
             course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url, self.org_name)
             actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")
@@ -606,6 +607,7 @@ class Test(unittest.TestCase):
         self.total += 1
         try:
             login.login_by_logindo(self.cfg, self.driver, self.base_url, self.l_card_num, self.l_card_pwd)
+            login.logout(self.driver, self.base_url)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append('fail to use listen card!')
@@ -1188,14 +1190,13 @@ class Test(unittest.TestCase):
         #个人用户部分
         self.login_user()
         self.use_prepaidcard()
+        self.buy_course_use_RMB()
+        self.buy_course_use_card()
         self.use_coursecard()
         self.use_catecard()
         self.use_exam_card()
-        self.buy_course_use_RMB()
-        self.buy_course_use_card()
         login.logout(self.driver, self.base_url) 
         self.use_listencard()
-        login.logout(self.driver, self.base_url)
 
 
         #考试系统部分

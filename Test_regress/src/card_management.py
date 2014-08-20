@@ -257,11 +257,16 @@ def user_usexamcard_management(cfg, driver, base_url, examcard_num):
     academy_catename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
     driver.execute_script("$('.wrap input').eq(0).click()")#选择第一个课程
     time.sleep(2)
+    bh = driver.window_handles
     driver.find_element(cfg.get('use_card', 'enter_study_center_by'), \
         cfg.get('use_card', 'enter_study_center')).click()#将课程加入学习中心
     time.sleep(2)
-    h = driver.window_handles
-    driver.switch_to_window(h[-1])
+    ah = driver.window_handles
+    while len(bh) == len(ah):
+        ah = driver.window_handles
+    for h in ah:
+        if h not in bh:
+            driver.switch_to_window(h)
     time.sleep(2)
     driver.get(base_url + "examRedirect.do?action=toUseExamCard")#获取点击线上考试
     time.sleep(2)

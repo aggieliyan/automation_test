@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
         self.browser = "ie"
 
         self.test_enviroment = "beta"
-        self.org_name = "salesdemo"
+        self.org_name = "lirenmba"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -622,8 +622,8 @@ class Test(unittest.TestCase):
             #验证
             for admin in admin_info:
                 xpath = "//div[text()=\'"+admin+"\']"
-                rs = self.is_element_present(By.XPATH, xpath)
                 time.sleep(1)
+                rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
                     self.verificationErrors.append("fail to create admin!")
         except Exception, e:

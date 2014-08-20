@@ -623,6 +623,7 @@ class Test(unittest.TestCase):
                 xpath = "//div[text()=\'"+admin+"\']"
                 time.sleep(1)
                 rs = self.is_element_present(By.XPATH, xpath)
+                time.sleep(1)
                 if rs == False:
                     self.verificationErrors.append("fail to create admin!")
         except Exception, e:

@@ -172,7 +172,7 @@ def add_card(cfg, driver, base_url, org_name, \
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
     driver.find_element_by_link_text(u"管理卡组").click()
-    time.sleep(2)
+    time.sleep(3)
     if cgroup_num == 1:
         driver.find_element_by_link_text(u"添加卡").click()
     else:  

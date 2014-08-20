@@ -36,6 +36,7 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     new_href = driver.execute_script("return $('.exam-new-btn').attr('href')")
     time.sleep(2)    
     driver.get("%sexam/%s" %(base_url,new_href))
+    time.sleep(2)    
     driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \
                         cfg.get('exam', 'exam_paper_name')).clear()
     driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \

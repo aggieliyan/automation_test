@@ -63,14 +63,14 @@ def create_student(cfg, driver, base_url, org_name, stu_txt):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"学员/员工").click()
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(30)
     try:
         driver.find_element(cfg.get('org_manage', "stu_close_by"), \
             cfg.get('org_manage', "stu_close")).click()
     except:
         pass
     driver.find_element_by_link_text(u"学员管理").click()
-    driver.implicitly_wait(30)
+    time.sleep(5)
     driver.find_element(cfg.get('org_manage', "create_multi_by"), \
         cfg.get('org_manage', "create_multi")).click()
     driver.implicitly_wait(30)

@@ -128,7 +128,7 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
         time.sleep(1)
     else:
         driver.find_element_by_link_text(u"课程预售").click()
-        driver.implicitly_wait(10)
+        time.sleep(3)
         driver.find_element(cfg.get('classRedirect', 'select_cate_by'), \
             cfg.get('classRedirect', 'select_cate')).click()
         #driver.execute_script("$(\".comp-presell input\").eq(0).\
@@ -159,13 +159,13 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
 def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
 
     driver.get("%smyOffice.do" %(base_url))
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"管理我申请的代理").click()
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"管理课程").click()
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"编辑").click()
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('courseRedirect', 'agency_title_by'), \
         cfg.get('courseRedirect', 'agency_title')).clear()
     driver.find_element(cfg.get('courseRedirect', 'agency_title_by'), \
@@ -185,7 +185,6 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
             cfg.get('courseRedirect', 'agency_rank')).clear()
         driver.find_element(cfg.get('courseRedirect', 'agency_rank_by'), \
             cfg.get('courseRedirect', 'agency_rank')).send_keys(100)
-        driver.implicitly_wait(1)
     except Exception:#如果是免费的代理课程会在上面取价格的时候就会报错，免费的直接点发布即可
         pass
     finally:

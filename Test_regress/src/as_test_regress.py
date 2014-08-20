@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
         self.browser = "ie"
 
         self.test_enviroment = "beta"
-        self.org_name = "lirenmba"
+        self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -190,8 +190,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/5_two_video.png')
 
-        self.two_title = title   
-
+        self.two_title = title
         #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
         time.sleep(1)
@@ -710,7 +709,8 @@ class Test(unittest.TestCase):
         try:
             user_management.buy_course(self.cfg, self.driver, self.base_url, self.course_href)
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
+            print self.course_href
             self.verificationErrors.append("fail to buy course use rmb!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/buy_course_use_RMB.png")
@@ -724,6 +724,7 @@ class Test(unittest.TestCase):
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use card!")
+            print self.course_href_2
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/buy_course_use_card.png")
             

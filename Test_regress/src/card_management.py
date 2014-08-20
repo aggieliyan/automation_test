@@ -172,7 +172,7 @@ def add_card(cfg, driver, base_url, org_name, \
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
     driver.find_element_by_link_text(u"管理卡组").click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     if cgroup_num == 1:
         driver.find_element_by_link_text(u"添加卡").click()
     else:  
@@ -192,12 +192,12 @@ def add_card(cfg, driver, base_url, org_name, \
 def get_academy_catename(cfg, driver, base_url, academy):
     driver.implicitly_wait(30)
     driver.get(base_url + academy)
-    time.sleep(2)
+    time.sleep(1)
     try:
         driver.find_element_by_link_text(u"跳过").click()#点击跳过
     except:
         pass
-    time.sleep(5)
+    time.sleep(1)
     driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
         cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
     time.sleep(2)
@@ -284,60 +284,3 @@ def user_usexamcard(cfg, driver, base_url, examcard_num):
     academy_catename = user_usexamcard_management(cfg, driver, base_url, examcard_num)
     # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
     exam_user_management.exam_user(cfg, driver, base_url, operation=0, blank_pager=0, question_answer='123', paper_name=academy_catename)
-#获取院校机构课程类目名并创建试卷后，创建卡号，并返回    
-def add_exam_card1(cfg, driver, base_url, count=5):
-    time.sleep(2)
-    driver.get(base_url + "qqhru")
-    time.sleep(2)
-    driver.find_element_by_link_text(u"跳过").click()#点击跳过
-    time.sleep(2)
-    driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
-        cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
-    time.sleep(2)
-    coursename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
-    time.sleep(2) 
-    driver.find_element(cfg.get('org_manage', 'exam_select_close_by'), \
-        cfg.get('org_manage', 'exam_select_close')).click()#关闭窗口   
-    time.sleep(2)
-    driver.get(base_url + "exam/")#考试系统链接
-    time.sleep(2)
-    driver.find_element(cfg.get('org_manage', 'exam_list_by'), \
-        cfg.get('org_manage', 'exam_list')).click()#点击试卷库
-    time.sleep(2)
-    url_add = driver.execute_script("return $('.exam-common-action-con a').eq(0).attr('href')")#点击新建试卷的链接
-    driver.get(base_url +'exam/'+url_add)
-    time.sleep(2)
-    driver.find_element(cfg.get('org_manage', 'exam_name_input_by'), \
-        cfg.get('org_manage', 'exam_name_input')).send_keys(coursename)
-    time.sleep(2)
-    driver.find_element_by_link_text(u"下一步").click()#点击下一步
-    time.sleep(2)
-    driver.find_element_by_link_text(u"添加题型").click()#点击下一步
-    time.sleep(2)
-    driver.find_element(cfg.get('org_manage', 'exam_confirm_by'), \
-        cfg.get('org_manage', 'exam_confirm')).click()#点击确定按钮
-    driver.find_element_by_link_text(u"生成试卷").click()#点击生成试卷
-    time.sleep(2)
-    #driver.execute_script("$('#paper_list_con tr').eq(0).hover")#hover第一条
-    time.sleep(2)
-    driver.execute_script("$('#paper_list_con a:eq(6)').click()")#点击更多
-    time.sleep(2)
-    driver.execute_script("$('#paper_list_con li:eq(0)').click()")#点击分配试卷  
-    time.sleep(2)
-    driver.find_element(cfg.get('org_manage', 'exam_subname_by'), \
-        cfg.get('org_manage', 'exam_subname')).send_keys("qqhru")#添加机构名称 
-    time.sleep(2)
-    driver.find_element(cfg.get('org_manage', 'exam_cardcount_by'), \
-        cfg.get('org_manage', 'exam_cardcount')).send_keys(count)#填写考试卡数量
-    time.sleep(2)
-    driver.find_element(cfg.get('org_manage', 'exam_ok_by'), \
-        cfg.get('org_manage', 'exam_ok')).click()#点击确定按钮
-    time.sleep(2)
-    driver.execute_script("$('#paper_list_con a:eq(6)').click()")#点击更多
-    lookcardnum_url = driver.execute_script("return $('#paper_list_con li:eq(1)').attr('data-url')")#获取点击查看卡号触发的链接
-    time.sleep(2)
-    driver.get(lookcardnum_url)#定位查看卡号连接
-    time.sleep(2)
-    examcard_number = driver.execute_script("return $('.first-cell span:eq(1)').text()")
-    time.sleep(2)
-    return examcard_number

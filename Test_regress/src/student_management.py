@@ -191,9 +191,13 @@ def buy_open_num(cfg, driver, base_url, org_name, bnum):
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', "buy_open_num_sure1_by"), \
         cfg.get('org_manage', "buy_open_num_sure1")).click()
-    driver.implicitly_wait(30)
-    driver.find_element(cfg.get('org_manage', "buy_open_num_sure2_by"), \
-        cfg.get('org_manage', "buy_open_num_sure2")).click()
+    #判断是否余额充足
+    re = is_element_present(driver, By.XPATH, "//div[1]/p/span[2]")
+    if re == True:
+        print u"购买授权，人民币账户余额不足！"
+    else:
+        driver.find_element(cfg.get('org_manage', "buy_open_num_sure2_by"), \
+                            cfg.get('org_manage', "buy_open_num_sure2")).click()
     time.sleep(2)
 
 #管理播放授权数

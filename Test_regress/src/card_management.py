@@ -58,8 +58,9 @@ def use_course_card(cfg, driver, base_url, card_num, card_psw):
 #添加卡组-充值卡
 def add_prepaid_cardgroup(cfg, driver, base_url, org_name, \
         group_name, group_price=300):
+    time.sleep(1)
     driver.get(base_url + "myOffice.do")
-    time.sleep(3)
+    time.sleep(5)
     driver.find_element_by_link_text(u"管理卡组").click()
     time.sleep(3)
     driver.find_element_by_link_text(u"添加卡组").click()

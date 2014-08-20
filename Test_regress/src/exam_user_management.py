@@ -29,7 +29,7 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
     time.sleep(2)
     driver.find_element(cfg.get('exam', 'search_input_by'), \
         cfg.get('exam', 'search_input')).send_keys(paper_name)
-    time.sleep(4)
+    time.sleep(5)
     driver.find_element_by_link_text(u"立即考试").click() 
     time.sleep(2)
     exam_time = driver.execute_script("return parseInt($('.pre-exam-outer li').eq(0).text().substring(5,6))")

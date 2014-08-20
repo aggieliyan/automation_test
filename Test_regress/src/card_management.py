@@ -149,23 +149,23 @@ def add_listen_cardgroup(cfg, driver, base_url, \
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'grouptitle_by'), \
         cfg.get('org_manage', 'grouptitle')).send_keys(group_name)
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'listen_spread_by'), \
         cfg.get('org_manage', 'listen_spread')).click()#展开默认类目下资料
-    time.sleep(8)
+    time.sleep(6)
     driver.find_element(cfg.get('org_manage', 'listen_course_by'), \
         cfg.get('org_manage', 'listen_course')).click()#勾选第一个课程
-    time.sleep(3)
+    time.sleep(1)
     try:
         print driver.find_element(cfg.get('org_manage', 'listen_warn_by'), \
         cfg.get('org_manage', 'listen_warn')).text
     except:
         None
-    time.sleep(2)
+    time.sleep(1)
     driver.execute_script("$(\".x-btn-text\").eq(0).click()")
-    driver.implicitly_wait(30)
+    time.sleep(1)
     driver.execute_script("$(\".x-btn-text\").eq(2).click()")  
-    driver.implicitly_wait(30)     
+    time.sleep(1)    
 #添加卡
 def add_card(cfg, driver, base_url, org_name, \
         card_prifix,cgroup_num=1,card_num=5):

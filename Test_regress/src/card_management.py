@@ -105,10 +105,10 @@ def add_cate_cardgroup(cfg, driver, base_url, org_name, \
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'grouptitle_by'), \
         cfg.get('org_manage', 'grouptitle')).send_keys(group_name)
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'cate_card_by'), \
         cfg.get('org_manage', 'cate_card')).click()
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'cate_by'), \
         cfg.get('org_manage', 'cate')).click()
     time.sleep(2)

@@ -1188,11 +1188,11 @@ class Test(unittest.TestCase):
     def test_regress(self):
 
         #网站主站回归流程
-        # self.register()
+        self.register()
         self.login_from_index()
-        # self.release_normal()
-        # self.release_two_video()
-        # self.release_three_video()
+        self.release_normal()
+        self.release_two_video()
+        self.release_three_video()
         self.agency_course()
         self.package_course() 
         self.add_cate()

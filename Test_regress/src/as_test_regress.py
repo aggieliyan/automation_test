@@ -376,7 +376,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/12_listen_cardgroup.png")  
-        self.driver.implicitly_wait(2)
+        self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create listen cardgroup!")

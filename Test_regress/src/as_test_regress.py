@@ -1175,17 +1175,6 @@ class Test(unittest.TestCase):
             self.verificationErrors.append('fail to buy_paper!')
         finally: 
             self.driver.save_screenshot("C:/test_rs_pic/buy_paper.png")       
-        
-            
-    def wailian_video(self):
-        self.total += 1
-        try:
-            user_management.wailian_video(self.cfg, self.driver, self.base_url, self.test_enviroment) 
-        except Exception, e:
-            print traceback.format_exc() 
-            self.verificationErrors.append("fail to use wailian")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/user_management_wailian.png")
 
     
     def test_regress(self):

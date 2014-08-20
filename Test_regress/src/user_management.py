@@ -5,49 +5,62 @@ Created on May 31, 2012
 @author: yilulu
 '''
 import time
+import re
 from selenium.common.exceptions import NoSuchElementException
 
 #个人人民币买课
 def buy_course(cfg, driver, base_url, course_url):
     
-    driver.get(course_url)
-    driver.implicitly_wait(10)
-    bh = driver.window_handles
-    driver.find_element(cfg.get('org_index','buy_course_by'), \
-        cfg.get('org_index','buy_course')).click()
-    ah = driver.window_handles
-    while len(bh) == len(ah):
-        ah = driver.window_handles
-    for h in ah:
-        if h not in bh:
-            driver.switch_to_window(h)
+    course_id = re.search(r'\d{1,10}', course_url).group(0)
+    #print course_id
+    host = base_url.replace("http://","")
+    driver.get("%spaymentRedirect.do?action=paymentDomainRedirect&\
+        host=%s&grouponid=&type=course&id=%s"\
+        %(base_url, host, str(course_id)))
+    # driver.get(course_url)
+    # driver.implicitly_wait(10)
+    # bh = driver.window_handles
+    # driver.find_element(cfg.get('org_index','buy_course_by'), \
+    #     cfg.get('org_index','buy_course')).click()
+    # ah = driver.window_handles
+    # while len(bh) == len(ah):
+    #     ah = driver.window_handles
+    # for h in ah:
+    #     if h not in bh:
+    #         driver.switch_to_window(h)
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index','use_rmb_by'), \
         cfg.get('org_index','use_rmb')).click()
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
         cfg.get('org_index', 'pay_ok')).click()
-    time.sleep(1)
+    time.sleep(3)
   
     
 #个人充值卡买课
 def buy_course_usecard(cfg, driver, base_url, course_url):
     
-    driver.get(course_url)
-    driver.implicitly_wait(10)
-    bh = driver.window_handles
-    driver.find_element(cfg.get('org_index','buy_course_by'), \
-        cfg.get('org_index','buy_course')).click()
-    ah = driver.window_handles
-    while len(bh) == len(ah):
-        ah = driver.window_handles
-    for h in ah:
-        if h not in bh:
-            driver.switch_to_window(h)
+    course_id = re.search(r'\d{1,10}', course_url).group(0)
+    #print course_id
+    host = base_url.replace("http://","")
+    driver.get("%spaymentRedirect.do?action=paymentDomainRedirect&\
+        host=%s&grouponid=&type=course&id=%s"\
+        %(base_url, host, str(course_id)))
+    # driver.get(course_url)
+    # driver.implicitly_wait(10)
+    # bh = driver.window_handles
+    # driver.find_element(cfg.get('org_index','buy_course_by'), \
+    #     cfg.get('org_index','buy_course')).click()
+    # ah = driver.window_handles
+    # while len(bh) == len(ah):
+    #     ah = driver.window_handles
+    # for h in ah:
+    #     if h not in bh:
+    #         driver.switch_to_window(h)
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
         cfg.get('org_index', 'pay_ok')).click()
-    time.sleep(1)
+    time.sleep(3)
     
 #个人发照片 数量最大10
 def add_photo(cfg, driver, base_url, username, \

@@ -129,6 +129,11 @@ class Test(unittest.TestCase):
         title = u"course" + rand_name#在标题中加入随机数字确保课件标题的唯一性
         try:
             new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
+            try:
+                rs = self.verify_course(title)
+                self.assertEqual(True, rs, "fail to release course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:       
             print traceback.format_exc() 
         finally:
@@ -136,12 +141,7 @@ class Test(unittest.TestCase):
 
         self.normal_course = title#待用-在数据库中查是否转换失败
 
-        try:
-            rs = self.verify_course(title)
-            self.assertEqual(True, rs, "fail to release course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
-            
+          
         #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
         time.sleep(1)
@@ -156,23 +156,22 @@ class Test(unittest.TestCase):
         self.total += 1
         rand_name = str(random.randint(1000, 9999))
         title = u"course-three"+rand_name
+        self.three_title = title
         try:
             new_course_management.course_redirect(self.cfg, self.driver, self.base_url, isthree=1, course_title=title)
+             
+            try:
+                rs = self.verify_course(title)
+                self.assertEqual(True, rs, "fail to release tree video course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
+            self.verificationErrors.append("fail to release tree video course!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/4_three_video.png')
 
-        self.three_title = title   
-
-        try:
-            rs = self.verify_course(title)
-            self.assertEqual(True, rs, "fail to release tree video course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
-        
-
-         
+                
     def release_two_video(self):
 
         self.total += 1
@@ -180,18 +179,18 @@ class Test(unittest.TestCase):
         title = u"two_video_course" + rand_name
         try:
             new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, isthree=2, course_price=10)
+            try:
+                rs = self.verify_course(title)
+                self.assertEqual(True, rs, "fail to release two video course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
+            self.verificationErrors.append("fail to release two video course!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/5_two_video.png')
 
         self.two_title = title   
-
-        try:
-            rs = self.verify_course(title)
-            self.assertEqual(True, rs, "fail to release two video course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
 
         #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
@@ -206,19 +205,19 @@ class Test(unittest.TestCase):
         self.total += 1
         rand_name = str(random.randint(1000, 9999))
         title = "onlineclass" + rand_name
+        self.package_title = title
         try:
-            new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)
+            new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)          
+            rs = self.verify_onlineclass(title)
+            try:
+                self.assertEqual(True, rs, "fail to release package course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
+            self.verificationErrors.append("fail to release package course!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/6_package.png')
-        self.package_title = title  
-        rs = self.verify_onlineclass(title)
-        try:
-            self.assertEqual(True, rs, "fail to release package course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
-
 
     def add_cate(self):
 
@@ -244,20 +243,19 @@ class Test(unittest.TestCase):
         self.total += 1
         rand_name = str(random.randint(1000, 9999))
         title = "presaleclass" + rand_name
+        self.presale_title = title 
         try:
             new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title, ctype=2)
+            rs = self.verify_onlineclass(title)
+            try:
+                self.assertEqual(True, rs, "fail to release presale course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:
             print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/8_presale.png')
-
-        self.presale_title = title   
-        rs = self.verify_onlineclass(title)
-        try:
-            self.assertEqual(True, rs, "fail to release presale course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
-
+        
     def agency_course(self):
 
         self.total += 1
@@ -265,17 +263,19 @@ class Test(unittest.TestCase):
         title = u"agencycourse"+rand_name
         try:
             new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
+            self.driver.implicitly_wait(10)
+            try:
+                rs = self.verify_course(title)
+                self.assertEqual(True, rs, "fail to release agency course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
+            self.verificationErrors.append("fail to release agency course!")
+
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/9_agency_course.png')
-        time.sleep(1)
-        self.driver.implicitly_wait(10)
-        try:
-            rs = self.verify_course(title)
-            self.assertEqual(True, rs, "fail to release agency course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
+
     #充值卡 
     def prepaid_cardgroup(self):#充值卡
 
@@ -701,7 +701,7 @@ class Test(unittest.TestCase):
     def verify_all_course_convert(self):
         self.verify_convert(self.normal_course, "fail to convert normal course!")
         self.verify_convert(self.three_title, "fail to convert three video course!")
-        #self.verify_convert(self.two_title, "fail to convert three video course!")
+        #self.verify_convert(self.two_title, "fail to convert two video course!")
         #self.verify_convert(self.space_course, "fail to convert course from space!")
 
     def buy_course_use_RMB(self):

@@ -22,3 +22,9 @@ def admin_athority_check():
 	chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
 	driver = webdriver.Chrome(chromedriver)
+
+
+
+if __name__ == "__main__":
+    #import sys;sys.argv = ['', 'Test.testName']
+    admin_athority_check()

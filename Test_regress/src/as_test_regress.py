@@ -621,9 +621,9 @@ class Test(unittest.TestCase):
             #验证
             for admin in admin_info:
                 xpath = "//div[text()=\'"+admin+"\']"
-                time.sleep(1)
+                time.sleep(2)
                 rs = self.is_element_present(By.XPATH, xpath)
-                time.sleep(1)
+                time.sleep(2)
                 if rs == False:
                     self.verificationErrors.append("fail to create admin!")
         except Exception, e:
@@ -1265,8 +1265,8 @@ class Test(unittest.TestCase):
         self.login_from_index()
         self.score_paper()
         #IE下不能导出
-        #self.export_openpaper_result()
-        #self.export_sendpaper_result()
+        # self.export_openpaper_result()
+        # self.export_sendpaper_result()
         
 
        

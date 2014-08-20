@@ -40,7 +40,7 @@ def create_admin(cfg, driver, base_url, admin_name, admin_username, admin_psw, a
         cfg.get('org_manage', 'per_admin_id')).click()
     driver.implicitly_wait(10)
     driver.execute_script("$('.x-btn-text').eq(0).click()")
-    driver.implicitly_wait(30)
+    time.sleep(1)
     
 def auto_create_admin(cfg, driver, base_url, org_name, adm_num):
 
@@ -79,7 +79,8 @@ def delete_admin(cfg, driver, base_url, admin_num=1):
     if len(alist) == len(blist):
         return False
     else:
-        return True
+        return True
+
 
 
 def modify_admin(cfg, driver, base_url):

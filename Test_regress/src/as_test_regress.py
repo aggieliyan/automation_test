@@ -1141,7 +1141,7 @@ class Test(unittest.TestCase):
     def manage_course_num(self):
         self.total += 1
         try:
-            student_management.manage_course_num(self.cfg, self.driver, self.base_url) 
+            student_management.manage_course_num(self.cfg, self.driver, self.base_url ,self.user_name) 
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to manage course num")

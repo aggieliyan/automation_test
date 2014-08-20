@@ -199,7 +199,7 @@ def buy_open_num(cfg, driver, base_url, org_name, bnum):
     time.sleep(2)
 
 #管理播放授权数
-def manage_course_num(cfg, driver, base_url):
+def manage_course_num(cfg, driver, base_url ,user_name):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"学员/员工").click()
@@ -211,6 +211,18 @@ def manage_course_num(cfg, driver, base_url):
         pass
     driver.find_element_by_link_text(u"学员管理").click()
     time.sleep(5)
+    driver.find_element(cfg.get('manage_course_num', "stu_select_by"), \
+            cfg.get('manage_course_num', "stu_select")).click()
+    driver.implicitly_wait(30)
+    driver.find_element(cfg.get('manage_course_num', "stu_selectuser_by"), \
+            cfg.get('manage_course_num', "stu_selectuser")).click()
+    driver.implicitly_wait(30)
+    driver.find_element(cfg.get('manage_course_num', 'stu_selectinput_by'), \
+                        cfg.get('manage_course_num', 'stu_selectinput')).send_keys(user_name)
+    driver.implicitly_wait(30)
+    driver.find_element(cfg.get('manage_course_num', "stu_selectsearch_by"), \
+            cfg.get('manage_course_num', "stu_selectsearch")).click()
+    driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"管理播放授权数").click()
     driver.implicitly_wait(30)
     #未归类内容展开资料，可能没有开通未归类的课程

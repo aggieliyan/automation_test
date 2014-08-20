@@ -103,10 +103,12 @@ def add_big_question(cfg, driver, qscore, qtype):
                             cfg.get('exam', 'exam_topic_dropdown')).click()
         driver.find_element('xpath', '//div[10]/ul/li').click()
     else:
+        time.sleep(2)
         driver.find_element(cfg.get('exam', 'exam_topic_dropdown_by'), \
                             cfg.get('exam', 'exam_topic_dropdown')).click()
         driver.implicitly_wait(10)
         if qtype == 2:
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_topic_multiple_by'), \
                                 cfg.get('exam', 'exam_topic_multiple')).click()
             driver.implicitly_wait(10)

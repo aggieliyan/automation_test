@@ -21,9 +21,9 @@ class Test(unittest.TestCase):
         self.browser = "ie"
 
         self.test_enviroment = "beta"
-        self.org_name = "lirenmba"
+        self.org_name = "salesdemo"
         self.org_password = "1234"
-        self.user_name = "mba"
+        self.user_name = "yilu282"
         self.user_password = "1234"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
         #self.independent_url = "www.dlym.com"#独立域名网址
@@ -1188,11 +1188,11 @@ class Test(unittest.TestCase):
     def test_regress(self):
 
         #网站主站回归流程
-        self.register()
+        # self.register()
         self.login_from_index()
-        self.release_normal()
-        self.release_two_video()
-        self.release_three_video()
+        # self.release_normal()
+        # self.release_two_video()
+        # self.release_three_video()
         self.agency_course()
         self.package_course() 
         self.add_cate()

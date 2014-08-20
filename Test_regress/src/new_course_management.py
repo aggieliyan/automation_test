@@ -128,10 +128,12 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
         time.sleep(1)
     else:
         driver.find_element_by_link_text(u"课程预售").click()
-        time.sleep(2)
-        driver.execute_script("$(\".comp-presell input\").eq(0).\
-            attr(\"checked\",\"checked\")")
-        time.sleep(1)
+        driver.implicitly_wait(10)
+        driver.find_element(cfg.get('classRedirect', 'select_cate_by'), \
+            cfg.get('classRedirect', 'select_cate')).click()
+        #driver.execute_script("$(\".comp-presell input\").eq(0).\
+        #    attr(\"checked\",\"checked\")")
+        driver.implicitly_wait(10)
         driver.find_element(cfg.get('classRedirect', 'presell_price_by'), \
             cfg.get('classRedirect', 'presell_price')).send_keys(price)
 

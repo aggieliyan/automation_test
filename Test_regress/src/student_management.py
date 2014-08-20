@@ -181,8 +181,6 @@ def buy_open_num(cfg, driver, base_url, org_name, bnum):
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', "buy_open_num_by"), \
         cfg.get('org_manage', "buy_open_num")).click()
-    h = driver.window_handles
-    driver.switch_to_window(h[-1])
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', "buy_open_num_input_by"), \
         cfg.get('org_manage', "buy_open_num_input")).click()

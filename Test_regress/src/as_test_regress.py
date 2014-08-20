@@ -606,7 +606,6 @@ class Test(unittest.TestCase):
         self.total += 1
         try:
             login.login_by_logindo(self.cfg, self.driver, self.base_url, self.l_card_num, self.l_card_pwd)
-            login.logout(self.driver, self.base_url)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append('fail to use listen card!')

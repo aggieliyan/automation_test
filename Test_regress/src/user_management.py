@@ -12,10 +12,15 @@ def buy_course(cfg, driver, base_url, course_url):
     
     driver.get(course_url)
     driver.implicitly_wait(10)
+    bh = driver.window_handles
     driver.find_element(cfg.get('org_index','buy_course_by'), \
         cfg.get('org_index','buy_course')).click()
-    h = driver.window_handles
-    driver.switch_to_window(h[-1])
+    ah = driver.window_handles
+    while len(bh) == len(ah):
+        ah = driver.window_handles
+    for h in ah:
+        if h not in bh:
+            driver.switch_to_window(h)
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index','use_rmb_by'), \
         cfg.get('org_index','use_rmb')).click()
@@ -29,12 +34,16 @@ def buy_course(cfg, driver, base_url, course_url):
 def buy_course_usecard(cfg, driver, base_url, course_url):
     
     driver.get(course_url)
-    print course_url
     driver.implicitly_wait(10)
+    bh = driver.window_handles
     driver.find_element(cfg.get('org_index','buy_course_by'), \
         cfg.get('org_index','buy_course')).click()
-    h = driver.window_handles
-    driver.switch_to_window(h[-1])
+    ah = driver.window_handles
+    while len(bh) == len(ah):
+        ah = driver.window_handles
+    for h in ah:
+        if h not in bh:
+            driver.switch_to_window(h)
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
         cfg.get('org_index', 'pay_ok')).click()

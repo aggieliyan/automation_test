@@ -541,9 +541,9 @@ class Test(unittest.TestCase):
     def verify_course(self, title): #去知识库检查是否存在
         
         self.driver.get(self.base_url + "myOffice.do")
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(20)
         self.driver.find_element_by_link_text(u"教学教务").click()
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(20)
         self.driver.find_element_by_link_text(u"课程管理").click()
         self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
@@ -1050,6 +1050,8 @@ class Test(unittest.TestCase):
     
     def createpaper(self):
         self.total += 1
+        #免得创建试卷失败后，后面要用到这个变量会失败
+        self.paper_name = ""
         try:
             self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1) 
         except Exception, e:

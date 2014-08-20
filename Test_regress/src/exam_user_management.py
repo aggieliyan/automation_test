@@ -23,17 +23,14 @@ def buy_paper(cfg, driver, paper_url):
 def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, paper_name):
     driver.implicitly_wait(30)
     driver.get(base_url+"exam/")
-    driver.implicitly_wait(30)
-    items = driver.find_elements_by_css_selector(".exampaper-list-li")
-    count = 0
-    driver.implicitly_wait(30)
-    for item in items:
-        pager_name_get = driver.execute_script("return $('.exampaper-title').eq(" + str(count) + ").text()")
-        if pager_name_get == unicode(paper_name):
-            driver.implicitly_wait(30)
-            url = driver.execute_script("return $('.exampaper-list-li a:eq(" + str(count) + ")').attr('href')")
-            driver.get(base_url + "exam/" + url)#立即考试链接
-        count += 1
+    time.sleep(2)
+    driver.find_element(cfg.get('exam', 'search_input_by'), \
+        cfg.get('exam', 'search_input')).clear()
+    time.sleep(2)
+    driver.find_element(cfg.get('exam', 'search_input_by'), \
+        cfg.get('exam', 'search_input')).send_keys(paper_name)
+    time.sleep(5)
+    driver.find_element_by_link_text(u"立即考试").click() 
     driver.implicitly_wait(30)
     exam_time = driver.execute_script("return parseInt($('.pre-exam-outer li').eq(0).text().substring(5,6))")
     driver.implicitly_wait(30)

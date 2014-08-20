@@ -234,7 +234,7 @@ class Test(unittest.TestCase):
         self.driver.implicitly_wait(10)
         actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
         try:
-            self.assertEqual(cate_name, actul, "the categroy does not exist!")#若最后一个类目名称与新建类目的名称相等则证明新建类目成功
+            self.assertEqual(cate_name, actul, "fail to create course categroy !")#若最后一个类目名称与新建类目的名称相等则证明新建类目成功
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 

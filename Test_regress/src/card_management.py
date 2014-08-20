@@ -143,7 +143,7 @@ def add_listen_cardgroup(cfg, driver, base_url, \
     driver.find_element_by_link_text(u"管理卡组").click()
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
-    time.sleep(2)
+    time.sleep(3)
     driver.find_element(cfg.get('org_manage', 'listen_card_by'), \
         cfg.get('org_manage', 'listen_card')).click()#选择试听卡
     time.sleep(2)
@@ -152,7 +152,7 @@ def add_listen_cardgroup(cfg, driver, base_url, \
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'listen_spread_by'), \
         cfg.get('org_manage', 'listen_spread')).click()#展开默认类目下资料
-    time.sleep(6)
+    time.sleep(8)
     driver.find_element(cfg.get('org_manage', 'listen_course_by'), \
         cfg.get('org_manage', 'listen_course')).click()#勾选第一个课程
     time.sleep(1)

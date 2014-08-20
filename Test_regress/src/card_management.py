@@ -59,7 +59,7 @@ def use_course_card(cfg, driver, base_url, card_num, card_psw):
 def add_prepaid_cardgroup(cfg, driver, base_url, org_name, \
         group_name, group_price=300):
     driver.get(base_url + "myOffice.do")
-    time.sleep(2)
+    time.sleep(3)
     driver.find_element_by_link_text(u"管理卡组").click()
     time.sleep(3)
     driver.find_element_by_link_text(u"添加卡组").click()
@@ -172,7 +172,7 @@ def add_card(cfg, driver, base_url, org_name, \
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
     driver.find_element_by_link_text(u"管理卡组").click()
-    time.sleep(3)
+    driver.implicitly_wait(30)
     if cgroup_num == 1:
         driver.find_element_by_link_text(u"添加卡").click()
     else:  

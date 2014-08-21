@@ -640,6 +640,7 @@ class Test(unittest.TestCase):
             xpath = "//div[text()=\'"+admin_name+"\']"
             time.sleep(1)
             rs = self.is_element_present(By.XPATH, xpath)
+            time.sleep(1)
             if rs == False:
                 self.verificationErrors.append("fail to modify admin!")
         except Exception, e:

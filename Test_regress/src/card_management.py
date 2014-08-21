@@ -274,7 +274,7 @@ def user_usexamcard_management(cfg, driver, base_url, examcard_num):
     time.sleep(2)
     driver.find_element(cfg.get('use_card', 'exam_inputnumber_by'), \
         cfg.get('use_card', 'exam_inputnumber')).send_keys(examcard_num)#输入考号
-    driver.implicitly_wait(30)
+    time.sleep(2)
     driver.find_element(cfg.get('use_card', 'exam_start_by'), \
         cfg.get('use_card', 'exam_start')).click()#点击开始考试
     time.sleep(2)

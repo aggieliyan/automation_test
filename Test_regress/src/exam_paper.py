@@ -205,9 +205,9 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
     #exam_name = u"未作答（主观题，免费）"
     #username = "sun123"
     driver.get("%sexam/" %(base_url))
-    time.sleep(1)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"试卷库").click()
-    driver.implicitly_wait(1)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', 'paper_search_by'), \
         cfg.get('exam', 'paper_search')).send_keys(exam_name)
     time.sleep(1)
@@ -256,13 +256,13 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
         time.sleep(2)
         stu_name = driver.execute_script(\
             "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(0).children().text()")
-        print stu_name
+        time.sleep(1)
         if username not in stu_name:
             print username + u'该学员不存在,无法评分。。'
         else:
             grade_href = driver.execute_script(\
                 "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
-            time.sleep(1)
+            time.sleep(2)
             driver.get("%sexam/%s" % (base_url, grade_href))
             score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), \
                 cfg.get('exam', 'input_score'))
@@ -279,11 +279,9 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
                 cfg.get('exam', 'score_save')).click()
             total_score = count * score
             return total_score
-
-    time.sleep(5)
     return True
 
-def send_close_paper(cfg, driver, base_url, username="", atype=2):
+def send_close_paper(cfg, driver, base_url, username, atype=2):
     """
     参数atype为1表示为学员开通试卷，2表示为学员关闭试卷
     """
@@ -314,4 +312,4 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     time.sleep(2)
     driver.find_element(cfg.get('exam', 'open_paper_ok_by'), \
         cfg.get('exam', 'open_paper_ok')).click()
-    time.sleep(5)      
+    time.sleep(2)    

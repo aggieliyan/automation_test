@@ -13,18 +13,40 @@ def execute_func(func_name):
 	func_name()
 #课程类目
 def course_cate():
+	current_url = driver.current_url
 	#修改
 	try:
 		#新建一级类目
-	    driver.find_element("id", "J_genTopCateg").click()
-	    driver.refresh()
+	    cate_management.add_cate(cfg, driver, base_url)
         
         #隐藏类目操作
-	    driver.find_element("class name", "trueFrame").click()
+	    #driver.find_element("class name", "trueFrame").click()
+	    #driver.execute_script("$('.trueFrame').eq(0).click()")
+	    #time.sleep(1)
 
+	    #添加课程到类目中
+	    cate_management.add_courese_to_cate(cfg, driver, base_url)
+	    driver.get(current_url)
+
+	    #添加子类目
+	    driver.find_element("class name", "addSub").click()
+	    time.sleep(1)
+	    driver.find_element("id", "reg_textField").clear()
+	    driver.find_element("id", "reg_textField").send_keys("sub_cate")
+	    time.sleep(1)
+	    driver.find_element("xpath", "//button").click()
 
 	except:
+		print traceback.format_exc()
+		print u"没有类目的编辑权限"
 
+
+	try:
+	    #删除类目
+	    cate_management.delete_cate(cfg, driver, base_url)
+	except:
+		print traceback.format_exc()
+		print u"没有类目删除权限"
 
 #课程管理
 def course_manage():
@@ -87,14 +109,52 @@ def course_manage():
 		# driver.find_element("xpath", "//button").click()
 
 	except:
-		print traceback.format_exc() 
+		print traceback.format_exc()
 		print u"没有课程删除权限"
+
+#课件存储空间
+def course_space():
+	pass
+
+#课程外链管理
+def course_href():   
+    #读权限
+    try:
+    	driver.find_element("id", "J_exportCourseLinks").click()
+    	time.sleep(1)
+    except:
+		print u"不能导出课程链接"
+    
+    #修改权限
+    try:
+		driver.find_element_by_link_text("添加绑定域名").click()
+		time.sleep(1)
+		driver.find_element("id", "handleWebInput").send_keys("www.baidu.com")
+		driver.find_elements("xpath", "//button")[-2].click()
+        
+		time.sleep(1)
+		driver.find_element_by_link_text(u"编辑").click()
+		time.sleep(1)
+		driver.find_elements("xpath", "//button")[-2].click()
+    except:
+		print traceback.format_exc()
+		print u"没有外链编辑权限"
+    #删除
+    try:
+    	driver.find_element_by_link_text(u"删除").click()
+        time.sleep(1)
+        driver.find_elements("xpath", "//button")[-2].click()
+    except:
+		print u"没有外链删除权限"
 
 
 def course():
 	driver.get("%smyOffice.do" %(base_url))
 	#course_func = [u'课程类目', u'课程管理', u'课件存储空间', u'视频外链管理', u'播放高级设置']
-	course_func = {u"课程类目":course_cate, u"课程管理":course_manage,}
+	course_func = {#u"课程类目":course_cate, 
+	               #u"课程管理":course_manage, 
+	               u"课件存储空间":course_space, 
+	               u'视频外链管理':course_href,}
 	try:
 		time.sleep(2)
 		driver.find_element_by_link_text(u"教学教务").click()

@@ -194,14 +194,16 @@ def add_card(cfg, driver, base_url, org_name, \
 def get_academy_catename(cfg, driver, base_url, academy):
     driver.implicitly_wait(30)
     driver.get(base_url + academy)
-    time.sleep(1)
+    time.sleep(2)
     try:
-        driver.find_element_by_link_text(u"跳过").click()#点击跳过
+        driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
+            cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
     except:
-        pass
-    time.sleep(1)
-    driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
-        cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
+        time.sleep(1)
+        driver.find_element_by_link_text(u"跳过").click()#点击跳过
+        time.sleep(2)
+        driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
+            cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
     time.sleep(2)
     academy_catename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
     time.sleep(2)
@@ -277,6 +279,11 @@ def user_usexamcard_management(cfg, driver, base_url, examcard_num):
     time.sleep(2)
     driver.find_element(cfg.get('use_card', 'exam_start_by'), \
         cfg.get('use_card', 'exam_start')).click()#点击开始考试
+    time.sleep(2)
+    try:
+        print driver.execute_script("return $('p.error').text()")
+    except:
+        None
     time.sleep(2)
     driver.find_element(cfg.get('use_card', 'exam_paper_by'), \
         cfg.get('use_card', 'exam_paper')).text#标题  

@@ -58,7 +58,8 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
             #选一个视频文件
             driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
             time.sleep(1)
-            driver.find_element("css selector", "div.dialog-button-container > button").click()
+            driver.execute_script(\
+                "$(\'.dialog-button-container button\').eq(0).click()")
             time.sleep(2)
         #本地上传
         else:
@@ -70,8 +71,7 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
             driver.find_element_by_name("files").send_keys(course_file)
             time.sleep(1)
 
-    #driver.implicitly_wait(10)
-    time.sleep(2) 
+    driver.implicitly_wait(10) 
     driver.find_element(cfg.get('courseRedirect', 'next_btn_by'), \
         cfg.get('courseRedirect', 'next_btn')).click()
 
@@ -99,7 +99,6 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
     driver.execute_script("$(\'li.level2\').click()")
     driver.execute_script("$(\'li.level3.selected\').click()")
     #填写课程标签
-    driver.implicitly_wait(10)
     driver.find_element(cfg.get('courseRedirect', 'tags_by'), \
         cfg.get('courseRedirect', 'tags')).send_keys(course_tags)
     #完成

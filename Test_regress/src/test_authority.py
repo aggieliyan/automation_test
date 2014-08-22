@@ -146,15 +146,22 @@ def course_href():
         driver.find_elements("xpath", "//button")[-2].click()
     except:
 		print u"没有外链删除权限"
-
+def course_setting():
+	try:
+		driver.find_element("id", "editCourseWare").click()
+		time.sleep(1)
+		driver.find_elements("class name", "bluebtn25_text")[-1].click()
+		time.sleep(1)
+	except:
+		print u"没有高级设置编辑权限"
 
 def course():
 	driver.get("%smyOffice.do" %(base_url))
-	#course_func = [u'课程类目', u'课程管理', u'课件存储空间', u'视频外链管理', u'播放高级设置']
-	course_func = {#u"课程类目":course_cate, 
-	               #u"课程管理":course_manage, 
+	course_func = {u"课程类目":course_cate, 
+	               u"课程管理":course_manage, 
 	               u"课件存储空间":course_space, 
-	               u'视频外链管理':course_href,}
+	               u'视频外链管理':course_href,
+	               u'播放高级设置':course_setting,}
 	try:
 		time.sleep(2)
 		driver.find_element_by_link_text(u"教学教务").click()
@@ -174,7 +181,8 @@ def course():
 		print u"没有教学教务相关权限"
 		return
 
-
+def class_center():
+	pass
 
 def admin_athority_check():
     
@@ -194,6 +202,7 @@ def admin_athority_check():
 	#driver = webdriver.Ie()
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
+	driver.get("%smyOffice.do" %(base_url))
 	course()
 
 	driver.quit()

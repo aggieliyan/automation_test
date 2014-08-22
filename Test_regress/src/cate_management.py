@@ -6,7 +6,7 @@ Created on Jun 2, 2012
 '''
 import time
 #添加一级类目
-def add_cate(cfg, driver, base_url, org_name, cate_name=u'计算机'):
+def add_cate(cfg, driver, base_url, cate_name=u'cate_name'):
     time.sleep(2)
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(10)
@@ -22,7 +22,7 @@ def add_cate(cfg, driver, base_url, org_name, cate_name=u'计算机'):
         cfg.get('org_manage', 'add_cate_ok')).click()
     driver.implicitly_wait(10)
 #删除类目   
-def delete_cate(cfg, driver, base_url, org_name):  
+def delete_cate(cfg, driver, base_url):  
     time.sleep(2)
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(10)
@@ -37,7 +37,7 @@ def delete_cate(cfg, driver, base_url, org_name):
     driver.implicitly_wait(10) 
     return before_delete #返回被删除的类目名 
 #向类目中加入课程  
-def add_courese_to_cate(cfg, driver, base_url, org_name, cate_num=0):
+def add_courese_to_cate(cfg, driver, base_url, cate_num=0):
     time.sleep(2)
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(10)

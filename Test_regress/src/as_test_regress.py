@@ -224,7 +224,7 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000, 9999))
         cate_name = u"catetest" + rand_name
         try:
-            cate_management.add_cate(self.cfg, self.driver, self.base_url, self.org_name, cate_name=cate_name)
+            cate_management.add_cate(self.cfg, self.driver, self.base_url, cate_name=cate_name)
         except Exception, e:
             print traceback.format_exc() 
         finally:
@@ -446,7 +446,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            before_delete = cate_management.delete_cate(self.cfg, self.driver, self.base_url, self.org_name)
+            before_delete = cate_management.delete_cate(self.cfg, self.driver, self.base_url)
             #print before_delete
         except Exception, e:
             print traceback.format_exc() 
@@ -469,7 +469,7 @@ class Test(unittest.TestCase):
         course_name = ""
         actual_name = "0"
         try:
-            course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url, self.org_name)
+            course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url
             actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")
             actual_name = actual_name.strip()   
             #print course_name, actual_name
@@ -937,7 +937,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append("fail to create cate!")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/add_cate.png")
+            self.driver.save_screenshot("C:/test_rs_pic/add_exam_cate.png")
 
 
 

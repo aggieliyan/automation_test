@@ -7,27 +7,40 @@ from selenium import webdriver
 
 import login
 import new_course_management
+import cate_management
 
 def execute_func(func_name):
 	func_name()
 #课程类目
 def course_cate():
-	driver.find_element("id", "J_genTopCateg").click()#新建一级类目
-	driver.refresh()
+	#修改
+	try:
+		#新建一级类目
+	    driver.find_element("id", "J_genTopCateg").click()
+	    driver.refresh()
+        
+        #隐藏类目操作
+	    driver.find_element("class name", "trueFrame").click()
+
+
+	except:
+
 
 #课程管理
 def course_manage():
+	#取当前页面的链接，后面的操作后能回来
 	current_url = driver.current_url
 	time.sleep(3)
 	try:
 		driver.find_element_by_link_text(u"获取视频链接").click()
 		time.sleep(1)
+		driver.find_element("xpath", "//button").click()
 	except:
+		print traceback.format_exc() 
 		print u"没有课程读权限"
 
 	try:		
 		#编辑
-		driver.get(current_url)
 		driver.find_element_by_link_text(u"编辑").click()
 		driver.execute_script("$('submit').click()")
 		try:
@@ -47,7 +60,13 @@ def course_manage():
 		time.sleep(3)
 		driver.find_element_by_link_text(u"编辑三分屏章节").click()
 		time.sleep(1)
+
+		#发布课程
+		driver.get(current_url)
+		driver.find_element("class name", "new-categ-button")
+		new_course_management.course_redirect(cfg, driver, base_url)
 	except:
+		print traceback.format_exc() 
 		print u"没有课程编辑权限"
 
 	try:
@@ -58,7 +77,17 @@ def course_manage():
 		time.sleep(1)
 		driver.find_element("xpath", "//button").click()
 		time.sleep(1)
+
+		
+		#批量删除-手测
+		# driver.find_element("id", "J_selAll").click()
+		# driver.find_elements("class name", ".cc-textbox")[-1].click()
+		# driver.find_element("class name", ".cc-item").click()
+		# time.sleep(1)
+		# driver.find_element("xpath", "//button").click()
+
 	except:
+		print traceback.format_exc() 
 		print u"没有课程删除权限"
 
 
@@ -96,7 +125,7 @@ def admin_athority_check():
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file)
-	user_name = "sadm001"
+	user_name = "salesdemo"
 	user_psw = "1234"
 
 	chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"

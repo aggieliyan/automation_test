@@ -197,17 +197,17 @@ def get_academy_catename(cfg, driver, base_url, academy):
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
         cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
-    time.sleep(2)
     try:
-        academy_catename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
+        driver.find_element(cfg.get('org_manage', 'exam_select_close_by'), \
+            cfg.get('org_manage', 'exam_select_close')).click()#关闭窗口   
     except:
-        driver.implicitly_wait(30)
-        driver.find_element_by_link_text(u"跳过").click()#点击跳过
-        driver.implicitly_wait(30)
-        driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
-            cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
         time.sleep(2)
-        academy_catename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
+        driver.find_element_by_link_text(u"跳过").click()#点击跳过
+    driver.implicitly_wait(30)
+    driver.find_element(cfg.get('org_manage', 'exam_selectcourse_by'), \
+        cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课
+    time.sleep(2)
+    academy_catename = driver.execute_script("return $(\'.wrap span\').eq(0).text()")#获取第一个课程名称
     driver.implicitly_wait(30)
     driver.find_element(cfg.get('org_manage', 'exam_select_close_by'), \
         cfg.get('org_manage', 'exam_select_close')).click()#关闭窗口   

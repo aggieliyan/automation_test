@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
         self.browser = "ie"
 
         self.test_enviroment = "beta"
-        self.org_name = "adm_liwen01"
+        self.org_name = "sadm001"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -1134,7 +1134,7 @@ class Test(unittest.TestCase):
     def test_regress(self):
 
         #网站主站回归流程
-        self.register()
+        #self.register()
         self.login_from_index()
         self.release_normal()
         self.release_three_video()

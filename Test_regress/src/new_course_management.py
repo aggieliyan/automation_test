@@ -33,8 +33,8 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         time.sleep(2)
         driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")#选一个视频课件
         time.sleep(1)
-        driver.execute_script(\
-            "$(\'.dialog-button-container button\').eq(0).click()")
+        driver.find_element(cfg.get('courseRedirect', 'select_ok_by'), \
+            cfg.get('courseRedirect', 'select_ok')).click()
         time.sleep(3)
         driver.find_elements(cfg.get('courseRedirect', 'upload_btn_by'), \
             cfg.get('courseRedirect', 'upload_btn'))[2].click()
@@ -44,8 +44,8 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         else:
             driver.execute_script("$(\"[filetype='pdf']\").eq(0).click()")#选一个pdf课件
             time.sleep(1)
-        driver.execute_script(\
-            "$(\'.dialog-button-container button\').eq(0).click()")
+        driver.find_element(cfg.get('courseRedirect', 'select_ok_by'), \
+            cfg.get('courseRedirect', 'select_ok')).click()
         time.sleep(3)
 
     else:#单视频
@@ -53,13 +53,13 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         if upload == 1:
             driver.find_element(cfg.get('courseRedirect', 'upload_btn_by'), \
                 cfg.get('courseRedirect', 'upload_btn')).click()
-            time.sleep(2)
+            time.sleep(1)
 
             #选一个视频文件
             driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
             time.sleep(1)
-            driver.execute_script(\
-                "$(\'.dialog-button-container button\').eq(0).click()")
+            driver.find_element(cfg.get('courseRedirect', 'select_ok_by'), \
+                cfg.get('courseRedirect', 'select_ok')).click()
             time.sleep(2)
         #本地上传
         else:
@@ -70,8 +70,7 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
             driver.implicitly_wait(10)
             driver.find_element_by_name("files").send_keys(course_file)
             time.sleep(1)
-
-    driver.implicitly_wait(10) 
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('courseRedirect', 'next_btn_by'), \
         cfg.get('courseRedirect', 'next_btn')).click()
 
@@ -83,10 +82,12 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         cfg.get('courseRedirect', 'ctitle')).click()
     driver.find_element(cfg.get('courseRedirect', 'ctitle_by'), \
         cfg.get('courseRedirect', 'ctitle')).send_keys(course_title)
+    driver.implicitly_wait(10)
     #设置价格
     if course_price != 0:
         driver.find_element(cfg.get('courseRedirect', 'chanrge_by'), \
             cfg.get('courseRedirect', 'chanrge')).click()
+        time.sleep(1)
         driver.find_element(cfg.get('courseRedirect', 'price_by'), \
             cfg.get('courseRedirect', 'price')).send_keys(course_price)
     #填课程详情
@@ -122,16 +123,17 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
     time.sleep(5)
 
     if ctype == 1:
-        #classname = "onlineclass"
         driver.find_element(cfg.get('classRedirect', 'select_course_by'), \
             cfg.get('classRedirect', 'select_course')).click()
         time.sleep(1)
     else:
         driver.find_element_by_link_text(u"课程预售").click()
-        time.sleep(2)
-        #classname = "onlineclass-presale"
-        driver.execute_script("$(\".comp-presell input\").eq(0).\
-            attr(\"checked\",\"checked\")")
+        time.sleep(3)
+        driver.find_element(cfg.get('classRedirect', 'select_cate_by'), \
+            cfg.get('classRedirect', 'select_cate')).click()
+        #driver.execute_script("$(\".comp-presell input\").eq(0).\
+        #    attr(\"checked\",\"checked\")")
+        driver.implicitly_wait(10)
         driver.find_element(cfg.get('classRedirect', 'presell_price_by'), \
             cfg.get('classRedirect', 'presell_price')).send_keys(price)
 
@@ -157,13 +159,13 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
 def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
 
     driver.get("%smyOffice.do" %(base_url))
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"管理我申请的代理").click()
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"管理课程").click()
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"编辑").click()
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('courseRedirect', 'agency_title_by'), \
         cfg.get('courseRedirect', 'agency_title')).clear()
     driver.find_element(cfg.get('courseRedirect', 'agency_title_by'), \
@@ -183,7 +185,6 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
             cfg.get('courseRedirect', 'agency_rank')).clear()
         driver.find_element(cfg.get('courseRedirect', 'agency_rank_by'), \
             cfg.get('courseRedirect', 'agency_rank')).send_keys(100)
-        driver.implicitly_wait(1)
     except Exception:#如果是免费的代理课程会在上面取价格的时候就会报错，免费的直接点发布即可
         pass
     finally:

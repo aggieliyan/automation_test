@@ -9,11 +9,9 @@ import time
 def add_cate(cfg, driver, base_url, org_name, cate_name=u'计算机'):
     time.sleep(2)
     driver.get(base_url + "myOffice.do")
-    time.sleep(2)
-    driver.find_element_by_link_text(u"教学教务").click()    
     driver.implicitly_wait(10)
-    #driver.find_element_by_link_text(u"课程类目").click()
-    #time.sleep(2)
+    driver.find_element_by_link_text(u"教学教务").click()    
+    time.sleep(3)
     driver.find_element(cfg.get('org_manage', 'add_topcate_by'), \
         cfg.get('org_manage', 'add_topcate')).click()#新建一级类目
     time.sleep(2)
@@ -48,7 +46,7 @@ def add_courese_to_cate(cfg, driver, base_url, org_name, cate_num=0):
     url_add = driver.execute_script("return $('#categoryList .manageCategCourse:eq("+str(cate_num)+")').attr('href')")
     time.sleep(2)
     driver.get(base_url + str(url_add))
-    time.sleep(2)
+    time.sleep(3)
     driver.find_element_by_link_text(u"向类目添加知识资料").click()
     time.sleep(3)
     driver.find_element(cfg.get('org_manage', 'course_add_1_by'), \

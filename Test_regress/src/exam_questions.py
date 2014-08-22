@@ -37,6 +37,7 @@ def exam_question_Single(cfg, driver, base_url, question_ansa):
     #添加音频
     driver.execute_script("$('.J_audioForm').eq(0).attr('style','display:block;'); \
         $('.file-ie-con input').eq(0).attr('style','height:300px;opacity:1;display:block;position:static;transform:translate(0px, 0px) scale(1)')")
+    time.sleep(2)
     driver.find_element(cfg.get('exam_questions', "question_music_by"), \
         cfg.get('exam_questions', "question_music")).send_keys \
         (r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\123.mp3")

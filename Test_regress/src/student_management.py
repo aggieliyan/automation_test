@@ -6,7 +6,6 @@ Created on Jun 2, 2012
 '''
 import time, random
 from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 def is_element_present(driver, how, what):
@@ -50,6 +49,7 @@ def import_multi_student(cfg, driver, base_url, org_name, stu_txt):
     driver.find_element_by_link_text(u"批量导入学员").click()
     driver.implicitly_wait(30)
     driver.execute_script("$('#fileFieldName-file').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(0.5)')")
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', "stu_file_by"), \
     	cfg.get('org_manage', "stu_file")).send_keys(stu_txt)
     driver.find_element(cfg.get('org_manage', "stu_file_ok_by"), \
@@ -64,17 +64,19 @@ def create_student(cfg, driver, base_url, org_name, stu_txt):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"学员/员工").click()
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(30)
     try:
         driver.find_element(cfg.get('org_manage', "stu_close_by"), \
             cfg.get('org_manage', "stu_close")).click()
     except:
         pass
     driver.find_element_by_link_text(u"学员管理").click()
-    driver.implicitly_wait(30)
-    driver.find_element_by_link_text(u"批量创建学员").click()
+    time.sleep(5)
+    driver.find_element(cfg.get('org_manage', "create_multi_by"), \
+        cfg.get('org_manage', "create_multi")).click()
     driver.implicitly_wait(30)
     driver.execute_script("$('#fileFieldName-file').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(0.5)')")
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', "stu_file_by"), \
     	cfg.get('org_manage', "stu_file")).send_keys(stu_txt)
     driver.implicitly_wait(30)
@@ -100,6 +102,7 @@ def auto_create_student(cfg, driver, base_url, org_name, stu_num):
             stu_file.writelines(" \n")
         stu_file.writelines(stu_name + " " + stu_psw + "\n")
     stu_file.close()
+    time.sleep(2)
     create_student(cfg, driver, base_url, org_name, stu_txt)
     time.sleep(5)
 
@@ -177,11 +180,8 @@ def open_course_for_multi(cfg, driver, base_url, org_name):
 def buy_open_num(cfg, driver, base_url, org_name, bnum):
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
-    driver.find_element(cfg.get('org_manage', "buy_open_num_by"), \
-        cfg.get('org_manage', "buy_open_num")).click()
-    h = driver.window_handles
-    driver.switch_to_window(h[-1])
-    driver.implicitly_wait(30)
+    driver.find_element_by_link_text(u"在线购买授权").click()
+    time.sleep(2)
     driver.find_element(cfg.get('org_manage', "buy_open_num_input_by"), \
         cfg.get('org_manage', "buy_open_num_input")).click()
     driver.implicitly_wait(30)
@@ -194,12 +194,63 @@ def buy_open_num(cfg, driver, base_url, org_name, bnum):
     driver.find_element(cfg.get('org_manage', "buy_open_num_sure1_by"), \
         cfg.get('org_manage', "buy_open_num_sure1")).click()
     driver.implicitly_wait(30)
-    driver.find_element(cfg.get('org_manage', "buy_open_num_sure2_by"), \
-        cfg.get('org_manage', "buy_open_num_sure2")).click()
+    #判断是否余额充足
+    re = is_element_present(driver, By.XPATH, "//div[1]/p/span[2]")
+    if re == True:
+        print u"购买授权，人民币账户余额不足！"
+    else:
+        driver.find_element(cfg.get('org_manage', "buy_open_num_sure2_by"), \
+                            cfg.get('org_manage', "buy_open_num_sure2")).click()
     time.sleep(2)
 
 #管理播放授权数
-def manage_course_num(cfg, driver, base_url):
+def manage_course_numdetail(cfg, driver, base_url ,user_name):
+    try:
+        driver.find_element(cfg.get('manage_course_num', \
+            "manage_coursenum_opencouse_by"), \
+             cfg.get('manage_course_num', "manage_coursenum_opencouse")).click()
+        driver.implicitly_wait(30)
+        #展开内容
+        driver.find_element(cfg.get('manage_course_num', \
+                                    "manage_coursenum_opennum_by"), \
+                            cfg.get('manage_course_num', "manage_coursenum_opennum")).click()
+        driver.implicitly_wait(30)
+        #修改剩余播放次数,刚开通课程，学员没有登录的不能修改
+        try:
+            driver.find_element_by_link_text(u"修改剩余播放次数").click()
+            driver.implicitly_wait(30)
+            driver.find_element(cfg.get('manage_course_num', \
+                                        'manage_coursenum_change_by'), \
+                                cfg.get('manage_course_num', 'manage_coursenum_change')).clear()
+            driver.implicitly_wait(30)
+            driver.find_element(cfg.get('manage_course_num', \
+                                        'manage_coursenum_change_by'), \
+                                cfg.get('manage_course_num', 'manage_coursenum_change')).send_keys("1")
+            driver.implicitly_wait(30)
+            driver.find_element_by_link_text(u"保存").click()
+            time.sleep(1)
+        except:
+            pass
+            time.sleep(1)
+    except:
+        pass
+        time.sleep(1)
+    #批量增加剩余授权数
+    driver.find_element(cfg.get('manage_course_num', \
+                                'manage_coursenum_all_by'), \
+                        cfg.get('manage_course_num', 'manage_coursenum_all')).click()
+    time.sleep(1)
+    driver.find_element(cfg.get('manage_course_num', \
+                                'manage_coursenum_allnum_by'), \
+                        cfg.get('manage_course_num', 'manage_coursenum_allnum')).send_keys("1")
+    time.sleep(1)
+    driver.find_element(cfg.get('manage_course_num', \
+                                'manage_coursenum_apply_by'), \
+                        cfg.get('manage_course_num', 'manage_coursenum_apply')).click()
+    time.sleep(2)
+
+#判断是否有学员user_name
+def manage_course_num(cfg, driver, base_url ,user_name):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"学员/员工").click()
@@ -211,48 +262,27 @@ def manage_course_num(cfg, driver, base_url):
         pass
     driver.find_element_by_link_text(u"学员管理").click()
     time.sleep(5)
-    driver.find_element_by_link_text(u"管理播放授权数").click()
+    driver.find_element(cfg.get('manage_course_num', "stu_select_by"), \
+            cfg.get('manage_course_num', "stu_select")).click()
     driver.implicitly_wait(30)
-    #未归类内容展开资料，可能没有开通未归类的课程
+    driver.find_element(cfg.get('manage_course_num', "stu_selectuser_by"), \
+            cfg.get('manage_course_num', "stu_selectuser")).click()
+    driver.implicitly_wait(30)
+    driver.find_element(cfg.get('manage_course_num', 'stu_selectinput_by'), \
+                        cfg.get('manage_course_num', 'stu_selectinput')).send_keys(user_name)
+    driver.implicitly_wait(30)
+    driver.find_element(cfg.get('manage_course_num', "stu_selectsearch_by"), \
+            cfg.get('manage_course_num', "stu_selectsearch")).click()
+    time.sleep(5)
     try:
-        driver.find_element(cfg.get('manage_course_num', \
-            "manage_coursenum_opencouse_by"), \
-    	    cfg.get('manage_course_num', "manage_coursenum_opencouse")).click()
+        driver.find_element_by_link_text(u"管理播放授权数").click()
         driver.implicitly_wait(30)
-        #展开内容
-        driver.find_element(cfg.get('manage_course_num', \
-            "manage_coursenum_opennum_by"), \
-    	    cfg.get('manage_course_num', "manage_coursenum_opennum")).click()
-        driver.implicitly_wait(30)
-        #修改剩余播放次数,刚开通课程，学员没有登录的不能修改
-        try:
-            driver.find_element_by_link_text(u"修改剩余播放次数").click()
-            driver.implicitly_wait(30)
-            driver.find_element(cfg.get('manage_course_num', \
-                'manage_coursenum_change_by'), \
-    	        cfg.get('manage_course_num', 'manage_coursenum_change')).clear()
-            driver.implicitly_wait(30)
-            driver.find_element(cfg.get('manage_course_num', \
-                'manage_coursenum_change_by'), \
-    	        cfg.get('manage_course_num', 'manage_coursenum_change')).send_keys("1")
-            driver.implicitly_wait(30)
-            driver.find_element_by_link_text(u"保存").click()
-            driver.implicitly_wait(30)
-        except:
-            pass
-            driver.implicitly_wait(30)
+        #未归类内容展开资料，可能没有开通未归类的课程
+        manage_course_numdetail(cfg, driver, base_url ,user_name)
     except:
-        pass
-    driver.implicitly_wait(30)
-    #批量增加剩余授权数
-    driver.find_element(cfg.get('manage_course_num', \
-        'manage_coursenum_all_by'), \
-        cfg.get('manage_course_num', 'manage_coursenum_all')).click()
-    driver.implicitly_wait(30)
-    driver.find_element(cfg.get('manage_course_num', \
-        'manage_coursenum_allnum_by'), \
-        cfg.get('manage_course_num', 'manage_coursenum_allnum')).send_keys("1")
-    driver.implicitly_wait(30)
-    driver.find_element_by_link_text(u"应用").click()
-    time.sleep(2)
+        driver.refresh()
+        time.sleep(5)
+        driver.find_element_by_link_text(u"管理播放授权数").click()
+        time.sleep(3)
+        manage_course_numdetail(cfg, driver, base_url ,user_name)
  

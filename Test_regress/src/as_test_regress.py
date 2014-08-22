@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
         self.browser = "ie"
 
         self.test_enviroment = "beta"
-        self.org_name = "adm_liwen01"
+        self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
 
         self.total = 0
 
-        if self.browser == 'ie':
+        if self.browser == 'Chrome':
             self.driver = webdriver.Ie()
         elif self.browser == 'firefox':
             self.driver = webdriver.Firefox()
@@ -129,6 +129,11 @@ class Test(unittest.TestCase):
         title = u"course" + rand_name#在标题中加入随机数字确保课件标题的唯一性
         try:
             new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
+            try:
+                rs = self.verify_course(title)
+                self.assertEqual(True, rs, "fail to release course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:       
             print traceback.format_exc() 
         finally:
@@ -136,18 +141,14 @@ class Test(unittest.TestCase):
 
         self.normal_course = title#待用-在数据库中查是否转换失败
 
-        try:
-            rs = self.verify_course(title)
-            self.assertEqual(True, rs, "fail to release course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
-            
+          
         #取链接待后面购买
         course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
+        time.sleep(1)
         if course_href:
-            self.course_href_2 = self.base_url + course_href
+            self.course_href = self.base_url + course_href
         else:
-            self.course_href_2 = ""
+            self.course_href = ""
 
 
     def release_three_video(self):
@@ -155,66 +156,67 @@ class Test(unittest.TestCase):
         self.total += 1
         rand_name = str(random.randint(1000, 9999))
         title = u"course-three"+rand_name
+        self.three_title = title
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, isthree=1, course_title=title, course_price=10)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, isthree=1, course_title=title)
+             
+            try:
+                rs = self.verify_course(title)
+                self.assertEqual(True, rs, "fail to release tree video course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
+            self.verificationErrors.append("fail to release tree video course!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/4_three_video.png')
 
-        self.three_title = title   
-
-        try:
-            rs = self.verify_course(title)
-            self.assertEqual(True, rs, "fail to release tree video course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
-        
-        #取链接待后面购买
-        course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
-        if course_href:
-            self.course_href_2 = self.base_url + course_href
-        else:
-            self.course_href_2 = ""
-         
+                
     def release_two_video(self):
 
         self.total += 1
         rand_name = str(random.randint(1000, 9999))
         title = u"two_video_course" + rand_name
         try:
-            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, isthree=2)
+            new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, isthree=2, course_price=10)
+            try:
+                rs = self.verify_course(title)
+                self.assertEqual(True, rs, "fail to release two video course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
+            self.verificationErrors.append("fail to release two video course!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/5_two_video.png')
 
-        self.two_title = title   
-
-        try:
-            rs = self.verify_course(title)
-            self.assertEqual(True, rs, "fail to release two video course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
+        self.two_title = title
+        #取链接待后面购买
+        course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
+        time.sleep(1)
+        if course_href:
+            self.course_href_2 = self.base_url + course_href
+        else:
+            self.course_href_2 = ""
 
     def package_course(self):
         #打包课程，即网络班
         self.total += 1
         rand_name = str(random.randint(1000, 9999))
         title = "onlineclass" + rand_name
+        self.package_title = title
         try:
-            new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)
+            new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)          
+            rs = self.verify_onlineclass(title)
+            try:
+                self.assertEqual(True, rs, "fail to release package course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
+            self.verificationErrors.append("fail to release package course!")
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/6_package.png')
-        self.package_title = title  
-        rs = self.verify_onlineclass(title)
-        try:
-            self.assertEqual(True, rs, "fail to release package course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
-
 
     def add_cate(self):
 
@@ -228,10 +230,10 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/7_add_cate.png')
         
-        self.driver.implicitly_wait(1)
+        self.driver.implicitly_wait(10)
         actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
         try:
-            self.assertEqual(cate_name, actul, "the categroy does not exist!")#若最后一个类目名称与新建类目的名称相等则证明新建类目成功
+            self.assertEqual(cate_name, actul, "fail to create course categroy !")#若最后一个类目名称与新建类目的名称相等则证明新建类目成功
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 
@@ -240,20 +242,19 @@ class Test(unittest.TestCase):
         self.total += 1
         rand_name = str(random.randint(1000, 9999))
         title = "presaleclass" + rand_name
+        self.presale_title = title 
         try:
             new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title, ctype=2)
+            rs = self.verify_onlineclass(title)
+            try:
+                self.assertEqual(True, rs, "fail to release presale course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:
             print traceback.format_exc() 
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/8_presale.png')
-
-        self.presale_title = title   
-        rs = self.verify_onlineclass(title)
-        try:
-            self.assertEqual(True, rs, "fail to release presale course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
-
+        
     def agency_course(self):
 
         self.total += 1
@@ -261,17 +262,19 @@ class Test(unittest.TestCase):
         title = u"agencycourse"+rand_name
         try:
             new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
+            self.driver.implicitly_wait(10)
+            try:
+                rs = self.verify_course(title)
+                self.assertEqual(True, rs, "fail to release agency course!")
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
+            self.verificationErrors.append("fail to release agency course!")
+
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/9_agency_course.png')
 
-        
-        try:
-            rs = self.verify_course(title)
-            self.assertEqual(True, rs, "fail to release agency course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
     #充值卡 
     def prepaid_cardgroup(self):#充值卡
 
@@ -287,7 +290,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/9_prepaid_cardgroup.png')
         
-        self.driver.implicitly_wait(2)
+        self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create prepaid cardgroup!")
@@ -297,8 +300,8 @@ class Test(unittest.TestCase):
         card_info = self.add_and_get_card()
         self.p_card_num = card_info[0]
         self.p_card_pwd = card_info[1]
-        print self.p_card_num
-        print self.p_card_pwd
+#        print self.p_card_num
+#        print self.p_card_pwd
         #考号
     #添加卡组-充课卡   
     def course_cardgroup(self):
@@ -314,7 +317,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/10_course_cardgroup.png")
 
-        self.driver.implicitly_wait(2)
+        self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create course cardgroup!")
@@ -339,7 +342,7 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/11_cate_cardgroup.png")
 
-        self.driver.implicitly_wait(2)
+        self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create cate cardgroup!")
@@ -372,7 +375,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/12_listen_cardgroup.png")  
-        self.driver.implicitly_wait(2)
+        self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
         try:
             self.assertEqual(True, rs, "fail to create listen cardgroup!")
@@ -382,7 +385,7 @@ class Test(unittest.TestCase):
         card_info = self.add_and_get_card()
         self.l_card_num = card_info[0]
         self.l_card_pwd = card_info[1]
-        print self.l_card_num
+#        print self.l_card_num
 
     def add_and_get_card(self, card_type=0):#添加卡并返回第一个卡号和密码
 
@@ -391,9 +394,8 @@ class Test(unittest.TestCase):
         chr(random.randint(97, 122)) + chr(random.randint(97, 122))
         try:
             card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name,card_prifix)
-            self.driver.implicitly_wait(2)
             if card_type == 0:
-                time.sleep(2)
+                time.sleep(3)
                 self.driver.find_element_by_link_text(u"浏览卡").click()
                 time.sleep(2)
                 card_num = self.driver.execute_script("return $(\"input[name='groupCheck']:eq(0)\").parent().next().text()")
@@ -401,7 +403,7 @@ class Test(unittest.TestCase):
                 card_pwd = self.driver.execute_script("return $(\".textaligncenter\:eq(4)\").text()")
                 time.sleep(2) 
             else:
-                time.sleep(2)                
+                time.sleep(3)                
                 self.driver.find_element_by_css_selector("span.greenbtn35_text").click()
                 time.sleep(2)
                 card_num = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().text()")
@@ -465,6 +467,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         course_name = ""
+        actual_name = "0"
         try:
             course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url, self.org_name)
             actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")
@@ -489,7 +492,6 @@ class Test(unittest.TestCase):
                 self.base_url, self.org_name, self.import_name)
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to import one student!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/import_one_student.png")
 
@@ -538,12 +540,17 @@ class Test(unittest.TestCase):
     def verify_course(self, title): #去知识库检查是否存在
         
         self.driver.get(self.base_url + "myOffice.do")
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(20)
         self.driver.find_element_by_link_text(u"教学教务").click()
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(20)
         self.driver.find_element_by_link_text(u"课程管理").click()
         self.driver.implicitly_wait(10)
         rs = self.is_element_present(By.LINK_TEXT, title)
+        if rs == False:
+            self.driver.find_element("name", "courseSearch").send_keys(title)
+            self.driver.find_element("class name", "searchBtn").click()
+            self.driver.implicitly_wait(10)
+            rs = self.is_element_present(By.LINK_TEXT, title)
         return rs
 
     def verify_onlineclass(self, classname):
@@ -613,8 +620,9 @@ class Test(unittest.TestCase):
             #验证
             for admin in admin_info:
                 xpath = "//div[text()=\'"+admin+"\']"
-                self.driver.implicitly_wait(2)
+                time.sleep(2)
                 rs = self.is_element_present(By.XPATH, xpath)
+                time.sleep(2)
                 if rs == False:
                     self.verificationErrors.append("fail to create admin!")
         except Exception, e:
@@ -629,6 +637,12 @@ class Test(unittest.TestCase):
         admin_name = ""
         try:
             admin_name = admin_management.modify_admin(self.cfg, self.driver, self.base_url)
+            xpath = "//div[text()=\'"+admin_name+"\']"
+            time.sleep(1)
+            rs = self.is_element_present(By.XPATH, xpath)
+            time.sleep(1)
+            if rs == False:
+                self.verificationErrors.append("fail to modify admin!")
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to modify admin!")
@@ -648,7 +662,10 @@ class Test(unittest.TestCase):
         #before_num = self.driver.execute_script("return $(\"a[]\")")
         #print before_num
         try:
-            admin_management.delete_admin(self.cfg, self.driver, self.base_url)
+            rs = admin_management.delete_admin(self.cfg, self.driver, self.base_url)
+            time.sleep(1)
+            if rs == False:
+                self.verificationErrors.append("fail to delete admin!")
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to delete admin!")
@@ -661,7 +678,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         rand_name = str(random.randint(1000, 9999))
-        title = u"自动化公告"+rand_name
+        title = u"announcement"+rand_name
         try:
             title = user_management.release_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
         except Exception, e:
@@ -670,43 +687,47 @@ class Test(unittest.TestCase):
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")  
 
-    def release_href_course(self):
+    def release_href_announcement(self):
         
         self.total += 1
         try:
-            user_management.release_href_course(self.cfg, self.driver, self.base_url, self.org_name) 
+            user_management.release_href_announcement(self.cfg, self.driver, self.base_url, self.org_name) 
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to use link")
+            self.verificationErrors.append("fail to release href announcement")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/user_management_link.png")
+            self.driver.save_screenshot("C:/test_rs_pic/release_href_announcement.png")
 
     def verify_all_course_convert(self):
         self.verify_convert(self.normal_course, "fail to convert normal course!")
         self.verify_convert(self.three_title, "fail to convert three video course!")
-        #self.verify_convert(self.two_title, "fail to convert three video course!")
+        #self.verify_convert(self.two_title, "fail to convert two video course!")
         #self.verify_convert(self.space_course, "fail to convert course from space!")
 
     def buy_course_use_RMB(self):
 
         self.total += 1
         try:
-            user_management.buy_course(self.cfg, self.driver, self.base_url, self.org_name)
+            user_management.buy_course(self.cfg, self.driver, self.base_url, self.course_href)
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
+            print self.course_href
             self.verificationErrors.append("fail to buy course use rmb!")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/href_course.png")
+            self.driver.save_screenshot("C:/test_rs_pic/buy_course_use_RMB.png")
         #验证待完成
 
     def buy_course_use_card(self):
 
         self.total += 1
         try:
-            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.org_name)
+            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.course_href_2)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use card!")
+            print self.course_href_2
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/buy_course_use_card.png")
             
     def open_course_for_one(self):
         
@@ -850,12 +871,11 @@ class Test(unittest.TestCase):
         
             #验证
             for subject in subject_info:
-                xpath = "//div[text()=\'"+subject+"\']"
-                self.driver.implicitly_wait(2)
+                xpath = "//li/p[text()=\'"+subject+"\']"
+                time.sleep(1)
                 rs = self.is_element_present(By.XPATH, xpath)
                 if rs == False:
-                    self.verificationErrors.append("fail to create subject!")
-                    
+                    self.verificationErrors.append("fail to create exam subject!")                    
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to create subject!")
@@ -867,9 +887,14 @@ class Test(unittest.TestCase):
         self.total += 1
         try:
             subject_name = exam_cate_management.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
+            xpath = "//li/p[text()=\'"+subject_name+"\']"
+            time.sleep(1)
+            rs = self.is_element_present(By.XPATH, xpath)
+            if rs == False:
+                self.verificationErrors.append("fail to modify exam subject!")
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to modify subject!")
+            self.verificationErrors.append("fail to modify exam subject!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/modify_subject.png")
 
@@ -880,10 +905,18 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            exam_cate_management.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
+            del_name = exam_cate_management.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
+            if del_name == False:
+                self.verificationErrors.append("fail to delete exam subject!")
+            else:
+                xpath = "//li/p[text()=\'"+ del_name +"\']"
+                time.sleep(1)
+                rs = self.is_element_present(By.XPATH, xpath)
+                if rs == True:
+                    self.verificationErrors.append("fail to delete exam subject!")
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to delete subject!")
+            self.verificationErrors.append("fail to delete exam subject!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/delete_subject.png")
     
@@ -1019,6 +1052,8 @@ class Test(unittest.TestCase):
     
     def createpaper(self):
         self.total += 1
+        #免得创建试卷失败后，后面要用到这个变量会失败
+        self.paper_name = ""
         try:
             self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1) 
         except Exception, e:
@@ -1026,18 +1061,41 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to create paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-            
-    def user_statistical_information(self):
+    
+    #为学员评分        
+    def score_paper(self):
+
         self.total += 1
         try:
-            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=1, username=self.user_name)
-            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=2, username=self.user_name)
-            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=3, username=self.user_name)
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=3, username=self.user_name)        
         except Exception, e:
             print traceback.format_exc() 
-            self.verificationErrors.append("fail to export exam result")
+            self.verificationErrors.append("fail to score!")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/exam_result.png")
+            self.driver.save_screenshot("C:/test_rs_pic/exam_score.png")
+    
+    #导出开放试卷的结果
+    def export_openpaper_result(self):
+        self.total += 1
+        try:
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=2, username=self.user_name)        
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append("fail to export openpaper result!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/openpaper_result.png")
+    
+    #导出分发试卷的结果
+    def export_sendpaper_result(self):
+        self.total += 1
+        try:
+            exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=1, username=self.user_name)        
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append("fail to export sendpaper result!")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/sendpaper_result.png")
+   
             
     def exam_student_management(self):
         self.total += 1
@@ -1085,7 +1143,7 @@ class Test(unittest.TestCase):
     def manage_course_num(self):
         self.total += 1
         try:
-            student_management.manage_course_num(self.cfg, self.driver, self.base_url) 
+            student_management.manage_course_num(self.cfg, self.driver, self.base_url ,self.user_name) 
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to manage course num")
@@ -1094,14 +1152,14 @@ class Test(unittest.TestCase):
     #学员参加考试
     def exam_user(self):
         self.total += 1
-        # operation =0 自动提交  operation =1 继续答题
-        operation = 1
+        # operation = '0' 自动提交  operation = '1' 继续答题
+        operation = '1'
         question_answer ='123'
         # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
         blank_pager = 0
         paper_name = self.paper_name
         try:
-            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, pager_name)
+            exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, paper_name)
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append('fail to exam!')
@@ -1118,17 +1176,6 @@ class Test(unittest.TestCase):
             self.verificationErrors.append('fail to buy_paper!')
         finally: 
             self.driver.save_screenshot("C:/test_rs_pic/buy_paper.png")       
-        
-            
-    def wailian_video(self):
-        self.total += 1
-        try:
-            user_management.wailian_video(self.cfg, self.driver, self.base_url, self.test_enviroment) 
-        except Exception, e:
-            print traceback.format_exc() 
-            self.verificationErrors.append("fail to use wailian")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/user_management_wailian.png")
 
     
     def test_regress(self):
@@ -1137,48 +1184,50 @@ class Test(unittest.TestCase):
         self.register()
         self.login_from_index()
         self.release_normal()
-        self.release_three_video()
         self.release_two_video()
+        self.release_three_video()
         self.agency_course()
         self.package_course() 
         self.add_cate()
         self.presale_course()  
         self.add_course_to_cate()   
+        self.add_exam_card()
         self.prepaid_cardgroup()
         self.course_cardgroup()
         self.cate_cardgroup()
         self.delete_cate()
         self.buy_listen_card()
         self.listen_cardgroup()
-        self.add_exam_card()
         self.import_one_student()
         self.import_multi_student()
         self.create_multi_student()
+        self.open_course_for_one()
+        self.open_course_for_multi()
+        self.manage_course_num()
+        self.buy_open_num()
         self.add_admin()  
         self.modify_admin()
         self.delete_admin()
-        self.buy_open_num()
-        self.release_href_course()
-        self.open_course_for_one()
-        self.open_course_for_multi()
+        self.release_href_announcement()
         self.change_homelogo()
         self.release_announcement()
         self.modify_pagefoot()  
         self.change_headpic()
-        self.manage_course_num()
         self.verify_all_course_convert()
         login.logout(self.driver, self.base_url)
 
         #个人用户部分
         self.login_user()
         self.use_prepaidcard()
-        self.use_coursecard()
-        self.use_catecard()
-        self.use_listencard()
-        self.use_exam_card()
         self.buy_course_use_RMB()
         self.buy_course_use_card()
-        login.logout(self.driver, self.base_url)        
+        self.use_coursecard()
+        self.use_catecard()
+        self.use_exam_card()
+        login.logout(self.driver, self.base_url) 
+        self.use_listencard()
+
+
 
         #考试系统部分
         self.login_from_index()
@@ -1203,7 +1252,10 @@ class Test(unittest.TestCase):
         login.logout(self.driver, self.base_url)
                     
         self.login_from_index()
-        self.user_statistical_information()
+        self.score_paper()
+        #IE下不能导出
+        # self.export_openpaper_result()
+        # self.export_sendpaper_result()
         
 
        
@@ -1212,7 +1264,7 @@ class Test(unittest.TestCase):
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()
         fail_num = len(self.verificationErrors)
-        print "total case:%s,%s failures.detail:%s"%(self.total,fail_num,self.verificationErrors)
+        print "total case:%s, %s failures.detail:%s"%(self.total, fail_num, self.verificationErrors)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

@@ -4,9 +4,12 @@ Created on Jul 23, 2014
 
 @author: liwen
 '''
+import random, time
 
 from selenium.webdriver.common.by import By
-import random, time
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 def create_paper(cfg, driver, base_url, exam_name, exam_time,\
                   eoperation, erandom, eopen):
@@ -25,7 +28,7 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
                         cfg.get('exam', 'exam_subject')).click()
 #    now_handle = driver.current_window_handle #得到当前窗口句柄
 #    driver.find_element_by_link_text(u"新建试卷").click()
-#    time.sleep(2)
+    time.sleep(2)
 #    all_handles = driver.window_handles #获取所有窗口句柄
 #    for handle in all_handles:
 #        if handle != now_handle:
@@ -33,6 +36,7 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     new_href = driver.execute_script("return $('.exam-new-btn').attr('href')")
     time.sleep(2)    
     driver.get("%sexam/%s" %(base_url,new_href))
+    time.sleep(2)    
     driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \
                         cfg.get('exam', 'exam_paper_name')).clear()
     driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \
@@ -99,10 +103,12 @@ def add_big_question(cfg, driver, qscore, qtype):
                             cfg.get('exam', 'exam_topic_dropdown')).click()
         driver.find_element('xpath', '//div[10]/ul/li').click()
     else:
+        time.sleep(2)
         driver.find_element(cfg.get('exam', 'exam_topic_dropdown_by'), \
                             cfg.get('exam', 'exam_topic_dropdown')).click()
         driver.implicitly_wait(10)
         if qtype == 2:
+            time.sleep(2)
             driver.find_element(cfg.get('exam', 'exam_topic_multiple_by'), \
                                 cfg.get('exam', 'exam_topic_multiple')).click()
             driver.implicitly_wait(10)
@@ -199,9 +205,9 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
     #exam_name = u"未作答（主观题，免费）"
     #username = "sun123"
     driver.get("%sexam/" %(base_url))
-    time.sleep(1)
+    driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"试卷库").click()
-    driver.implicitly_wait(1)
+    driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', 'paper_search_by'), \
         cfg.get('exam', 'paper_search')).send_keys(exam_name)
     time.sleep(1)
@@ -220,8 +226,12 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
             driver.find_element(cfg.get('exam', 'output_open_by'), \
                 cfg.get('exam', 'output_open')).click()
             time.sleep(2)
+
         except:
             print u'试卷暂时没有学员购买'
+
+        #ActionChains(driver).send_keys(Keys.DOWN)
+        #ActionChains(driver).send_keys(Keys.ENTER)
     elif etype == 1:
         try:
             driver.find_element(cfg.get('exam', 'select_paper_by'), \
@@ -231,25 +241,28 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
             time.sleep(2)
         except:
             print u'试卷暂时没有分发给学员'
-        try:
-            save_alert = driver.switch_to_alert()
+
+        #ActionChains(driver).send_keys(Keys.DOWN)
+        #ActionChains(driver).send_keys(Keys.ENTER)
+        #try:
+        #    save_alert = driver.switch_to_alert()
             #print save_alert.text
-            save_alert.accept()
-        except:
-            pass
+        #    save_alert.accept()
+        #except:
+        #    pass
 
     else:
         #取评分链接
         time.sleep(2)
         stu_name = driver.execute_script(\
             "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(0).children().text()")
-        print stu_name
+        time.sleep(1)
         if username not in stu_name:
             print username + u'该学员不存在,无法评分。。'
         else:
             grade_href = driver.execute_script(\
                 "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
-            time.sleep(1)
+            time.sleep(2)
             driver.get("%sexam/%s" % (base_url, grade_href))
             score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), \
                 cfg.get('exam', 'input_score'))
@@ -266,11 +279,9 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
                 cfg.get('exam', 'score_save')).click()
             total_score = count * score
             return total_score
-
-    time.sleep(5)
     return True
 
-def send_close_paper(cfg, driver, base_url, username="", atype=2):
+def send_close_paper(cfg, driver, base_url, username, atype=2):
     """
     参数atype为1表示为学员开通试卷，2表示为学员关闭试卷
     """
@@ -296,9 +307,9 @@ def send_close_paper(cfg, driver, base_url, username="", atype=2):
     else:
         driver.find_element_by_link_text(u"关闭试卷").click()
         driver.implicitly_wait(10)
-        driver.find_element(cfg.get('exam', 'select_one_p_by'), \
-            cfg.get('exam', 'select_one_p')).click()
+        driver.find_elements(cfg.get('exam', 'select_one_p_by'), \
+            cfg.get('exam', 'select_one_p'))[-1].click()
     time.sleep(2)
     driver.find_element(cfg.get('exam', 'open_paper_ok_by'), \
         cfg.get('exam', 'open_paper_ok')).click()
-    time.sleep(5)      
+    time.sleep(2)    

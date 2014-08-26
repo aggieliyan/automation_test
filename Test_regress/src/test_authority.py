@@ -314,13 +314,62 @@ def teacher():
 	check_menu(menu_title, menu_dic)
 
 def new_onlineclass():
-	pass
+	time.sleep(1)
 
 def onlineclass():
 	driver.get("%smyOffice.do" %(base_url))
 	menu_dic = {u"发布直播课程": new_onlineclass,}
+
 	menu_title = u"教学教务"
 	check_menu(menu_title, menu_dic)
+
+def new_cheapcourse():
+	time.sleep(1)
+
+def cheapcourse_manege():
+	current_url = driver.current_url
+	try:
+		time.sleep(1)
+		driver.find_element_by_link_text(u"导出表单").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"详情").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"导出表单").click()
+		time.sleep(2)
+		driver.get(current_url)
+	except:
+		print traceback.format_exc() 
+		print u"没有特惠课程查看权限"
+    
+
+	try:
+		current_url = driver.current_url
+		time.sleep(1)
+		driver.find_element_by_link_text(u"新建能力团").click()
+		time.sleep(1)
+		driver.get(current_url)
+		
+		time.sleep(1)
+		driver.find_element_by_link_text(u"编辑").click()
+		time.sleep(1)
+		driver.find_elements("xpath", "//button")[-2].click()
+		time.sleep(1)
+
+		driver.find_element_by_link_text(u"下线").click()
+		time.sleep(1)
+		driver.find_elements("xpath", "//button")[-2].click()
+		time.sleep(1)
+	except:
+		print traceback.format_exc() 
+		print u"没有特惠课程编辑权限"		
+
+def cheap_course():
+	driver.get("%smyOffice.do" %(base_url))
+	menu_dic = {u"发布特惠课程": new_cheapcourse,
+	            u"管理特惠课程": cheapcourse_manege,}
+	menu_title = u"教学教务"
+	check_menu(menu_title, menu_dic)
+
 
 def admin_athority_check():
     
@@ -331,8 +380,8 @@ def admin_athority_check():
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file)
-	user_name = "sadm_slk0"
-	user_psw = "123456aa"
+	user_name = "salesdemo"
+	user_psw = "1234"
 
 	chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
@@ -340,9 +389,10 @@ def admin_athority_check():
 	#driver = webdriver.Ie()
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
-	course()
-	exam_manage()
-	teacher()
+	# course()
+	# exam_manage()
+	cheap_course()
+	#teacher()
 
 	driver.quit()
 

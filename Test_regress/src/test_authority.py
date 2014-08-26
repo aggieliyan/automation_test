@@ -337,6 +337,17 @@ def cheapcourse_manege():
 		driver.find_element_by_link_text(u"导出表单").click()
 		time.sleep(2)
 		driver.get(current_url)
+
+		time.sleep(1)
+		driver.find_element_by_link_text(u"已下线的团购").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"导出表单").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"详情").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"导出表单").click()
+		time.sleep(2)
+		driver.get(current_url)	
 	except:
 		print traceback.format_exc() 
 		print u"没有特惠课程查看权限"
@@ -344,6 +355,16 @@ def cheapcourse_manege():
 
 	try:
 		current_url = driver.current_url
+		time.sleep(1)
+		driver.find_element_by_link_text(u"已下线的团购").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"发布相似团").click()
+		time.sleep(1)
+		driver.find_elements("xpath", "//button")[-4].click()
+		time.sleep(1)
+		driver.get(current_url)
+
+
 		time.sleep(1)
 		driver.find_element_by_link_text(u"新建能力团").click()
 		time.sleep(1)

@@ -181,8 +181,59 @@ def course():
 		print u"没有教学教务相关权限"
 		return
 
+def class_manage():
+	current_url = driver.current_url
+
+	try:
+		#编辑
+		driver.find_element_by_link_text("编辑").click()
+		time.sleep(1)
+		driver.find_element("css selector", "span.greenbtn25_text").click()
+
+		#下架
+		time.sleep(1)
+		driver.find_element_by_link_text("下架").click()
+
+		#报名详情
+		driver.find_element_by_link_text("报名详情").click()
+		time.sleep(1)
+		driver.find_element("css selector", "span.greenbtn25_text").click()
+		time.sleep(1)
+	except:
+		print u"没有报班管理-编辑权限"
+
+	try:
+		#删除
+		driver.get(current_url)
+		driver.find_element_by_link_text(u"删除").click()
+		time.sleep(1)
+		driver.find_element("xpath", "//button").click()
+		time.sleep(1)
+	except:
+		print u"没有报班管理-删除权限"
+
+
 def class_center():
-	pass
+	driver.get("%smyOffice.do" %(base_url))
+	course_func = {u"报班管理":class_manage,}
+	try:
+	time.sleep(2)
+	driver.find_element_by_link_text(u"教学教务").click()
+	time.sleep(1)
+	for item in course_func.keys():
+		try:
+			driver.implicitly_wait(5)
+			driver.find_element_by_link_text(item).click()
+			time.sleep(1)
+			execute_func(course_func[item])
+		except Exception:
+			print traceback.format_exc() 
+			error_info = u"没有教务管理-%s权限"%item
+			print error_info
+	except Exception:
+		print traceback.format_exc() 
+		print u"没有教学教务相关权限"
+		return
 
 def admin_athority_check():
     
@@ -202,7 +253,6 @@ def admin_athority_check():
 	#driver = webdriver.Ie()
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
-	driver.get("%smyOffice.do" %(base_url))
 	course()
 
 	driver.quit()

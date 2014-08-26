@@ -1226,9 +1226,9 @@ class Test(unittest.TestCase):
         self.use_exam_card()
         login.logout(self.driver, self.base_url) 
         self.use_listencard()
-
-
-
+        
+    def test_exam_regress(self):
+        
         #考试系统部分
         self.login_from_index()
         self.exam_onequestion()
@@ -1255,10 +1255,7 @@ class Test(unittest.TestCase):
         self.score_paper()
         #IE下不能导出
         # self.export_openpaper_result()
-        # self.export_sendpaper_result()
-        
-
-       
+        # self.export_sendpaper_result() 
                    
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作

@@ -469,7 +469,7 @@ class Test(unittest.TestCase):
         course_name = ""
         actual_name = "0"
         try:
-            course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url
+            course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url)
             actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")
             actual_name = actual_name.strip()   
             #print course_name, actual_name

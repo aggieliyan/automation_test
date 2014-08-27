@@ -7,8 +7,8 @@ from selenium import webdriver
 
 import login
 import new_course_management
-import cate_management, student_management, new_course_management, card_management
-
+import cate_management, student_management, new_course_management, card_management, user_management
+    
 def execute_func(func_name):
 	func_name()
 
@@ -36,15 +36,127 @@ def check_menu(menu_title, menu_dic):
 	except Exception:
 		print traceback.format_exc() 
 		print u"没有%s权限"%menu_title
-
+    
 #切换窗口公共方法
 def swithing_window(bh,ah):
 	 while len(bh) == len(ah):
 	     ah = driver.window_handles
 	 for h in ah:
 	     if h not in bh:
-		     driver.switch_to_window(h)	
+		     driver.switch_to_window(h)
 		     	
+#前台-首页
+def firstpage():
+	time.sleep(1)
+	driver.find_element_by_link_text("网校首页").click()
+	current_url = driver.current_url
+	
+	#首页装扮
+	time.sleep(1)
+	try:
+	    driver.find_element_by_link_text("首页装扮").click()
+	    time.sleep(1)
+	    driver.find_element_by_link_text(u"保存").click()
+	except Exception:
+		print traceback.format_exc()
+		print u"所有管理员都应该有首页装扮的权限"
+	
+	#发布课程	
+	time.sleep(1)
+	try:
+	    driver.find_element_by_link_text("发布课程")
+	    #time.sleep(1)
+	    #driver.get(current_url)
+	except Exception:
+		print traceback.format_exc()
+		print u"此管理员没有：教学教务-课程课件-课程管理-编辑、删除权限"
+	
+	#导航管理	
+	time.sleep(1)
+	try:
+	    time.sleep(1)
+	    driver.execute_script("$('.dnl-list-ul').attr('style','display:block')")
+	    driver.find_element_by_link_text("导航管理").click()
+	    time.sleep(1)
+	    driver.find_element_by_link_text("导航编辑").click()
+	    time.sleep(1)
+	    driver.find_element_by_link_text(u"保存").click()
+	    time.sleep(1)
+	    driver.execute_script("$('.dnl-list-ul').attr('style','display:block')")
+	    time.sleep(1)
+	    driver.find_element_by_link_text("导航管理").click()
+	    time.sleep(1)
+	    driver.find_element_by_link_text("导航颜色").click()
+	    time.sleep(1)
+	    driver.find_element_by_link_text(u"保存").click()
+	    time.sleep(1)
+	except Exception:
+		print traceback.format_exc()
+		print u"所有管理员都应该有导航管理的权限"
+	
+	#页面SEO	
+	time.sleep(1)
+	try:
+		bh = driver.window_handles 	    
+		driver.find_element_by_link_text("页面SEO").click()
+		time.sleep(1)
+		ah = driver.window_handles
+		swithing_window(bh,ah)
+		driver.find_element("class name", "submit-btn")#点击确定
+		time.sleep(1)
+	except Exception:
+		print traceback.format_exc()
+		print u"所有管理员都应该有页面SEO的权限"
+
+    #编辑页脚
+	time.sleep(1)
+	org_name = "salesdemo"
+	try:
+		user_management.modify_pagefoot(cfg, driver, base_url, org_name) 
+	except Exception:
+		print traceback.format_exc()
+		print u"所有管理员都应该有编辑页脚的权限"
+
+    #自定义页面
+	time.sleep(1)
+	try:
+	    driver.find_element_by_link_text("自定义页面").click()
+	    time.sleep(1)
+	    driver.get(current_url)
+	except Exception:
+		print traceback.format_exc()
+		print u"所有管理员都应该有自定义页面的权限"
+	
+	#网校首页头像logo	
+	time.sleep(1)
+	try:
+	    user_management.change_homelogo(cfg, driver, base_url, org_name)
+	    time.sleep(1)
+	    driver.get(current_url)
+	except Exception:
+		print traceback.format_exc()
+		print u"所有管理员都应该有修改网校首页头像页面的权限"
+
+    #编辑课程关键词
+	time.sleep(1)
+	try:
+	    driver.find_element("class name","keyword-mask").click()
+	    time.sleep(1)
+	    driver.find_element("css selector",".dialog-button-container button").click()#点击确定	    
+	except Exception:
+		print traceback.format_exc()
+		print u"所有管理员都应该有编辑课程关键字的权限"
+	
+	#编辑右上角咨询热线和服务时间	
+	time.sleep(2)
+	try:
+	    driver.find_element_by_link_text("编辑").click()
+	    time.sleep(1)
+	    driver.find_element("css selector",".dialog-button-container button").click()#点击确定	   
+	except Exception:
+		print traceback.format_exc()
+		print u"所有管理员都应该有编辑咨询热线和服务时间的权限"
+			     	
 #后台首页-教学互动		    
 def teaching():
 	driver.get("%smyOffice.do" %(base_url))
@@ -95,10 +207,22 @@ def countmanage():
 #系统设置-管理员/客服
 def manageorservice():
 	driver.get("%smyOffice.do" %(base_url))
+	#管理员/客服-网校管理员  网校客服
 	menu_dic = {u"网校管理员":manageorservice_manage, 
 	               u"网校客服":manageorservice_service,}
 	menu_title = u"系统设置"
 	check_menu(menu_title, menu_dic)
+
+#系统设置-页面建设
+def pagecreate():
+	driver.get("%smyOffice.do" %(base_url))
+	#页面建设-首页高级编辑  自定义页面  网络图片库  自定义登录图片
+	menu_dic = {u"首页高级编辑":pagecreate_edit, 
+	               u"自定义页面":pagecreate_selfpage,
+	               u"网络图片库":pagecreate_netpic,
+	               u"自定义登录图片":pagecreate_selflogin,}
+	menu_title = u"系统设置"
+	check_menu(menu_title, menu_dic)	
             
 #学员/员工-网校学员
 def stuoremp():
@@ -112,7 +236,7 @@ def stuoremp():
 	menu_title = u"学员/员工"
 	check_menu(menu_title, menu_dic)
 	
-#教学互动-我的私信
+#后台首页-教学互动-我的私信
 def teaching_letter():
 	time.sleep(1)
 	try:
@@ -150,7 +274,7 @@ def teaching_letter():
 		print traceback.format_exc()
 		print u"没有我的私信的删除权限"
 				 
-#教学互动-网校答疑    
+#后台首页-教学互动-网校答疑    
 def teaching_ansquestion():
 	time.sleep(1)
 	try:
@@ -181,7 +305,7 @@ def teaching_ansquestion():
 		print traceback.format_exc()
 		print u"没有我的私信的删除权限"  
 		
-#授权管理-授权购买记录	
+#后台首页-授权管理-授权购买记录	
 def authmanage_buyRecord():
 	time.sleep(1)
 	try:
@@ -210,7 +334,7 @@ def authmanage_buyRecord():
 		print traceback.format_exc()
 		print u"没有授权购买记录的编辑、删除权限"
 		
-#授权管理-已使用授权		
+#后台首页-授权管理-已使用授权		
 def authmanage_usegrant():
 	time.sleep(1)
 	try:
@@ -236,7 +360,7 @@ def authmanage_usegrant():
 		print traceback.format_exc()
 		print u"没有已使用授权的读、编辑、删除权限"
 		
-#授权管理-在线购买授权	
+#后台首页-授权管理-在线购买授权	
 def authmanage_buygrant():
 	time.sleep(1)
 	try:
@@ -263,18 +387,18 @@ def authmanage_buygrant():
 	driver.get(current_url)
 
 	
-#课程合作代理-管理我授权的代理	
+#后台首页-课程合作代理-管理我授权的代理	
 def agent_grant():
 	time.sleep(1)
 	courseagent_grant()
 	paperagent_grant()
 
-#课程合作代理-管理我申请的代理	
+#后台首页-课程合作代理-管理我申请的代理	
 def agent_apply():
 	courseagent_apply()
 	paperagent_apply()
 
-#课程合作代理-管理我授权的代理-课程代理
+#后台首页-课程合作代理-管理我授权的代理-课程代理
 def courseagent_grant():
 	time.sleep(1)
 	current_url = driver.current_url
@@ -357,7 +481,7 @@ def courseagent_grant():
 		print u"没有管理我授权的代理的课程代理的编辑权限、删除权限"######？？？？
 	time.sleep(2)
 	driver.get(current_url)		
-#课程合作代理-管理我申请的代理-课程代理		
+#后台首页-课程合作代理-管理我申请的代理-课程代理		
 def courseagent_apply():
 	time.sleep(1)
 	try:
@@ -412,7 +536,7 @@ def courseagent_apply():
 		print u"没有管理我授权的代理的课程代理的编辑权限、删除权限"######？？？？
 	time.sleep(2)
 	
-#课程合作代理-管理我授权的代理-考试代理
+#后台首页-课程合作代理-管理我授权的代理-考试代理
 def paperagent_grant():
 	time.sleep(1)
 	try:
@@ -492,7 +616,7 @@ def paperagent_grant():
 		print u"没有管理我授权的代理的考试代理的编辑权限、删除权限"
 	driver.get(current_url)	
 	time.sleep(2)
-#课程合作代理-管理我申请的代理-考试代理
+#后台首页-课程合作代理-管理我申请的代理-考试代理
 def paperagent_apply():
 	time.sleep(1)
 	try:
@@ -558,7 +682,7 @@ def paperagent_apply():
 	driver.get(current_url)	
 	time.sleep(2)
 
-#学习卡-管理卡组
+#后台首页-学习卡-管理卡组
 def learnigcard_group():
 	time.sleep(1)
 	current_url = driver.current_url	
@@ -645,7 +769,7 @@ def learnigcard_group():
 	except Exception, e:
 		print traceback.format_exc()
 		print u"没有管理卡组的删除权限"
-#学习卡-卡使用记录	
+#后台首页-学习卡-卡使用记录	
 def learnigcard_record():
 	time.sleep(1)
 	try:
@@ -667,7 +791,7 @@ def learnigcard_record():
 		print traceback.format_exc()
 		print u"没有卡使用记录的读、编辑、删除权限"
 
-#统计管理-外链视频流量统计
+#后台首页-统计管理-外链视频流量统计
 def countmanage_outvideo():
 	time.sleep(1)
 	try:
@@ -681,7 +805,7 @@ def countmanage_outvideo():
 		print traceback.format_exc()
 		print u"没有外链视频流量统计的读、编辑、删除权限"
 		
-#统计管理-浏览量统计
+#后台首页-统计管理-浏览量统计
 def countmanage_views():
 	time.sleep(1)
 	try:
@@ -695,7 +819,7 @@ def countmanage_views():
 		print traceback.format_exc()
 		print u"没有浏览量的读、编辑、删除权限"
 		
-#统计管理-新增学员量统计	
+#后台首页-统计管理-新增学员量统计	
 def countmanage_newstudent():
 	time.sleep(1)
 	try:
@@ -708,14 +832,292 @@ def countmanage_newstudent():
 	except Exception:
 		print traceback.format_exc()
 		print u"没有新增学员量统计的读、编辑、删除权限"		
+ 
+#系统设置-管理员/客服-网校管理员
+def manageorservice_manage():
+	time.sleep(1)
+	current_url = driver.current_url
+	try:
+	    driver.find_element("class name","colorGray")#找到编辑管理员的置灰span
+	except Exception:
+		print traceback.format_exc()
+		print u"没有管理员的读权限"
 
+	time.sleep(1)
+	try:
+	    driver.find_element_by_link_text(u"添加管理员").click()
+	    time.sleep(1)
+	    driver.get(current_url)
+	    time.sleep(1)
+	    driver.find_element_by_link_text(u"编辑管理员").click()
+	    time.sleep(1)
+	    driver.get(current_url)	    	    
+	except Exception:
+		print traceback.format_exc()
+		print u"没有管理员的编辑权限"
+		
+	time.sleep(1)
+	try:
+	    driver.find_element_by_link_text(u"删除管理员").click()
+	    time.sleep(1)
+	    driver.find_elements("class name","x-btn-text")[1].click()#先取消删除   	    
+	except Exception:
+		print traceback.format_exc()
+		print u"没有管理员的编辑权限"		
 
-   
-#系统设置-----------------
-   
-   
+#待写---------------------------------------
+def create_manage():
+	time.sleep(1)
+#待写---------------------------------------
+		        
+#系统设置-管理员/客服-网校客服
+def manageorservice_service():
+	time.sleep(1)
+	time.sleep(1)
+	current_url = driver.current_url
+	try:
+	    driver.find_element("css selector",".sup-head .supPageTitle")#找到左侧管理机构客服的黑色字体
+	except Exception:
+		print traceback.format_exc()
+		print u"没有网校客服的读权限"
+	
+	time.sleep(2)		
+	rand_name = str(random.randint(1000, 9999))
+	service_name = u"se" + rand_name
+	try:
+		#创建机构客服
+	    driver.find_element("class name","GreenBtn_ab").click()#点击创建机构客服
+	    time.sleep(1)
+	    driver.find_element("class name","x-form-arrow-trigger").click()#下拉选择用户名
+	    time.sleep(1)
+	    driver.find_elements("class name","x-combo-list-item")[1].click()
+	    time.sleep(1)
+	    driver.find_element("id","reg_supName").send_keys(service_name)#输入客服名
+	    time.sleep(1)
+	    driver.find_element("class name","GreenBtn_ab").click()#点击保存
+	    time.sleep(1)
+	    #编辑
+	    driver.find_elements("css selector",".supportUl .editSup")[-1].click()#点击编辑  
+	    time.sleep(1)
+	    driver.find_element("class name","GreenBtn_ab").click()#点击保存
+	    time.sleep(1)
+	    #编辑-机构客服显示方式
+	    driver.find_element("css selector",".supportDisplay .editDisplay").click()#点击编辑  
+	    time.sleep(1)
+	    driver.find_element("class name","GreenBtn_ab").click()#点击保存
+	    time.sleep(1)
+	    #选择使用自定义客服-编辑
+	    driver.find_elements("name","customizedSupportEnabled")[1].click()#选择使用自定义客服
+	    time.sleep(1)
+	    driver.find_element("id","J_toEditBtn").click()#点击编辑
+	    time.sleep(1)	      	    
+	    driver.find_element("id","J_saveCodeBtn").click()#点击保存
+	    time.sleep(1)
+	    #选择使用AbkeSky机构客服 
+	    driver.find_element("name","customizedSupportEnabled").click()#选择使用AbkeSky机构客服    	    	    	    
+	except Exception:
+		print traceback.format_exc()
+		print u"没有网校客服的编辑权限"
+		
+	time.sleep(2)
+	try:
+		#删除
+	    driver.find_elements("css selector",".supportUl .delSup")[-1].click()#点击删除-最后一个创建的机构客服  
+	    time.sleep(1)
+	    driver.find_element("class name","x-btn-text").click()#点击确定
+	    time.sleep(1)	    
+	except Exception:
+		print traceback.format_exc()
+		print u"没有管理员的删除权限"	
+			
+#系统设置-页面建设-首页高级编辑 
+def pagecreate_edit():
+	time.sleep(1)
+	try:
+		#预览首页
+	    driver.find_elements("class name","GreenBtn_ab")[-1].click()#点击预览首页
+	    time.sleep(1)	    
+	except Exception:
+		print traceback.format_exc()
+		print u"没有首页高级编辑的读权限"	
 
-#网校学员-学员类目   
+	time.sleep(1)
+	try:
+		#发布
+	    driver.find_element("class name","OrangeBtn_ab").click()#点击发布  
+	    time.sleep(1)
+	    driver.find_element("class name","x-btn-text").click()#点击关闭窗口
+	    time.sleep(1)	    
+	except Exception:
+		print traceback.format_exc()
+		print u"没有首页高级编辑的编辑、删除权限"	
+
+#系统设置-页面建设-自定义页面 
+def pagecreate_selfpage():
+	time.sleep(1)
+	try:
+		#找到页面html图片
+	    driver.find_element("css selector",".floatleft img")
+	    time.sleep(1)   
+	except Exception:
+		print traceback.format_exc()
+		print u"没有自定义页面的读权限"
+		
+	time.sleep(2)
+	rand_name = str(random.randint(1000, 9999))
+	page_name = u"page" + rand_name	
+	try:
+		#添加页面
+	    driver.find_element("class name","yellow_btn_center").click()#点击添加页面
+	    time.sleep(1)
+	    driver.find_element("id","orgPageField").send_keys(page_name)#页面名称
+	    time.sleep(1)
+	    driver.find_element("id","orgWebField").send_keys(rand_name)#为页面设定链接
+	    time.sleep(1)
+	    driver.find_element("id","orgInfoField").send_keys("<html><body>hello word!</body></html>")#代码嵌入
+	    time.sleep(1)
+	    driver.find_elements("class name","x-btn-text")[-1].click()#点击保存
+	    time.sleep(1)
+	    #编辑
+	    driver.find_element_by_link_text("编辑").click()#点击编辑
+	    time.sleep(1)
+	    driver.find_elements("class name","x-btn-text")[-1].click()#点击保存
+	    time.sleep(1)	    
+	    #设为自设导航模块
+	    driver.find_element_by_link_text("设为自设导航模块").click()#点击设为自设导航模块
+	    time.sleep(1)
+	    driver.find_element("id","titleFieldId").send_keys(rand_name)#导航名称
+	    time.sleep(1)
+	    driver.find_element("class name","x-btn-text").click()#点击确定
+	    time.sleep(1)	    
+	    #取消自设导航模块
+	    driver.find_element_by_link_text("取消自设导航模块").click()#点击取消自设导航模块
+	    time.sleep(1)
+	    driver.find_element("class name","x-btn-text").click()#点击确定
+	    time.sleep(1)	    	    	    
+	except Exception:
+		print traceback.format_exc()
+		print u"没有自定义页面的编辑权限"	
+
+	time.sleep(2)
+	try:
+		#删除
+	    driver.find_element_by_link_text("删除").click()#点击删除
+	    time.sleep(1)
+	    driver.find_element("class name","x-btn-text").click()#点击删除
+	    time.sleep(1)    
+	except Exception:
+		print traceback.format_exc()
+		print u"没有自定义页面的删除权限"
+			
+#系统设置-页面建设-网络图片库 
+def pagecreate_netpic():
+	time.sleep(1)
+	current_url = driver.current_url
+	rand_name = str(random.randint(1000, 9999))
+	record_name = u"record" + rand_name
+	pic = "C:\\Users\\Public\\Pictures\\Sample Pictures\\Tulips.jpg"	
+	try:
+		#点击第一个图片库
+	    driver.find_element("class name","albumName").click()
+	    time.sleep(1)
+	    driver.find_element("class name","albumBg").click()#复制第一个链接   
+	    time.sleep(1)
+	    driver.find_element_by_link_text(u"返回网络图片库").click()
+	    #driver.get(current_url)   
+	except Exception:
+		print traceback.format_exc()
+		print u"没有网络图片库的读权限"
+		
+	time.sleep(1)
+	try:
+		#创建专辑
+	    driver.find_elements("class name","cursorHand")[1].click()#点击创建专辑
+	    time.sleep(1)
+	    driver.find_element("id","orgAlbumField").send_keys(record_name)#输入专辑名称
+	    time.sleep(1)  
+	    driver.find_element("id","picture1").send_keys(pic)#点击浏览上传图片
+	    time.sleep(1)
+	    driver.find_element("class name","x-btn-text").click()#点击上传
+	    time.sleep(2)
+	    driver.get(current_url)
+	    time.sleep(2)
+	    #添加新照片
+	    driver.find_element("class name","albumName").click()#点击选择第一个刚创建的图片库
+	    time.sleep(1)
+	    current_url = driver.current_url
+	    driver.find_element_by_link_text(u"添加新照片").click()
+	    time.sleep(1)	    
+	    driver.find_element("id","picture1").send_keys(pic)#点击浏览上传图片
+	    time.sleep(1)
+	    driver.find_element("class name","x-btn-text").click()#点击上传 
+	    time.sleep(5)
+	    driver.get(current_url)
+	    #修改专辑名称	    
+	    driver.find_element_by_link_text(u"修改专辑名称").click()
+	    time.sleep(1)	    
+	    driver.find_element("class name","x-btn-text").click()#点击保存
+	    time.sleep(1)  	    
+	except Exception:
+		print traceback.format_exc()
+		print u"没有网络图片库的编辑权限"
+
+	time.sleep(2) 
+	try:
+		#删除图片
+	    driver.find_element("class name","albumName").click()#点击第一个图片库
+	    time.sleep(1)
+	    driver.find_element("xpath","/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div/div/div/div[6]/div[2]").click()
+	    time.sleep(1)	    
+	    driver.find_element("class name","x-btn-text").click()#点击确认
+	    time.sleep(1)
+	    #添加图片--上传图片--删除
+	    current_url = driver.current_url
+	    driver.find_element_by_link_text(u"添加新照片").click()
+	    time.sleep(1)	    
+	    driver.find_element("id","picture1").send_keys(pic)#点击浏览上传图片
+	    time.sleep(1)
+	    driver.find_element("class name","deleteAb").click()#点击删除 
+	    time.sleep(1)
+	    driver.get(current_url)	    
+#	    #删除专辑 
+#	    driver.find_element_by_link_text(u"删除专辑").click()
+#	    time.sleep(1)
+#	    driver.find_element("class name","x-btn-text").click()#点击确认-网站有bug，报参数错误    
+	except Exception:
+		print traceback.format_exc()
+		print u"没有网络图片库的删除权限"
+	
+#系统设置-页面建设-自定义登录图片 
+def pagecreate_selflogin():
+	time.sleep(1)
+	current_url = driver.current_url
+	try:
+		#能找到第一个的登录图片
+	    driver.find_element("id","J_showImage")   
+	    time.sleep(1)  
+	except Exception:
+		print traceback.format_exc()
+		print u"没有自定义登录图片的读权限"
+
+	time.sleep(1)
+	pic = "C:\\Users\\Public\\Pictures\\Sample Pictures\\1.jpg"
+	try:
+		#点击浏览
+	    time.sleep(1)
+	    driver.find_element("id","picFieldName-file").send_keys(pic)#浏览   
+	    time.sleep(1)
+	    driver.find_elements("class name","x-btn-text")[1].click()#上传
+	    time.sleep(2)
+	    driver.get(current_url)
+	    time.sleep(1)
+	    #恢复默认
+	    driver.find_element("id","J_restoreDefault").click()
+	except Exception:
+		print traceback.format_exc()
+		print u"没有自定义登录图片的编辑、删除权限"
+			
+#学员/员工-网校学员-学员类目   
 def stuoremp_stucate():
 	time.sleep(1)
 	current_url = driver.current_url
@@ -802,7 +1204,7 @@ def opencourseBatch(bh):
 	time.sleep(2)
 	driver.find_elements_by_css_selector(".x-btn-center .x-btn-text")[1].click()
 	time.sleep(3)		
-#网校学员-学员管理
+#学员/员工-网校学员-学员管理
 def stuoremp_stumanage():
 	time.sleep(2)
 	current_url = driver.current_url
@@ -881,7 +1283,7 @@ def stuoremp_stumanage():
 		print traceback.format_exc()
 		print u"没有学员管理的删除权限"
 	  
-#网校学员-员工管理
+#学员/员工-网校学员-员工管理
 def stuoremp_empmanage():
 	time.sleep(2)
 	current_url = driver.current_url
@@ -937,7 +1339,7 @@ def stuoremp_empmanage():
 		print traceback.format_exc()
 		print u"没有员工管理的删除权限"
 	
-#网校学员-员工申请
+#学员/员工-网校学员-员工申请
 def stuoremp_empapply():
 	time.sleep(1)
 #	try:
@@ -957,7 +1359,7 @@ def stuoremp_empapply():
 #		print traceback.format_exc()
 #		print u"没有员工申请的编辑、删除权限"
 			
-#网校学员-学员学习记录
+#学员/员工-网校学员-学员学习记录
 def stuoremp_stulearnrecord():
 	time.sleep(1)
 	current_url = driver.current_url
@@ -1004,22 +1406,27 @@ def admin_athority_check():
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
 #	driver.get("%smyOffice.do" %(base_url))
 
-    #后台首页
-#	teaching()
-#	authmanage()
-#	courseagent()
-#	learnigcard()
-#	countmanage()
+    #后台-后台首页
+#	teaching()#教学互动
+#	authmanage()#授权管理
+#	courseagent()#课程合作代理
+#	learnigcard()#学习卡
+#	countmanage()#统计管理
 
-    #系统设置
+    #后台-系统设置
+#	manageorservice()#管理员/客服
+#	pagecreate()#页面建设
 
-#   #学员/员工
-	stuoremp()
+#   #后台-学员/员工
+#	stuoremp()#网校学员
+
+    #前台(适用于所有管理员)
+	firstpage()#网校首页
+    
 
 	driver.quit()
-
-
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     admin_athority_check()
+    

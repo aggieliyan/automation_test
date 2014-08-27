@@ -18,10 +18,10 @@ class Test(unittest.TestCase):
 
     def setUp(self):
 
-        self.browser = "ie"
+        self.browser = "Chrome"
 
         self.test_enviroment = "beta"
-        self.org_name = "salesdemo"
+        self.org_name = "adm_liwen01"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
 
         self.total = 0
 
-        if self.browser == 'Chrome':
+        if self.browser == 'ie':
             self.driver = webdriver.Ie()
         elif self.browser == 'firefox':
             self.driver = webdriver.Firefox()

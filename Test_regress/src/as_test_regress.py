@@ -1227,8 +1227,6 @@ class Test(unittest.TestCase):
         login.logout(self.driver, self.base_url) 
         self.use_listencard()
         
-    def test_exam_regress(self):
-        
         #考试系统部分
         self.login_from_index()
         self.exam_onequestion()

@@ -49,145 +49,69 @@ def swithing_window(bh,ah):
 def teaching():
 	driver.get("%smyOffice.do" %(base_url))
 	#教学互动-我的私信、网校答疑
-	teaching_func = {u"我的私信":teaching_letter, u"网校答疑":teaching_ansquestion,}
-	try:
-		time.sleep(2)
-		driver.find_element_by_link_text(u"后台首页").click()
-		time.sleep(1)
-		for item in teaching_func.keys():
-			try:
-				driver.implicitly_wait(5)
-				driver.find_element_by_link_text(item).click()
-				time.sleep(1)
-				execute_func(teaching_func[item])
-			except Exception:
-				print traceback.format_exc() 
-				error_info = u"没有教学互动-%s权限"%item
-				print error_info
-	except Exception:
-		print traceback.format_exc() 
-		print u"没有教学互动相关权限"
+	menu_dic = {u"我的私信":teaching_letter, 
+			       u"网校答疑":teaching_ansquestion,}
+	menu_title = u"后台首页"
+	check_menu(menu_title, menu_dic)
 			
 #后台首页-授权管理
 def authmanage():
 	driver.get("%smyOffice.do" %(base_url))
 	#教学互动-授权购买记录、已使用授权 在线购买授权
-	authmanage_func = {u"授权购买记录":authmanage_buyRecord, u"已使用授权":authmanage_usegrant,u"在线购买授权":authmanage_buygrant}
-	try:
-		time.sleep(2)
-		driver.find_element_by_link_text(u"后台首页").click()
-		time.sleep(1)
-		for item in authmanage_func.keys():
-			try:
-				driver.implicitly_wait(5)
-				driver.find_element_by_link_text(item).click()
-				time.sleep(1)
-				execute_func(authmanage_func[item])
-			except Exception:
-				print traceback.format_exc() 
-				error_info = u"没有授权管理-%s权限"%item
-				print error_info
-	except Exception:
-		print traceback.format_exc() 
-		print u"没有授权管理相关权限"      
+	menu_dic = {u"授权购买记录":authmanage_buyRecord, 
+			       u"已使用授权":authmanage_usegrant,
+			       u"在线购买授权":authmanage_buygrant}
+	menu_title = u"后台首页"
+	check_menu(menu_title, menu_dic)   
 
 #后台首页-课程合作代理
 def courseagent():
 	driver.get("%smyOffice.do" %(base_url))
 	#教学互动-管理我授权的代理、管理我申请的代理
-	authmanage_func = {u"管理我授权的代理":agent_grant, u"管理我申请的代理":agent_apply}
-	try:
-		time.sleep(2)
-		driver.find_element_by_link_text(u"后台首页").click()
-		time.sleep(1)
-		for item in authmanage_func.keys():
-			try:
-				driver.implicitly_wait(5)
-				driver.find_element_by_link_text(item).click()
-				time.sleep(1)
-				execute_func(authmanage_func[item])
-			except Exception:
-				print traceback.format_exc() 
-				error_info = u"没有授权管理-%s权限"%item
-				print error_info
-	except Exception:
-		print traceback.format_exc() 
-		print u"没有授课程合作代理相关权限"
+	menu_dic = {u"管理我授权的代理":agent_grant, 
+			       u"管理我申请的代理":agent_apply}
+	menu_title = u"后台首页"
+	check_menu(menu_title, menu_dic)
 		
 #后台首页-学习卡
 def learnigcard():
 	driver.get("%smyOffice.do" %(base_url))
 	#学习卡-管理卡组、卡使用记录
-	learnigcard_func = {u"管理卡组":learnigcard_group, u"卡使用记录":learnigcard_record}
-	try:
-		time.sleep(2)
-		driver.find_element_by_link_text(u"后台首页").click()
-		time.sleep(1)
-		for item in learnigcard_func.keys():
-			try:
-				driver.implicitly_wait(5)
-				driver.find_element_by_link_text(item).click()
-				time.sleep(1)
-				execute_func(learnigcard_func[item])
-			except Exception:
-				print traceback.format_exc() 
-				error_info = u"没有学习卡-%s权限"%item
-				print error_info
-	except Exception:
-		print traceback.format_exc() 
-		print u"没有学习卡相关权限"
+	menu_dic = {u"管理卡组":learnigcard_group, 
+					       u"卡使用记录":learnigcard_record}
+	menu_title = u"后台首页"
+	check_menu(menu_title, menu_dic)
 
 #后台首页-统计管理
 def countmanage():
 	driver.get("%smyOffice.do" %(base_url))
 	#统计管理-外链视频流量统计  浏览量统计 新增学员量统计
-	countmanage_func = {u"外链视频流量统计":countmanage_outvideo, u"浏览量统计":countmanage_views, u"新增学员量统计":countmanage_newstudent}
-	try:
-		time.sleep(2)
-		driver.find_element_by_link_text(u"后台首页").click()
-		time.sleep(1)
-		for item in countmanage_func.keys():
-			try:
-				driver.implicitly_wait(5)
-				driver.find_element_by_link_text(item).click()
-				time.sleep(1)
-				execute_func(countmanage_func[item])
-			except Exception:
-				print traceback.format_exc() 
-				error_info = u"没有统计管理-%s权限"%item
-				print error_info
-	except Exception:
-		print traceback.format_exc() 
-		print u"没有统计管理相关权限"     
-		
-		      
-
-#系统设置-------------
-      
-        
+	menu_dic = {u"外链视频流量统计":countmanage_outvideo, 
+			       u"浏览量统计":countmanage_views, 
+			       u"新增学员量统计":countmanage_newstudent}
+	menu_title = u"后台首页"
+	check_menu(menu_title, menu_dic)   
+				     
+#系统设置-管理员/客服
+def manageorservice():
+	driver.get("%smyOffice.do" %(base_url))
+	menu_dic = {u"网校管理员":manageorservice_manage, 
+	               u"网校客服":manageorservice_service,}
+	menu_title = u"系统设置"
+	check_menu(menu_title, menu_dic)
+            
 #学员/员工-网校学员
 def stuoremp():
 	driver.get("%smyOffice.do" %(base_url))
 	#统计管理-外链视频流量统计  浏览量统计 新增学员量统计
-	stuoremp_func = {u"学员类目":stuoremp_stucate, u"学员管理":stuoremp_stumanage, \
-	    u"员工管理":stuoremp_empmanage, u"员工申请 ":stuoremp_empapply, u"学员学习记录":stuoremp_stulearnrecord}
-	try:
-		time.sleep(2)
-		driver.find_element_by_link_text(u"学员/员工").click()
-		time.sleep(1)
-		for item in stuoremp_func.keys():
-			try:
-				driver.implicitly_wait(5)
-				driver.find_element_by_link_text(item).click()
-				execute_func(stuoremp_func[item])
-			except Exception:
-				print traceback.format_exc() 
-				error_info = u"没有网校学员-%s权限"%item
-				print error_info
-	except Exception:
-		print traceback.format_exc() 
-		print u"没有网校学员相关权限"   
-		
+	menu_dic = {u"学员类目":stuoremp_stucate, 
+			        u"学员管理":stuoremp_stumanage, 
+	                u"员工管理":stuoremp_empmanage, 
+	                u"员工申请 ":stuoremp_empapply, 
+	                u"学员学习记录":stuoremp_stulearnrecord}
+	menu_title = u"学员/员工"
+	check_menu(menu_title, menu_dic)
+	
 #教学互动-我的私信
 def teaching_letter():
 	time.sleep(1)
@@ -338,7 +262,19 @@ def authmanage_buygrant():
 	time.sleep(2)
 	driver.get(current_url)
 
-#课程合作代理-管理我授权的代理
+	
+#课程合作代理-管理我授权的代理	
+def agent_grant():
+	time.sleep(1)
+	courseagent_grant()
+	paperagent_grant()
+
+#课程合作代理-管理我申请的代理	
+def agent_apply():
+	courseagent_apply()
+	paperagent_apply()
+
+#课程合作代理-管理我授权的代理-课程代理
 def courseagent_grant():
 	time.sleep(1)
 	current_url = driver.current_url
@@ -390,7 +326,7 @@ def courseagent_grant():
 		time.sleep(2)
 		driver.find_element_by_id("J_acceptProtocol").click()
 		time.sleep(2)
-		driver.find_element_by_class_name("x-btn-text").click()
+		driver.find_element_by_class_name("x-btn-text").click()#点击发送订单
 		time.sleep(2)
 		driver.find_element_by_css_selector(".dialog-button-container button").click()#点击确定
 		time.sleep(2)		
@@ -421,7 +357,7 @@ def courseagent_grant():
 		print u"没有管理我授权的代理的课程代理的编辑权限、删除权限"######？？？？
 	time.sleep(2)
 	driver.get(current_url)		
-#课程合作代理-管理我申请的代理		
+#课程合作代理-管理我申请的代理-课程代理		
 def courseagent_apply():
 	time.sleep(1)
 	try:
@@ -460,22 +396,23 @@ def courseagent_apply():
 		new_course_management.release_agency_course(cfg, driver, base_url, course_title=title)
 		driver.get(current_url)
 		time.sleep(2)
-		driver.find_element_by_link_text(u"订单管理").click()  
+		driver.find_element_by_link_text(u"订单管理").click()
+		bh = driver.window_handles 	  
 		time.sleep(1)
 		try:
 		    driver.find_element_by_link_text(u"立即支付").click()
-		    ah = driver.window_handles
-		    swithing_window(bh,ah)
-		    time.sleep(1)
 		except:
 			print "没有立即支付的课程订单"
+		ah = driver.window_handles
+		swithing_window(bh,ah)
+		time.sleep(1)
 		driver.get(current_url)					  
 	except Exception:
 		print traceback.format_exc()
 		print u"没有管理我授权的代理的课程代理的编辑权限、删除权限"######？？？？
 	time.sleep(2)
 	
-#管理我授权的代理-考试代理
+#课程合作代理-管理我授权的代理-考试代理
 def paperagent_grant():
 	time.sleep(1)
 	try:
@@ -555,7 +492,7 @@ def paperagent_grant():
 		print u"没有管理我授权的代理的考试代理的编辑权限、删除权限"
 	driver.get(current_url)	
 	time.sleep(2)
-#管理我申请的代理-考试代理
+#课程合作代理-管理我申请的代理-考试代理
 def paperagent_apply():
 	time.sleep(1)
 	try:
@@ -610,26 +547,16 @@ def paperagent_apply():
 	    time.sleep(1)
 	    try:  
 	        driver.find_element_by_link_text(u"立即支付").click()
-	        ah = driver.window_handles
-	        swithing_window(bh,ah)
-	        time.sleep(1)
 	    except:
-	    	print "没有立即支付的考试订单"				  
+	    	print "没有立即支付的考试订单"
+	    ah = driver.window_handles
+	    swithing_window(bh,ah)
+	    time.sleep(1)				  
 	except Exception:
 		print traceback.format_exc()
 		print u"没有管理我授权的代理的课程代理的编辑权限、删除权限"
 	driver.get(current_url)	
 	time.sleep(2)
-	
-#管理我授权的代理	
-def agent_grant():
-	courseagent_grant()
-	paperagent_grant()
-
-#管理我申请的代理	
-def agent_apply():
-	courseagent_apply()
-	paperagent_apply()
 
 #学习卡-管理卡组
 def learnigcard_group():
@@ -838,11 +765,10 @@ def creat_stucate():
 	try:
 	   driver.find_element_by_id("reg_topCateName").send_keys(cate_name)#输入类目名称
 	except:
-		None
-	try:
-	   driver.find_element_by_id("reg_textField").send_keys(cate_name)#输入类目名称
-	except:
-		None		
+	    try:
+	        driver.find_element_by_id("reg_textField").send_keys(cate_name)#输入类目名称
+	    except:
+		    None		
 	time.sleep(1)
 	driver.find_element_by_class_name("x-btn-text").click()#点击确定			
 	time.sleep(1)
@@ -1088,7 +1014,7 @@ def admin_athority_check():
     #系统设置
 
 #   #学员/员工
-#	stuoremp()
+	stuoremp()
 
 	driver.quit()
 

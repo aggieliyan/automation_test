@@ -391,6 +391,95 @@ def cheap_course():
 	menu_title = u"教学教务"
 	check_menu(menu_title, menu_dic)
 
+def accout_detail():
+	current_url = driver.current_url
+	try:
+		#充值
+		driver.find_element_by_link_text(u"充值").click()
+		time.sleep(1)
+		driver.find_element("name", "payment").click()
+		driver.find_element("id", "saveBtn").click()
+		time.sleep(1)
+		driver.get(current_url)
+	except:
+		print u"没有财务充值权限"
+
+	try:
+		time.sleep(1)
+		driver.find_element_by_link_text(u"提现").click()
+		time.sleep(1)
+		driver.find_element("id", "realname").send_keys(u"马如龙")
+		driver.find_element("xpath", "//img").click()
+		time.sleep(1)
+		driver.find_element("class name", "x-combo-list-item").click()
+		driver.find_elements("xpath", "//img")[1].click()
+		time.sleep(1)
+		driver.find_elements("class name", "x-combo-list-item")[10].click()
+		driver.find_elements("xpath", "//img")[2].click()
+		time.sleep(1)
+		driver.find_elements("class name", "x-combo-list-item")[42].click()
+		driver.find_element("id", "banksub").send_keys(u"小英支行")	
+		driver.find_element("id", "banknum").send_keys("6225880145880028")
+		driver.find_element("id", "banknumretry").send_keys("6225880145880028")
+		driver.find_element("xpath", "//button").click()
+		time.sleep(1)
+		driver.find_element("id", "drawsum").send_keys("1")
+		driver.find_elements("xpath", "//button")[1].click()
+		time.sleep(1)
+		driver.find_elements("xpath", "//button")[2].click()
+		time.sleep(1)
+
+	except:
+		print traceback.format_exc()
+		print u"没有提现权限"
+
+
+def accout_charge():
+	pass
+	# time.sleep(1)
+	# driver.find_element("name", "payment").click()
+	# driver.find_element("id", "saveBtn").click()
+	# time.sleep(1)
+
+def accout_withdraw():
+	pass
+	# try:
+	# 	driver.find_element("id", "realname").send_keys(u"马如龙")
+	# 	driver.find_element("id", "bankname").send_keys(u"招商银行")
+	# 	driver.find_element("id", "provincename").send_keys(u"北京市")
+	# 	driver.find_element("id", "cityname").send_keys(u"海淀区")
+	# 	driver.find_element("id", "banksub").send_keys(u"小英支行")
+	# 	driver.find_element("id", "banknum").send_keys("6225880145880028")
+	# 	driver.find_element("id", "banknumretry").send_keys("6225880145880028")
+	# 	driver.find_element("xpath", "//button").click()
+	# except:
+	# 	print u"没有提现权限"
+
+def accout_charge():
+	pass
+
+
+def financial():
+	driver.get("%smyOffice.do" %(base_url))
+	menu_title = u"财务/交易"
+	menu_dic = {u"账户明细": accout_detail,    
+	            u"提现": accout_withdraw, 
+	            u"充值": accout_charge,
+	            u"管理成员账户": member_manage,}
+	check_menu(menu_title, menu_dic)
+
+def sold_history():
+	pass
+
+def repay_history():
+	pass
+
+def transaction():
+	driver.get("%smyOffice.do" %(base_url))
+	menu_title = u"财务/交易"
+	menu_dic = {u"卖出交易记录": sold_history,    
+	            u"退款交易记录": repay_history,}
+	check_menu(menu_title, menu_dic)
 
 def admin_athority_check():
     
@@ -412,8 +501,9 @@ def admin_athority_check():
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
 	# course()
 	# exam_manage()
-	cheap_course()
-	#teacher()
+	# cheap_course()
+	# teacher()
+	financial()
 
 	driver.quit()
 

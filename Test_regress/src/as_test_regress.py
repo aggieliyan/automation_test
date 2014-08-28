@@ -21,14 +21,13 @@ class Test(unittest.TestCase):
         self.browser = "Chrome"
 
         self.test_enviroment = "beta"
+        self.independent_url = "www.dlym.com" #独立域名网址
         self.org_name = "adm_liwen01"
         self.org_password = "1234"
         self.user_name = "yilu282"
         self.user_password = "1234"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
-        #self.independent_url = "www.dlym.com"#独立域名网址
-        self.import_name = ""#跑完成的回归不需要填，注册的时候会把第一个值赋给她
-        self.username = "sun123"
+              
 
         cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
@@ -41,6 +40,9 @@ class Test(unittest.TestCase):
         #课程购买链接，跑发课流程时取的,后面购买课程需要用到
         self.course_href = ""
         self.course_href_2 = ""
+
+        #注册的时候会把第一个值赋给它
+        self.import_name = ""
 
         if self.browser == 'ie':
             self.driver = webdriver.Ie()
@@ -690,7 +692,7 @@ class Test(unittest.TestCase):
             print traceback.format_exc() 
             self.verificationErrors.append("fail to release announcement!")
         finally:
-            self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")  
+            self.driver.save_screenshot("C:/test_rs_pic/release_announcement.png")
 
     def release_href_announcement(self):
         

@@ -37,6 +37,11 @@ class Test(unittest.TestCase):
 
         self.total = 0
 
+        #一些回归过程中需要用到的变量
+        #课程购买链接，跑发课流程时取的,后面购买课程需要用到
+        self.course_href = ""
+        self.course_href_2 = ""
+
         if self.browser == 'ie':
             self.driver = webdriver.Ie()
         elif self.browser == 'firefox':
@@ -708,7 +713,10 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            user_management.buy_course(self.cfg, self.driver, self.base_url, self.course_href)
+            if self.course_href:
+                user_management.buy_course(self.cfg, self.driver, self.base_url, self.course_href)
+            else:
+                print u"没有购买课程链接"
         except Exception, e:
             print traceback.format_exc()
             print self.course_href
@@ -721,7 +729,10 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.course_href_2)
+            if self.course_href_2:
+                user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, self.course_href_2)
+            else:
+                print u"没有课程购买链接"
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to buy course use card!")

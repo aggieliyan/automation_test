@@ -458,6 +458,8 @@ def accout_withdraw():
 def accout_charge():
 	pass
 
+def member_accout():
+	pass
 
 def financial():
 	driver.get("%smyOffice.do" %(base_url))
@@ -465,20 +467,97 @@ def financial():
 	menu_dic = {u"账户明细": accout_detail,    
 	            u"提现": accout_withdraw, 
 	            u"充值": accout_charge,
-	            u"管理成员账户": member_manage,}
+	            u"管理成员账户": member_accout,}
 	check_menu(menu_title, menu_dic)
 
 def sold_history():
-	pass
+	try:
+		time.sleep(1)
+		driver.find_element_by_link_text(u"导出Excel列表").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"尚未确认付款的交易记录").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"导出Excel列表").click()
+		time.sleep(1)
+	except:
+		print u"没有卖出交易记录查看权限"
 
 def repay_history():
-	pass
+	try:
+		time.sleep(1)
+		driver.find_element_by_link_text(u"查看").click()
+		time.sleep(1)
+	except:
+		print u"没有退款交易记录查看权限"
 
 def transaction():
 	driver.get("%smyOffice.do" %(base_url))
 	menu_title = u"财务/交易"
 	menu_dic = {u"卖出交易记录": sold_history,    
 	            u"退款交易记录": repay_history,}
+	check_menu(menu_title, menu_dic)
+
+def member_cate():
+	try:
+		#新建一级类目
+		time.sleep(1)
+    	driver.find_element(cfg.get('org_manage', 'add_topcate_by'), \
+    		cfg.get('org_manage', 'add_topcate')).click()
+    	time.sleep(2)
+    	driver.find_element(cfg.get('org_manage', 'cate_addname_by'), \
+    		cfg.get('org_manage', 'cate_addname')).send_keys(cate_name)
+    	time.sleep(2)
+    	driver.find_element(cfg.get('org_manage', 'add_cate_ok_by'), \
+    		cfg.get('org_manage', 'add_cate_ok')).click()
+    	time.sleep(1)
+
+    	#添加子类目
+		driver.find_element("class name", "addSub").click()
+		time.sleep(1)
+		driver.find_element("id", "reg_textField").clear()
+		driver.find_element("id", "reg_textField").send_keys("sub_cate")
+		time.sleep(1)
+		driver.find_element("xpath", "//button").click()
+		time.sleep(1)
+
+		#编辑类目
+		driver.find_element("class name", "editCateg").click()
+		time.sleep(1)
+		driver.find_element("xpath", "//button").click()
+		time.sleep(1)
+    except:
+    	print u"没有成员类目修改权限"
+
+    #删除
+    try:
+    	driver.find_elements("class name", "delete")[-1].click()
+    	time.sleep(1)
+    	driver.find_element("xpath", "//button").click()
+    except:
+    	print u"没有成员类目删除权限"
+
+def member_manage():
+	pass
+
+
+def member():
+	driver.get("%smyOffice.do" %(base_url))
+	menu_title = u"其他"
+	menu_dic = {u"成员类目": member_cate,    
+	            u"退款交易记录": member_manage,}
+	check_menu(menu_title, menu_dic)
+
+def express_manage():
+	pass
+
+def stu_lecture():
+	pass
+
+def course_lecture():
+	driver.get("%smyOffice.do" %(base_url))
+	menu_title = u"其他"
+	menu_dic = {u"管理快递公司": express_manage,    
+	            u"管理学员讲义": stu_lecture,}
 	check_menu(menu_title, menu_dic)
 
 def admin_athority_check():

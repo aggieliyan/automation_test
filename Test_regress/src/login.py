@@ -95,7 +95,8 @@ def register_by_email_index(cfg, driver, base_url, r_username, r_email, r_psw):
     driver.find_element(cfg.get('as_index', 'register_email_confirm_psw_by'), \
                         cfg.get('as_index', \
                                 'register_email_confirm_psw')).send_keys(r_psw)
-    #driver.find_element_by_id("J_iCode").send_keys("aaaa")
+    driver.find_element_by_id("J_iCode").click()
+    driver.find_element_by_id("J_iCode").send_keys(raw_input(u"请输入验证码："))
     time.sleep(8)
     driver.find_element(cfg.get('as_index', 'register_email_submit_by'), \
                         cfg.get('as_index', 'register_email_submit')).click()

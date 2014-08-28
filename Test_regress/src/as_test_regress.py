@@ -18,7 +18,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
 
-        self.browser = "Chrome"
+        self.browser = "ie"
 
         self.test_enviroment = "beta"
         self.independent_url = "www.dlym.com" #独立域名网址

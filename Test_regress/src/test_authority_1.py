@@ -45,7 +45,7 @@ def swithing_window(bh,ah):
 	     if h not in bh:
 		     driver.switch_to_window(h)
 		     	
-#前台-首页
+#前台-首页导航
 def firstpage():
 	time.sleep(1)
 	driver.find_element_by_link_text("网校首页").click()
@@ -155,8 +155,521 @@ def firstpage():
 	    driver.find_element("css selector",".dialog-button-container button").click()#点击确定	   
 	except Exception:
 		print traceback.format_exc()
-		print u"所有管理员都应该有编辑咨询热线和服务时间的权限"
-			     	
+		print u"所有管理员都应该有编辑咨询热线和服务时间的权限"   
+#前台-课程中心（教学教务-课程课件-课程管理权限）
+def course_center():
+    time.sleep(1)   
+    try:
+        #课程中心
+        driver.find_element_by_link_text(u"全部").click()
+        time.sleep(1)     
+    except Exception:
+        print traceback.format_exc()
+        print u"课程中心：没有教学教务-课程课件-课程管理的读权限"   
+    	
+    time.sleep(1)   
+    try:
+        #课程中心
+        driver.execute_script("$('.coursecenter-module-hover').attr('style','display:block')")#显示隐藏操作
+        #排序
+        time.sleep(1)
+        driver.find_element_by_link_text(u"排序").click()
+        time.sleep(1)
+        driver.find_element("class name", "courseRank").click()
+        #置顶显示、取消置顶
+        time.sleep(1)
+        driver.execute_script("$('.coursecenter-module-hover').attr('style','display:block')")#显示隐藏操作
+        time.sleep(1)
+        driver.find_element_by_link_text(u"置顶显示").click()
+        time.sleep(1)
+        driver.find_element_by_link_text(u"取消置顶").click()
+        #获取视频链接
+        time.sleep(1)
+        driver.find_element_by_link_text(u"获取视频链接").click()
+        time.sleep(1)
+        driver.find_element("class name", "dialog-button-container").click()#点击关闭  
+        #显示编辑
+        time.sleep(1)
+        driver.find_element_by_link_text(u"编辑")
+        #显示编辑
+        time.sleep(1)
+        try:
+            driver.find_element_by_link_text(u"编辑三分屏章节")
+        except:
+            print '此页没有三分屏课程，没有编辑三分屏章节！'       
+        #显示发布相似课程 
+        time.sleep(1)
+        driver.find_element_by_link_text(u"发布相似课程")    
+    except Exception:
+        print traceback.format_exc()
+        print u"课程中心：没有教学教务-课程课件-课程管理的编辑权限"
+
+    time.sleep(1)
+    try:
+        #课程中心
+        driver.execute_script("$('.coursecenter-module-hover').attr('style','display:block')")#显示隐藏操作
+        time.sleep(1)
+#        driver.find_element_by_link_text(u"删除").click()
+#        time.sleep(1)
+#        driver.find_element("css selector",".dialog-button-container button").click()#确定    
+    except Exception:
+        print traceback.format_exc()
+        print u"课程中心：没有教学教务-课程课件-课程管理的删除权限"
+           
+#前台-课程中心-课程详情页（教学教务-课程课件-课程管理权限）             
+def course_detail():  
+    time.sleep(1)
+    bh = driver.window_handles   
+    try:
+        #课程详情页
+        driver.find_element("class name","coursecenter-details-pic").click()#点击第一个课程进入课程详情页 
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+        time.sleep(1)
+        #分享
+        driver.find_element("class name","bdshare_b")#显示分享
+        time.sleep(1)
+        #显示开始播放
+        driver.find_element_by_link_text(u"开始播放")
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"课程详情页面：没有教学教务-课程课件-课程管理的读权限"
+        
+    time.sleep(1)   
+    try:
+        #显示编辑
+        driver.find_element_by_link_text(u"编辑")
+        time.sleep(2)
+        #显示获取视频链接
+        try:
+            driver.find_element_by_link_text(u"获取视频链接").click()
+            time.sleep(1)
+            driver.find_element("class name", "dialog-button-container").click()#点击关闭  
+        except:
+            print'不是视频课程，没有获取视频链接！'
+        time.sleep(2)
+        #显示编辑三分屏章节
+        try:
+            driver.find_element_by_link_text(u"编辑三分屏章节")
+        except:
+            print'不是三分屏或双视频课程,没有编辑三分屏章节'
+        time.sleep(1)
+        #显示发布相似课程
+        driver.find_element_by_link_text(u"发布相似课程")
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"课程详情页面：没有教学教务-课程课件-课程管理的编辑权限！" 
+        
+    time.sleep(3)   
+    try:
+        #删除
+        driver.find_element_by_link_text(u"删除").click()
+        time.sleep(1)
+        driver.find_elements("css selector",".dialog-button-container button")[1].click()#点击取消删除
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"课程详情页面：没有教学教务-课程课件-课程管理的删除权限"         
+
+#前台-课程中心-课程详情页-答疑讨论区        
+def course_detail_ansquetion():
+        #答疑讨论区 
+    time.sleep(3)
+    try:
+        try:
+            #回复提问
+            driver.find_element_by_link_text(u"回复").click()                                                
+        except:
+            print '还没有提问！'
+            return
+        time.sleep(1)
+        driver.find_element("class name","replay-textarea").send_keys("hello")
+        time.sleep(1)
+        driver.find_element("class name","send-replay").click()#点击回复按钮  
+        time.sleep(1)
+        driver.find_element("class name","delete-my").click()#删除刚才的回复
+        #删除提问
+        time.sleep(1)
+        driver.find_element("class name","delete-all").click()
+        time.sleep(1)                                              
+    except Exception:
+        print traceback.format_exc()
+        print u"课程详情页面：答疑讨论区应该对所有的管理员开放"             
+
+#课程播放页面的答疑讨论区收到测试吧
+
+#前台-课程中心导航
+def course_center_relate():
+    time.sleep(1)
+    driver.find_element_by_link_text("网校首页").click()
+    time.sleep(1)
+    driver.find_element_by_link_text("课程中心").click()
+    course_center()
+    course_detail()
+    course_detail_ansquetion()
+
+#前台-报班中心(教学教务-报班中心-报班管理)
+def class_center():
+    time.sleep(1)   
+    try:
+        #报班中心
+        driver.find_element_by_link_text(u"全部").click()
+    except Exception:
+        print traceback.format_exc()
+        print u"报班中心：没有教学教务-报班中心-报班管理的读权限"
+
+    time.sleep(1)
+    current_url = driver.current_url 
+    try:
+        #置顶显示、取消置顶
+        driver.find_element_by_link_text(u"置顶显示").click()
+        time.sleep(1)
+        driver.find_element_by_link_text(u"取消置顶").click()
+        time.sleep(1)
+        #班级管理
+        driver.find_element_by_link_text(u"报班管理").click()
+        time.sleep(1)
+        driver.get(current_url)
+        time.sleep(1)        
+    except Exception:
+        print traceback.format_exc()
+        print u"报班中心：没有教学教务-报班中心-报班管理的编辑、删除权限"
+    
+#前台-报班中心--班级详情页(教学教务-报班中心-报班管理)
+def class_detail():
+    time.sleep(2)
+    bh = driver.window_handles 
+    try:
+        driver.find_element("css selector", ".course-title a").click()#点击第一个班级进入详情页
+        time.sleep(1)
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+        time.sleep(1)
+        #分享
+        driver.find_element("id", "bdshare")
+        time.sleep(1)
+        bh = driver.window_handles 
+        current_url = driver.current_url
+        time.sleep(1) 
+        #查看报名情况
+        driver.find_element("class name", "see-faceDetial").click()
+        time.sleep(1)
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+        time.sleep(1)
+        driver.get(current_url)
+        time.sleep(1)
+        #开始观看
+        try:
+            driver.find_element("class name", "see-now")
+            time.sleep(1)
+        except:
+            print '此班级是面授班，没有开始观看按钮！'        
+    except Exception:
+        print traceback.format_exc()
+        print u"班级详情页面：没有教学教务-报班中心-报班管理的读权限"
+
+    time.sleep(1)
+    try:
+        #编辑
+        driver.find_element("class name", "detialEdit")
+        time.sleep(1)
+        #下架
+        try:
+            driver.find_element("class name", "upclass").click()
+            driver.find_element("class name", "upclass").click()
+        except:
+            print '此班级是面授班，没有下架按钮！'       
+    except Exception:
+        print traceback.format_exc()
+        print u"班级详情页面：没有教学教务-报班中心-报班管理的编辑、删除权限"
+
+#前台-报班中心--班级详情页-答疑区(网络班)
+def class_detail_ansquestion():
+    #答疑讨论区 
+    time.sleep(3)
+    try:
+        try:
+            #回复提问
+            driver.find_element_by_link_text(u"回复").click()                                                
+        except:
+            print '还没有提问或者是面授班没有答疑区！'
+            return
+        time.sleep(1)
+        driver.find_element("class name","replay-textarea").send_keys("hello")
+        time.sleep(1)
+        driver.find_element("class name","send-replay").click()#点击回复按钮  
+        time.sleep(1)
+        driver.find_element("class name","delete-my").click()#删除刚才的回复
+        #删除提问
+        time.sleep(1)
+        driver.find_element("class name","delete-all").click()
+        time.sleep(1)                                              
+    except Exception:
+        print traceback.format_exc()
+        print u"班级详情页面：答疑讨论区应该对所有的管理员开放"   
+ 
+#前台-报班中心导航
+def class_center_relate():
+    time.sleep(1)
+    driver.find_element_by_link_text("网校首页").click()
+    time.sleep(1)
+    driver.find_element_by_link_text("报班中心").click()   
+    class_center()
+    class_detail()
+    class_detail_ansquestion()
+
+#前台-在线答疑
+def online_ansquestion():
+    time.sleep(1)
+    driver.find_element_by_link_text("网校首页").click() 
+    time.sleep(1)
+    driver.find_element_by_link_text("在线答疑").click() 
+    course_detail_ansquetion()
+
+#前台-直播课程
+def live_course():
+    time.sleep(1)   
+    try:
+        driver.find_element("class name", "see-course")#找到进入课程或者查看详情
+    except Exception:
+        print traceback.format_exc()
+        print u"直播课程：没有教学教务-直播课程-发布直播课程的读权限"
+
+    time.sleep(1)
+    bh = driver.window_handles 
+    current_url = driver.current_url
+    try:
+        #发布直播课程
+        driver.find_element("css selector", ".post-btn a").click()
+        time.sleep(1)
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+        driver.get(current_url)
+        time.sleep(1)
+        #编辑
+        driver.find_elements_by_link_text(u"编辑")[1].click()
+        time.sleep(1)
+        driver.get(current_url)
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"直播课程：没有教学教务-直播课程-发布直播课程的编辑权限"
+        
+    try:
+        #删除
+        driver.find_element_by_link_text(u"删除").click()
+        time.sleep(1)
+        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#先取消删除以后改过来
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"直播课程：没有教学教务-直播课程-发布直播课程的删除权限"
+
+#前台-报名中-直播课程详情页
+def live_course_detail_continue():
+    time.sleep(2)
+    driver.find_element("class name", "package-type").click()#点击报名中
+    time.sleep(1)
+    bh = driver.window_handles   
+    try:
+        driver.find_element("class name", "see-course").click()#进入课程
+        time.sleep(1)
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+    except:
+        print u"没有正在报名中的课程"
+
+    time.sleep(1)        
+    bh = driver.window_handles 
+    current_url = driver.current_url 
+    try:
+        #查看学员
+        driver.find_elements("css selector", ".course-manage a")[-1].click()
+        time.sleep(1)
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+        driver.get(current_url)
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"报名中-直播课程详情页-直播课程-发布直播课程的读权限"
+
+    time.sleep(1)
+    bh = driver.window_handles
+    try:
+#        #发布相似课程
+        driver.find_element("css selector", ".course-manage a").click()
+        time.sleep(1)
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+        driver.get(current_url) 
+        time.sleep(1)
+        #上传课件
+        driver.find_elements("css selector", ".course-manage a")[1]
+        time.sleep(1)
+        #导入学员
+        driver.find_elements("css selector", ".course-manage a")[2].click()
+        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"报名中-直播课程详情页-直播课程-发布直播课程的编辑、删除权限"
+    #返回直播课程首页 
+    time.sleep(1)
+    driver.find_element_by_link_text("直播课程").click()
+            
+#前台-已结束-直播课程详情页
+def live_course_detail_end():
+    time.sleep(1)
+    driver.find_element("class name", "face-type").click()#点击已结束
+    time.sleep(1)
+    bh = driver.window_handles   
+    driver.find_element("class name", "see-course").click()#找到进入课程
+    time.sleep(1)
+    ah = driver.window_handles
+    swithing_window(bh,ah)
+    current_url = driver.current_url 
+    try:
+        #统计信息
+        bh = driver.window_handles
+        driver.find_elements("css selector", ".course-manage a")[2].click()
+        time.sleep(1)
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+        time.sleep(1)
+        driver.get(current_url)
+        time.sleep(1)
+        #课程结束
+        driver.find_element_by_link_text("课程结束")
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"报名中-直播课程详情页-直播课程-发布直播课程的读权限"
+
+    time.sleep(1)
+    bh = driver.window_handles
+    try:
+        #发布相似课程
+        driver.find_element("css selector", ".course-manage a").click()
+        time.sleep(1)
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+        driver.get(current_url) 
+        time.sleep(2)
+        #上传课件
+        driver.find_elements("css selector", ".course-manage a")[1]
+        time.sleep(1)
+        #编辑
+        driver.find_elements("css selector", ".course-manage a")[3].click()
+        time.sleep(1)
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+        driver.get(current_url) 
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"报名中-直播课程详情页-直播课程-发布直播课程的编辑权限"
+    time.sleep(1)
+    try:
+        #删除
+        driver.find_elements("css selector", ".course-manage a")[4].click()
+        time.sleep(1)
+        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#先取消删除以后改过来
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"报名中-直播课程详情页-直播课程-发布直播课程的删除权限"
+        
+#前台-直播课程导航
+def live_course_relate():
+    time.sleep(1)
+    driver.find_element_by_link_text("网校首页").click() 
+    time.sleep(1)
+    driver.find_element_by_link_text("直播课程").click()   
+    live_course()
+    live_course_detail_continue()
+    live_course_detail_end()
+    
+#前台-在线考试(教学教务-考试测评-考试系统权限)
+def online_exam():
+    time.sleep(1)
+    bh = driver.window_handles   
+    current_url = driver.current_url       
+    try:
+        #更多试卷
+        driver.find_element("css selector", ".publish-exam a").click()
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+        time.sleep(1)
+        driver.get(current_url)     
+    except Exception:
+        print traceback.format_exc()
+        print u"在线考试：没有教学教务-考试测评-考试系统的读权限"   
+        
+    time.sleep(1)   
+    try:
+        #在线考试
+        driver.execute_script("$('.coursecenter-module-hover').attr('style','display:block')")#显示隐藏操作
+        #置顶显示、取消置顶
+        time.sleep(1)
+        driver.find_element_by_link_text(u"置顶显示").click()
+        time.sleep(1)
+        driver.find_element_by_link_text(u"取消置顶").click()
+        #显示编辑
+        time.sleep(1)
+        driver.find_element_by_link_text(u"编辑")
+    except Exception:
+        print traceback.format_exc()
+        print u"在线考试：没有教学教务-考试测评-考试系统的编辑权限"
+        
+    time.sleep(1)   
+    try:
+        #显示删除
+        time.sleep(1)
+        driver.find_element_by_link_text(u"删除").click()
+        time.sleep(1)        
+        driver.find_elements("css selector", ".dialog-button-container button")[-1].click()#先取消删除以后改过来  
+    except Exception:
+        print traceback.format_exc()
+        print u"在线考试：没有教学教务-考试测评-考试系统的删除权限"        
+
+#前台-在线考试-试卷详情页面(教学教务-考试测评-考试系统权限)
+def online_exam_detail():
+    time.sleep(1)
+    driver.find_element("css selector", ".onlineexam-module-txtes a").click()
+    time.sleep(1)   
+    current_url = driver.current_url       
+    try:
+        #显示试卷标题
+        driver.find_element("class name", "onlineexam-introduce")  
+    except Exception:
+        print traceback.format_exc()
+        print u"试卷详情：没有教学教务-考试测评-考试系统的读权限"   
+        
+    time.sleep(1)   
+    try:
+        #2个编辑按钮
+        driver.find_element("class name", "start-test")
+        time.sleep(1) 
+        driver.find_element("class name", "onlineexam-btn") 
+        time.sleep(1)   
+    except Exception:
+        print traceback.format_exc()
+        print u"试卷详情：没有教学教务-考试测评-考试系统的编辑、删除权限"  
+
+#前台-在线考试(教学教务-考试测评-考试系统权限)
+def online_exam_relate():
+    time.sleep(1)
+    driver.find_element_by_link_text("网校首页").click() 
+    time.sleep(1)
+    driver.find_element_by_link_text("在线考试").click()
+    online_exam()
+    online_exam_detail()
+                                       		     	
 #后台首页-教学互动		    
 def teaching():
 	driver.get("%smyOffice.do" %(base_url))
@@ -385,13 +898,6 @@ def authmanage_buygrant():
 		print u"没有在线购买授权的编辑、删除权限"
 	time.sleep(2)
 	driver.get(current_url)
-
-	
-#后台首页-课程合作代理-管理我授权的代理	
-def agent_grant():
-	time.sleep(1)
-	courseagent_grant()
-	paperagent_grant()
 
 #后台首页-课程合作代理-管理我申请的代理	
 def agent_apply():
@@ -682,6 +1188,12 @@ def paperagent_apply():
 	driver.get(current_url)	
 	time.sleep(2)
 
+#后台首页-课程合作代理-管理我授权的代理    
+def agent_grant():
+    time.sleep(1)
+    courseagent_grant()
+    paperagent_grant()
+    
 #后台首页-学习卡-管理卡组
 def learnigcard_group():
 	time.sleep(1)
@@ -1395,8 +1907,8 @@ def admin_athority_check():
 	cfg.read(cfg_file)
 #	user_name = "v52"
 #	user_psw = "1234"    
-	user_name = "stu_gy"
-	user_psw = "gy04110911"
+	user_name = "sadm_gaoyue"
+	user_psw = "123456aa"
 
 	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
@@ -1406,25 +1918,35 @@ def admin_athority_check():
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
 #	driver.get("%smyOffice.do" %(base_url))
 
-    #后台-后台首页
+#    #后台-后台首页
 #	teaching()#教学互动
 #	authmanage()#授权管理
 #	courseagent()#课程合作代理
 #	learnigcard()#学习卡
 #	countmanage()#统计管理
-
-    #后台-系统设置
+#
+#    #后台-系统设置
 #	manageorservice()#管理员/客服
 #	pagecreate()#页面建设
-
-#   #后台-学员/员工
+#
+#    #后台-学员/员工
 #	stuoremp()#网校学员
 
     #前台(适用于所有管理员)
-	firstpage()#网校首页
-    
-
-	driver.quit()
+#        firstpage()#首页
+#        course_center_relate()#课程中心
+#        class_center_relate()#报班中心 
+#        online_ansquestion()#在线答疑
+#        live_course_relate()#直播课程
+        online_exam_relate()#在线考试
+        #待写
+        #网校公告
+        #网校成员
+        #特惠课程
+        #名师团队
+        #帮助中心
+        #关于我们
+        driver.quit()
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

@@ -99,11 +99,13 @@ def course_manage():
 		except:
 			pass
 		time.sleep(1)
+
 		#发布相似课程
 		driver.get(current_url)
 		time.sleep(2)
 		driver.find_element_by_link_text(u"发布相似课程").click()
 		time.sleep(1)
+
 		#编辑三分屏章节
 		driver.get(current_url)
 		alert = driver.switch_to_alert()
@@ -116,8 +118,14 @@ def course_manage():
 		driver.get(current_url)
 		driver.find_element("class name", "new-categ-button")
 		new_course_management.course_redirect(cfg, driver, base_url)
+
+		#员工课程申请
+		driver.get(current_url)
+		driver.find_element_by_link_text(u"员工课程申请").click()
+		driver.find_element_by_link_text(u"通过").click()
+		driver.find_element_by_link_text(u"拒绝").click()
 	except NoSuchElementException:
-		print traceback.format_exc() 
+		print traceback.format_exc()
 		print u"没有课程编辑权限"
 
 	try:
@@ -179,6 +187,14 @@ def course_href():
 		print u"没有外链删除权限"
 def course_setting():
 	try:
+		#片头管理
+		time.sleep(1)
+		driver.find_element("id", "J_showIntroVideo").click()
+		driver.find_element("id", "J_allowSkipIntroVideo").click()
+		time.sleep(1)
+
+
+		#跑马灯
 		driver.find_element("id", "editCourseWare").click()
 		time.sleep(1)
 		driver.find_elements("class name", "bluebtn25_text")[-1].click()
@@ -200,26 +216,64 @@ def class_manage():
 	current_url = driver.current_url
 
 	try:
+		#创建网络班
+		new_course_management.class_redirect(cfg, driver, base_url, classname='onlineclass', ctype=1)		
 		#编辑
-		driver.find_element_by_link_text("编辑").click()
+		driver.find_element_by_link_text(u"编辑").click()
+		time.sleep(3)
+		driver.find_element("css selector", "span.greenbtn25_text").click()
+
+		#预售班的创建和编辑
+		new_course_management.class_redirect(cfg, driver, base_url, classname='presaleclass', ctype=2)
+		driver.find_element_by_link_text(u"编辑").click()
+		time.sleep(3)
+		driver.find_element("css selector", "span.greenbtn25_text").click()
+		#下架
 		time.sleep(1)
+		driver.find_element_by_link_text(u"下架").click()
+
+		#上架
+		time.sleep(1)
+		driver.find_element_by_link_text(u"上架").click()
+
+		#报名详情
+		driver.find_element_by_link_text(u"报名详情").click()
+		time.sleep(1)
+		driver.find_element("css selector", "span.greenbtn25_text").click()
+		time.sleep(1)
+		driver.get(current_url)
+
+		#面授班
+		driver.find_element_by_link_text(u"面授班").click()
+		#创建面授班
+
+		#编辑
+		driver.find_element_by_link_text(u"编辑").click()
+		time.sleep(3)
 		driver.find_element("css selector", "span.greenbtn25_text").click()
 
 		#下架
+		driver.find_element_by_link_text(u"面授班").click()
 		time.sleep(1)
-		driver.find_element_by_link_text("下架").click()
+		driver.find_element_by_link_text(u"下架").click()
 
 		#报名详情
-		driver.find_element_by_link_text("报名详情").click()
+		driver.find_element_by_link_text(u"报名详情").click()
 		time.sleep(1)
 		driver.find_element("css selector", "span.greenbtn25_text").click()
-		time.sleep(1)
+		time.sleep(1)		
 	except:
 		print u"没有报班管理-编辑权限"
 
 	try:
 		#删除
 		driver.get(current_url)
+		driver.find_element_by_link_text(u"删除").click()
+		time.sleep(1)
+		driver.find_element("xpath", "//button").click()
+		time.sleep(1)
+
+		driver.find_element_by_link_text(u"面授班").click()
 		driver.find_element_by_link_text(u"删除").click()
 		time.sleep(1)
 		driver.find_element("xpath", "//button").click()
@@ -249,6 +303,13 @@ def course_test():
 
 
 def exam_card():
+
+	try:
+		time.sleep(1)
+		driver.find_element_by_link_text(u"导出该卡组的Excel文件").click()
+		time.sleep(1)
+	except:
+		print u"没有考试卡查看权限"
 
 	try:
 		driver.find_element("id", "J_datatable_batchaction").click()
@@ -395,7 +456,7 @@ def accout_detail():
 	current_url = driver.current_url
 	try:
 		#充值
-		driver.find_element_by_link_text(u"充值").click()
+		driver.find_element_by_link_text(u"立即充值").click()
 		time.sleep(1)
 		driver.find_element("name", "payment").click()
 		driver.find_element("id", "saveBtn").click()
@@ -433,6 +494,19 @@ def accout_detail():
 		print traceback.format_exc()
 		print u"没有提现权限"
 
+	try:
+		driver.get(current_url)
+		driver.find_element_by_link_text(u"导出收入记录").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"支出").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"导出收入记录").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"充值记录").click()
+		driver.find_element_by_link_text(u"提现记录").click()
+		driver.find_element_by_link_text(u"转账").click()
+	except:
+		print u"没有账户明细查看权限"
 
 def accout_charge():
 	pass
@@ -459,7 +533,29 @@ def accout_charge():
 	pass
 
 def member_accout():
-	pass
+	try:
+		time.sleep(2)
+		toinput = driver.find_elements("css selector", "div.floatleft > input")[1]
+		toinput.clear()
+		toinput.send_keys("1")
+		driver.find_element("xpath", "//a/span[2]").click()
+		time.sleep(3)
+		driver.find_elements("xpath", "//button")[-1].click()
+		time.sleep(2)
+	except:
+		print traceback.format_exc() 
+		print u"没有权限给成员转账"
+
+	try:		
+		frominput = driver.find_elements("css selector", "div.floatleft > input")[2]
+		frominput.clear()
+		frominput.send_keys("1")
+		driver.find_element("xpath", "//td[3]/div/div/div[3]/div/a/span[2]").click()
+		time.sleep(3)
+		driver.find_elements("xpath", "//button")[-1].click()
+	except:
+		print traceback.format_exc()
+		print u"没有权限从成员提账"
 
 def financial():
 	driver.get("%smyOffice.do" %(base_url))
@@ -475,11 +571,12 @@ def sold_history():
 		time.sleep(1)
 		driver.find_element_by_link_text(u"导出Excel列表").click()
 		time.sleep(1)
-		driver.find_element_by_link_text(u"尚未确认付款的交易记录").click()
+		driver.find_element("id", "needpaySellHistory").click()
 		time.sleep(1)
 		driver.find_element_by_link_text(u"导出Excel列表").click()
-		time.sleep(1)
+		time.sleep(2)
 	except:
+		print traceback.format_exc() 
 		print u"没有卖出交易记录查看权限"
 
 def repay_history():
@@ -488,6 +585,7 @@ def repay_history():
 		driver.find_element_by_link_text(u"查看").click()
 		time.sleep(1)
 	except:
+		print traceback.format_exc() 
 		print u"没有退款交易记录查看权限"
 
 def transaction():
@@ -501,15 +599,15 @@ def member_cate():
 	try:
 		#新建一级类目
 		time.sleep(1)
-    	driver.find_element(cfg.get('org_manage', 'add_topcate_by'), \
+		driver.find_element(cfg.get('org_manage', 'add_topcate_by'), \
     		cfg.get('org_manage', 'add_topcate')).click()
-    	time.sleep(2)
-    	driver.find_element(cfg.get('org_manage', 'cate_addname_by'), \
-    		cfg.get('org_manage', 'cate_addname')).send_keys(cate_name)
-    	time.sleep(2)
-    	driver.find_element(cfg.get('org_manage', 'add_cate_ok_by'), \
+		time.sleep(2)
+		driver.find_element(cfg.get('org_manage', 'cate_addname_by'), \
+    		cfg.get('org_manage', 'cate_addname')).send_keys("member_cate")
+		time.sleep(2)
+		driver.find_element(cfg.get('org_manage', 'add_cate_ok_by'), \
     		cfg.get('org_manage', 'add_cate_ok')).click()
-    	time.sleep(1)
+		time.sleep(1)
 
     	#添加子类目
 		driver.find_element("class name", "addSub").click()
@@ -525,30 +623,93 @@ def member_cate():
 		time.sleep(1)
 		driver.find_element("xpath", "//button").click()
 		time.sleep(1)
-    except:
-    	print u"没有成员类目修改权限"
+	except:
+		print traceback.format_exc() 
+		print u"没有成员类目修改权限"
 
     #删除
-    try:
-    	driver.find_elements("class name", "delete")[-1].click()
-    	time.sleep(1)
-    	driver.find_element("xpath", "//button").click()
-    except:
-    	print u"没有成员类目删除权限"
+	try:
+		driver.find_elements("class name", "delete")[-1].click()
+		time.sleep(1)
+		driver.find_element("xpath", "//button").click()
+	except:
+		print traceback.format_exc() 
+		print u"没有成员类目删除权限"
 
 def member_manage():
-	pass
+	
+	time.sleep(1)
+	current_url = driver.current_url
+	try:
+		driver.find_element_by_link_text(u"创建机构成员").click()
+		driver.get(current_url)
+	except:
+		print u"没有创建机构学员权限"
+
+	try:
+		time.sleep(1)
+		driver.find_element_by_link_text(u"添加类目")
+	except:
+		print u"没有添加类目的权限"
+
+
+	try:
+		driver.find_element_by_link_text(u"删除成员").click()
+		time.sleep(1)
+		driver.find_elements("xpath", "//button")[-2].click()
+		time.sleep(1)
+	except:
+		print u"没有删除成员权限"
+
 
 
 def member():
 	driver.get("%smyOffice.do" %(base_url))
 	menu_title = u"其他"
 	menu_dic = {u"成员类目": member_cate,    
-	            u"退款交易记录": member_manage,}
+	            u"成员管理": member_manage,}
 	check_menu(menu_title, menu_dic)
 
-def express_manage():
+def ad_income():
 	pass
+
+def ad_manage():
+	pass
+
+def ad_system():
+	driver.get("%smyOffice.do" %(base_url))
+	menu_title = u"其他"
+	menu_dic = {u"广告收入记录": ad_income,    
+	            u"广告管理": ad_manage,}
+	check_menu(menu_title, menu_dic)	
+
+def express_manage():
+	try:
+		driver.find_element_by_link_text(u"添加快递公司").click()
+		time.sleep(1)
+		driver.find_element("id", "expressname").send_keys(u"快递公司")
+		driver.find_element("id", "expressweb").send_keys("http://www.ablesky.com")
+		driver.find_element("xpath", "//button").click()
+		time.sleep(2)
+	except:
+		print u"没有添加快递公司权限"
+
+	try:
+		driver.find_element_by_link_text(u"编辑").click()
+		time.sleep(1)
+		driver.find_element("xpath", "//button").click()
+		time.sleep(2)
+	except:
+		print u"没有删除快递公司权限"
+
+	try:
+		driver.find_element_by_link_text(u"删除").click()
+		time.sleep(1)
+		driver.find_element("xpath", "//button").click()
+		time.sleep(1)
+	except:
+		print u"没有删除快递公司权限"
+
 
 def stu_lecture():
 	pass
@@ -576,13 +737,25 @@ def admin_athority_check():
 	os.environ["webdriver.chrome.driver"] = chromedriver
 	driver = webdriver.Chrome(chromedriver)
 	#driver = webdriver.Ie()
+	driver.maximize_window() #窗口最大化
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
+	#教学教务
 	# course()
+	#class_center()
+	#onlineclass()
 	# exam_manage()
 	# cheap_course()
 	# teacher()
-	financial()
+
+	#财务/交易
+	#financial()
+	#transaction()
+
+	#其他
+	#member()
+	ad_system()
+	course_lecture()
 
 	driver.quit()
 

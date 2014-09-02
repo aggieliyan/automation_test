@@ -41,6 +41,22 @@ class Test(unittest.TestCase):
         self.course_href = ""
         self.course_href_2 = ""
 
+        #一些使用卡相关变量，前置条件：管理员先创建卡，给变量赋值，用户才可获取卡号登录使用卡号
+        #充值卡-卡号、密码
+        self.p_card_num = 0
+        self.p_card_pwd = 0
+        #充课卡-卡号、密码
+        self.c_card_num = 0
+        self.c_card_pwd = 0
+        #补课卡-卡号、密码
+        self.ca_card_num = 0
+        self.ca_card_pwd = 0
+        #试听卡-考号、密码
+        self.l_card_num = 0
+        self.l_card_pwd = 0
+        #考试卡-卡号
+        self.examcard_num = 0
+
         #注册的时候会把第一个值赋给它
         self.import_name = ""
 
@@ -442,7 +458,10 @@ class Test(unittest.TestCase):
     def use_exam_card(self):
         self.total += 1
         try:
-            card_management.user_usexamcard(self.cfg, self.driver, self.base_url, self.examcard_num)
+            if self.examcard_num != 0:
+                card_management.user_usexamcard(self.cfg, self.driver, self.base_url, self.examcard_num)
+            else:
+                print u"没有获取到考试卡号"
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append('fail to use exam card!')
@@ -569,7 +588,10 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            confirm_num = card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.p_card_num, self.p_card_pwd)
+            if self.p_card_num != 0 and self.p_card_pwd != 0:
+                confirm_num = card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.p_card_num, self.p_card_pwd)
+            else:
+                print u"没有获取到卡充值卡号或者密码"
             #验证
             if self.p_card_num!=confirm_num:
                 self.verificationErrors.append('fail to use prepaid card!')
@@ -582,7 +604,10 @@ class Test(unittest.TestCase):
     def use_coursecard(self):#充课卡
         self.total += 1
         try:
-            confirm_num = card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.c_card_num, self.c_card_pwd)
+            if self.c_card_num != 0 and self.c_card_pwd != 0:
+                confirm_num = card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, self.c_card_num, self.c_card_pwd)
+            else:
+                print u"没有获取到充课卡号或者密码"
             #验证
             if self.c_card_num!=confirm_num:
                self.verificationErrors.append('fail to use course card!')             
@@ -598,7 +623,10 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            course_num = card_management.use_course_card(self.cfg, self.driver, self.base_url, self.ca_card_num, self.ca_card_pwd)
+            if self.ca_card_num != 0 and self.ca_card_pwd != 0:
+                course_num = card_management.use_course_card(self.cfg, self.driver, self.base_url, self.ca_card_num, self.ca_card_pwd)
+            else:
+                print u"没有获取到补课卡号或者密码"
             #验证
             if self.ca_card_num!=course_num:
               self.verificationErrors.append('fail to use category card!')  
@@ -612,7 +640,10 @@ class Test(unittest.TestCase):
         
         self.total += 1
         try:
-            login.login_by_logindo(self.cfg, self.driver, self.base_url, self.l_card_num, self.l_card_pwd)
+            if self.l_card_num != 0 and self.l_card_pwd != 0:
+                login.login_by_logindo(self.cfg, self.driver, self.base_url, self.l_card_num, self.l_card_pwd)
+            else:
+                print u"没有获取到试听卡号或者密码"
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append('fail to use listen card!')

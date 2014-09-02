@@ -36,21 +36,63 @@ def check_menu(menu_title, menu_dic):
 	except Exception:
 		print traceback.format_exc() 
 		print u"没有%s权限"%menu_title
+
+def fore_stage():
+    navi_dic = {u"首页":firstpage, 
+                   u"课程中心":course_center_relate, 
+                   u"报班中心":class_center_relate,
+                   u"在线考试":online_exam_relate, 
+                   u"网校公告":school_notice, 
+                   u"直播课程":live_course_relate,
+                   u"特惠课程":cheap_course_relate,
+                   u"在线答疑":online_ansquestion, 
+                   u"名师团队":teacher_team,
+                   u"网校成员":school_members, 
+                   u"关于我们":about_us,
+                   u"帮助中心":help_center}
+    check_navigation(navi_dic) 
     
+def check_navigation(navi_dic): 
+    time.sleep(1)   
+    driver.find_element_by_link_text("网校首页").click()
+    time.sleep(1)
+    for item in navi_dic.keys():  
+        try:
+            driver.find_element_by_link_text(item).click()
+        except:
+            time.sleep(1)
+            driver.execute_script("$('.dnl-list-ul').attr('style','display:block')")
+            time.sleep(1)
+            driver.find_element_by_link_text("导航管理").click()
+            time.sleep(1)
+            driver.find_element_by_link_text("导航编辑").click()
+            time.sleep(1)
+            driver.find_element_by_link_texts(u"隐藏")[-1].click()#隐藏最后一个
+            time.sleep(1)
+            title = driver.execute_script("return $('.hidden-module-en .nav-items-uen .limitword').eq(0).val()")
+            time.sleep(1)
+            #显示第一个
+            if navigation_title == title:
+                driver.find_element_by_link_texts(u"显示")[0].click()
+            #显示第二个
+            else:            
+                driver.find_element_by_link_texts(u"显示")[1].click()
+            time.sleep(1)                   
+            driver.find_element_by_link_text(u"保存").click()
+            time.sleep(1)
+        finally:           
+            execute_func(navi_dic[item])
 #切换窗口公共方法
 def swithing_window(bh,ah):
-	 while len(bh) == len(ah):
+     while len(bh) == len(ah):
 	     ah = driver.window_handles
-	 for h in ah:
+     for h in ah:
 	     if h not in bh:
 		     driver.switch_to_window(h)
 		     	
 #前台-首页导航
 def firstpage():
-	time.sleep(1)
-	driver.find_element_by_link_text("网校首页").click()
 	current_url = driver.current_url
-	
 	#首页装扮
 	time.sleep(1)
 	try:
@@ -158,14 +200,14 @@ def firstpage():
 		print u"所有管理员都应该有编辑咨询热线和服务时间的权限"   
 #前台-课程中心（教学教务-课程课件-课程管理权限）
 def course_center():
-    time.sleep(1)   
-    try:
-        #课程中心
-        driver.find_element_by_link_text(u"全部").click()
-        time.sleep(1)     
-    except Exception:
-        print traceback.format_exc()
-        print u"课程中心：没有教学教务-课程课件-课程管理的读权限"   
+#    time.sleep(1)   
+#    try:
+#        #课程中心
+#        driver.find_element_by_link_text(u"全部").click()
+#        time.sleep(1)     
+#    except Exception:
+#        print traceback.format_exc()
+#        print u"课程中心：没有教学教务-课程课件-课程管理的读权限"   
     	
     time.sleep(1)   
     try:
@@ -222,12 +264,12 @@ def course_detail():
     bh = driver.window_handles   
     try:
         #课程详情页
-        driver.find_element("class name","coursecenter-details-pic").click()#点击第一个课程进入课程详情页 
+        driver.find_element("class name", "coursecenter-details-pic").click()#点击第一个课程进入课程详情页 
         ah = driver.window_handles
         swithing_window(bh,ah)
         time.sleep(1)
         #分享
-        driver.find_element("class name","bdshare_b")#显示分享
+        driver.find_element("class name", "bdshare_b")#显示分享
         time.sleep(1)
         #显示开始播放
         driver.find_element_by_link_text(u"开始播放")
@@ -267,7 +309,7 @@ def course_detail():
         #删除
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)
-        driver.find_elements("css selector",".dialog-button-container button")[1].click()#点击取消删除
+        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#点击取消删除
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
@@ -282,30 +324,28 @@ def course_detail_ansquetion():
             #回复提问
             driver.find_element_by_link_text(u"回复").click()                                                
         except:
-            print '还没有提问！'
+            print '课程详情页的答疑区：还没有提问！'
             return
         time.sleep(1)
-        driver.find_element("class name","replay-textarea").send_keys("hello")
+        driver.find_element("class name", "replay-textarea").send_keys("hello")
         time.sleep(1)
-        driver.find_element("class name","send-replay").click()#点击回复按钮  
+        driver.find_element("class name", "send-replay").click()#点击回复按钮  
         time.sleep(1)
-        driver.find_element("class name","delete-my").click()#删除刚才的回复
+        driver.find_element("class name", "delete-my").click()#删除刚才的回复
         #删除提问
         time.sleep(1)
-        driver.find_element("class name","delete-all").click()
+        driver.find_element("class name", "delete-all").click()
         time.sleep(1)                                              
     except Exception:
         print traceback.format_exc()
-        print u"课程详情页面：答疑讨论区应该对所有的管理员开放"             
+        print u"课程详情页面：答疑讨论区相关操作权限应该对所有的管理员开放"             
 
 #课程播放页面的答疑讨论区收到测试吧
 
-#前台-课程中心导航
+#前台-课程中心导航（教学教务-课程课件-课程管理权限）
 def course_center_relate():
     time.sleep(1)
-    driver.find_element_by_link_text("网校首页").click()
-    time.sleep(1)
-    driver.find_element_by_link_text("课程中心").click()
+    driver.find_element_by_link_text(u"课程中心").click()
     course_center()
     course_detail()
     course_detail_ansquetion()
@@ -395,26 +435,24 @@ def class_detail_ansquestion():
             #回复提问
             driver.find_element_by_link_text(u"回复").click()                                                
         except:
-            print '还没有提问或者是面授班没有答疑区！'
+            print '网络班答疑讨论区还没有提问或者是面授班没有答疑区！'
             return
         time.sleep(1)
-        driver.find_element("class name","replay-textarea").send_keys("hello")
+        driver.find_element("class name", "replay-textarea").send_keys("hello")
         time.sleep(1)
-        driver.find_element("class name","send-replay").click()#点击回复按钮  
+        driver.find_element("class name", "send-replay").click()#点击回复按钮  
         time.sleep(1)
-        driver.find_element("class name","delete-my").click()#删除刚才的回复
+        driver.find_element("class name", "delete-my").click()#删除刚才的回复
         #删除提问
         time.sleep(1)
-        driver.find_element("class name","delete-all").click()
+        driver.find_element("class name", "delete-all").click()
         time.sleep(1)                                              
     except Exception:
         print traceback.format_exc()
-        print u"班级详情页面：答疑讨论区应该对所有的管理员开放"   
+        print u"班级详情页面：答疑讨论区相关操作权限应该对所有的管理员开放"   
  
 #前台-报班中心导航
 def class_center_relate():
-    time.sleep(1)
-    driver.find_element_by_link_text("网校首页").click()
     time.sleep(1)
     driver.find_element_by_link_text("报班中心").click()   
     class_center()
@@ -423,8 +461,6 @@ def class_center_relate():
 
 #前台-在线答疑
 def online_ansquestion():
-    time.sleep(1)
-    driver.find_element_by_link_text("网校首页").click() 
     time.sleep(1)
     driver.find_element_by_link_text("在线答疑").click() 
     course_detail_ansquetion()
@@ -495,7 +531,7 @@ def live_course_detail_continue():
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
-        print u"报名中-直播课程详情页-直播课程-发布直播课程的读权限"
+        print u"报名中-直播课程详情页：没有直播课程-发布直播课程的读权限"
 
     time.sleep(1)
     bh = driver.window_handles
@@ -511,16 +547,20 @@ def live_course_detail_continue():
         driver.find_elements("css selector", ".course-manage a")[1]
         time.sleep(1)
         #导入学员
-        driver.find_elements("css selector", ".course-manage a")[2].click()
-        time.sleep(1)
-        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
-        time.sleep(1)
+#        try:
+#            driver.find_elements("css selector", ".course-manage a")[2].click()
+#            time.sleep(1)
+#            driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+#            time.sleep(1)
+#        except:
+            
     except Exception:
         print traceback.format_exc()
-        print u"报名中-直播课程详情页-直播课程-发布直播课程的编辑、删除权限"
+        print u"报名中-直播课程详情页：没有直播课程-发布直播课程的编辑权限"
     #返回直播课程首页 
     time.sleep(1)
     driver.find_element_by_link_text("直播课程").click()
+    #删除
             
 #前台-已结束-直播课程详情页
 def live_course_detail_end():
@@ -548,7 +588,7 @@ def live_course_detail_end():
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
-        print u"报名中-直播课程详情页-直播课程-发布直播课程的读权限"
+        print u"报名中-直播课程详情页：没有直播课程-发布直播课程的读权限"
 
     time.sleep(1)
     bh = driver.window_handles
@@ -572,7 +612,7 @@ def live_course_detail_end():
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
-        print u"报名中-直播课程详情页-直播课程-发布直播课程的编辑权限"
+        print u"报名中-直播课程详情页：没有直播课程-发布直播课程的编辑权限"
     time.sleep(1)
     try:
         #删除
@@ -582,17 +622,100 @@ def live_course_detail_end():
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
-        print u"报名中-直播课程详情页-直播课程-发布直播课程的删除权限"
+        print u"报名中-直播课程详情页：没有直播课程-发布直播课程的删除权限"
         
-#前台-直播课程导航
+#前台-直播课程导航(教学教务-直播课程-发布直播课程权限)
 def live_course_relate():
-    time.sleep(1)
-    driver.find_element_by_link_text("网校首页").click() 
     time.sleep(1)
     driver.find_element_by_link_text("直播课程").click()   
     live_course()
     live_course_detail_continue()
     live_course_detail_end()
+
+#前台-特惠课程(教学教务-特惠课程-管理特惠课程权限)
+def cheap_course():
+#    time.sleep(1)
+#    try:
+#        #显示我抢
+#        driver.find_element("css selector", ".buy a")
+#    except Exception:
+#        print traceback.format_exc()
+#        print u"特惠课程：没有特惠课程-管理特惠课程的读权限"
+        
+    time.sleep(1)
+    try:
+        #显示隐藏操作
+        driver.execute_script("$('.exit-wrap').attr('style','display:block')")
+        time.sleep(1)
+        #下架
+        driver.find_element_by_link_text(u"下架").click()
+        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+        time.sleep(1)      
+        #置顶显示
+        driver.execute_script("$('.exit-wrap').attr('style','display:block')")
+        time.sleep(1)
+        driver.find_element_by_link_text(u"置顶显示").click()
+        time.sleep(1)                           
+        #编辑
+        current_url = driver.current_url
+        driver.execute_script("$('.exit-wrap').attr('style','display:block')")
+        time.sleep(1)
+        driver.find_elements_by_link_text(u"编辑")[1].click()
+        time.sleep(1)
+        driver.find_elements("css selector", ".x-panel-btns-right button")[2].click()#点击保存
+        time.sleep(1)
+        driver.get(current_url) 
+        time.sleep(1)       
+    except Exception:
+        print traceback.format_exc()
+        print u"特惠课程：没有特惠课程-管理特惠课程的编辑权限"        
+
+    time.sleep(1)
+    try:
+        #显示隐藏操作
+        driver.execute_script("$('.exit-wrap').attr('style','display:block')")
+        time.sleep(1)
+        #删除
+        driver.find_element_by_link_text(u"删除").click()
+        time.sleep(1)
+        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#先点击取消
+        time.sleep(1) 
+    except Exception:
+        print traceback.format_exc()
+        print u"特惠课程：没有特惠课程-管理特惠课程的删除权限" 
+
+#特惠课程留言区
+def cheap_course_ansquestion():
+    time.sleep(2)
+    try:
+        try:
+            #回复提问
+            driver.find_element_by_link_text(u"回复").click()                                                
+        except:
+            print '特惠课程留言器区还没有留言！'
+            return
+        time.sleep(1)
+        driver.find_element("class name", "replay-textarea").send_keys("hello")
+        time.sleep(1)
+        driver.find_element("class name", "send-replay").click()#点击回复按钮  
+        time.sleep(1)
+        driver.find_element("class name", "delete-my").click()#删除刚才的回复
+        #删除提问
+        time.sleep(1)
+        driver.find_element("class name", "delete-all").click()
+        time.sleep(1)                                              
+    except Exception:
+        print traceback.format_exc()
+        print u"特惠课程留言区相关操作权限应该对所有的管理员开放"  
+                                    
+#前台-特惠课程(教学教务-特惠课程-管理特惠课程权限)
+def cheap_course_relate():
+    time.sleep(1)
+    driver.find_element_by_link_text("特惠课程").click()
+    time.sleep(1)
+    cheap_course_ansquestion() #学员留言区
+    cheap_course()    #特惠课程    
     
 #前台-在线考试(教学教务-考试测评-考试系统权限)
 def online_exam():
@@ -669,7 +792,214 @@ def online_exam_relate():
     driver.find_element_by_link_text("在线考试").click()
     online_exam()
     online_exam_detail()
-                                       		     	
+    
+#前台-网校公告(适用于所有管理员) 
+def school_notice():
+    time.sleep(1)
+    driver.find_element_by_link_text("网校公告").click() 
+    an_content = "noticecontent"      
+    try:
+        #新建栏目
+        driver.find_element("class name", "create-column").click()#点击新建栏目
+        time.sleep(1)
+        driver.find_element("class name", "columnName").send_keys("columnname")#栏目名称
+        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+        time.sleep(1)
+        driver.find_elements("css selector", ".left-global-ul li")[-1].click()#选择刚才新建的栏目
+        #新建公告
+        time.sleep(1)
+        driver.find_elements("css selector", ".content-right-title .notice-btn")[-1].click()#新建公告
+        time.sleep(1)
+        driver.find_element("class name", "titleName").send_keys('notice_title')#输入标题
+        time.sleep(1)
+        driver.execute_script("var element=window.document.getElementById('editNotice_ifr');\
+        idocument=element.contentDocument;\
+        element=idocument.getElementById('tinymce');\
+        element.innerHTML='" + an_content + "'")#内容  
+        time.sleep(1)
+        driver.find_element("class name", "edit-column-sure").click()#确定
+        #置顶显示
+        time.sleep(1)
+        driver.execute_script("$('.notice-content-bottom').attr('style','display:block')")#显示隐藏操作
+        time.sleep(1)
+        driver.find_element("class name", "subNotice-top").click()
+        time.sleep(1)        
+        #编辑公告
+        driver.find_elements("css selector", ".notice-content-bottom .notice-btn")[1].click()
+        time.sleep(1)
+        driver.find_element("class name", "edit-column-sure").click()#确定        
+        #删除公告
+        time.sleep(1)
+        driver.execute_script("$('.notice-content-bottom').attr('style','display:block')")#显示隐藏操作
+        time.sleep(1)
+        driver.find_element("class name", "notice-del").click()#点击删除公告
+        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+        time.sleep(1)        
+        #编辑栏目
+        driver.find_element("class name", "edit-column").click()#点击编辑栏目
+        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+        time.sleep(1)
+        #隐藏栏目
+        driver.find_element("class name", "notice-hide").click()
+        time.sleep(1)        
+        #删除栏目   
+        driver.find_element("class name", "column-del").click()#点击确定
+        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+        time.sleep(1)    
+    except Exception:
+        print traceback.format_exc()
+        print u"所有管理员都应该有网校公告相关权限"   
+
+#前台-名师团队(教学教务-名师团队-名师管理)
+def teacher_team():
+    time.sleep(1)
+    driver.find_element_by_link_text("名师团队").click()           
+    time.sleep(1)   
+    current_url = driver.current_url       
+    try:
+        #置顶显示
+        driver.find_element_by_link_text(u"置顶显示").click()
+        time.sleep(1)
+        #编辑
+        driver.find_elements_by_link_text(u"编辑")[1].click()
+        time.sleep(1)
+        driver.find_element("css selector", ".submit-wrap a").click()#发布
+        time.sleep(1)
+        driver.get(current_url)
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"名师团队：没有教学教务-名师团队-名师管理的编辑、删除权限" 
+
+#前台-网校成员(教学教务-网校成员-成员管理)
+def school_members():
+    time.sleep(1)
+    driver.find_element_by_link_text("网校成员").click()
+    time.sleep(1)   
+    current_url = driver.current_url       
+    try:
+        #管理机构成员
+        driver.find_element("css selector", ".weizhi-right a").click()#点击管理机构成员
+        time.sleep(1)
+        driver.get(current_url)
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"名师团队：没有教学教务-网校成员-成员管理的读权限" 
+                
+    time.sleep(1)   
+    current_url = driver.current_url       
+    try:
+        #置顶显示
+        driver.find_element_by_link_text(u"置顶显示").click()
+        time.sleep(1)
+    except Exception:
+        print traceback.format_exc()
+        print u"名师团队：没有教学教务-网校成员-成员管理的编辑、删除权限"   
+
+#前台-关于我们(适用于所有管理员) 
+def about_us():
+    time.sleep(1)
+    driver.find_element_by_link_text("关于我们").click() 
+    an_content = "noticecontent"      
+    try:
+        #新建栏目
+        driver.find_element("css selector", ".column-title a").click()#点击新建栏目
+        time.sleep(1)
+        driver.find_element("css selector", "#J_inputWordCount input").send_keys("columnname")#栏目标题
+        time.sleep(1)
+        driver.execute_script("var element=window.document.getElementById('editAboutUs_ifr');\
+        idocument=element.contentDocument;\
+        element=idocument.getElementById('tinymce');\
+        element.innerHTML='" + an_content + "'")#内容  
+        time.sleep(1)
+        driver.find_element("class name", "edit-column-sure").click()#确定
+        time.sleep(1)      
+        #编辑
+        driver.find_elements("css selector", ".notice-content-title .notice-btn")[2].click()
+        time.sleep(1)
+        driver.find_element("class name", "edit-column-sure").click()#确定  
+        time.sleep(1) 
+        #隐藏
+        driver.find_element("class name", "column-hide").click()
+        time.sleep(1)       
+        #删除公告
+        driver.find_element("class name", "column-del").click()
+        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+        time.sleep(1)        
+    except Exception:
+        print traceback.format_exc()
+        print u"所有管理员都应该有关于我们相关权限"
+           
+#前台-帮助中心(适用于所有管理员) 
+def help_center():
+    time.sleep(1)
+    driver.find_element_by_link_text("帮助中心").click() 
+    an_content = "noticecontent"      
+    try:
+        #管理栏目
+        driver.find_element("css selector", ".column-title a").click()#点击管理栏目
+        time.sleep(1)
+        #新建栏目
+        driver.find_element("css selector", ".column-title a").click()#点击新建栏目
+        time.sleep(1)
+        driver.find_element("class name", "editColumnInput").send_keys("columnname")#栏目名称
+        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+        time.sleep(1)   
+        #编辑栏目(刚创建的)
+        driver.find_elements("css selector", ".column-edit-main .edit-column")[-1].click()
+        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+        time.sleep(1) 
+        #隐藏栏目
+        driver.find_elements("css selector", ".column-edit-main .hide-column")[-1].click()
+        time.sleep(1)
+        #添加子栏目
+        driver.find_elements("css selector", ".column-edit-main a")[-1].click()
+        time.sleep(1)
+        driver.find_element("css selector", "#J_inputWordCount input").send_keys("columnname")#栏目标题
+        time.sleep(1)
+        driver.execute_script("var element=window.document.getElementById('editHelpCenter_ifr');\
+        idocument=element.contentDocument;\
+        element=idocument.getElementById('tinymce');\
+        element.innerHTML='" + an_content + "'")#内容  
+        time.sleep(1)
+        driver.find_element("class name", "edit-column-sure").click()#确定
+        time.sleep(1)
+        #展开显示出子栏目
+        driver.find_elements("class name", "helpcenter-column-title")[-1].click()
+        time.sleep(1)         
+        #隐藏子栏目
+        driver.find_element("css selector", ".column-main-detail .hide-column").click()
+        time.sleep(1)
+        #编辑子栏目
+        driver.find_element("css selector", ".column-main-detail a").click()
+        time.sleep(1)
+        driver.find_element("class name", "edit-column-sure").click()#点击确定
+        time.sleep(1) 
+        #删除子栏目
+        driver.find_elements("class name", "helpcenter-column-title")[-1].click()#展开显示出子栏目
+        time.sleep(1) 
+        driver.find_element("css selector", ".column-main-detail .del-column").click()
+        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+        time.sleep(1)      
+        #删除栏目
+        driver.find_elements("css selector", ".column-edit-main .del-column")[-1].click()
+        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+        time.sleep(1)         
+    except Exception:
+        print traceback.format_exc()
+        print u"所有管理员都应该有帮助中心相关权限" 
+
+        
 #后台首页-教学互动		    
 def teaching():
 	driver.get("%smyOffice.do" %(base_url))
@@ -711,11 +1041,7 @@ def learnigcard():
 def countmanage():
 	driver.get("%smyOffice.do" %(base_url))
 	#统计管理-外链视频流量统计  浏览量统计 新增学员量统计
-	menu_dic = {u"外链视频流量统计":countmanage_outvideo, 
-			       u"浏览量统计":countmanage_views, 
-			       u"新增学员量统计":countmanage_newstudent}
-	menu_title = u"后台首页"
-	check_menu(menu_title, menu_dic)   
+  
 				     
 #系统设置-管理员/客服
 def manageorservice():
@@ -753,36 +1079,36 @@ def stuoremp():
 def teaching_letter():
 	time.sleep(1)
 	try:
-		driver.find_element_by_class_name("x-tab-strip-text").click()
+		driver.find_element("class name", "x-tab-strip-text").click()
 	except Exception:
 		print traceback.format_exc()
 		print u"没有我的私信的读权限"
 		return
 	time.sleep(2)	
 	try:
-		driver.find_element_by_class_name("sendEmialBtn").click()#发送私信
+		driver.find_element("class name", "sendEmialBtn").click()#发送私信
 		time.sleep(1)
-		driver.find_element_by_name("username").send_keys("success")
+		driver.find_element("name", "username").send_keys("success")
 		time.sleep(1)
-		driver.find_element_by_name("subject").send_keys(u"标题")
+		driver.find_element("name", "subject").send_keys(u"标题")
 		time.sleep(1)
-		driver.find_element_by_name("msg").send_keys(u"内容")
+		driver.find_element("name", "msg").send_keys(u"内容")
 		time.sleep(1)
-		driver.find_element_by_css_selector(".x-panel-btn-td button").click()
+		driver.find_element("css selector", ".x-panel-btn-td button").click()
 	except Exception, e:
 		print traceback.format_exc()
 		print u"没有我的私信的编辑权限"
 	time.sleep(3)		
 	try:
-		driver.find_element_by_class_name("deleteS").click()
+		driver.find_element("class name", "deleteS").click()
 		time.sleep(2)
-		driver.find_elements_by_css_selector(".x-panel-btns-center .x-btn-center button")[1].click()
+		driver.find_elements("css selector", ".x-panel-btns-center .x-btn-center button")[1].click()
 		time.sleep(1)
 		driver.find_element_by_link_text(u"发件箱").click()
 		time.sleep(1)
-		driver.find_element_by_css_selector(".priceAndFeedBGrid .deleteS").click()
+		driver.find_element("css selector", ".priceAndFeedBGrid .deleteS").click()
 		time.sleep(1)
-		driver.find_elements_by_css_selector(".x-window-br .x-btn-text")[1].click()
+		driver.find_elements("css selector", ".x-window-br .x-btn-text")[1].click()
 	except Exception:
 		print traceback.format_exc()
 		print u"没有我的私信的删除权限"
@@ -791,9 +1117,9 @@ def teaching_letter():
 def teaching_ansquestion():
 	time.sleep(1)
 	try:
-		driver.find_element_by_class_name("x-form-arrow-trigger").click()
+		driver.find_element("class name", "x-form-arrow-trigger").click()
 		time.sleep(1)
-		driver.find_elements_by_class_name("x-combo-list-item")[0].click()
+		driver.find_elements_by("class name", "x-combo-list-item")[0].click()
 	except Exception, e:
 		print traceback.format_exc()
 		print u"没有网校答疑的读权限"
@@ -822,17 +1148,17 @@ def teaching_ansquestion():
 def authmanage_buyRecord():
 	time.sleep(1)
 	try:
-	    driver.find_element_by_class_name("cc-arrow").click()#下拉选择
+	    driver.find_element("class name", "cc-arrow").click()#下拉选择
 	    time.sleep(1)
-	    driver.find_elements_by_class_name("cc-item")[1].click()
+	    driver.find_elements("class name", "cc-item")[1].click()
 	    time.sleep(2)	
-	    driver.find_elements_by_class_name("j-gldp-target")[0].click()#日期筛选
+	    driver.find_elements("class name", "j-gldp-target")[0].click()#日期筛选
 	    time.sleep(1)    
-	    driver.find_element_by_class_name("outday").click()
+	    driver.find_element("class name", "outday").click()
 	    time.sleep(1)    
-	    driver.find_elements_by_class_name("j-gldp-target")[1].click()
+	    driver.find_elements("class name", "j-gldp-target")[1].click()
 	    time.sleep(1)    
-	    driver.find_elements_by_class_name("outday")[-1].click()
+	    driver.find_elements("class name", "outday")[-1].click()
 	    time.sleep(1)
 	    driver.find_element_by_link_text(u"查询").click()
 	except Exception:
@@ -851,23 +1177,23 @@ def authmanage_buyRecord():
 def authmanage_usegrant():
 	time.sleep(1)
 	try:
-	    driver.find_element_by_name("authType").click()#下拉选择扣除方式
+	    driver.find_element("name", "authType").click()#下拉选择扣除方式
 	    time.sleep(1)
-	    driver.find_elements_by_css_selector("select option")[1].click()
+	    driver.find_elements("css selector", "select option")[1].click()
 	    time.sleep(2)
-	    driver.find_element_by_name("authStatus").click()#下拉选择状态
+	    driver.find_element("name", "authStatus").click()#下拉选择状态
 	    time.sleep(1)
-	    driver.find_elements_by_css_selector("select option")[-1].click()
+	    driver.find_elements("css selector", "select option")[-1].click()
 	    time.sleep(2)
-	    driver.find_elements_by_class_name("x-form-date-trigger")[0].click()#日期筛选
+	    driver.find_elements("class name", "x-form-date-trigger")[0].click()#日期筛选
 	    time.sleep(1)
-	    driver.find_element_by_class_name("x-date-active").click()
+	    driver.find_element("class name", "x-date-active").click()
 	    time.sleep(2)	
-	    driver.find_elements_by_class_name("x-form-date-trigger")[1].click()
+	    driver.find_elements("class name", "x-form-date-trigger")[1].click()
 	    time.sleep(1)    
-	    driver.find_elements_by_class_name("x-date-active")[-1].click()
+	    driver.find_elements("class name", "x-date-active")[-1].click()
 	    time.sleep(2)
-	    driver.find_element_by_class_name("x-btn-text").click()#点击过滤
+	    driver.find_element("class name", "x-btn-text").click()#点击过滤
 	    time.sleep(1)	        
 	except Exception:
 		print traceback.format_exc()
@@ -887,9 +1213,9 @@ def authmanage_buygrant():
 	current_url = driver.current_url
 	time.sleep(1) 
 	try:
-	    driver.find_element_by_class_name("authorizeNum").clear()
+	    driver.find_element("class name", "authorizeNum").clear()
 	    time.sleep(1)
-	    driver.find_element_by_class_name("authorizeNum").send_keys('1')
+	    driver.find_element("class name", "authorizeNum").send_keys('1')
 	    time.sleep(1)		
 	    driver.find_element_by_link_text(u"确认购买").click()   
 #		student_management.buy_open_num(cfg, driver, base_url, user_name, bnum)
@@ -910,7 +1236,7 @@ def courseagent_grant():
 	current_url = driver.current_url
 	time.sleep(2)
 	try:
-	    driver.find_element_by_class_name("agency-navInfo").click()#接受or拒绝
+	    driver.find_element("class name", "agency-navInfo").click()#接受or拒绝
 	    time.sleep(1)
 	    driver.get(current_url)
 	    time.sleep(2)
@@ -938,27 +1264,27 @@ def courseagent_grant():
 
 	time.sleep(2) 
 	try:
-		driver.find_element_by_class_name("agency-province").click()#选择代理区域
+		driver.find_element("class name", "agency-province").click()#选择代理区域
 		time.sleep(1)
-		driver.find_elements_by_css_selector(".agency-province option")[2].click()
+		driver.find_elements("css selector", ".agency-province option")[2].click()
 		time.sleep(1)
-		driver.find_element_by_class_name("agency-city").click()#选择代理区域
+		driver.find_element("class name", "agency-city").click()#选择代理区域
 		time.sleep(1)
-		driver.find_elements_by_css_selector(".agency-city option")[2].click()
+		driver.find_elements("css selector", ".agency-city option")[2].click()
 		time.sleep(1)
-		driver.find_element_by_class_name("agency-rank").click()#选择代理级别
+		driver.find_element("class name", "agency-rank").click()#选择代理级别
 		time.sleep(1)
-		driver.find_elements_by_css_selector(".agency-rank option")[2].click()
+		driver.find_elements("css selector", ".agency-rank option")[2].click()
 		time.sleep(1)    
 		driver.find_element_by_link_text(u"新建订单").click()#新建订单  
 		time.sleep(3)		
-		driver.find_elements_by_name("categoryItems")[-1].click()
+		driver.find_elements("name", "categoryItems")[-1].click()
 		time.sleep(2)
-		driver.find_element_by_id("J_acceptProtocol").click()
+		driver.find_element("id", "J_acceptProtocol").click()
 		time.sleep(2)
-		driver.find_element_by_class_name("x-btn-text").click()#点击发送订单
+		driver.find_element("class name", "x-btn-text").click()#点击发送订单
 		time.sleep(2)
-		driver.find_element_by_css_selector(".dialog-button-container button").click()#点击确定
+		driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
 		time.sleep(2)		
 #		driver.get(current_url)
 #		time.sleep(2)
@@ -970,17 +1296,17 @@ def courseagent_grant():
 		ah = driver.window_handles
 		swithing_window(bh,ah)
 		time.sleep(2)
-		driver.find_element_by_id("J_acceptProtocol").click()
+		driver.find_element("id", "J_acceptProtocol").click()
 		time.sleep(1)
-		driver.find_element_by_class_name("x-btn-text").click()
+		driver.find_element("class name", "x-btn-text").click()
 		time.sleep(1)
-		driver.find_element_by_css_selector(".dialog-button-container button").click()
+		driver.find_element("css selector", ".dialog-button-container button").click()
 #		driver.get(current_url)
 #		driver.find_element_by_link_text(u"订单管理").click() 
 		time.sleep(2)
 		driver.find_element_by_link_text(u"取消订单").click()
 		time.sleep(1)
-		driver.find_element_by_css_selector(".dialog-button-container button").click()
+		driver.find_element("css selector", ".dialog-button-container button").click()
 		time.sleep(1)				  
 	except Exception:
 		print traceback.format_exc()
@@ -1073,27 +1399,27 @@ def paperagent_grant():
 
 	time.sleep(2) 
 	try:
-		driver.find_element_by_class_name("agency-province").click()#选择代理区域
+		driver.find_element("class name", "agency-province").click()#选择代理区域
 		time.sleep(1)
-		driver.find_elements_by_css_selector(".agency-province option")[2].click()
+		driver.find_elements("css selector", ".agency-province option")[2].click()
 		time.sleep(1)
-		driver.find_element_by_class_name("agency-city").click()#选择代理区域
+		driver.find_element("class name", "agency-city").click()#选择代理区域
 		time.sleep(1)
-		driver.find_elements_by_css_selector(".agency-city option")[2].click()
+		driver.find_elements("css selector", ".agency-city option")[2].click()
 		time.sleep(1)
-		driver.find_element_by_class_name("agency-rank").click()#选择代理级别
+		driver.find_element("class name", "agency-rank").click()#选择代理级别
 		time.sleep(1)
-		driver.find_elements_by_css_selector(".agency-rank option")[2].click()
+		driver.find_elements("css selector", ".agency-rank option")[2].click()
 		time.sleep(1)    
 		driver.find_element_by_link_text(u"新建订单").click()#新建订单 
 		time.sleep(2)  
 		driver.find_element_by_link_text(u"全选试卷").click()
 		time.sleep(2)
-		driver.find_element_by_id("readed_check").click()
+		driver.find_element("id", "readed_check").click()
 		time.sleep(2)
-		driver.find_element_by_id("submit_btn").click()
+		driver.find_element("id", "submit_btn").click()
 		time.sleep(2)
-		driver.find_element_by_css_selector(".dialog-button-container button").click()#点击确定
+		driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
 		time.sleep(2)		
 #		driver.get(current_url)
 #		time.sleep(2)
@@ -1105,17 +1431,17 @@ def paperagent_grant():
 		ah = driver.window_handles
 		swithing_window(bh,ah)
 		time.sleep(2)
-		driver.find_element_by_id("readed_check").click()
+		driver.find_element("id", "readed_check").click()
 		time.sleep(1)
-		driver.find_element_by_id("submit_btn").click()
+		driver.find_element("id", "submit_btn").click()
 		time.sleep(1)
-		driver.find_element_by_css_selector(".dialog-button-container button").click()
+		driver.find_element("css selector", ".dialog-button-container button").click()
 #		driver.get(current_url)
 #		driver.find_element_by_link_text(u"订单管理").click() 
 		time.sleep(2)
 		driver.find_element_by_link_text(u"取消订单").click()
 		time.sleep(1)
-		driver.find_element_by_css_selector(".dialog-button-container button").click()
+		driver.find_element("css selector", ".dialog-button-container button").click()
 		time.sleep(1)			  
 	except Exception:
 		print traceback.format_exc()
@@ -1164,11 +1490,11 @@ def paperagent_apply():
 	    ah = driver.window_handles
 	    swithing_window(bh,ah)
 	    time.sleep(1)
-	    driver.find_element_by_id("paper_name_input").clear()
+	    driver.find_element("id", "paper_name_input").clear()
 	    time.sleep(1)
-	    driver.find_element_by_id("paper_name_input").send_keys(title)
+	    driver.find_element("id", "paper_name_input").send_keys(title)
 	    time.sleep(1)
-	    driver.find_element_by_id("save_btn").click()
+	    driver.find_element("id", "save_btn").click()
 	    time.sleep(1)
 	    driver.get(current_url)
 	    time.sleep(1) 	    
@@ -1232,29 +1558,29 @@ def learnigcard_group():
 	    time.sleep(1)
 	    driver.find_element_by_link_text(u"浏览卡").click()		
 	    time.sleep(1)
-	    driver.find_elements_by_css_selector("input[type=checkbox]")[1].click()#勾选第一个卡
+	    driver.find_elements("css selector", "input[type=checkbox]")[1].click()#勾选第一个卡
 	    time.sleep(1)
-	    driver.find_element_by_class_name("x-form-arrow-trigger").click()#禁用
+	    driver.find_element("class name", "x-form-arrow-trigger").click()#禁用
 	    time.sleep(1)
-	    driver.find_elements_by_class_name("x-combo-list-item")[1].click()
+	    driver.find_elements("class name", "x-combo-list-item")[1].click()
 	    time.sleep(1)
 	    driver.find_element_by_link_text("应用").click()#应用
 	    time.sleep(2)
-	    driver.find_elements_by_css_selector("input[type=checkbox]")[1].click()#勾选第一卡
+	    driver.find_elements("css selector", "input[type=checkbox]")[1].click()#勾选第一卡
 	    time.sleep(1)
-	    driver.find_element_by_class_name("x-form-arrow-trigger").click()#启用
+	    driver.find_element("class name", "x-form-arrow-trigger").click()#启用
 	    time.sleep(1)	    
-	    driver.find_elements_by_class_name("x-combo-list-item")[2].click()
+	    driver.find_elements("class name", "x-combo-list-item")[2].click()
 	    time.sleep(1)
 	    driver.find_element_by_link_text("应用").click()#应用
 	    time.sleep(1)
-	    driver.find_elements_by_class_name("colorwhite")[1].click()#点击向该卡组添加卡
+	    driver.find_elements("class name", "colorwhite")[1].click()#点击向该卡组添加卡
 	    time.sleep(1)
 	    driver.get(current_url)
 	    time.sleep(2)	    
 	    driver.find_element_by_link_text(u"编辑卡组").click()#编辑卡组
 	    time.sleep(1)
-	    driver.find_element_by_class_name("x-btn-text").click()#保存修改
+	    driver.find_element("class name", "x-btn-text").click()#保存修改
 	    time.sleep(1)					  
 	except Exception, e:
 		print traceback.format_exc()
@@ -1264,11 +1590,11 @@ def learnigcard_group():
 	try:
 	    driver.find_element_by_link_text(u"浏览卡").click()		
 	    time.sleep(1)
-	    driver.find_elements_by_css_selector("input[type=checkbox]")[1].click()#勾选第一个卡
+	    driver.find_elements("css selector", "input[type=checkbox]")[1].click()#勾选第一个卡
 	    time.sleep(1)
-	    driver.find_element_by_class_name("x-form-arrow-trigger").click()#删除
+	    driver.find_element("class name", "x-form-arrow-trigger").click()#删除
 	    time.sleep(1)
-	    driver.find_elements_by_class_name("x-combo-list-item")[0].click()
+	    driver.find_elements("class name", "x-combo-list-item")[0].click()
 	    time.sleep(1)
 	    driver.find_element_by_link_text("应用").click()#应用
 	    time.sleep(1)
@@ -1276,7 +1602,7 @@ def learnigcard_group():
 	    time.sleep(2)
 	    driver.find_element_by_link_text(u"删除卡组").click()
 	    time.sleep(1)
-	    driver.find_elements_by_css_selector(".x-panel-bwrap .x-btn-text")[5].click()
+	    driver.find_elements("css selector", ".x-panel-bwrap .x-btn-text")[5].click()
 	    time.sleep(1)
 	except Exception, e:
 		print traceback.format_exc()
@@ -1285,19 +1611,19 @@ def learnigcard_group():
 def learnigcard_record():
 	time.sleep(1)
 	try:
-	    driver.find_element_by_class_name("x-form-arrow-trigger").click()#下拉选择充卡类型
+	    driver.find_element("class name", "x-form-arrow-trigger").click()#下拉选择充卡类型
 	    time.sleep(2)
-	    driver.find_elements_by_class_name("x-combo-list-item")[-1].click()
+	    driver.find_elements("class name", "x-combo-list-item")[-1].click()
 	    time.sleep(1)
-	    driver.find_elements_by_class_name("x-form-date-trigger")[0].click()#日期筛选
+	    driver.find_elements("class name", "x-form-date-trigger")[0].click()#日期筛选
 	    time.sleep(1)
-	    driver.find_element_by_class_name("x-date-active").click()
+	    driver.find_element("class name", "x-date-active").click()
 	    time.sleep(2)	
-	    driver.find_elements_by_class_name("x-form-date-trigger")[1].click()
+	    driver.find_elements("class name", "x-form-date-trigger")[1].click()
 	    time.sleep(1)    
-	    driver.find_elements_by_class_name("x-date-active")[-1].click()
+	    driver.find_elements("class name", "x-date-active")[-1].click()
 	    time.sleep(2)
-	    driver.find_element_by_class_name("x-btn-text").click()#点击过滤
+	    driver.find_element("class name", "x-btn-text").click()#点击过滤
 	    time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
@@ -1307,11 +1633,11 @@ def learnigcard_record():
 def countmanage_outvideo():
 	time.sleep(1)
 	try:
-	    driver.find_element_by_css_selector("div[data-type=cur-year]").click()#点击本年
+	    driver.find_element("css selector", "div[data-type=cur-year]").click()#点击本年
 	    time.sleep(1)
-	    driver.find_element_by_class_name("x-form-arrow-trigger").click()#按日显示
+	    driver.find_element("class name", "x-form-arrow-trigger").click()#按日显示
 	    time.sleep(2)	
-	    driver.find_elements_by_class_name("x-combo-list-item")[0].click()
+	    driver.find_elements("class name", "x-combo-list-item")[0].click()
 	    time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
@@ -1321,11 +1647,11 @@ def countmanage_outvideo():
 def countmanage_views():
 	time.sleep(1)
 	try:
-	    driver.find_element_by_css_selector("span[data-type=recent3month]").click()#点击最近3个月
+	    driver.find_element("css selector", "span[data-type=recent3month]").click()#点击最近3个月
 	    time.sleep(1)
-	    driver.find_element_by_class_name("cc-arrow").click()#按日查询
+	    driver.find_element("class name", "cc-arrow").click()#按日查询
 	    time.sleep(2)	
-	    driver.find_elements_by_class_name("cc-item")[0].click()
+	    driver.find_elements("class name", "cc-item")[0].click()
 	    time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
@@ -1335,11 +1661,11 @@ def countmanage_views():
 def countmanage_newstudent():
 	time.sleep(1)
 	try:
-	    driver.find_element_by_css_selector("span[data-type=last-month]").click()#点击上个月
+	    driver.find_element("css selector", "span[data-type=last-month]").click()#点击上个月
 	    time.sleep(1)
-	    driver.find_element_by_class_name("cc-arrow").click()#按日查询
+	    driver.find_element("class name", "cc-arrow").click()#按日查询
 	    time.sleep(2)	
-	    driver.find_elements_by_class_name("cc-item")[0].click()
+	    driver.find_elements("class name", "cc-item")[0].click()
 	    time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
@@ -1398,35 +1724,35 @@ def manageorservice_service():
 	service_name = u"se" + rand_name
 	try:
 		#创建机构客服
-	    driver.find_element("class name","GreenBtn_ab").click()#点击创建机构客服
+	    driver.find_element("class name", "GreenBtn_ab").click()#点击创建机构客服
 	    time.sleep(1)
-	    driver.find_element("class name","x-form-arrow-trigger").click()#下拉选择用户名
+	    driver.find_element("class name", "x-form-arrow-trigger").click()#下拉选择用户名
 	    time.sleep(1)
-	    driver.find_elements("class name","x-combo-list-item")[1].click()
+	    driver.find_elements("class name", "x-combo-list-item")[1].click()
 	    time.sleep(1)
-	    driver.find_element("id","reg_supName").send_keys(service_name)#输入客服名
+	    driver.find_element("id", "reg_supName").send_keys(service_name)#输入客服名
 	    time.sleep(1)
-	    driver.find_element("class name","GreenBtn_ab").click()#点击保存
+	    driver.find_element("class name", "GreenBtn_ab").click()#点击保存
 	    time.sleep(1)
 	    #编辑
-	    driver.find_elements("css selector",".supportUl .editSup")[-1].click()#点击编辑  
+	    driver.find_elements("css selector", ".supportUl .editSup")[-1].click()#点击编辑  
 	    time.sleep(1)
-	    driver.find_element("class name","GreenBtn_ab").click()#点击保存
+	    driver.find_element("class name", "GreenBtn_ab").click()#点击保存
 	    time.sleep(1)
 	    #编辑-机构客服显示方式
-	    driver.find_element("css selector",".supportDisplay .editDisplay").click()#点击编辑  
+	    driver.find_element("css selector", ".supportDisplay .editDisplay").click()#点击编辑  
 	    time.sleep(1)
-	    driver.find_element("class name","GreenBtn_ab").click()#点击保存
+	    driver.find_element("class name", "GreenBtn_ab").click()#点击保存
 	    time.sleep(1)
 	    #选择使用自定义客服-编辑
-	    driver.find_elements("name","customizedSupportEnabled")[1].click()#选择使用自定义客服
+	    driver.find_elements("name", "customizedSupportEnabled")[1].click()#选择使用自定义客服
 	    time.sleep(1)
-	    driver.find_element("id","J_toEditBtn").click()#点击编辑
+	    driver.find_element("id", "J_toEditBtn").click()#点击编辑
 	    time.sleep(1)	      	    
-	    driver.find_element("id","J_saveCodeBtn").click()#点击保存
+	    driver.find_element("id", "J_saveCodeBtn").click()#点击保存
 	    time.sleep(1)
 	    #选择使用AbkeSky机构客服 
-	    driver.find_element("name","customizedSupportEnabled").click()#选择使用AbkeSky机构客服    	    	    	    
+	    driver.find_element("name", "customizedSupportEnabled").click()#选择使用AbkeSky机构客服    	    	    	    
 	except Exception:
 		print traceback.format_exc()
 		print u"没有网校客服的编辑权限"
@@ -1434,9 +1760,9 @@ def manageorservice_service():
 	time.sleep(2)
 	try:
 		#删除
-	    driver.find_elements("css selector",".supportUl .delSup")[-1].click()#点击删除-最后一个创建的机构客服  
+	    driver.find_elements("css selector", ".supportUl .delSup")[-1].click()#点击删除-最后一个创建的机构客服  
 	    time.sleep(1)
-	    driver.find_element("class name","x-btn-text").click()#点击确定
+	    driver.find_element("class name", "x-btn-text").click()#点击确定
 	    time.sleep(1)	    
 	except Exception:
 		print traceback.format_exc()
@@ -1447,7 +1773,7 @@ def pagecreate_edit():
 	time.sleep(1)
 	try:
 		#预览首页
-	    driver.find_elements("class name","GreenBtn_ab")[-1].click()#点击预览首页
+	    driver.find_elements("class name", "GreenBtn_ab")[-1].click()#点击预览首页
 	    time.sleep(1)	    
 	except Exception:
 		print traceback.format_exc()
@@ -1456,9 +1782,9 @@ def pagecreate_edit():
 	time.sleep(1)
 	try:
 		#发布
-	    driver.find_element("class name","OrangeBtn_ab").click()#点击发布  
+	    driver.find_element("class name", "OrangeBtn_ab").click()#点击发布  
 	    time.sleep(1)
-	    driver.find_element("class name","x-btn-text").click()#点击关闭窗口
+	    driver.find_element("class name", "x-btn-text").click()#点击关闭窗口
 	    time.sleep(1)	    
 	except Exception:
 		print traceback.format_exc()
@@ -1480,32 +1806,32 @@ def pagecreate_selfpage():
 	page_name = u"page" + rand_name	
 	try:
 		#添加页面
-	    driver.find_element("class name","yellow_btn_center").click()#点击添加页面
+	    driver.find_element("class name", "yellow_btn_center").click()#点击添加页面
 	    time.sleep(1)
-	    driver.find_element("id","orgPageField").send_keys(page_name)#页面名称
+	    driver.find_element("id", "orgPageField").send_keys(page_name)#页面名称
 	    time.sleep(1)
-	    driver.find_element("id","orgWebField").send_keys(rand_name)#为页面设定链接
+	    driver.find_element("id", "orgWebField").send_keys(rand_name)#为页面设定链接
 	    time.sleep(1)
-	    driver.find_element("id","orgInfoField").send_keys("<html><body>hello word!</body></html>")#代码嵌入
+	    driver.find_element("id", "orgInfoField").send_keys("<html><body>hello word!</body></html>")#代码嵌入
 	    time.sleep(1)
-	    driver.find_elements("class name","x-btn-text")[-1].click()#点击保存
+	    driver.find_elements("class name", "x-btn-text")[-1].click()#点击保存
 	    time.sleep(1)
 	    #编辑
 	    driver.find_element_by_link_text("编辑").click()#点击编辑
 	    time.sleep(1)
-	    driver.find_elements("class name","x-btn-text")[-1].click()#点击保存
+	    driver.find_elements("class name", "x-btn-text")[-1].click()#点击保存
 	    time.sleep(1)	    
 	    #设为自设导航模块
 	    driver.find_element_by_link_text("设为自设导航模块").click()#点击设为自设导航模块
 	    time.sleep(1)
-	    driver.find_element("id","titleFieldId").send_keys(rand_name)#导航名称
+	    driver.find_element("id", "titleFieldId").send_keys(rand_name)#导航名称
 	    time.sleep(1)
-	    driver.find_element("class name","x-btn-text").click()#点击确定
+	    driver.find_element("class name", "x-btn-text").click()#点击确定
 	    time.sleep(1)	    
 	    #取消自设导航模块
 	    driver.find_element_by_link_text("取消自设导航模块").click()#点击取消自设导航模块
 	    time.sleep(1)
-	    driver.find_element("class name","x-btn-text").click()#点击确定
+	    driver.find_element("class name", "x-btn-text").click()#点击确定
 	    time.sleep(1)	    	    	    
 	except Exception:
 		print traceback.format_exc()
@@ -1516,7 +1842,7 @@ def pagecreate_selfpage():
 		#删除
 	    driver.find_element_by_link_text("删除").click()#点击删除
 	    time.sleep(1)
-	    driver.find_element("class name","x-btn-text").click()#点击删除
+	    driver.find_element("class name", "x-btn-text").click()#点击删除
 	    time.sleep(1)    
 	except Exception:
 		print traceback.format_exc()
@@ -1531,9 +1857,9 @@ def pagecreate_netpic():
 	pic = "C:\\Users\\Public\\Pictures\\Sample Pictures\\Tulips.jpg"	
 	try:
 		#点击第一个图片库
-	    driver.find_element("class name","albumName").click()
+	    driver.find_element("class name", "albumName").click()
 	    time.sleep(1)
-	    driver.find_element("class name","albumBg").click()#复制第一个链接   
+	    driver.find_element("class name", "albumBg").click()#复制第一个链接   
 	    time.sleep(1)
 	    driver.find_element_by_link_text(u"返回网络图片库").click()
 	    #driver.get(current_url)   
@@ -1544,31 +1870,31 @@ def pagecreate_netpic():
 	time.sleep(1)
 	try:
 		#创建专辑
-	    driver.find_elements("class name","cursorHand")[1].click()#点击创建专辑
+	    driver.find_elements("class name", "cursorHand")[1].click()#点击创建专辑
 	    time.sleep(1)
-	    driver.find_element("id","orgAlbumField").send_keys(record_name)#输入专辑名称
+	    driver.find_element("id", "orgAlbumField").send_keys(record_name)#输入专辑名称
 	    time.sleep(1)  
-	    driver.find_element("id","picture1").send_keys(pic)#点击浏览上传图片
+	    driver.find_element("id", "picture1").send_keys(pic)#点击浏览上传图片
 	    time.sleep(1)
-	    driver.find_element("class name","x-btn-text").click()#点击上传
+	    driver.find_element("class name", "x-btn-text").click()#点击上传
 	    time.sleep(2)
 	    driver.get(current_url)
 	    time.sleep(2)
 	    #添加新照片
-	    driver.find_element("class name","albumName").click()#点击选择第一个刚创建的图片库
+	    driver.find_element("class name", "albumName").click()#点击选择第一个刚创建的图片库
 	    time.sleep(1)
 	    current_url = driver.current_url
 	    driver.find_element_by_link_text(u"添加新照片").click()
 	    time.sleep(1)	    
-	    driver.find_element("id","picture1").send_keys(pic)#点击浏览上传图片
+	    driver.find_element("id", "picture1").send_keys(pic)#点击浏览上传图片
 	    time.sleep(1)
-	    driver.find_element("class name","x-btn-text").click()#点击上传 
+	    driver.find_element("class name", "x-btn-text").click()#点击上传 
 	    time.sleep(5)
 	    driver.get(current_url)
 	    #修改专辑名称	    
 	    driver.find_element_by_link_text(u"修改专辑名称").click()
 	    time.sleep(1)	    
-	    driver.find_element("class name","x-btn-text").click()#点击保存
+	    driver.find_element("class name", "x-btn-text").click()#点击保存
 	    time.sleep(1)  	    
 	except Exception:
 		print traceback.format_exc()
@@ -1577,19 +1903,19 @@ def pagecreate_netpic():
 	time.sleep(2) 
 	try:
 		#删除图片
-	    driver.find_element("class name","albumName").click()#点击第一个图片库
+	    driver.find_element("class name", "albumName").click()#点击第一个图片库
 	    time.sleep(1)
-	    driver.find_element("xpath","/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div/div/div/div[6]/div[2]").click()
+	    driver.find_element("xpath", "/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div/div/div/div[6]/div[2]").click()
 	    time.sleep(1)	    
-	    driver.find_element("class name","x-btn-text").click()#点击确认
+	    driver.find_element("class name", "x-btn-text").click()#点击确认
 	    time.sleep(1)
 	    #添加图片--上传图片--删除
 	    current_url = driver.current_url
 	    driver.find_element_by_link_text(u"添加新照片").click()
 	    time.sleep(1)	    
-	    driver.find_element("id","picture1").send_keys(pic)#点击浏览上传图片
+	    driver.find_element("id", "picture1").send_keys(pic)#点击浏览上传图片
 	    time.sleep(1)
-	    driver.find_element("class name","deleteAb").click()#点击删除 
+	    driver.find_element("class name", "deleteAb").click()#点击删除 
 	    time.sleep(1)
 	    driver.get(current_url)	    
 #	    #删除专辑 
@@ -1617,14 +1943,14 @@ def pagecreate_selflogin():
 	try:
 		#点击浏览
 	    time.sleep(1)
-	    driver.find_element("id","picFieldName-file").send_keys(pic)#浏览   
+	    driver.find_element("id", "picFieldName-file").send_keys(pic)#浏览   
 	    time.sleep(1)
-	    driver.find_elements("class name","x-btn-text")[1].click()#上传
+	    driver.find_elements("class name", "x-btn-text")[1].click()#上传
 	    time.sleep(2)
 	    driver.get(current_url)
 	    time.sleep(1)
 	    #恢复默认
-	    driver.find_element("id","J_restoreDefault").click()
+	    driver.find_element("id", "J_restoreDefault").click()
 	except Exception:
 		print traceback.format_exc()
 		print u"没有自定义登录图片的编辑、删除权限"
@@ -1634,7 +1960,7 @@ def stuoremp_stucate():
 	time.sleep(1)
 	current_url = driver.current_url
 	try:
-		driver.find_element_by_class_name("expandSub ")#找到展开图标
+		driver.find_element("class name", "expandSub ")#找到展开图标
 		time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
@@ -1642,7 +1968,7 @@ def stuoremp_stucate():
 
 	time.sleep(1)
 	try:
-	    driver.find_element_by_id("J_genTopCateg").click()#新建一级类目
+	    driver.find_element("id", "J_genTopCateg").click()#新建一级类目
 	    creat_stucate()#新建一级类目
 	    driver.get(current_url)
 	    bh = driver.window_handles
@@ -1650,11 +1976,11 @@ def stuoremp_stucate():
 	    bh = driver.window_handles 
 	    opencourseBatch(bh)#批量开通课程
 	    driver.get(current_url)
-	    driver.find_element_by_class_name("editCateg").click()#编辑类目
+	    driver.find_element("class name", "editCateg").click()#编辑类目
 	    time.sleep(1)
-	    driver.find_element_by_class_name("x-btn-text").click()#点击确定		
+	    driver.find_element("class name", "x-btn-text").click()#点击确定		
 	    time.sleep(1)
-	    driver.find_element_by_class_name("addSub").click()#添加子类目
+	    driver.find_element("class name", "addSub").click()#添加子类目
 	    creat_stucate()
 	    time.sleep(1)				    
 	except Exception:
@@ -1663,9 +1989,9 @@ def stuoremp_stucate():
 
 	time.sleep(2)
 	try:
-	    driver.find_elements_by_class_name("delete")[-1].click()#删除类目
+	    driver.find_elements("class name", "delete")[-1].click()#删除类目
 	    time.sleep(1)
-	    driver.find_element_by_class_name("x-btn-text").click()#点击删除		
+	    driver.find_element("class name", "x-btn-text").click()#点击删除		
 	    time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
@@ -1677,20 +2003,20 @@ def creat_stucate():
 	rand_name = str(random.randint(1000, 9999))
 	cate_name = u"catetest" + rand_name
 	try:
-	   driver.find_element_by_id("reg_topCateName").send_keys(cate_name)#输入类目名称
+	   driver.find_element("id", "reg_topCateName").send_keys(cate_name)#输入类目名称
 	except:
 	    try:
-	        driver.find_element_by_id("reg_textField").send_keys(cate_name)#输入类目名称
+	        driver.find_element("id", "reg_textField").send_keys(cate_name)#输入类目名称
 	    except:
 		    None		
 	time.sleep(1)
-	driver.find_element_by_class_name("x-btn-text").click()#点击确定			
+	driver.find_element("class name", "x-btn-text").click()#点击确定			
 	time.sleep(1)
 
 #管理类目学员的方法
 def manage_catestu(bh):
 	time.sleep(3)
-	driver.find_element_by_class_name("manageCategStudent").click()
+	driver.find_element("class name", "manageCategStudent").click()
 	ah = driver.window_handles
 	swithing_window(bh,ah)
 	time.sleep(3)
@@ -1698,7 +2024,7 @@ def manage_catestu(bh):
 	time.sleep(2)
 	driver.find_element_by_link_text(u"全部").click()
 	time.sleep(2)
-	driver.find_elements_by_css_selector(".x-panel-bwrap .x-btn-text")[-1].click()
+	driver.find_elements("css selector", ".x-panel-bwrap .x-btn-text")[-1].click()
 	time.sleep(2)
 	driver.find_element_by_link_text(u"返回").click()
 	time.sleep(2)
@@ -1706,15 +2032,15 @@ def manage_catestu(bh):
 #批量开通课程
 def opencourseBatch(bh):
 	time.sleep(1)
-	driver.find_elements_by_class_name("openCourseBatch")[0].click()
+	driver.find_elements("class name", "openCourseBatch")[0].click()
 	time.sleep(3)
 	ah = driver.window_handles
 	swithing_window(bh,ah)
-	driver.find_elements_by_css_selector("input[type=checkbox]")[-1].click()#勾选最后一个课程类目
+	driver.find_elements("css selector", "input[type=checkbox]")[-1].click()#勾选最后一个课程类目
 	time.sleep(2)
-	driver.find_element_by_class_name("x-btn-text").click()
+	driver.find_element("class name", "x-btn-text").click()
 	time.sleep(2)
-	driver.find_elements_by_css_selector(".x-btn-center .x-btn-text")[1].click()
+	driver.find_elements("css selector", ".x-btn-center .x-btn-text")[1].click()
 	time.sleep(3)		
 #学员/员工-网校学员-学员管理
 def stuoremp_stumanage():
@@ -1751,7 +2077,7 @@ def stuoremp_stumanage():
 		time.sleep(1)
 		driver.find_element_by_link_text(u"延长授权").click()#延长授权
 		time.sleep(1)
-		driver.find_elements_by_class_name("x-btn-text")[-1].click()#点击取消
+		driver.find_elements("class name", "x-btn-text")[-1].click()#点击取消
 		time.sleep(1)
 		#页面下方的批量操作手动测试 吧	
 		#逐一导入手动导入测试
@@ -1771,7 +2097,7 @@ def stuoremp_stumanage():
 #		time.sleep(2)
 #		driver.find_element_by_link_text(u"延长授权").click()#延长授权
 #		time.sleep(1)
-#		driver.find_elements_by_class_name("x-btn-text")[-1].click()#点击取消
+#		driver.find_elements("class name", "x-btn-text")[-1].click()#点击取消
 		time.sleep(1)
 		#页面下方的批量操作手动测试 吧													
 	except Exception:
@@ -1782,12 +2108,12 @@ def stuoremp_stumanage():
 	try:
 	    driver.find_element_by_link_text(u"删除学员").click()#删除学员
 	    time.sleep(1)
-	    driver.find_element_by_css_selector(".x-panel-btns-right .x-btn-text").click()#点击确定
+	    driver.find_element("css selector", ".x-panel-btns-right .x-btn-text").click()#点击确定
 	    time.sleep(1)
 	    try:
 	        driver.find_element_by_link_text(u"删除帐号").click()
 	        time.sleep(1)
-	        driver.find_element_by_class_name("x-btn-text").click()#点击确定
+	        driver.find_element("class name", "x-btn-text").click()#点击确定
 	        time.sleep(1)
 	    except:
 	    	print "没有找到删除帐号"		
@@ -1834,7 +2160,7 @@ def stuoremp_empmanage():
 #		time.sleep(1)
 		driver.find_element_by_link_text(u"延长授权").click()#延长授权
 		time.sleep(1)
-		driver.find_elements_by_class_name("x-btn-text")[-1].click()#点击取消
+		driver.find_elements("class name", "x-btn-text")[-1].click()#点击取消
 		time.sleep(1)
 		#页面下方的批量操作手动测试 吧													
 	except Exception:
@@ -1845,7 +2171,7 @@ def stuoremp_empmanage():
 	try:
 	    driver.find_element_by_link_text(u"删除员工").click()#删除员工
 	    time.sleep(1)
-	    driver.find_element_by_css_selector(".x-panel-btns-right .x-btn-text").click()#点击确定
+	    driver.find_element("css selector", ".x-panel-btns-right .x-btn-text").click()#点击确定
 	    time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
@@ -1863,9 +2189,9 @@ def stuoremp_empapply():
 #	####加黑名单是什么权限？	
 #	time.sleep(1)
 #	try:
-#		driver.find_element_by_css_selector(".action span").click()#点击通过
+#		driver.find_element("css selector", ".action span").click()#点击通过
 #		time.sleep(1)
-#		driver.find_elements_by_css_selector(".action span")[1].click()#点击拒绝
+#		driver.find_elements("css selector", ".action span")[1].click()#点击拒绝
 #		time.sleep(1)
 #	except Exception:
 #		print traceback.format_exc()
@@ -1876,11 +2202,11 @@ def stuoremp_stulearnrecord():
 	time.sleep(1)
 	current_url = driver.current_url
 	try:
-		#driver.find_element_by_class_name(".GreenBtn_ab").click()#导出学员学习记录
+		#driver.find_element("class name", ".GreenBtn_ab").click()#导出学员学习记录
 		time.sleep(1)
-		driver.find_element_by_id("J_stuType").click()#选择学员类型
+		driver.find_element("id", "J_stuType").click()#选择学员类型
 		time.sleep(1)
-		driver.find_element_by_css_selector("#J_stuType option").click()
+		driver.find_element("css selector", "#J_stuType option").click()
 		time.sleep(1)
 		driver.find_element_by_link_text(u"查询").click()#点击查询
 		time.sleep(1)
@@ -1931,23 +2257,27 @@ def admin_athority_check():
 #
 #    #后台-学员/员工
 #	stuoremp()#网校学员
-
-    #前台(适用于所有管理员)
+    
+        #前台(适用于所有管理员)
+        #fore_stage()
+        time.sleep(1)
+        driver.find_element_by_link_text(u"网校首页").click()
+        time.sleep(1)
 #        firstpage()#首页
 #        course_center_relate()#课程中心
 #        class_center_relate()#报班中心 
 #        online_ansquestion()#在线答疑
-#        live_course_relate()#直播课程
-        online_exam_relate()#在线考试
-        #待写
-        #网校公告
-        #网校成员
-        #特惠课程
-        #名师团队
-        #帮助中心
-        #关于我们
+        live_course_relate()#直播课程
+#        cheap_course_relate()#特惠课程
+#        online_exam_relate()#在线考试
+#        school_notice()#网校公告
+#        teacher_team()#名师团队
+#        school_members()#网校成员
+#        about_us()#关于我们
+#        help_center()#帮助中心
+        
         driver.quit()
-
+    
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     admin_athority_check()

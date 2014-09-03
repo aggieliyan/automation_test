@@ -111,7 +111,7 @@ def firstpage():
 	    #driver.get(current_url)
 	except Exception:
 		print traceback.format_exc()
-		print u"此管理员没有：教学教务-课程课件-课程管理-编辑、删除权限"
+		print u"此管理员没有：教学教务-课程课件-课程管理-编辑权限"
 	
 	#导航管理	
 	time.sleep(1)
@@ -251,9 +251,9 @@ def course_center():
         #课程中心
         driver.execute_script("$('.coursecenter-module-hover').attr('style','display:block')")#显示隐藏操作
         time.sleep(1)
-#        driver.find_element_by_link_text(u"删除").click()
-#        time.sleep(1)
-#        driver.find_element("css selector",".dialog-button-container button").click()#确定    
+        driver.find_element_by_link_text(u"删除").click()
+        time.sleep(1)
+        driver.find_elements("css selector",".dialog-button-container button")[1].click()#先不删除呀   
     except Exception:
         print traceback.format_exc()
         print u"课程中心：没有教学教务-课程课件-课程管理的删除权限"
@@ -322,7 +322,7 @@ def course_detail():
 
 #前台-课程中心-课程详情页-答疑讨论区        
 def course_detail_ansquetion():
-        #答疑讨论区 
+    #答疑讨论区 
     time.sleep(3)
     try:
         try:
@@ -363,7 +363,7 @@ def class_center():
         driver.find_element_by_link_text(u"全部").click()
     except Exception:
         print traceback.format_exc()
-        print u"报班中心：没有教学教务-报班中心-报班管理的读权限"
+        print u"报班中心：没有教学教务-报班中心-报班管理的读、删除权限"
 
     time.sleep(1)
     current_url = driver.current_url 
@@ -380,7 +380,7 @@ def class_center():
         time.sleep(1)        
     except Exception:
         print traceback.format_exc()
-        print u"报班中心：没有教学教务-报班中心-报班管理的编辑、删除权限"
+        print u"报班中心：没有教学教务-报班中心-报班管理的编辑权限"
     
 #前台-报班中心--班级详情页(教学教务-报班中心-报班管理)
 def class_detail():
@@ -414,7 +414,7 @@ def class_detail():
             print '此班级是面授班，没有开始观看按钮！'        
     except Exception:
         print traceback.format_exc()
-        print u"班级详情页面：没有教学教务-报班中心-报班管理的读权限"
+        print u"班级详情页面：没有教学教务-报班中心-报班管理的读、删除权限"
 
     time.sleep(1)
     try:
@@ -429,7 +429,7 @@ def class_detail():
             print '此班级是面授班，没有下架按钮！'       
     except Exception:
         print traceback.format_exc()
-        print u"班级详情页面：没有教学教务-报班中心-报班管理的编辑、删除权限"
+        print u"班级详情页面：没有教学教务-报班中心-报班管理的编辑权限"
 
 #前台-报班中心--班级详情页-答疑区(网络班)
 def class_detail_ansquestion():
@@ -716,13 +716,13 @@ def live_course_relate():
 
 #前台-特惠课程(教学教务-特惠课程-管理特惠课程权限)
 def cheap_course():
-#    time.sleep(1)
-#    try:
-#        #显示我抢
-#        driver.find_element("css selector", ".buy a")
-#    except Exception:
-#        print traceback.format_exc()
-#        print u"特惠课程：没有特惠课程-管理特惠课程的读权限"
+    time.sleep(1)
+    try:
+        #显示我抢
+        driver.find_element("css selector", ".buy a")
+    except Exception:
+        print traceback.format_exc()
+        print u"特惠课程：没有特惠课程-管理特惠课程的读权限"
         
     time.sleep(1)
     try:
@@ -853,7 +853,7 @@ def online_exam_detail():
         driver.find_element("class name", "onlineexam-introduce")  
     except Exception:
         print traceback.format_exc()
-        print u"试卷详情：没有教学教务-考试测评-考试系统的读权限"   
+        print u"试卷详情：没有教学教务-考试测评-考试系统的读、编辑权限"   
         
     time.sleep(1)   
     try:
@@ -864,7 +864,7 @@ def online_exam_detail():
         time.sleep(1)   
     except Exception:
         print traceback.format_exc()
-        print u"试卷详情：没有教学教务-考试测评-考试系统的编辑、删除权限"  
+        print u"试卷详情：没有教学教务-考试测评-考试系统的编辑权限"  
 
 #前台-在线考试(教学教务-考试测评-考试系统权限)
 def online_exam_relate():
@@ -955,7 +955,7 @@ def teacher_team():
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
-        print u"名师团队：没有教学教务-名师团队-名师管理的编辑、删除权限" 
+        print u"名师团队：没有教学教务-名师团队-名师管理的编辑权限" 
 
 #前台-网校成员(教学教务-网校成员-成员管理)
 def school_members():
@@ -971,7 +971,7 @@ def school_members():
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
-        print u"名师团队：没有教学教务-网校成员-成员管理的读权限" 
+        print u"名师团队：没有教学教务-网校成员-成员管理的读、删除权限" 
                 
     time.sleep(1)   
     current_url = driver.current_url       
@@ -981,7 +981,7 @@ def school_members():
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
-        print u"名师团队：没有教学教务-网校成员-成员管理的编辑、删除权限"   
+        print u"名师团队：没有教学教务-网校成员-成员管理的编辑权限"   
 
 #前台-关于我们(适用于所有管理员) 
 def about_us():
@@ -1152,7 +1152,7 @@ def stuoremp():
 	menu_dic = {u"学员类目":stuoremp_stucate, 
 			        u"学员管理":stuoremp_stumanage, 
 	                u"员工管理":stuoremp_empmanage, 
-	                u"员工申请 ":stuoremp_empapply, 
+	                #u"员工申请 ":stuoremp_empapply, #手动测试吧
 	                u"学员学习记录":stuoremp_stulearnrecord}
 	menu_title = u"学员/员工"
 	check_menu(menu_title, menu_dic)
@@ -1243,17 +1243,11 @@ def authmanage_buyRecord():
 	    driver.find_elements("class name", "outday")[-1].click()
 	    time.sleep(1)
 	    driver.find_element_by_link_text(u"查询").click()
-	except Exception:
-		print traceback.format_exc()
-		print u"没有授权购买记录的读权限"
-		return
-		
-	time.sleep(2)	   
-	try:   
+	    time.sleep(2)	    
 	    driver.find_element_by_link_text(u"购买授权").click()	    
 	except Exception, e:
 		print traceback.format_exc()
-		print u"没有授权购买记录的编辑、删除权限"
+        print u"没有授权购买记录的读、编辑、删除权限"
 		
 #后台首页-授权管理-已使用授权		
 def authmanage_usegrant():
@@ -1288,7 +1282,7 @@ def authmanage_buygrant():
 	    driver.find_element_by_link_text(u"在线购买授权").click()   
 	except Exception:
 		print traceback.format_exc()
-		print u"没有在线购买授权的读权限"
+		print u"没有在线购买授权的读、删除权限"
 		return
 #	user_name = 'none'
 #	bnum = 1
@@ -1303,7 +1297,7 @@ def authmanage_buygrant():
 #		student_management.buy_open_num(cfg, driver, base_url, user_name, bnum)
 	except Exception:
 		print traceback.format_exc()
-		print u"没有在线购买授权的编辑、删除权限"
+		print u"没有在线购买授权的编辑权限"
 	time.sleep(2)
 	driver.get(current_url)
 
@@ -1341,7 +1335,7 @@ def courseagent_grant():
 	    driver.get(current_url)     
 	except Exception:
 		print traceback.format_exc()
-		print u"没有管理我授权的代理的课程代理的读权限"
+		print u"没有管理我授权的代理的课程代理的读、删除权限"
 		return
 
 	time.sleep(2) 
@@ -1392,7 +1386,7 @@ def courseagent_grant():
 		time.sleep(1)				  
 	except Exception:
 		print traceback.format_exc()
-		print u"没有管理我授权的代理的课程代理的编辑权限、删除权限"######？？？？
+		print u"没有管理我授权的代理的课程代理的编辑权限"
 	time.sleep(2)
 	driver.get(current_url)		
 #后台首页-课程合作代理-管理我申请的代理-课程代理		
@@ -1423,7 +1417,7 @@ def courseagent_apply():
 	    driver.get(current_url)     
 	except Exception:
 		print traceback.format_exc()
-		print u"没有管理我申请的代理的课程代理的读权限"
+		print u"没有管理我申请的代理的课程代理的读、编辑权限"
 		return
 
 	time.sleep(2)
@@ -1447,7 +1441,7 @@ def courseagent_apply():
 		driver.get(current_url)					  
 	except Exception:
 		print traceback.format_exc()
-		print u"没有管理我授权的代理的课程代理的编辑权限、删除权限"######？？？？
+		print u"没有管理我授权的代理的课程代理的编辑权限"
 	time.sleep(2)
 	
 #后台首页-课程合作代理-管理我授权的代理-考试代理
@@ -1476,7 +1470,7 @@ def paperagent_grant():
 	    driver.get(current_url)     
 	except Exception:
 		print traceback.format_exc()
-		print u"没有管理我授权的代理的考试代理的读权限"
+		print u"没有管理我授权的代理的考试代理的读、删除权限"
 		return
 
 	time.sleep(2) 
@@ -1527,7 +1521,7 @@ def paperagent_grant():
 		time.sleep(1)			  
 	except Exception:
 		print traceback.format_exc()
-		print u"没有管理我授权的代理的考试代理的编辑权限、删除权限"
+		print u"没有管理我授权的代理的考试代理的编辑权限"
 	driver.get(current_url)	
 	time.sleep(2)
 #后台首页-课程合作代理-管理我申请的代理-考试代理
@@ -1558,7 +1552,7 @@ def paperagent_apply():
 	    driver.get(current_url)     
 	except Exception:
 		print traceback.format_exc()
-		print u"没有管理我申请的代理的考试代理的读权限"
+		print u"没有管理我申请的代理的考试代理的读、编辑权限"
 		return
 
 	time.sleep(2)
@@ -1592,7 +1586,7 @@ def paperagent_apply():
 	    time.sleep(1)				  
 	except Exception:
 		print traceback.format_exc()
-		print u"没有管理我授权的代理的课程代理的编辑权限、删除权限"
+		print u"没有管理我授权的代理的课程代理的编辑权限"
 	driver.get(current_url)	
 	time.sleep(2)
 
@@ -1783,7 +1777,7 @@ def manageorservice_manage():
 	    driver.find_elements("class name","x-btn-text")[1].click()#先取消删除   	    
 	except Exception:
 		print traceback.format_exc()
-		print u"没有管理员的编辑权限"		
+		print u"没有管理员的删除权限"		
 
 #待写---------------------------------------
 def create_manage():
@@ -1859,7 +1853,7 @@ def pagecreate_edit():
 	    time.sleep(1)	    
 	except Exception:
 		print traceback.format_exc()
-		print u"没有首页高级编辑的读权限"	
+		print u"没有首页高级编辑的读、删除权限"	
 
 	time.sleep(1)
 	try:
@@ -1870,7 +1864,7 @@ def pagecreate_edit():
 	    time.sleep(1)	    
 	except Exception:
 		print traceback.format_exc()
-		print u"没有首页高级编辑的编辑、删除权限"	
+		print u"没有首页高级编辑的编辑权限"	
 
 #系统设置-页面建设-自定义页面 
 def pagecreate_selfpage():
@@ -2018,7 +2012,7 @@ def pagecreate_selflogin():
 	    time.sleep(1)  
 	except Exception:
 		print traceback.format_exc()
-		print u"没有自定义登录图片的读权限"
+		print u"没有自定义登录图片的读、删除权限"
 
 	time.sleep(1)
 	pic = "C:\\Users\\Public\\Pictures\\Sample Pictures\\1.jpg"
@@ -2035,7 +2029,7 @@ def pagecreate_selflogin():
 	    driver.find_element("id", "J_restoreDefault").click()
 	except Exception:
 		print traceback.format_exc()
-		print u"没有自定义登录图片的编辑、删除权限"
+		print u"没有自定义登录图片的编辑权限"
 			
 #学员/员工-网校学员-学员类目   
 def stuoremp_stucate():
@@ -2262,22 +2256,22 @@ def stuoremp_empmanage():
 #学员/员工-网校学员-员工申请
 def stuoremp_empapply():
 	time.sleep(1)
-#	try:
-#	    driver.find_element_by_link_text(u"查看资料").click()#点击查看资料
-#	    time.sleep(1)
-#	except Exception:
-#		print traceback.format_exc()
-#		print u"没有员工申请的读权限"
-#	####加黑名单是什么权限？	
-#	time.sleep(1)
-#	try:
-#		driver.find_element("css selector", ".action span").click()#点击通过
-#		time.sleep(1)
-#		driver.find_elements("css selector", ".action span")[1].click()#点击拒绝
-#		time.sleep(1)
-#	except Exception:
-#		print traceback.format_exc()
-#		print u"没有员工申请的编辑、删除权限"
+	try:
+	    driver.find_element_by_link_text(u"查看资料").click()#点击查看资料
+	    time.sleep(1)
+	except Exception:
+		print traceback.format_exc()
+		print u"没有员工申请的读权限"
+	####加黑名单是什么权限？	
+	time.sleep(1)
+	try:
+		driver.find_element("css selector", ".action span").click()#点击通过
+		time.sleep(1)
+		driver.find_elements("css selector", ".action span")[1].click()#点击拒绝
+		time.sleep(1)
+	except Exception:
+		print traceback.format_exc()
+		print u"没有员工申请的编辑、删除权限"
 			
 #学员/员工-网校学员-学员学习记录
 def stuoremp_stulearnrecord():
@@ -2326,7 +2320,7 @@ def admin_athority_check():
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
 #	driver.get("%smyOffice.do" %(base_url))
 
-#    #后台-后台首页
+#	#后台-后台首页
 #	teaching()#教学互动
 #	authmanage()#授权管理
 #	courseagent()#课程合作代理
@@ -2337,30 +2331,30 @@ def admin_athority_check():
 #	manageorservice()#管理员/客服
 #	pagecreate()#页面建设
 #
-#    #后台-学员/员工
+#	#后台-学员/员工
 #	stuoremp()#网校学员
-    
-        #前台(适用于所有管理员)
-        #fore_stage()
-        time.sleep(1)
-        driver.find_element_by_link_text(u"网校首页").click()
-        time.sleep(1)
-#        firstpage()#首页
-#        course_center_relate()#课程中心
-#        class_center_relate()#报班中心 
-#        online_ansquestion()#在线答疑
-#        live_course_relate()#直播课程
-#        cheap_course_relate()#特惠课程
-#        online_exam_relate()#在线考试
-#        school_notice()#网校公告
-#        teacher_team()#名师团队
-#        school_members()#网校成员
-#        about_us()#关于我们
-#        help_center()#帮助中心
+	
+	#前台(适用于所有管理员)
+	#fore_stage()
+	time.sleep(1)
+	driver.find_element_by_link_text(u"网校首页").click()
+	time.sleep(1)
+	firstpage()#首页
+	course_center_relate()#课程中心
+	class_center_relate()#报班中心 
+	online_ansquestion()#在线答疑
+	live_course_relate()#直播课程
+	cheap_course_relate()#特惠课程
+	online_exam_relate()#在线考试
+	school_notice()#网校公告
+	teacher_team()#名师团队
+	school_members()#网校成员
+	about_us()#关于我们
+	help_center()#帮助中心
         
-        driver.quit()
+	driver.quit()
     
 if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    admin_athority_check()
+	#import sys;sys.argv = ['', 'Test.testName']
+	admin_athority_check()
     

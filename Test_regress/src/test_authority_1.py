@@ -300,6 +300,11 @@ def course_detail():
         #显示发布相似课程
         driver.find_element_by_link_text(u"发布相似课程")
         time.sleep(1)
+        #显示编辑课件
+        driver.find_element_by_link_text(u"编辑课件").click()
+        time.sleep(1)
+        driver.find_elements("css selector", ".breadcrumb a")[-1].click()#返回课程详情页
+        time.sleep(1)         
     except Exception:
         print traceback.format_exc()
         print u"课程详情页面：没有教学教务-课程课件-课程管理的编辑权限！" 
@@ -504,6 +509,17 @@ def live_course():
         print traceback.format_exc()
         print u"直播课程：没有教学教务-直播课程-发布直播课程的删除权限"
 
+#-直播课程距开课半个小时前
+#发布相似课程 导入学员  查看学员 编辑 删除
+#发布相似课程 查看学员 编辑 删除
+#
+#-直播课程距开课半小时内-结束
+#发布相似课程 导入学员  查看学员
+#发布相似课程 查看学员
+#
+#-直播课程第一节课结束，第二节课未结束前(手动测试)
+#发布相似课程 上传课件  导入学员  查看学员  统计信息
+#发布相似课程 上传课件 查看学员 统计信息
 #前台-报名中-直播课程详情页
 def live_course_detail_continue():
     time.sleep(2)
@@ -511,7 +527,7 @@ def live_course_detail_continue():
     time.sleep(1)
     bh = driver.window_handles   
     try:
-        driver.find_element("class name", "see-course").click()#进入课程
+        driver.find_elements("class name", "see-course")[0].click()#进入课程
         time.sleep(1)
         ah = driver.window_handles
         swithing_window(bh,ah)
@@ -523,7 +539,26 @@ def live_course_detail_continue():
     current_url = driver.current_url 
     try:
         #查看学员
-        driver.find_elements("css selector", ".course-manage a")[-1].click()
+        try:
+            #找到了删除按钮
+            driver.find_elements("css selector", ".course-manage a")[4]
+            time.sleep(1)
+            driver.find_elements("css selector", ".course-manage a")[2].click()
+            time.sleep(1)
+        except:
+            try:
+                #找到了删除按钮
+                driver.find_elements("css selector", ".course-manage a")[3]
+                time.sleep(1)
+                driver.find_elements("css selector", ".course-manage a")[1].click()
+                time.sleep(1)
+            except:
+                try:
+                    #找到了查看学员
+                    driver.find_elements("css selector", ".course-manage a")[2].click()
+                    time.sleep(1)
+                except:
+                    driver.find_elements("css selector", ".course-manage a")[1].click()                   
         time.sleep(1)
         ah = driver.window_handles
         swithing_window(bh,ah)
@@ -536,31 +571,78 @@ def live_course_detail_continue():
     time.sleep(1)
     bh = driver.window_handles
     try:
-#        #发布相似课程
+        #发布相似课程
         driver.find_element("css selector", ".course-manage a").click()
         time.sleep(1)
         ah = driver.window_handles
         swithing_window(bh,ah)
         driver.get(current_url) 
         time.sleep(1)
-        #上传课件
-        driver.find_elements("css selector", ".course-manage a")[1]
-        time.sleep(1)
         #导入学员
-#        try:
-#            driver.find_elements("css selector", ".course-manage a")[2].click()
-#            time.sleep(1)
-#            driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
-#            time.sleep(1)
-#        except:
-            
+        try:
+            #找到了删除按钮
+            driver.find_elements("css selector", ".course-manage a")[4]
+            time.sleep(1)
+            driver.find_elements("css selector", ".course-manage a")[1].click()
+            time.sleep(1)
+            driver.find_element("css selector", ".dialog-button-container button").click()
+        except:
+            try:
+                #找到了删除按钮
+                driver.find_elements("css selector", ".course-manage a")[3]
+                time.sleep(1)
+            except:
+                try:
+                    #找到了查看学员
+                    driver.find_elements("css selector", ".course-manage a")[2]
+                    time.sleep(1)
+                    driver.find_elements("css selector", ".course-manage a")[1].click()
+                    time.sleep(1)
+                    driver.find_element("css selector", ".dialog-button-container button").click()
+                except:
+                   None 
+        time.sleep(1)       
+        #编辑
+        try:
+            driver.find_elements("css selector", ".course-manage a")[4]
+            time.sleep(1)
+            driver.find_elements("css selector", ".course-manage a")[3].click()
+            time.sleep(1)
+        except:
+            try:
+                 driver.find_elements("css selector", ".course-manage a")[3]
+                 time.sleep(1)
+                 driver.find_elements("css selector", ".course-manage a")[2].click()
+                 time.sleep(1)
+            except:
+                None
+        time.sleep(1)
+        ah = driver.window_handles
+        swithing_window(bh,ah)
+        driver.get(current_url) 
+        time.sleep(1)
     except Exception:
         print traceback.format_exc()
         print u"报名中-直播课程详情页：没有直播课程-发布直播课程的编辑权限"
+    
+    #删除    
+    time.sleep(1)
+    try:
+        try:
+            driver.find_elements("css selector", ".course-manage a")[4].click()
+            time.sleep(1)
+        except:
+            try:
+                driver.find_elements("css selector", ".course-manage a")[3].click()
+                time.sleep(1)
+            except:
+                None           
+    except Exception:
+        print traceback.format_exc()
+        print u"报名中-直播课程详情页：没有直播课程-发布直播课程的删除权限"
     #返回直播课程首页 
     time.sleep(1)
     driver.find_element_by_link_text("直播课程").click()
-    #删除
             
 #前台-已结束-直播课程详情页
 def live_course_detail_end():
@@ -2267,7 +2349,7 @@ def admin_athority_check():
 #        course_center_relate()#课程中心
 #        class_center_relate()#报班中心 
 #        online_ansquestion()#在线答疑
-        live_course_relate()#直播课程
+#        live_course_relate()#直播课程
 #        cheap_course_relate()#特惠课程
 #        online_exam_relate()#在线考试
 #        school_notice()#网校公告

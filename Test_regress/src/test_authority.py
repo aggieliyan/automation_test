@@ -42,6 +42,32 @@ def check_menu(menu_title, menu_dic):
 def course_cate():
 	current_url = driver.current_url
 	#修改
+
+	try:
+		#新建一级类目
+		time.sleep(1)
+		cate_management.add_cate(cfg, driver, base_url)
+	except:
+		print u"不能新建一级类目"
+
+	try:
+	    #添加课程到类目中
+		cate_management.add_courese_to_cate(cfg, driver, base_url)
+		driver.get(current_url)
+	except:
+		print u"不能将课程添加到类目"
+
+	try:
+		#添加子类目
+		driver.find_element("class name", "addSub").click()
+		time.sleep(1)
+		driver.find_element("id", "reg_textField").clear()
+		driver.find_element("id", "reg_textField").send_keys("sub_cate")
+		time.sleep(1)
+		driver.find_element("xpath", "//button").click()
+	except:
+		print u"不能添加子类目"
+
 	try:
 		#新建一级类目
 		time.sleep(1)

@@ -143,6 +143,101 @@ def register_by_mobile_index(cfg, driver, base_url, r_username, r_mobile, r_psw)
         logout(driver, base_url)
     except:
         print 'pass'
+        
+#院校注册
+def register_college_by_email(cfg, driver, base_url, r_username, r_email, r_psw):
+    driver.get(base_url + "/")
+    time.sleep(2)
+    driver.find_element_by_link_text(u"[注册]").click()
+    driver.find_element_by_link_text(u"高校用户").click()
+    driver.find_element(cfg.get('as_index', 'register_college_email_username_by'), \
+                        cfg.get('as_index', 'register_college_email_username')).click()
+    driver.find_element(cfg.get('as_index', 'register_college_email_username_by'), \
+                        cfg.get('as_index', 'register_college_email_username')).send_keys(r_username)
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_realname_by'), \
+                        cfg.get('as_index', 'register_college_email_realname')).click()
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_realname_by'), \
+                        cfg.get('as_index', 'register_college_email_realname')).send_keys("Realname")
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_by'), \
+                        cfg.get('as_index', 'register_college_email')).click()
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_by'), \
+                        cfg.get('as_index', 'register_college_email')).send_keys(r_email)
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_pwd_by'), \
+                        cfg.get('as_index', 'register_college_email_pwd')).click()
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_pwd_by'), \
+                        cfg.get('as_index', 'register_college_email_pwd')).send_keys(r_psw)
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_by'), \
+                        cfg.get('as_index', 'register_college')).click()
+    driver.find_element_by_css_selector("li.province-item.selected-item").click()
+    driver.find_element_by_css_selector("span.college-item").click()
+    driver.find_element_by_id("J_infoFaculty").click()
+    driver.find_element_by_xpath("//div[@id='sizcache007010915597576761']/div[2]/ul/div/li").click()
+    driver.find_element_by_id("J_infoSpecialty").click()
+    driver.find_element_by_xpath("//div[@id='sizcache007010915597576761']/div[2]/ul/li").click()
+    driver.find_element_by_id("J_infoAdmission").click()
+    driver.find_element_by_xpath("//ul[@id='J_getFullYear']/div/li").click()
+    driver.find_element_by_id("J_infoEdu").click()
+    driver.find_element_by_xpath("//div[@id='sizcache007010915597576761']/div[2]/ul/li").click()
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_num_by'), \
+                        cfg.get('as_index', 'register_college_num')).click()
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_num_by'), \
+                        cfg.get('as_index', 'register_college_num')).send_keys("M06000109")
+    driver.find_element_by_id("J_collegeVerifycode").click()
+    time.sleep(8)
+    #driver.find_element_by_id("J_collegeVerifycode").send_keys(u" ")
+    driver.find_element(cfg.get('as_index', 'register_email_submit_by'), \
+                        cfg.get('as_index', 'register_email_submit')).click()
+    time.sleep(6)
+    try:
+        logout(driver, base_url)
+    except:
+        print 'pass' 
+        
+def register_college_by_mobile(cfg, driver, base_url, r_username, r_mobile, r_psw):
+    driver.get(base_url + "/")
+    time.sleep(2)
+    driver.find_element_by_link_text(u"[注册]").click()
+    driver.find_element_by_link_text(u"高校用户").click()
+    driver.find_element(cfg.get('as_index', 'register_college_email_username_by'), \
+                        cfg.get('as_index', 'register_college_email_username')).click()
+    driver.find_element(cfg.get('as_index', 'register_college_email_username_by'), \
+                        cfg.get('as_index', 'register_college_email_username')).send_keys(r_username)
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_realname_by'), \
+                        cfg.get('as_index', 'register_college_email_realname')).click()
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_realname_by'), \
+                        cfg.get('as_index', 'register_college_email_realname')).send_keys("Realname")
+    driver.find_element_by_id("J_collegeMobile").click()
+    driver.find_element_by_id("J_collegeMobile").send_keys("15233344555")
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_pwd_by'), \
+                        cfg.get('as_index', 'register_college_email_pwd')).click()
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_pwd_by'), \
+                        cfg.get('as_index', 'register_college_email_pwd')).send_keys(r_psw)
+    driver.find_element_by_css_selector("li.province-item.selected-item").click()
+    driver.find_element_by_id("J_belongCollege").click()
+    driver.find_element_by_css_selector("span.college-item").click()
+    driver.find_element_by_id("J_enterFaculty").click()
+    driver.find_element_by_xpath("//div[@id='sizcache040772023210946595']/div[2]/ul/div/li").click()
+    driver.find_element_by_id("J_enterSpecialty").click()
+    driver.find_element_by_xpath("//div[@id='sizcache040772023210946595']/div[2]/ul/li[2]").click()
+    driver.find_element_by_id("J_enterAdmission").click()
+    driver.find_element_by_xpath("//ul[@id='J_getFullYear']/div/li").click()
+    driver.find_element_by_id("J_enterEdu").click()
+    driver.find_element_by_xpath("//div[@id='sizcache040772023210946595']/div[2]/ul/li").click()
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_num_by'), \
+                        cfg.get('as_index', 'register_college_num')).click()
+    driver.find_element_by_id(cfg.get('as_index', 'register_college_num_by'), \
+                        cfg.get('as_index', 'register_college_num')).send_keys("M06000109")
+    driver.find_element_by_id("J_imessageCode").click()
+    time.sleep(8)
+    driver.find_element_by_css_selector("span.show-state.lightgray30_text").click()
+    driver.find_element(cfg.get('as_index', 'register_email_submit_by'), \
+                        cfg.get('as_index', 'register_email_submit')).click()
+    time.sleep(6)
+    try:
+        logout(driver, base_url)
+    except:
+        print 'pass'    
+    
 #独立域名注册
 def register_by_independent_domian(cfg, driver, base_url, r_username, r_email, r_psw):
     driver.get(base_url + "/")
@@ -237,6 +332,8 @@ def auto_register(cfg, driver, base_url, r_num, reg_type):
             register_by_mobile_index(cfg, driver, base_url, r_username, r_mobile, r_psw)
         elif reg_type == 3:
             register_by_independent_domian(cfg, driver, base_url, r_username, r_email, r_psw)
+        else:
+            register_college_by_email(cfg, driver, base_url, r_username, r_email, r_psw)
             #except Exception,info:
             #print info
         if i == 0:

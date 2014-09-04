@@ -115,7 +115,7 @@ class Test(unittest.TestCase):
         self.total += 1
         user_name = ""
         try:
-            user_name = login.auto_register(self.cfg, self.driver, self.base_url, 2, 1)
+            user_name = login.auto_register(self.cfg, self.driver, self.base_url, 1, 4)
             self.import_name = user_name
         except Exception, e:
             print traceback.format_exc() 
@@ -1222,7 +1222,7 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/buy_paper.png")       
 
     
-    def test_regress(self):
+    def test_as_regress(self):
 
         #网站主站回归流程
         self.register()
@@ -1270,6 +1270,8 @@ class Test(unittest.TestCase):
         self.use_exam_card()
         login.logout(self.driver, self.base_url) 
         self.use_listencard()
+        
+    def test_exam_regress(self):
         
         #考试系统部分
         self.login_from_index()

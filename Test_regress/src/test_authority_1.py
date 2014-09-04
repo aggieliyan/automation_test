@@ -1123,7 +1123,11 @@ def learnigcard():
 def countmanage():
 	driver.get("%smyOffice.do" %(base_url))
 	#统计管理-外链视频流量统计  浏览量统计 新增学员量统计
-  
+	menu_dic = {u"外链视频流量统计":countmanage_outvideo, 
+			       u"浏览量统计":countmanage_views,
+			       u"新增学员量统计":countmanage_newstudent,}
+	menu_title = u"后台首页"
+	check_menu(menu_title, menu_dic)
 				     
 #系统设置-管理员/客服
 def manageorservice():
@@ -1149,11 +1153,11 @@ def pagecreate():
 def stuoremp():
 	driver.get("%smyOffice.do" %(base_url))
 	#统计管理-外链视频流量统计  浏览量统计 新增学员量统计
-	menu_dic = {u"学员类目":stuoremp_stucate, 
-			        u"学员管理":stuoremp_stumanage, 
-	                u"员工管理":stuoremp_empmanage, 
+	menu_dic = {u"学员管理":stuoremp_stumanage, 
+	                u"员工管理":stuoremp_empmanage,
+                    u"学员类目":stuoremp_stucate,
 	                #u"员工申请 ":stuoremp_empapply, #手动测试吧
-	                u"学员学习记录":stuoremp_stulearnrecord}
+	                u"学员学习记录":stuoremp_stulearnrecord,}
 	menu_title = u"学员/员工"
 	check_menu(menu_title, menu_dic)
 	
@@ -1168,7 +1172,8 @@ def teaching_letter():
 		return
 	time.sleep(2)	
 	try:
-		driver.find_element("class name", "sendEmialBtn").click()#发送私信
+        #收件箱发送私信
+		driver.find_element("class name", "sendEmialBtn").click()
 		time.sleep(1)
 		driver.find_element("name", "username").send_keys("success")
 		time.sleep(1)
@@ -1177,15 +1182,34 @@ def teaching_letter():
 		driver.find_element("name", "msg").send_keys(u"内容")
 		time.sleep(1)
 		driver.find_element("css selector", ".x-panel-btn-td button").click()
+		#发件箱发送私信
+		time.sleep(1)
+		driver.find_element_by_link_text(u"发件箱").click()
+		time.sleep(1)
+		driver.execute_script("$('#composeMsgTitle').click()")
+		#driver.find_element("id", "composeMsgTitle").click()#点击写信  
+		time.sleep(1)
+		driver.find_element("name", "username").send_keys("gy0411")
+		time.sleep(1)
+		driver.find_element("name", "subject").send_keys(u"标题")
+		time.sleep(1)
+		driver.find_element("name", "msg").send_keys(u"内容")
+		time.sleep(1)
+		driver.find_element("css selector", ".x-panel-btn-td button").click()
+		time.sleep(1)
+		driver.find_element("class name", "x-tab-strip-text").click()#点击收件箱            
 	except Exception, e:
 		print traceback.format_exc()
 		print u"没有我的私信的编辑权限"
-	time.sleep(3)		
+        
+	time.sleep(2)		
 	try:
+        #收件箱删除私信
 		driver.find_element("class name", "deleteS").click()
 		time.sleep(2)
 		driver.find_elements("css selector", ".x-panel-btns-center .x-btn-center button")[1].click()
 		time.sleep(1)
+        #发件箱删除私信
 		driver.find_element_by_link_text(u"发件箱").click()
 		time.sleep(1)
 		driver.find_element("css selector", ".priceAndFeedBGrid .deleteS").click()
@@ -1199,9 +1223,9 @@ def teaching_letter():
 def teaching_ansquestion():
 	time.sleep(1)
 	try:
-		driver.find_element("class name", "x-form-arrow-trigger").click()
+		driver.find_elements("class name", "x-form-arrow-trigger")[0].click()
 		time.sleep(1)
-		driver.find_elements_by("class name", "x-combo-list-item")[0].click()
+		driver.find_elements("class name", "x-combo-list-item")[0].click()
 	except Exception, e:
 		print traceback.format_exc()
 		print u"没有网校答疑的读权限"
@@ -1601,9 +1625,18 @@ def learnigcard_group():
 	time.sleep(1)
 	current_url = driver.current_url	
 	try:
-	    driver.find_element_by_link_text(u"浏览卡").click()
-	    time.sleep(1)
-	    driver.get(current_url)	
+		driver.find_element_by_link_text(u"浏览卡").click()
+		time.sleep(1)
+		driver.get(current_url)
+		#查看卡组页面-浏览卡
+		time.sleep(1)
+		driver.find_element("class name","textaligncenter").click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"浏览卡").click()
+		time.sleep(1)
+		#点击该卡组的Excel文件
+		time.sleep(1)
+		driver.get(current_url)       	
 	except Exception:
 		print traceback.format_exc()
 		print u"没有管理卡组的读权限"
@@ -1611,11 +1644,23 @@ def learnigcard_group():
 		
 	time.sleep(2)	   
 	try: 
+        #购买试听卡
 	    driver.find_element_by_link_text(u"购买试听卡").click()
 		#card_management.buy_listen_card(cfg,driver,base_url)#购买试听卡
 	    time.sleep(1)
 	    driver.get(current_url)
 	    time.sleep(1)
+        #查看卡组页面-编辑卡组
+	    time.sleep(1)
+	    driver.find_element("class name","textaligncenter").click()
+	    time.sleep(1)
+	    driver.find_element("class name","x-btn-center").click()#点击编辑卡组
+	    time.sleep(1)
+	    driver.find_elements("class name","x-btn-center")[1].click()#点击保存卡组
+	    time.sleep(1)
+	    driver.get(current_url)
+	    time.sleep(1)
+        #添加卡组
 	    org_name = "stu_gy"
 	    rand_name = str(random.randint(1000, 9999))
 	    group_name = u"prepaidcard"+rand_name
@@ -1631,17 +1676,20 @@ def learnigcard_group():
 		#driver.find_element_by_link_text(u"添加卡").click()	
 		#time.sleep(1)
 		#driver.get(current_url)
+        #浏览卡
 	    time.sleep(1)
 	    driver.find_element_by_link_text(u"浏览卡").click()		
 	    time.sleep(1)
 	    driver.find_elements("css selector", "input[type=checkbox]")[1].click()#勾选第一个卡
 	    time.sleep(1)
+        #禁用
 	    driver.find_element("class name", "x-form-arrow-trigger").click()#禁用
 	    time.sleep(1)
 	    driver.find_elements("class name", "x-combo-list-item")[1].click()
 	    time.sleep(1)
 	    driver.find_element_by_link_text("应用").click()#应用
 	    time.sleep(2)
+        #启用
 	    driver.find_elements("css selector", "input[type=checkbox]")[1].click()#勾选第一卡
 	    time.sleep(1)
 	    driver.find_element("class name", "x-form-arrow-trigger").click()#启用
@@ -1650,10 +1698,12 @@ def learnigcard_group():
 	    time.sleep(1)
 	    driver.find_element_by_link_text("应用").click()#应用
 	    time.sleep(1)
+        #添加卡
 	    driver.find_elements("class name", "colorwhite")[1].click()#点击向该卡组添加卡
 	    time.sleep(1)
 	    driver.get(current_url)
-	    time.sleep(2)	    
+	    time.sleep(2)
+        #编辑卡组	    
 	    driver.find_element_by_link_text(u"编辑卡组").click()#编辑卡组
 	    time.sleep(1)
 	    driver.find_element("class name", "x-btn-text").click()#保存修改
@@ -1664,6 +1714,7 @@ def learnigcard_group():
 		
 	time.sleep(2)	   
 	try:
+        #浏览卡页面-删除卡
 	    driver.find_element_by_link_text(u"浏览卡").click()		
 	    time.sleep(1)
 	    driver.find_elements("css selector", "input[type=checkbox]")[1].click()#勾选第一个卡
@@ -1676,6 +1727,7 @@ def learnigcard_group():
 	    time.sleep(1)
 	    driver.get(current_url)
 	    time.sleep(2)
+        #删除卡组
 	    driver.find_element_by_link_text(u"删除卡组").click()
 	    time.sleep(1)
 	    driver.find_elements("css selector", ".x-panel-bwrap .x-btn-text")[5].click()
@@ -1714,6 +1766,8 @@ def countmanage_outvideo():
 	    driver.find_element("class name", "x-form-arrow-trigger").click()#按日显示
 	    time.sleep(2)	
 	    driver.find_elements("class name", "x-combo-list-item")[0].click()
+	    time.sleep(1)
+	    driver.find_element("id", "J_exportExcel").click()#点击导入excel列表
 	    time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
@@ -1728,6 +1782,8 @@ def countmanage_views():
 	    driver.find_element("class name", "cc-arrow").click()#按日查询
 	    time.sleep(2)	
 	    driver.find_elements("class name", "cc-item")[0].click()
+	    time.sleep(1)
+	    driver.find_element("class name", "exportExecl").click()
 	    time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
@@ -1742,6 +1798,8 @@ def countmanage_newstudent():
 	    driver.find_element("class name", "cc-arrow").click()#按日查询
 	    time.sleep(2)	
 	    driver.find_elements("class name", "cc-item")[0].click()
+	    time.sleep(1)
+	    driver.find_element("class name", "exportExecl").click()
 	    time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
@@ -1777,13 +1835,114 @@ def manageorservice_manage():
 	    driver.find_elements("class name","x-btn-text")[1].click()#先取消删除   	    
 	except Exception:
 		print traceback.format_exc()
-		print u"没有管理员的删除权限"		
+		print u"没有管理员的删除权限"
+		
+#批量创建读权限管理员
+def create_manage_read():
+	user_file = open(r"C:/register_admin_user_list_read.txt", 'w')
+	i = 1
+	pre_name='relog_'
+	for item in driver.find_elements("class name","categoryAuthority-look-active"):
+		admin_username = create_manage_fillmanage(pre_name, i, user_file)
+		time.sleep(1)
+		if i != 1:
+			driver.execute_script("$('.onOff').click()")
+			time.sleep(1)
+			# driver.execute_script("$('.')")
+			item.click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"取消").click()
+		time.sleep(1)
+		user_file.writelines(admin_username + "\n")
+		i = i + 1
+		time.sleep(5)
+		driver.find_element_by_link_text(u"添加管理员").click() 
+		time.sleep(3)
+	print '读权限管理员个数' + i
+	user_file.close()
 
-#待写---------------------------------------
-def create_manage():
+#批量创建编辑权限管理员
+def create_manage_edit():
+	user_file = open(r"C:/register_admin_user_list_edit.txt", 'w')
+	i = 1
+	pre_name = 'edlog_'
+	for item in driver.find_elements("class name", "categoryAuthority-add"):
+		admin_username = create_manage_fillmanage(driver, pre_name, i, user_file)
+		if i != 1:
+			driver.execute_script("$('.onOff').click()")
+			time.sleep(1)
+			item.click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"取消").click()
+		time.sleep(1)
+		user_file.writelines(admin_username + "\n")
+		i = i + 1
+		time.sleep(1)
+		driver.find_element_by_link_text(u"添加管理员").click() 
+		time.sleep(1)
+	print '编辑权限管理员个数' + i
+	user_file.close()
+
+#批量创建编辑权限管理员
+def create_manage_delete():
+	user_file = open(r"C:/register_admin_user_list_delete.txt", 'w')
+	i = 1
+	pre_name = 'delog_'
+	for item in driver.find_elements("class name", "categoryAuthority-delete"):
+		admin_username = create_manage_fillmanage(pre_name, i, user_file)
+		if i != 1:
+			driver.execute_script("$('.onOff').click()")
+			time.sleep(1)
+			item.click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"取消").click()
+		time.sleep(1)
+		user_file.writelines(admin_username + "\n")
+		i = i + 1
+		time.sleep(1)
+		driver.find_element_by_link_text(u"添加管理员").click() 
+		time.sleep(1)
+	print '编辑权限管理员个数' + i
+	user_file.close()
+
+#创建管理员填写信息公用方法
+def create_manage_fillmanage(pre_name, i, user_file):
 	time.sleep(1)
-#待写---------------------------------------
-		        
+	prefix = chr(random.randint(97, 122)) + chr(random.randint(97, 122)) + chr(random.randint(97, 122))
+	admin_name = pre_name + prefix + str(i)
+	admin_username = admin_name 
+	admin_email = admin_name + "@sohu.com"
+	admin_psw = 'gy0411'
+	time.sleep(1)
+	driver.find_element("id", "admin_name").send_keys(admin_name)#管理员名称
+	time.sleep(1)
+	driver.find_element("id", "admin_username").send_keys(admin_username)#用户名
+	time.sleep(1)
+	driver.find_element("id", "admin_password").send_keys(admin_psw)#密码
+	time.sleep(1)
+	driver.find_element("id", "admin_repassword").send_keys(admin_psw)#再次输入密码
+	time.sleep(1)
+	driver.find_element("id", "admin_email").send_keys(admin_email)#邮箱
+	time.sleep(1)
+	driver.find_element("id", "admin_reemail").send_keys(admin_email)#再次确认邮箱
+	time.sleep(1)
+	return admin_username
+
+#创建管理员
+def create_manage():
+	time.sleep(10)
+	driver.get("%smyOffice.do" %(base_url))
+	time.sleep(6)
+	driver.find_element_by_link_text(u"系统设置").click()   
+	time.sleep(6)
+	driver.find_element_by_link_text(u"网校管理员").click() 
+	time.sleep(6)
+	driver.find_element_by_link_text(u"添加管理员").click() 
+	time.sleep(4)
+	create_manage_read()#批量创建读权限管理员
+#	create_manage_edit()#批量创建编辑权限管理员
+#	create_manage_delete()#批量创建删除权限管理员
+
 #系统设置-管理员/客服-网校客服
 def manageorservice_service():
 	time.sleep(1)
@@ -2068,11 +2227,13 @@ def stuoremp_stucate():
 	    driver.find_elements("class name", "delete")[-1].click()#删除类目
 	    time.sleep(1)
 	    driver.find_element("class name", "x-btn-text").click()#点击删除		
-	    time.sleep(1)	
+	    time.sleep(2)	
 	except Exception:
 		print traceback.format_exc()
 		print u"没有学员类目的删除权限"
-						
+	driver.get(current_url)
+	time.sleep(2)
+
 #新建一级类目和子类目的方法		
 def creat_stucate():
 	time.sleep(1)
@@ -2123,20 +2284,29 @@ def stuoremp_stumanage():
 	time.sleep(2)
 	current_url = driver.current_url
 	try:
-	    driver.find_element_by_link_text(u"筛选").click()#点击筛选
-	    time.sleep(1)	
+		driver.find_element_by_link_text(u"筛选").click()#点击筛选
+		time.sleep(1)
+		#页面下方批量操作-导出账户信息
+		driver.find_element("name","userCheck").click()#勾选第一个学员
+		time.sleep(1)
+		driver.find_element("class name","x-form-arrow-trigger").click()
+		time.sleep(1)
+		driver.find_elements("class name","x-combo-list-item ")[1].click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"应用").click()
+		time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
 		print u"没有学员管理的读权限"
-		return
 	
 	org_name = "stu_gy"
 	user_name = "stu_gy50"
 	stu_num = 5
-	time.sleep(1)
+	driver.get(current_url)
+	time.sleep(3)
 	try:
 		driver.find_element_by_link_text(u"批量导入学员").click()#批量导入学员
-		time.sleep(1)
+		time.sleep(2)
 		driver.find_element_by_link_text(u"返回").click()
 		time.sleep(2)
 		driver.find_element_by_link_text(u"批量创建学员").click()#批量创建学员
@@ -2155,7 +2325,6 @@ def stuoremp_stumanage():
 		time.sleep(1)
 		driver.find_elements("class name", "x-btn-text")[-1].click()#点击取消
 		time.sleep(1)
-		#页面下方的批量操作手动测试 吧	
 		#逐一导入手动导入测试
 #		student_management.import_multi_student(cfg, driver, \
 #			base_url, org_name, r"C:\register_user_list.txt")#批量导入学员
@@ -2175,24 +2344,42 @@ def stuoremp_stumanage():
 #		time.sleep(1)
 #		driver.find_elements("class name", "x-btn-text")[-1].click()#点击取消
 		time.sleep(1)
-		#页面下方的批量操作手动测试 吧													
+		#页面下方的批量操作-开通课程
+		driver.find_element("name","userCheck").click()#勾选第一个学员
+		time.sleep(1)
+		driver.find_element("class name","x-form-arrow-trigger").click()
+		time.sleep(1)
+		driver.find_elements("class name","x-combo-list-item ")[0].click()
+		time.sleep(1)
+		driver.get(current_url)
+		time.sleep(1)													
 	except Exception:
 		print traceback.format_exc()
 		print u"没有学员管理的编辑权限" 
 
 	time.sleep(2)
 	try:
-	    driver.find_element_by_link_text(u"删除学员").click()#删除学员
-	    time.sleep(1)
-	    driver.find_element("css selector", ".x-panel-btns-right .x-btn-text").click()#点击确定
-	    time.sleep(1)
-	    try:
-	        driver.find_element_by_link_text(u"删除帐号").click()
-	        time.sleep(1)
-	        driver.find_element("class name", "x-btn-text").click()#点击确定
-	        time.sleep(1)
-	    except:
-	    	print "没有找到删除帐号"		
+		driver.find_element_by_link_text(u"删除学员").click()#删除学员
+		time.sleep(1)
+		driver.find_element("css selector", ".x-panel-btns-right .x-btn-text").click()#点击确定
+		time.sleep(1)
+		try:
+			driver.find_element_by_link_text(u"删除帐号").click()
+			time.sleep(1)
+			driver.find_element("class name", "x-btn-text").click()#点击确定
+			time.sleep(2)
+		except:
+			print "没有找到删除帐号"
+		#页面下方的批量操作-删除员工（删除账号手动测试）
+		driver.find_element("name", "userCheck").click()#勾选第一个
+		time.sleep(1)
+		driver.find_element("class name", "x-form-arrow-trigger").click()
+		time.sleep(1)
+		driver.find_elements("class name", "x-combo-list-item ")[2].click()
+		time.sleep(2)
+		driver.find_element_by_link_text(u"应用").click()
+		time.sleep(2)
+		driver.find_element("css selector", ".x-panel-btns-right .x-btn-text").click()#确定		
 	except Exception:
 		print traceback.format_exc()
 		print u"没有学员管理的删除权限"
@@ -2202,20 +2389,30 @@ def stuoremp_empmanage():
 	time.sleep(2)
 	current_url = driver.current_url
 	try:
-	    driver.find_element_by_link_text(u"筛选").click()#点击筛选
-	    time.sleep(1)	
+		#筛选
+		driver.find_element_by_link_text(u"筛选").click()#点击筛选
+		time.sleep(1)
+		#页面下方批量操作-导出账户信息
+		driver.find_element("name","userCheck").click()#勾选第一个
+		time.sleep(1)
+		driver.find_element("class name","x-form-arrow-trigger").click()
+		time.sleep(1)
+		driver.find_elements("class name","x-combo-list-item ")[1].click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"应用").click()
+		time.sleep(2)
 	except Exception:
 		print traceback.format_exc()
 		print u"没有员工管理的读权限"
-		return
 	
 	org_name = "stu_gy"
 	user_name = "stu_gy50"
-	time.sleep(1)
+	driver.get(current_url)
+	time.sleep(3)
 	try:
 		#逐一导入手动导入测试
 		driver.find_element_by_link_text(u"批量导入员工").click()#批量导入员工
-		time.sleep(1)
+		time.sleep(2)
 		driver.find_element_by_link_text(u"返回").click()
 		time.sleep(2)
 		driver.find_element_by_link_text(u"批量创建员工").click()#批量创建员工
@@ -2238,17 +2435,40 @@ def stuoremp_empmanage():
 		time.sleep(1)
 		driver.find_elements("class name", "x-btn-text")[-1].click()#点击取消
 		time.sleep(1)
-		#页面下方的批量操作手动测试 吧													
+		#页面下方的批量操作-开通课程
+		driver.find_element("name","userCheck").click()#勾选第一个
+		time.sleep(1)
+		driver.find_element("class name","x-form-arrow-trigger").click()
+		time.sleep(1)
+		driver.find_elements("class name","x-combo-list-item ")[0].click()
+		time.sleep(1)
+		driver.find_element_by_link_text(u"应用").click()
+		time.sleep(2)
+		driver.get(current_url)
+		time.sleep(1)
 	except Exception:
 		print traceback.format_exc()
 		print u"没有员工管理的编辑权限" 
 
 	time.sleep(2)
 	try:
-	    driver.find_element_by_link_text(u"删除员工").click()#删除员工
-	    time.sleep(1)
-	    driver.find_element("css selector", ".x-panel-btns-right .x-btn-text").click()#点击确定
-	    time.sleep(1)	
+		driver.find_element_by_link_text(u"删除员工").click()#删除员工
+		time.sleep(1)
+		driver.find_elements("css selector", ".x-panel-btns-right .x-btn-text")[1].click()#先取消删除
+		time.sleep(1)
+		#页面下方的批量操作-删除员工（删除账号手动测试）
+		driver.get(current_url)
+		time.sleep(1)
+		driver.find_element("name", "userCheck").click()#勾选第一个
+		time.sleep(1)
+		driver.find_element("class name", "x-form-arrow-trigger").click()
+		time.sleep(1)
+		driver.find_elements("class name", "x-combo-list-item ")[2].click()
+		time.sleep(2)
+		driver.find_element_by_link_text(u"应用").click()
+		time.sleep(2)
+		driver.find_elements("css selector", ".x-panel-btns-right .x-btn-text")[-1].click()#先取消删除
+		time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
 		print u"没有员工管理的删除权限"
@@ -2286,13 +2506,22 @@ def stuoremp_stulearnrecord():
 		time.sleep(1)
 		driver.find_element_by_link_text(u"查询").click()#点击查询
 		time.sleep(1)
+#		driver.find_element("class name", "center").click()#点击导出学员学习记录的excel文件
+#		time.sleep(3)
 		bh = driver.window_handles
-		driver.find_element_by_link_text(u"详情").click()#点击详情
-		time.sleep(1)
+		driver.find_element_by_link_text(u"详情").click()
+		time.sleep(1)		
 		ah = driver.window_handles
 		swithing_window(bh,ah)
+		time.sleep(1)    
+		driver.find_elements("class name", "centercafC")[3].click()#点击学习记录tab
+		time.sleep(2)
+		driver.find_element("class name", "x-btn-center").click()#点击过滤
+		time.sleep(2)
+		driver.find_elements("class name", "cursorHand")[1].click()#点击导出学习记录的excel文件
 		time.sleep(1)
-		driver.get(current_url)	
+		driver.get(current_url)
+		time.sleep(1)
 	except Exception:
 		print traceback.format_exc()
 		print u"没有学员学习记录的读、编辑、删除权限"	    		  
@@ -2302,15 +2531,15 @@ def admin_athority_check():
 	global base_url
 	global cfg 
 	global driver
-	base_url = "http://www.ablesky.com/"
-#	base_url = "http://www.ablesky-a.com:8080/"
+#	base_url = "http://www.ablesky.com/"
+	base_url = "http://www.ablesky-a.com:8080/"
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file)
-#	user_name = "v52"
-#	user_psw = "1234"    
-	user_name = "sadm_gaoyue"
-	user_psw = "123456aa"
+	user_name = "v52"
+	user_psw = "1234"    
+#	user_name = "sadm_gaoyue"
+#	user_psw = "123456aa"
 
 	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
@@ -2320,6 +2549,9 @@ def admin_athority_check():
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
 #	driver.get("%smyOffice.do" %(base_url))
 
+	#后台-先创建管理员	
+	create_manage()
+
 #	#后台-后台首页
 #	teaching()#教学互动
 #	authmanage()#授权管理
@@ -2327,7 +2559,7 @@ def admin_athority_check():
 #	learnigcard()#学习卡
 #	countmanage()#统计管理
 #
-#    #后台-系统设置
+#   #后台-系统设置
 #	manageorservice()#管理员/客服
 #	pagecreate()#页面建设
 #
@@ -2336,21 +2568,21 @@ def admin_athority_check():
 	
 	#前台(适用于所有管理员)
 	#fore_stage()
-	time.sleep(1)
-	driver.find_element_by_link_text(u"网校首页").click()
-	time.sleep(1)
-	firstpage()#首页
-	course_center_relate()#课程中心
-	class_center_relate()#报班中心 
-	online_ansquestion()#在线答疑
-	live_course_relate()#直播课程
-	cheap_course_relate()#特惠课程
-	online_exam_relate()#在线考试
-	school_notice()#网校公告
-	teacher_team()#名师团队
-	school_members()#网校成员
-	about_us()#关于我们
-	help_center()#帮助中心
+#	time.sleep(1)
+#	driver.find_element_by_link_text(u"网校首页").click()
+#	time.sleep(1)
+#	firstpage()#首页
+#	course_center_relate()#课程中心
+#	class_center_relate()#报班中心 
+#	online_ansquestion()#在线答疑
+#	live_course_relate()#直播课程
+#	cheap_course_relate()#特惠课程
+#	online_exam_relate()#在线考试
+#	school_notice()#网校公告
+#	teacher_team()#名师团队
+#	school_members()#网校成员
+#	about_us()#关于我们
+#	help_center()#帮助中心
         
 	driver.quit()
     

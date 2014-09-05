@@ -1848,8 +1848,8 @@ def create_manage_read():
 		if i != 1:
 			driver.execute_script("$('.onOff').click()")
 			time.sleep(1)
-			# driver.execute_script("$('.')")
-			item.click()
+			driver.execute_script("$('.categoryAuthority-look-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-look').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
 		driver.find_element_by_link_text(u"取消").click()
 		time.sleep(1)
@@ -1858,20 +1858,21 @@ def create_manage_read():
 		time.sleep(5)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(3)
-	print '读权限管理员个数' + i
+	print '读权限管理员个数:' + str(i)
 	user_file.close()
 
 #批量创建编辑权限管理员
 def create_manage_edit():
-	user_file = open(r"C:/register_admin_user_list_edit.txt", 'w')
 	i = 1
 	pre_name = 'edlog_'
 	for item in driver.find_elements("class name", "categoryAuthority-add"):
-		admin_username = create_manage_fillmanage(driver, pre_name, i, user_file)
+		user_file = open(r"C:/register_admin_user_list_edit.txt", 'w')
+		admin_username = create_manage_fillmanage( pre_name, i, user_file)
 		if i != 1:
 			driver.execute_script("$('.onOff').click()")
 			time.sleep(1)
-			item.click()
+			driver.execute_script("$('.categoryAuthority-add-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-add').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
 		driver.find_element_by_link_text(u"取消").click()
 		time.sleep(1)
@@ -1880,10 +1881,10 @@ def create_manage_edit():
 		time.sleep(1)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
-	print '编辑权限管理员个数' + i
+	print '编辑权限管理员个数:' + str(i)
 	user_file.close()
 
-#批量创建编辑权限管理员
+#批量创建删除权限管理员
 def create_manage_delete():
 	user_file = open(r"C:/register_admin_user_list_delete.txt", 'w')
 	i = 1
@@ -1893,7 +1894,8 @@ def create_manage_delete():
 		if i != 1:
 			driver.execute_script("$('.onOff').click()")
 			time.sleep(1)
-			item.click()
+			driver.execute_script("$('.categoryAuthority-delete-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-delete').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
 		driver.find_element_by_link_text(u"取消").click()
 		time.sleep(1)
@@ -1902,7 +1904,7 @@ def create_manage_delete():
 		time.sleep(1)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
-	print '编辑权限管理员个数' + i
+	print '删除权限管理员个数' + str(i)
 	user_file.close()
 
 #创建管理员填写信息公用方法
@@ -1930,18 +1932,18 @@ def create_manage_fillmanage(pre_name, i, user_file):
 
 #创建管理员
 def create_manage():
-	time.sleep(10)
+	time.sleep(15)
 	driver.get("%smyOffice.do" %(base_url))
-	time.sleep(6)
+	time.sleep(8)
 	driver.find_element_by_link_text(u"系统设置").click()   
 	time.sleep(6)
 	driver.find_element_by_link_text(u"网校管理员").click() 
 	time.sleep(6)
 	driver.find_element_by_link_text(u"添加管理员").click() 
 	time.sleep(4)
-	create_manage_read()#批量创建读权限管理员
-#	create_manage_edit()#批量创建编辑权限管理员
-#	create_manage_delete()#批量创建删除权限管理员
+	# create_manage_read()#批量创建读权限管理员
+	# create_manage_edit()#批量创建编辑权限管理员
+	create_manage_delete()#批量创建删除权限管理员
 
 #系统设置-管理员/客服-网校客服
 def manageorservice_service():

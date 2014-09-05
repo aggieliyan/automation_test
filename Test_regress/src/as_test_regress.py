@@ -18,7 +18,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
 
-        self.browser = "ie"
+        self.browser = "firfox"
 
         self.test_enviroment = "beta"
         self.independent_url = "www.dlym.com" #独立域名网址
@@ -86,7 +86,7 @@ class Test(unittest.TestCase):
         try:
             conn = MySQLdb.connect(host=self.dbhost, user='root', passwd='mysqlpwd1', db=database, charset='utf8')
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
         return conn
 
     def verify_convert(self, course_title, msg):
@@ -131,7 +131,8 @@ class Test(unittest.TestCase):
         try:
             login.login_by_as(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
         except Exception, e:
-            print traceback.format_exc() 
+            print traceback.format_exc()
+             
         finally:
             self.driver.save_screenshot(r'C:/test_rs_pic/1_login.png')
 

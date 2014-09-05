@@ -134,7 +134,7 @@ def register_by_mobile_index(cfg, driver, base_url, r_username, r_mobile, r_psw)
                                 'register_mobile_confirm_psw')).send_keys(r_psw)
     driver.find_element(cfg.get('as_index', 'register_mobile_getverify_by'), \
                         cfg.get('as_index', 'register_mobile_getverify')).click()
-    #driver.find_element_by_id("J_imessageCode").send_keys("aaaa")    
+    driver.find_element_by_id("J_imessageCode").send_keys(raw_input(u'请输入验证码：'))    
     time.sleep(8) 
     driver.find_element(cfg.get('as_index', 'register_mobile_submit_by'), \
                         cfg.get('as_index', 'register_mobile_submit')).click()
@@ -145,91 +145,75 @@ def register_by_mobile_index(cfg, driver, base_url, r_username, r_mobile, r_psw)
         print 'pass'
         
 #院校注册
-def register_college_by_email(cfg, driver, base_url, r_username, r_email, r_psw):
+def register_college_by_email(cfg, driver, base_url, r_username, r_email, r_mobile, r_psw, reg_type):
     driver.get(base_url + "/")
     time.sleep(2)
     driver.find_element_by_link_text(u"[注册]").click()
     driver.find_element_by_link_text(u"高校用户").click()
+    if reg_type == 5:
+        driver.find_element(cfg.get('as_index', 'register_college_type_by'), \
+                        cfg.get('as_index', 'register_college_type')).click()        
     driver.find_element(cfg.get('as_index', 'register_college_email_username_by'), \
                         cfg.get('as_index', 'register_college_email_username')).click()
     driver.find_element(cfg.get('as_index', 'register_college_email_username_by'), \
                         cfg.get('as_index', 'register_college_email_username')).send_keys(r_username)
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_realname_by'), \
+    driver.find_element(cfg.get('as_index', 'register_college_email_realname_by'), \
                         cfg.get('as_index', 'register_college_email_realname')).click()
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_realname_by'), \
+    driver.find_element(cfg.get('as_index', 'register_college_email_realname_by'), \
                         cfg.get('as_index', 'register_college_email_realname')).send_keys("Realname")
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_by'), \
-                        cfg.get('as_index', 'register_college_email')).click()
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_by'), \
-                        cfg.get('as_index', 'register_college_email')).send_keys(r_email)
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_pwd_by'), \
+    if reg_type == 4:
+        driver.find_element(cfg.get('as_index', 'register_college_email_by'), \
+                            cfg.get('as_index', 'register_college_email')).click()
+        driver.find_element(cfg.get('as_index', 'register_college_email_by'), \
+                            cfg.get('as_index', 'register_college_email')).send_keys(r_email)
+    else:
+        driver.find_element(cfg.get('as_index', 'register_college_mobile_by'), \
+                            cfg.get('as_index', 'register_college_mobile')).click()
+        driver.find_element(cfg.get('as_index', 'register_college_mobile_by'), \
+                            cfg.get('as_index', 'register_college_mobile')).send_keys(r_mobile)        
+    driver.find_element(cfg.get('as_index', 'register_college_email_pwd_by'), \
                         cfg.get('as_index', 'register_college_email_pwd')).click()
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_pwd_by'), \
+    driver.find_element(cfg.get('as_index', 'register_college_email_pwd_by'), \
                         cfg.get('as_index', 'register_college_email_pwd')).send_keys(r_psw)
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_by'), \
+    driver.find_element(cfg.get('as_index', 'register_college_by'), \
                         cfg.get('as_index', 'register_college')).click()
-    driver.find_element_by_css_selector("li.province-item.selected-item").click()
-    driver.find_element_by_css_selector("span.college-item").click()
-    driver.find_element_by_id("J_infoFaculty").click()
-    driver.find_element_by_xpath("//div[@id='sizcache007010915597576761']/div[2]/ul/div/li").click()
-    driver.find_element_by_id("J_infoSpecialty").click()
-    driver.find_element_by_xpath("//div[@id='sizcache007010915597576761']/div[2]/ul/li").click()
-    driver.find_element_by_id("J_infoAdmission").click()
-    driver.find_element_by_xpath("//ul[@id='J_getFullYear']/div/li").click()
-    driver.find_element_by_id("J_infoEdu").click()
-    driver.find_element_by_xpath("//div[@id='sizcache007010915597576761']/div[2]/ul/li").click()
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_num_by'), \
-                        cfg.get('as_index', 'register_college_num')).click()
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_num_by'), \
-                        cfg.get('as_index', 'register_college_num')).send_keys("M06000109")
-    driver.find_element_by_id("J_collegeVerifycode").click()
-    time.sleep(8)
-    #driver.find_element_by_id("J_collegeVerifycode").send_keys(u" ")
-    driver.find_element(cfg.get('as_index', 'register_email_submit_by'), \
-                        cfg.get('as_index', 'register_email_submit')).click()
-    time.sleep(6)
-    try:
-        logout(driver, base_url)
-    except:
-        print 'pass' 
-        
-def register_college_by_mobile(cfg, driver, base_url, r_username, r_mobile, r_psw):
-    driver.get(base_url + "/")
+    driver.find_element(cfg.get('as_index', 'register_college_form_by'), \
+                        cfg.get('as_index', 'register_college_form')).click()
     time.sleep(2)
-    driver.find_element_by_link_text(u"[注册]").click()
-    driver.find_element_by_link_text(u"高校用户").click()
-    driver.find_element(cfg.get('as_index', 'register_college_email_username_by'), \
-                        cfg.get('as_index', 'register_college_email_username')).click()
-    driver.find_element(cfg.get('as_index', 'register_college_email_username_by'), \
-                        cfg.get('as_index', 'register_college_email_username')).send_keys(r_username)
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_realname_by'), \
-                        cfg.get('as_index', 'register_college_email_realname')).click()
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_realname_by'), \
-                        cfg.get('as_index', 'register_college_email_realname')).send_keys("Realname")
-    driver.find_element_by_id("J_collegeMobile").click()
-    driver.find_element_by_id("J_collegeMobile").send_keys("15233344555")
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_pwd_by'), \
-                        cfg.get('as_index', 'register_college_email_pwd')).click()
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_email_pwd_by'), \
-                        cfg.get('as_index', 'register_college_email_pwd')).send_keys(r_psw)
-    driver.find_element_by_css_selector("li.province-item.selected-item").click()
-    driver.find_element_by_id("J_belongCollege").click()
-    driver.find_element_by_css_selector("span.college-item").click()
-    driver.find_element_by_id("J_enterFaculty").click()
-    driver.find_element_by_xpath("//div[@id='sizcache040772023210946595']/div[2]/ul/div/li").click()
-    driver.find_element_by_id("J_enterSpecialty").click()
-    driver.find_element_by_xpath("//div[@id='sizcache040772023210946595']/div[2]/ul/li[2]").click()
-    driver.find_element_by_id("J_enterAdmission").click()
-    driver.find_element_by_xpath("//ul[@id='J_getFullYear']/div/li").click()
-    driver.find_element_by_id("J_enterEdu").click()
-    driver.find_element_by_xpath("//div[@id='sizcache040772023210946595']/div[2]/ul/li").click()
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_num_by'), \
+    driver.find_element(cfg.get('as_index', 'register_college_selected_by'), \
+                        cfg.get('as_index', 'register_college_selected')).click()
+    time.sleep(1)
+    driver.find_element(cfg.get('as_index', 'register_college_faculty_by'), \
+                        cfg.get('as_index', 'register_college_faculty')).click()
+    time.sleep(2)
+    driver.find_element(cfg.get('as_index', 'register_college_faculty_selected_by'), \
+                        cfg.get('as_index', 'register_college_faculty_selected')).click()
+    time.sleep(2)                    
+    driver.find_element(cfg.get('as_index', 'register_college_specialty_by'), \
+                        cfg.get('as_index', 'register_college_specialty')).click()
+    driver.find_element(cfg.get('as_index', 'register_college_specialty_selected_by'), \
+                        cfg.get('as_index', 'register_college_specialty_selected')).click()
+    driver.find_element(cfg.get('as_index', 'register_college_year_by'), \
+                        cfg.get('as_index', 'register_college_year')).click()
+    driver.find_element(cfg.get('as_index', 'register_college_year_selected_by'), \
+                        cfg.get('as_index', 'register_college_year_selected')).click()
+    driver.find_element(cfg.get('as_index', 'register_college_edu_by'), \
+                        cfg.get('as_index', 'register_college_edu')).click()
+    driver.find_element(cfg.get('as_index', 'register_college_edu_selected_by'), \
+                        cfg.get('as_index', 'register_college_edu_selected')).click()
+    driver.find_element(cfg.get('as_index', 'register_college_num_by'), \
                         cfg.get('as_index', 'register_college_num')).click()
-    driver.find_element_by_id(cfg.get('as_index', 'register_college_num_by'), \
+    driver.find_element(cfg.get('as_index', 'register_college_num_by'), \
                         cfg.get('as_index', 'register_college_num')).send_keys("M06000109")
-    driver.find_element_by_id("J_imessageCode").click()
-    time.sleep(8)
-    driver.find_element_by_css_selector("span.show-state.lightgray30_text").click()
+    if reg_type == 4:
+        driver.find_element_by_id("J_collegeVerifycode").click()
+        driver.find_element_by_id("J_collegeVerifycode").send_keys(raw_input(u'请输入验证码：'))
+        time.sleep(8)
+    else:
+        driver.find_element_by_css_selector("span.show-state.lightgray30_text").click()
+        driver.find_element_by_id("J_imessageCode").click()
+        driver.find_element_by_id("J_imessageCode").send_keys(raw_input(u'请输入验证码：'))
+        time.sleep(8)        
     driver.find_element(cfg.get('as_index', 'register_email_submit_by'), \
                         cfg.get('as_index', 'register_email_submit')).click()
     time.sleep(6)
@@ -261,7 +245,8 @@ def register_by_independent_domian(cfg, driver, base_url, r_username, r_email, r
     driver.find_element(cfg.get('as_index', 'register_email_confirm_psw_by'), \
                         cfg.get('as_index', \
                                 'register_email_confirm_psw')).send_keys(r_psw)
-    #driver.find_element_by_id("J_iCode").send_keys("aaaa")
+    driver.find_element_by_id("J_iCode").click
+    driver.find_element_by_id("J_iCode").send_keys(raw_input(u'请输入验证码：'))
     time.sleep(10)
     #下一步
     driver.find_element(cfg.get('as_index', 'register_email_next_by'), \
@@ -318,6 +303,8 @@ def auto_register(cfg, driver, base_url, r_num, reg_type):
     reg_type 代表注册方式 1 邮箱注册
                         2 手机注册
                         3 独立域名下注册
+                        4 院校邮箱注册
+                        5 院校手机注册
     """
     prefix = chr(random.randint(97, 122))+chr(random.randint(97, 122))+chr(random.randint(97, 122))
     user_file = open(r"C:/register_user_list.txt", 'w')
@@ -333,7 +320,7 @@ def auto_register(cfg, driver, base_url, r_num, reg_type):
         elif reg_type == 3:
             register_by_independent_domian(cfg, driver, base_url, r_username, r_email, r_psw)
         else:
-            register_college_by_email(cfg, driver, base_url, r_username, r_email, r_psw)
+            register_college_by_email(cfg, driver, base_url, r_username, r_email, r_mobile, r_psw, reg_type)
             #except Exception,info:
             #print info
         if i == 0:

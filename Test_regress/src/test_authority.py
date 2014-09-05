@@ -68,32 +68,32 @@ def course_cate():
 	except:
 		print u"不能添加子类目"
 
-	try:
-		#新建一级类目
-		time.sleep(1)
-		cate_management.add_cate(cfg, driver, base_url)
+	# try:
+	# 	#新建一级类目
+	# 	time.sleep(1)
+	# 	cate_management.add_cate(cfg, driver, base_url)
 
-        #隐藏类目操作
-	    #driver.find_element("class name", "trueFrame").click()
-	    #driver.execute_script("$('.trueFrame').eq(0).click()")
-	    #time.sleep(1)
-		time.sleep(1)
+ #        #隐藏类目操作
+	#     #driver.find_element("class name", "trueFrame").click()
+	#     #driver.execute_script("$('.trueFrame').eq(0).click()")
+	#     #time.sleep(1)
+	# 	time.sleep(1)
 	    
-	    #添加课程到类目中
-		cate_management.add_courese_to_cate(cfg, driver, base_url)
-		driver.get(current_url)
+	#     #添加课程到类目中
+	# 	cate_management.add_courese_to_cate(cfg, driver, base_url)
+	# 	driver.get(current_url)
 
-	    #添加子类目
-		driver.find_element("class name", "addSub").click()
-		time.sleep(1)
-		driver.find_element("id", "reg_textField").clear()
-		driver.find_element("id", "reg_textField").send_keys("sub_cate")
-		time.sleep(1)
-		driver.find_element("xpath", "//button").click()
+	#     #添加子类目
+	# 	driver.find_element("class name", "addSub").click()
+	# 	time.sleep(1)
+	# 	driver.find_element("id", "reg_textField").clear()
+	# 	driver.find_element("id", "reg_textField").send_keys("sub_cate")
+	# 	time.sleep(1)
+	# 	driver.find_element("xpath", "//button").click()
 
-	except:
-		print traceback.format_exc()
-		print u"没有类目的编辑权限"
+	# except:
+	# 	print traceback.format_exc()
+	# 	print u"没有类目的编辑权限"
 
 
 	try:
@@ -109,15 +109,23 @@ def course_manage():
 	current_url = driver.current_url
 	time.sleep(3)
 	try:
+		#发布课程
+		driver.get(current_url)
+		driver.find_element("class name", "new-categ-button")
+		new_course_management.course_redirect(cfg, driver, base_url)
+	except:
+		print u"不能发布课程"		
+
+	try:
 		driver.find_element_by_link_text(u"获取视频链接").click()
 		time.sleep(1)
 		driver.find_element("xpath", "//button").click()
 	except NoSuchElementException:
 		#print traceback.format_exc() 
-		print u"没有课程读权限"
+		print u"不能获取视频链接"
 
-	try:		
-		#编辑
+	try:
+		#编辑课程
 		driver.find_element_by_link_text(u"编辑").click()
 		driver.execute_script("$('submit').click()")
 		try:
@@ -125,34 +133,74 @@ def course_manage():
 		except:
 			pass
 		time.sleep(1)
+	except:
+		print u"不能编辑课程"
 
+	try:
 		#发布相似课程
 		driver.get(current_url)
 		time.sleep(2)
 		driver.find_element_by_link_text(u"发布相似课程").click()
 		time.sleep(1)
+	except:
+		print u"不能发布相似课程"
 
-		#编辑三分屏章节
+	try:
 		driver.get(current_url)
 		alert = driver.switch_to_alert()
 		alert.accept()
 		time.sleep(3)
 		driver.find_element_by_link_text(u"编辑三分屏章节").click()
 		time.sleep(1)
+	except:
+		print u"不能编辑三分屏章节"
 
-		#发布课程
-		driver.get(current_url)
-		driver.find_element("class name", "new-categ-button")
-		new_course_management.course_redirect(cfg, driver, base_url)
-
+	try:
 		#员工课程申请
 		driver.get(current_url)
 		driver.find_element_by_link_text(u"员工课程申请").click()
 		driver.find_element_by_link_text(u"通过").click()
 		driver.find_element_by_link_text(u"拒绝").click()
-	except NoSuchElementException:
-		print traceback.format_exc()
-		print u"没有课程编辑权限"
+	except:
+		print u"不能处理员工申请"
+
+	# try:		
+	# 	#编辑
+	# 	driver.find_element_by_link_text(u"编辑").click()
+	# 	driver.execute_script("$('submit').click()")
+	# 	try:
+	# 		driver.find_element("id", "J_complete").click()
+	# 	except:
+	# 		pass
+	# 	time.sleep(1)
+
+	# 	#发布相似课程
+	# 	driver.get(current_url)
+	# 	time.sleep(2)
+	# 	driver.find_element_by_link_text(u"发布相似课程").click()
+	# 	time.sleep(1)
+
+	# 	#编辑三分屏章节
+	# 	driver.get(current_url)
+	# 	alert = driver.switch_to_alert()
+	# 	alert.accept()
+	# 	time.sleep(3)
+	# 	driver.find_element_by_link_text(u"编辑三分屏章节").click()
+	# 	time.sleep(1)
+
+	# 	#发布课程
+	# 	driver.get(current_url)
+	# 	driver.find_element("class name", "new-categ-button")
+	# 	new_course_management.course_redirect(cfg, driver, base_url)
+
+	# 	#员工课程申请
+	# 	driver.get(current_url)
+	# 	driver.find_element_by_link_text(u"员工课程申请").click()
+	# 	driver.find_element_by_link_text(u"通过").click()
+	# 	driver.find_element_by_link_text(u"拒绝").click()
+	# except NoSuchElementException:
+	# 	print traceback.format_exc()
+	# 	print u"没有课程编辑权限"
 
 	try:
 		#删除

@@ -162,32 +162,40 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
     driver.implicitly_wait(10)
     driver.find_element_by_link_text(u"管理我申请的代理").click()
     driver.implicitly_wait(10)
-    driver.find_element_by_link_text(u"管理课程").click()
-    driver.implicitly_wait(10)
-    driver.find_element_by_link_text(u"编辑").click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('courseRedirect', 'agency_title_by'), \
-        cfg.get('courseRedirect', 'agency_title')).clear()
-    driver.find_element(cfg.get('courseRedirect', 'agency_title_by'), \
-        cfg.get('courseRedirect', 'agency_title')).send_keys(course_title)
-
-    try:
-        str_price = driver.execute_script(\
-            "return $('.ablableSNew .colorGreen').text()")
-        temp = re.search(r'\d{1,10}.\d', str_price)
-        price = temp.group(0)
-        #print str_price, price
-        driver.find_element(cfg.get('courseRedirect', 'agency_price_by'), \
-            cfg.get('courseRedirect', 'agency_price')).clear()
-        driver.find_element(cfg.get('courseRedirect', 'agency_price_by'), \
-            cfg.get('courseRedirect', 'agency_price')).send_keys(price)
-        driver.find_element(cfg.get('courseRedirect', 'agency_rank_by'), \
-            cfg.get('courseRedirect', 'agency_rank')).clear()
-        driver.find_element(cfg.get('courseRedirect', 'agency_rank_by'), \
-            cfg.get('courseRedirect', 'agency_rank')).send_keys(100)
-    except Exception:#如果是免费的代理课程会在上面取价格的时候就会报错，免费的直接点发布即可
-        pass
-    finally:
-        driver.find_element(cfg.get('courseRedirect', 'finish_btn_by'), \
-            cfg.get('courseRedirect', 'finish_btn')).click()
-        time.sleep(1)
+    mlist = driver.find_elements_by_link_text(u"管理课程")
+    if mlist:
+        driver.find_element_by_link_text(u"管理课程").click()
+        driver.implicitly_wait(10)
+        course_list = driver.find_elements_by_link_text(u"编辑")
+        if course_list:
+            driver.find_elements_by_link_text(u"编辑").click()
+            driver.implicitly_wait(10)
+            course_list = driver.find_elements_by_link_text(u"编辑")
+            driver.find_element(cfg.get('courseRedirect', 'agency_title_by'), \
+                                cfg.get('courseRedirect', 'agency_title')).clear()
+            driver.find_element(cfg.get('courseRedirect', 'agency_title_by'), \
+                                cfg.get('courseRedirect', 'agency_title')).send_keys(course_title)
+            try:
+                str_price = driver.execute_script(\
+                           "return $('.ablableSNew .colorGreen').text()")
+                temp = re.search(r'\d{1,10}.\d', str_price)
+                price = temp.group(0)
+                #print str_price, price
+                driver.find_element(cfg.get('courseRedirect', 'agency_price_by'), \
+                                    cfg.get('courseRedirect', 'agency_price')).clear()
+                driver.find_element(cfg.get('courseRedirect', 'agency_price_by'), \
+                                    cfg.get('courseRedirect', 'agency_price')).send_keys(price)
+                driver.find_element(cfg.get('courseRedirect', 'agency_rank_by'), \
+                                    cfg.get('courseRedirect', 'agency_rank')).clear()
+                driver.find_element(cfg.get('courseRedirect', 'agency_rank_by'), \
+                                    cfg.get('courseRedirect', 'agency_rank')).send_keys(100)
+            except Exception:#如果是免费的代理课程会在上面取价格的时候就会报错，免费的直接点发布即可
+                pass
+            finally:
+                driver.find_element(cfg.get('courseRedirect', 'finish_btn_by'), \
+                                    cfg.get('courseRedirect', 'finish_btn')).click()
+                time.sleep(1)
+        else:
+            print u'你还没有代理课程可以编辑奥'
+    else:
+        print u"你还没有申请代理，先去申请代理课程吧"    

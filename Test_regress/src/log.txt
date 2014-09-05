@@ -769,3 +769,11 @@ Fri, 05 Sep 2014 14:17:55 as_test_regress.py[line:95] WARNING This is warning me
 Fri, 05 Sep 2014 14:21:29 as_test_regress.py[line:95] WARNING This is warning message
 Fri, 05 Sep 2014 14:21:59 as_test_regress.py[line:95] WARNING This is warning message
 Fri, 05 Sep 2014 14:23:14 as_test_regress.py[line:95] WARNING This is warning message
+Fri, 05 Sep 2014 14:44:52 as_test_regress.py[line:95] WARNING This is warning message
+Fri, 05 Sep 2014 15:06:47 as_test_regress.py[line:95] WARNING This is warning message
+Fri, 05 Sep 2014 15:07:56 as_test_regress.py[line:95] WARNING This is warning message
+Fri, 05 Sep 2014 15:09:12 as_test_regress.py[line:95] WARNING This is warning message
+Fri, 05 Sep 2014 15:22:30 as_test_regress.py[line:95] WARNING This is warning message
+Fri, 05 Sep 2014 15:26:06 as_test_regress.py[line:95] WARNING This is warning message
+Fri, 05 Sep 2014 15:30:15 as_test_regress.py[line:95] WARNING This is warning message
+Fri, 05 Sep 2014 15:55:00 as_test_regress.py[line:95] WARNING This is warning message

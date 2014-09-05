@@ -4,7 +4,7 @@ Created on Sep. 24, 2012
 
 @author: yilulu
 '''
-import unittest, ConfigParser, random, time, os, MySQLdb
+import unittest, ConfigParser, random, time, os, logging, MySQLdb
 import traceback
 from selenium import webdriver
 import login, new_course_management, course_management, student_management, \
@@ -18,7 +18,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
 
-        self.browser = "firfox"
+        self.browser = "ie"
 
         self.test_enviroment = "beta"
         self.independent_url = "www.dlym.com" #独立域名网址

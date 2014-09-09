@@ -53,7 +53,7 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         if upload == 1:
             driver.find_element(cfg.get('courseRedirect', 'upload_btn_by'), \
                 cfg.get('courseRedirect', 'upload_btn')).click()
-            time.sleep(1)
+            time.sleep(2)
 
             #选一个视频文件
             driver.execute_script("$(\"[filetype='flv']\").eq(0).click()")
@@ -96,9 +96,11 @@ def course_redirect(cfg, driver, base_url, isthree=0, upload=1, \
         idocument=element.contentDocument;\
         element=idocument.getElementById('tinymce');\
         element.innerHTML =\'"+course_describe+"\';")
+    time.sleep(1)
     #选择服务分类
     driver.execute_script("$(\'li.level2\').click()")
     driver.execute_script("$(\'li.level3.selected\').click()")
+    time.sleep(1)
     #填写课程标签
     driver.find_element(cfg.get('courseRedirect', 'tags_by'), \
         cfg.get('courseRedirect', 'tags')).send_keys(course_tags)

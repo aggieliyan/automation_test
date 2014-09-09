@@ -51,6 +51,15 @@ def course_cate():
 		print u"不能新建一级类目"
 
 	try:
+        #隐藏类目操作
+        time.sleep(1)
+	    driver.find_element("class name", "trueFrame").click()
+	    #driver.execute_script("$('.trueFrame').eq(0).click()")
+	    time.sleep(1)
+	except:
+		print u"不能隐藏类目"
+
+	try:
 	    #添加课程到类目中
 		cate_management.add_courese_to_cate(cfg, driver, base_url)
 		driver.get(current_url)
@@ -235,22 +244,39 @@ def course_href():
     	time.sleep(1)
     except:
 		print u"不能导出课程链接"
-    
-    #修改权限
-    try:
+
+	try:
 		driver.find_element_by_link_text("添加绑定域名").click()
 		time.sleep(1)
 		driver.find_element("id", "handleWebInput").send_keys("www.baidu.com")
 		driver.find_elements("xpath", "//button")[-2].click()
-        
+		time.sleep(1)	
+	except:
+		print u"不能绑定域名"
+
+	try:
 		time.sleep(1)
 		driver.find_element_by_link_text(u"编辑").click()
 		time.sleep(1)
 		driver.find_elements("xpath", "//button")[-2].click()
-		time.sleep(1)
-    except:
-		print traceback.format_exc()
-		print u"没有外链编辑权限"
+		time.sleep(1)		
+	except:
+		print u"不能编辑域名"
+    #修改权限
+  #   try:
+		# driver.find_element_by_link_text("添加绑定域名").click()
+		# time.sleep(1)
+		# driver.find_element("id", "handleWebInput").send_keys("www.baidu.com")
+		# driver.find_elements("xpath", "//button")[-2].click()
+        
+		# time.sleep(1)
+		# driver.find_element_by_link_text(u"编辑").click()
+		# time.sleep(1)
+		# driver.find_elements("xpath", "//button")[-2].click()
+		# time.sleep(1)
+  #   except:
+		# print traceback.format_exc()
+		# print u"没有外链编辑权限"
     #删除
     try:
     	driver.find_element_by_link_text(u"删除").click()
@@ -259,6 +285,7 @@ def course_href():
         time.sleep(1)
     except:
 		print u"没有外链删除权限"
+
 def course_setting():
 	try:
 		#片头管理
@@ -266,15 +293,17 @@ def course_setting():
 		driver.find_element("id", "J_showIntroVideo").click()
 		driver.find_element("id", "J_allowSkipIntroVideo").click()
 		time.sleep(1)
+	except:
+		print u"不能进行片头管理"
 
-
+	try:
 		#跑马灯
 		driver.find_element("id", "editCourseWare").click()
 		time.sleep(1)
 		driver.find_elements("class name", "bluebtn25_text")[-1].click()
 		time.sleep(1)
 	except:
-		print u"没有高级设置编辑权限"
+		print u"不能设置跑马灯"
 
 def course():
 	driver.get("%smyOffice.do" %(base_url))
@@ -291,53 +320,88 @@ def class_manage():
 
 	try:
 		#创建网络班
-		new_course_management.class_redirect(cfg, driver, base_url, classname='onlineclass', ctype=1)		
+		new_course_management.class_redirect(cfg, driver, base_url, classname='onlineclass', ctype=1)
+	except:
+		print u"不能创建普通网络班"	
+	
+	try:
 		#编辑
 		driver.find_element_by_link_text(u"编辑").click()
 		time.sleep(3)
 		driver.find_element("css selector", "span.greenbtn25_text").click()
+	except:
+		print u"不能编辑普通网络班"
 
+	try:
 		#预售班的创建和编辑
 		new_course_management.class_redirect(cfg, driver, base_url, classname='presaleclass', ctype=2)
+	except:
+		print u"不能创建预售网络班"
+
+	try:
 		driver.find_element_by_link_text(u"编辑").click()
 		time.sleep(3)
 		driver.find_element("css selector", "span.greenbtn25_text").click()
+	except:
+		print u"不能编辑预售网络班"
+
+	try:
 		#下架
 		time.sleep(1)
 		driver.find_element_by_link_text(u"下架").click()
+	except:
+		print u"不能下架网络班"
 
+	try:
 		#上架
 		time.sleep(1)
 		driver.find_element_by_link_text(u"上架").click()
+	except:
+		print "不能上架网络班"
 
+	try:
 		#报名详情
 		driver.find_element_by_link_text(u"报名详情").click()
-		time.sleep(1)
 		driver.find_element("css selector", "span.greenbtn25_text").click()
 		time.sleep(1)
-		driver.get(current_url)
+	except:
+		print u"不能查看网络班报名详情"
 
-		#面授班
-		driver.find_element_by_link_text(u"面授班").click()
+	driver.get(current_url)
+	time.sleep(1)
+	#面授班
+	driver.find_element_by_link_text(u"面授班").click()
+
+	try：
 		#创建面授班
-
+		pass
+	except:
+		print u"不能创建面授班"
+		
+	try:
 		#编辑
 		driver.find_element_by_link_text(u"编辑").click()
 		time.sleep(3)
 		driver.find_element("css selector", "span.greenbtn25_text").click()
+	except:
+		print u"不能编辑面授班"
 
+	try:
 		#下架
 		driver.find_element_by_link_text(u"面授班").click()
 		time.sleep(1)
 		driver.find_element_by_link_text(u"下架").click()
+	except:
+		print u"不能下架面授班"
 
+	try:
 		#报名详情
 		driver.find_element_by_link_text(u"报名详情").click()
 		time.sleep(1)
 		driver.find_element("css selector", "span.greenbtn25_text").click()
 		time.sleep(1)		
 	except:
-		print u"没有报班管理-编辑权限"
+		print u"不能查看面授班报名详情"
 
 	try:
 		#删除
@@ -346,14 +410,17 @@ def class_manage():
 		time.sleep(1)
 		driver.find_element("xpath", "//button").click()
 		time.sleep(1)
+	except:
+		print u"不能删除网络班"
 
+	try:
 		driver.find_element_by_link_text(u"面授班").click()
 		driver.find_element_by_link_text(u"删除").click()
 		time.sleep(1)
 		driver.find_element("xpath", "//button").click()
 		time.sleep(1)
 	except:
-		print u"没有报班管理-删除权限"
+		print u"不能删除预售班"
 
 
 def class_center():

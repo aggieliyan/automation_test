@@ -406,10 +406,11 @@ class Test(unittest.TestCase):
         except AssertionError, e:
             self.verificationErrors.append(str(e))
         #建卡,取考号密码
-        card_info = self.add_and_get_card()
-        self.l_card_num = card_info[0]
-        self.l_card_pwd = card_info[1]
-#        print self.l_card_num
+        if rs == True:
+            card_info = self.add_and_get_card()
+            self.l_card_num = card_info[0]
+            self.l_card_pwd = card_info[1]
+#           print self.l_card_num
 
     def add_and_get_card(self, card_type=0):#添加卡并返回第一个卡号和密码
 

@@ -1942,6 +1942,39 @@ def create_manage_delete():
 	print '删除权限管理员个数' + str(i)
 	user_file.close()
 
+#批量创建查看、编辑、删除权限管理员
+def create_manage_all():
+	user_file = open(r"C:/register_admin_user_list_all.txt", 'w')
+	i = 1
+	pre_name = 'alllog_'
+	for item in driver.find_elements("class name", "categoryAuthorityBox"):
+		admin_username = create_manage_fillmanage(pre_name, i, user_file)
+		if i == 1:
+			time.sleep(1)
+			driver.execute_script("$('.categoryAuthority-add-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-add').eq(" + str(i-1) + ").attr('style','display:none'); \
+				$('.categoryAuthority-delete-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-delete').eq(" + str(i-1) + ").attr('style','display:none')")
+		else:
+			driver.execute_script("$('.onOff').click()")
+			time.sleep(1)
+			driver.execute_script("$('.categoryAuthority-look-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-look').eq(" + str(i-1) + ").attr('style','display:none'); \
+				$('.categoryAuthority-add-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-add').eq(" + str(i-1) + ").attr('style','display:none'); \
+				$('.categoryAuthority-delete-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-delete').eq(" + str(i-1) + ").attr('style','display:none')")
+		time.sleep(1)
+		driver.find_element_by_link_text(u"取消").click()
+		time.sleep(1)
+		user_file.writelines(admin_username + "\n")
+		i = i + 1
+		time.sleep(1)
+		driver.find_element_by_link_text(u"添加管理员").click() 
+		time.sleep(5)
+	print '删除权限管理员个数' + str(i)
+	user_file.close()
+
 #创建管理员填写信息公用方法
 def create_manage_fillmanage(pre_name, i, user_file):
 	time.sleep(1)
@@ -1978,7 +2011,8 @@ def create_manage():
 	time.sleep(4)
 	# create_manage_read()#批量创建读权限管理员
 	# create_manage_edit()#批量创建编辑权限管理员
-	create_manage_delete()#批量创建删除权限管理员
+	# create_manage_delete()#批量创建删除权限管理员
+	create_manage_all()#批量创建读、编辑、删除权限管理员
 
 #系统设置-管理员/客服-网校客服
 def manageorservice_service():
@@ -2571,15 +2605,15 @@ def admin_athority_check():
 	global base_url
 	global cfg 
 	global driver
-	base_url = "http://www.ablesky.com/"
-#	base_url = "http://www.ablesky-a.com:8080/"
+#	base_url = "http://www.ablesky.com/"
+	base_url = "http://www.ablesky-a.com:8080/"
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file)
-#	user_name = "v52"
-#	user_psw = "1234"    
-	user_name = "sadm_gaoyue"
-	user_psw = "123456aa"
+	user_name = "v52"
+	user_psw = "1234"    
+	# user_name = "sadm_gaoyue"
+	# user_psw = "123456aa"
 
 	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
@@ -2590,12 +2624,12 @@ def admin_athority_check():
 #	driver.get("%smyOffice.do" %(base_url))
 
 	# #后台-先创建管理员	
-	# create_manage()
+	create_manage()
 
 	# #后台-后台首页
 	# teaching()#教学互动
 	# authmanage()#授权管理
-	courseagent()#课程合作代理
+	# courseagent()#课程合作代理
 	# learnigcard()#学习卡
 	# countmanage()#统计管理
 

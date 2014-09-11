@@ -81,7 +81,7 @@ class Test(unittest.TestCase):
 
         if os.path.exists("C:\\test_rs_pic") != True:
             os.system("mkdir C:\\test_rs_pic")
-
+        
     def connect_db(self, database):
         try:
             conn = MySQLdb.connect(host=self.dbhost, user='root', passwd='mysqlpwd1', db=database, charset='utf8')
@@ -289,7 +289,7 @@ class Test(unittest.TestCase):
             self.driver.implicitly_wait(10)
             try:
                 rs = self.verify_course(title)
-                self.assertEqual(True, rs, "fail to release agency course!")
+                self.assertEqual(True, rs, "fail to release agency course!,no agency course")
             except AssertionError, e:
                 self.verificationErrors.append(str(e))
         except Exception, e:

@@ -97,7 +97,7 @@ def firstpage():
 	time.sleep(1)
 	try:
 	    driver.find_element_by_link_text(u"首页装扮").click()
-	    time.sleep(1)
+	    time.sleep(2)
 	    driver.find_element_by_link_text(u"保存").click()
 	except Exception:
 		print traceback.format_exc()
@@ -127,7 +127,7 @@ def firstpage():
 	    driver.find_element_by_link_text(u"导航管理").click()
 	    time.sleep(1)
 	    driver.find_element_by_link_text(u"导航编辑").click()
-	    time.sleep(1)
+	    time.sleep(2)
 	    driver.find_element_by_link_text(u"保存").click()
 	    time.sleep(1)
 	    driver.execute_script("$('.dnl-list-ul').attr('style','display:block')")
@@ -285,6 +285,7 @@ def course_detail():
     try:
         #课程详情页
         driver.find_element("class name", "coursecenter-details-pic").click()#点击第一个课程进入课程详情页  
+        time.sleep(1)
         ah = driver.window_handles
         swithing_window(bh,ah)
         current_url = driver.current_url
@@ -298,7 +299,6 @@ def course_detail():
         time.sleep(1)
         ah = driver.window_handles
         swithing_window(bh,ah)
-        time.sleep(1) 
         driver.get(current_url)
         time.sleep(1)    
     except Exception:
@@ -2605,15 +2605,15 @@ def admin_athority_check():
 	global base_url
 	global cfg 
 	global driver
-#	base_url = "http://www.ablesky.com/"
-	base_url = "http://www.ablesky-a.com:8080/"
+	base_url = "http://www.ablesky.com/"
+	# base_url = "http://www.ablesky-a.com:8080/"
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file)
-	user_name = "v52"
-	user_psw = "1234"    
-	# user_name = "sadm_gaoyue"
-	# user_psw = "123456aa"
+	# user_name = "v52"
+	# user_psw = "1234"    
+	user_name = "sadm_gaoyue"
+	user_psw = "123456aa"
 
 	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
@@ -2621,10 +2621,10 @@ def admin_athority_check():
 	#driver = webdriver.Ie()
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
-#	driver.get("%smyOffice.do" %(base_url))
+	# driver.get("%smyOffice.do" %(base_url))
 
 	# #后台-先创建管理员	
-	create_manage()
+	# create_manage()
 
 	# #后台-后台首页
 	# teaching()#教学互动
@@ -2640,11 +2640,11 @@ def admin_athority_check():
 	# #后台-学员/员工
 	# stuoremp()#网校学员
 	
-	#前台(fore_stage())
+	##(fore_stage())
 	driver.find_element_by_link_text(u"网校首页").click()
 	time.sleep(1)
 	# firstpage()#首页
-	# course_center_relate()#课程中心
+	course_center_relate()#课程中心
 	# class_center_relate()#报班中心 
 	# online_ansquestion()#在线答疑
 	# live_course_relate()#直播课程
@@ -2653,8 +2653,8 @@ def admin_athority_check():
 	# school_notice()#网校公告
 	# teacher_team()#名师团队
 	# school_members()#网校成员
-	# about_us()#关于我们
-	# help_center()#帮助中心
+	about_us()#关于我们
+	help_center()#帮助中心
         
 	driver.quit()
     

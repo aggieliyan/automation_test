@@ -256,6 +256,8 @@ def course_center():
         except:
             print '此页没有三分屏课程，没有编辑三分屏章节！'       
         #显示发布相似课程 
+        time.sleep(1)  
+        driver.execute_script("$('.coursecenter-module-hover').attr('style','display:block')")#显示隐藏操作      
         time.sleep(1)
         driver.find_element_by_link_text(u"发布相似课程").click()
         time.sleep(1)
@@ -325,7 +327,7 @@ def course_detail():
             time.sleep(1)
             driver.get(current_url) 
         except:
-            print'不是三分屏或双视频课程,没有编辑三分屏章节'
+            print'不是三分屏或双视频课程,没有编辑三分屏章节!'
         time.sleep(1)
         #显示发布相似课程
         driver.find_element_by_link_text(u"发布相似课程").click()
@@ -2643,18 +2645,18 @@ def admin_athority_check():
 	##(fore_stage())
 	driver.find_element_by_link_text(u"网校首页").click()
 	time.sleep(1)
-	# firstpage()#首页
+	firstpage()#首页
 	course_center_relate()#课程中心
-	# class_center_relate()#报班中心 
-	# online_ansquestion()#在线答疑
-	# live_course_relate()#直播课程
-	# cheap_course_relate()#特惠课程
-	# online_exam_relate()#在线考试
-	# school_notice()#网校公告
-	# teacher_team()#名师团队
-	# school_members()#网校成员
-	about_us()#关于我们
-	help_center()#帮助中心
+	class_center_relate()#报班中心 
+	online_ansquestion()#在线答疑
+	live_course_relate()#直播课程
+	cheap_course_relate()#特惠课程
+	online_exam_relate()#在线考试
+	school_notice()#网校公告
+	teacher_team()#名师团队
+	school_members()#网校成员
+	# about_us()#关于我们
+	# help_center()#帮助中心
         
 	driver.quit()
     

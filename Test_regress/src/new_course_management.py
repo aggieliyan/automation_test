@@ -166,11 +166,17 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
     if mlist:
         driver.find_element_by_link_text(u"管理课程").click()
         driver.implicitly_wait(10)
+        bh = driver.window_handles
         course_list = driver.find_elements_by_link_text(u"编辑")
+        driver.implicitly_wait(10)          
         if course_list:
-            driver.find_elements_by_link_text(u"编辑").click()
-            driver.implicitly_wait(10)
-            course_list = driver.find_elements_by_link_text(u"编辑")
+            driver.find_element_by_link_text(u"编辑").click()
+            ah = driver.window_handles
+            while len(bh) == len(ah):
+                ah = driver.window_handles
+            for h in ah:
+                if h not in bh:
+                    driver.switch_to_window(h)
             driver.find_element(cfg.get('courseRedirect', 'agency_title_by'), \
                                 cfg.get('courseRedirect', 'agency_title')).clear()
             driver.find_element(cfg.get('courseRedirect', 'agency_title_by'), \
@@ -182,16 +188,17 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
                 price = temp.group(0)
                 #print str_price, price
                 driver.find_element(cfg.get('courseRedirect', 'agency_price_by'), \
-                                    cfg.get('courseRedirect', 'agency_price')).clear()
+                                    cfg.get('courseRedirect', 'agency_price')).clear()                                 
                 driver.find_element(cfg.get('courseRedirect', 'agency_price_by'), \
-                                    cfg.get('courseRedirect', 'agency_price')).send_keys(price)
+                                    cfg.get('courseRedirect', 'agency_price')).send_keys(price)                   
                 driver.find_element(cfg.get('courseRedirect', 'agency_rank_by'), \
-                                    cfg.get('courseRedirect', 'agency_rank')).clear()
+                                    cfg.get('courseRedirect', 'agency_rank')).clear()                   
                 driver.find_element(cfg.get('courseRedirect', 'agency_rank_by'), \
                                     cfg.get('courseRedirect', 'agency_rank')).send_keys(100)
             except Exception:#如果是免费的代理课程会在上面取价格的时候就会报错，免费的直接点发布即可
                 pass
             finally:
+                time.sleep(1)
                 driver.find_element(cfg.get('courseRedirect', 'finish_btn_by'), \
                                     cfg.get('courseRedirect', 'finish_btn')).click()
                 time.sleep(1)

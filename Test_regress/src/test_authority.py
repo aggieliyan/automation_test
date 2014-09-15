@@ -66,6 +66,7 @@ def course_cate():
 	    #添加课程到类目中
 		cate_management.add_courese_to_cate(cfg, driver, base_url)
 		driver.get(current_url)
+		time.sleep(1)
 	except:
 		print u"不能将课程添加到类目"
 
@@ -77,6 +78,7 @@ def course_cate():
 		driver.find_element("id", "reg_textField").send_keys("sub_cate")
 		time.sleep(1)
 		driver.find_element("xpath", "//button").click()
+		time.sleep(1)
 	except:
 		print u"不能添加子类目"
 
@@ -313,11 +315,11 @@ def course_setting():
 
 def course():
 	driver.get("%smyOffice.do" %(base_url))
-	menu_dic = {#u"课程类目":course_cate, 
-	               u"课程管理":course_manage, }
-	               # u"课件存储空间":course_space, 
-	               # u'视频外链管理':course_href,
-	               # u'播放高级设置':course_setting,}
+	menu_dic = {u"课程类目":course_cate,
+	            u"课程管理":course_manage,
+	            u"课件存储空间":course_space,
+	            u'视频外链管理':course_href,
+	            u'播放高级设置':course_setting,}
 	menu_title = u"教学教务"
 	check_menu(menu_title, menu_dic)
 
@@ -363,7 +365,7 @@ def class_manage():
 		time.sleep(1)
 		driver.find_element_by_link_text(u"上架").click()
 	except:
-		print "不能上架网络班"
+		print u"不能上架网络班"
 
 	try:
 		#报名详情
@@ -372,8 +374,6 @@ def class_manage():
 		time.sleep(1)
 	except:
 		print u"不能查看网络班报名详情"
-
-	driver.get(current_url)
 	time.sleep(1)
 	#面授班
 	driver.find_element_by_link_text(u"面授班").click()
@@ -384,7 +384,7 @@ def class_manage():
 		time.sleep(1)
 		driver.find_element("id", "J_className").send_keys(u"面授班")
 		driver.find_element("name", "class-space").send_keys("1")
-		driver.find_element("name", "person-num").send_keys("10")
+		driver.find_element("name", " person-num").send_keys("10")
 		#填课程详情
 		driver.execute_script("var element=\
 			window.document.getElementById('courseDescribe-editor_ifr');\
@@ -392,11 +392,16 @@ def class_manage():
 			element=idocument.getElementById('tinymce');\
 			element.innerHTML ='hello';")
 		driver.find_element("css selector", \
-			"div.text-layer.clearfix > input[type=\"text\"]").send_keys("english")
+			"div.text-layer.clearfix > input[type=\"text\"]").send_keys("english\n")
+		time.sleep(1)
+		#选择服务分类
+		driver.execute_script("$(\'li.level2\').click()")
+		driver.execute_script("$(\'li.level3.selected\').click()")
 		time.sleep(1)
 		driver.find_element("css selector", "span.greenbtn25_text").click()
 		time.sleep(1)
 	except:
+		print traceback.format_exc()
 		print u"不能创建面授班"
 		
 	try:
@@ -405,6 +410,7 @@ def class_manage():
 		time.sleep(3)
 		driver.find_element("css selector", "span.greenbtn25_text").click()
 	except:
+		print traceback.format_exc()
 		print u"不能编辑面授班"
 
 	try:
@@ -920,7 +926,7 @@ def admin_athority_check():
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
 	#教学教务
-	course()
+	#course()
 	#class_center()
 	#onlineclass()
 	# exam_manage()

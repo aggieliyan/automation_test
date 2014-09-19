@@ -351,7 +351,7 @@ def course_detail():
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)
         driver.find_element("css selector", ".dialog-button-container button").click()#点击删除
-        time.sleep(1)
+        time.sleep(1)             
     except Exception:
         print traceback.format_exc()
         print u"课程详情页面：没有教学教务-课程课件-课程管理的删除权限"         
@@ -359,7 +359,7 @@ def course_detail():
 #前台-课程中心-课程详情页-答疑讨论区        
 def course_detail_ansquetion():
     #答疑讨论区 
-    time.sleep(3)
+    time.sleep(1)       
     try:
         try:
             #回复提问
@@ -389,6 +389,17 @@ def course_center_relate():
     driver.find_element_by_link_text(u"课程中心").click()
     course_center()
     course_detail()
+    time.sleep(1)
+    driver.find_element_by_link_text(u"网校首页").click()#删除课程返回了ablesky首页了
+    time.sleep(1) 
+    driver.find_element_by_link_text(u"课程中心").click()#课程中心
+    time.sleep(1)  
+    bh = driver.window_handles 
+    driver.find_element("class name", "coursecenter-details-pic").click()#点击第一个课程进入课程详情页,为后续答疑在准备  
+    time.sleep(1)
+    ah = driver.window_handles
+    swithing_window(bh,ah)
+    time.sleep(1)    
     course_detail_ansquetion()
 
 #前台-报班中心(教学教务-报班中心-报班管理)
@@ -470,7 +481,7 @@ def class_detail():
 #前台-报班中心--班级详情页-答疑区(网络班)
 def class_detail_ansquestion():
     #答疑讨论区 
-    time.sleep(3)
+    time.sleep(2)
     try:
         try:
             #回复提问
@@ -977,10 +988,15 @@ def teacher_team():
     time.sleep(1)
     driver.find_element_by_link_text(u"名师团队").click()           
     time.sleep(1)   
-    current_url = driver.current_url       
+    current_url = driver.current_url   
+    time.sleep(1)    
     try:
         #置顶显示
         driver.find_element_by_link_text(u"置顶显示").click()
+        time.sleep(1)
+        driver.find_element_by_link_text(u"取消置顶").click()
+        time.sleep(1)
+        driver.get(current_url)
         time.sleep(1)
         #编辑
         driver.find_elements_by_link_text(u"编辑")[1].click()
@@ -1869,7 +1885,8 @@ def manageorservice_manage():
 	try:
 	    driver.find_element_by_link_text(u"删除管理员").click()
 	    time.sleep(1)
-	    driver.find_element("class name","x-btn-text").click()#删除   	    
+	    driver.find_element("class name","x-btn-text").click()#删除 
+	    time.sleep(1)  	    
 	except Exception:
 		print traceback.format_exc()
 		print u"没有管理员的删除权限"
@@ -2642,21 +2659,21 @@ def admin_athority_check():
 	# #后台-学员/员工
 	# stuoremp()#网校学员
 	
-	##(fore_stage())
+	# ##(fore_stage())
 	driver.find_element_by_link_text(u"网校首页").click()
 	time.sleep(1)
-	firstpage()#首页
-	course_center_relate()#课程中心
-	class_center_relate()#报班中心 
-	online_ansquestion()#在线答疑
-	live_course_relate()#直播课程
-	cheap_course_relate()#特惠课程
-	online_exam_relate()#在线考试
-	school_notice()#网校公告
+	# firstpage()#首页
+	# course_center_relate()#课程中心
+	# class_center_relate()#报班中心 
+	# online_ansquestion()#在线答疑
+	# live_course_relate()#直播课程
+	# cheap_course_relate()#特惠课程
+	# online_exam_relate()#在线考试
+	# school_notice()#网校公告
 	teacher_team()#名师团队
-	school_members()#网校成员
-	# about_us()#关于我们
-	# help_center()#帮助中心
+	# school_members()#网校成员
+	# # about_us()#关于我们
+	# # help_center()#帮助中心
         
 	driver.quit()
     

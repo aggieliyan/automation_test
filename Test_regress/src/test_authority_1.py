@@ -275,7 +275,7 @@ def course_center():
         time.sleep(1)
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)
-        driver.find_elements("css selector",".dialog-button-container button")[1].click()#先不删除呀   
+        driver.find_element("css selector",".dialog-button-container button").click()#删除
     except Exception:
         print traceback.format_exc()
         print u"课程中心：没有教学教务-课程课件-课程管理的删除权限"
@@ -350,7 +350,7 @@ def course_detail():
         #删除
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)
-        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#点击取消删除
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击删除
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
@@ -539,7 +539,7 @@ def live_course():
         #删除
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)
-        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#先取消删除以后改过来
+        driver.find_element("css selector", ".dialog-button-container button").click()#先删除
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
@@ -736,7 +736,7 @@ def live_course_detail_end():
         #删除
         driver.find_elements("css selector", ".course-manage a")[4].click()
         time.sleep(1)
-        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#先取消删除以后改过来
+        driver.find_element("css selector", ".dialog-button-container button").click()#删除
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
@@ -797,7 +797,7 @@ def cheap_course():
         #删除
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)
-        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#先点击取消
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击
         time.sleep(1) 
     except Exception:
         print traceback.format_exc()
@@ -873,7 +873,7 @@ def online_exam():
         time.sleep(1)
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)        
-        driver.find_elements("css selector", ".dialog-button-container button")[-1].click()#先取消删除以后改过来  
+        driver.find_element("css selector", ".dialog-button-container button").click()#删除  
     except Exception:
         print traceback.format_exc()
         print u"在线考试：没有教学教务-考试测评-考试系统的删除权限"        
@@ -1869,7 +1869,7 @@ def manageorservice_manage():
 	try:
 	    driver.find_element_by_link_text(u"删除管理员").click()
 	    time.sleep(1)
-	    driver.find_elements("class name","x-btn-text")[1].click()#先取消删除   	    
+	    driver.find_element("class name","x-btn-text").click()#删除   	    
 	except Exception:
 		print traceback.format_exc()
 		print u"没有管理员的删除权限"
@@ -1892,9 +1892,9 @@ def create_manage_read():
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
-		time.sleep(5)
+		time.sleep(2)
 		driver.find_element_by_link_text(u"添加管理员").click() 
-		time.sleep(3)
+		time.sleep(2)
 	print '读权限管理员个数:' + str(i)
 	user_file.close()
 
@@ -1967,13 +1967,13 @@ def create_manage_all():
 				$('.categoryAuthority-delete-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
 				$('.categoryAuthority-delete').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
-		driver.find_element_by_link_text(u"取消").click()
+		driver.find_element_by_link_text(u"保存").click()
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
 		time.sleep(1)
 		driver.find_element_by_link_text(u"添加管理员").click() 
-		time.sleep(5)
+		time.sleep(1)
 	print '删除权限管理员个数' + str(i)
 	user_file.close()
 
@@ -2002,15 +2002,15 @@ def create_manage_fillmanage(pre_name, i, user_file):
 
 #创建管理员
 def create_manage():
-	time.sleep(15)
+	time.sleep(2)
 	driver.get("%smyOffice.do" %(base_url))
-	time.sleep(8)
+	time.sleep(2)
 	driver.find_element_by_link_text(u"系统设置").click()   
-	time.sleep(6)
+	time.sleep(2)
 	driver.find_element_by_link_text(u"网校管理员").click() 
-	time.sleep(6)
+	time.sleep(2)
 	driver.find_element_by_link_text(u"添加管理员").click() 
-	time.sleep(4)
+	time.sleep(2)
 	# create_manage_read()#批量创建读权限管理员
 	# create_manage_edit()#批量创建编辑权限管理员
 	# create_manage_delete()#批量创建删除权限管理员
@@ -2530,7 +2530,7 @@ def stuoremp_empmanage():
 	try:
 		driver.find_element_by_link_text(u"删除员工").click()#删除员工
 		time.sleep(1)
-		driver.find_elements("css selector", ".x-panel-btns-right .x-btn-text")[1].click()#先取消删除
+		driver.find_element("css selector", ".x-panel-btns-right .x-btn-text").click()#删除
 		time.sleep(1)
 		#页面下方的批量操作-删除员工（删除账号手动测试）
 		driver.get(current_url)
@@ -2543,7 +2543,7 @@ def stuoremp_empmanage():
 		time.sleep(2)
 		driver.find_element_by_link_text(u"应用").click()
 		time.sleep(2)
-		driver.find_elements("css selector", ".x-panel-btns-right .x-btn-text")[-1].click()#先取消删除
+		driver.find_element("css selector", ".x-panel-btns-right .x-btn-text").click()#删除
 		time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()

@@ -1031,6 +1031,11 @@ def school_members():
         #置顶显示
         driver.find_element_by_link_text(u"置顶显示").click()
         time.sleep(1)
+        driver.get(current_url)
+        time.sleep(1)
+        #取消置顶
+        driver.find_element_by_link_text(u"取消置顶").click()
+        time.sleep(1)
     except Exception:
         print traceback.format_exc()
         print u"名师团队：没有教学教务-网校成员-成员管理的编辑权限"   
@@ -2670,7 +2675,7 @@ def admin_athority_check():
 	# cheap_course_relate()#特惠课程
 	# online_exam_relate()#在线考试
 	# school_notice()#网校公告
-	teacher_team()#名师团队
+	# teacher_team()#名师团队
 	# school_members()#网校成员
 	# # about_us()#关于我们
 	# # help_center()#帮助中心

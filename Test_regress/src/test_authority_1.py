@@ -2012,7 +2012,7 @@ def create_manage_fillmanage(pre_name, i, user_file):
 	admin_name = pre_name + prefix + str(i)
 	admin_username = admin_name 
 	admin_email = admin_name + "@sohu.com"
-	admin_psw = 'gy0411'
+	admin_psw = '1234aa'
 	time.sleep(1)
 	driver.find_element("id", "admin_name").send_keys(admin_name)#管理员名称
 	time.sleep(1)
@@ -2635,15 +2635,15 @@ def admin_athority_check():
 	global base_url
 	global cfg 
 	global driver
-	base_url = "http://www.ablesky.com/"
-	# base_url = "http://www.ablesky-a.com:8080/"
+	# base_url = "http://www.ablesky.com/"
+	base_url = "http://www.ablesky-a.com:8080/"
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file)
-	# user_name = "v52"
-	# user_psw = "1234"    
-	user_name = "sadm_gaoyue"
-	user_psw = "123456aa"
+	user_name = "v52"
+	user_psw = "1234"    
+	# user_name = "sadm_gaoyue"
+	# user_psw = "123456aa"
 
 	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
@@ -2654,7 +2654,7 @@ def admin_athority_check():
 	# driver.get("%smyOffice.do" %(base_url))
 
 	# #后台-先创建管理员	
-	# create_manage()
+	create_manage()
 
 	# #后台-后台首页
 	# teaching()#教学互动
@@ -2671,9 +2671,9 @@ def admin_athority_check():
 	# stuoremp()#网校学员
 	
 	# ##(fore_stage())
-	driver.find_element_by_link_text(u"网校首页").click()
-	time.sleep(1)
-	firstpage()#首页
+	# driver.find_element_by_link_text(u"网校首页").click()
+	# time.sleep(1)
+	# firstpage()#首页
 	# course_center_relate()#课程中心
 	# class_center_relate()#报班中心 
 	# online_ansquestion()#在线答疑

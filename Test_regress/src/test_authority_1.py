@@ -158,9 +158,14 @@ def firstpage():
 
     #编辑页脚
 	time.sleep(1)
-	org_name = "salesdemo"
 	try:
-		user_management.modify_pagefoot(cfg, driver, base_url, org_name) 
+		bh = driver.window_handles 	    
+		driver.find_element_by_link_text(u"编辑页脚").click()
+		time.sleep(1)
+		ah = driver.window_handles
+		swithing_window(bh,ah)
+		driver.find_element("class name", "submit-btn")#点击确定
+		time.sleep(1)
 	except Exception:
 		print traceback.format_exc()
 		print u"所有管理员都应该有编辑页脚的权限"
@@ -175,7 +180,8 @@ def firstpage():
 		print traceback.format_exc()
 		print u"所有管理员都应该有自定义页面的权限"
 	
-	#网校首页头像logo	
+	#网校首页头像logo
+	org_name = "salesdemo"	
 	time.sleep(1)
 	try:
 	    user_management.change_homelogo(cfg, driver, base_url, org_name)
@@ -2667,7 +2673,7 @@ def admin_athority_check():
 	# ##(fore_stage())
 	driver.find_element_by_link_text(u"网校首页").click()
 	time.sleep(1)
-	# firstpage()#首页
+	firstpage()#首页
 	# course_center_relate()#课程中心
 	# class_center_relate()#报班中心 
 	# online_ansquestion()#在线答疑

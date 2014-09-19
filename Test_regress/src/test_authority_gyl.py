@@ -138,7 +138,7 @@ def teaching_letter():
         #收件箱发送私信
 		driver.find_element("class name", "sendEmialBtn").click()
 		time.sleep(1)
-		driver.find_element("name", "username").send_keys("success")
+		driver.find_element("name", "username").send_keys("stu_gy")
 		time.sleep(1)
 		driver.find_element("name", "subject").send_keys(u"标题")
 		time.sleep(1)
@@ -1196,47 +1196,49 @@ def pagecreate_selflogin():
 			
 #学员/员工-网校学员-学员类目   
 def stuoremp_stucate():
-	time.sleep(1)
-	current_url = driver.current_url
-	try:
-		driver.find_element("class name", "expandSub ")#找到展开图标
-		time.sleep(1)	
-	except Exception:
-		print traceback.format_exc()
-		print u"没有学员类目的读权限"
+    time.sleep(1)
+    current_url = driver.current_url
+    try:
+        driver.find_element("class name", "expandSub ")#找到展开图标
+        time.sleep(1)   
+    except Exception:
+        print traceback.format_exc()
+        print u"没有学员类目的读权限"
 
-	time.sleep(1)
-	try:
-	    driver.find_element("id", "J_genTopCateg").click()#新建一级类目
-	    creat_stucate()#新建一级类目
-	    driver.get(current_url)
-	    bh = driver.window_handles
-	    manage_catestu(bh)#管理类目学员
-	    bh = driver.window_handles 
-	    opencourseBatch(bh)#批量开通课程
-	    driver.get(current_url)
-	    driver.find_element("class name", "editCateg").click()#编辑类目
-	    time.sleep(1)
-	    driver.find_element("class name", "x-btn-text").click()#点击确定		
-	    time.sleep(1)
-	    driver.find_element("class name", "addSub").click()#添加子类目
-	    creat_stucate()
-	    time.sleep(1)				    
-	except Exception:
-		print traceback.format_exc()
-		print u"没有学员类目的编辑权限"
+    time.sleep(1)
+    try:
+        driver.find_element("id", "J_genTopCateg").click()#新建一级类目
+        creat_stucate()#新建一级类目
+        driver.get(current_url)
+        bh = driver.window_handles
+        manage_catestu(bh)#管理类目学员
+        bh = driver.window_handles 
+        opencourseBatch(bh)#批量开通课程
+        time.sleep(1)
+        driver.get(current_url)
+        time.sleep(1)
+        driver.find_element("class name", "editCateg").click()#编辑类目
+        time.sleep(1)
+        driver.find_element("class name", "x-btn-text").click()#点击确定        
+        time.sleep(1)
+        driver.find_element("class name", "addSub").click()#添加子类目
+        creat_stucate()
+        time.sleep(1)                   
+    except Exception:
+        print traceback.format_exc()
+        print u"没有学员类目的编辑权限"
 
-	time.sleep(2)
-	try:
-	    driver.find_elements("class name", "delete")[-1].click()#删除类目
-	    time.sleep(1)
-	    driver.find_element("class name", "x-btn-text").click()#点击删除		
-	    time.sleep(2)	
-	except Exception:
-		print traceback.format_exc()
-		print u"没有学员类目的删除权限"
-	driver.get(current_url)
-	time.sleep(2)
+    time.sleep(2)
+    try:
+        driver.find_elements("class name", "delete")[-1].click()#删除类目
+        time.sleep(1)
+        driver.find_element("class name", "x-btn-text").click()#点击删除        
+        time.sleep(2)   
+    except Exception:
+        print traceback.format_exc()
+        print u"没有学员类目的删除权限"
+    driver.get(current_url)
+    time.sleep(2)
 
 #新建一级类目和子类目的方法		
 def creat_stucate():
@@ -1539,7 +1541,7 @@ def admin_athority_check():
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file) 
-	user_name = "stu_gy000"
+	user_name = "stu_gy00"
 	user_psw = "gy0411"
 
 	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"

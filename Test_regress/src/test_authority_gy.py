@@ -2296,47 +2296,48 @@ def pagecreate_selflogin():
 			
 #学员/员工-网校学员-学员类目   
 def stuoremp_stucate():
-	time.sleep(1)
-	current_url = driver.current_url
-	try:
-		driver.find_element("class name", "expandSub ")#找到展开图标
-		time.sleep(1)	
-	except Exception:
-		print traceback.format_exc()
-		print u"没有学员类目的读权限"
+    time.sleep(1)
+    current_url = driver.current_url
+    try:
+        driver.find_element("class name", "expandSub ")#找到展开图标
+        time.sleep(1)	
+    except Exception:
+        print traceback.format_exc()
+        print u"没有学员类目的读权限"
 
-	time.sleep(1)
-	try:
-	    driver.find_element("id", "J_genTopCateg").click()#新建一级类目
-	    creat_stucate()#新建一级类目
-	    driver.get(current_url)
-	    bh = driver.window_handles
-	    manage_catestu(bh)#管理类目学员
-	    bh = driver.window_handles 
-	    opencourseBatch(bh)#批量开通课程
-	    driver.get(current_url)
-	    driver.find_element("class name", "editCateg").click()#编辑类目
-	    time.sleep(1)
-	    driver.find_element("class name", "x-btn-text").click()#点击确定		
-	    time.sleep(1)
-	    driver.find_element("class name", "addSub").click()#添加子类目
-	    creat_stucate()
-	    time.sleep(1)				    
-	except Exception:
-		print traceback.format_exc()
-		print u"没有学员类目的编辑权限"
+    time.sleep(1)
+    try:
+        driver.find_element("id", "J_genTopCateg").click()#新建一级类目
+        creat_stucate()#新建一级类目
+        driver.get(current_url)
+        bh = driver.window_handles
+        manage_catestu(bh)#管理类目学员
+        bh = driver.window_handles 
+        opencourseBatch(bh)#批量开通课程
+        driver.get(current_url)
+        time.sleep(1)
+        driver.find_element("class name", "editCateg").click()#编辑类目
+        time.sleep(1)
+        driver.find_element("class name", "x-btn-text").click()#点击确定		
+        time.sleep(1)
+        driver.find_element("class name", "addSub").click()#添加子类目
+        creat_stucate()
+        time.sleep(1)				    
+    except Exception:
+        print traceback.format_exc()
+        print u"没有学员类目的编辑权限"
 
-	time.sleep(2)
-	try:
-	    driver.find_elements("class name", "delete")[-1].click()#删除类目
-	    time.sleep(1)
-	    driver.find_element("class name", "x-btn-text").click()#点击删除		
-	    time.sleep(2)	
-	except Exception:
-		print traceback.format_exc()
-		print u"没有学员类目的删除权限"
-	driver.get(current_url)
-	time.sleep(2)
+    time.sleep(2)
+    try:
+        driver.find_elements("class name", "delete")[-1].click()#删除类目
+        time.sleep(1)
+        driver.find_element("class name", "x-btn-text").click()#点击删除		
+        time.sleep(2)	
+    except Exception:
+        print traceback.format_exc()
+        print u"没有学员类目的删除权限"
+    driver.get(current_url)
+    time.sleep(2)
 
 #新建一级类目和子类目的方法		
 def creat_stucate():
@@ -2653,33 +2654,33 @@ def admin_athority_check():
 	# #后台-先创建管理员	
 	# create_manage()
 
-	#后台-后台首页
-	teaching()#教学互动
-	authmanage()#授权管理
-	courseagent()#课程合作代理
-	learnigcard()#学习卡
-	countmanage()#统计管理
+	# #后台-后台首页
+	# teaching()#教学互动
+	# authmanage()#授权管理
+	# courseagent()#课程合作代理
+	# learnigcard()#学习卡
+	# countmanage()#统计管理
 
-	#后台-系统设置
-	manageorservice()#管理员/客服
-	pagecreate()#页面建设
+	# #后台-系统设置
+	# manageorservice()#管理员/客服
+	# pagecreate()#页面建设
 
 	# #后台-学员/员工
 	# stuoremp()#网校学员
 	
-	# ##(fore_stage())
-	# driver.find_element_by_link_text(u"网校首页").click()
-	# time.sleep(1)
-	# firstpage()#首页
-	# course_center_relate()#课程中心
-	# class_center_relate()#报班中心 
-	# online_ansquestion()#在线答疑
-	# live_course_relate()#直播课程
-	# cheap_course_relate()#特惠课程
-	# online_exam_relate()#在线考试
-	# school_notice()#网校公告
-	# teacher_team()#名师团队
-	# school_members()#网校成员
+	##(fore_stage())
+	driver.find_element_by_link_text(u"网校首页").click()
+	time.sleep(1)
+	firstpage()#首页
+	course_center_relate()#课程中心
+	class_center_relate()#报班中心 
+	online_ansquestion()#在线答疑
+	live_course_relate()#直播课程
+	cheap_course_relate()#特惠课程
+	online_exam_relate()#在线考试
+	school_notice()#网校公告
+	teacher_team()#名师团队
+	school_members()#网校成员
 	# # about_us()#关于我们
 	# # help_center()#帮助中心
         

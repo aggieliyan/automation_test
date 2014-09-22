@@ -72,7 +72,7 @@ def check_navigation(navi_dic):
             title = driver.execute_script("return $('.hidden-module-en .nav-items-uen .limitword').eq(0).val()")
             time.sleep(1)
             #显示第一个
-            if navigation_title == title:
+            if item == title:
                 driver.find_element_by_link_texts(u"显示")[0].click()
             #显示第二个
             else:            
@@ -1142,8 +1142,8 @@ def help_center():
         time.sleep(1)         
     except Exception:
         print traceback.format_exc()
-        print u"所有管理员都应该有帮助中心相关权限" 
-
+        print u"所有管理员都应该有帮助中心相关权限"     		  
+   
 def admin_athority_check():
     
 	global base_url
@@ -1156,14 +1156,14 @@ def admin_athority_check():
 	user_name = "stu_gy000"
 	user_psw = "gy0411"    
 
-	chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
+	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chrome.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
 	driver = webdriver.Chrome(chromedriver)
 	#driver = webdriver.Ie()
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
 	driver.get("%smyOffice.do" %(base_url))
-
+	
 	# ##(fore_stage())
 	# driver.find_element_by_link_text(u"网校首页").click()
 	# time.sleep(1)

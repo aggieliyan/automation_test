@@ -837,13 +837,15 @@ def create_manage_edit():
 			driver.execute_script("$('.onOff').click()")
 			time.sleep(1)
 			driver.execute_script("$('.categoryAuthority-add-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
-				$('.categoryAuthority-add').eq(" + str(i-1) + ").attr('style','display:none')")
+				$('.categoryAuthority-add').eq(" + str(i-1) + ").attr('style','display:none'); \
+				$('.categoryAuthority-look-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-look').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
 		driver.find_element_by_link_text(u"保存").click()
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
-		time.sleep(1)
+		driver.implicitly_wait(15)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
 	print '编辑权限管理员个数:' + str(i)
@@ -860,13 +862,15 @@ def create_manage_delete():
 			driver.execute_script("$('.onOff').click()")
 			time.sleep(1)
 			driver.execute_script("$('.categoryAuthority-delete-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
-				$('.categoryAuthority-delete').eq(" + str(i-1) + ").attr('style','display:none')")
+				$('.categoryAuthority-delete').eq(" + str(i-1) + ").attr('style','display:none'); \
+				$('.categoryAuthority-look-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-look').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
 		driver.find_element_by_link_text(u"保存").click()
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
-		time.sleep(1)
+		driver.implicitly_wait(15)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
 	print '删除权限管理员个数' + str(i)

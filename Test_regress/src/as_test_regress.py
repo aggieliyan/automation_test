@@ -81,19 +81,6 @@ class Test(unittest.TestCase):
 
         if os.path.exists("C:\\test_rs_pic") != True:
             os.system("mkdir C:\\test_rs_pic")
-            logging.basicConfig(filename = os.path.join(os.getcwd(), 'log.txt'), \
-                            format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s', \
-                             datefmt='%a, %d %b %Y %H:%M:%S')
-#        console = logging.StreamHandler()
-#        console.setLevel(logging.INFO)
-#        formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
-#        console.setFormatter(formatter)
-#        logging.getLogger('').addHandler(console)
-
-        logging.debug('this is a message')
-        logging.info('This is info message')
-        logging.warning('This is warning message')
-
         
     def connect_db(self, database):
         try:

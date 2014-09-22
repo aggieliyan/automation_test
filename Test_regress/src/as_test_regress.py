@@ -81,6 +81,19 @@ class Test(unittest.TestCase):
 
         if os.path.exists("C:\\test_rs_pic") != True:
             os.system("mkdir C:\\test_rs_pic")
+            logging.basicConfig(filename = os.path.join(os.getcwd(), 'log.txt'), \
+                            format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s', \
+                             datefmt='%a, %d %b %Y %H:%M:%S')
+#        console = logging.StreamHandler()
+#        console.setLevel(logging.INFO)
+#        formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+#        console.setFormatter(formatter)
+#        logging.getLogger('').addHandler(console)
+
+        logging.debug('this is a message')
+        logging.info('This is info message')
+        logging.warning('This is warning message')
+
         
     def connect_db(self, database):
         try:
@@ -414,7 +427,7 @@ class Test(unittest.TestCase):
 
     def add_and_get_card(self, card_type=0):#添加卡并返回第一个卡号和密码
 
-        self.total += 1
+        self.total += 1 
         card_prifix = "auto" + chr(random.randint(97, 122)) + \
         chr(random.randint(97, 122)) + chr(random.randint(97, 122))
         try:

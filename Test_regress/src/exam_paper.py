@@ -9,6 +9,7 @@ import random, time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import Select
 
 
 def create_paper(cfg, driver, base_url, exam_name, exam_time,\
@@ -182,17 +183,91 @@ def exam_export_question(cfg, driver, qscore, qtype):
                         cfg.get('exam', 'paper_selece_all')).click()
     driver.find_element(cfg.get('exam', 'exam_add_question_ok_by'), \
                         cfg.get('exam', 'exam_add_question_ok')).click()   
+#随机组卷                        
+def random_exam(cfg, driver, base_url, exam_name, exam_time,\
+                  eoperation, erandom, eopen):
+    time.sleep(2)
+    driver.get("%sexam/" %(base_url))
+    driver.implicitly_wait(10)
+    driver.find_element(cfg.get('exam', 'exam_subject_by'), \
+                        cfg.get('exam', 'exam_subject')).click()
+#    now_handle = driver.current_window_handle #得到当前窗口句柄
+#    driver.find_element_by_link_text(u"新建试卷").click()
+    time.sleep(2)
+#    all_handles = driver.window_handles #获取所有窗口句柄
+#    for handle in all_handles:
+#        if handle != now_handle:
+#            driver.switch_to_window(handle)
+    new_href = driver.execute_script("return $('.exam-random-btn').attr('href')")
+    time.sleep(2)    
+    driver.get("%sexam/%s" %(base_url,new_href))
+    time.sleep(2)    
+    driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \
+                        cfg.get('exam', 'exam_paper_name')).clear()
+    driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \
+                        cfg.get('exam', 'exam_paper_name')).send_keys(exam_name)
+    driver.find_element(cfg.get('exam', 'exam_timelen_by'), \
+                        cfg.get('exam', 'exam_timelen')).clear()
+    driver.find_element(cfg.get('exam', 'exam_timelen_by'), \
+                        cfg.get('exam', 'exam_timelen')).send_keys(exam_time)
+    if eoperation == 0:
+        driver.find_element(cfg.get('exam', 'exam_operation_auto_by'), \
+                            cfg.get('exam', 'exam_operation_auto')).click()
+    elif eoperation == 1:
+        driver.find_element(cfg.get('exam', 'exam_operation_continue_by'), \
+                            cfg.get('exam', 'exam_operation_continue')).click()
+    if erandom == 0:
+        driver.find_element(cfg.get('exam', 'exam_random_false_by'), \
+                            cfg.get('exam', 'exam_random_false')).click()
+    elif erandom == 1:
+        driver.find_element(cfg.get('exam', 'exam_random_true_by'), \
+                            cfg.get('exam', 'exam_random_true')).click()
+    if eopen == 0:
+        driver.find_element(cfg.get('exam', 'exam_open_false_by'), \
+                            cfg.get('exam', 'exam_open_false')).click()
+    elif eopen == 1:
+        driver.find_element(cfg.get('exam', 'exam_open_true_by'), \
+                            cfg.get('exam', 'exam_open_true')).click()
+        driver.find_element(cfg.get('exam', 'exam_times_down_by'), \
+                            cfg.get('exam', 'exam_times_down')).click()
+        driver.find_element(cfg.get('exam', 'exam_times_by'), \
+                            cfg.get('exam', 'exam_times')).click()
+        driver.find_element(cfg.get('exam', 'exam_paper_price_by'), \
+                            cfg.get('exam', 'exam_paper_price')).send_keys("10")
+    driver.implicitly_wait(10)
+    driver.find_element_by_id("add_random_btn").click()
+    driver.find_element_by_css_selector("#question_select_1 > #combobox-container > div.cc-box > span.cc-arrow").click()
+    driver.find_element_by_css_selector("li.cc-item.selectedItem").click()
+    driver.find_element_by_css_selector("p.random-q-num-con > input.random-input").clear()
+    driver.find_element_by_css_selector("p.random-q-num-con > input.random-input").send_keys("9")
+    driver.find_element_by_css_selector("p.random-q-score-con > input.random-input").clear()
+    driver.find_element_by_css_selector("p.random-q-score-con > input.random-input").send_keys("5")
+    driver.find_element_by_id("add_random_btn").click()
+    driver.find_element_by_css_selector("#question_select_2 > #combobox-container > div.cc-box > span.cc-arrow").click()
+    driver.find_element_by_xpath("//div[5]/ul/li[2]").click()
+    driver.find_element_by_xpath("(//input[@type='text'])[14]").clear()
+    driver.find_element_by_xpath("(//input[@type='text'])[14]").send_keys("1")
+    driver.find_element_by_xpath("(//input[@type='text'])[15]").clear()
+    driver.find_element_by_xpath("(//input[@type='text'])[15]").send_keys("2")
+    driver.find_element_by_xpath("(//input[@type='text'])[16]").clear()
+    driver.find_element_by_xpath("(//input[@type='text'])[16]").send_keys("1")
+    driver.find_element_by_id("create_step_one").click()
+                          
 #自动创建试卷
 def auto_createpaper(cfg, driver, base_url, eoperation, \
-                     erandom, eopen, exam_num):
+                     erandom, eopen, exam_num, type='2'):
     prefix = chr(random.randint(97, 122))+\
     chr(random.randint(97, 122))+chr(random.randint(97, 122))
     for i in range(exam_num):
         exam_name = 'testpaper_' + prefix + str(i)\
         +time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         exam_time = '120'
-        paper_name = create_paper(cfg, driver, base_url, exam_name, exam_time, \
+        if type==1:
+            paper_name = create_paper(cfg, driver, base_url, exam_name, exam_time, \
                      eoperation, erandom, eopen)
+        else:
+            random_exam(cfg, driver, base_url, exam_name, exam_time,\
+                  eoperation, erandom, eopen)
     return paper_name
         #print i      
 

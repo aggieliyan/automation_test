@@ -1916,7 +1916,7 @@ def create_manage_read():
 			driver.execute_script("$('.categoryAuthority-look-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
 				$('.categoryAuthority-look').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
-		driver.find_element_by_link_text(u"取消").click()
+		driver.find_element_by_link_text(u"保存").click()
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
@@ -1939,7 +1939,7 @@ def create_manage_edit():
 			driver.execute_script("$('.categoryAuthority-add-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
 				$('.categoryAuthority-add').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
-		driver.find_element_by_link_text(u"取消").click()
+		driver.find_element_by_link_text(u"保存").click()
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
@@ -1962,7 +1962,7 @@ def create_manage_delete():
 			driver.execute_script("$('.categoryAuthority-delete-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
 				$('.categoryAuthority-delete').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
-		driver.find_element_by_link_text(u"取消").click()
+		driver.find_element_by_link_text(u"保存").click()
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1

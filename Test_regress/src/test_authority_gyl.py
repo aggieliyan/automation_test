@@ -828,10 +828,10 @@ def create_manage_read():
 
 #批量创建编辑权限管理员
 def create_manage_edit():
+	user_file = open(r"C:/register_admin_user_list_edit.txt", 'w')    
 	i = 1
 	pre_name = 'edlog_'
 	for item in driver.find_elements("class name", "categoryAuthority-add"):
-		user_file = open(r"C:/register_admin_user_list_edit.txt", 'w')
 		admin_username = create_manage_fillmanage( pre_name, i, user_file)
 		if i != 1:
 			driver.execute_script("$('.onOff').click()")

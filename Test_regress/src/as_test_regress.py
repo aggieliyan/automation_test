@@ -414,7 +414,7 @@ class Test(unittest.TestCase):
 
     def add_and_get_card(self, card_type=0):#添加卡并返回第一个卡号和密码
 
-        self.total += 1
+        self.total += 1 
         card_prifix = "auto" + chr(random.randint(97, 122)) + \
         chr(random.randint(97, 122)) + chr(random.randint(97, 122))
         try:

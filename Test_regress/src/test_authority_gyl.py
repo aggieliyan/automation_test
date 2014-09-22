@@ -903,7 +903,7 @@ def create_manage_all():
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
-		time.sleep(1)
+		driver.implicitly_wait(15)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
 	print '删除权限管理员个数' + str(i-1)

@@ -823,7 +823,7 @@ def create_manage_read():
 		time.sleep(2)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(2)
-	print '读权限管理员个数:' + str(i)
+	print '读权限管理员个数:' + str(i-1)
 	user_file.close()
 
 #批量创建编辑权限管理员
@@ -848,7 +848,7 @@ def create_manage_edit():
 		driver.implicitly_wait(15)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
-	print '编辑权限管理员个数:' + str(i)
+	print '编辑权限管理员个数:' + str(i-1)
 	user_file.close()
 
 #批量创建删除权限管理员
@@ -873,7 +873,7 @@ def create_manage_delete():
 		driver.implicitly_wait(15)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
-	print '删除权限管理员个数' + str(i)
+	print '删除权限管理员个数' + str(i-1)
 	user_file.close()
 
 #批量创建查看、编辑、删除权限管理员
@@ -906,7 +906,7 @@ def create_manage_all():
 		time.sleep(1)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
-	print '删除权限管理员个数' + str(i)
+	print '删除权限管理员个数' + str(i-1)
 	user_file.close()
 
 #创建管理员填写信息公用方法

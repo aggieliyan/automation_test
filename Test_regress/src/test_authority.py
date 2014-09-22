@@ -82,34 +82,6 @@ def course_cate():
 	except:
 		print u"不能添加子类目"
 
-	# try:
-	# 	#新建一级类目
-	# 	time.sleep(1)
-	# 	cate_management.add_cate(cfg, driver, base_url)
-
- #        #隐藏类目操作
-	#     #driver.find_element("class name", "trueFrame").click()
-	#     #driver.execute_script("$('.trueFrame').eq(0).click()")
-	#     #time.sleep(1)
-	# 	time.sleep(1)
-	    
-	#     #添加课程到类目中
-	# 	cate_management.add_courese_to_cate(cfg, driver, base_url)
-	# 	driver.get(current_url)
-
-	#     #添加子类目
-	# 	driver.find_element("class name", "addSub").click()
-	# 	time.sleep(1)
-	# 	driver.find_element("id", "reg_textField").clear()
-	# 	driver.find_element("id", "reg_textField").send_keys("sub_cate")
-	# 	time.sleep(1)
-	# 	driver.find_element("xpath", "//button").click()
-
-	# except:
-	# 	print traceback.format_exc()
-	# 	print u"没有类目的编辑权限"
-
-
 	try:
 	    #删除类目
 	    cate_management.delete_cate(cfg, driver, base_url)
@@ -319,7 +291,8 @@ def course():
 	            u"课程管理":course_manage,
 	            u"课件存储空间":course_space,
 	            u'视频外链管理':course_href,
-	            u'播放高级设置':course_setting,}
+	            u'播放高级设置':course_setting,
+	            }
 	menu_title = u"教学教务"
 	check_menu(menu_title, menu_dic)
 
@@ -376,6 +349,7 @@ def class_manage():
 		print u"不能查看网络班报名详情"
 	time.sleep(1)
 	#面授班
+	driver.get(current_url)
 	driver.find_element_by_link_text(u"面授班").click()
 
 	try:
@@ -383,6 +357,7 @@ def class_manage():
 		driver.find_element("css selector", "span.greenbtn25_text").click()
 		time.sleep(1)
 		driver.find_element("id", "J_className").send_keys(u"面授班")
+		driver.find_element("classname", "last-price").send_keys("10")
 		driver.find_element("name", "class-space").send_keys("1")
 		driver.find_element("name", " person-num").send_keys("10")
 		#填课程详情
@@ -688,28 +663,41 @@ def accout_detail():
 		print u"没有账户明细查看权限"
 
 def accout_charge():
-	pass
-	# time.sleep(1)
-	# driver.find_element("name", "payment").click()
-	# driver.find_element("id", "saveBtn").click()
-	# time.sleep(1)
+	time.sleep(1)
+	driver.find_element("name", "payment").click()
+	driver.find_element("id", "saveBtn").click()
+	time.sleep(1)
 
 def accout_withdraw():
-	pass
-	# try:
-	# 	driver.find_element("id", "realname").send_keys(u"马如龙")
-	# 	driver.find_element("id", "bankname").send_keys(u"招商银行")
-	# 	driver.find_element("id", "provincename").send_keys(u"北京市")
-	# 	driver.find_element("id", "cityname").send_keys(u"海淀区")
-	# 	driver.find_element("id", "banksub").send_keys(u"小英支行")
-	# 	driver.find_element("id", "banknum").send_keys("6225880145880028")
-	# 	driver.find_element("id", "banknumretry").send_keys("6225880145880028")
-	# 	driver.find_element("xpath", "//button").click()
-	# except:
-	# 	print u"没有提现权限"
+	try:
+		time.sleep(1)
+		driver.find_element_by_link_text(u"提现").click()
+		time.sleep(1)
+		driver.find_element("id", "realname").send_keys(u"马如龙")
+		driver.find_element("xpath", "//img").click()
+		time.sleep(1)
+		driver.find_element("class name", "x-combo-list-item").click()
+		driver.find_elements("xpath", "//img")[1].click()
+		time.sleep(1)
+		driver.find_elements("class name", "x-combo-list-item")[10].click()
+		driver.find_elements("xpath", "//img")[2].click()
+		time.sleep(1)
+		driver.find_elements("class name", "x-combo-list-item")[42].click()
+		driver.find_element("id", "banksub").send_keys(u"小英支行")	
+		driver.find_element("id", "banknum").send_keys("6225880145880028")
+		driver.find_element("id", "banknumretry").send_keys("6225880145880028")
+		driver.find_element("xpath", "//button").click()
+		time.sleep(1)
+		driver.find_element("id", "drawsum").send_keys("1")
+		driver.find_elements("xpath", "//button")[1].click()
+		time.sleep(1)
+		driver.find_elements("xpath", "//button")[2].click()
+		time.sleep(1)
 
-def accout_charge():
-	pass
+	except:
+		print traceback.format_exc()
+		print u"没有提现权限"
+
 
 def member_accout():
 	try:
@@ -740,8 +728,8 @@ def financial():
 	driver.get("%smyOffice.do" %(base_url))
 	menu_title = u"财务/交易"
 	menu_dic = {u"账户明细": accout_detail,    
-	            u"提现": accout_withdraw, 
-	            u"充值": accout_charge,
+	            # u"提现": accout_withdraw, 
+	            # u"充值": accout_charge,
 	            u"管理成员账户": member_accout,}
 	check_menu(menu_title, menu_dic)
 
@@ -911,11 +899,11 @@ def admin_athority_check():
 	global base_url
 	global cfg 
 	global driver
-	base_url = "http://www.beta.ablesky.com/"
+	base_url = "http://www.gamma.ablesky.com/"
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file)
-	user_name = "salesdemo"
+	user_name = "offcn"
 	user_psw = "1234"
 
 	chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
@@ -926,24 +914,25 @@ def admin_athority_check():
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
 	#教学教务
-	#course()
-	#class_center()
-	#onlineclass()
+	course()
+	class_center()
+	# onlineclass()
 	# exam_manage()
 	# cheap_course()
 	# teacher()
 
-	#财务/交易
-	#financial()
-	#transaction()
+	# #财务/交易39
+	# financial()
+	# transaction()
 
-	#其他
-	#member()
+	# #其他
+	# member()
 	# ad_system()
 	# course_lecture()
 
-	driver.quit()
-
+	# driver.quit()
+#手测-alllog_hmr27课后测验评分等各种啊
+#手册-alllog_wdv44 退款那些
 
 
 if __name__ == "__main__":

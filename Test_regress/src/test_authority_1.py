@@ -1969,7 +1969,7 @@ def create_manage_delete():
 		time.sleep(1)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
-	print '删除权限管理员个数' + str(i)
+	print u'删除权限管理员个数' + str(i)
 	user_file.close()
 
 #批量创建查看、编辑、删除权限管理员
@@ -2002,7 +2002,7 @@ def create_manage_all():
 		time.sleep(1)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
-	print '删除权限管理员个数' + str(i)
+	print u'删除权限管理员个数' + str(i)
 	user_file.close()
 
 #创建管理员填写信息公用方法
@@ -2012,20 +2012,20 @@ def create_manage_fillmanage(pre_name, i, user_file):
 	admin_name = pre_name + prefix + str(i)
 	admin_username = admin_name 
 	admin_email = admin_name + "@sohu.com"
-	admin_psw = 'gy0411'
-	time.sleep(1)
+	admin_psw = '1234aa'
+	# time.sleep(1)
 	driver.find_element("id", "admin_name").send_keys(admin_name)#管理员名称
-	time.sleep(1)
+	# time.sleep(1)
 	driver.find_element("id", "admin_username").send_keys(admin_username)#用户名
-	time.sleep(1)
+	# time.sleep(1)
 	driver.find_element("id", "admin_password").send_keys(admin_psw)#密码
-	time.sleep(1)
+	# time.sleep(1)
 	driver.find_element("id", "admin_repassword").send_keys(admin_psw)#再次输入密码
-	time.sleep(1)
+	# time.sleep(1)
 	driver.find_element("id", "admin_email").send_keys(admin_email)#邮箱
-	time.sleep(1)
+	# time.sleep(1)
 	driver.find_element("id", "admin_reemail").send_keys(admin_email)#再次确认邮箱
-	time.sleep(1)
+	# time.sleep(1)
 	return admin_username
 
 #创建管理员
@@ -2635,26 +2635,26 @@ def admin_athority_check():
 	global base_url
 	global cfg 
 	global driver
-	base_url = "http://www.ablesky.com/"
+	base_url = "http://www.gamma.ablesky.com/"
 	# base_url = "http://www.ablesky-a.com:8080/"
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file)
 	# user_name = "v52"
 	# user_psw = "1234"    
-	user_name = "sadm_gaoyue"
-	user_psw = "123456aa"
+	user_name = "alllog_sqc1"
+	user_psw = "1234aa"
 
-	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"
+	chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
 	driver = webdriver.Chrome(chromedriver)
 	#driver = webdriver.Ie()
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
-	# driver.get("%smyOffice.do" %(base_url))
+	driver.get("%smyOffice.do" %(base_url))
 
-	# #后台-先创建管理员	
-	# create_manage()
+	#后台-先创建管理员	
+	create_manage()
 
 	# #后台-后台首页
 	# teaching()#教学互动
@@ -2671,9 +2671,9 @@ def admin_athority_check():
 	# stuoremp()#网校学员
 	
 	# ##(fore_stage())
-	driver.find_element_by_link_text(u"网校首页").click()
-	time.sleep(1)
-	firstpage()#首页
+	# driver.find_element_by_link_text(u"网校首页").click()
+	# time.sleep(1)
+	# firstpage()#首页
 	# course_center_relate()#课程中心
 	# class_center_relate()#报班中心 
 	# online_ansquestion()#在线答疑

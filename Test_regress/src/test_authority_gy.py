@@ -97,7 +97,7 @@ def firstpage():
 	time.sleep(1)
 	try:
 	    driver.find_element_by_link_text(u"首页装扮").click()
-	    time.sleep(1)
+	    time.sleep(2)
 	    driver.find_element_by_link_text(u"保存").click()
 	except Exception:
 		print traceback.format_exc()
@@ -127,7 +127,7 @@ def firstpage():
 	    driver.find_element_by_link_text(u"导航管理").click()
 	    time.sleep(1)
 	    driver.find_element_by_link_text(u"导航编辑").click()
-	    time.sleep(1)
+	    time.sleep(2)
 	    driver.find_element_by_link_text(u"保存").click()
 	    time.sleep(1)
 	    driver.execute_script("$('.dnl-list-ul').attr('style','display:block')")
@@ -158,9 +158,14 @@ def firstpage():
 
     #编辑页脚
 	time.sleep(1)
-	org_name = "salesdemo"
 	try:
-		user_management.modify_pagefoot(cfg, driver, base_url, org_name) 
+		bh = driver.window_handles 	    
+		driver.find_element_by_link_text(u"编辑页脚").click()
+		time.sleep(1)
+		ah = driver.window_handles
+		swithing_window(bh,ah)
+		driver.find_element("class name", "submit-btn")#点击确定
+		time.sleep(1)
 	except Exception:
 		print traceback.format_exc()
 		print u"所有管理员都应该有编辑页脚的权限"
@@ -175,7 +180,8 @@ def firstpage():
 		print traceback.format_exc()
 		print u"所有管理员都应该有自定义页面的权限"
 	
-	#网校首页头像logo	
+	#网校首页头像logo
+	org_name = "salesdemo"	
 	time.sleep(1)
 	try:
 	    user_management.change_homelogo(cfg, driver, base_url, org_name)
@@ -256,6 +262,8 @@ def course_center():
         except:
             print '此页没有三分屏课程，没有编辑三分屏章节！'       
         #显示发布相似课程 
+        time.sleep(1)  
+        driver.execute_script("$('.coursecenter-module-hover').attr('style','display:block')")#显示隐藏操作      
         time.sleep(1)
         driver.find_element_by_link_text(u"发布相似课程").click()
         time.sleep(1)
@@ -273,7 +281,7 @@ def course_center():
         time.sleep(1)
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)
-        driver.find_elements("css selector",".dialog-button-container button")[1].click()#先不删除呀   
+        driver.find_element("css selector",".dialog-button-container button").click()#删除
     except Exception:
         print traceback.format_exc()
         print u"课程中心：没有教学教务-课程课件-课程管理的删除权限"
@@ -285,6 +293,7 @@ def course_detail():
     try:
         #课程详情页
         driver.find_element("class name", "coursecenter-details-pic").click()#点击第一个课程进入课程详情页  
+        time.sleep(1)
         ah = driver.window_handles
         swithing_window(bh,ah)
         current_url = driver.current_url
@@ -298,7 +307,6 @@ def course_detail():
         time.sleep(1)
         ah = driver.window_handles
         swithing_window(bh,ah)
-        time.sleep(1) 
         driver.get(current_url)
         time.sleep(1)    
     except Exception:
@@ -325,7 +333,7 @@ def course_detail():
             time.sleep(1)
             driver.get(current_url) 
         except:
-            print'不是三分屏或双视频课程,没有编辑三分屏章节'
+            print'不是三分屏或双视频课程,没有编辑三分屏章节!'
         time.sleep(1)
         #显示发布相似课程
         driver.find_element_by_link_text(u"发布相似课程").click()
@@ -348,8 +356,8 @@ def course_detail():
         #删除
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)
-        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#点击取消删除
-        time.sleep(1)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击删除
+        time.sleep(1)             
     except Exception:
         print traceback.format_exc()
         print u"课程详情页面：没有教学教务-课程课件-课程管理的删除权限"         
@@ -357,7 +365,7 @@ def course_detail():
 #前台-课程中心-课程详情页-答疑讨论区        
 def course_detail_ansquetion():
     #答疑讨论区 
-    time.sleep(3)
+    time.sleep(1)       
     try:
         try:
             #回复提问
@@ -387,6 +395,17 @@ def course_center_relate():
     driver.find_element_by_link_text(u"课程中心").click()
     course_center()
     course_detail()
+    time.sleep(1)
+    driver.find_element_by_link_text(u"网校首页").click()#删除课程返回了ablesky首页了
+    time.sleep(1) 
+    driver.find_element_by_link_text(u"课程中心").click()#课程中心
+    time.sleep(1)  
+    bh = driver.window_handles 
+    driver.find_element("class name", "coursecenter-details-pic").click()#点击第一个课程进入课程详情页,为后续答疑在准备  
+    time.sleep(1)
+    ah = driver.window_handles
+    swithing_window(bh,ah)
+    time.sleep(1)    
     course_detail_ansquetion()
 
 #前台-报班中心(教学教务-报班中心-报班管理)
@@ -468,7 +487,7 @@ def class_detail():
 #前台-报班中心--班级详情页-答疑区(网络班)
 def class_detail_ansquestion():
     #答疑讨论区 
-    time.sleep(3)
+    time.sleep(2)
     try:
         try:
             #回复提问
@@ -537,7 +556,7 @@ def live_course():
         #删除
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)
-        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#先取消删除以后改过来
+        driver.find_element("css selector", ".dialog-button-container button").click()#先删除
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
@@ -734,7 +753,7 @@ def live_course_detail_end():
         #删除
         driver.find_elements("css selector", ".course-manage a")[4].click()
         time.sleep(1)
-        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#先取消删除以后改过来
+        driver.find_element("css selector", ".dialog-button-container button").click()#删除
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
@@ -795,7 +814,7 @@ def cheap_course():
         #删除
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)
-        driver.find_elements("css selector", ".dialog-button-container button")[1].click()#先点击取消
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击
         time.sleep(1) 
     except Exception:
         print traceback.format_exc()
@@ -871,7 +890,7 @@ def online_exam():
         time.sleep(1)
         driver.find_element_by_link_text(u"删除").click()
         time.sleep(1)        
-        driver.find_elements("css selector", ".dialog-button-container button")[-1].click()#先取消删除以后改过来  
+        driver.find_element("css selector", ".dialog-button-container button").click()#删除  
     except Exception:
         print traceback.format_exc()
         print u"在线考试：没有教学教务-考试测评-考试系统的删除权限"        
@@ -975,10 +994,15 @@ def teacher_team():
     time.sleep(1)
     driver.find_element_by_link_text(u"名师团队").click()           
     time.sleep(1)   
-    current_url = driver.current_url       
+    current_url = driver.current_url   
+    time.sleep(1)    
     try:
         #置顶显示
         driver.find_element_by_link_text(u"置顶显示").click()
+        time.sleep(1)
+        driver.find_element_by_link_text(u"取消置顶").click()
+        time.sleep(1)
+        driver.get(current_url)
         time.sleep(1)
         #编辑
         driver.find_elements_by_link_text(u"编辑")[1].click()
@@ -1012,6 +1036,11 @@ def school_members():
     try:
         #置顶显示
         driver.find_element_by_link_text(u"置顶显示").click()
+        time.sleep(1)
+        driver.get(current_url)
+        time.sleep(1)
+        #取消置顶
+        driver.find_element_by_link_text(u"取消置顶").click()
         time.sleep(1)
     except Exception:
         print traceback.format_exc()
@@ -1122,17 +1151,17 @@ def teaching():
 	#教学互动-我的私信、网校答疑
 	menu_dic = {u"我的私信":teaching_letter, 
 			       u"网校答疑":teaching_ansquestion,}
-	menu_title = u"后台首页"
+	menu_title = u"首页"
 	check_menu(menu_title, menu_dic)
 			
-#后台首页-授权管理
+#后台首页-授权管理 
 def authmanage():
 	driver.get("%smyOffice.do" %(base_url))
 	#教学互动-授权购买记录、已使用授权 在线购买授权
 	menu_dic = {u"授权购买记录":authmanage_buyRecord, 
 			       u"已使用授权":authmanage_usegrant,
 			       u"在线购买授权":authmanage_buygrant}
-	menu_title = u"后台首页"
+	menu_title = u"首页"
 	check_menu(menu_title, menu_dic)   
 
 #后台首页-课程合作代理
@@ -1141,7 +1170,7 @@ def courseagent():
 	#教学互动-管理我授权的代理、管理我申请的代理
 	menu_dic = {u"管理我授权的代理":agent_grant, 
 			       u"管理我申请的代理":agent_apply}
-	menu_title = u"后台首页"
+	menu_title = u"首页"
 	check_menu(menu_title, menu_dic)
 		
 #后台首页-学习卡
@@ -1150,7 +1179,7 @@ def learnigcard():
 	#学习卡-管理卡组、卡使用记录
 	menu_dic = {u"管理卡组":learnigcard_group, 
 					       u"卡使用记录":learnigcard_record}
-	menu_title = u"后台首页"
+	menu_title = u"首页"
 	check_menu(menu_title, menu_dic)
 
 #后台首页-统计管理
@@ -1160,7 +1189,7 @@ def countmanage():
 	menu_dic = {u"外链视频流量统计":countmanage_outvideo, 
 			       u"浏览量统计":countmanage_views,
 			       u"新增学员量统计":countmanage_newstudent,}
-	menu_title = u"后台首页"
+	menu_title = u"首页"
 	check_menu(menu_title, menu_dic)
 				     
 #系统设置-管理员/客服
@@ -1867,7 +1896,8 @@ def manageorservice_manage():
 	try:
 	    driver.find_element_by_link_text(u"删除管理员").click()
 	    time.sleep(1)
-	    driver.find_elements("class name","x-btn-text")[1].click()#先取消删除   	    
+	    driver.find_element("class name","x-btn-text").click()#删除 
+	    time.sleep(1)  	    
 	except Exception:
 		print traceback.format_exc()
 		print u"没有管理员的删除权限"
@@ -1890,9 +1920,9 @@ def create_manage_read():
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
-		time.sleep(5)
+		time.sleep(2)
 		driver.find_element_by_link_text(u"添加管理员").click() 
-		time.sleep(3)
+		time.sleep(2)
 	print '读权限管理员个数:' + str(i)
 	user_file.close()
 
@@ -1965,13 +1995,13 @@ def create_manage_all():
 				$('.categoryAuthority-delete-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
 				$('.categoryAuthority-delete').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
-		driver.find_element_by_link_text(u"取消").click()
+		driver.find_element_by_link_text(u"保存").click()
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
 		time.sleep(1)
 		driver.find_element_by_link_text(u"添加管理员").click() 
-		time.sleep(5)
+		time.sleep(1)
 	print '删除权限管理员个数' + str(i)
 	user_file.close()
 
@@ -1982,7 +2012,7 @@ def create_manage_fillmanage(pre_name, i, user_file):
 	admin_name = pre_name + prefix + str(i)
 	admin_username = admin_name 
 	admin_email = admin_name + "@sohu.com"
-	admin_psw = 'gy0411'
+	admin_psw = '1234aa'
 	time.sleep(1)
 	driver.find_element("id", "admin_name").send_keys(admin_name)#管理员名称
 	time.sleep(1)
@@ -2000,15 +2030,15 @@ def create_manage_fillmanage(pre_name, i, user_file):
 
 #创建管理员
 def create_manage():
-	time.sleep(15)
+	time.sleep(2)
 	driver.get("%smyOffice.do" %(base_url))
-	time.sleep(8)
+	time.sleep(2)
 	driver.find_element_by_link_text(u"系统设置").click()   
-	time.sleep(6)
+	time.sleep(2)
 	driver.find_element_by_link_text(u"网校管理员").click() 
-	time.sleep(6)
+	time.sleep(2)
 	driver.find_element_by_link_text(u"添加管理员").click() 
-	time.sleep(4)
+	time.sleep(2)
 	# create_manage_read()#批量创建读权限管理员
 	# create_manage_edit()#批量创建编辑权限管理员
 	# create_manage_delete()#批量创建删除权限管理员
@@ -2266,47 +2296,48 @@ def pagecreate_selflogin():
 			
 #学员/员工-网校学员-学员类目   
 def stuoremp_stucate():
-	time.sleep(1)
-	current_url = driver.current_url
-	try:
-		driver.find_element("class name", "expandSub ")#找到展开图标
-		time.sleep(1)	
-	except Exception:
-		print traceback.format_exc()
-		print u"没有学员类目的读权限"
+    time.sleep(1)
+    current_url = driver.current_url
+    try:
+        driver.find_element("class name", "expandSub ")#找到展开图标
+        time.sleep(1)	
+    except Exception:
+        print traceback.format_exc()
+        print u"没有学员类目的读权限"
 
-	time.sleep(1)
-	try:
-	    driver.find_element("id", "J_genTopCateg").click()#新建一级类目
-	    creat_stucate()#新建一级类目
-	    driver.get(current_url)
-	    bh = driver.window_handles
-	    manage_catestu(bh)#管理类目学员
-	    bh = driver.window_handles 
-	    opencourseBatch(bh)#批量开通课程
-	    driver.get(current_url)
-	    driver.find_element("class name", "editCateg").click()#编辑类目
-	    time.sleep(1)
-	    driver.find_element("class name", "x-btn-text").click()#点击确定		
-	    time.sleep(1)
-	    driver.find_element("class name", "addSub").click()#添加子类目
-	    creat_stucate()
-	    time.sleep(1)				    
-	except Exception:
-		print traceback.format_exc()
-		print u"没有学员类目的编辑权限"
+    time.sleep(1)
+    try:
+        driver.find_element("id", "J_genTopCateg").click()#新建一级类目
+        creat_stucate()#新建一级类目
+        driver.get(current_url)
+        bh = driver.window_handles
+        manage_catestu(bh)#管理类目学员
+        bh = driver.window_handles 
+        opencourseBatch(bh)#批量开通课程
+        driver.get(current_url)
+        time.sleep(1)
+        driver.find_element("class name", "editCateg").click()#编辑类目
+        time.sleep(1)
+        driver.find_element("class name", "x-btn-text").click()#点击确定		
+        time.sleep(1)
+        driver.find_element("class name", "addSub").click()#添加子类目
+        creat_stucate()
+        time.sleep(1)				    
+    except Exception:
+        print traceback.format_exc()
+        print u"没有学员类目的编辑权限"
 
-	time.sleep(2)
-	try:
-	    driver.find_elements("class name", "delete")[-1].click()#删除类目
-	    time.sleep(1)
-	    driver.find_element("class name", "x-btn-text").click()#点击删除		
-	    time.sleep(2)	
-	except Exception:
-		print traceback.format_exc()
-		print u"没有学员类目的删除权限"
-	driver.get(current_url)
-	time.sleep(2)
+    time.sleep(2)
+    try:
+        driver.find_elements("class name", "delete")[-1].click()#删除类目
+        time.sleep(1)
+        driver.find_element("class name", "x-btn-text").click()#点击删除		
+        time.sleep(2)	
+    except Exception:
+        print traceback.format_exc()
+        print u"没有学员类目的删除权限"
+    driver.get(current_url)
+    time.sleep(2)
 
 #新建一级类目和子类目的方法		
 def creat_stucate():
@@ -2528,7 +2559,7 @@ def stuoremp_empmanage():
 	try:
 		driver.find_element_by_link_text(u"删除员工").click()#删除员工
 		time.sleep(1)
-		driver.find_elements("css selector", ".x-panel-btns-right .x-btn-text")[1].click()#先取消删除
+		driver.find_element("css selector", ".x-panel-btns-right .x-btn-text").click()#删除
 		time.sleep(1)
 		#页面下方的批量操作-删除员工（删除账号手动测试）
 		driver.get(current_url)
@@ -2541,7 +2572,7 @@ def stuoremp_empmanage():
 		time.sleep(2)
 		driver.find_element_by_link_text(u"应用").click()
 		time.sleep(2)
-		driver.find_elements("css selector", ".x-panel-btns-right .x-btn-text")[-1].click()#先取消删除
+		driver.find_element("css selector", ".x-panel-btns-right .x-btn-text").click()#删除
 		time.sleep(1)	
 	except Exception:
 		print traceback.format_exc()
@@ -2605,15 +2636,12 @@ def admin_athority_check():
 	global base_url
 	global cfg 
 	global driver
-#	base_url = "http://www.ablesky.com/"
-	base_url = "http://www.ablesky-a.com:8080/"
+	base_url = "http://www.gamma.ablesky.com/"
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file)
-	user_name = "v52"
-	user_psw = "1234"    
-	# user_name = "sadm_gaoyue"
-	# user_psw = "123456aa"
+	user_name = "stu_gy000"
+	user_psw = "gy0411"    
 
 	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
@@ -2621,10 +2649,10 @@ def admin_athority_check():
 	#driver = webdriver.Ie()
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
-#	driver.get("%smyOffice.do" %(base_url))
+	# driver.get("%smyOffice.do" %(base_url))
 
 	# #后台-先创建管理员	
-	create_manage()
+	# create_manage()
 
 	# #后台-后台首页
 	# teaching()#教学互动
@@ -2640,21 +2668,21 @@ def admin_athority_check():
 	# #后台-学员/员工
 	# stuoremp()#网校学员
 	
-	#前台(fore_stage())
+	##(fore_stage())
 	driver.find_element_by_link_text(u"网校首页").click()
 	time.sleep(1)
-	# firstpage()#首页
-	# course_center_relate()#课程中心
-	# class_center_relate()#报班中心 
-	# online_ansquestion()#在线答疑
-	# live_course_relate()#直播课程
-	# cheap_course_relate()#特惠课程
-	# online_exam_relate()#在线考试
-	# school_notice()#网校公告
-	# teacher_team()#名师团队
-	# school_members()#网校成员
-	# about_us()#关于我们
-	# help_center()#帮助中心
+	firstpage()#首页
+	course_center_relate()#课程中心
+	class_center_relate()#报班中心 
+	online_ansquestion()#在线答疑
+	live_course_relate()#直播课程
+	cheap_course_relate()#特惠课程
+	online_exam_relate()#在线考试
+	school_notice()#网校公告
+	teacher_team()#名师团队
+	school_members()#网校成员
+	# # about_us()#关于我们
+	# # help_center()#帮助中心
         
 	driver.quit()
     

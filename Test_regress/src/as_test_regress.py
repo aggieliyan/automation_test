@@ -1101,12 +1101,22 @@ class Test(unittest.TestCase):
         #免得创建试卷失败后，后面要用到这个变量会失败
         self.paper_name = ""
         try:
-            self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1) 
+            self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 1) 
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to create paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+            
+    def create_random_epaper(self):
+        self.total += 1
+        try:
+            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 2) 
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append("fail to create random paper")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/create_random_paper.png")
     
     #为学员评分        
     def score_paper(self):
@@ -1224,7 +1234,7 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/buy_paper.png")       
 
     
-    def test_as_regress(self):
+   # def test_as_regress(self):
 
         #网站主站回归流程
         self.register()
@@ -1277,19 +1287,20 @@ class Test(unittest.TestCase):
         
         #考试系统部分
         self.login_from_index()
-        self.exam_onequestion()
-        self.exam_questions()
-        self.import_questions()
-        self.add_exam_subject()
-        self.modify_exam_subject()
-        self.delete_exam_subject()
-        self.create_exam_cate()
-        self.modify_exam_cate()
-        self.delete_exam_cate() 
-        self.add_exam_point()
-        self.modify_exam_point()
-        self.delete_exam_point()    
+#        self.exam_onequestion()
+#        self.exam_questions()
+#        self.import_questions()
+#        self.add_exam_subject()
+#        self.modify_exam_subject()
+#        self.delete_exam_subject()
+#        self.create_exam_cate()
+#        self.modify_exam_cate()
+#        self.delete_exam_cate() 
+#        self.add_exam_point()
+#        self.modify_exam_point()
+#        self.delete_exam_point()    
         self.createpaper()
+        self.create_random_epaper()
         self.exam_student_management()
         login.logout(self.driver, self.base_url)
 

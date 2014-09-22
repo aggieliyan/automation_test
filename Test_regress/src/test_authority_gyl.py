@@ -906,7 +906,7 @@ def create_manage_all():
 		driver.implicitly_wait(15)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
-	print '删除权限管理员个数' + str(i-1)
+	print '查看、编辑、删除权限管理员个数' + str(i-1)
 	user_file.close()
 
 #创建管理员填写信息公用方法

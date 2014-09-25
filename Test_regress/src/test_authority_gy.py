@@ -181,7 +181,7 @@ def firstpage():
 		print u"所有管理员都应该有自定义页面的权限"
 	
 	#网校首页头像logo
-	org_name = "salesdemo"	
+	org_name = "success"	
 	time.sleep(1)
 	try:
 	    user_management.change_homelogo(cfg, driver, base_url, org_name)
@@ -194,9 +194,9 @@ def firstpage():
     #编辑课程关键词
 	time.sleep(1)
 	try:
-	    driver.find_element("class name","keyword-mask").click()
+	    driver.find_element("class name", "keyword-mask").click()
 	    time.sleep(1)
-	    driver.find_element("css selector",".dialog-button-container button").click()#点击确定	    
+	    driver.find_element("css selector", ".dialog-button-container button").click()#点击确定	    
 	except Exception:
 		print traceback.format_exc()
 		print u"所有管理员都应该有编辑课程关键字的权限"
@@ -206,7 +206,7 @@ def firstpage():
 	try:
 	    driver.find_element_by_link_text(u"编辑").click()
 	    time.sleep(1)
-	    driver.find_element("css selector",".dialog-button-container button").click()#点击确定	   
+	    driver.find_element("css selector", ".dialog-button-container button").click()#点击确定	   
 	except Exception:
 		print traceback.format_exc()
 		print u"所有管理员都应该有编辑咨询热线和服务时间的权限"   
@@ -244,12 +244,20 @@ def course_center():
         driver.find_element("class name", "dialog-button-container").click()#点击关闭  
         #显示编辑
         time.sleep(1)
-        driver.find_elements_by_link_text(u"编辑")[1].click()
-        time.sleep(1)
-        driver.find_element("id", "J_complete").click()#保存
+        try:
+            driver.find_elements_by_link_text(u"编辑")[1].click()
+            time.sleep(1)
+            try:
+                driver.find_element("id", "J_complete").click()#保存
+            except:
+                driver.find_element("class name", "x-btn-text").click()#代理保存
+                driver.get(current_url)
+        except:
+            print '编辑失败！'
+            driver.get(current_url)
         time.sleep(1)
         driver.execute_script("$('.coursecenter-module-hover').attr('style','display:block')")#显示隐藏操作
-        time.sleep(1)   
+        time.sleep(1)    
         #显示编辑三分屏章节
         time.sleep(1)
         try:
@@ -305,10 +313,14 @@ def course_detail():
         #显示开始播放
         driver.find_element_by_link_text(u"开始播放").click()
         time.sleep(1)
-        ah = driver.window_handles
-        swithing_window(bh,ah)
-        driver.get(current_url)
-        time.sleep(1)    
+        try:
+            driver.find_element("class name", "dialog-button-container").click()#资料正在转换中我知道了	
+        except:
+            time.sleep(1)
+            ah = driver.window_handles
+            swithing_window(bh,ah)
+            driver.get(current_url)
+            time.sleep(1)    
     except Exception:
         print traceback.format_exc()
         print u"课程详情页面：没有教学教务-课程课件-课程管理的读权限"
@@ -316,9 +328,18 @@ def course_detail():
     time.sleep(1)   
     try:
         #显示编辑
-        driver.find_elements_by_link_text(u"编辑")[1].click()
-        time.sleep(1)
-        driver.find_element("id", "J_complete").click()#保存
+        try:
+            driver.find_elements_by_link_text(u"编辑")[1].click()
+            time.sleep(1)
+            try:
+                driver.find_element("id", "J_complete").click()#保存
+            except:
+                driver.find_element("class name", "x-btn-text").click()#代理保存
+                driver.get(current_url)
+        except:
+            print'课程详情页编辑失败！'
+            driver.get(current_url)
+        time.sleep(2)
         #显示获取视频链接
         try:
             driver.find_element_by_link_text(u"获取视频链接").click()
@@ -494,6 +515,46 @@ def class_detail_ansquestion():
             driver.find_element_by_link_text(u"回复").click()                                                
         except:
             print '网络班答疑讨论区还没有提问或者是面授班没有答疑区！'
+            driver.refresh()
+            return
+        time.sleep(1)
+        driver.find_element("class name", "replay-textarea").send_keys("hello")
+        time.sleep(1)
+        driver.find_element("class name", "send-replay").click()#点击回复按钮  
+        time.sleep(1)
+        driver.find_element("class name", "delete-my").click()#删除刚才的回复
+        try:
+            #删除提问
+            time.sleep(1)
+            driver.find_element("class name", "delete-all").click()
+            time.sleep(1)                                              
+        except:
+            print '网络班答疑讨论区没有成功删除提问！'
+            driver.refresh()
+            return                                           
+    except Exception:
+        print traceback.format_exc()
+        print u"班级详情页面：答疑讨论区相关操作权限应该对所有的管理员开放" 
+      
+#前台-报班中心导航
+def class_center_relate():
+    time.sleep(1)
+    driver.find_element_by_link_text(u"报班中心").click()   
+    class_center()
+    class_detail()
+    class_detail_ansquestion()
+
+#前台-在线答疑
+def online_ansquestion():
+    time.sleep(1)
+    driver.find_element_by_link_text(u"在线答疑").click() 
+    time.sleep(1)       
+    try:
+        try:
+            #回复提问
+            driver.find_element_by_link_text(u"回复").click()                                                
+        except:
+            print '在线答疑的答疑区：还没有提问！'
             return
         time.sleep(1)
         driver.find_element("class name", "replay-textarea").send_keys("hello")
@@ -507,21 +568,7 @@ def class_detail_ansquestion():
         time.sleep(1)                                              
     except Exception:
         print traceback.format_exc()
-        print u"班级详情页面：答疑讨论区相关操作权限应该对所有的管理员开放"   
- 
-#前台-报班中心导航
-def class_center_relate():
-    time.sleep(1)
-    driver.find_element_by_link_text(u"报班中心").click()   
-    class_center()
-    class_detail()
-    class_detail_ansquestion()
-
-#前台-在线答疑
-def online_ansquestion():
-    time.sleep(1)
-    driver.find_element_by_link_text(u"在线答疑").click() 
-    course_detail_ansquetion()
+        print u"在线答疑：相关操作权限应该对所有的管理员开放" 
 
 #前台-直播课程
 def live_course():
@@ -783,10 +830,10 @@ def cheap_course():
         driver.execute_script("$('.exit-wrap').attr('style','display:block')")
         time.sleep(1)
         #下架
-        driver.find_element_by_link_text(u"下架").click()
-        time.sleep(1)
-        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
-        time.sleep(1)      
+#        driver.find_element_by_link_text(u"下架").click()
+#        driver.implicitly_wait(10)
+#        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
+#        time.sleep(1)      
         #置顶显示
         driver.execute_script("$('.exit-wrap').attr('style','display:block')")
         time.sleep(1)
@@ -813,8 +860,8 @@ def cheap_course():
         time.sleep(1)
         #删除
         driver.find_element_by_link_text(u"删除").click()
-        time.sleep(1)
-        driver.find_element("css selector", ".dialog-button-container button").click()#点击
+        driver.implicitly_wait(10)
+        driver.find_element("css selector", ".dialog-button-container button").click()#点击确定
         time.sleep(1) 
     except Exception:
         print traceback.format_exc()
@@ -826,7 +873,7 @@ def cheap_course_ansquestion():
     try:
         try:
             #回复提问
-            driver.find_element_by_link_text(u"回复").click()                                                
+            driver.find_element_by_partial_link_text(u"回复").click()                                                
         except:
             print '特惠课程留言器区还没有留言！'
             return
@@ -1145,44 +1192,51 @@ def help_center():
         print u"所有管理员都应该有帮助中心相关权限"     		  
    
 def admin_athority_check():
-    
+	
 	global base_url
 	global cfg 
 	global driver
 	base_url = "http://www.gamma.ablesky.com/"
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
-	cfg.read(cfg_file)
-	user_name = "stu_gy000"
-	user_psw = "gy0411"    
-
-	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chrome.exe"
+	cfg.read(cfg_file) 
+	user_name = "stu_gy00"
+	user_psw = "gy0411"
+	
+	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
 	driver = webdriver.Chrome(chromedriver)
 	#driver = webdriver.Ie()
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
-	driver.get("%smyOffice.do" %(base_url))
+	# driver.get("%smyOffice.do" %(base_url))
 	
 	# ##(fore_stage())
-	# driver.find_element_by_link_text(u"网校首页").click()
-	# time.sleep(1)
+	time.sleep(1)
+	driver.find_element_by_link_text(u"网校首页").click()
+	time.sleep(1)
 	# firstpage()#首页
 	# course_center_relate()#课程中心
 	# class_center_relate()#报班中心 
-	# online_ansquestion()#在线答疑
-	# live_course_relate()#直播课程
+	time.sleep(1)
+	driver.find_element_by_link_text(u"网校首页").click()
+	time.sleep(1) 
+	online_ansquestion()#在线答疑
+	time.sleep(1)
+	driver.find_element_by_link_text(u"网校首页").click()
+	time.sleep(1)
+	live_course_relate()#直播课程
 	# cheap_course_relate()#特惠课程
 	# online_exam_relate()#在线考试
 	# school_notice()#网校公告
 	# teacher_team()#名师团队
 	# school_members()#网校成员
-	# # about_us()#关于我们
-	# # help_center()#帮助中心
-        
+	# about_us()#关于我们
+	# help_center()#帮助中心
+	
 	driver.quit()
     
 if __name__ == "__main__":
 	#import sys;sys.argv = ['', 'Test.testName']
 	admin_athority_check()
-    
+	

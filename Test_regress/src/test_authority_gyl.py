@@ -77,7 +77,7 @@ def courseagent():
 def learnigcard():
 	driver.get("%smyOffice.do" %(base_url))
 	#学习卡-管理卡组、卡使用记录
-	menu_dic = {u"管理卡组":learnigcard_group, 
+	menu_dic = {u"管理/卡组":learnigcard_group, 
 					       u"卡使用记录":learnigcard_record}
 	menu_title = u"首页"
 	check_menu(menu_title, menu_dic)
@@ -624,15 +624,30 @@ def learnigcard_group():
 	    time.sleep(1)
 	    driver.get(current_url)
 	    time.sleep(1)
+
         #添加卡组
-	    org_name = "stu_gy"
+	    org_name = "stu_lr01"
 	    rand_name = str(random.randint(1000, 9999))
+	    card_prifix = "auto" + chr(random.randint(97, 122)) + \
+	    chr(random.randint(97, 122)) + chr(random.randint(97, 122))
+	    
 	    group_name = u"prepaidcard"+rand_name
 	    group_price = 100
-	    card_management.add_prepaid_cardgroup(cfg, driver, base_url, org_name, group_name, group_price)#添加卡组
-	    card_prifix = "auto" + chr(random.randint(97, 122)) + \
-		chr(random.randint(97, 122)) + chr(random.randint(97, 122))
-	    card_management.add_card(cfg, driver, base_url, org_name,card_prifix)#添加卡
+	    card_management.add_prepaid_cardgroup(cfg, driver, base_url, org_name, group_name, group_price)#添加充值卡组
+	    card_management.add_card(cfg, driver, base_url, org_name, card_prifix)#添加卡
+	    
+	    group_name = u"coursecard"+rand_name
+	    card_management.add_course_cardgroup(cfg, driver, base_url, org_name, group_name)#添加充课卡组
+	    card_management.add_card(cfg, driver, base_url, org_name, card_prifix)#添加卡
+	    
+	    group_name = u"catecard"+rand_name
+	    card_management.add_cate_cardgroup(cfg, driver, base_url, org_name, group_name)#添加补课卡组
+	    card_management.add_card(cfg, driver, base_url, org_name, card_prifix)#添加卡
+	    
+	    group_name = u"listencard"+rand_name        
+	    card_management.add_listen_cardgroup(cfg, driver, base_url, org_name, group_name)#添加试听卡组
+	    card_management.add_card(cfg, driver, base_url, org_name, card_prifix)#添加卡  
+	    
 		#driver.find_element_by_link_text(u"添加卡组").click()	
 		#time.sleep(1)
 		#driver.get(current_url)
@@ -1545,7 +1560,7 @@ def admin_athority_check():
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file) 
-	user_name = "stu_gy00"
+	user_name = "stu_lr01"
 	user_psw = "gy0411"
 
 	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"

@@ -418,7 +418,7 @@ class Test(unittest.TestCase):
         card_prifix = "auto" + chr(random.randint(97, 122)) + \
         chr(random.randint(97, 122)) + chr(random.randint(97, 122))
         try:
-            card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name,card_prifix)
+            card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name, card_prifix)
             if card_type == 0:
                 time.sleep(3)
                 self.driver.find_element_by_link_text(u"浏览卡").click()

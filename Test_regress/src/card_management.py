@@ -61,7 +61,7 @@ def add_prepaid_cardgroup(cfg, driver, base_url, org_name, \
     time.sleep(1)
     driver.get(base_url + "myOffice.do")
     time.sleep(5)
-    driver.find_element_by_link_text(u"管理卡组").click()
+    driver.find_element_by_link_text(u"管理/卡组").click()
     time.sleep(3)
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
@@ -76,7 +76,7 @@ def add_prepaid_cardgroup(cfg, driver, base_url, org_name, \
 def add_course_cardgroup(cfg, driver, base_url, org_name, group_name):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
-    driver.find_element_by_link_text(u"管理卡组").click()
+    driver.find_element_by_link_text(u"管理/卡组").click()
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
@@ -100,7 +100,7 @@ def add_cate_cardgroup(cfg, driver, base_url, org_name, \
         group_name, group_price=500):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
-    driver.find_element_by_link_text(u"管理卡组").click()
+    driver.find_element_by_link_text(u"管理/卡组").click()
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(2)
@@ -122,7 +122,7 @@ def add_cate_cardgroup(cfg, driver, base_url, org_name, \
 def buy_listen_card(cfg, driver, base_url):
     driver.get(base_url + "myOffice.do")
     driver.implicitly_wait(30)
-    driver.find_element_by_link_text(u"管理卡组").click()
+    driver.find_element_by_link_text(u"管理/卡组").click()
     time.sleep(2)
     driver.find_element_by_link_text(u"购买试听卡").click()
     time.sleep(2)
@@ -141,7 +141,7 @@ def add_listen_cardgroup(cfg, driver, base_url, \
         org_name, group_name):
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
-    driver.find_element_by_link_text(u"管理卡组").click()
+    driver.find_element_by_link_text(u"管理/卡组").click()
     time.sleep(2)
     driver.find_element_by_link_text(u"添加卡组").click()
     time.sleep(3)
@@ -172,7 +172,7 @@ def add_card(cfg, driver, base_url, org_name, \
         card_prifix,cgroup_num=1,card_num=5):
     driver.get(base_url + "myOffice.do")
     time.sleep(2)
-    driver.find_element_by_link_text(u"管理卡组").click()
+    driver.find_element_by_link_text(u"管理/卡组").click()
     time.sleep(2)
     if cgroup_num == 1:
         time.sleep(1)
@@ -181,8 +181,11 @@ def add_card(cfg, driver, base_url, org_name, \
         driver.find_element_by_xpath("//div["+str(cgroup_num)+ \
             "]/table/tbody/tr/td[6]/div/div/a").click()
     time.sleep(3)
-    driver.find_element(cfg.get('org_manage', 'card_prefix_by'), \
-        cfg.get('org_manage', 'card_prefix')).send_keys(card_prifix)
+    try:
+        driver.find_element(cfg.get('org_manage', 'card_prefix_by'), \
+            cfg.get('org_manage', 'card_prefix')).send_keys(card_prifix)
+    except:
+        None
     time.sleep(2)
     driver.find_element(cfg.get('org_manage', 'card_count_by'), \
         cfg.get('org_manage', 'card_count')).send_keys(card_num)

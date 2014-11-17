@@ -77,7 +77,7 @@ def courseagent():
 def learnigcard():
 	driver.get("%smyOffice.do" %(base_url))
 	#学习卡-管理卡组、卡使用记录
-	menu_dic = {u"管理卡组":learnigcard_group, 
+	menu_dic = {u"管理/卡组":learnigcard_group, 
 					       u"卡使用记录":learnigcard_record}
 	menu_title = u"首页"
 	check_menu(menu_title, menu_dic)
@@ -624,15 +624,30 @@ def learnigcard_group():
 	    time.sleep(1)
 	    driver.get(current_url)
 	    time.sleep(1)
+
         #添加卡组
-	    org_name = "stu_gy"
+	    org_name = "stu_lr01"
 	    rand_name = str(random.randint(1000, 9999))
+	    card_prifix = "auto" + chr(random.randint(97, 122)) + \
+	    chr(random.randint(97, 122)) + chr(random.randint(97, 122))
+	    
 	    group_name = u"prepaidcard"+rand_name
 	    group_price = 100
-	    card_management.add_prepaid_cardgroup(cfg, driver, base_url, org_name, group_name, group_price)#添加卡组
-	    card_prifix = "auto" + chr(random.randint(97, 122)) + \
-		chr(random.randint(97, 122)) + chr(random.randint(97, 122))
-	    card_management.add_card(cfg, driver, base_url, org_name,card_prifix)#添加卡
+	    card_management.add_prepaid_cardgroup(cfg, driver, base_url, org_name, group_name, group_price)#添加充值卡组
+	    card_management.add_card(cfg, driver, base_url, org_name, card_prifix)#添加卡
+	    
+	    group_name = u"coursecard"+rand_name
+	    card_management.add_course_cardgroup(cfg, driver, base_url, org_name, group_name)#添加充课卡组
+	    card_management.add_card(cfg, driver, base_url, org_name, card_prifix)#添加卡
+	    
+	    group_name = u"catecard"+rand_name
+	    card_management.add_cate_cardgroup(cfg, driver, base_url, org_name, group_name)#添加补课卡组
+	    card_management.add_card(cfg, driver, base_url, org_name, card_prifix)#添加卡
+	    
+	    group_name = u"listencard"+rand_name        
+	    card_management.add_listen_cardgroup(cfg, driver, base_url, org_name, group_name)#添加试听卡组
+	    card_management.add_card(cfg, driver, base_url, org_name, card_prifix)#添加卡  
+	    
 		#driver.find_element_by_link_text(u"添加卡组").click()	
 		#time.sleep(1)
 		#driver.get(current_url)
@@ -823,30 +838,32 @@ def create_manage_read():
 		time.sleep(2)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(2)
-	print '读权限管理员个数:' + str(i)
+	print '读权限管理员个数:' + str(i-1)
 	user_file.close()
 
 #批量创建编辑权限管理员
 def create_manage_edit():
+	user_file = open(r"C:/register_admin_user_list_edit.txt", 'w')    
 	i = 1
 	pre_name = 'edlog_'
 	for item in driver.find_elements("class name", "categoryAuthority-add"):
-		user_file = open(r"C:/register_admin_user_list_edit.txt", 'w')
 		admin_username = create_manage_fillmanage( pre_name, i, user_file)
 		if i != 1:
 			driver.execute_script("$('.onOff').click()")
 			time.sleep(1)
 			driver.execute_script("$('.categoryAuthority-add-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
-				$('.categoryAuthority-add').eq(" + str(i-1) + ").attr('style','display:none')")
+				$('.categoryAuthority-add').eq(" + str(i-1) + ").attr('style','display:none'); \
+				$('.categoryAuthority-look-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-look').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
 		driver.find_element_by_link_text(u"保存").click()
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
-		time.sleep(1)
+		driver.implicitly_wait(15)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
-	print '编辑权限管理员个数:' + str(i)
+	print '编辑权限管理员个数:' + str(i-1)
 	user_file.close()
 
 #批量创建删除权限管理员
@@ -860,16 +877,18 @@ def create_manage_delete():
 			driver.execute_script("$('.onOff').click()")
 			time.sleep(1)
 			driver.execute_script("$('.categoryAuthority-delete-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
-				$('.categoryAuthority-delete').eq(" + str(i-1) + ").attr('style','display:none')")
+				$('.categoryAuthority-delete').eq(" + str(i-1) + ").attr('style','display:none'); \
+				$('.categoryAuthority-look-active').eq(" + str(i-1) + ").attr('style','display: inline-block'); \
+				$('.categoryAuthority-look').eq(" + str(i-1) + ").attr('style','display:none')")
 		time.sleep(1)
 		driver.find_element_by_link_text(u"保存").click()
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
-		time.sleep(1)
+		driver.implicitly_wait(15)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
-	print '删除权限管理员个数' + str(i)
+	print '删除权限管理员个数' + str(i-1)
 	user_file.close()
 
 #批量创建查看、编辑、删除权限管理员
@@ -899,10 +918,10 @@ def create_manage_all():
 		time.sleep(1)
 		user_file.writelines(admin_username + "\n")
 		i = i + 1
-		time.sleep(1)
+		driver.implicitly_wait(15)
 		driver.find_element_by_link_text(u"添加管理员").click() 
 		time.sleep(1)
-	print '删除权限管理员个数' + str(i)
+	print '查看、编辑、删除权限管理员个数' + str(i-1)
 	user_file.close()
 
 #创建管理员填写信息公用方法
@@ -1541,8 +1560,9 @@ def admin_athority_check():
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file) 
-	user_name = "alllog_ole33"
-	user_psw = "1234aa"
+
+	user_name = "stu_lr01"
+	user_psw = "gy0411"
 
 	chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver

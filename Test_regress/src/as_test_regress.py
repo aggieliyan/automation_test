@@ -418,7 +418,7 @@ class Test(unittest.TestCase):
         card_prifix = "auto" + chr(random.randint(97, 122)) + \
         chr(random.randint(97, 122)) + chr(random.randint(97, 122))
         try:
-            card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name,card_prifix)
+            card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name, card_prifix)
             if card_type == 0:
                 time.sleep(3)
                 self.driver.find_element_by_link_text(u"浏览卡").click()
@@ -1101,12 +1101,22 @@ class Test(unittest.TestCase):
         #免得创建试卷失败后，后面要用到这个变量会失败
         self.paper_name = ""
         try:
-            self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1) 
+            self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 1) 
         except Exception, e:
             print traceback.format_exc() 
             self.verificationErrors.append("fail to create paper")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+            
+    def create_random_epaper(self):
+        self.total += 1
+        try:
+            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 2) 
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append("fail to create random paper")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/create_random_paper.png")
     
     #为学员评分        
     def score_paper(self):
@@ -1224,85 +1234,87 @@ class Test(unittest.TestCase):
             self.driver.save_screenshot("C:/test_rs_pic/buy_paper.png")       
 
     
-    def test_as_regress(self):
+   def test_as_regress(self):
 
         #网站主站回归流程
-        # self.register()
+        self.register()
         self.login_from_index()
-        # self.release_normal()
-        # self.release_two_video()
-        # self.release_three_video()
-        # self.agency_course()
-        # self.package_course() 
-        # self.add_cate()
-        # self.presale_course()  
-        # self.add_course_to_cate()   
-        # self.add_exam_card()
-        # self.prepaid_cardgroup()
-        # self.course_cardgroup()
-        # self.cate_cardgroup()
-        # self.delete_cate()
-        # self.buy_listen_card()
-        # self.listen_cardgroup()
-        # self.import_one_student()
-        # self.import_multi_student()
-        # self.create_multi_student()
-        # self.open_course_for_one()
-        # self.open_course_for_multi()
-        # self.manage_course_num()
-        # self.buy_open_num()
-        # self.add_admin()  
-        # self.modify_admin()
-        # self.delete_admin()
-        # self.release_href_announcement()
-        # self.change_homelogo()
-        # self.release_announcement()
-        # self.modify_pagefoot()  
+        self.release_normal()
+        self.release_two_video()
+        self.release_three_video()
+        self.agency_course()
+        self.package_course() 
+        self.add_cate()
+        self.presale_course()  
+        self.add_course_to_cate()   
+        self.add_exam_card()
+        self.prepaid_cardgroup()
+        self.course_cardgroup()
+        self.cate_cardgroup()
+        self.delete_cate()
+        self.buy_listen_card()
+        self.listen_cardgroup()
+        self.import_one_student()
+        self.import_multi_student()
+        self.create_multi_student()
+        self.open_course_for_one()
+        self.open_course_for_multi()
+        self.manage_course_num()
+        self.buy_open_num()
+        self.add_admin()  
+        self.modify_admin()
+        self.delete_admin()
+        self.release_href_announcement()
+        self.change_homelogo()
+        self.release_announcement()
+        self.modify_pagefoot()  
         self.change_headpic()
-        # self.verify_all_course_convert()
-        # login.logout(self.driver, self.base_url)
+        self.verify_all_course_convert()
+        login.logout(self.driver, self.base_url)
 
-        # #个人用户部分
-        # self.login_user()
-        # self.use_prepaidcard()
-        # self.buy_course_use_RMB()
-        # self.buy_course_use_card()
-        # self.use_coursecard()
-        # self.use_catecard()
-        # self.use_exam_card()
-        # login.logout(self.driver, self.base_url) 
-        # self.use_listencard()
+        #个人用户部分
+        self.login_user()
+        self.use_prepaidcard()
+        self.buy_course_use_RMB()
+        self.buy_course_use_card()
+        self.use_coursecard()
+        self.use_catecard()
+        self.use_exam_card()
+        login.logout(self.driver, self.base_url) 
+        self.use_listencard()
         
     def test_exam_regress(self):
         
         #考试系统部分
-        # self.login_from_index()
-        # self.exam_onequestion()
-        # self.exam_questions()
-        # self.import_questions()
-        # self.add_exam_subject()
-        # self.modify_exam_subject()
-        # self.delete_exam_subject()
-        # self.create_exam_cate()
-        # self.modify_exam_cate()
-        # self.delete_exam_cate() 
-        # self.add_exam_point()
-        # self.modify_exam_point()
-        # self.delete_exam_point()    
-        # self.createpaper()
-        # self.exam_student_management()
-        # login.logout(self.driver, self.base_url)
+        self.login_from_index()
+        self.exam_onequestion()
+        self.exam_questions()
+        self.import_questions()
+        self.add_exam_subject()
+        self.modify_exam_subject()
+        self.delete_exam_subject()
+        self.create_exam_cate()
+        self.modify_exam_cate()
+        self.delete_exam_cate() 
+        self.add_exam_point()
+        self.modify_exam_point()
+        self.delete_exam_point()    
+        self.createpaper()
+        self.create_random_epaper()
+        self.exam_student_management()
+        login.logout(self.driver, self.base_url)
 
-        # self.login_user()
-        # self.exam_user()        
-        # login.logout(self.driver, self.base_url)
+        self.login_user()
+        self.exam_user()        
+        login.logout(self.driver, self.base_url)
+
                     
         # self.login_from_index()
         # self.score_paper()
         #IE下不能导出
         # self.export_openpaper_result()
         # self.export_sendpaper_result()
-        pass
+
                    
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作

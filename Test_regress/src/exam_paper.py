@@ -191,13 +191,7 @@ def random_exam(cfg, driver, base_url, exam_name, exam_time,\
     driver.implicitly_wait(10)
     driver.find_element(cfg.get('exam', 'exam_subject_by'), \
                         cfg.get('exam', 'exam_subject')).click()
-#    now_handle = driver.current_window_handle #得到当前窗口句柄
-#    driver.find_element_by_link_text(u"新建试卷").click()
     time.sleep(2)
-#    all_handles = driver.window_handles #获取所有窗口句柄
-#    for handle in all_handles:
-#        if handle != now_handle:
-#            driver.switch_to_window(handle)
     new_href = driver.execute_script("return $('.exam-random-btn').attr('href')")
     time.sleep(2)    
     driver.get("%sexam/%s" %(base_url,new_href))
@@ -255,18 +249,19 @@ def random_exam(cfg, driver, base_url, exam_name, exam_time,\
                           
 #自动创建试卷
 def auto_createpaper(cfg, driver, base_url, eoperation, \
-                     erandom, eopen, exam_num, type='2'):
+                     erandom, eopen, exam_num, type):
     prefix = chr(random.randint(97, 122))+\
     chr(random.randint(97, 122))+chr(random.randint(97, 122))
     for i in range(exam_num):
-        exam_name = 'testpaper_' + prefix + str(i)\
-        +time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         exam_time = '120'
         if type==1:
+            exam_name = 'testpaper_' + prefix + str(i)\
+        +time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
             paper_name = create_paper(cfg, driver, base_url, exam_name, exam_time, \
                      eoperation, erandom, eopen)
         else:
-            random_exam(cfg, driver, base_url, exam_name, exam_time,\
+            exam_name = 'random_p_' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+            paper_name = random_exam(cfg, driver, base_url, exam_name, exam_time,\
                   eoperation, erandom, eopen)
     return paper_name
         #print i      

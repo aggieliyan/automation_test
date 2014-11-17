@@ -23,7 +23,7 @@ def create_admin(cfg, driver, base_url, admin_name, admin_username, admin_psw, a
     driver.find_element(cfg.get('org_manage', 'ad_username_by'), \
         cfg.get('org_manage', 'ad_username_id')).send_keys(admin_username)
     driver.find_element(cfg.get('org_manage', 'ad_psw_by'), \
-        cfg.get('org_manage', 'ad_psw_id')).send_keys(admin_psw)
+        cfg.get('org_manage', 'ad_psw')).send_keys(admin_psw)
     driver.find_element(cfg.get('org_manage', 'ad_repsw_by'), \
         cfg.get('org_manage', 'ad_repsw_id')).send_keys(admin_psw)
     driver.find_element(cfg.get('org_manage', 'ad_email_by'), \

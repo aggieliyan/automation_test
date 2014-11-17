@@ -69,7 +69,7 @@ def courseagent():
 	driver.get("%smyOffice.do" %(base_url))
 	#教学互动-管理我授权的代理、管理我申请的代理
 	menu_dic = {u"管理我授权的代理":agent_grant, 
-			       u"管理我申请的代理":agent_apply}
+			    u"管理我申请的代理":agent_apply,}
 	menu_title = u"首页"
 	check_menu(menu_title, menu_dic)
 		
@@ -422,7 +422,7 @@ def courseagent_apply():
 		try:
 		    driver.find_element_by_link_text(u"立即支付").click()
 		except:
-			print "没有立即支付的课程订单"
+			print u"没有立即支付的课程订单"
 		ah = driver.window_handles
 		swithing_window(bh,ah)
 		time.sleep(1)
@@ -1541,13 +1541,14 @@ def admin_athority_check():
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file) 
-	user_name = "stu_gy00"
-	user_psw = "gy0411"
+	user_name = "alllog_ole33"
+	user_psw = "1234aa"
 
-	chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"
+	chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
 	driver = webdriver.Chrome(chromedriver)
 	#driver = webdriver.Ie()
+	driver.maximize_window() #窗口最大化
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
 	# driver.get("%smyOffice.do" %(base_url))
@@ -1556,20 +1557,20 @@ def admin_athority_check():
 	# create_manage()
 
 	#后台-后台首页
-	teaching()#教学互动
-	authmanage()#授权管理
-	courseagent()#课程合作代理
-	learnigcard()#学习卡
-	countmanage()#统计管理
+	# teaching()#教学互动
+	# authmanage()#授权管理
+	# courseagent()#课程合作代理
+	# learnigcard()#学习卡
+	# countmanage()#统计管理
 
-	#后台-系统设置
+	# #后台-系统设置
 	manageorservice()#管理员/客服
-	pagecreate()#页面建设
+	# pagecreate()#页面建设
 
-	#后台-学员/员工
+	# #后台-学员/员工
 	stuoremp()#网校学员
         
-	driver.quit()
+	# driver.quit()
     
 if __name__ == "__main__":
 	#import sys;sys.argv = ['', 'Test.testName']

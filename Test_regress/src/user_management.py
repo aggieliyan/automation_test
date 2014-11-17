@@ -8,6 +8,8 @@ import time
 import re
 from selenium.common.exceptions import NoSuchElementException
 
+from MyOfficePage import MyOfficePage
+
 #个人人民币买课
 def buy_course(cfg, driver, base_url, course_url):
     
@@ -173,17 +175,21 @@ def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_an
 def org_chang_headpic(cfg, driver, base_url, org_name, \
     head_pic = r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\headpic.jpg"):
     
-    driver.get("%smyOffice.do" %(base_url))
-    time.sleep(2)
-    driver.execute_script("$('.oai-org-logo-upload').attr('style','display:block;');\
-        $('#J_oaiUploadTrigger').attr('style','display:block;'); \
-        $('.fileinput-button input').eq(0).attr('style',\
-            'height:300px;opacity:1;display:block;position:static;\
-            transform:translate(-2px,-50px) scale(1)')")
-    time.sleep(1)
-    driver.find_element(cfg.get('org_index','head_picname_by'), \
-        cfg.get('org_index','head_picname')).send_keys(head_pic)
-    time.sleep(1)
+    # driver.get("%smyOffice.do" %(base_url))
+    # time.sleep(2)
+    # driver.execute_script("$('.oai-org-logo-upload').attr('style','display:block;');\
+    #     $('#J_oaiUploadTrigger').attr('style','display:block;'); \
+    #     $('.fileinput-button input').eq(0).attr('style',\
+    #         'height:300px;opacity:1;display:block;position:static;\
+    #         transform:translate(-2px,-50px) scale(1)')")
+    # time.sleep(1)
+    # driver.find_element(cfg.get('org_index','head_picname_by'), \
+    #     cfg.get('org_index','head_picname')).send_keys(head_pic)
+    # time.sleep(1)
+
+    org_office =  MyOfficePage(driver)
+    org_office.open()
+    org_office.input_org_pic(head_pic)
 
 #机构首页logo   
 def change_homelogo(cfg, driver, base_url, org_name, \

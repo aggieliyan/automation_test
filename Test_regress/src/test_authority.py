@@ -85,6 +85,7 @@ def course_cate():
 	try:
 	    #删除类目
 	    cate_management.delete_cate(cfg, driver, base_url)
+	    time.sleep(1)
 	except:
 		print traceback.format_exc()
 		print u"没有类目删除权限"
@@ -121,7 +122,7 @@ def course_manage():
 			driver.find_element("id", "J_complete").click()
 		except:
 			pass
-		time.sleep(1)
+		time.sleep(2)
 	except:
 		print u"不能编辑课程"
 
@@ -357,7 +358,7 @@ def class_manage():
 		driver.find_element("css selector", "span.greenbtn25_text").click()
 		time.sleep(1)
 		driver.find_element("id", "J_className").send_keys(u"面授班")
-		driver.find_element("classname", "last-price").send_keys("10")
+		driver.find_element("class name", "last-price").send_keys("10")
 		driver.find_element("name", "class-space").send_keys("1")
 		driver.find_element("name", " person-num").send_keys("10")
 		#填课程详情
@@ -728,8 +729,8 @@ def financial():
 	driver.get("%smyOffice.do" %(base_url))
 	menu_title = u"财务/交易"
 	menu_dic = {u"账户明细": accout_detail,    
-	            # u"提现": accout_withdraw, 
-	            # u"充值": accout_charge,
+	            u"提现": accout_withdraw, 
+	            #u"充值": accout_charge,
 	            u"管理成员账户": member_accout,}
 	check_menu(menu_title, menu_dic)
 
@@ -899,36 +900,36 @@ def admin_athority_check():
 	global base_url
 	global cfg 
 	global driver
-	base_url = "http://www.gamma.ablesky.com/"
+	base_url = "http://www.beta.ablesky.com/"
 	cfg_file = 'config.ini'
 	cfg = ConfigParser.RawConfigParser()
 	cfg.read(cfg_file)
-	user_name = "offcn"
+	user_name = "sadm001"
 	user_psw = "1234"
 
 	chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
 	os.environ["webdriver.chrome.driver"] = chromedriver
 	driver = webdriver.Chrome(chromedriver)
-	#driver = webdriver.Ie()
+	# driver = webdriver.Ie()
 	driver.maximize_window() #窗口最大化
 
 	login.login_by_logindo(cfg, driver, base_url, user_name, user_psw)
 	#教学教务
 	course()
 	class_center()
-	# onlineclass()
-	# exam_manage()
-	# cheap_course()
-	# teacher()
+	onlineclass()
+	exam_manage()
+	cheap_course()
+	teacher()
 
-	# #财务/交易39
-	# financial()
-	# transaction()
+	#财务/交易39
+	financial()
+	transaction()
 
-	# #其他
-	# member()
-	# ad_system()
-	# course_lecture()
+	#其他
+	member()
+	ad_system()
+	course_lecture()
 
 	# driver.quit()
 #手测-alllog_hmr27课后测验评分等各种啊

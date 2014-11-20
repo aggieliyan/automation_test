@@ -27,9 +27,9 @@ def create_admin(cfg, driver, base_url, admin_name, admin_username, admin_psw, a
     driver.find_element(cfg.get('org_manage', 'ad_repsw_by'), \
         cfg.get('org_manage', 'ad_repsw_id')).send_keys(admin_psw)
     driver.find_element(cfg.get('org_manage', 'ad_email_by'), \
-        cfg.get('org_manage', 'ad_email_id')).send_keys(admin_email)
+        cfg.get('org_manage', 'ad_email')).send_keys(admin_email)
     driver.find_element(cfg.get('org_manage', 'ad_reemail_by'), \
-        cfg.get('org_manage', 'ad_reemail_id')).send_keys(admin_email)
+        cfg.get('org_manage', 'ad_reemail')).send_keys(admin_email)
     driver.find_element(cfg.get('org_manage', 'per_menber_by'), \
         cfg.get('org_manage', 'per_menber_id')).click()
     driver.find_element(cfg.get('org_manage', 'per_student_by'), \

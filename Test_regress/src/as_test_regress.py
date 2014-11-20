@@ -22,8 +22,8 @@ class Test(unittest.TestCase):
 
         self.test_enviroment = "beta"
         self.independent_url = "www.dlym.com" #独立域名网址
-        self.org_name = "sadm001"
-        self.org_password = "lulu123456"
+        self.org_name = "salesdemo"
+        self.org_password = "1234"
         self.user_name = "stu_aa02"
         self.user_password = "1234"
         self.dbhost = "192.168.120.201" #alpha数据库地址：192.168.150.7、beta: 192.168.120.201 omega数据库：192.168.190.74 beta数据库192.168.3.50 gamma: 192.168.120.110r
@@ -73,11 +73,12 @@ class Test(unittest.TestCase):
         else:
             self.driver = webdriver.Ie()
 
-        self.driver.implicitly_wait(5)
+        self.driver.implicitly_wait(10)
+        self.driver.maximize_window()
         #self.base_url = "http://www."+self.test_enviroment+".ablesky.com/"
         #self.base_url = "http://www.zhongyan.com/"
         #self.base_url = "http://web1mb1.bp1.ablesky.com/"
-        self.base_url = "http://www.ablesky.com/"
+        self.base_url = "http://www.beta.ablesky.com/"
 
         if os.path.exists("C:\\test_rs_pic") != True:
             os.system("mkdir C:\\test_rs_pic")
@@ -129,7 +130,7 @@ class Test(unittest.TestCase):
 
         self.total += 1
         try:
-            login.login_by_as(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
+            login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
         except Exception, e:
             print traceback.format_exc()
              
@@ -674,11 +675,10 @@ class Test(unittest.TestCase):
     def modify_admin(self):
 
         self.total += 1
-        admin_name = ""
         try:
             admin_name = admin_management.modify_admin(self.cfg, self.driver, self.base_url)
             xpath = "//div[text()=\'"+admin_name+"\']"
-            time.sleep(1)
+            print xpath
             rs = self.is_element_present(By.XPATH, xpath)
             time.sleep(1)
             if rs == False:
@@ -688,13 +688,6 @@ class Test(unittest.TestCase):
             self.verificationErrors.append("fail to modify admin!")
         finally:
             self.driver.save_screenshot("C:/test_rs_pic/modify_admin.png")
-
-        #验证
-        xpath = "//div[text()=\'"+admin_name+"\']"
-        self.driver.implicitly_wait(2)
-        rs = self.is_element_present(By.XPATH, xpath)
-        if rs == False:
-            self.verificationErrors.append("fail to modify admin!")
 
     def delete_admin(self):
 
@@ -1233,80 +1226,80 @@ class Test(unittest.TestCase):
         finally: 
             self.driver.save_screenshot("C:/test_rs_pic/buy_paper.png")       
 
-    
-   def test_as_regress(self):
+
+    def test_as_regress(self):
 
         #网站主站回归流程
-        self.register()
+        # self.register()
         self.login_from_index()
-        self.release_normal()
-        self.release_two_video()
-        self.release_three_video()
-        self.agency_course()
-        self.package_course() 
-        self.add_cate()
-        self.presale_course()  
-        self.add_course_to_cate()   
-        self.add_exam_card()
-        self.prepaid_cardgroup()
-        self.course_cardgroup()
-        self.cate_cardgroup()
-        self.delete_cate()
-        self.buy_listen_card()
-        self.listen_cardgroup()
-        self.import_one_student()
-        self.import_multi_student()
-        self.create_multi_student()
-        self.open_course_for_one()
-        self.open_course_for_multi()
-        self.manage_course_num()
-        self.buy_open_num()
-        self.add_admin()  
+        # self.release_normal()
+        # self.release_two_video()
+        # self.release_three_video()
+        # self.agency_course()
+        # self.package_course() 
+        # self.add_cate()
+        # self.presale_course()  
+        # self.add_course_to_cate()   
+        # self.add_exam_card()
+        # self.prepaid_cardgroup()
+        # self.course_cardgroup()
+        # self.cate_cardgroup()
+        # self.delete_cate()
+        # self.buy_listen_card()
+        # self.listen_cardgroup()
+        # self.import_one_student()
+        # self.import_multi_student()
+        # self.create_multi_student()
+        # self.open_course_for_one()
+        # self.open_course_for_multi()
+        # self.manage_course_num()
+        # self.buy_open_num()
+        # self.add_admin()  
         self.modify_admin()
         self.delete_admin()
-        self.release_href_announcement()
-        self.change_homelogo()
-        self.release_announcement()
-        self.modify_pagefoot()  
-        self.change_headpic()
-        self.verify_all_course_convert()
-        login.logout(self.driver, self.base_url)
+        # self.release_href_announcement()
+        # self.change_homelogo()
+        # self.release_announcement()
+        # self.modify_pagefoot()  
+        # self.change_headpic()
+        # self.verify_all_course_convert()
+        # login.logout(self.driver, self.base_url)
 
-        #个人用户部分
-        self.login_user()
-        self.use_prepaidcard()
-        self.buy_course_use_RMB()
-        self.buy_course_use_card()
-        self.use_coursecard()
-        self.use_catecard()
-        self.use_exam_card()
-        login.logout(self.driver, self.base_url) 
-        self.use_listencard()
+        # #个人用户部分
+        # self.login_user()
+        # self.use_prepaidcard()
+        # self.buy_course_use_RMB()
+        # self.buy_course_use_card()
+        # self.use_coursecard()
+        # self.use_catecard()
+        # self.use_exam_card()
+        # login.logout(self.driver, self.base_url) 
+        # self.use_listencard()
         
-    def test_exam_regress(self):
+    # def test_exam_regress(self):
         
-        #考试系统部分
-        self.login_from_index()
-        self.exam_onequestion()
-        self.exam_questions()
-        self.import_questions()
-        self.add_exam_subject()
-        self.modify_exam_subject()
-        self.delete_exam_subject()
-        self.create_exam_cate()
-        self.modify_exam_cate()
-        self.delete_exam_cate() 
-        self.add_exam_point()
-        self.modify_exam_point()
-        self.delete_exam_point()    
-        self.createpaper()
-        self.create_random_epaper()
-        self.exam_student_management()
-        login.logout(self.driver, self.base_url)
+    #     #考试系统部分
+    #     self.login_from_index()
+    #     self.exam_onequestion()
+    #     self.exam_questions()
+    #     self.import_questions()
+    #     self.add_exam_subject()
+    #     self.modify_exam_subject()
+    #     self.delete_exam_subject()
+    #     self.create_exam_cate()
+    #     self.modify_exam_cate()
+    #     self.delete_exam_cate() 
+    #     self.add_exam_point()
+    #     self.modify_exam_point()
+    #     self.delete_exam_point()    
+    #     self.createpaper()
+    #     self.create_random_epaper()
+    #     self.exam_student_management()
+    #     login.logout(self.driver, self.base_url)
 
-        self.login_user()
-        self.exam_user()        
-        login.logout(self.driver, self.base_url)
+    #     self.login_user()
+    #     self.exam_user()        
+    #     login.logout(self.driver, self.base_url)
 
                     
         # self.login_from_index()

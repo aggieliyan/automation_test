@@ -5,7 +5,7 @@ Created on Nov 17, 2014
 @author: yilulu
 '''
 import time
-from MyOfficePage import MyOfficePage
+from myoffice_page import MyOfficePage
 
 class OrgAdminListPage():
 
@@ -37,7 +37,7 @@ class OrgAdminListPage():
 		return len(self.dr.find_elements_by_link_text(u"删除管理员"))
 
 class OrgAdminInputPage():
-	
+
 	def __init__(self, driver, cfg):
 		self.dr = driver
 		self.cfg = cfg

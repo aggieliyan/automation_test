@@ -7,7 +7,7 @@ Created on May 28, 2012
 
 import time, random
 
-from OrgAdminPage import OrgAdminListPage, OrgAdminInputPage
+from org_admin_page import OrgAdminListPage, OrgAdminInputPage
 
 def create_admin(cfg, driver, admin_name, admin_username, admin_psw, admin_email):
     

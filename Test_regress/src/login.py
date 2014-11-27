@@ -52,6 +52,7 @@ def login_by_logindo(cfg, driver, base_url, user_name, user_psw):
                                 'login_username')).send_keys(user_name)
     driver.find_element(cfg.get('login', 'login_psw_by'), \
                         cfg.get('login', 'login_psw')).send_keys(user_psw)
+    driver.find_element('id', 'J_rememberMe').click()
     driver.find_element(cfg.get('login', 'login_btn_by'), \
                         cfg.get('login', 'login_btn')).click()
     time.sleep(2)

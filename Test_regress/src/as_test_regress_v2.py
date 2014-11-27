@@ -61,7 +61,6 @@ class Test(unittest.TestCase):
         if os.path.exists("C:\\test_rs_pic") != True:
                 os.system("mkdir C:\\test_rs_pic")
 
-        self.cookie = 'OEY5NUQ1M0MwNjIyRjgwMTIwQkZDODFGMjI0REVGMUMucGFzc3BvcnQzbWM6MTkyLjE2OC4xMjAuNTY6MTEyMTE6MTg4ODkxNTpzYWRtMDAxOjE0MTY5MDE2NDkxMTY6WWpreE1HSXpOR1JqTmpBNU9EVmhPVFl4TUdSbFl6TXpZalZpTldVNU1UYz0%3D'
         if self.browser == 'ie':
             self.driver = webdriver.Ie()
         elif self.browser == 'firefox':

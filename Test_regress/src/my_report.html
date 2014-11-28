@@ -189,9 +189,9 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>My unit test</h1>
-<p class='attribute'><strong>Start Time:</strong> 2014-11-27 15:42:22</p>
-<p class='attribute'><strong>Duration:</strong> 0:00:31.484000</p>
-<p class='attribute'><strong>Status:</strong> Pass 1</p>
+<p class='attribute'><strong>Start Time:</strong> 2014-11-28 11:10:57</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:45.116000</p>
+<p class='attribute'><strong>Status:</strong> Pass 2</p>
 
 <p class='description'>This demonstrates the report output by HTMLTestRunner.</p>
 </div>
@@ -224,11 +224,11 @@ function showOutput(id, name) {
 
 <tr class='passClass'>
     <td>Test</td>
-    <td>1</td>
-    <td>1</td>
+    <td>2</td>
+    <td>2</td>
     <td>0</td>
     <td>0</td>
-    <td><a href="javascript:showClassDetail('c1',1)">Detail</a></td>
+    <td><a href="javascript:showClassDetail('c1',2)">Detail</a></td>
     <td>&nbsp;</td>
 </tr>
 
@@ -247,20 +247,7 @@ function showOutput(id, name) {
         </div>
         <pre>
         
-pt1.1: Traceback (most recent call last):
-  File "as_test_regress_v2.py", line 109, in test_release_normal_course
-    new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
-  File "D:\code\automation_test\Test_regress\src\new_course_management.py", line 80, in course_redirect
-    cfg.get('courseRedirect', 'ctitle')).clear()
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
-    {'using': by, 'value': value})['value']
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
-    self.error_handler.check_response(response)
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
-
-image:C://test_rs_pic//2_normal_course.png
+pt1.1: image:C://test_rs_pic//2_normal_course.png
 
 
         </pre>
@@ -273,10 +260,15 @@ image:C://test_rs_pic//2_normal_course.png
     </td>
 </tr>
 
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_create_admin</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
 <tr id='total_row'>
     <td>Total</td>
-    <td>1</td>
-    <td>1</td>
+    <td>2</td>
+    <td>2</td>
     <td>0</td>
     <td>0</td>
     <td>&nbsp;</td>

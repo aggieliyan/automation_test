@@ -7,7 +7,7 @@ Created on Nov 17, 2014
 import time
 from myoffice_page import MyOfficePage
 
-class OrgAdminListPage():
+class OrgAdminListPage(base.Base):
 
 	def __init__(self, driver, cfg):
 		self.dr = driver
@@ -36,7 +36,7 @@ class OrgAdminListPage():
 	def count_admin(self):
 		return len(self.dr.find_elements_by_link_text(u"删除管理员"))
 
-class OrgAdminInputPage():
+class OrgAdminInputPage(base.Base):
 
 	def __init__(self, driver, cfg):
 		self.dr = driver

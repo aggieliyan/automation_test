@@ -8,7 +8,7 @@ import time
 import re
 from selenium.common.exceptions import NoSuchElementException
 
-from MyOfficePage import MyOfficePage
+from PO.myoffice_page import MyOfficePage
 
 #个人人民币买课
 def buy_course(cfg, driver, base_url, course_url):

@@ -7,7 +7,7 @@ Created on May 28, 2012
 
 import time, random
 
-from org_admin_page import OrgAdminListPage, OrgAdminInputPage
+from PO.org_admin_page import OrgAdminListPage, OrgAdminInputPage
 
 def create_admin(cfg, driver, admin_name, admin_username, admin_psw, admin_email):
     
@@ -60,13 +60,13 @@ def create_admin(cfg, driver, admin_name, admin_username, admin_psw, admin_email
 
 
     
-def auto_create_admin(cfg, driver, base_url, org_name, adm_num):
+def auto_create_admin(cfg, driver, adm_num):
 
     prefix = chr(random.randint(97,122)) + chr(random.randint(97,122)) + chr(random.randint(97,122))
     admin_info = []  
     for i in range(adm_num):
 
-        admin_name = org_name[0] +"adm_" + prefix + str(i)
+        admin_name = "adm_" + prefix + str(i)
         admin_username = admin_name
         admin_psw ='123456aa'
         admin_email = admin_name + "@ablesky.com"

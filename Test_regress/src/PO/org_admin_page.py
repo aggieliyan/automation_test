@@ -5,6 +5,8 @@ Created on Nov 17, 2014
 @author: yilulu
 '''
 import time
+
+import base
 from myoffice_page import MyOfficePage
 
 class OrgAdminListPage(base.Base):

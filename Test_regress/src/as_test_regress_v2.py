@@ -6,14 +6,20 @@ Created on Sep. 24, 2012
 '''
 import unittest, ConfigParser, random, time, os, logging, MySQLdb
 import traceback
+
 from selenium import webdriver
-import login, new_course_management, course_management, student_management, \
-card_management, cate_management, admin_management, user_management, exam_paper, exam_questions, exam_cate_management
-import exam_user_management
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 import HTMLTestRunner
 
+import login, new_course_management, course_management, student_management, \
+card_management, cate_management, admin_management, user_management, exam_paper, exam_questions, exam_cate_management
+import exam_user_management
+
+from selenium.webdriver.common.by import By
+import HTMLTestRunner
+
+from PO.base import Base
 
 class Test(unittest.TestCase):
     
@@ -84,7 +90,6 @@ class Test(unittest.TestCase):
             self.cfg.set("env_para", "cookie1", str(self.driver.get_cookie('ASUSS')['value']))
             self.cfg.write(open(cfg_file, "w"))
             
-            #print self.driver.get_cookie('ASUSS')['value']
             #本来还有一个叫RM的cookie，但是值都是rm不变所以不取了
             # path=/; domain=.ablesky.com
         else:
@@ -92,20 +97,18 @@ class Test(unittest.TestCase):
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
 
     def test_release_normal_course(self):
-
+        
+        ba = Base(self.driver)
         rand_name = str(random.randint(1000, 9999))
         title = u"course" + rand_name#在标题中加入随机数字确保课件标题的唯一性
         new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
-        file_name = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + '.png'
+        # file_name = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + '.png'
         # self.driver.save_screenshot(r'C:/test_rs_pic/2_normal_course.png')
-        self.driver.save_screenshot(file_name)
-        print "image:C://test_rs_pic//2_normal_course.png"
-        try:
-            rs = True
-            # rs = self.verify_course(title)
-            self.assertEqual(True, rs, "fail to release course!")
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))           
+        
+        rs = ba.is_element_present("link text", u"查看课程")
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+     
 
         # self.normal_course = title#待用-在数据库中查是否转换失败
 
@@ -121,9 +124,11 @@ class Test(unittest.TestCase):
     def test_create_admin(self):
 
         admin_management.auto_create_admin(self.cfg, self.driver, adm_num=1)
-        file_name = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + '.png'
-        # self.driver.save_screenshot(r'C:/test_rs_pic/2_normal_course.png')
-        self.driver.save_screenshot(file_name)
+        # file_name = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + '.png'
+        # # self.driver.save_screenshot(r'C:/test_rs_pic/2_normal_course.png')
+        # self.driver.save_screenshot(file_name)
+        ba = Base(self.driver)
+        ba.save_screenshot()
                    
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
@@ -135,10 +140,11 @@ class Test(unittest.TestCase):
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     # unittest.main()
-    testsuite = unittest.TestSuite()
-    testsuite.addTest(Test("test_release_normal_course"))
-    testsuite.addTest(Test("test_create_admin"))
-
+    # suite = unittest.TestLoader().loadTestsFromTestCase(TestSequenceFunctions)
+    # testsuite = unittest.TestSuite()
+    # testsuite.addTest(Test("test_release_normal_course"))
+    # testsuite.addTest(Test("test_create_admin"))
+    testsuite = unittest.TestLoader().loadTestsFromTestCase(Test)
 
     #file_name = time.strftime('%Y-%m-%d-%H:%M:%S', time.localtime(time.time())) + '.html'
     fp = file("my_report.html", 'wb')

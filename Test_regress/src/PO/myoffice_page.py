@@ -3,6 +3,8 @@
 import time
 import ConfigParser
 
+import base
+
 class MyOfficePage(base.Base):
 	#
 	def __init__(self, driver, cfg):

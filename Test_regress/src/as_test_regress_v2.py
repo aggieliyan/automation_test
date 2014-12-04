@@ -102,8 +102,6 @@ class Test(unittest.TestCase):
         rand_name = str(random.randint(1000, 9999))
         title = u"course" + rand_name#在标题中加入随机数字确保课件标题的唯一性
         new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
-        # file_name = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + '.png'
-        # self.driver.save_screenshot(r'C:/test_rs_pic/2_normal_course.png')
         
         rs = ba.is_element_present("link text", u"查看课程")
         self.assertEqual(True, rs)
@@ -124,9 +122,6 @@ class Test(unittest.TestCase):
     def test_create_admin(self):
 
         admin_management.auto_create_admin(self.cfg, self.driver, adm_num=1)
-        # file_name = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + '.png'
-        # # self.driver.save_screenshot(r'C:/test_rs_pic/2_normal_course.png')
-        # self.driver.save_screenshot(file_name)
         ba = Base(self.driver)
         ba.save_screenshot()
                    

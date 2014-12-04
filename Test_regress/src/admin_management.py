@@ -28,7 +28,7 @@ def create_admin(cfg, driver, admin_name, admin_username, admin_psw, admin_email
 def auto_create_admin(cfg, driver, adm_num):
 
     prefix = chr(random.randint(97,122)) + chr(random.randint(97,122)) + chr(random.randint(97,122))
-    admin_info = []  
+    #admin_info = []  
     for i in range(adm_num):
 
         admin_name = "adm_" + prefix + str(i)
@@ -36,9 +36,9 @@ def auto_create_admin(cfg, driver, adm_num):
         admin_psw ='123456aa'
         admin_email = admin_name + "@ablesky.com"
         create_admin(cfg, driver, admin_name, admin_username, admin_psw, admin_email)
-        admin_info.append(admin_name)
+        #admin_info.append(admin_name)
 
-    return admin_info
+    return admin_name
 
 def delete_admin(cfg, driver, base_url, admin_num=1):
     

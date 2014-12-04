@@ -95,12 +95,12 @@ class Test(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
-
+ 
+    # @unittest.skip("test")
     def test_release_normal_course(self):
         
         ba = Base(self.driver)
-        rand_name = str(random.randint(1000, 9999))
-        title = u"course" + rand_name#在标题中加入随机数字确保课件标题的唯一性
+        title = "course" + ba.rand_name()
         new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
         
         rs = ba.is_element_present("link text", u"查看课程")
@@ -119,10 +119,35 @@ class Test(unittest.TestCase):
         # else:
         #     self.course_href = ""
 
+    def test_presaleclass(self):
+
+        ba = Base(self.driver)
+        title = "presaleclass" + ba.rand_name()
+        new_course_management.class_redirect(self.cfg, self.driver, self.base_url, ctype=2, classname=title)
+
+        rs = ba.is_element_present("link text", title)
+        ba.save_screenshot()
+
+        self.assertEqual(True, rs)
+
+    def test_onlineclass(self):
+
+        ba = Base(self.driver)
+        title = "onlineclass" + ba.rand_name()
+        new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)
+
+        rs = ba.is_element_present("link text", title)
+        ba.save_screenshot()
+        self.assertEqual(True, rs)
+
+
+    # @unittest.skip("test")
     def test_create_admin(self):
 
-        admin_management.auto_create_admin(self.cfg, self.driver, adm_num=1)
-        ba = Base(self.driver)
+        aname = admin_management.auto_create_admin(self.cfg, self.driver, adm_num=1)
+
+        # self.driver.execute_script()
+        
         ba.save_screenshot()
                    
 

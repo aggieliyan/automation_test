@@ -86,6 +86,7 @@ class OrgAdminInputPage(base.Base):
 	def click_add_save(self):
 		self.dr.find_element(self.cfg.get('org_manage', 'add_save_by'), \
 			self.cfg.get('org_manage', 'add_save')).click()
+		time.sleep(1)
 
 	def click_edit_save(self, i=0):
 		self.dr.find_elements(self.cfg.get('org_manage', 'edit_save_by'), \

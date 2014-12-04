@@ -26,6 +26,14 @@ class MyOfficePage(base.Base):
 	def click_org_admin(self):
 		self.dr.find_element_by_link_text(u"网校管理员").click()
 
+	#点击教学教务
+	def click_teaching(self):
+		self.dr.find_element_by_link_text(u"教学教务").click()
+
+	def class_manage(self):
+		self.dr.find_element_by_link_text(u"报班管理").click()
+
+
 	#为机构头像换图片
 	def input_org_pic(self, picfile):
 		self.dr.execute_script("$('.oai-org-logo-upload').attr('style','display:block;');\

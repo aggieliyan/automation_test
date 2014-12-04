@@ -8,6 +8,7 @@ import re
 import time
 
 from PO.course_page import CourseStepOnePage, CourseInfoPage
+from PO.class_page import OnLineClassListPage, ClassInfoPage
 
 def course_redirect(cfg, driver, base_url, isthree=0,\
     course_title=u"course", course_describe='hello world', \
@@ -160,48 +161,60 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
     '''
     ctype代表发课类型，1代表普通网络班（打包），2代表预售网络班
     '''
-    driver.get("%smyOffice.do" %(base_url))
-    driver.implicitly_wait(10)
-    driver.find_element_by_link_text(u"教学教务").click()
-    driver.implicitly_wait(10)
-    driver.find_element_by_link_text(u"报班管理").click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('classRedirect', 'redirect_btn_by'), \
-        cfg.get('classRedirect', 'redirect_btn')).click()
-    time.sleep(5)
+    # driver.get("%smyOffice.do" %(base_url))
+    # driver.find_element_by_link_text(u"教学教务").click()
+    # driver.find_element_by_link_text(u"报班管理").click()
+    # driver.find_element(cfg.get('classRedirect', 'redirect_btn_by'), \
+    #     cfg.get('classRedirect', 'redirect_btn')).click()
+    # time.sleep(5)
+    olclass = OnLineClassListPage(driver, cfg)
+    olclass.open()
+    olclass.click_create()
 
+    # if ctype == 1:
+    #     driver.find_element(cfg.get('classRedirect', 'select_course_by'), \
+    #         cfg.get('classRedirect', 'select_course')).click()
+    #     time.sleep(1)
+    # else:
+    #     driver.find_element_by_link_text(u"课程预售").click()
+    #     time.sleep(3)
+    #     driver.find_element(cfg.get('classRedirect', 'select_cate_by'), \
+    #         cfg.get('classRedirect', 'select_cate')).click()
+    #     driver.implicitly_wait(10)
+    #     driver.find_element(cfg.get('classRedirect', 'presell_price_by'), \
+    #         cfg.get('classRedirect', 'presell_price')).send_keys(price)
+
+    # driver.find_element(cfg.get('classRedirect', 'classname_by'), \
+    #     cfg.get('classRedirect', 'classname')).send_keys(classname)
+    # time.sleep(2)
+    cinfo = ClassInfoPage(driver, cfg)
     if ctype == 1:
-        driver.find_element(cfg.get('classRedirect', 'select_course_by'), \
-            cfg.get('classRedirect', 'select_course')).click()
-        time.sleep(1)
+        cinfo.chooes_course()
     else:
-        driver.find_element_by_link_text(u"课程预售").click()
-        time.sleep(3)
-        driver.find_element(cfg.get('classRedirect', 'select_cate_by'), \
-            cfg.get('classRedirect', 'select_cate')).click()
-        #driver.execute_script("$(\".comp-presell input\").eq(0).\
-        #    attr(\"checked\",\"checked\")")
-        driver.implicitly_wait(10)
-        driver.find_element(cfg.get('classRedirect', 'presell_price_by'), \
-            cfg.get('classRedirect', 'presell_price')).send_keys(price)
+        cinfo.click_presell()
+        cinfo.choose_cate()
+        cinfo.input_price(price)
 
-    driver.find_element(cfg.get('classRedirect', 'classname_by'), \
-        cfg.get('classRedirect', 'classname')).send_keys(classname)
-    time.sleep(2)
+    cinfo.input_classname(classname)
+    cinfo.input_description(course_describe)
+    cinfo.input_tag(course_tags)
+    cinfo.click_service_cate()
+    cinfo.click_save()
 
-    #填课程详情
-    driver.execute_script("var element=\
-        window.document.getElementById('courseDescribe-editor_ifr');\
-        idocument=element.contentDocument;\
-        element=idocument.getElementById('tinymce');\
-        element.innerHTML =\'"+course_describe+"\';")
-    driver.find_element("css selector", \
-        "div.text-layer.clearfix > input[type=\"text\"]").send_keys(course_tags)
-    #选择服务分类
-    driver.execute_script("$(\'li.level2\').click()")
-    driver.execute_script("$(\'li.level3.selected\').click()")
-    driver.execute_script("$('.greenbtn25_text').click()")
-    time.sleep(1)
+
+    # #填课程详情
+    # driver.execute_script("var element=\
+    #     window.document.getElementById('courseDescribe-editor_ifr');\
+    #     idocument=element.contentDocument;\
+    #     element=idocument.getElementById('tinymce');\
+    #     element.innerHTML =\'"+course_describe+"\';")
+    # driver.find_element("css selector", \
+    #     "div.text-layer.clearfix > input[type=\"text\"]").send_keys(course_tags)
+    # #选择服务分类
+    # driver.execute_script("$(\'li.level2\').click()")
+    # driver.execute_script("$(\'li.level3.selected\').click()")
+    # driver.execute_script("$('.greenbtn25_text').click()")
+    # time.sleep(1)
 
 #发布代理课程-没有发布了现在代理人只能编辑代理的课程
 def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):

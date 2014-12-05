@@ -21,9 +21,9 @@ import HTMLTestRunner
 
 from PO.base import Base
 
+
 class Test(unittest.TestCase):
     
-       
 
     def setUp(self):
         self.verificationErrors = []
@@ -80,7 +80,7 @@ class Test(unittest.TestCase):
         else:
             self.driver = webdriver.Ie()
 
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(3)
         self.driver.maximize_window()
         self.driver.get(self.base_url)
 
@@ -96,9 +96,8 @@ class Test(unittest.TestCase):
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
  
-    # @unittest.skip("test")
-    def test_release_normal_course(self):
-        
+    @unittest.skip("test")
+    def test_release_normal_course(self):      
         ba = Base(self.driver)
         title = "course" + ba.rand_name()
         new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
@@ -119,8 +118,28 @@ class Test(unittest.TestCase):
         # else:
         #     self.course_href = ""
 
-    def test_presaleclass(self):
+    @unittest.skip("test")
+    def test_release_three_video(self):
+        ba = Base(self.driver)
+        title = "coursethree" + ba.rand_name()
+        new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title)
+        
+        rs = ba.is_element_present("link text", u"查看课程")
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
 
+    @unittest.skip("test")
+    def test_release_two_video(self):
+        ba = Base(self.driver)
+        title = "two_video" + ba.rand_name()
+        new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
+        
+        rs = ba.is_element_present("link text", u"查看课程")
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+
+    @unittest.skip("test")
+    def test_presaleclass(self):
         ba = Base(self.driver)
         title = "presaleclass" + ba.rand_name()
         new_course_management.class_redirect(self.cfg, self.driver, self.base_url, ctype=2, classname=title)
@@ -130,8 +149,8 @@ class Test(unittest.TestCase):
 
         self.assertEqual(True, rs)
 
+    @unittest.skip("test")
     def test_onlineclass(self):
-
         ba = Base(self.driver)
         title = "onlineclass" + ba.rand_name()
         new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)
@@ -140,15 +159,22 @@ class Test(unittest.TestCase):
         ba.save_screenshot()
         self.assertEqual(True, rs)
 
+    def test_agency_course(self):
+        ba = Base(self.driver)
+        title = "agency" + ba.rand_name()
+        new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
 
-    # @unittest.skip("test")
-    def test_create_admin(self):
-
-        aname = admin_management.auto_create_admin(self.cfg, self.driver, adm_num=1)
-
-        # self.driver.execute_script()
-        
+        rs = ba.is_element_present("link text", title)
         ba.save_screenshot()
+        self.assertEqual(True, rs)
+
+    @unittest.skip("test")
+    def test_create_admin(self):
+        aname = admin_management.auto_create_admin(self.cfg, self.driver, adm_num=1)
+        lastadmin = self.driver.execute_script("return $('.floatleft').eq(-10).text()")
+
+        self.assertEqual(aname, lastadmin)
+        
                    
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作

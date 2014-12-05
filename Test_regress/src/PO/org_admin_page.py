@@ -9,7 +9,9 @@ import time
 import base
 from myoffice_page import MyOfficePage
 
+
 class OrgAdminListPage(base.Base):
+
 
 	def __init__(self, driver, cfg):
 		self.dr = driver
@@ -38,7 +40,9 @@ class OrgAdminListPage(base.Base):
 	def count_admin(self):
 		return len(self.dr.find_elements_by_link_text(u"删除管理员"))
 
+
 class OrgAdminInputPage(base.Base):
+
 
 	def __init__(self, driver, cfg):
 		self.dr = driver

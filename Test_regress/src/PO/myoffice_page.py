@@ -1,5 +1,9 @@
 # -*- coding: UTF-8 -*-
+'''
+Created on Nov. 17, 2014
 
+@author: yilulu
+'''
 import time
 import ConfigParser
 
@@ -32,6 +36,10 @@ class MyOfficePage(base.Base):
 
 	def class_manage(self):
 		self.dr.find_element_by_link_text(u"报班管理").click()
+
+	#点击管理我申请的代理
+	def click_myapplyagency(self):
+		self.dr.find_element_by_link_text(u"管理我申请的代理").click()
 
 
 	#为机构头像换图片

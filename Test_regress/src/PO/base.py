@@ -1,9 +1,17 @@
+# -*- coding: UTF-8 -*-
+'''
+Created on Nov. 17, 2014
+
+@author: yilulu
+'''
 import random
 import time
 
 from selenium.common.exceptions import NoSuchElementException
 
+
 class Base():
+
 
     def __init__(self, driver):
 
@@ -28,3 +36,16 @@ class Base():
     def save_screenshot(self):
         filename = self.datatime_name() + '.png'
         self.dr.save_screenshot(r"C://test_rs_pic//"+filename)
+
+    def switch_window(self, bh):
+        """
+        bh是另弹出窗口前当前所有窗口句柄的列表
+        bh = driver.window_handles
+        """
+        ah = self.dr.window_handles
+        #有时间调用该转换窗口方法时，新窗口还没打开，所以需要判断下
+        while len(bh) == len(ah):
+            ah = self.dr.window_handles
+        for h in ah:
+            if h not in bh:
+                self.dr.switch_to_window(h)

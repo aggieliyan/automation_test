@@ -28,9 +28,9 @@ class Test(unittest.TestCase):
     def setUp(self):
         self.verificationErrors = []
         self.browser = "Chrome"
-        cfg_file = 'config.ini'
+        self.cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
-        self.cfg.read(cfg_file)
+        self.cfg.read(self.cfg_file)
         self.verificationErrors = []
         self.org_name = self.cfg.get("env_para", "org_name")
         self.org_password = self.cfg.get("env_para", "org_password")
@@ -88,7 +88,7 @@ class Test(unittest.TestCase):
         if(cookie1 == 'no'):
             login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
             self.cfg.set("env_para", "cookie1", str(self.driver.get_cookie('ASUSS')['value']))
-            self.cfg.write(open(cfg_file, "w"))
+            self.cfg.write(open(self.cfg_file, "w"))
             
             #本来还有一个叫RM的cookie，但是值都是rm不变所以不取了
             # path=/; domain=.ablesky.com
@@ -144,21 +144,38 @@ class Test(unittest.TestCase):
         title = "presaleclass" + ba.rand_name()
         new_course_management.class_redirect(self.cfg, self.driver, self.base_url, ctype=2, classname=title)
 
-        rs = ba.is_element_present("link text", title)
+        course = self.driver.find_element("link text", title)
+        #若发课成功了取出课程链接存入文件中供后面的购买流程用
+        rs = False
+        if course:
+            rs = True
+            self.cfg.set("env_para", "course_href1", course.get_attribute("href"))
+            self.cfg.write(open(self.cfg_file, "w"))
         ba.save_screenshot()
 
         self.assertEqual(True, rs)
 
-    @unittest.skip("test")
+   #@unittest.skip("test")
     def test_onlineclass(self):
         ba = Base(self.driver)
         title = "onlineclass" + ba.rand_name()
         new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)
 
-        rs = ba.is_element_present("link text", title)
+        # rs = ba.is_element_present("link text", title)
+        course = self.driver.find_element("link text", title)
+        #若发课成功了取出课程链接存入文件中供后面的购买流程用
+        rs = False
+        if course:
+            rs = True
+            self.cfg.set("env_para", "course_href2", course.get_attribute("href"))
+            self.cfg.write(open(self.cfg_file, "w"))
+
         ba.save_screenshot()
         self.assertEqual(True, rs)
+        
 
+
+    @unittest.skip("test")
     def test_agency_course(self):
         ba = Base(self.driver)
         title = "agency" + ba.rand_name()
@@ -174,8 +191,7 @@ class Test(unittest.TestCase):
         lastadmin = self.driver.execute_script("return $('.floatleft').eq(-10).text()")
 
         self.assertEqual(aname, lastadmin)
-        
-                   
+                        
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()

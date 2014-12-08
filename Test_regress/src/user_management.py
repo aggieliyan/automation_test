@@ -159,13 +159,6 @@ def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_an
     driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"获取视频链接").click()
     time.sleep(2)
-    #chref = driver.execute_script("return $(\".coursecenter-details-pic a\").eq(0).attr('href')")
-    #time.sleep(1)
-    #driver.get("%s%s"%(base_url, chref)) 
-    #driver.implicitly_wait(10)
-    #driver.find_element(cfg.get('org_index', 'release_hrefi_by'), \
-    #    cfg.get('org_index', 'release_hrefi')).click() 
-    #time.sleep(2)
     an_content = driver.execute_script("return $('textarea:eq(1)').text()")
     time.sleep(1)  
     release_announcement(cfg,driver, base_url, org_name, title, an_content)
@@ -174,18 +167,6 @@ def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_an
 #机构修改头像
 def org_chang_headpic(cfg, driver, base_url, org_name, \
     head_pic = r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\headpic.jpg"):
-    
-    # driver.get("%smyOffice.do" %(base_url))
-    # time.sleep(2)
-    # driver.execute_script("$('.oai-org-logo-upload').attr('style','display:block;');\
-    #     $('#J_oaiUploadTrigger').attr('style','display:block;'); \
-    #     $('.fileinput-button input').eq(0).attr('style',\
-    #         'height:300px;opacity:1;display:block;position:static;\
-    #         transform:translate(-2px,-50px) scale(1)')")
-    # time.sleep(1)
-    # driver.find_element(cfg.get('org_index','head_picname_by'), \
-    #     cfg.get('org_index','head_picname')).send_keys(head_pic)
-    # time.sleep(1)
 
     org_office =  MyOfficePage(driver)
     org_office.open()

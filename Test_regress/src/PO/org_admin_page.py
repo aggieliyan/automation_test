@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 '''
-Created on Nov 17, 2014
+Created on Nov. 17, 2014
 
 @author: yilulu
 '''

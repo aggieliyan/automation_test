@@ -9,60 +9,51 @@ import re
 from selenium.common.exceptions import NoSuchElementException
 
 from PO.myoffice_page import MyOfficePage
+from PO.payment_page import PaymentPage
 
 #个人人民币买课
 def buy_course(cfg, driver, base_url, course_url):
+
+    pay = PaymentPage(driver, cfg)
+    pay.open(course_url)
+    pay.save_screenshot()
+    pay.choose_use_rmb()
+    pay.click_pay()
+    pay.save_screenshot()
     
-    course_id = re.search(r'\d{1,10}', course_url).group(0)
-    #print course_id
-    host = base_url.replace("http://","")
-    driver.get("%spaymentRedirect.do?action=paymentDomainRedirect&\
-        host=%s&grouponid=&type=course&id=%s"\
-        %(base_url, host, str(course_id)))
-    # driver.get(course_url)
-    # driver.implicitly_wait(10)
-    # bh = driver.window_handles
-    # driver.find_element(cfg.get('org_index','buy_course_by'), \
-    #     cfg.get('org_index','buy_course')).click()
-    # ah = driver.window_handles
-    # while len(bh) == len(ah):
-    #     ah = driver.window_handles
-    # for h in ah:
-    #     if h not in bh:
-    #         driver.switch_to_window(h)
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('org_index','use_rmb_by'), \
-        cfg.get('org_index','use_rmb')).click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
-        cfg.get('org_index', 'pay_ok')).click()
-    time.sleep(3)
+    # course_id = re.search(r'\d{1,10}', course_url).group(0)
+    # #print course_id
+    # host = base_url.replace("http://","")
+    # driver.get("%spaymentRedirect.do?action=paymentDomainRedirect&\
+    #     host=%s&grouponid=&type=course&id=%s"\
+    #     %(base_url, host, str(course_id)))
+
+    # driver.find_element(cfg.get('org_index','use_rmb_by'), \
+    #     cfg.get('org_index','use_rmb')).click()
+    # driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
+    #     cfg.get('org_index', 'pay_ok')).click()
+    # time.sleep(3)
   
     
 #个人充值卡买课
 def buy_course_usecard(cfg, driver, base_url, course_url):
+
+    pay = PaymentPage(driver, cfg)
+    pay.open(course_url)
+    pay.save_screenshot()
+    pay.click_pay()
+    pay.save_screenshot()
     
-    course_id = re.search(r'\d{1,10}', course_url).group(0)
-    #print course_id
-    host = base_url.replace("http://","")
-    driver.get("%spaymentRedirect.do?action=paymentDomainRedirect&\
-        host=%s&grouponid=&type=course&id=%s"\
-        %(base_url, host, str(course_id)))
-    # driver.get(course_url)
-    # driver.implicitly_wait(10)
-    # bh = driver.window_handles
-    # driver.find_element(cfg.get('org_index','buy_course_by'), \
-    #     cfg.get('org_index','buy_course')).click()
-    # ah = driver.window_handles
-    # while len(bh) == len(ah):
-    #     ah = driver.window_handles
-    # for h in ah:
-    #     if h not in bh:
-    #         driver.switch_to_window(h)
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
-        cfg.get('org_index', 'pay_ok')).click()
-    time.sleep(3)
+    # course_id = re.search(r'\d{1,10}', course_url).group(0)
+    # #print course_id
+    # host = base_url.replace("http://","")
+    # driver.get("%spaymentRedirect.do?action=paymentDomainRedirect&\
+    #     host=%s&grouponid=&type=course&id=%s"\
+    #     %(base_url, host, str(course_id)))
+
+    # driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
+    #     cfg.get('org_index', 'pay_ok')).click()
+    # time.sleep(3)
     
 #个人发照片 数量最大10
 def add_photo(cfg, driver, base_url, username, \

@@ -20,7 +20,7 @@ from selenium.webdriver.common.by import By
 import HTMLTestRunner
 
 from PO.base import Base
-
+from testcase_student import StudentTest
 
 class Test(unittest.TestCase):
     
@@ -138,7 +138,7 @@ class Test(unittest.TestCase):
         self.assertEqual(True, rs)
         ba.save_screenshot()
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_presaleclass(self):
         ba = Base(self.driver)
         title = "presaleclass" + ba.rand_name()
@@ -155,7 +155,7 @@ class Test(unittest.TestCase):
 
         self.assertEqual(True, rs)
 
-   #@unittest.skip("test")
+    # @unittest.skip("test")
     def test_onlineclass(self):
         ba = Base(self.driver)
         title = "onlineclass" + ba.rand_name()
@@ -206,7 +206,12 @@ if __name__ == "__main__":
     # testsuite = unittest.TestSuite()
     # testsuite.addTest(Test("test_release_normal_course"))
     # testsuite.addTest(Test("test_create_admin"))
-    testsuite = unittest.TestLoader().loadTestsFromTestCase(Test)
+    # testsuite = unittest.TestLoader().loadTestsFromTestCase(Test)
+    suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
+    suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
+    allsuites = [suite1, suite2]
+    alltests = unittest.TestSuite(allsuites)
+
 
     #file_name = time.strftime('%Y-%m-%d-%H:%M:%S', time.localtime(time.time())) + '.html'
     fp = file("my_report.html", 'wb')
@@ -215,10 +220,11 @@ if __name__ == "__main__":
                 title='My unit test',
                 description='This demonstrates the report output by HTMLTestRunner.'
                 )
-    runner.run(testsuite)
+    runner.run(alltests)
 
     cfg_file = 'config.ini'
     cfg = ConfigParser.RawConfigParser()
     cfg.read(cfg_file)
     cfg.set("env_para", "cookie1", "no")
+    cfg.set("env_para", "cookie_stu", "no")
     cfg.write(open(cfg_file, "w"))

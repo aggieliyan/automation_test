@@ -53,5 +53,17 @@ class MyOfficePage(base.Base):
 		self.dr.find_element(self.cfg.get('org_index','headpic_by'), \
 			self.cfg.get('org_index','headpic')).send_keys(picfile)
 
+	#点击学员/员工导航
+	def click_student(self):
+		self.dr.find_element_by_link_text(u"学员/员工").click()
+
+	#点击学员管理
+	def click_student_management(self):
+		self.dr.find_element_by_link_text(u"学员管理").click()
+
+	#点击在线购买授权
+	def click_buy_opennum(self):
+		self.dr.find_element_by_link_text(u"在线购买授权").click()
+
 
 

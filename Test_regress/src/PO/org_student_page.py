@@ -131,6 +131,62 @@ class OrgStudentManagePage(base.Base):
 		self.dr.find_element_by_link_text(u"离开").click()
 		time.sleep(2)
 
+    #管理播放授权数
+    #筛选学员user_name
+	def click_stu_select(self):
+		time.sleep(5)
+		self.dr.find_element(self.cfg.get('manage_course_num', "stu_select_by"), \
+							self.cfg.get('manage_course_num', "stu_select")).click()
+	def click_stu_selectuser(self):#改xpath
+		self.dr.find_element(self.cfg.get('manage_course_num', "stu_selectuser_by"), \
+							self.cfg.get('manage_course_num', "stu_selectuser")).click()
+	def click_stu_selectinput(self, user_name):
+		self.dr.find_element(self.cfg.get('manage_course_num', 'stu_selectinput_by'), \
+							self.cfg.get('manage_course_num', 'stu_selectinput')).send_keys(user_name)
+	def click_stu_selectsearch(self):
+		self.dr.find_element(self.cfg.get('manage_course_num', "stu_selectsearch_by"), \
+							self.cfg.get('manage_course_num', "stu_selectsearch")).click()
+		time.sleep(5)
+	#点击管理播放授权数
+	def click_managenum(self):
+		self.dr.find_element_by_link_text(u"管理播放授权数").click()
+	#刷新页面
+	def self_dr_refresh(self):
+		self.dr.refresh()
+        time.sleep(5)
+	#批量增加授权数
+	def click_coursenum_all(self):
+		time.sleep(5)
+		self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_all_by'), \
+							self.cfg.get('manage_course_num', 'manage_coursenum_all')).click()
+	def click_coursenum_allnum(self):
+		self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_allnum_by'), \
+							self.cfg.get('manage_course_num', 'manage_coursenum_allnum')).send_keys("1")
+	def click_coursenum_apply(self):
+		self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_apply_by'), \
+							self.cfg.get('manage_course_num', 'manage_coursenum_apply')).click()
+	#单个课程增加授权数
+	#展开资料
+	def click_pushcourse(self):
+		self.dr.find_element(self.cfg.get('manage_course_num', "manage_coursenum_opencouse_by"), \
+							self.cfg.get('manage_course_num', "manage_coursenum_opencouse")).click()
+	#展开内容
+	def click_pushcontent(self):
+		self.dr.find_element(self.cfg.get('manage_course_num', "manage_coursenum_opennum_by"), \
+							self.cfg.get('manage_course_num', "manage_coursenum_opennum")).click()
+	#点击修改剩余播放次数
+	def click_changenum(self):
+		self.dr.find_element_by_link_text(u"修改剩余播放次数").click()
+	def click_coursenum_change(self):
+		self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_change_by'), \
+							self.cfg.get('manage_course_num', 'manage_coursenum_change')).clear()
+	def click_coursenum_key(self):
+		self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_change_by'), \
+							self.cfg.get('manage_course_num', 'manage_coursenum_change')).send_keys("1")
+	#保存
+	def click_save(self):
+		self.dr.find_element_by_link_text(u"保存").click()
+
 	#在线购买授权
 	#输入1个授权
 	def click_inputclick(self):#xpath有变化

@@ -128,7 +128,8 @@ class OrgStudentManagePage(base.Base):
 			self.cfg.get('org_manage', "open_keep")).click()
 		time.sleep(2)
 	def click_openaway(self):
-		self.dr.find_element_by_link_text(u"离开").click()
+		self.dr.find_element(self.cfg.get('org_manage', "open_away_by"), \
+			self.cfg.get('org_manage', "open_away")).click()
 		time.sleep(2)
 
     #管理播放授权数

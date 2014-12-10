@@ -78,6 +78,7 @@ def open_course_for_multi(cfg, driver, base_url, org_name):
     ogstumanage.click_openchoose()
     ogstumanage.click_openok()
     ogstumanage.click_openkeep()
+    ogstumanage.click_openaway()
 
 #管理播放授权数
 #管理播放授权数页面操作

@@ -65,6 +65,8 @@ class StudentTest(unittest.TestCase):
         ba = Base(self.driver)
 
         rs = ba.is_element_present("id", "J_studycenter")
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(True, rs)
 
         ba.save_screenshot()
@@ -78,6 +80,8 @@ class StudentTest(unittest.TestCase):
         ba = Base(self.driver)
 
         rs = ba.is_element_present("id", "J_studycenter")
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(True, rs)
         
         ba.save_screenshot()

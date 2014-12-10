@@ -35,7 +35,8 @@ class Base():
     
     def save_screenshot(self):
         filename = self.datatime_name() + '.png'
-        self.dr.save_screenshot(r"C://test_rs_pic//"+filename)
+        self.dr.save_screenshot("C://test_rs_pic//" + filename)
+        return filename
 
     def switch_window(self, bh):
         """

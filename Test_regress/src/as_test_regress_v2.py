@@ -151,7 +151,9 @@ class Test(unittest.TestCase):
             rs = True
             self.cfg.set("env_para", "course_href1", course.get_attribute("href"))
             self.cfg.write(open(self.cfg_file, "w"))
-        ba.save_screenshot()
+        
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
         self.assertEqual(True, rs)
 
@@ -170,7 +172,8 @@ class Test(unittest.TestCase):
             self.cfg.set("env_para", "course_href2", course.get_attribute("href"))
             self.cfg.write(open(self.cfg_file, "w"))
 
-        ba.save_screenshot()
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(True, rs)
         
 
@@ -182,7 +185,8 @@ class Test(unittest.TestCase):
         new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
 
         rs = ba.is_element_present("link text", title)
-        ba.save_screenshot()
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(True, rs)
 
     @unittest.skip("test")
@@ -214,7 +218,7 @@ if __name__ == "__main__":
 
 
     #file_name = time.strftime('%Y-%m-%d-%H:%M:%S', time.localtime(time.time())) + '.html'
-    fp = file("my_report.html", 'wb')
+    fp = file("myreport.html", 'wb')
     runner = HTMLTestRunner.HTMLTestRunner(
                 stream=fp,
                 title='My unit test',

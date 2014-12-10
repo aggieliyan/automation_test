@@ -201,6 +201,8 @@ sdist/
 develop-eggs/
 .installed.cfg
 .pyc
+.html
+.HTML
 
 # Installer logs
 pip-log.txt
@@ -215,4 +217,4 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-.html
+

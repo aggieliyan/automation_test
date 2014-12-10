@@ -5,19 +5,20 @@ Created on Jun 15, 2012
 @author: yilulu
 '''
 import time, random
-from selenium.webdriver.common.by import By
+from PO.login_page import LoginPage, IndexPage, SearchPage, IndependentDomianLoginPage, ClickLoginText
 #从网站首页登录
 #参数：drivere对象，用户名和密码
 def login_by_as(cfg, driver, base_url, user_name, user_psw):
-    driver.get(base_url + "index.do")
-    driver.find_element_by_link_text('登录').click()
-    time.sleep(2)
-    driver.find_element(cfg.get('login', 'login_username_by'), \
-                        cfg.get('login', 'login_username')).send_keys(user_name)
-    driver.find_element(cfg.get('login', 'login_psw_by'), \
-                        cfg.get('login', 'login_psw')).send_keys(user_psw)
-    driver.find_element(cfg.get('login', 'login_btn_by'), \
-                        cfg.get('login', 'login_btn')).click()
+    indexpage = IndexPage(driver,cfg)    
+    indexpage.open()
+    
+    click = ClickLoginText(driver,cfg)
+    click.click_login()
+    
+    loginpage = LoginPage(driver,cfg)
+    loginpage.input_username(user_name)
+    loginpage.input_pwd(user_psw)
+    loginpage.click_login_btn()
     time.sleep(2)
 #从搜索页面登陆
 def login_by_search(cfg, driver, test_enviroment, user_name, user_psw):
@@ -35,27 +36,28 @@ def login_by_search(cfg, driver, test_enviroment, user_name, user_psw):
 #从独立域名登录
 #参数：driverenium对象，独立域名地址、用户名和密码
 def login_by_independent_domian(cfg, driver, independent_url, user_name, user_psw):
-    driver.get(independent_url)
-    driver.find_element(cfg.get('org_index', 'login_popup_by'), \
-                        cfg.get('org_index', 'login_popup')).click()
-    driver.find_element(cfg.get('org_index', 'login_username_by'), \
-                        cfg.get('org_index', 'login_username')).send_keys(user_name)
-    driver.find_element(cfg.get('org_index', 'login_psw_by'), \
-                        cfg.get('org_index', 'login_psw')).send_keys(user_psw)
-    driver.find_element(cfg.get('org_index', 'login_btn_by'), \
-                        cfg.get('org_index', 'login_btn')).click()
+    
+    indompage = IndependentDomianLoginPage(driver,cfg)
+    indompage.open()
+        
+    click = ClickLoginText(driver,cfg)
+    click.click_login()
+    
+    loginpage = LoginPage(driver,cfg)
+    loginpage.input_username(user_name)
+    loginpage.input_pwd(user_psw)
+    loginpage.click_login_btn()
     time.sleep(2)
+    
 def login_by_logindo(cfg, driver, base_url, user_name, user_psw):
-    driver.get(base_url + "login.do")
-    driver.find_element(cfg.get('login', 'login_username_by'), \
-                        cfg.get('login', \
-                                'login_username')).send_keys(user_name)
-    driver.find_element(cfg.get('login', 'login_psw_by'), \
-                        cfg.get('login', 'login_psw')).send_keys(user_psw)
-    driver.find_element('id', 'J_rememberMe').click()
-    driver.find_element(cfg.get('login', 'login_btn_by'), \
-                        cfg.get('login', 'login_btn')).click()
+    loginpage = LoginPage(driver,cfg)    
+    loginpage.open_logindo()
+    
+    loginpage.input_username(user_name)
+    loginpage.input_pwd(user_psw)
+    loginpage.click_login_btn()
     time.sleep(2)
+    
 #从独立域名退出
 #参数：driverenium对象，独立域名地址、用户名和密码
 def logout_by_independent_domian(driver, independent_url):

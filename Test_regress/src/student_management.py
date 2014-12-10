@@ -152,4 +152,9 @@ def buy_open_num(cfg, driver, base_url, org_name):
     ogstumanage.click_inputclear()
     ogstumanage.click_inputkey()
     ogstumanage.click_buy()
-    ogstumanage.click_sure()
+    #判断余额是否充足
+    re = is_element_present(driver, By.XPATH, "//div[1]/p/span[2]")
+    if re = True:
+        pass
+    else:
+        ogstumanage.click_sure()

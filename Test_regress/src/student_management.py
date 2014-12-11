@@ -82,7 +82,7 @@ def open_course_for_multi(cfg, driver, base_url, org_name):
 
 #管理播放授权数
 #管理播放授权数页面操作
-def manage_course_numdetail(cfg, driver, base_url ,user_name):
+def manage_course_numdetail(cfg, driver, base_url, user_name):
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
     try:
@@ -101,7 +101,7 @@ def manage_course_numdetail(cfg, driver, base_url ,user_name):
     ogstumanage.click_coursenum_allnum()
     ogstumanage.click_coursenum_apply()   
 #学员管理页面操作
-def manage_course_num(cfg, driver, base_url ,user_name):
+def manage_course_num(cfg, driver, base_url, user_name):
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
     ogstumanage.click_stu_select()
@@ -155,7 +155,7 @@ def buy_open_num(cfg, driver, base_url, org_name):
     ogstumanage.click_buy()
     #判断余额是否充足
     re = is_element_present(driver, By.XPATH, "//div[1]/p/span[2]")
-    if re = True:
+    if re == True:
         pass
     else:
         ogstumanage.click_sure()

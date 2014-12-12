@@ -64,6 +64,9 @@ class MyOfficePage(base.Base):
 	#点击在线购买授权
 	def click_buy_opennum(self):
 		self.dr.find_element_by_link_text(u"在线购买授权").click()
+    #进入考试系统
+	def click_exam(self):
+		self.dr.get(self.base_url + "exam/")
 
 
 

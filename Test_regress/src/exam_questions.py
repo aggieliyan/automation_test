@@ -64,7 +64,7 @@ def exam_question_Answer(cfg, driver, base_url, question_ansa):
     ogstumanage.click_question_type()
     ogstumanage.click_question_Answer()
     ogstumanage.click_question_name(question_ansa)
-    ogstumanage.click_answerA(question_ansa)
+    ogstumanage.click_answer_Answer(question_ansa)
     ogstumanage.click_question_save()
 #创建填空题
 def exam_question_Blank(cfg, driver, base_url, question_ansa):
@@ -99,9 +99,9 @@ def exam_question_Composite(cfg, driver, base_url, question_ansa):
     ogstumanage.click_question_type()
     ogstumanage.click_question_Composite() 
     ogstumanage.click_question_name(question_ansa)
+    ogstumanage.click_Composite_name(question_ansa)
     ogstumanage.click_answerA(question_ansa)
     ogstumanage.click_answerB(question_ansa)
-    ogstumanage.click_answerC(question_ansa)
     ogstumanage.click_question_save()
 
 def auto_exam_questions(cfg, driver, base_url, question_ansa, num):

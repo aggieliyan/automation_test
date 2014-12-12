@@ -20,6 +20,7 @@ from selenium.webdriver.common.by import By
 import HTMLTestRunner
 
 from PO.base import Base
+from PO.org_cate_exam import OrgExamCreateListPage, OrgExamInputListPage, OrgExamiOkListPage, OrgExamSearchListPage
 from testcase_student import StudentTest
 
 class Test(unittest.TestCase):

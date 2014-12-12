@@ -6,6 +6,7 @@ Created on Jul 24, 2014
 '''
 
 import time
+from PO.exam_user_page import UserpaperListPage, UserexampaperPage
 
 def buy_paper(cfg, driver, paper_url):
     #paper_url = "http://www.gamma.ablesky.com/examRedirect.do?action=viewExamPaperInfo&examPaperId=6129"
@@ -21,88 +22,68 @@ def buy_paper(cfg, driver, paper_url):
     time.sleep(5)
 #学员考试
 def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, paper_name):
-    driver.implicitly_wait(30)
-    driver.get(base_url+"exam/")
-    time.sleep(2)
-    driver.find_element(cfg.get('exam', 'search_input_by'), \
-        cfg.get('exam', 'search_input')).clear()
-    time.sleep(2)
-    driver.find_element(cfg.get('exam', 'search_input_by'), \
-        cfg.get('exam', 'search_input')).send_keys(paper_name)
-    time.sleep(5)
-    driver.find_element_by_link_text(u"立即考试").click() 
-    time.sleep(2)
-    exam_time = driver.execute_script("return parseInt($('.pre-exam-outer li').eq(0).text().substring(5,6))")
-    time.sleep(2)
-    driver.find_element_by_link_text(u"开始考试").click()
-    time.sleep(2)
-    question_title = driver.execute_script("return $('#J_classification a:eq(0)').text()")
+    userpaperlist = UserpaperListPage(driver, cfg)
+    userpaperlist.enter_exampaperlist()
+    userpaperlist.clear_searchpapername()
+    userpaperlist.input_searchpapername(paper_name)
+    userpaperlist.click_examnow()
+    userexampaper = UserexampaperPage(driver, cfg)
+    exam_time = userexampaper.get_examtime()
+    userexampaper.click_startexam()
+    question_title = userexampaper.get_questiontitle()
     time.sleep(5)
      # blank_pager=1 是白卷 ;blank_pager=0 是做了一个题
     if blank_pager == 0:
         #单选 多选
         if question_title == u"单选题" or question_title == u"多选题":
             try:
-                driver.find_element(cfg.get('exam', 'exam_selectque_by'), \
-                    cfg.get('exam', 'exam_selectque')).click()
+                userexampaper.click_selectquestion()
             except:
                 None     
         #是非题
         elif question_title == u"是非题":
             try: 
-                driver.find_element(cfg.get('exam', 'exam_yesnoque_by'), \
-                    cfg.get('exam', 'exam_yesnoque')).click()   
+                userexampaper.click_yesnoquestion() 
             except:
                 None      
         #填空题
         elif question_title == u"填空题":
             try: 
-                driver.find_element(cfg.get('exam', 'exam_blankque_by'), \
-                    cfg.get('exam', 'exam_blankque')).send_keys(question_answer)   
+                userexampaper.click_blankquestion(question_answer)  
             except:
                 None  
         #问答题  
         elif question_title == u"问答题": 
             try:        
-                 iframe_id = driver.execute_script("return $('#J_examWrapper iframe:eq(0)').attr('id')")
-                 driver.execute_script("var element=window.document.getElementById('" + iframe_id + "');\
-                 idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
-                 element.innerHTML =\'"+question_answer+"\';")
+                userexampaper.click_queanswerquestion(question_answer)  
             except:
                 None 
         #完形填空题
         elif question_title == u"完形填空题":
             try:
-                driver.find_element(cfg.get('exam', 'exam_clozeque_by'), \
-                    cfg.get('exam', 'exam_clozeque')).click()
+                userexampaper.click_clozequestion()
             except:
                 None 
         #综合题
         elif question_title == u"综合题":
             #第一个是单选 or 多选
             try:
-                driver.find_element(cfg.get('exam', 'exam_all_selectque_by'), \
-                    cfg.get('exam', 'exam_all_selectque')).click()
+                userexampaper.click_all_selectquestion()
             except:
                 None
             #是非
             try:
-                driver.find_element(cfg.get('exam', 'exam_all_yesque_by'), \
-                    cfg.get('exam', 'exam_all_yesque')).click()
+                userexampaper.click_all_yesnoquestion()
             except:
                 None
             #填空
             try:
-                driver.find_element(cfg.get('exam', 'exam_all_blankque_by'), \
-                    cfg.get('exam', 'exam_all_blankque')).send_keys(question_answer)
+                userexampaper.click_all_blankquestion(question_answer)
             except:  
                 None
             #问答
             try:
-                iframe_id = driver.execute_script("return $('#J_examWrapper iframe:eq(0)').attr('id')")
-                driver.execute_script("var element=window.document.getElementById('" + iframe_id + "');\
-                    idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
-                    element.innerHTML =\'"+question_answer+"\';")
+                userexampaper.click_all_queanswerquestion(question_answer)
             except:
                 None
         ###综合题结束
@@ -111,18 +92,10 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
         if operation == '0':
              time.sleep(exam_time * 60 + 2)
         try:        
-            driver.find_element(cfg.get('exam', 'exam_submit_by'), \
-                cfg.get('exam', 'exam_submit')).click()#提交
-            time.sleep(2)
-            driver.find_element(cfg.get('exam', 'exam_continue_by'), \
-                cfg.get('exam', 'exam_continue')).click()#弹窗-继续考试
-            time.sleep(2)
-            driver.find_element(cfg.get('exam', 'exam_submit_by'), \
-                 cfg.get('exam', 'exam_submit')).click()#提交
-            time.sleep(2)
-            driver.find_element(cfg.get('exam', 'window_submit_by'), \
-                cfg.get('exam', 'window_submit')).click()#弹窗-提交
-            time.sleep(2) 
+            userexampaper.click_submit()
+            userexampaper.click_continueexam()
+            userexampaper.click_submit()
+            userexampaper.click_confirmsubmit()
         except:
              None
     #学员提交白卷
@@ -131,17 +104,9 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
         if operation == '0':
              time.sleep(exam_time * 60 + 2)
         try:   
-            driver.find_element(cfg.get('exam', 'exam_submit_by'), \
-                cfg.get('exam', 'exam_submit')).click()#提交
-            time.sleep(2)
-            driver.find_element(cfg.get('exam', 'exam_continue_by'), \
-                cfg.get('exam', 'exam_continue')).click()#弹窗-继续考试
-            time.sleep(2)
-            driver.find_element(cfg.get('exam', 'exam_submit_by'), \
-                cfg.get('exam', 'exam_submit')).click()#提交
-            time.sleep(2) 
-            driver.find_element(cfg.get('exam', 'window_submit_by'), \
-                cfg.get('exam', 'window_submit')).click()#弹窗-提交
-            time.sleep(2)  
+            userexampaper.click_submit()
+            userexampaper.click_continueexam()
+            userexampaper.click_submit()
+            userexampaper.click_confirmsubmit()
         except:
              None

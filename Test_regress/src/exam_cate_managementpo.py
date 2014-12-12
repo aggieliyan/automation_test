@@ -148,17 +148,12 @@ def delete_exam_cate(cfg, driver, base_url, org_name):
     okscp = OrgExamiOkListPage(driver, cfg)
     okscp.click_addcate_ok()
 
-    driver.find_element(cfg.get('exam', 'cate_del_by'), \
-        cfg.get('exam', 'cate_del_xpath')).click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'cate_oknew_button_by'), \
-        cfg.get('exam', 'cate_oknew_button')).click()
-    driver.implicitly_wait(10)
 
 
 def create_exam_point(cfg, driver, base_url, org_name, point_name, point_detail, other_groom):
-    driver.get("%sexam/" %(base_url))
-    driver.implicitly_wait(10) 
+    addscp = OrgExamCreateListPage(driver, cfg)
+    addscp.open()
+    addscp.click_point_page()
     driver.find_element_by_link_text(u"考点库").click()
     driver.find_element(cfg.get('exam', 'point_addnewid_by'), \
         cfg.get('exam', 'point_addnewid')).click()

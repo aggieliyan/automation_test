@@ -6,7 +6,7 @@ Created on Nov 17, 2014
 '''
 import time
 import base
-from myoffice_page1 import MyOfficePage
+from myoffice_page import MyOfficePage
 
 class OrgMancardgroupPage(base.Base):
 

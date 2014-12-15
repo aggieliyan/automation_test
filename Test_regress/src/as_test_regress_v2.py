@@ -19,7 +19,10 @@ import exam_user_management
 from selenium.webdriver.common.by import By
 import HTMLTestRunner
 
+import PO.org_card_page, PO.org_cate_page, PO.org_student_page
+
 from PO.base import Base
+from PO.org_cate_exam import OrgExamCreateListPage, OrgExamInputListPage, OrgExamiOkListPage, OrgExamSearchListPage
 from testcase_student import StudentTest
 
 class Test(unittest.TestCase):

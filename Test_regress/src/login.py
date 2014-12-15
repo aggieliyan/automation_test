@@ -6,6 +6,7 @@ Created on Jun 15, 2012
 '''
 import time, random
 from PO.login_page import LoginPage, IndexPage, SearchPage, IndependentDomianLoginPage, ClickLoginText
+from PO.register_page import ClickRegisterText, EmailRegisterPage, PhoneRegisterPage, IndependentAegisterPage 
 #从网站首页登录
 #参数：drivere对象，用户名和密码
 def login_by_as(cfg, driver, base_url, user_name, user_psw):
@@ -76,72 +77,48 @@ def is_element_present(driver, how, what):
     return True
 #email注册
 def register_by_email_index(cfg, driver, base_url, r_username, r_email, r_psw):
-    driver.get(base_url + "/index.do")
+    clickregister = ClickRegisterText(driver,cfg)
+    clickregister.click_register()
+
+    registerpage = EmailRegisterPage(driver,cfg)
+    registerpage.click_emalimod()
+    registerpage.input_username(r_username)
+    registerpage.input_email(r_email)
+    registerpage.input_psw(r_psw)
     time.sleep(2)
-    driver.find_element_by_link_text(u"[注册]").click()
-    driver.find_element(cfg.get('as_index', 'register_email_username_by'), \
-                        cfg.get('as_index', 'register_email_username')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_username_by'), \
-                        cfg.get('as_index', 'register_email_username'))\
-                        .send_keys(r_username)
-    driver.find_element(cfg.get('as_index', 'register_email_by'), \
-                        cfg.get('as_index', 'register_email')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_by'), \
-                        cfg.get('as_index', 'register_email')).send_keys(r_email)
-    driver.find_element(cfg.get('as_index', 'register_email_psw_by'), \
-                        cfg.get('as_index', 'register_email_psw')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_psw_by'), \
-                        cfg.get('as_index', \
-                                'register_email_psw')).send_keys(r_psw)
-    driver.find_element(cfg.get('as_index', 'register_email_confirm_psw_by'), \
-                        cfg.get('as_index', 'register_email_confirm_psw')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_confirm_psw_by'), \
-                        cfg.get('as_index', \
-                                'register_email_confirm_psw')).send_keys(r_psw)
-    driver.find_element_by_id("J_iCode").click()
-    driver.find_element_by_id("J_iCode").send_keys(raw_input(u"请输入验证码："))
+    registerpage.verification_code()
     time.sleep(8)
-    driver.find_element(cfg.get('as_index', 'register_email_submit_by'), \
-                        cfg.get('as_index', 'register_email_submit')).click()
-    time.sleep(6)
+#    code = driver.find_element_by_id("J_iCode")
+#    code.click()
+#    time.sleep(2)
+#    put = raw_input(u"请输入验证码:")
+#    code.send_keys(put)
+#    time.sleep(8)
+#    driver.find_element(cfg.get('as_index', 'register_email_submit_by'), \
+#                        cfg.get('as_index', 'register_email_submit')).click()
+#    time.sleep(6)
+    registerpage.register_submit_btn()
+
     try:
         logout(driver, base_url)
     except:
         print 'pass'
+
 #手机注册
 def register_by_mobile_index(cfg, driver, base_url, r_username, r_mobile, r_psw):
-    driver.get(base_url + "/index.do")
-    time.sleep(2)
-    driver.find_element_by_link_text(u"[注册]").click()
-    driver.find_element(cfg.get('as_index', 'register_mobile_type_by'), \
-                        cfg.get('as_index', 'register_mobile_type')).click()
-    driver.find_element(cfg.get('as_index', 'register_mobile_username_by'), \
-                        cfg.get('as_index', 'register_mobile_username')).clear()
-    driver.find_element(cfg.get('as_index', 'register_mobile_username_by'), \
-                        cfg.get('as_index', 'register_mobile_username'))\
-                        .send_keys(r_username)
-    driver.find_element(cfg.get('as_index', 'register_mobile_number_by'), \
-                        cfg.get('as_index', 'register_mobile_number')).clear()
-    driver.find_element(cfg.get('as_index', 'register_mobile_number_by'), \
-                        cfg.get('as_index', \
-                                'register_mobile_number')).send_keys(r_mobile)
-    driver.find_element(cfg.get('as_index', 'register_mobile_psw_by'), \
-                        cfg.get('as_index', 'register_mobile_psw')).clear()
-    driver.find_element(cfg.get('as_index', 'register_mobile_psw_by'), \
-                        cfg.get('as_index', 'register_mobile_psw')).send_keys(r_psw)
-    driver.find_element(cfg.get('as_index', 'register_mobile_confirm_psw_by'), \
-                        cfg.get('as_index', \
-                                'register_mobile_confirm_psw')).clear()
-    driver.find_element(cfg.get('as_index', 'register_mobile_confirm_psw_by'), \
-                        cfg.get('as_index', \
-                                'register_mobile_confirm_psw')).send_keys(r_psw)
-    driver.find_element(cfg.get('as_index', 'register_mobile_getverify_by'), \
-                        cfg.get('as_index', 'register_mobile_getverify')).click()
-    driver.find_element_by_id("J_imessageCode").send_keys(raw_input(u'请输入验证码：'))    
-    time.sleep(8) 
-    driver.find_element(cfg.get('as_index', 'register_mobile_submit_by'), \
-                        cfg.get('as_index', 'register_mobile_submit')).click()
-    time.sleep(2)
+
+    clickregister = ClickRegisterText(driver,cfg)
+    clickregister.click_register()
+
+    registerpage = PhoneRegisterPage(driver,cfg)
+    registerpage.input_username(r_username)
+    registerpage.input_mobile(r_mobile)
+    registerpage.input_psw(r_psw)
+    registerpage.get_verification()    
+    #registerpage.verification_code()
+    driver.find_element_by_id("J_imessageCode").send_keys(raw_input(u'请输入验证码：')) 
+    registerpage.register_submit_btn()
+
     try:
         logout(driver, base_url)
     except:
@@ -227,79 +204,31 @@ def register_college_by_email(cfg, driver, base_url, r_username, r_email, r_mobi
     
 #独立域名注册
 def register_by_independent_domian(cfg, driver, base_url, r_username, r_email, r_psw):
-    driver.get(base_url + "/")
-    time.sleep(2)
-    driver.find_element_by_link_text(u"[注册]").click()
-    driver.find_element(cfg.get('as_index', 'register_email_username_by'), \
-                        cfg.get('as_index', 'register_email_username')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_username_by'), \
-                        cfg.get('as_index', \
-                                'register_email_username')).send_keys(r_username)
-    driver.find_element(cfg.get('as_index', 'register_email_by'), \
-                        cfg.get('as_index', 'register_email')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_by'), \
-                        cfg.get('as_index', 'register_email')).send_keys(r_email)
-    driver.find_element(cfg.get('as_index', 'register_email_psw_by'), \
-                        cfg.get('as_index', 'register_email_psw')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_psw_by'), \
-                        cfg.get('as_index', 'register_email_psw')).send_keys(r_psw)
-    driver.find_element(cfg.get('as_index', 'register_email_confirm_psw_by'), \
-                        cfg.get('as_index', 'register_email_confirm_psw')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_confirm_psw_by'), \
-                        cfg.get('as_index', \
-                                'register_email_confirm_psw')).send_keys(r_psw)
-    driver.find_element_by_id("J_iCode").click
-    driver.find_element_by_id("J_iCode").send_keys(raw_input(u'请输入验证码：'))
+    indompage = IndependentDomianLoginPage(driver,cfg)
+    indompage.open()
+
+    clickregister = ClickLoginText(driver,cfg)
+    clickregister.click_register()
+
+    registerpage = EmailRegisterPage(driver,cfg)
+    registerpage.input_username(r_username)
+    registerpage.input_email(r_email)
+    registerpage.input_pwd(r_psw)
+    registerpage.verification_code()
     time.sleep(10)
     #下一步
-    driver.find_element(cfg.get('as_index', 'register_email_next_by'), \
-                        cfg.get('as_index', 'register_email_next')).click()
-    time.sleep(3)
-    driver.find_element(cfg.get('as_index', 'register_email_realname_by'), \
-                        cfg.get('as_index', 'register_email_realname')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_realname_by'), \
-                        cfg.get('as_index', \
-                                'register_email_realname')).send_keys(u"真实姓名")
-    driver.find_element(cfg.get('as_index', 'register_email_mobile_by'), \
-                        cfg.get('as_index', 'register_email_mobile')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_mobile_by'), \
-                        cfg.get('as_index', \
-                                'register_email_mobile')).send_keys(u"1588881100")
-    driver.find_element(cfg.get('as_index', 'register_email_address_by'), \
-                        cfg.get('as_index', 'register_email_address')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_address_by'), \
-                        cfg.get('as_index', \
-                                'register_email_address')).send_keys(u"地址啊")
-    driver.find_element(cfg.get('as_index', 'register_email_code_by'), \
-                        cfg.get('as_index', 'register_email_code')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_code_by'), \
-                        cfg.get('as_index', \
-                                'register_email_code')).send_keys(u"055550")
-    driver.find_element_by_css_selector("a.select-btn.ablesky-colortip-right").click()
-    time.sleep(2)
-    driver.find_element(cfg.get('as_index', 'register_email_school_by'), \
-                        cfg.get('as_index', 'register_email_school')).click()
-    driver.find_element_by_xpath("//form[@id='J_nextStopForm']/dl[6]/dd/a").click()
-    time.sleep(2)
-    driver.find_element(cfg.get('as_index', 'register_email_age_by'), \
-                        cfg.get('as_index', 'register_email_age')).click()
-    driver.find_element(cfg.get('as_index', 'register_email_qq_by'), \
-                        cfg.get('as_index', 'register_email_qq')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_qq_by'), \
-                        cfg.get('as_index', \
-                                'register_email_qq')).send_keys(u"529111129")
-    driver.find_element(cfg.get('as_index', 'register_email_year_by'), \
-                        cfg.get('as_index', 'register_email_year')).clear()
-    driver.find_element(cfg.get('as_index', 'register_email_year_by'), \
-                        cfg.get('as_index', \
-                                'register_email_year')).send_keys(u"2013")
-    driver.find_element(cfg.get('as_index', 'register_email_submit_by'),\
-                        cfg.get('as_index', 'register_email_submit')).click()
+    independentreg = IndependentDomianLoginPage(driver,cfg)
+    independentreg.click_next()
+    independentreg.input_realname()
+    # ...
+    # ...
+    registerpage.register_submit_btn()
     time.sleep(2)
     try:
         logout(driver, base_url)
     except:
         print 'pass'
+
 #自动注册 
 def auto_register(cfg, driver, base_url, r_num, reg_type):
     """

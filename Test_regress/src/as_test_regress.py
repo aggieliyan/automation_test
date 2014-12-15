@@ -1303,7 +1303,7 @@ class Test(unittest.TestCase):
                     
         self.login_from_index()
         self.score_paper()
-        IE下不能导出
+        #IE下不能导出
         self.export_openpaper_result()
         self.export_sendpaper_result()
 

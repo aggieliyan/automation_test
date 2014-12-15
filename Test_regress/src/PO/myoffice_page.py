@@ -67,6 +67,23 @@ class MyOfficePage(base.Base):
     #进入考试系统
 	def click_exam(self):
 		self.dr.get(self.base_url + "exam/")
+		
+	#点击教学教务导航
+	def click_org_teach(self):
+		time.sleep(2)
+		self.dr.find_element_by_link_text(u"教学教务").click()
+
+	#点击课程类目
+	def click_org_cate(self):
+		self.dr.find_element_by_link_text(u"课程类目").click()
+		
+	#点击首页导航
+	def click_org_firstpage(self):
+		self.dr.find_element_by_link_text(u"首页").click()
+
+	#点击管理/卡组
+	def click_org_mancardgroup(self):
+		self.dr.find_element_by_link_text(u"管理/卡组").click()
 
 
 

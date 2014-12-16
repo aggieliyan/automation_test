@@ -43,10 +43,6 @@ class Test(unittest.TestCase):
 
         self.total = 0
 
-        #一些回归过程中需要用到的变量
-        #课程购买链接，跑发课流程时取的,后面购买课程需要用到
-        self.course_href = ""
-        self.course_href_2 = ""
 
         #一些使用卡相关变量，前置条件：管理员先创建卡，给变量赋值，用户才可获取卡号登录使用卡号
         #充值卡-卡号、密码
@@ -87,17 +83,17 @@ class Test(unittest.TestCase):
         self.driver.maximize_window()
         self.driver.get(self.base_url)
 
-#        cookie1 = self.cfg.get('env_para', 'cookie1')     
-#        if(cookie1 == 'no'):
-#            login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
-#            self.cfg.set("env_para", "cookie1", str(self.driver.get_cookie('ASUSS')['value']))
-#            self.cfg.write(open(self.cfg_file, "w"))
-#            
-#            #本来还有一个叫RM的cookie，但是值都是rm不变所以不取了
-#            # path=/; domain=.ablesky.com
-#        else:
-#            self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
-#            self.driver.add_cookie({'name':'RM', 'value':'rm'})
+        cookie1 = self.cfg.get('env_para', 'cookie1')
+        if(cookie1 == 'no'):
+            login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
+            self.cfg.set("env_para", "cookie1", str(self.driver.get_cookie('ASUSS')['value']))
+            self.cfg.write(open(self.cfg_file, "w"))
+           
+            #本来还有一个叫RM的cookie，但是值都是rm不变所以不取了
+            # path=/; domain=.ablesky.com
+        else:
+            self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
+            self.driver.add_cookie({'name':'RM', 'value':'rm'})
  
     @unittest.skip("test")
     def test_release_normal_course(self):      
@@ -198,7 +194,8 @@ class Test(unittest.TestCase):
         lastadmin = self.driver.execute_script("return $('.floatleft').eq(-10).text()")
 
         self.assertEqual(aname, lastadmin)
-#    @unittest.skip("test")    
+
+    @unittest.skip("test")    
     def test_register(self):
         ba = Base(self.driver)
         user_name = ""
@@ -207,6 +204,12 @@ class Test(unittest.TestCase):
         
         filename = ba.save_screenshot()
         print "image:"+filename
+
+    def test_release_announcement(self):
+        ba = Base(self.driver)
+
+        title = ba.rand_name()
+        user_management.release_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
         
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()

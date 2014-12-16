@@ -27,9 +27,9 @@ class ExamQuestions(base.Base):
 		self.dr.find_element_by_link_text(u"试题库").click()
 
 	#点击新建试题
-	def click_question_creat(self):
-		self.dr.find_element(self.cfg.get('exam_questions', "question_creat_by"), \
-							self.cfg.get('exam_questions', "question_creat")).click()
+	def click_question_create(self):
+		self.dr.find_element(self.cfg.get('exam_questions', "question_create_by"), \
+							self.cfg.get('exam_questions', "question_create")).click()
 
     #点击题型的下拉框
 	def click_question_type(self):

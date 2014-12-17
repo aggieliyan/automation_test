@@ -154,37 +154,18 @@ def create_exam_point(cfg, driver, base_url, org_name, point_name, point_detail,
     addscp = OrgExamCreateListPage(driver, cfg)
     addscp.open()
     addscp.click_point_page()
-    driver.find_element_by_link_text(u"考点库").click()
-    driver.find_element(cfg.get('exam', 'point_addnewid_by'), \
-        cfg.get('exam', 'point_addnewid')).click()
-    driver.find_element(cfg.get('exam', 'point_addname_by'), \
-        cfg.get('exam', 'point_addname')).clear()
-    driver.find_element(cfg.get('exam', 'point_addname_by'), \
-        cfg.get('exam', 'point_addname')).send_keys(point_name)
-    driver.find_element(cfg.get('exam', 'point_desname_by'), \
-        cfg.get('exam', 'point_desname')).clear()
-    driver.find_element(cfg.get('exam', 'point_desname_by'), \
-        cfg.get('exam', 'point_desname')).send_keys(point_detail)
-    driver.implicitly_wait(10)
-    driver.find_element_by_link_text("+").click()
-    #driver.find_element_by_css_selector(cfg.get('exam','point_lesson_css')).click()
-    driver.find_element(cfg.get('exam', 'point_address_by'), \
-        cfg.get('exam', 'point_address_xpath1')).click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'point_address_by'), \
-        cfg.get('exam', 'point_address_xpath2')).click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'point_ok_lessbotton_by'), \
-        cfg.get('exam', 'point_ok_lessbotton')).click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'point_othergroom_by'), \
-        cfg.get('exam', 'point_othergroom')).clear()
-    driver.find_element(cfg.get('exam', 'point_othergroom_by'), \
-        cfg.get('exam', 'point_othergroom')).send_keys(other_groom)
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'point_okbotton_by'), \
-        cfg.get('exam', 'point_okbotton')).click()
-    driver.implicitly_wait(10)
+    searchscp = OrgExamSearchListPage(driver, cfg)
+    searchscp.click_create_point()
+    editscp = OrgExamInputListPage(driver, cfg)
+    editscp.input_pname()
+    editscp.pd_input()
+    searchscp.click_add_course()
+    searchscp.click_add_courses()
+    okscp = OrgExamiOkListPage(driver, cfg)
+    okscp.click_addcourse_ok()
+    editscp.input_other_groom()
+    okscp.click_addpoint_ok()
+
 
 def auto_create_exam_point(cfg, driver, base_url, org_name, point_num):
 
@@ -200,48 +181,27 @@ def auto_create_exam_point(cfg, driver, base_url, org_name, point_num):
 
 
 def modify_exam_point(cfg, driver, base_url, org_name):
-    driver.get("%sexam/" %(base_url))
-    driver.implicitly_wait(10) 
-    driver.find_element_by_link_text(u"考点库").click()
-    point_name = 'bianjikaodian'
-    point_detail = 'kaodianmiaoshu'
-    point_other = 'qitatuijian'
-    driver.find_element(cfg.get('exam', 'point_edit_by'), \
-        cfg.get('exam', 'point_edit')).click()
+    addscp = OrgExamCreateListPage(driver, cfg)
+    addscp.open()
+    addscp.click_point_page()
+    point_name = 'editpoint'
+    point_detail = 'pointdetail'
+    point_other = 'othergroom'
+    searchscp = OrgExamSearchListPage(driver, cfg)
+    searchscp.click_modify_point()
+    editscp = OrgExamInputListPage(driver, cfg)
+    editscp.input_pname()
+    editscp.pd_input()
     driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'point_addname_by'), \
-        cfg.get('exam', 'point_addname')).clear()
-    driver.find_element(cfg.get('exam', 'point_addname_by'), \
-        cfg.get('exam', 'point_addname')).send_keys(point_name)
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'point_desname_by'), \
-        cfg.get('exam', 'point_desname')).clear()
-    driver.find_element(cfg.get('exam', 'point_desname_by'), \
-        cfg.get('exam', 'point_desname')).send_keys(point_detail)
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'point_lesdel_botton_by'), \
-        cfg.get('exam','point_lesdel_botton')).click()
-    driver.implicitly_wait(10)
-    driver.find_element_by_link_text("+").click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'point_address_by'), \
-        cfg.get('exam', 'point_address_xpath1')).click()
-    driver.find_element(cfg.get('exam', 'point_address_by'), \
-        cfg.get('exam', 'point_address_xpath2')).click()
-    driver.find_element(cfg.get('exam', 'point_ok_lessbotton_by'), \
-        cfg.get('exam', 'point_ok_lessbotton')).click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'point_othergroom_by'), \
-        cfg.get('exam', 'point_othergroom')).click()
-    driver.find_element(cfg.get('exam', 'point_othergroom_by'), \
-        cfg.get('exam', 'point_othergroom')).clear()
-    driver.find_element(cfg.get('exam', 'point_othergroom_by'), \
-        cfg.get('exam', 'point_othergroom')).send_keys(point_other)
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'point_okbotton_by'), \
-        cfg.get('exam', 'point_okbotton')).click()
-    driver.implicitly_wait(10)
+    searchscp.click_lesdel_point()
+    searchscp.click_add_course()
+    searchscp.click_add_courses()
+    okscp = OrgExamiOkListPage(driver, cfg)
+    okscp.click_addcourse_ok()
+    editscp.input_other_groom()
+    okscp.click_addpoint_ok()
 
+    
 
 def delete_exam_point(cfg, driver, base_url, org_name):
     driver.get("%sexam/" %(base_url))

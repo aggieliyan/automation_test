@@ -21,9 +21,9 @@ class ExamQuestions(base.Base):
 		self.dr.find_element_by_link_text(u"试题库").click()
 
 	#点击新建试题
-	def click_question_creat(self):
-		self.dr.find_element(self.cfg.get('exam_questions', "question_creat_by"), \
-							self.cfg.get('exam_questions', "question_creat")).click()
+	def click_question_create(self):
+		self.dr.find_element(self.cfg.get('exam_questions', "question_create_by"), \
+							self.cfg.get('exam_questions', "question_create")).click()
 
 	#点击导入试题
 	def click_import_questions(self, template):
@@ -70,13 +70,10 @@ class ExamQuestions(base.Base):
 
 	#填题目
 	def click_question_name(self, question_ansa):
-#		self.dr.find_element(self.cfg.get('exam_questions', "question_name_by "), \
-#							self.cfg.get('exam_questions', "question_name")).send_keys(question_ansa)
-		iframe_id = self.dr.execute_script("return $('#sbjFormCon iframe:eq(0)').attr('id')")
-		self.dr.execute_script("var element=window.document.getElementById\
-		(\'" + iframe_id + "\'); \
-		idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
-		element.innerHTML =\'" + question_ansa + "\';")
+		name = self.dr.find_element(self.cfg.get('exam_questions', "question_name_by"), \
+							self.cfg.get('exam_questions', "question_name"))
+		name.click()
+		name.send_keys(question_ansa)
 
     #添加音频
 	def click_music(self):
@@ -88,40 +85,35 @@ class ExamQuestions(base.Base):
 							(r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\123.mp3")
 		time.sleep(2)
 
-    #答案A				
+    #单选多选答案A				
 	def click_answerA(self, question_ansa):
-		iframe_id = self.dr.execute_script("return $('#sbjFormCon iframe:eq(2)') \
-        .attr('id')")
-		self.dr.execute_script("var element=window.document.getElementById \
-		(\'" + iframe_id + "\'); \
-		idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
-		element.innerHTML =\'" + question_ansa + "\';")
-        time.sleep(2)
+		name = self.dr.find_element(self.cfg.get('exam_questions', "question_answerA_by"), \
+							self.cfg.get('exam_questions', "question_answerA"))
+		name.click()
+		name.send_keys(question_ansa)
 
-    #答案B
+    #单选多选答案B
 	def click_answerB(self, question_ansa):
-		iframe_id = self.dr.execute_script("return $('#sbjFormCon iframe:eq(3)') \
-        .attr('id')")
-		self.dr.execute_script("var element=window.document.getElementById \
-		(\'" + iframe_id + "\'); \
-		idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
-		element.innerHTML =\'" + question_ansa + "\';")
+		name = self.dr.find_element(self.cfg.get('exam_questions', "question_answerB_by"), \
+							self.cfg.get('exam_questions', "question_answerB"))
+		name.click()
+		name.send_keys(question_ansa)
 		time.sleep(2)
 
-	#答案C#综合题答案B
-	def click_answerC(self, question_ansa):
-		iframe_id = self.dr.execute_script("return $('#sbjFormCon iframe:eq(4)') \
-		.attr('id')")
-		self.dr.execute_script("var element=window.document.getElementById \
-		(\'" + iframe_id + "\'); \
-		idocument=element.contentDocument;element=idocument.getElementById('tinymce'); \
-		element.innerHTML =\'" + question_ansa + "\';")
+	#问答题答案
+	def click_answer_Answer(self, question_ansa):
+		name = self.dr.find_element(self.cfg.get('exam_questions', "question_answer_Answer_by"), \
+							self.cfg.get('exam_questions', "question_answer_Answer"))
+		name.click()
+		name.send_keys(question_ansa)
 		time.sleep(2)
 
 	#填空题答案
 	def click_Blank_answer(self, question_ansa):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('exam_questions', "question_Blank_by"), \
 							self.cfg.get('exam_questions', "question_Blank")).send_keys(question_ansa)
+		time.sleep(2)
 
 	#完型题答案
 	def click_Cloze1(self, question_ansa):
@@ -136,6 +128,14 @@ class ExamQuestions(base.Base):
 	def click_Cloze4(self, question_ansa):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_Cloze4_by"), \
 							self.cfg.get('exam_questions', "question_Cloze4")).send_keys(question_ansa)
+							
+	#综合题中的单选题名称
+	def click_Composite_name(self, question_ansa):
+		name = self.dr.find_element(self.cfg.get('exam_questions', "question_Composite_name_by"), \
+							self.cfg.get('exam_questions', "question_Composite_name"))
+		name.click()
+		name.send_keys(question_ansa)
+		time.sleep(2)
 
 	#保存
 	def click_question_save(self):

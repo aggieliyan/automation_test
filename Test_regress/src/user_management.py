@@ -10,6 +10,8 @@ from selenium.common.exceptions import NoSuchElementException
 
 from PO.myoffice_page import MyOfficePage
 from PO.payment_page import PaymentPage
+from PO.orgindex_page import OrgIndexPage
+from PO.announcement_page import AnnouncementListPage, AnnouncementInputPage
 
 #个人人民币买课
 def buy_course(cfg, driver, base_url, course_url):
@@ -21,20 +23,6 @@ def buy_course(cfg, driver, base_url, course_url):
     pay.click_pay()
     pay.save_screenshot()
     
-    # course_id = re.search(r'\d{1,10}', course_url).group(0)
-    # #print course_id
-    # host = base_url.replace("http://","")
-    # driver.get("%spaymentRedirect.do?action=paymentDomainRedirect&\
-    #     host=%s&grouponid=&type=course&id=%s"\
-    #     %(base_url, host, str(course_id)))
-
-    # driver.find_element(cfg.get('org_index','use_rmb_by'), \
-    #     cfg.get('org_index','use_rmb')).click()
-    # driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
-    #     cfg.get('org_index', 'pay_ok')).click()
-    # time.sleep(3)
-  
-    
 #个人充值卡买课
 def buy_course_usecard(cfg, driver, base_url, course_url):
 
@@ -43,66 +31,6 @@ def buy_course_usecard(cfg, driver, base_url, course_url):
     pay.save_screenshot()
     pay.click_pay()
     pay.save_screenshot()
-    
-    # course_id = re.search(r'\d{1,10}', course_url).group(0)
-    # #print course_id
-    # host = base_url.replace("http://","")
-    # driver.get("%spaymentRedirect.do?action=paymentDomainRedirect&\
-    #     host=%s&grouponid=&type=course&id=%s"\
-    #     %(base_url, host, str(course_id)))
-
-    # driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
-    #     cfg.get('org_index', 'pay_ok')).click()
-    # time.sleep(3)
-    
-#个人发照片 数量最大10
-def add_photo(cfg, driver, base_url, username, \
-    pic="C:\\Users\\Public\\Pictures\\Sample Pictures\\Tulips.jpg", pic_num = 1):
-    
-    driver.get(base_url + "community.do?action=toProfileSpace&username=" + username)
-    try:
-        driver.find_element_by_link_text(u"编辑").click()
-        time.sleep(2)
-        driver.find_element_by_id(cfg.get('office','add_Galleries_id')).click()
-    except NoSuchElementException:
-        driver.execute_script("$('#albumMain .center').click()")
-        time.sleep(1)
-        driver.find_element_by_id("albumName").send_keys("sss")
-        driver.find_element_by_id("albumDescription").send_keys("dddd")
-        driver.find_element_by_xpath("//button").click()
-        
-    
-    time.sleep(3)    
-    for i in range(1,pic_num + 1):       
-        if i > 5 and i < 11:
-            driver.find_element_by_id(cfg.get('office', 'add_photo_id')).click()
-        driver.find_element_by_id("gallery"+str(i)).send_keys(pic)
-        
-    driver.find_element_by_xpath(cfg.get('office', 'add_submit_xpath')).click()
-    
-    if pic_num > 5:
-        time.sleep(15)
-    else:
-        time.sleep(6)
-    
-    driver.find_element_by_xpath(cfg.get('office', 'save_photo_xpath')).click()
-    time.sleep(2)
-
-def auto_add_photo(cfg,driver, base_url, username, \
-    pic="C:\\Users\\Public\\Pictures\\Sample Pictures\\Tulips.jpg",pic_num = 50):
-    
-    count = 0
-    last_count = 0
-    count = pic_num/10
-    last_count = pic_num%10
-    if last_count != 0:
-        count = count + 1
-    
-    pic_num = 10
-    for i in range(count):  
-        if i == count - 1:
-            pic_num = last_count
-        add_photo(cfg,driver, base_url, username, pic, pic_num)
            
     
 #个人修改头像
@@ -120,24 +48,36 @@ def change_headpic(cfg, base_url, driver, \
 #机构发公告  
 def release_announcement(cfg,driver, base_url, org_name, title, an_content=u'announcement'):
     
-    driver.get("%s%s"%(base_url, org_name))
-    driver.implicitly_wait(10)
-    driver.find_element_by_link_text(u"网校公告").click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('org_index', 'release_announcementx_by'), \
-        cfg.get('org_index', 'release_announcementx')).click()
-    driver.find_element(cfg.get('org_index', 'release_announcementc_by'), \
-        cfg.get('org_index', 'release_announcementc')).send_keys(title)
-    an_content = an_content.replace("\"","\\\"").replace("\'","\\\'")
-    driver.implicitly_wait(10)
-    driver.execute_script("var element=window.document.getElementById('editNotice_ifr');\
-    idocument=element.contentDocument;\
-    element=idocument.getElementById('tinymce');\
-    element.innerHTML='" + an_content + "'")
-    time.sleep(2)
-    driver.find_element(cfg.get('org_index', 'release_announcementx2_by'), \
-        cfg.get('org_index', 'release_announcementx2')).click()
-    time.sleep(1)
+    index = OrgIndexPage(driver, cfg)
+    index.open(org_name)
+    index.click_announcement()
+    al = AnnouncementListPage(driver, cfg)
+    al.click_add_announcement()
+    ai = AnnouncementInputPage(driver, cfg)
+    ai.input_title(title)
+    ai.input_content(an_content)
+    ai.click_save()
+
+
+
+    # driver.get("%s%s"%(base_url, org_name))
+    # driver.implicitly_wait(10)
+    # driver.find_element_by_link_text(u"网校公告").click()
+    # driver.implicitly_wait(10)
+    # driver.find_element(cfg.get('org_index', 'release_announcementx_by'), \
+    #     cfg.get('org_index', 'release_announcementx')).click()
+    # driver.find_element(cfg.get('org_index', 'release_announcementc_by'), \
+    #     cfg.get('org_index', 'release_announcementc')).send_keys(title)
+    # an_content = an_content.replace("\"","\\\"").replace("\'","\\\'")
+    # driver.implicitly_wait(10)
+    # driver.execute_script("var element=window.document.getElementById('editNotice_ifr');\
+    # idocument=element.contentDocument;\
+    # element=idocument.getElementById('tinymce');\
+    # element.innerHTML='" + an_content + "'")
+    # time.sleep(2)
+    # driver.find_element(cfg.get('org_index', 'act_ok_by'), \
+    #     cfg.get('org_index', 'act_ok')).click()
+    # time.sleep(1)
 
 #获取视频外链发公告    
 def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_announcement'):

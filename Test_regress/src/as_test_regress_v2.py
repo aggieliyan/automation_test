@@ -19,7 +19,10 @@ import exam_user_management
 from selenium.webdriver.common.by import By
 import HTMLTestRunner
 import PO.exam_questions_page
+import PO.org_card_page, PO.org_cate_page, PO.org_student_page
+
 from PO.base import Base
+from PO.org_cate_exam import OrgExamCreateListPage, OrgExamInputListPage, OrgExamiOkListPage, OrgExamSearchListPage
 from testcase_student import StudentTest
 
 class Test(unittest.TestCase):
@@ -40,10 +43,6 @@ class Test(unittest.TestCase):
         self.dbhost = self.cfg.get("env_para", "dbhost")
         self.total = 0
 
-        #一些回归过程中需要用到的变量
-        #课程购买链接，跑发课流程时取的,后面购买课程需要用到
-        self.course_href = ""
-        self.course_href_2 = ""
 
         #一些使用卡相关变量，前置条件：管理员先创建卡，给变量赋值，用户才可获取卡号登录使用卡号
         #充值卡-卡号、密码
@@ -84,12 +83,12 @@ class Test(unittest.TestCase):
         self.driver.maximize_window()
         self.driver.get(self.base_url)
 
-        cookie1 = self.cfg.get('env_para', 'cookie1')     
+        cookie1 = self.cfg.get('env_para', 'cookie1')
         if(cookie1 == 'no'):
             login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
             self.cfg.set("env_para", "cookie1", str(self.driver.get_cookie('ASUSS')['value']))
             self.cfg.write(open(self.cfg_file, "w"))
-            
+           
             #本来还有一个叫RM的cookie，但是值都是rm不变所以不取了
             # path=/; domain=.ablesky.com
         else:
@@ -196,6 +195,7 @@ class Test(unittest.TestCase):
         lastadmin = self.driver.execute_script("return $('.floatleft').eq(-10).text()")
 
         self.assertEqual(aname, lastadmin)
+
                         
     def test_import_questions(self):
         ba = Base(self.driver)
@@ -228,6 +228,23 @@ class Test(unittest.TestCase):
         msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
         print msg
 
+
+    @unittest.skip("test")    
+    def test_register(self):
+        ba = Base(self.driver)
+        user_name = ""
+        user_name = login.auto_register(self.cfg, self.driver, self.base_url, 1, 1)
+        self.import_name = user_name
+        
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    def test_release_announcement(self):
+        ba = Base(self.driver)
+
+        title = ba.rand_name()
+        user_management.release_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
+        
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()
         # self.assertEqual([], self.verificationErrors)
@@ -243,8 +260,8 @@ if __name__ == "__main__":
     # testsuite.addTest(Test("test_create_admin"))
     # testsuite = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
-    suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
-    allsuites = [suite1, suite2]
+#    suite2 = unittest.TestLoader().loadTestsFromTestCase(ttStudentTest)
+    allsuites = [suite1]
     alltests = unittest.TestSuite(allsuites)
 
 

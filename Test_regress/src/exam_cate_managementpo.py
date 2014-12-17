@@ -204,10 +204,9 @@ def modify_exam_point(cfg, driver, base_url, org_name):
     
 
 def delete_exam_point(cfg, driver, base_url, org_name):
-    driver.get("%sexam/" %(base_url))
-    driver.implicitly_wait(10) 
-    driver.find_element_by_link_text(u"考点库").click()
-    driver.implicitly_wait(10)
+    addscp = OrgExamCreateListPage(driver, cfg)
+    addscp.open()
+    addscp.click_point_page()
     driver.find_element(cfg.get('exam', 'point_delete_by'), \
         cfg.get('exam', 'point_delete_xpath')).click()
     driver.implicitly_wait(10)

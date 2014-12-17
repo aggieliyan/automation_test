@@ -189,8 +189,8 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>My unit test</h1>
-<p class='attribute'><strong>Start Time:</strong> 2014-12-16 19:08:33</p>
-<p class='attribute'><strong>Duration:</strong> 0:00:18.579000</p>
+<p class='attribute'><strong>Start Time:</strong> 2014-12-17 19:04:01</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:36.045000</p>
 <p class='attribute'><strong>Status:</strong> Pass 1</p>
 
 <p class='description'>This demonstrates the report output by HTMLTestRunner.</p>
@@ -233,10 +233,30 @@ function showOutput(id, name) {
 </tr>
 
 <tr id='pt1.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_release_announcement</div></td>
-    <td colspan='5' align='center'>pass</td>
+    <td class='none'><div class='testcase'>test_href_announcement</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
+        pass</a>
+
+    <div id='div_pt1.1' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1: image:2014-12-17-19_04_35.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
     <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-17-19_04_35.png">check Screenshot</a>
     </td>
 </tr>
 

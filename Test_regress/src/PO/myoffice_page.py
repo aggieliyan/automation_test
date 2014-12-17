@@ -26,6 +26,9 @@ class MyOfficePage(base.Base):
 	def click_system_settings(self):
 		self.dr.find_element_by_link_text(u"系统设置").click()
 
+	def click_logo_settings(self):
+		self.dr.find_element_by_link_text(u"logo/联系方式设置").click()
+
 	#点击网校管理员
 	def click_org_admin(self):
 		self.dr.find_element_by_link_text(u"网校管理员").click()
@@ -33,6 +36,9 @@ class MyOfficePage(base.Base):
 	#点击教学教务
 	def click_teaching(self):
 		self.dr.find_element_by_link_text(u"教学教务").click()
+
+	def click_course_manage(self):
+		self.dr.find_element_by_link_text(u"课程管理").click()	
 
 	def class_manage(self):
 		self.dr.find_element_by_link_text(u"报班管理").click()

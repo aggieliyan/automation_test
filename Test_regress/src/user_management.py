@@ -12,6 +12,8 @@ from PO.myoffice_page import MyOfficePage
 from PO.payment_page import PaymentPage
 from PO.orgindex_page import OrgIndexPage
 from PO.announcement_page import AnnouncementListPage, AnnouncementInputPage
+from PO.banner_page import BannerPage
+from PO.course_page import CourseManageListPage
 
 #个人人民币买课
 def buy_course(cfg, driver, base_url, course_url):
@@ -46,7 +48,7 @@ def change_headpic(cfg, base_url, driver, \
     time.sleep(2)
 
 #机构发公告  
-def release_announcement(cfg,driver, base_url, org_name, title, an_content=u'announcement'):
+def release_announcement(cfg,driver, base_url, org_name, title,  an_content=u'announcement'):
     
     index = OrgIndexPage(driver, cfg)
     index.open(org_name)
@@ -82,41 +84,53 @@ def release_announcement(cfg,driver, base_url, org_name, title, an_content=u'ann
 #获取视频外链发公告    
 def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_announcement'):
     
-    driver.get("%smyOffice.do" %(base_url))
-    driver.implicitly_wait(10)
-    driver.find_element_by_link_text(u"教学教务").click()
-    driver.implicitly_wait(10)
-    driver.find_element_by_link_text(u"课程管理").click()
-    driver.implicitly_wait(30)
-    driver.find_element_by_link_text(u"获取视频链接").click()
-    time.sleep(2)
-    an_content = driver.execute_script("return $('textarea:eq(1)').text()")
-    time.sleep(1)  
+    op = MyOfficePage(driver, cfg)
+    op.open()
+    op.click_teaching()
+    op.click_course_manage()
+    cp = CourseManageListPage(driver, cfg)
+    cp.open()
+    an_content = cp.click_get_link()
     release_announcement(cfg,driver, base_url, org_name, title, an_content)
-    time.sleep(2)
+    # driver.get("%smyOffice.do" %(base_url))
+    # driver.implicitly_wait(10)
+    # driver.find_element_by_link_text(u"教学教务").click()
+    # driver.implicitly_wait(10)
+    # driver.find_element_by_link_text(u"课程管理").click()
+    # driver.implicitly_wait(30)
+    # driver.find_element_by_link_text(u"获取视频链接").click()
+    # time.sleep(2)
+    # an_content = driver.execute_script("return $('textarea:eq(1)').text()")
+    # time.sleep(1)  
+    # release_announcement(cfg,driver, base_url, org_name, title, an_content)
+    # time.sleep(2)
 
 #机构修改头像
 def org_chang_headpic(cfg, driver, base_url, org_name, \
     head_pic = r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\headpic.jpg"):
 
-    org_office =  MyOfficePage(driver)
+    org_office =  MyOfficePage(driver, cfg)
     org_office.open()
     org_office.input_org_pic(head_pic)
 
 #机构首页logo   
 def change_homelogo(cfg, driver, base_url, org_name, \
     logo_pic = r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\headpic.jpg"):
-  
-    driver.get("%s%s"%(base_url, org_name))
-    time.sleep(2)
-    driver.execute_script("$('.edit-logo').attr('style','display:block;');\
-        $('.edit-logo-btn ').attr('style','display:block;');\
-        $('.fileinput-button input').eq(0).attr('style','height:300px;opacity:1;\
-            display:block;position:static;transform:translate(0px, 0px) scale(1)')")
-    time.sleep(1)
-    driver.find_element(cfg.get('org_index', 'home_logoname_by'), \
-        cfg.get('org_index', 'home_logoname')).send_keys(logo_pic)
-    time.sleep(1)
+
+    lop = BannerPage(driver, cfg)
+    lop.open()
+    lop.change_logo(logo_pic)
+
+    # driver.get("%s%s"%(base_url, org_name))
+    # time.sleep(2)
+    # driver.execute_script("$('#J_uploadLogoIndex').attr('style','display:block;');\
+    #     $('#J_uploadLogo ').attr('style','display:block;');\
+    #     $('#J_uploadLogo input').eq(0).attr('style','height:300px;opacity:1;\
+    #         display:block;position:static;transform:translate(0px, 0px) scale(1)')")
+    # time.sleep(1)
+    # driver.find_element(cfg.get('org_index', 'home_logoname_by'), \
+    #     cfg.get('org_index', 'home_logoname')).send_keys(logo_pic)
+    # time.sleep(1)
 
 #修改页脚
 def modify_pagefoot(cfg, driver, base_url, org_name, \

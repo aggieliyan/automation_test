@@ -239,12 +239,43 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    def test_release_announcement(self):
+    @unittest.skip("test")
+    def test_add_announcement(self):
         ba = Base(self.driver)
 
         title = ba.rand_name()
         user_management.release_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
+
+        rs = ba.is_element_present("link text", title)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+        self.assertEqual(True, rs)
+
+    def test_href_announcement(self):
+        ba = Base(self.driver)
+        title = ba.rand_name()
+        user_management.release_href_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
+
+        rs = ba.is_element_present("link text", title)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+        self.assertEqual(True, rs)
+
+    @unittest.skip("test")
+    def test_change_homelogo(self):
+        ba = Base(self.driver)
+        user_management.change_homelogo(self.cfg, self.driver, self.base_url, self.org_name)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+    
+    @unittest.skip("test")
+    def test_change_headpic(self):
+        ba = Base(self.driver)
+        user_management.org_chang_headpic(self.cfg, self.driver, self.base_url, self.org_name)
+        filename = ba.save_screenshot()
+        print "image:"+filename
         
+
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()
         # self.assertEqual([], self.verificationErrors)

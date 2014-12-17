@@ -3,24 +3,11 @@ import time
 from selenium.webdriver.common.keys import Keys
 from PO.exam_questions_page import ExamQuestions
 
-def importquestions(cfg, driver, base_url, template):
-    driver.get(base_url + "exam/")
-    driver.implicitly_wait(30)
-    driver.find_element("link text", u"试题库").click()
-    driver.implicitly_wait(30)
-    
-    driver.find_element(cfg.get('exam', "import_questions_by"), \
-                             cfg.get('exam', 'import_questions')).click()    
-    driver.execute_script("$('#J_uploadFileInput').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(1)')")
-    time.sleep(1)
-    driver.find_element(cfg.get('exam', "path_by"), \
-                             cfg.get('exam', "path")).send_keys(template)
-    driver.find_element(cfg.get('exam', "upload_button_by"), \
-                             cfg.get('exam', "upload_button")).click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', "close_button_by"), \
-                             cfg.get('exam', "close_button")).click()
-    
+def import_questions(cfg, driver, template):
+    ogimpquestions = ExamQuestions(driver, cfg)
+    ogimpquestions.open()
+    ogimpquestions.click_questions()
+    ogimpquestions.click_import_questions(template)
     
 #创建单选题
 def exam_question_Single(cfg, driver, base_url, question_ansa):

@@ -13,7 +13,7 @@ import login, user_management
 from PO.base import Base
 
 class StudentTest(unittest.TestCase):
-
+    @unittest.skip("test")
     def setUp(self):
         self.verificationErrors = []
         self.browser = "Chrome"
@@ -55,7 +55,7 @@ class StudentTest(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
-
+    @unittest.skip("test")
     def test_buy_course_use_RMB(self):
         course_href = self.cfg.get("env_para", "course_href1")
         if course_href != '0':
@@ -70,7 +70,7 @@ class StudentTest(unittest.TestCase):
         self.assertEqual(True, rs)
 
         ba.save_screenshot()
-
+    @unittest.skip("test")
     def test_buy_course_use_card(self):
         course_href = self.cfg.get("env_para", "course_href2")
         if course_href != '0':

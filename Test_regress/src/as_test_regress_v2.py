@@ -18,7 +18,7 @@ import exam_user_management
 
 from selenium.webdriver.common.by import By
 import HTMLTestRunner
-
+import PO.exam_questions_page
 from PO.base import Base
 from testcase_student import StudentTest
 
@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
         self.user_name = self.cfg.get("env_para", "user_name")
         self.user_password = self.cfg.get("env_para", "user_password")
         self.base_url = self.cfg.get("env_para", "base_url")
-
+        self.dbhost = self.cfg.get("env_para", "dbhost")
         self.total = 0
 
         #一些回归过程中需要用到的变量
@@ -95,6 +95,7 @@ class Test(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
+    
  
     @unittest.skip("test")
     def test_release_normal_course(self):      
@@ -138,7 +139,7 @@ class Test(unittest.TestCase):
         self.assertEqual(True, rs)
         ba.save_screenshot()
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     def test_presaleclass(self):
         ba = Base(self.driver)
         title = "presaleclass" + ba.rand_name()
@@ -157,7 +158,7 @@ class Test(unittest.TestCase):
 
         self.assertEqual(True, rs)
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     def test_onlineclass(self):
         ba = Base(self.driver)
         title = "onlineclass" + ba.rand_name()
@@ -196,6 +197,36 @@ class Test(unittest.TestCase):
 
         self.assertEqual(aname, lastadmin)
                         
+    def test_import_questions(self):
+        ba = Base(self.driver)
+        self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
+        #建立数据库连接查询当前试题总数并关闭连接,否则下面的查询会有缓存
+        db = 'ablesky_examsystem'
+        conn = ba.connect_db(self.dbhost, db)
+        cursor = conn.cursor()
+        sql = "SELECT COUNT(*) FROM e_question_q"
+        cursor.execute(sql)
+        num1 = cursor.fetchall()[0][0]
+        cursor.close()
+        #调用导入试题
+        try:
+            exam_questions.import_questions(self.cfg, self.driver, self.template)
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append("fail to import questions..")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+        #重新建立数据库,查询导入试题后的总数,二者差即为导入总数
+        conn = ba.connect_db(self.dbhost, db)
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        num2 = cursor.fetchall()[0][0]
+        num = num2 - num1
+        cursor.execute \
+            ("SELECT content_q,content_q FROM e_question_q ORDER BY id_q DESC LIMIT 1")
+        title = cursor.fetchall()[0][0]
+        msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
+        print msg
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()

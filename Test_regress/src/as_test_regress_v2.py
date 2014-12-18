@@ -278,6 +278,21 @@ class Test(unittest.TestCase):
         msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
         print msg
 
+    @unittest.skip("test")#暂时只支持ie
+    def test_auto_exam_onequestion(self):
+        ba = Base(self.driver)
+        title = "exam" + ba.rand_name()
+        exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa=title, onetype=7)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")#暂时只支持ie
+    def test_auto_exam_questions(self):
+        ba = Base(self.driver)
+        title = "exam" + ba.rand_name()
+        exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa=title, num=1)
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
     @unittest.skip("test")    
     def test_register(self):

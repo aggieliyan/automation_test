@@ -107,7 +107,7 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
     if str_price:
         temp = re.search(r'\d{1,10}.\d', str_price)
         price = temp.group(0)
-        ac.input_price()
+        ac.input_price(price)
         ac.input_rank(100)
 
     ac.click_save()

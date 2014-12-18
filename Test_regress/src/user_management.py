@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 from PO.myoffice_page import MyOfficePage
 from PO.payment_page import PaymentPage
-from PO.orgindex_page import OrgIndexPage
+from PO.orgindex_page import OrgIndexPage, FootPage
 from PO.announcement_page import AnnouncementListPage, AnnouncementInputPage
 from PO.banner_page import BannerPage
 from PO.course_page import CourseManageListPage
@@ -84,10 +84,6 @@ def release_announcement(cfg,driver, base_url, org_name, title,  an_content=u'an
 #获取视频外链发公告    
 def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_announcement'):
     
-    op = MyOfficePage(driver, cfg)
-    op.open()
-    op.click_teaching()
-    op.click_course_manage()
     cp = CourseManageListPage(driver, cfg)
     cp.open()
     an_content = cp.click_get_link()
@@ -136,23 +132,27 @@ def change_homelogo(cfg, driver, base_url, org_name, \
 def modify_pagefoot(cfg, driver, base_url, org_name, \
     foot_name=u"footname", foot_url=u"http://www.ablesky.com"):
    
-    driver.get("%s%s"%(base_url, org_name))
-    driver.implicitly_wait(10)
-    foot_href = driver.execute_script("return $('#J_dressNav_warp a').eq(6).attr('href')")
-    time.sleep(1)
-    driver.get("%s%s"%(base_url, foot_href))
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('org_index', 'pf_modx2_by'), \
-        cfg.get('org_index', 'pf_modx2')).clear()
-    driver.find_element(cfg.get('org_index', 'pf_modx3_by'), \
-        cfg.get('org_index', 'pf_modx3')).send_keys(foot_name)
-    driver.find_element(cfg.get('org_index', 'pf_modx4_by'), \
-        cfg.get('org_index', 'pf_modx4')).clear()
-    driver.find_element(cfg.get('org_index', 'pf_modx4_by'), \
-        cfg.get('org_index', 'pf_modx4')).send_keys(foot_url)
-    driver.find_element(cfg.get('org_index', 'pf_modc5_by'), \
-        cfg.get('org_index', 'pf_modc5')).click()
-    time.sleep(1)
+    fp = FootPage(driver, cfg)
+    fp.open(org_name)
+    fp.input_footname(foot_name)
+    fp.input_link(foot_url)
+    fp.click_save()
+
+    # driver.get("%s%s"%(base_url, org_name))
+    # foot_href = driver.execute_script("return $('#J_dressNav_warp a').eq(6).attr('href')")
+    # time.sleep(1)
+    # driver.get("%s%s"%(base_url, foot_href))
+    # driver.find_element(cfg.get('org_index', 'pf_name_by'), \
+    #     cfg.get('org_index', 'pf_name')).clear()
+    # driver.find_element(cfg.get('org_index', 'pf_name_by'), \
+    #     cfg.get('org_index', 'pf_name')).send_keys(foot_name)
+    # driver.find_element(cfg.get('org_index', 'pf_link_by'), \
+    #     cfg.get('org_index', 'pf_link')).clear()
+    # driver.find_element(cfg.get('org_index', 'pf_modx4_by'), \
+    #     cfg.get('org_index', 'pf_modx4')).send_keys(foot_url)
+    # driver.find_element(cfg.get('org_index', 'pf_save_by'), \
+    #     cfg.get('org_index', 'pf_save')).click()
+    # time.sleep(1)
 
 
     

@@ -6,6 +6,8 @@ Created on Dec. 03, 2014
 '''
 import time
 
+from selenium.webdriver.support.wait import WebDriverWait
+
 import base
 from myoffice_page import MyOfficePage
 
@@ -106,6 +108,7 @@ class CourseManageListPage(base.Base):
 		op.click_course_manage()
 
 	def click_get_link(self):
+		time.sleep(3)
 		self.dr.find_element_by_link_text(u"获取视频链接").click()
 		time.sleep(1)
 		link = self.dr.execute_script("return $('textarea:eq(1)').text()")

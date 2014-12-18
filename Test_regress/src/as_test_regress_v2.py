@@ -12,18 +12,12 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 import HTMLTestRunner
 
-import login, new_course_management, course_management, student_management, \
-card_management, cate_management, admin_management, user_management, exam_paper, exam_questions, exam_cate_management
-import exam_user_management
-
-from selenium.webdriver.common.by import By
-import HTMLTestRunner
-import PO.exam_questions_page
-import PO.org_card_page, PO.org_cate_page, PO.org_student_page
-
 from PO.base import Base
-from PO.org_cate_exam import OrgExamCreateListPage, OrgExamInputListPage, OrgExamiOkListPage, OrgExamSearchListPage
 from testcase_student import StudentTest
+import login, new_course_management, course_management, student_management
+import card_management, cate_management, admin_management, user_management
+import exam_paper, exam_questions, exam_cate_management
+import exam_user_management
 
 class Test(unittest.TestCase):
     
@@ -96,15 +90,17 @@ class Test(unittest.TestCase):
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
     
  
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_release_normal_course(self):      
         ba = Base(self.driver)
         title = "course" + ba.rand_name()
         new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
         
         rs = ba.is_element_present("link text", u"查看课程")
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(True, rs)
-        ba.save_screenshot()
+
      
 
         # self.normal_course = title#待用-在数据库中查是否转换失败
@@ -118,27 +114,29 @@ class Test(unittest.TestCase):
         # else:
         #     self.course_href = ""
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_release_three_video(self):
         ba = Base(self.driver)
         title = "coursethree" + ba.rand_name()
         new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title)
         
         rs = ba.is_element_present("link text", u"查看课程")
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(True, rs)
-        ba.save_screenshot()
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_release_two_video(self):
         ba = Base(self.driver)
         title = "two_video" + ba.rand_name()
         new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
         
         rs = ba.is_element_present("link text", u"查看课程")
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(True, rs)
-        ba.save_screenshot()
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_presaleclass(self):
         ba = Base(self.driver)
         title = "presaleclass" + ba.rand_name()
@@ -157,7 +155,7 @@ class Test(unittest.TestCase):
 
         self.assertEqual(True, rs)
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_onlineclass(self):
         ba = Base(self.driver)
         title = "onlineclass" + ba.rand_name()
@@ -178,7 +176,7 @@ class Test(unittest.TestCase):
         
 
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_agency_course(self):
         ba = Base(self.driver)
         title = "agency" + ba.rand_name()
@@ -189,14 +187,17 @@ class Test(unittest.TestCase):
         print "image:"+filename
         self.assertEqual(True, rs)
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_create_admin(self):
+        ba = Base(self.driver)
         aname = admin_management.auto_create_admin(self.cfg, self.driver, adm_num=1)
         lastadmin = self.driver.execute_script("return $('.floatleft').eq(-10).text()")
-
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(aname, lastadmin)
 
-                        
+
+    @unittest.skip("test")                  
     def test_import_questions(self):
         ba = Base(self.driver)
         self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
@@ -239,7 +240,7 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_add_announcement(self):
         ba = Base(self.driver)
 
@@ -261,19 +262,26 @@ class Test(unittest.TestCase):
         print "image:"+filename
         self.assertEqual(True, rs)
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_change_homelogo(self):
         ba = Base(self.driver)
         user_management.change_homelogo(self.cfg, self.driver, self.base_url, self.org_name)
         filename = ba.save_screenshot()
         print "image:"+filename
     
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_change_headpic(self):
         ba = Base(self.driver)
         user_management.org_chang_headpic(self.cfg, self.driver, self.base_url, self.org_name)
         filename = ba.save_screenshot()
         print "image:"+filename
+
+    def test_modify_pagefoot(self):
+        ba = Base(self.driver)
+        user_management.modify_pagefoot(self.cfg, self.driver, self.base_url, self.org_name)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
         
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
@@ -291,12 +299,11 @@ if __name__ == "__main__":
     # testsuite.addTest(Test("test_create_admin"))
     # testsuite = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
-#    suite2 = unittest.TestLoader().loadTestsFromTestCase(ttStudentTest)
+    suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
     allsuites = [suite1]
+    allsuites.append(suite2)
     alltests = unittest.TestSuite(allsuites)
 
-
-    #file_name = time.strftime('%Y-%m-%d-%H:%M:%S', time.localtime(time.time())) + '.html'
     fp = file("myreport.html", 'wb')
     runner = HTMLTestRunner.HTMLTestRunner(
                 stream=fp,

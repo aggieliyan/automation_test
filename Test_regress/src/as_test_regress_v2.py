@@ -379,7 +379,7 @@ class Test(unittest.TestCase):
         #统计科目总数
         total_num = self.driver.execute_script("return $('.subject-item-con').size()")
         exam_cate_managementpo.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
-        last_num = = self.driver.execute_script("return $('.subject-item-con').size()")
+        last_num == self.driver.execute_script("return $('.subject-item-con').size()")
         self.assertEqual(total_num - 1, last_num)
         ba.save_screenshot()
         

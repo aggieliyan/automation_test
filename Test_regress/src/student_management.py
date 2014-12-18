@@ -14,13 +14,13 @@ def is_element_present(driver, how, what):
     except NoSuchElementException, e: return False
     return True
 
-def import_one_student(cfg, driver, stu_name):
+def import_one_student(cfg, driver, base_url, stu_name):
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
     ogstumanage.input_studentname(stu_name)
     ogstumanage.click_import()
 
-def import_multi_student(cfg, driver, base_url, org_name, stu_txt):
+def import_multi_student(cfg, driver, base_url, stu_txt):
 
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
@@ -29,7 +29,7 @@ def import_multi_student(cfg, driver, base_url, org_name, stu_txt):
     ogstumanage.click_importfile(stu_txt)
     ogstumanage.click_importmulti()
 
-def create_student(cfg, driver, base_url, org_name, stu_txt):
+def create_student(cfg, driver, base_url, stu_txt):
 
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
@@ -38,7 +38,7 @@ def create_student(cfg, driver, base_url, org_name, stu_txt):
     ogstumanage.click_createfile(stu_txt)
     ogstumanage.click_createmulti()
 
-def auto_create_student(cfg, driver, base_url, org_name, stu_num):
+def auto_create_student(cfg, driver, base_url, stu_num):
     #自动生成用户名文件创建学员
     #stu_num为需要创建学员的数量
     prefix = chr(random.randint(97, 122)) + chr(random.randint(97, 122)) \
@@ -53,10 +53,10 @@ def auto_create_student(cfg, driver, base_url, org_name, stu_num):
         stu_file.writelines(stu_name + " " + stu_psw + "\n")
     stu_file.close()
     time.sleep(2)
-    create_student(cfg, driver, base_url, org_name, stu_txt)
+    create_student(cfg, driver, base_url, stu_txt)
     time.sleep(5)
     
-def open_course_for_one(cfg, driver, base_url, org_name):
+def open_course_for_one(cfg, driver, base_url):
     
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
@@ -66,7 +66,7 @@ def open_course_for_one(cfg, driver, base_url, org_name):
     ogstumanage.click_openok()
     ogstumanage.click_opensure()
 
-def open_course_for_multi(cfg, driver, base_url, org_name):
+def open_course_for_multi(cfg, driver, base_url):
     
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
@@ -145,7 +145,7 @@ def manage_course_num(cfg, driver, base_url, user_name):
         ogstumanage.click_coursenum_apply()
 
 #购买开通授权数 bnum为购买的数量
-def buy_open_num(cfg, driver, base_url, org_name):
+def buy_open_num(cfg, driver, base_url):
     
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open_buyopennum()

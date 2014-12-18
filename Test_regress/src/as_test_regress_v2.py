@@ -196,6 +196,56 @@ class Test(unittest.TestCase):
 
         self.assertEqual(aname, lastadmin)
 
+    @unittest.skip("test")
+    def test_import_one_student(self):
+        ba = Base(self.driver)
+        stu_name = "exam3996"#还是固定的学员，以后改成注册那生成的学员
+        student_management.import_one_student(self.cfg, self.driver, self.base_url, stu_name)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")
+    def test_import_multi_student(self):
+        ba = Base(self.driver)
+        student_management.import_multi_student(self.cfg, self.driver, self.base_url, r"C:\register_user_list.txt")
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")
+    def test_auto_create_student(self):
+        ba = Base(self.driver)
+        stu_num = 1
+        student_management.auto_create_student(self.cfg, self.driver, self.base_url, stu_num)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")
+    def test_open_course_for_one(self):
+        ba = Base(self.driver)
+        student_management.open_course_for_one(self.cfg, self.driver, self.base_url)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")
+    def test_open_course_for_multi(self):
+        ba = Base(self.driver)
+        student_management.open_course_for_multi(self.cfg, self.driver, self.base_url)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")
+    def test_manage_course_num(self):
+        ba = Base(self.driver)
+        student_management.manage_course_num(self.cfg, self.driver, self.base_url, self.user_name)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")
+    def test_buy_open_num(self):
+        ba = Base(self.driver)
+        student_management.buy_open_num(self.cfg, self.driver, self.base_url)
+        filename = ba.save_screenshot()
+        print "image:"+filename
                         
     def test_import_questions(self):
         ba = Base(self.driver)

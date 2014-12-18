@@ -225,5 +225,10 @@ class OrgExamSearchListPage(object):
         self.dr.driver.find_element(cfg.get('exam', 'point_delete_by'), \
             cfg.get('exam', 'point_delete_xpath')).click()
         self.dr.driver.implicitly_wait(10)
+    #
+    def click_lesdel_point(self):
+        self.dr.driver.find_element(cfg.get('exam', 'point_lesdel_botton_by'), \
+            cfg.get('exam','point_lesdel_botton')).click()
+        driver.implicitly_wait(10)
 
     

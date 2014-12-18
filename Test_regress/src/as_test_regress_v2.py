@@ -196,8 +196,57 @@ class Test(unittest.TestCase):
         print "image:"+filename
         self.assertEqual(aname, lastadmin)
 
+    @unittest.skip("test")
+    def test_import_one_student(self):
+        ba = Base(self.driver)
+        stu_name = "exam3996"#还是固定的学员，以后改成注册那生成的学员
+        student_management.import_one_student(self.cfg, self.driver, self.base_url, stu_name)
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
-    @unittest.skip("test")                  
+    @unittest.skip("test")
+    def test_import_multi_student(self):
+        ba = Base(self.driver)
+        student_management.import_multi_student(self.cfg, self.driver, self.base_url, r"C:\register_user_list.txt")
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")
+    def test_auto_create_student(self):
+        ba = Base(self.driver)
+        stu_num = 1
+        student_management.auto_create_student(self.cfg, self.driver, self.base_url, stu_num)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")
+    def test_open_course_for_one(self):
+        ba = Base(self.driver)
+        student_management.open_course_for_one(self.cfg, self.driver, self.base_url)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")
+    def test_open_course_for_multi(self):
+        ba = Base(self.driver)
+        student_management.open_course_for_multi(self.cfg, self.driver, self.base_url)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")
+    def test_manage_course_num(self):
+        ba = Base(self.driver)
+        student_management.manage_course_num(self.cfg, self.driver, self.base_url, self.user_name)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")
+    def test_buy_open_num(self):
+        ba = Base(self.driver)
+        student_management.buy_open_num(self.cfg, self.driver, self.base_url)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+                        
     def test_import_questions(self):
         ba = Base(self.driver)
         self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
@@ -229,6 +278,21 @@ class Test(unittest.TestCase):
         msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
         print msg
 
+    @unittest.skip("test")#暂时只支持ie
+    def test_auto_exam_onequestion(self):
+        ba = Base(self.driver)
+        title = "exam" + ba.rand_name()
+        exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa=title, onetype=7)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")#暂时只支持ie
+    def test_auto_exam_questions(self):
+        ba = Base(self.driver)
+        title = "exam" + ba.rand_name()
+        exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa=title, num=1)
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
     @unittest.skip("test")    
     def test_register(self):
@@ -290,6 +354,40 @@ class Test(unittest.TestCase):
         # fail_num = len(self.verificationErrors)
         # print "total case:%s, %s failures.detail:%s"%(self.total, fail_num, self.verificationErrors)
 
+
+
+    
+    @unittest.skip("test")
+    def test_exam_create_subject(self):
+        subject_name = exam_cate_managementpo.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num = 1)
+        lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
+        self.assertEqual(subject_name, lastsubject)
+        ba.save_screenshot()
+
+
+    @unittest.skip("test")
+    def test_exam_modify_subject(self):
+        subject_name = exam_cate_managementpo.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
+        lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
+        self.assertEqual(subject_name, lastsubject)
+        ba.save_screenshot()
+
+
+    @unittest.skip("test")
+    def test_exam_delete_subject(self):
+        ba = Base(self.driver)
+        #统计科目总数
+        total_num = self.driver.execute_script("return $('.subject-item-con').size()")
+        exam_cate_managementpo.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
+        last_num = = self.driver.execute_script("return $('.subject-item-con').size()")
+        self.assertEqual(total_num - 1, last_num)
+        ba.save_screenshot()
+        
+
+    @unittest.skip("test")
+    def test_exam_create_cate():
+        cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
+
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     # unittest.main()
@@ -318,3 +416,15 @@ if __name__ == "__main__":
     cfg.set("env_para", "cookie1", "no")
     cfg.set("env_para", "cookie_stu", "no")
     cfg.write(open(cfg_file, "w"))
+    
+
+        
+
+    
+
+
+    
+
+
+    
+

@@ -14,8 +14,8 @@ def create_subject(cfg, driver, base_url, org_name, subject_name):
     addscp = OrgExamCreateListPage(driver, cfg)
     addscp.open()
     addscp.click_create_sub()
-    editscp=OrgExamInputListPage(driver, cfg)
-    okscp=OrgExamiOkListPage(driver, cfg)
+    editscp = OrgExamInputListPage(driver, cfg)
+    okscp = OrgExamiOkListPage(driver, cfg)
     try:
         editscp.clear_sub()
     except NoSuchElementException, e:
@@ -38,7 +38,7 @@ def auto_create_subject(cfg, driver, base_url, org_name, sub_num):
         subject_info.append(subject_name)
         if rs == False:
             break
-    return subject_info
+    return subject_name
 
 
 def modify_subject(cfg, driver, base_url, org_name):
@@ -51,7 +51,7 @@ def modify_subject(cfg, driver, base_url, org_name):
         try:
             searchscp.click_sub_big1()
         except:
-            print u"亲,先创建个类目再来编辑呗!"
+            print u"亲,先创建个科目再来编辑呗!"
             return "lack of subject"
         else:
             searchscp.click_sub_small1()
@@ -60,7 +60,7 @@ def modify_subject(cfg, driver, base_url, org_name):
         try:
             searchscp.click_sub_big2()
         except:
-            print u"亲,先创建个类目再来编辑呗!"
+            print u"亲,先创建个科目再来编辑呗!"
             return "lack of subject"
         else:
             searchscp.click_sub_small2()
@@ -80,7 +80,7 @@ def delete_subject(cfg, driver, base_url, org_name, sub_num=1):
         try:
             searchscp.click_sub_big1()
         except NoSuchElementException, e:
-            print u"亲,先创建个类目再来删除呗!"
+            print u"亲,先创建个科目再来删除呗!"
             return False
         else:
             searchscp.click_sub_del1()
@@ -89,7 +89,7 @@ def delete_subject(cfg, driver, base_url, org_name, sub_num=1):
         try:
             searchscp.click_sub_big2()
         except NoSuchElementException, e:
-            print u"亲,先创建个类目再来删除呗!"
+            print u"亲,先创建个科目再来删除呗!"
             return False
         else:
             searchscp.click_sub_del2()
@@ -207,9 +207,7 @@ def delete_exam_point(cfg, driver, base_url, org_name):
     addscp = OrgExamCreateListPage(driver, cfg)
     addscp.open()
     addscp.click_point_page()
-    driver.find_element(cfg.get('exam', 'point_delete_by'), \
-        cfg.get('exam', 'point_delete_xpath')).click()
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'point_delokbot_by'), \
-        cfg.get('exam', 'point_delokbot_xpath')).click()
-    driver.implicitly_wait(10)
+    searchscp = OrgExamSearchListPage(driver, cfg)
+    searchscp.click_delete_point()
+    okscp = OrgExamiOkListPage(driver, cfg)
+    okscp.click_delpoint_ok()

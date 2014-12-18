@@ -311,3 +311,47 @@ if __name__ == "__main__":
     cfg.set("env_para", "cookie1", "no")
     cfg.set("env_para", "cookie_stu", "no")
     cfg.write(open(cfg_file, "w"))
+
+    
+@unittest.skip("test")
+def test_exam_create_subject(self):
+    subject_name = exam_cate_managementpo.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num = 1)
+    lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
+    self.assertEqual(subject_name, lastsubject)
+    ba.save_screenshot()
+
+
+@unittest.skip("test")
+def test_exam_modify_subject(self):
+    subject_name = exam_cate_managementpo.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
+    lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
+    self.assertEqual(subject_name, lastsubject)
+    ba.save_screenshot()
+
+
+@unittest.skip("test")
+def test_exam_delete_subject(self):
+    ba = Base(self.driver)
+    #统计科目总数
+    total_num = self.driver.execute_script("return $('.subject-item-con').size()")
+    exam_cate_managementpo.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
+    last_num = = self.driver.execute_script("return $('.subject-item-con').size()")
+    self.assertEqual(total_num - 1, last_num)
+    ba.save_screenshot()
+    
+
+@unittest.skip("test")
+def test_exam_create_cate():
+    cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
+    
+
+        
+
+    
+
+
+    
+
+
+    
+

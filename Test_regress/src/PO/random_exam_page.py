@@ -13,6 +13,6 @@ class  RandomExamPage(base.Base):
         self.dr = driver 
         
     def click_random_btn(self):
-        new_href = driver.execute_script("return $('.exam-random-btn').attr('href')")
+        new_href = self.dr.execute_script("return $('.exam-random-btn').attr('href')")
         time.sleep(2)    
-        driver.get("%sexam/%s" %(base_url,new_href))   
+        self.dr.get("%sexam/%s" %(self.base_url,new_href))   

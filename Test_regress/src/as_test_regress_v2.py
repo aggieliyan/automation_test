@@ -546,7 +546,7 @@ if __name__ == "__main__":
     suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
     suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
     allsuites = []
-#    allsuites.append(suite_register
+#    allsuites.append(suite_register)
     allsuites.append(suite1)
     allsuites.append(suite2)
     allsuites.append(suite_exam)

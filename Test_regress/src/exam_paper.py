@@ -40,75 +40,10 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     auto_creatquestion(cfg, driver, 2)
     time.sleep(2)
     #生成试卷
-    examinfo.click_submit_btn()
-    return exam_name  
-    
-#    time.sleep(2) 
-#    driver.get("%sexam/" %(base_url))
-#    driver.implicitly_wait(10) 
-#    driver.find_element(cfg.get('exam', 'exam_subject_by'), \
-#                        cfg.get('exam', 'exam_subject')).click()
-##    now_handle = driver.current_window_handle #得到当前窗口句柄
-##    driver.find_element_by_link_text(u"新建试卷").click()
-#    time.sleep(2)
-##    all_handles = driver.window_handles #获取所有窗口句柄
-##    for handle in all_handles:
-##        if handle != now_handle:
-##            driver.switch_to_window(handle)
-#    new_href = driver.execute_script("return $('.exam-new-btn').attr('href')")
-#    time.sleep(2)    
-#    driver.get("%sexam/%s" %(base_url,new_href))
-#    time.sleep(2)    
-#    driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \
-#                        cfg.get('exam', 'exam_paper_name')).clear()
-#    driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \
-#                        cfg.get('exam', 'exam_paper_name')).send_keys(exam_name)
-#    driver.find_element(cfg.get('exam', 'exam_timelen_by'), \
-#                        cfg.get('exam', 'exam_timelen')).clear()
-#    driver.find_element(cfg.get('exam', 'exam_timelen_by'), \
-#                        cfg.get('exam', 'exam_timelen')).send_keys(exam_time)
-#    if eoperation == 0:
-#        driver.find_element(cfg.get('exam', 'exam_operation_auto_by'), \
-#                            cfg.get('exam', 'exam_operation_auto')).click()
-#    elif eoperation == 1:
-#        driver.find_element(cfg.get('exam', 'exam_operation_continue_by'), \
-#                            cfg.get('exam', 'exam_operation_continue')).click()
-#    if erandom == 0:
-#        driver.find_element(cfg.get('exam', 'exam_random_false_by'), \
-#                            cfg.get('exam', 'exam_random_false')).click()
-#    elif erandom == 1:
-#        driver.find_element(cfg.get('exam', 'exam_random_true_by'), \
-#                            cfg.get('exam', 'exam_random_true')).click()
-#    if eopen == 0:
-#        driver.find_element(cfg.get('exam', 'exam_open_false_by'), \
-#                            cfg.get('exam', 'exam_open_false')).click()
-#    elif eopen == 1:
-#        driver.find_element(cfg.get('exam', 'exam_open_true_by'), \
-#                            cfg.get('exam', 'exam_open_true')).click()
-#        driver.find_element(cfg.get('exam', 'exam_times_down_by'), \
-#                            cfg.get('exam', 'exam_times_down')).click()
-#        driver.find_element(cfg.get('exam', 'exam_times_by'), \
-#                            cfg.get('exam', 'exam_times')).click()
-#        driver.find_element(cfg.get('exam', 'exam_paper_price_by'), \
-#                            cfg.get('exam', 'exam_paper_price')).clear()
-#        driver.find_element(cfg.get('exam', 'exam_paper_price_by'), \
-#                            cfg.get('exam', 'exam_paper_price')).send_keys("10")
-#    driver.find_element(cfg.get('exam', 'exam_next_one_by'), \
-#                        cfg.get('exam', 'exam_next_one')).click()
-#    driver.implicitly_wait(10)
-#    #添加大题
-#    auto_creatquestion(cfg, driver, 2)
-#    #生成试卷
-#    driver.implicitly_wait(10)
-#    driver.find_element(cfg.get('exam', 'exam_paper_build_btn_by'), \
-#                        cfg.get('exam', 'exam_paper_build_btn')).click()
-#    driver.implicitly_wait(10)
-#    paper_id = driver.execute_script(\
-#                "return $(\"a:contains(\'"+exam_name+"\')\").parent().children().eq(0).attr('data-id')")
-#    driver.implicitly_wait(10)
-#    print paper_id
-#    return exam_name
-
+    submit = QuestionInfoPage(driver,cfg)    
+    submit.click_submit_btn()
+    time.sleep(2)
+    return exam_name   
             
 #添加大题
 def add_big_question(cfg, driver, qscore, qtype):
@@ -120,7 +55,6 @@ def add_big_question(cfg, driver, qscore, qtype):
     qinfo.add_big_question(qtype,qscore)
     qinfo.exam_import_question()
     time.sleep(3)
-
     
 #自动添加题
 def auto_creatquestion(cfg, driver, q_num):

@@ -146,3 +146,6 @@ class QuestionInfoPage(base.Base):
     def click_submit_btn(self):
         self.dr.find_element(self.cfg.get('exam', 'exam_paper_build_btn_by'), \
                         self.cfg.get('exam', 'exam_paper_build_btn')).click()
+        
+                        
+                        

@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 import base
 from myoffice_page import MyOfficePage
 
-class SubjectLstPage(base.Base):
+class SubjectListPage(base.Base):
 
 
 	def __init__(self, driver, cfg):

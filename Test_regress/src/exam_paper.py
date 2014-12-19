@@ -69,65 +69,50 @@ def auto_creatquestion(cfg, driver, q_num):
 def random_exam(cfg, driver, base_url, exam_name, exam_time,\
                   eoperation, erandom, eopen):
     time.sleep(2)
-    driver.get("%sexam/" %(base_url))
-    driver.implicitly_wait(10)
-    driver.find_element(cfg.get('exam', 'exam_subject_by'), \
-                        cfg.get('exam', 'exam_subject')).click()
-    time.sleep(2)
-    new_href = driver.execute_script("return $('.exam-random-btn').attr('href')")
-    time.sleep(2)    
-    driver.get("%sexam/%s" %(base_url,new_href))
-    time.sleep(2)    
-    driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \
-                        cfg.get('exam', 'exam_paper_name')).clear()
-    driver.find_element(cfg.get('exam', 'exam_paper_name_by'), \
-                        cfg.get('exam', 'exam_paper_name')).send_keys(exam_name)
-    driver.find_element(cfg.get('exam', 'exam_timelen_by'), \
-                        cfg.get('exam', 'exam_timelen')).clear()
-    driver.find_element(cfg.get('exam', 'exam_timelen_by'), \
-                        cfg.get('exam', 'exam_timelen')).send_keys(exam_time)
-    if eoperation == 0:
-        driver.find_element(cfg.get('exam', 'exam_operation_auto_by'), \
-                            cfg.get('exam', 'exam_operation_auto')).click()
-    elif eoperation == 1:
-        driver.find_element(cfg.get('exam', 'exam_operation_continue_by'), \
-                            cfg.get('exam', 'exam_operation_continue')).click()
-    if erandom == 0:
-        driver.find_element(cfg.get('exam', 'exam_random_false_by'), \
-                            cfg.get('exam', 'exam_random_false')).click()
-    elif erandom == 1:
-        driver.find_element(cfg.get('exam', 'exam_random_true_by'), \
-                            cfg.get('exam', 'exam_random_true')).click()
-    if eopen == 0:
-        driver.find_element(cfg.get('exam', 'exam_open_false_by'), \
-                            cfg.get('exam', 'exam_open_false')).click()
-    elif eopen == 1:
-        driver.find_element(cfg.get('exam', 'exam_open_true_by'), \
-                            cfg.get('exam', 'exam_open_true')).click()
-        driver.find_element(cfg.get('exam', 'exam_times_down_by'), \
-                            cfg.get('exam', 'exam_times_down')).click()
-        driver.find_element(cfg.get('exam', 'exam_times_by'), \
-                            cfg.get('exam', 'exam_times')).click()
-        driver.find_element(cfg.get('exam', 'exam_paper_price_by'), \
-                            cfg.get('exam', 'exam_paper_price')).send_keys("10")
-    driver.implicitly_wait(10)
-    driver.find_element_by_id("add_random_btn").click()
-    driver.find_element_by_css_selector("#question_select_1 > #combobox-container > div.cc-box > span.cc-arrow").click()
-    driver.find_element_by_css_selector("li.cc-item.selectedItem").click()
-    driver.find_element_by_css_selector("p.random-q-num-con > input.random-input").clear()
-    driver.find_element_by_css_selector("p.random-q-num-con > input.random-input").send_keys("9")
-    driver.find_element_by_css_selector("p.random-q-score-con > input.random-input").clear()
-    driver.find_element_by_css_selector("p.random-q-score-con > input.random-input").send_keys("5")
-    driver.find_element_by_id("add_random_btn").click()
-    driver.find_element_by_css_selector("#question_select_2 > #combobox-container > div.cc-box > span.cc-arrow").click()
-    driver.find_element_by_xpath("//div[5]/ul/li[2]").click()
-    driver.find_element_by_xpath("(//input[@type='text'])[14]").clear()
-    driver.find_element_by_xpath("(//input[@type='text'])[14]").send_keys("1")
-    driver.find_element_by_xpath("(//input[@type='text'])[15]").clear()
-    driver.find_element_by_xpath("(//input[@type='text'])[15]").send_keys("2")
-    driver.find_element_by_xpath("(//input[@type='text'])[16]").clear()
-    driver.find_element_by_xpath("(//input[@type='text'])[16]").send_keys("1")
-    driver.find_element_by_id("create_step_one").click()
+    clickexamsystem = ClickExamSystem(driver,cfg)
+    clickexamsystem.open_examsystem()
+    
+    randompg = RandomExamPage(driver,cfg)
+    randompg.click_random_btn()
+    
+    examinfo = ExamInfoPage(driver,cfg)
+    examinfo.input_exam_name(exam_name)
+    examinfo.input_exam_time(exam_time)
+    examinfo.whether_auto_commit(eoperation)
+    examinfo.whether_random(erandom)
+    examinfo.open_or_no(eopen)
+    
+    auto_create_randomquestion(cfg, driver, 2)
+    randompg.click_submit_btn()
+    
+    
+    
+#    driver.find_element_by_css_selector("#question_select_1 > #combobox-container > div.cc-box > span.cc-arrow").click()
+#    driver.find_element_by_css_selector("li.cc-item.selectedItem").click()
+#    driver.find_element_by_css_selector("p.random-q-num-con > input.random-input").clear()
+#    driver.find_element_by_css_selector("p.random-q-num-con > input.random-input").send_keys("9")
+#    driver.find_element_by_css_selector("p.random-q-score-con > input.random-input").clear()
+#    driver.find_element_by_css_selector("p.random-q-score-con > input.random-input").send_keys("5")
+#    driver.find_element_by_id("add_random_btn").click()
+#    driver.find_element_by_css_selector("#question_select_2 > #combobox-container > div.cc-box > span.cc-arrow").click()
+#    driver.find_element_by_xpath("//div[5]/ul/li[2]").click()
+#    driver.find_element_by_xpath("(//input[@type='text'])[14]").clear()
+#    driver.find_element_by_xpath("(//input[@type='text'])[14]").send_keys("1")
+#    driver.find_element_by_xpath("(//input[@type='text'])[15]").clear()
+#    driver.find_element_by_xpath("(//input[@type='text'])[15]").send_keys("2")
+#    driver.find_element_by_xpath("(//input[@type='text'])[16]").clear()
+#    driver.find_element_by_xpath("(//input[@type='text'])[16]").send_keys("1")
+#    driver.find_element_by_id("create_step_one").click()
+    
+#自动添加题
+def auto_create_randomquestion(cfg, driver, q_num):
+    #typel = [1,2,3,4,5,6,7]
+    for i in range(q_num):
+#        qscore = '5'
+#        qtype = random.randint(1, 7)
+        #print qtype
+        add_randomq = RandomExamPage(driver,cfg)
+        add_randomq.add_qusetion_btn()
                           
 #自动创建试卷
 def auto_createpaper(cfg, driver, base_url, eoperation, \

@@ -19,7 +19,7 @@ class SubjectListPage(base.Base):
 
 	#试卷库
 	def click_exampaper(self):
-		driver.find_element_by_link_text(u"试卷库").click()
+		self.dr.find_element_by_link_text(u"试卷库").click()
 
 	#试题库
 	def click_examquestion(self):

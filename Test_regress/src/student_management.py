@@ -8,11 +8,7 @@ import time, random
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from PO.org_student_page import OrgStudentManagePage
-
-def is_element_present(driver, how, what):
-    try: driver.find_element(by=how, value=what)
-    except NoSuchElementException, e: return False
-    return True
+from PO.base import Base
 
 def import_one_student(cfg, driver, base_url, stu_name):
 
@@ -120,13 +116,14 @@ def manage_course_num(cfg, driver, base_url, user_name):
 
 #购买开通授权数 bnum为购买的数量
 def buy_open_num(cfg, driver, base_url):
-    
+
+    ba = Base(driver)
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open_buyopennum()
     ogstumanage.click_inputnum()
     ogstumanage.click_buy()
     #判断余额是否充足
-    re = is_element_present(driver, By.XPATH, "//div[1]/p/span[2]")
+    re = ba.is_element_present("xpath", "//div[1]/p/span[2]")
     if re == True:
         pass
     else:

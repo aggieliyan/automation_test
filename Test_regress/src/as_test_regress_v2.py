@@ -366,14 +366,26 @@ class Test(unittest.TestCase):
         self.assertEqual(True, rs)
 
     @unittest.skip("test")
+    #导入一个学员
     def test_import_one_student(self):
         ba = Base(self.driver)
         stu_name = "exam3996"#还是固定的学员，以后改成注册那生成的学员
         student_management.import_one_student(self.cfg, self.driver, self.base_url, stu_name)
         filename = ba.save_screenshot()
         print "image:"+filename
+        #验证
+        self.driver.refresh()
+        time.sleep(5)
+        ts = self.is_element_present(By.XPATH, \
+            "//span[@title=\'"+stu_name+"\']")
+        if ts == False:
+            rs = False
+        else:
+            rs = True
+        self.assertEqual(True, rs)
 
     @unittest.skip("test")
+    #导入多个学员
     def test_import_multi_student(self):
         ba = Base(self.driver)
         student_management.import_multi_student(self.cfg, self.driver, self.base_url, r"C:\register_user_list.txt")
@@ -381,6 +393,7 @@ class Test(unittest.TestCase):
         print "image:"+filename
 
     @unittest.skip("test")
+    #创建学员
     def test_auto_create_student(self):
         ba = Base(self.driver)
         stu_num = 1
@@ -389,6 +402,7 @@ class Test(unittest.TestCase):
         print "image:"+filename
 
     @unittest.skip("test")
+    #给一个学员开通课程
     def test_open_course_for_one(self):
         ba = Base(self.driver)
         student_management.open_course_for_one(self.cfg, self.driver, self.base_url)
@@ -396,6 +410,7 @@ class Test(unittest.TestCase):
         print "image:"+filename
 
     @unittest.skip("test")
+    #给多个学员开通课程
     def test_open_course_for_multi(self):
         ba = Base(self.driver)
         student_management.open_course_for_multi(self.cfg, self.driver, self.base_url)
@@ -403,6 +418,7 @@ class Test(unittest.TestCase):
         print "image:"+filename
 
     @unittest.skip("test")
+    #管理学员播放授权数
     def test_manage_course_num(self):
         ba = Base(self.driver)
         student_management.manage_course_num(self.cfg, self.driver, self.base_url, self.user_name)
@@ -410,6 +426,7 @@ class Test(unittest.TestCase):
         print "image:"+filename
 
     @unittest.skip("test")
+    #购买授权
     def test_buy_open_num(self):
         ba = Base(self.driver)
         student_management.buy_open_num(self.cfg, self.driver, self.base_url)
@@ -448,6 +465,7 @@ class Test(unittest.TestCase):
         print msg
 
     @unittest.skip("test")#暂时只支持ie
+    #创建一个试题
     def test_auto_exam_onequestion(self):
         ba = Base(self.driver)
         title = "exam" + ba.rand_name()
@@ -456,6 +474,7 @@ class Test(unittest.TestCase):
         print "image:"+filename
 
     @unittest.skip("test")#暂时只支持ie
+    #创建多个试题
     def test_auto_exam_questions(self):
         ba = Base(self.driver)
         title = "exam" + ba.rand_name()

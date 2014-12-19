@@ -6,10 +6,10 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 import HTMLTestRunner
-
 from PO.base import Base
+from PO.org_cate_exam import OrgExamCreateListPage, OrgExamInputListPage, OrgExamiOkListPage, OrgExamSearchListPage
 import login
-import exam_paper, exam_questions, exam_cate_management
+import exam_paper, exam_questions, exam_cate_managementpo
 import exam_user_management
 
 class ExamTest(unittest.TestCase):
@@ -106,67 +106,86 @@ class ExamTest(unittest.TestCase):
         exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa=title, num=1)
         filename = ba.save_screenshot()
         print "image:"+filename
-    @unittest.skip("test")
+    #@unittest.skip("test")
     def test_exam_create_subject(self):
+        ba = Base(self.driver)
         subject_name = exam_cate_managementpo.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num = 1)
         lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
         self.assertEqual(subject_name, lastsubject)
         ba.save_screenshot()
 
 
-    @unittest.skip("test")
+    #@unittest.skip("test")
     def test_exam_modify_subject(self):
+        ba = Base(self.driver)
         subject_name = exam_cate_managementpo.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
         lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
         self.assertEqual(subject_name, lastsubject)
         ba.save_screenshot()
 
 
-    @unittest.skip("test")
+    #@unittest.skip("test")
     def test_exam_delete_subject(self):
         ba = Base(self.driver)
         #统计科目总数
         total_num = self.driver.execute_script("return $('.subject-item-con').size()")
         exam_cate_managementpo.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
-        last_num == self.driver.execute_script("return $('.subject-item-con').size()")
+        last_num = self.driver.execute_script("return $('.subject-item-con').size()")
         self.assertEqual(total_num - 1, last_num)
         ba.save_screenshot()
         
 
-    @unittest.skip("test")
+    #@unittest.skip("test")
     def test_exam_create_cate():
-        cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
-
-    @unittest.skip("test")
-    def test_exam_create_subject(self):
-        subject_name = exam_cate_managementpo.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num = 1)
-        lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
-        self.assertEqual(subject_name, lastsubject)
-        ba.save_screenshot()
-
-
-    @unittest.skip("test")
-    def test_exam_modify_subject(self):
-        subject_name = exam_cate_managementpo.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
-        lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
-        self.assertEqual(subject_name, lastsubject)
-        ba.save_screenshot()
-
-
-    @unittest.skip("test")
-    def test_exam_delete_subject(self):
         ba = Base(self.driver)
-        #统计科目总数
-        total_num = self.driver.execute_script("return $('.subject-item-con').size()")
-        exam_cate_managementpo.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
-        last_num == self.driver.execute_script("return $('.subject-item-con').size()")
+        cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
+        lastcate = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
+        self.assertEqual(cate_name, lastcate)
+        ba.save_screenshot()
+
+        
+    #@unittest.skip("test")
+    def test_exam_modify_cate():
+        ba = Base(self.driver)
+        cate_name = exam_cate_managementpo.modify_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
+        lastcate = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
+        self.assertEqual(cate_name, lastcate)
+        ba.save_screenshot()
+
+
+    #@unittest.skip("test")
+    def test_exam_delete_cate():
+        ba = Base(self.driver)
+        total_num = self.driver.execute_script("return $('.categTitleFalse').size()")
+        exam_cate_managementpo.delete_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
+        last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
         ba.save_screenshot()
-        
 
-    @unittest.skip("test")
-    def test_exam_create_cate():
-        cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
+    #@unittest.skip("test")
+    def test_exam_create_point():
+        ba = Base(self.driver)
+        point_name = exam_cate_managementpo.auto_create_exam_point(self.cfg, self.driver, self.base_url, self.org_name, point_num = 1)
+        lastpoint = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
+        self.assertEqual(point_name, lastpoint)
+        ba.save_screenshot()
+
+    #@unittest.skip("test")
+    def test_exam_modify_point():
+        ba = Base(self.driver)
+        point_name = exam_cate_managementpo.modify_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
+        lastpoint = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
+        self.assertEqual(point_name, lastpoint)
+        ba.save_screenshot()
+
+    #@unittest.skip("test")
+    def test_exam_delete_point():
+        ba = Base(self.driver)
+        total_num = self.driver.execute_script("return $('.categTitleFalse').size()")
+        exam_cate_managementpo.delete_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
+        last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
+        self.assertEqual(total_num - 1, last_num)
+        ba.save_screenshot()
 
     def tearDown(self):
         self.driver.quit()

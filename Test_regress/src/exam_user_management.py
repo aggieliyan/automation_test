@@ -55,7 +55,7 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
         #问答题  
         elif question_title == u"问答题": 
             try:        
-                userexampaper.click_queanswerquestion(question_answer)  
+                userexampaper.click_essayquestion(question_answer)  
             except:
                 None 
         #完形填空题
@@ -83,7 +83,7 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
                 None
             #问答
             try:
-                userexampaper.click_all_queanswerquestion(question_answer)
+                userexampaper.click_all_essayquestion(question_answer)
             except:
                 None
         ###综合题结束

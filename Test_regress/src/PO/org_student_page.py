@@ -178,29 +178,26 @@ class OrgStudentManagePage(base.Base):
 	#点击修改剩余播放次数
 	def click_changenum(self):
 		self.dr.find_element_by_link_text(u"修改剩余播放次数").click()
-	def click_coursenum_change(self):
-		self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_change_by'), \
-							self.cfg.get('manage_course_num', 'manage_coursenum_change')).clear()
-	def click_coursenum_key(self):
-		self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_change_by'), \
-							self.cfg.get('manage_course_num', 'manage_coursenum_change')).send_keys("1")
+	def click_course_num(self):
+		num = self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_change_by'), \
+							self.cfg.get('manage_course_num', 'manage_coursenum_change'))
+		num.clear()
+		num.send_keys("1")
 	#保存
 	def click_save(self):
 		self.dr.find_element_by_link_text(u"保存").click()
 
 	#在线购买授权
 	#输入1个授权
-	def click_inputclick(self):#xpath有变化
+	def click_inputnum(self):
 		h = self.dr.window_handles
 		self.dr.switch_to_window(h[-1])
-		self.dr.find_element(self.cfg.get('org_manage', "buy_open_num_input_by"), \
-						self.cfg.get('org_manage', "buy_open_num_input")).click()
-	def click_inputclear(self):
-		self.dr.find_element(self.cfg.get('org_manage', "buy_open_num_input_by"), \
-						self.cfg.get('org_manage', "buy_open_num_input")).clear()
-	def click_inputkey(self):
-		self.dr.find_element(self.cfg.get('org_manage', "buy_open_num_input_by"), \
-						self.cfg.get('org_manage', "buy_open_num_input")).send_keys("1")
+		num = self.dr.find_element(self.cfg.get('org_manage', "buy_open_num_input_by"), \
+								self.cfg.get('org_manage', "buy_open_num_input"))
+		num.click()
+		num.clear()
+		num.send_keys("1")
+		
 
 	#点击购买
 	def click_buy(self):

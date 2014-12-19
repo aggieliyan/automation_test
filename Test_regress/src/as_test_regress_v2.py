@@ -90,11 +90,6 @@ class Test(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
-
-    def is_element_present(self, how, what):
-        try: self.driver.find_element(by=how, value=what)
-        except NoSuchElementException, e: return False
-        return True
  
     # @unittest.skip("test")
     def test_release_normal_course(self):      
@@ -381,7 +376,7 @@ class Test(unittest.TestCase):
         #验证
         self.driver.refresh()
         time.sleep(5)
-        ts = self.is_element_present(By.XPATH, \
+        ts = ba.self.is_element_present(By.XPATH, \
             "//span[@title=\'"+stu_name+"\']")
         if ts == False:
             rs = False

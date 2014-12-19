@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 import HTMLTestRunner
 from PO.base import Base
 from PO.org_cate_exam import OrgExamCreateListPage, OrgExamInputListPage, OrgExamiOkListPage, OrgExamSearchListPage
-import login
+import login, time
 import exam_paper, exam_questions, exam_cate_managementpo
 import exam_user_management
 
@@ -51,7 +51,8 @@ class ExamTest(unittest.TestCase):
         cookie1 = self.cfg.get('env_para', 'cookie1')
         if(cookie1 == 'no'):
             login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
-            self.cfg.set("env_para", "cookie1", str(self.driver.get_cookie('ASUSS')['value']))
+            self.cfg.set("env_para", "cookie1", \
+                str(self.driver.get_cookie('ASUSS')['value']))
             self.cfg.write(open(self.cfg_file, "w"))
            
             #本来还有一个叫RM的cookie，但是值都是rm不变所以不取了
@@ -60,6 +61,7 @@ class ExamTest(unittest.TestCase):
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
 
+    @unittest.skip("test")
     def test_import_questions(self):
         ba = Base(self.driver)
         self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
@@ -106,83 +108,96 @@ class ExamTest(unittest.TestCase):
         exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa=title, num=1)
         filename = ba.save_screenshot()
         print "image:"+filename
-    #@unittest.skip("test")
+
+
+    @unittest.skip("test")
     def test_exam_create_subject(self):
         ba = Base(self.driver)
         subject_name = exam_cate_managementpo.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num = 1)
+        time.sleep(1)
         lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
         self.assertEqual(subject_name, lastsubject)
         ba.save_screenshot()
 
 
-    #@unittest.skip("test")
+    @unittest.skip("test")
     def test_exam_modify_subject(self):
         ba = Base(self.driver)
         subject_name = exam_cate_managementpo.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
+        time.sleep(1)
         lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
         self.assertEqual(subject_name, lastsubject)
         ba.save_screenshot()
 
 
-    #@unittest.skip("test")
+    @unittest.skip("test")
     def test_exam_delete_subject(self):
         ba = Base(self.driver)
         #统计科目总数
         total_num = self.driver.execute_script("return $('.subject-item-con').size()")
         exam_cate_managementpo.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
+        time.sleep(1)
         last_num = self.driver.execute_script("return $('.subject-item-con').size()")
         self.assertEqual(total_num - 1, last_num)
         ba.save_screenshot()
         
 
-    #@unittest.skip("test")
-    def test_exam_create_cate():
+    @unittest.skip("test")
+    def test_exam_create_cate(self):
         ba = Base(self.driver)
-        cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
+        cate_name = exam_cate_managementpo.auto_create_exam_cate(self.cfg, self.driver, self.base_url, self.org_name, cate_num = 1)
+        time.sleep(1)
         lastcate = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
         self.assertEqual(cate_name, lastcate)
         ba.save_screenshot()
 
         
     #@unittest.skip("test")
-    def test_exam_modify_cate():
+    def test_exam_modify_cate(self):
         ba = Base(self.driver)
         cate_name = exam_cate_managementpo.modify_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
+        time.sleep(1)
         lastcate = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
         self.assertEqual(cate_name, lastcate)
         ba.save_screenshot()
 
 
-    #@unittest.skip("test")
-    def test_exam_delete_cate():
+    @unittest.skip("test")
+    def test_exam_delete_cate(self):
         ba = Base(self.driver)
+        time.sleep(1)
         total_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         exam_cate_managementpo.delete_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
+        time.sleep(1)
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
         ba.save_screenshot()
 
-    #@unittest.skip("test")
-    def test_exam_create_point():
+
+    @unittest.skip("test")
+    def test_exam_create_point(self):
         ba = Base(self.driver)
         point_name = exam_cate_managementpo.auto_create_exam_point(self.cfg, self.driver, self.base_url, self.org_name, point_num = 1)
+        time.sleep(1)
         lastpoint = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
         self.assertEqual(point_name, lastpoint)
         ba.save_screenshot()
 
-    #@unittest.skip("test")
-    def test_exam_modify_point():
+    @unittest.skip("test")
+    def test_exam_modify_point(self):
         ba = Base(self.driver)
         point_name = exam_cate_managementpo.modify_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
+        time.sleep(1)
         lastpoint = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
         self.assertEqual(point_name, lastpoint)
         ba.save_screenshot()
 
-    #@unittest.skip("test")
-    def test_exam_delete_point():
+    @unittest.skip("test")
+    def test_exam_delete_point(self):
         ba = Base(self.driver)
         total_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         exam_cate_managementpo.delete_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
+        time.sleep(1)
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
         ba.save_screenshot()
@@ -190,3 +205,36 @@ class ExamTest(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+
+
+if __name__ == "__main__":
+    #import sys;sys.argv = ['', 'Test.testName']
+    # unittest.main()
+    # suite = unittest.TestLoader().loadTestsFromTestCase(TestSequenceFunctions)
+    # testsuite = unittest.TestSuite()
+    # testsuite.addTest(Test("test_release_normal_course"))
+    # testsuite.addTest(Test("test_create_admin"))
+    # testsuite = unittest.TestLoader().loadTestsFromTestCase(Test)
+    #suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
+    #suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
+    suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
+    allsuites = []
+    #allsuites.append(suite1)
+    #allsuites.append(suite2)
+    allsuites.append(suite_exam)
+    alltests = unittest.TestSuite(allsuites)
+
+    fp = file("myreport.html", 'wb')
+    runner = HTMLTestRunner.HTMLTestRunner(
+                stream=fp,
+                title='My unit test',
+                description='This demonstrates the report output by HTMLTestRunner.'
+                )
+    runner.run(alltests)
+
+    cfg_file = 'config.ini'
+    cfg = ConfigParser.RawConfigParser()
+    cfg.read(cfg_file)
+    cfg.set("env_para", "cookie1", "no")
+    cfg.set("env_para", "cookie_stu", "no")
+    cfg.write(open(cfg_file, "w"))

@@ -223,8 +223,8 @@ if __name__ == "__main__":
     # testsuite.addTest(Test("test_create_admin"))
     # testsuite = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
-#    suite2 = unittest.TestLoader().loadTestsFromTestCase(ttStudentTest)
-    allsuites = [suite1]
+    suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
+    allsuites = [suite1,suite2]
     alltests = unittest.TestSuite(allsuites)
 
 

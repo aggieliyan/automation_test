@@ -21,6 +21,23 @@ class SubjectListPage(base.Base):
 	def click_exampaper(self):
 		self.dr.find_element_by_link_text(u"试卷库").click()
 
+	#创建科目
+    def click_create_sub(self):
+        self.dr.driver.find_element(cfg.get('exam', 'new_subject_by'), \
+        cfg.get('exam', 'new_subject_id')).click()
+        driver.implicitly_wait(10)
+
+    #类目管理
+    def click_create_cate(self):
+        self.dr.driver.find_element_by_link_text(u"类目管理").click()
+        self.dr.driver.implicitly_wait(10)
+
+    #考点库
+    def click_point_page(self):
+        self.dr.driver.find_element_by_link_text(u"考点库").click()
+    
+
+
 	#试题库
 	def click_examquestion(self):
 		pass

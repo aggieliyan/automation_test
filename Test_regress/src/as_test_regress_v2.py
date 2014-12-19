@@ -546,16 +546,10 @@ if __name__ == "__main__":
     suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
     suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
     allsuites = []
-#    allsuites.append(suite_register)
-<<<<<<< HEAD
-#    allsuites.append(suite1)
-#    allsuites.append(suite2)
-    allsuites.append(suite_exam)
-=======
+#    allsuites.append(suite_register
     allsuites.append(suite1)
     allsuites.append(suite2)
     allsuites.append(suite_exam)
->>>>>>> d9f042796e2d7bc300db1a68beefd7bdb5997aec
     alltests = unittest.TestSuite(allsuites)
 
     fp = file("myreport.html", 'wb')

@@ -90,11 +90,6 @@ class Test(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
-
-    def is_element_present(self, how, what):
-        try: self.driver.find_element(by=how, value=what)
-        except NoSuchElementException, e: return False
-        return True
  
     # @unittest.skip("test")
     def test_release_normal_course(self):      
@@ -381,8 +376,7 @@ class Test(unittest.TestCase):
         #验证
         self.driver.refresh()
         time.sleep(5)
-        ts = self.is_element_present(By.XPATH, \
-            "//span[@title=\'"+stu_name+"\']")
+        ts = ba.is_element_present(By.XPATH, "//span[@title=\'"+stu_name+"\']")
         if ts == False:
             rs = False
         else:
@@ -553,9 +547,15 @@ if __name__ == "__main__":
     suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
     allsuites = []
 #    allsuites.append(suite_register)
+<<<<<<< HEAD
 #    allsuites.append(suite1)
 #    allsuites.append(suite2)
     allsuites.append(suite_exam)
+=======
+    allsuites.append(suite1)
+    allsuites.append(suite2)
+    allsuites.append(suite_exam)
+>>>>>>> d9f042796e2d7bc300db1a68beefd7bdb5997aec
     alltests = unittest.TestSuite(allsuites)
 
     fp = file("myreport.html", 'wb')

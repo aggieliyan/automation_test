@@ -173,8 +173,6 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
         self.assertEqual(True, rs)
-        
-
 
     # @unittest.skip("test")
     def test_agency_course(self):
@@ -195,6 +193,168 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
         self.assertEqual(aname, lastadmin)
+        
+    def test_add_cate(self):
+        ba = Base(self.driver)
+        cate_name = u"cate" + ba.rand_name()
+        cate_management.add_cate(self.cfg, self.driver, self.base_url, cate_name=cate_name)
+        
+        time.sleep(2)          
+        actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
+        self.assertEqual(actul, cate_name)
+        ba.save_screenshot()
+
+    def test_delete_cate(self):
+        ba = Base(self.driver)
+        before_delete = cate_management.delete_cate(self.cfg, self.driver, self.base_url)
+        #print before_delete
+        time.sleep(1)         
+        after_delete = self.driver.execute_script("return $(\".categTitle:last\").text()")#取最后一个类目的名称
+        #print after_delete
+        rs = (before_delete==after_delete )
+        #若删除前后最后一个类目名类不同则证明删除类目成功
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+
+    def test_add_course_to_cate(self):
+        ba = Base(self.driver)
+        course_name = ""
+        actual_name = "0"
+        course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url)
+
+        time.sleep(2)
+        actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")
+        actual_name = actual_name.strip()   
+            #print course_name, actual_name
+        self.assertEqual(course_name, actual_name) 
+        ba.save_screenshot()
+        
+    #充值卡 
+    def test_prepaid_cardgroup(self):#充值卡
+        ba = Base(self.driver)
+        title = u"prepaid" + ba.rand_name()
+        price = 100
+        #建卡组
+        card_management.add_prepaid_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title, group_price=price)
+         
+        self.driver.implicitly_wait(10)
+        rs = ba.is_element_present("link text", title)
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+        #建卡,取考号密码
+        if rs == True:
+            card_info = self.add_and_get_card()
+            self.p_card_num = card_info[0]
+            self.p_card_pwd = card_info[1]
+            self.cfg.set("env_para", "p_card_num", self.p_card_num)
+            self.cfg.set("env_para", "p_card_pwd", self.p_card_pwd)
+            self.cfg.write(open(self.cfg_file, "w"))
+
+    #添加卡组-充课卡   
+    def test_course_cardgroup(self):
+        ba = Base(self.driver)
+        title = u"course" + ba.rand_name()
+        card_management.add_course_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title)
+
+        self.driver.implicitly_wait(10)
+        rs = ba.is_element_present("link text", title)
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+        #建卡,取考号密码
+        if rs == True:
+            card_info = self.add_and_get_card(1)#充课卡需要传参数
+            self.c_card_num = card_info[0]
+            self.c_card_pwd = card_info[1]
+            self.cfg.set("env_para", "c_card_num", self.c_card_num)
+            self.cfg.set("env_para", "c_card_pwd", self.c_card_pwd)
+            self.cfg.write(open(self.cfg_file, "w"))
+        
+     #添加卡组-补课卡         
+    def test_cate_cardgroup(self):
+        ba = Base(self.driver)
+        title = u"cate" + ba.rand_name()
+        card_management.add_cate_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, title)
+
+        self.driver.implicitly_wait(10)
+        rs = ba.is_element_present("link text", title)
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+        #建卡,取考号密码
+        if rs == True:
+            card_info = self.add_and_get_card()
+            self.ca_card_num = card_info[0]
+            self.ca_card_pwd = card_info[1]
+            self.cfg.set("env_para", "ca_card_num", self.ca_card_num)
+            self.cfg.set("env_para", "ca_card_pwd", self.ca_card_pwd)
+            self.cfg.write(open(self.cfg_file, "w"))
+        
+    #购买试听卡
+    def test_buy_listen_card(self):
+        ba = Base(self.driver)
+        card_management.buy_listen_card(self.cfg, self.driver, self.base_url)
+        
+        time.sleep(2)
+        payok = self.driver.execute_script("return $('.page-headline').text()").strip()
+        self.assertEqual("付款成功！", payok)
+        ba.save_screenshot()
+        
+    #添加试听卡组
+    def test_listen_cardgroup(self):
+        ba = Base(self.driver)
+        title = u"listen" + ba.rand_name()
+        card_management.add_listen_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title)
+
+        self.driver.implicitly_wait(10)
+        rs = ba.is_element_present("link text", title)
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+        #建卡,取考号密码
+        if rs == True:
+            card_info = self.add_and_get_card()
+            self.l_card_num = card_info[0]
+            self.l_card_pwd = card_info[1]
+            self.cfg.set("env_para", "l_card_num", self.l_card_num)
+            self.cfg.set("env_para", "l_card_pwd", self.l_card_pwd)
+            self.cfg.write(open(self.cfg_file, "w"))
+        
+
+    def add_and_get_card(self, card_type=0):#添加卡并返回第一个卡号和密码
+        ba = Base(self.driver)
+        card_prifix = "c" + ba.rand_name()
+        card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name, card_prifix)
+        if card_type == 0:
+            time.sleep(3)
+            self.driver.find_element_by_link_text(u"浏览卡").click()
+            time.sleep(2)
+            card_num = self.driver.execute_script("return $(\"input[name='groupCheck']:eq(0)\").parent().next().text()")
+            time.sleep(2)
+            card_pwd = self.driver.execute_script("return $(\".textaligncenter\:eq(4)\").text()")
+            time.sleep(2) 
+        else:
+            time.sleep(3)                
+            self.driver.find_element_by_css_selector("span.greenbtn35_text").click()
+            time.sleep(2)
+            card_num = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().text()")
+            time.sleep(2)
+             #print 'card_num:',card_num
+            card_pwd = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().parent().next().children().text()") 
+            time.sleep(2)
+   
+        return card_num, card_pwd
+
+    @unittest.skip("test") 
+    #添加考试卡并返回第一个卡号
+    def test_add_exam_card(self):
+        ba = Base(self.driver)
+        count = 5
+        academy = "qqhru"
+        self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url, count, academy)
+        if self.examcard_num == None:
+           rs = False
+        else:
+           rs = True         
+        self.assertEqual(True, rs)
+        ba.save_screenshot()   
 
     @unittest.skip("test")
     def test_import_one_student(self):

@@ -32,7 +32,7 @@ class StudentTest(unittest.TestCase):
         elif self.browser == 'firefox':
             self.driver = webdriver.Firefox()
         elif self.browser == 'Chrome':
-            chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
+            chromedriver = "C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe"
             os.environ["webdriver.chrome.driver"] = chromedriver
             self.driver = webdriver.Chrome(chromedriver)
         elif self.browser == "Html":
@@ -56,93 +56,93 @@ class StudentTest(unittest.TestCase):
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
 
-    def test_buy_course_use_RMB(self):
-        course_href = self.cfg.get("env_para", "course_href1")
-        if course_href != '0':
-            user_management.buy_course(self.cfg, self.driver, self.base_url, course_href)
-        else:
-            print u"没有购买链接"
-        ba = Base(self.driver)
-
-        rs = ba.is_element_present("id", "J_studycenter")
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(True, rs)
-
-        ba.save_screenshot()
+#    def test_buy_course_use_RMB(self):
+#        course_href = self.cfg.get("env_para", "course_href1")
+#        if course_href != '0':
+#            user_management.buy_course(self.cfg, self.driver, self.base_url, course_href)
+#        else:
+#            print u"没有购买链接"
+#        ba = Base(self.driver)
+#
+#        rs = ba.is_element_present("id", "J_studycenter")
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
+#        self.assertEqual(True, rs)
+#
+#        ba.save_screenshot()
+#        
+#    def test_buy_course_use_card(self):
+#        course_href = self.cfg.get("env_para", "course_href2")
+#        if course_href != '0':
+#            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, course_href)
+#        else:
+#            print u"没有购买链接"
+#        ba = Base(self.driver)
+#
+#        rs = ba.is_element_present("id", "J_studycenter")
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
+#        self.assertEqual(True, rs)
+#        
+#        ba.save_screenshot()
         
-    def test_buy_course_use_card(self):
-        course_href = self.cfg.get("env_para", "course_href2")
-        if course_href != '0':
-            user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, course_href)
-        else:
-            print u"没有购买链接"
-        ba = Base(self.driver)
-
-        rs = ba.is_element_present("id", "J_studycenter")
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(True, rs)
-        
-        ba.save_screenshot()
-        
-    #充值卡
-    def test_use_prepaidcard(self):
-        p_card_num = self.cfg.get("env_para", "p_card_num")
-        p_card_pwd = self.cfg.get("env_para", "p_card_pwd")
-        if p_card_num != 0 and p_card_pwd != 0:
-            confirm_num = card_management.use_prepaidorcate_card(self.cfg, self.driver, self.base_url, p_card_num, p_card_pwd)
-        else:
-            print u"没有获取到卡充值卡号或者密码"
-            
-        ba = Base(self.driver)
-        filename = ba.save_screenshot()
-        print "image:"+filename       
-        self.assertEqual(p_card_num, confirm_num)
-    
-    #充课卡    
-    def test_use_coursecard(self):
-        c_card_num = self.cfg.get("env_para", "c_card_num")
-        c_card_pwd = self.cfg.get("env_para", "c_card_pwd")
-        if c_card_num != 0 and c_card_pwd != 0:
-            confirm_num = card_management.use_prepaidorcate_card(self.cfg, self.driver, self.base_url, c_card_num, c_card_pwd)
-        else:
-            print u"没有获取到充课卡号或者密码"
-            
-        ba = Base(self.driver) 
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(c_card_num, confirm_num)
-
-    #补课卡
-    def test_use_catecard(self):
-        ca_card_num = self.cfg.get("env_para", "ca_card_num")
-        ca_card_pwd = self.cfg.get("env_para", "ca_card_pwd")
-        if ca_card_num != 0 and ca_card_pwd != 0:
-            course_num = card_management.use_course_card(self.cfg, self.driver, self.base_url, ca_card_num, ca_card_pwd)
-        else:
-            print u"没有获取到补课卡号或者密码"
-
-        ba = Base(self.driver)
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(ca_card_num, course_num)       
-
-    #试听卡
-    def test_use_listencard(self):
-        l_card_num = self.cfg.get("env_para", "l_card_num")
-        l_card_pwd = self.cfg.get("env_para", "l_card_pwd")
-        if l_card_num != 0 and l_card_pwd != 0:
-            login.login_by_logindo(self.cfg, self.driver, self.base_url, l_card_num, l_card_pwd)
-        else:
-            print u"没有获取到试听卡号或者密码"
-            
-        time.sleep(2)     
-        confirm_ok = self.driver.execute_script("return $('.mode-selected').text()")
-        ba = Base(self.driver)
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(u"绑定手机", confirm_ok)
+#    #充值卡
+#    def test_use_prepaidcard(self):
+#        p_card_num = self.cfg.get("env_para", "p_card_num")
+#        p_card_pwd = self.cfg.get("env_para", "p_card_pwd")
+#        if p_card_num != 0 and p_card_pwd != 0:
+#            confirm_num = card_management.use_prepaidorcate_card(self.cfg, self.driver, self.base_url, p_card_num, p_card_pwd)
+#        else:
+#            print u"没有获取到卡充值卡号或者密码"
+#            
+#        ba = Base(self.driver)
+#        filename = ba.save_screenshot()
+#        print "image:"+filename       
+#        self.assertEqual(p_card_num, confirm_num)
+#    
+#    #充课卡    
+#    def test_use_coursecard(self):
+#        c_card_num = self.cfg.get("env_para", "c_card_num")
+#        c_card_pwd = self.cfg.get("env_para", "c_card_pwd")
+#        if c_card_num != 0 and c_card_pwd != 0:
+#            confirm_num = card_management.use_prepaidorcate_card(self.cfg, self.driver, self.base_url, c_card_num, c_card_pwd)
+#        else:
+#            print u"没有获取到充课卡号或者密码"
+#            
+#        ba = Base(self.driver) 
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
+#        self.assertEqual(c_card_num, confirm_num)
+#
+#    #补课卡
+#    def test_use_catecard(self):
+#        ca_card_num = self.cfg.get("env_para", "ca_card_num")
+#        ca_card_pwd = self.cfg.get("env_para", "ca_card_pwd")
+#        if ca_card_num != 0 and ca_card_pwd != 0:
+#            course_num = card_management.use_course_card(self.cfg, self.driver, self.base_url, ca_card_num, ca_card_pwd)
+#        else:
+#            print u"没有获取到补课卡号或者密码"
+#
+#        ba = Base(self.driver)
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
+#        self.assertEqual(ca_card_num, course_num)       
+#
+#    #试听卡
+#    def test_use_listencard(self):
+#        l_card_num = self.cfg.get("env_para", "l_card_num")
+#        l_card_pwd = self.cfg.get("env_para", "l_card_pwd")
+#        if l_card_num != 0 and l_card_pwd != 0:
+#            login.login_by_logindo(self.cfg, self.driver, self.base_url, l_card_num, l_card_pwd)
+#        else:
+#            print u"没有获取到试听卡号或者密码"
+#            
+#        time.sleep(2)     
+#        confirm_ok = self.driver.execute_script("return $('.mode-selected').text()")
+#        ba = Base(self.driver)
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
+#        self.assertEqual(u"绑定手机", confirm_ok)
 
     #使用考试卡  
     def test_use_exam_card(self):

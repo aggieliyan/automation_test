@@ -358,6 +358,8 @@ class Test(unittest.TestCase):
         count = 5
         academy = "qqhru"
         self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url, count, academy)
+        self.cfg.set("env_para", "examcard_num", self.examcard_num)
+        self.cfg.write(open(self.cfg_file, "w"))
         if self.examcard_num == None:
            rs = False
         else:

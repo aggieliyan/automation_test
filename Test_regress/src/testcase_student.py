@@ -160,23 +160,5 @@ class StudentTest(unittest.TestCase):
         print "image:"+filename
         self.assertEqual(academy_catename_ok, academy_catename)
 
-    @unittest.skip("test") 
-    #学员参加考试
-    def test_exam_user(self):
-        ba = Base(self.driver)
-        # operation = '0' 自动提交  operation = '1' 继续答题
-        operation = '1'
-        question_answer ='123'
-        # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
-        blank_pager = 0
-#        paper_name = self.paper_name
-        paper_name = self.cfg.get("env_para", "paper_name")
-        exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, paper_name)
-
-        paper_name_ok = self.driver.execute_script("return $('.exampaper-title:eq(0)').text()")#获取已考完的第一个试卷名称
-        filename = ba.save_screenshot()
-        print "image:"+filename 
-        self.assertEqual(paper_name, paper_name_ok)
-
     def tearDown(self):
         self.driver.quit()

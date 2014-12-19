@@ -14,7 +14,6 @@ import HTMLTestRunner
 
 from PO.base import Base
 from testcase_student import StudentTest
-from testcase_exam import ExamTest
 import login, new_course_management, course_management, student_management
 import card_management, cate_management, admin_management, user_management
 import exam_paper, exam_questions, exam_cate_management
@@ -174,8 +173,6 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
         self.assertEqual(True, rs)
-        
-
 
     # @unittest.skip("test")
     def test_agency_course(self):
@@ -196,6 +193,168 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
         self.assertEqual(aname, lastadmin)
+        
+    def test_add_cate(self):
+        ba = Base(self.driver)
+        cate_name = u"cate" + ba.rand_name()
+        cate_management.add_cate(self.cfg, self.driver, self.base_url, cate_name=cate_name)
+        
+        time.sleep(2)          
+        actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
+        self.assertEqual(actul, cate_name)
+        ba.save_screenshot()
+
+    def test_delete_cate(self):
+        ba = Base(self.driver)
+        before_delete = cate_management.delete_cate(self.cfg, self.driver, self.base_url)
+        #print before_delete
+        time.sleep(1)         
+        after_delete = self.driver.execute_script("return $(\".categTitle:last\").text()")#取最后一个类目的名称
+        #print after_delete
+        rs = (before_delete==after_delete )
+        #若删除前后最后一个类目名类不同则证明删除类目成功
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+
+    def test_add_course_to_cate(self):
+        ba = Base(self.driver)
+        course_name = ""
+        actual_name = "0"
+        course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url)
+
+        time.sleep(2)
+        actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")
+        actual_name = actual_name.strip()   
+            #print course_name, actual_name
+        self.assertEqual(course_name, actual_name) 
+        ba.save_screenshot()
+        
+    #充值卡 
+    def test_prepaid_cardgroup(self):#充值卡
+        ba = Base(self.driver)
+        title = u"prepaid" + ba.rand_name()
+        price = 100
+        #建卡组
+        card_management.add_prepaid_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title, group_price=price)
+         
+        self.driver.implicitly_wait(10)
+        rs = ba.is_element_present("link text", title)
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+        #建卡,取考号密码
+        if rs == True:
+            card_info = self.add_and_get_card()
+            self.p_card_num = card_info[0]
+            self.p_card_pwd = card_info[1]
+            self.cfg.set("env_para", "p_card_num", self.p_card_num)
+            self.cfg.set("env_para", "p_card_pwd", self.p_card_pwd)
+            self.cfg.write(open(self.cfg_file, "w"))
+
+    #添加卡组-充课卡   
+    def test_course_cardgroup(self):
+        ba = Base(self.driver)
+        title = u"course" + ba.rand_name()
+        card_management.add_course_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title)
+
+        self.driver.implicitly_wait(10)
+        rs = ba.is_element_present("link text", title)
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+        #建卡,取考号密码
+        if rs == True:
+            card_info = self.add_and_get_card(1)#充课卡需要传参数
+            self.c_card_num = card_info[0]
+            self.c_card_pwd = card_info[1]
+            self.cfg.set("env_para", "c_card_num", self.c_card_num)
+            self.cfg.set("env_para", "c_card_pwd", self.c_card_pwd)
+            self.cfg.write(open(self.cfg_file, "w"))
+        
+     #添加卡组-补课卡         
+    def test_cate_cardgroup(self):
+        ba = Base(self.driver)
+        title = u"cate" + ba.rand_name()
+        card_management.add_cate_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, title)
+
+        self.driver.implicitly_wait(10)
+        rs = ba.is_element_present("link text", title)
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+        #建卡,取考号密码
+        if rs == True:
+            card_info = self.add_and_get_card()
+            self.ca_card_num = card_info[0]
+            self.ca_card_pwd = card_info[1]
+            self.cfg.set("env_para", "ca_card_num", self.ca_card_num)
+            self.cfg.set("env_para", "ca_card_pwd", self.ca_card_pwd)
+            self.cfg.write(open(self.cfg_file, "w"))
+        
+    #购买试听卡
+    def test_buy_listen_card(self):
+        ba = Base(self.driver)
+        card_management.buy_listen_card(self.cfg, self.driver, self.base_url)
+        
+        time.sleep(2)
+        payok = self.driver.execute_script("return $('.page-headline').text()").strip()
+        self.assertEqual("付款成功！", payok)
+        ba.save_screenshot()
+        
+    #添加试听卡组
+    def test_listen_cardgroup(self):
+        ba = Base(self.driver)
+        title = u"listen" + ba.rand_name()
+        card_management.add_listen_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title)
+
+        self.driver.implicitly_wait(10)
+        rs = ba.is_element_present("link text", title)
+        self.assertEqual(True, rs)
+        ba.save_screenshot()
+        #建卡,取考号密码
+        if rs == True:
+            card_info = self.add_and_get_card()
+            self.l_card_num = card_info[0]
+            self.l_card_pwd = card_info[1]
+            self.cfg.set("env_para", "l_card_num", self.l_card_num)
+            self.cfg.set("env_para", "l_card_pwd", self.l_card_pwd)
+            self.cfg.write(open(self.cfg_file, "w"))
+        
+
+    def add_and_get_card(self, card_type=0):#添加卡并返回第一个卡号和密码
+        ba = Base(self.driver)
+        card_prifix = "c" + ba.rand_name()
+        card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name, card_prifix)
+        if card_type == 0:
+            time.sleep(3)
+            self.driver.find_element_by_link_text(u"浏览卡").click()
+            time.sleep(2)
+            card_num = self.driver.execute_script("return $(\"input[name='groupCheck']:eq(0)\").parent().next().text()")
+            time.sleep(2)
+            card_pwd = self.driver.execute_script("return $(\".textaligncenter\:eq(4)\").text()")
+            time.sleep(2) 
+        else:
+            time.sleep(3)                
+            self.driver.find_element_by_css_selector("span.greenbtn35_text").click()
+            time.sleep(2)
+            card_num = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().text()")
+            time.sleep(2)
+             #print 'card_num:',card_num
+            card_pwd = self.driver.execute_script("return $(\"input[type='checkbox']:eq(1)\").parent().parent().next().children().text()") 
+            time.sleep(2)
+   
+        return card_num, card_pwd
+
+    @unittest.skip("test") 
+    #添加考试卡并返回第一个卡号
+    def test_add_exam_card(self):
+        ba = Base(self.driver)
+        count = 5
+        academy = "qqhru"
+        self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url, count, academy)
+        if self.examcard_num == None:
+           rs = False
+        else:
+           rs = True         
+        self.assertEqual(True, rs)
+        ba.save_screenshot()   
 
     @unittest.skip("test")
     def test_import_one_student(self):
@@ -248,7 +407,52 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
                         
+    def test_import_questions(self):
+        ba = Base(self.driver)
+        self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
+        #建立数据库连接查询当前试题总数并关闭连接,否则下面的查询会有缓存
+        db = 'ablesky_examsystem'
+        conn = ba.connect_db(self.dbhost, db)
+        cursor = conn.cursor()
+        sql = "SELECT COUNT(*) FROM e_question_q"
+        cursor.execute(sql)
+        num1 = cursor.fetchall()[0][0]
+        cursor.close()
+        #调用导入试题
+        try:
+            exam_questions.import_questions(self.cfg, self.driver, self.template)
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append("fail to import questions..")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+        #重新建立数据库,查询导入试题后的总数,二者差即为导入总数
+        conn = ba.connect_db(self.dbhost, db)
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        num2 = cursor.fetchall()[0][0]
+        num = num2 - num1
+        cursor.execute \
+            ("SELECT content_q,content_q FROM e_question_q ORDER BY id_q DESC LIMIT 1")
+        title = cursor.fetchall()[0][0]
+        msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
+        print msg
 
+    @unittest.skip("test")#暂时只支持ie
+    def test_auto_exam_onequestion(self):
+        ba = Base(self.driver)
+        title = "exam" + ba.rand_name()
+        exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa=title, onetype=7)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    @unittest.skip("test")#暂时只支持ie
+    def test_auto_exam_questions(self):
+        ba = Base(self.driver)
+        title = "exam" + ba.rand_name()
+        exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa=title, num=1)
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
     @unittest.skip("test")    
     def test_register(self):
@@ -313,7 +517,36 @@ class Test(unittest.TestCase):
 
 
     
+    @unittest.skip("test")
+    def test_exam_create_subject(self):
+        subject_name = exam_cate_managementpo.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num = 1)
+        lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
+        self.assertEqual(subject_name, lastsubject)
+        ba.save_screenshot()
 
+
+    @unittest.skip("test")
+    def test_exam_modify_subject(self):
+        subject_name = exam_cate_managementpo.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
+        lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
+        self.assertEqual(subject_name, lastsubject)
+        ba.save_screenshot()
+
+
+    @unittest.skip("test")
+    def test_exam_delete_subject(self):
+        ba = Base(self.driver)
+        #统计科目总数
+        total_num = self.driver.execute_script("return $('.subject-item-con').size()")
+        exam_cate_managementpo.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
+        last_num == self.driver.execute_script("return $('.subject-item-con').size()")
+        self.assertEqual(total_num - 1, last_num)
+        ba.save_screenshot()
+        
+
+    @unittest.skip("test")
+    def test_exam_create_cate():
+        cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
@@ -325,11 +558,8 @@ if __name__ == "__main__":
     # testsuite = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
-    suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
-    allsuites = []
-    # allsuites.append(suite1)
-    # allsuites.append(suite2)
-    allsuites.append(suite_exam)
+    allsuites = [suite1]
+    allsuites.append(suite2)
     alltests = unittest.TestSuite(allsuites)
 
     fp = file("myreport.html", 'wb')

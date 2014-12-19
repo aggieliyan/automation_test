@@ -133,12 +133,11 @@ def add_exam_card_management(cfg, driver, base_url, count, academy):
 #总调用方法####################################
 def add_exam_card(cfg, driver, base_url, count, academy):
     page_catename = get_academy_catename(cfg, driver, academy)
-    base_url = "http://www.beta.ablesky.com/"
     exam_paper.create_paper(cfg, driver, base_url, page_catename, 1, 1, 1, 1)
 #    time.sleep(2)
 #    driver.get("http://www.beta.ablesky.com/exam/examPaperRedirect.do?action=toExamPaperList&subjectId=3171")
 #    time.sleep(2)  
-    examcard_number = add_exam_card_management(cfg, driver, count, academy)
+    examcard_number = add_exam_card_management(cfg, driver, base_url, count, academy)
     return examcard_number
 
 def user_usexamcard_management(cfg, driver, base_url, examcard_num):
@@ -160,6 +159,7 @@ def user_usexamcard(cfg, driver, base_url, examcard_num):
     academy_catename = user_usexamcard_management(cfg, driver, examcard_num)
     # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
     exam_user_management.exam_user(cfg, driver, operation=0, blank_pager=0, question_answer='123', paper_name=academy_catename)
+    return academy_catename
 
 ##使用充值卡和充课卡
 #def use_prepaid_card(cfg, driver, base_url, card_num, card_psw):

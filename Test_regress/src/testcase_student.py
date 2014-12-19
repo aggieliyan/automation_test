@@ -96,8 +96,9 @@ class StudentTest(unittest.TestCase):
             print u"没有获取到卡充值卡号或者密码"
             
         ba = Base(self.driver)
+        filename = ba.save_screenshot()
+        print "image:"+filename       
         self.assertEqual(p_card_num, confirm_num)
-        ba.save_screenshot()
     
     #充课卡    
     def test_use_coursecard(self):
@@ -109,8 +110,10 @@ class StudentTest(unittest.TestCase):
             print u"没有获取到充课卡号或者密码"
             
         ba = Base(self.driver) 
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(c_card_num, confirm_num)
-        ba.save_screenshot()
+
     #补课卡
     def test_use_catecard(self):
         ca_card_num = self.cfg.get("env_para", "ca_card_num")
@@ -121,8 +124,9 @@ class StudentTest(unittest.TestCase):
             print u"没有获取到补课卡号或者密码"
 
         ba = Base(self.driver)
-        self.assertEqual(ca_card_num, course_num)
-        ba.save_screenshot()        
+        filename = ba.save_screenshot()
+        print "image:"+filename
+        self.assertEqual(ca_card_num, course_num)       
 
     #试听卡
     def test_use_listencard(self):
@@ -136,8 +140,9 @@ class StudentTest(unittest.TestCase):
         time.sleep(2)     
         confirm_ok = self.driver.execute_script("return $('.mode-selected').text()")
         ba = Base(self.driver)
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(u"绑定手机", confirm_ok)
-        ba.save_screenshot()
 
     @unittest.skip("test") 
     #使用考试卡  
@@ -151,8 +156,9 @@ class StudentTest(unittest.TestCase):
         ba = Base(self.driver)            
         time.sleep(1)         
         academy_catename_ok = self.driver.execute_script("return $('.exampaper-title:eq(0)').text()")#获取已考完的第一个试卷名称
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(academy_catename_ok, academy_catename)
-        ba.save_screenshot()
 
     @unittest.skip("test") 
     #学员参加考试
@@ -168,8 +174,9 @@ class StudentTest(unittest.TestCase):
         exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, paper_name)
 
         paper_name_ok = self.driver.execute_script("return $('.exampaper-title:eq(0)').text()")#获取已考完的第一个试卷名称
+        filename = ba.save_screenshot()
+        print "image:"+filename 
         self.assertEqual(paper_name, paper_name_ok)
-        ba.save_screenshot()
 
     def tearDown(self):
         self.driver.quit()

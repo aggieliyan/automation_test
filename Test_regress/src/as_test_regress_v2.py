@@ -202,8 +202,9 @@ class Test(unittest.TestCase):
         
         time.sleep(2)          
         actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(actul, cate_name)
-        ba.save_screenshot()
 
     def test_delete_cate(self):
         ba = Base(self.driver)
@@ -214,8 +215,9 @@ class Test(unittest.TestCase):
         #print after_delete
         rs = (before_delete==after_delete )
         #若删除前后最后一个类目名类不同则证明删除类目成功
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(True, rs)
-        ba.save_screenshot()
 
     def test_add_course_to_cate(self):
         ba = Base(self.driver)
@@ -226,9 +228,9 @@ class Test(unittest.TestCase):
         time.sleep(2)
         actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")
         actual_name = actual_name.strip()   
-            #print course_name, actual_name
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(course_name, actual_name) 
-        ba.save_screenshot()
         
     #充值卡 
     def test_prepaid_cardgroup(self):#充值卡
@@ -240,8 +242,9 @@ class Test(unittest.TestCase):
          
         self.driver.implicitly_wait(10)
         rs = ba.is_element_present("link text", title)
+        filename = ba.save_screenshot()
+        print "image:"+filename        
         self.assertEqual(True, rs)
-        ba.save_screenshot()
         #建卡,取考号密码
         if rs == True:
             card_info = self.add_and_get_card()
@@ -259,8 +262,9 @@ class Test(unittest.TestCase):
 
         self.driver.implicitly_wait(10)
         rs = ba.is_element_present("link text", title)
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(True, rs)
-        ba.save_screenshot()
         #建卡,取考号密码
         if rs == True:
             card_info = self.add_and_get_card(1)#充课卡需要传参数
@@ -278,8 +282,9 @@ class Test(unittest.TestCase):
 
         self.driver.implicitly_wait(10)
         rs = ba.is_element_present("link text", title)
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(True, rs)
-        ba.save_screenshot()
         #建卡,取考号密码
         if rs == True:
             card_info = self.add_and_get_card()
@@ -296,8 +301,9 @@ class Test(unittest.TestCase):
         
         time.sleep(2)
         payok = self.driver.execute_script("return $('.page-headline').text()").strip()
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual("付款成功！", payok)
-        ba.save_screenshot()
         
     #添加试听卡组
     def test_listen_cardgroup(self):
@@ -307,8 +313,9 @@ class Test(unittest.TestCase):
 
         self.driver.implicitly_wait(10)
         rs = ba.is_element_present("link text", title)
+        filename = ba.save_screenshot()
+        print "image:"+filename
         self.assertEqual(True, rs)
-        ba.save_screenshot()
         #建卡,取考号密码
         if rs == True:
             card_info = self.add_and_get_card()
@@ -353,9 +360,10 @@ class Test(unittest.TestCase):
         if self.examcard_num == None:
            rs = False
         else:
-           rs = True         
+           rs = True  
+        filename = ba.save_screenshot()
+        print "image:"+filename       
         self.assertEqual(True, rs)
-        ba.save_screenshot()   
 
     @unittest.skip("test")
     def test_import_one_student(self):

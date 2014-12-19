@@ -73,6 +73,7 @@ class  ExamInfoPage(base.Base):
         self.dr.find_element(self.cfg.get('exam', 'exam_next_one_by'), \
                         self.cfg.get('exam', 'exam_next_one')).click()
 class QuestionInfoPage(base.Base):
+    
     def __init__(self, driver, cfg):
         self.cfg = cfg
         self.base_url = cfg.get('env_para', 'base_url')

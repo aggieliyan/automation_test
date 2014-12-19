@@ -14,6 +14,7 @@ import HTMLTestRunner
 
 from PO.base import Base
 from testcase_student import StudentTest
+from testcase_register import RegisterTest
 from testcase_exam import ExamTest
 import login, new_course_management, course_management, student_management
 import card_management, cate_management, admin_management, user_management
@@ -486,16 +487,6 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    @unittest.skip("test")    
-    def test_register(self):
-        ba = Base(self.driver)
-        user_name = ""
-        user_name = login.auto_register(self.cfg, self.driver, self.base_url, 1, 1)
-        self.import_name = user_name
-        
-        filename = ba.save_screenshot()
-        print "image:"+filename
-
     # @unittest.skip("test")
     def test_add_announcement(self):
         ba = Base(self.driver)
@@ -556,10 +547,12 @@ if __name__ == "__main__":
     # testsuite.addTest(Test("test_release_normal_course"))
     # testsuite.addTest(Test("test_create_admin"))
     # testsuite = unittest.TestLoader().loadTestsFromTestCase(Test)
+    suite_register = unittest.TestLoader().loadTestsFromTestCase(RegisterTest)
     suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
     suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
     allsuites = []
+#    allsuites.append(suite_register)
     allsuites.append(suite1)
     allsuites.append(suite2)
     allsuites.append(suite_exam)

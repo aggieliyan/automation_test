@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
-from PO.create_exam_page import ClickExamSystem, ExamInfoPage, QuestionInfoPage
+from PO.exam_paper_page import ClickExamSystem, ExamInfoPage, QuestionInfoPage
 from PO.base import Base
 from PO.random_exam_page import RandomExamPage
 

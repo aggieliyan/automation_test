@@ -16,6 +16,7 @@ from PO.base import Base
 from testcase_student import StudentTest
 from testcase_register import RegisterTest
 from testcase_exam import ExamTest
+from testcase_exam_student import ExamStudentTest
 import login, new_course_management, course_management, student_management
 import card_management, cate_management, admin_management, user_management
 import exam_paper, exam_questions, exam_cate_management
@@ -545,11 +546,13 @@ if __name__ == "__main__":
     suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
     suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
+    suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
     allsuites = []
 #    allsuites.append(suite_register)
     allsuites.append(suite1)
     allsuites.append(suite2)
     allsuites.append(suite_exam)
+    allsuites.append(suite_exam_student)    
     alltests = unittest.TestSuite(allsuites)
 
     fp = file("myreport.html", 'wb')

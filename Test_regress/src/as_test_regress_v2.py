@@ -376,8 +376,7 @@ class Test(unittest.TestCase):
         #验证
         self.driver.refresh()
         time.sleep(5)
-        ts = ba.self.is_element_present(By.XPATH, \
-            "//span[@title=\'"+stu_name+"\']")
+        ts = ba.is_element_present(By.XPATH, "//span[@title=\'"+stu_name+"\']")
         if ts == False:
             rs = False
         else:

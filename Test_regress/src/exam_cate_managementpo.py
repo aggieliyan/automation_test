@@ -73,7 +73,7 @@ def delete_subject(cfg, driver, base_url, org_name, sub_num=1):
     exam_subject = SubjectListPage(driver, cfg)
     exam_subject.open()
     del_name = driver.execute_script("return $('.subject-item-con').eq(0).children().eq(0).text()")
- 
+    total_num = driver.execute_script("return $('.subject-item-con').size()")
     if del_name != u'默认科目': 
         try:
             exam_subject.click_sub_big1()
@@ -94,7 +94,7 @@ def delete_subject(cfg, driver, base_url, org_name, sub_num=1):
             del_name = exam_subject.click_sub_big2().text
     exam_subject.click_delsub_ok()
     print del_name 
-    return del_name
+    return total_num
 
 def create_exam_cate(cfg, driver, base_url, org_name, cate_name, cate_detail):
     exam_subject = SubjectListPage(driver, cfg)

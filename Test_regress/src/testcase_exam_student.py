@@ -68,6 +68,7 @@ class ExamStudentTest(unittest.TestCase):
         paper_name = self.cfg.get("env_para", "paper_name")
         exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, paper_name)
 
+        time.sleep(2)
         paper_name_ok = self.driver.execute_script("return $('.exampaper-title:eq(0)').text()")#获取已考完的第一个试卷名称
         filename = ba.save_screenshot()
         print "image:"+filename 

@@ -144,7 +144,6 @@ class StudentTest(unittest.TestCase):
         print "image:"+filename
         self.assertEqual(u"绑定手机", confirm_ok)
 
-    @unittest.skip("test") 
     #使用考试卡  
     def test_use_exam_card(self):
         examcard_num = self.cfg.get("env_para", "examcard_num")

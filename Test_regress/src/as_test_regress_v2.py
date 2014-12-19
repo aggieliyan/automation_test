@@ -14,6 +14,7 @@ import HTMLTestRunner
 
 from PO.base import Base
 from testcase_student import StudentTest
+from testcase_exam import ExamTest
 import login, new_course_management, course_management, student_management
 import card_management, cate_management, admin_management, user_management
 import exam_paper, exam_questions, exam_cate_management
@@ -247,52 +248,7 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
                         
-    def test_import_questions(self):
-        ba = Base(self.driver)
-        self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
-        #建立数据库连接查询当前试题总数并关闭连接,否则下面的查询会有缓存
-        db = 'ablesky_examsystem'
-        conn = ba.connect_db(self.dbhost, db)
-        cursor = conn.cursor()
-        sql = "SELECT COUNT(*) FROM e_question_q"
-        cursor.execute(sql)
-        num1 = cursor.fetchall()[0][0]
-        cursor.close()
-        #调用导入试题
-        try:
-            exam_questions.import_questions(self.cfg, self.driver, self.template)
-        except Exception, e:
-            print traceback.format_exc() 
-            self.verificationErrors.append("fail to import questions..")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-        #重新建立数据库,查询导入试题后的总数,二者差即为导入总数
-        conn = ba.connect_db(self.dbhost, db)
-        cursor = conn.cursor()
-        cursor.execute(sql)
-        num2 = cursor.fetchall()[0][0]
-        num = num2 - num1
-        cursor.execute \
-            ("SELECT content_q,content_q FROM e_question_q ORDER BY id_q DESC LIMIT 1")
-        title = cursor.fetchall()[0][0]
-        msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
-        print msg
 
-    @unittest.skip("test")#暂时只支持ie
-    def test_auto_exam_onequestion(self):
-        ba = Base(self.driver)
-        title = "exam" + ba.rand_name()
-        exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa=title, onetype=7)
-        filename = ba.save_screenshot()
-        print "image:"+filename
-
-    @unittest.skip("test")#暂时只支持ie
-    def test_auto_exam_questions(self):
-        ba = Base(self.driver)
-        title = "exam" + ba.rand_name()
-        exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa=title, num=1)
-        filename = ba.save_screenshot()
-        print "image:"+filename
 
     @unittest.skip("test")    
     def test_register(self):
@@ -357,36 +313,7 @@ class Test(unittest.TestCase):
 
 
     
-    @unittest.skip("test")
-    def test_exam_create_subject(self):
-        subject_name = exam_cate_managementpo.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num = 1)
-        lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
-        self.assertEqual(subject_name, lastsubject)
-        ba.save_screenshot()
 
-
-    @unittest.skip("test")
-    def test_exam_modify_subject(self):
-        subject_name = exam_cate_managementpo.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
-        lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
-        self.assertEqual(subject_name, lastsubject)
-        ba.save_screenshot()
-
-
-    @unittest.skip("test")
-    def test_exam_delete_subject(self):
-        ba = Base(self.driver)
-        #统计科目总数
-        total_num = self.driver.execute_script("return $('.subject-item-con').size()")
-        exam_cate_managementpo.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
-        last_num == self.driver.execute_script("return $('.subject-item-con').size()")
-        self.assertEqual(total_num - 1, last_num)
-        ba.save_screenshot()
-        
-
-    @unittest.skip("test")
-    def test_exam_create_cate():
-        cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
@@ -398,8 +325,11 @@ if __name__ == "__main__":
     # testsuite = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
-    allsuites = [suite1]
-    allsuites.append(suite2)
+    suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
+    allsuites = []
+    # allsuites.append(suite1)
+    # allsuites.append(suite2)
+    allsuites.append(suite_exam)
     alltests = unittest.TestSuite(allsuites)
 
     fp = file("myreport.html", 'wb')

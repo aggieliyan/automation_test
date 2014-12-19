@@ -7,7 +7,7 @@ Created on Jun 1, 2012
 import time
 import exam_paper
 import exam_user_management
-from PO.org_card_page import OrgMancardgroupPage, OrgAddcardgroupPage, OrgBuyliscardPage, \
+from PO.org_card_page import OrgCardgroupListPage, OrgCardgroupInputPage, OrgBuyliscardPage, \
     OrgAddcardPage, OrgUselearncardPage, OrgAcademyFirstPage, OrgAddExamcardPage, OrguseExamcardPage
 
 #使用充值卡和充课卡
@@ -37,20 +37,20 @@ def use_course_card(cfg, driver, base_url, card_num, card_psw):
 #添加卡组-充值卡
 def add_prepaid_cardgroup(cfg, driver, base_url, org_name, \
         group_name, group_price=300):
-    ogmancardgroup = OrgMancardgroupPage(driver, cfg)
+    ogmancardgroup = OrgCardgroupListPage(driver, cfg)
     ogmancardgroup.open()
     ogmancardgroup.click_addcardgroup()
-    ogaddcardgroup = OrgAddcardgroupPage(driver, cfg)    
+    ogaddcardgroup = OrgCardgroupInputPage(driver, cfg)    
     ogaddcardgroup.input_groupname(group_name)
     ogaddcardgroup.input_prepaidprice(group_price)
     ogaddcardgroup.click_addgroup()
     
 #添加卡组-充课卡
 def add_course_cardgroup(cfg, driver, base_url, org_name, group_name):
-    ogmancardgroup = OrgMancardgroupPage(driver, cfg)
+    ogmancardgroup = OrgCardgroupListPage(driver, cfg)
     ogmancardgroup.open()
     ogmancardgroup.click_addcardgroup()
-    ogaddcardgroup = OrgAddcardgroupPage(driver, cfg)
+    ogaddcardgroup = OrgCardgroupInputPage(driver, cfg)
     ogaddcardgroup.select_coursecard() 
     ogaddcardgroup.input_groupname(group_name)
     ogaddcardgroup.select_relatecourse()
@@ -60,10 +60,10 @@ def add_course_cardgroup(cfg, driver, base_url, org_name, group_name):
 #添加卡组-补课卡 
 def add_cate_cardgroup(cfg, driver, base_url, org_name, \
         group_name, group_price=500):
-    ogmancardgroup = OrgMancardgroupPage(driver, cfg)
+    ogmancardgroup = OrgCardgroupListPage(driver, cfg)
     ogmancardgroup.open()
     ogmancardgroup.click_addcardgroup()
-    ogaddcardgroup = OrgAddcardgroupPage(driver, cfg)
+    ogaddcardgroup = OrgCardgroupInputPage(driver, cfg)
     ogaddcardgroup.select_catecard()
     ogaddcardgroup.input_groupname(group_name)
     ogaddcardgroup.select_relatecate()
@@ -72,7 +72,7 @@ def add_cate_cardgroup(cfg, driver, base_url, org_name, \
 
  #购买试听卡
 def buy_listen_card(cfg, driver, base_url):
-    ogmancardgroup = OrgMancardgroupPage(driver, cfg)
+    ogmancardgroup = OrgCardgroupListPage(driver, cfg)
     ogmancardgroup.open()
     ogmancardgroup.click_buyliscard()
     ogbuyliscard = OrgBuyliscardPage(driver, cfg)    
@@ -83,10 +83,10 @@ def buy_listen_card(cfg, driver, base_url):
 #添加卡组-试听卡
 def add_listen_cardgroup(cfg, driver, base_url, \
         org_name, group_name):
-    ogmancardgroup = OrgMancardgroupPage(driver, cfg)
+    ogmancardgroup = OrgCardgroupListPage(driver, cfg)
     ogmancardgroup.open()
     ogmancardgroup.click_addcardgroup()
-    ogaddcardgroup = OrgAddcardgroupPage(driver, cfg)
+    ogaddcardgroup = OrgCardgroupInputPage(driver, cfg)
     ogaddcardgroup.select_listencard()
     ogaddcardgroup.input_groupname(group_name)
     ogaddcardgroup.select_listencourse()
@@ -96,7 +96,7 @@ def add_listen_cardgroup(cfg, driver, base_url, \
 #添加卡
 def add_card(cfg, driver, org_name, base_url, \
         card_prifix,cgroup_num=1,card_num=5):
-    ogmancardgroup = OrgMancardgroupPage(driver, cfg)
+    ogmancardgroup = OrgCardgroupListPage(driver, cfg)
     ogmancardgroup.open()
     ogmancardgroup.click_addcard(cgroup_num)
     ogaddcard = OrgAddcardPage(driver, cfg)

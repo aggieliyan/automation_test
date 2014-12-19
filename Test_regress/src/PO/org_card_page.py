@@ -8,7 +8,7 @@ import time
 import base
 from myoffice_page import MyOfficePage
 
-class OrgMancardgroupPage(base.Base):
+class OrgCardgroupListPage(base.Base):
 
 	def __init__(self, driver, cfg):
 		self.dr = driver
@@ -38,7 +38,7 @@ class OrgMancardgroupPage(base.Base):
 		    self.dr.find_element_by_xpath("//div["+str(cgroup_num)+ \
 			    "]/table/tbody/tr/td[6]/div/div/a").click()
 		
-class OrgAddcardgroupPage(base.Base):
+class OrgCardgroupInputPage(base.Base):
 
 	def __init__(self, driver, cfg):
 		self.dr = driver

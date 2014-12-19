@@ -14,6 +14,7 @@ import HTMLTestRunner
 
 from PO.base import Base
 from testcase_student import StudentTest
+from testcase_exam import ExamTest
 import login, new_course_management, course_management, student_management
 import card_management, cate_management, admin_management, user_management
 import exam_paper, exam_questions, exam_cate_management
@@ -558,6 +559,11 @@ if __name__ == "__main__":
     # testsuite = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
+    suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
+    allsuites = []
+    allsuites.append(suite1)
+    allsuites.append(suite2)
+    allsuites.append(suite_exam)
     allsuites = [suite1]
     allsuites.append(suite2)
     alltests = unittest.TestSuite(allsuites)

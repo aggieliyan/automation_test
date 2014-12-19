@@ -59,7 +59,7 @@ class ExamTest(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
-
+    @unittest.skip("test")
     def test_import_questions(self):
         ba = Base(self.driver)
         self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
@@ -161,12 +161,31 @@ class ExamTest(unittest.TestCase):
         exam_cate_managementpo.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
         last_num == self.driver.execute_script("return $('.subject-item-con').size()")
         self.assertEqual(total_num - 1, last_num)
-        ba.save_screenshot()
-        
+        ba.save_screenshot()        
 
     @unittest.skip("test")
     def test_exam_create_cate():
         cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
+        
+    def test_createpaper(self):
+        #免得创建试卷失败后，后面要用到这个变量会失败
+        self.paper_name = ""
+        try:
+            self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 2, 1, 1) 
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append("fail to create paper")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+            
+    def test_random_paper(self):
+        try:
+            exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 2) 
+        except Exception, e:
+            print traceback.format_exc() 
+            self.verificationErrors.append("fail to create random paper")
+        finally:
+            self.driver.save_screenshot("C:/test_rs_pic/create_random_paper.png")
 
     def tearDown(self):
         self.driver.quit()

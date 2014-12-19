@@ -5,6 +5,7 @@ Created on Jun 15, 2012
 @author: yilulu
 '''
 import time, random
+from PO.base import Base
 from PO.login_page import LoginPage, IndexPage, SearchPage, IndependentDomianLoginPage, ClickLoginText
 from PO.register_page import ClickRegisterText, EmailRegisterPage, PhoneRegisterPage, IndependentAegisterPage 
 #从网站首页登录
@@ -238,7 +239,8 @@ def auto_register(cfg, driver, base_url, r_num, reg_type):
                         4 院校邮箱注册
                         5 院校手机注册
     """
-    prefix = chr(random.randint(97, 122))+chr(random.randint(97, 122))+chr(random.randint(97, 122))
+    ba = Base(driver)
+    prefix = ba.rand_name()
     user_file = open(r"C:/register_user_list.txt", 'w')
     for i in range(r_num):
         r_username = 'testlogin_' + prefix + str(i) 

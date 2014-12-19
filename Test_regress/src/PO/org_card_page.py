@@ -2,13 +2,13 @@
 '''
 Created on Nov 17, 2014
 
-@author: yilulu
+@author: gaoyue
 '''
 import time
 import base
-from myoffice_page1 import MyOfficePage
+from myoffice_page import MyOfficePage
 
-class OrgMancardgroupPage(base.Base):
+class OrgCardgroupListPage(base.Base):
 
 	def __init__(self, driver, cfg):
 		self.dr = driver
@@ -38,7 +38,7 @@ class OrgMancardgroupPage(base.Base):
 		    self.dr.find_element_by_xpath("//div["+str(cgroup_num)+ \
 			    "]/table/tbody/tr/td[6]/div/div/a").click()
 		
-class OrgAddcardgroupPage(base.Base):
+class OrgCardgroupInputPage(base.Base):
 
 	def __init__(self, driver, cfg):
 		self.dr = driver
@@ -187,12 +187,12 @@ class OrgUselearncardPage(base.Base):
 	    return prepaid_num
 	   
 	def select_relatecourse(self):
-		time.sleep(2)
+		time.sleep(5)
 		self.dr.find_element(self.cfg.get('use_card', 'course_check_1_by'), \
 			self.cfg.get('use_card', 'course_check_1')).click()
-		time.sleep(2)
-		self.dr.find_element(self.cfg.get('use_card', 'course_check_2_by'), \
-			self.cfg.get('use_card', 'course_check_2')).click()
+#		time.sleep(2)
+#		self.dr.find_element(self.cfg.get('use_card', 'course_check_2_by'), \
+#			self.cfg.get('use_card', 'course_check_2')).click()
 
 	def click_selected(self):
 		time.sleep(2)

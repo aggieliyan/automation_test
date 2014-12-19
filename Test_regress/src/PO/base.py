@@ -6,6 +6,7 @@ Created on Nov. 17, 2014
 '''
 import random
 import time
+import traceback, MySQLdb
 
 from selenium.common.exceptions import NoSuchElementException
 
@@ -16,7 +17,7 @@ class Base():
     def __init__(self, driver):
 
         self.dr = driver
-
+        
     def rand_name(self):
         rand_name = chr(random.randint(97, 122)) \
         + chr(random.randint(97, 122)) + chr(random.randint(97, 122)) \
@@ -50,3 +51,9 @@ class Base():
         for h in ah:
             if h not in bh:
                 self.dr.switch_to_window(h)
+                
+    def connect_db(self, dbhost, database):
+        conn = MySQLdb.connect(host=dbhost, user='root', passwd='mysqlpwd1', db=database, charset='utf8')
+        return conn
+        
+        

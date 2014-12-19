@@ -77,8 +77,6 @@ build/
 *.pidb
 *.log
 *.scc
-*.html
-*.HTML
 
 # Visual C++ cache files
 ipch/
@@ -203,8 +201,6 @@ sdist/
 develop-eggs/
 .installed.cfg
 .pyc
-.html
-.HTML
 
 # Installer logs
 pip-log.txt

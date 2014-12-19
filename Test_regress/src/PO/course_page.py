@@ -6,16 +6,19 @@ Created on Dec. 03, 2014
 '''
 import time
 
+from selenium.webdriver.support.wait import WebDriverWait
+
 import base
+from myoffice_page import MyOfficePage
 
 class CourseStepOnePage(base.Base):
+
 
 	def __init__(self, driver, cfg):
 
 		self.cfg = cfg
 		self.base_url = cfg.get('env_para', 'base_url')
 		self.dr = driver
-
 
 	def open(self):
 		url = "%s/coursePostRedirect.do?action=courseStepOne"%(self.base_url)
@@ -47,6 +50,7 @@ class CourseStepOnePage(base.Base):
 			self.cfg.get('courseRedirect', 'next_btn')).click()
 
 class CourseInfoPage(base.Base):
+
 
 	def __init__(self, driver, cfg):
 		self.cfg = cfg
@@ -88,3 +92,24 @@ class CourseInfoPage(base.Base):
 		self.dr.find_element(self.cfg.get('courseRedirect', 'done_btn_by'), \
 			self.cfg.get('courseRedirect', 'done_btn')).click()
 
+class CourseManageListPage(base.Base):
+
+
+	def __init__(self, driver, cfg):
+
+		self.cfg = cfg
+		self.base_url = cfg.get('env_para', 'base_url')
+		self.dr = driver
+
+	def open(self):
+		op = MyOfficePage(self.dr, self.cfg)
+		op.open()
+		op.click_teaching()
+		op.click_course_manage()
+
+	def click_get_link(self):
+		time.sleep(3)
+		self.dr.find_element_by_link_text(u"获取视频链接").click()
+		time.sleep(1)
+		link = self.dr.execute_script("return $('textarea:eq(1)').text()")
+		return link

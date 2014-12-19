@@ -2,12 +2,12 @@
 '''
 Created on Nov 17, 2014
 
-@author: yilulu
+@author: gaoyue
 '''
 import time
 
 import base
-from myoffice_page1 import MyOfficePage
+from myoffice_page import MyOfficePage
 
 class OrgCateListPage(base.Base):
 

@@ -1,17 +1,11 @@
 # -*- coding: UTF-8 -*-
-'''
-Created on Nov 17, 2014
 
-@author: yilulu
-'''
 import time
-
 import base
 from myoffice_page import MyOfficePage
 
 
 class ExamQuestions(base.Base):
-
 
 	def __init__(self, driver, cfg):
 		self.dr = driver
@@ -27,10 +21,24 @@ class ExamQuestions(base.Base):
 		self.dr.find_element_by_link_text(u"试题库").click()
 
 	#点击新建试题
-	def click_question_creat(self):
-		self.dr.find_element(self.cfg.get('exam_questions', "question_creat_by"), \
-							self.cfg.get('exam_questions', "question_creat")).click()
+	def click_question_create(self):
+		self.dr.find_element(self.cfg.get('exam_questions', "question_create_by"), \
+							self.cfg.get('exam_questions', "question_create")).click()
 
+	#点击导入试题
+	def click_import_questions(self, template):
+		self.dr.find_element(self.cfg.get('exam', "import_questions_by"), \
+							self.cfg.get('exam', 'import_questions')).click()
+		self.dr.execute_script("$('#J_uploadFileInput').attr('style', \
+		'height:20px;opacity:1;transform:translate(0px, 0px) scale(1)')")
+		time.sleep(1)
+		self.dr.find_element(self.cfg.get('exam', "path_by"), \
+							self.cfg.get('exam', "path")).send_keys(template)
+		self.dr.find_element(self.cfg.get('exam', "upload_button_by"), \
+							self.cfg.get('exam', "upload_button")).click()
+		time.sleep(2)
+		self.dr.find_element(self.cfg.get('exam', "close_button_by"), \
+							self.cfg.get('exam', "close_button")).click()                     
     #点击题型的下拉框
 	def click_question_type(self):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_type_by"), \

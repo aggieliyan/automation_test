@@ -60,7 +60,10 @@ class ExamTest(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     @unittest.skip("test")
     def test_import_questions(self):
         ba = Base(self.driver)
@@ -171,7 +174,8 @@ class ExamTest(unittest.TestCase):
         time.sleep(1)
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
-        ba.save_screenshot()
+        ba.save_screenshot()        
+
 
 #ok
     @unittest.skip("test")
@@ -201,6 +205,30 @@ class ExamTest(unittest.TestCase):
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
         ba.save_screenshot()
+
+    def test_exam_create_cate():
+        cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
+        
+        
+#    @unittest.skip("test")    
+    def test_createpaper(self):
+        #免得创建试卷失败后，后面要用到这个变量会失败
+        #paper_name = self.cfg.get('env_para', 'paper_name')
+        ba = Base(self.driver)
+        self.paper_name = ""
+        self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 2, 1, 1)
+               
+        self.cfg.set("env_para", "paper_name", str(self.paper_name))
+        self.cfg.write(open(self.cfg_file, "w"))
+        
+        filename = ba.save_screenshot()
+        print "image:"+filename
+            
+    def test_random_paper(self):
+        ba = Base(self.driver)
+        exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 2) 
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
     def tearDown(self):
         self.driver.quit()

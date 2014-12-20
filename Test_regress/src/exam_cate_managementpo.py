@@ -42,11 +42,13 @@ def auto_create_subject(cfg, driver, base_url, org_name, sub_num):
 
 
 def modify_subject(cfg, driver, base_url, org_name):
-
-    prefix = chr(random.randint(97,122)) + chr(random.randint(97,122)) + chr(random.randint(97,122))    
+    exam_subject = SubjectListPage(driver, cfg)
+    exam_subject.open()
+    prefix = chr(random.randint(97,122)) + chr(random.randint(97,122)) + chr(random.randint(97,122))
+    time.sleep(2)    
     edit_name = driver.execute_script("return $('.subject-item-con').eq(0).children().eq(0).text()")
     subject_name = org_name[0] + "sub_" + prefix
-    exam_subject = SubjectListPage(driver, cfg)
+    print edit_name
     if edit_name != u'默认科目':  
         try:
             exam_subject.click_sub_big1()
@@ -54,18 +56,25 @@ def modify_subject(cfg, driver, base_url, org_name):
             print u"亲,先创建个科目再来编辑呗!"
             return "lack of subject"
         else:
+            
             exam_subject.click_sub_small1()
     else:
-        driver.implicitly_wait(10)
+        time.sleep(1)
         try:
+            
             exam_subject.click_sub_big2()
+        
         except:
-            print u"亲,先创建个科目再来编辑呗!"
+            print u"亲,先创建个科目再来编辑呗！！！！！！！！!"
             return "lack of subject"
         else:
+            time.sleep(1)
+            #button = driver.execute_script("return $('.subject-item-con').eq(1).children().eq(2).children().eq(0).attr('href')")
+            #button.click()
+            
             exam_subject.click_sub_small2()
     exam_subject.clear_sub()
-    exam_subject.input_sub()
+    exam_subject.input_sub(subject_name)
     exam_subject.click_addsub_ok()  
     return subject_name
 

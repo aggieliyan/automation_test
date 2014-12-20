@@ -62,7 +62,7 @@ class SubjectListPage(base.Base):
     def click_sub_big2(self):
         self.dr.find_element(self.cfg.get('exam', 'sub_big2_by'), \
         	self.cfg.get('exam', 'sub_big2_xpath')).click()
-
+    
     #第二个科目
     def click_sub_small2(self):
         self.dr.find_element(self.cfg.get('exam', 'sub_small2_by'), \

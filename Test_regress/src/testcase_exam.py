@@ -16,7 +16,7 @@ class ExamTest(unittest.TestCase):
 
     def setUp(self):
         self.verificationErrors = []
-        self.browser = "Chrome"
+        self.browser = "ie"
         self.cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
         self.cfg.read(self.cfg_file)
@@ -60,10 +60,7 @@ class ExamTest(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
     @unittest.skip("test")
     def test_import_questions(self):
         ba = Base(self.driver)
@@ -123,7 +120,7 @@ class ExamTest(unittest.TestCase):
         ba.save_screenshot()
 
 
-    @unittest.skip("test")
+    #@unittest.skip("test")
     def test_exam_modify_subject(self):
         ba = Base(self.driver)
         subject_name = exam_cate_managementpo.modify_subject(self.cfg,self.driver, self.base_url, self.org_name)
@@ -133,7 +130,7 @@ class ExamTest(unittest.TestCase):
         ba.save_screenshot()
 
 #ok
-    #@unittest.skip("test")
+    @unittest.skip("test")
     def test_exam_delete_subject(self):
         ba = Base(self.driver)
         #统计科目总数
@@ -187,7 +184,7 @@ class ExamTest(unittest.TestCase):
         self.assertEqual(point_name, lastpoint)
         ba.save_screenshot()
 #ok
-    #@unittest.skip("test")
+    @unittest.skip("test")
     def test_exam_modify_point(self):
         ba = Base(self.driver)
         point_name = exam_cate_managementpo.modify_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
@@ -205,12 +202,12 @@ class ExamTest(unittest.TestCase):
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
         ba.save_screenshot()
-
+    @unittest.skip("test")
     def test_exam_create_cate():
         cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
         
         
-#    @unittest.skip("test")    
+    @unittest.skip("test")    
     def test_createpaper(self):
         #免得创建试卷失败后，后面要用到这个变量会失败
         #paper_name = self.cfg.get('env_para', 'paper_name')
@@ -223,7 +220,8 @@ class ExamTest(unittest.TestCase):
         
         filename = ba.save_screenshot()
         print "image:"+filename
-            
+        
+    @unittest.skip("test")       
     def test_random_paper(self):
         ba = Base(self.driver)
         exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 2) 

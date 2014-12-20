@@ -10,7 +10,7 @@ import unittest, time, re,random
 from selenium.common.exceptions import NoSuchElementException
 from PO.exam_subject_page import SubjectListPage
 from PO.exam_cate_page import ExamCateListPage
-from PO.exam_point_page import ExamPointListPage 
+from PO.exam_point_page import ExamPointListPage
 
 def create_subject(cfg, driver, base_url, org_name, subject_name):
     exam_subject = SubjectListPage(driver, cfg)
@@ -64,7 +64,7 @@ def modify_subject(cfg, driver, base_url, org_name):
             return "lack of subject"
         else:
             exam_subject.click_sub_small2()
-    #exam_subject.clear_sub()
+    exam_subject.clear_sub()
     exam_subject.input_sub()
     exam_subject.click_addsub_ok()  
     return subject_name
@@ -91,7 +91,8 @@ def delete_subject(cfg, driver, base_url, org_name, sub_num=1):
             return False
         else:
             exam_subject.click_sub_del2()
-            del_name = exam_subject.click_sub_big2().text
+            #del_name = exam_subject.click_sub_big2().text
+    time.sleep(2)
     exam_subject.click_delsub_ok()
     print del_name 
     return total_num
@@ -137,9 +138,11 @@ def delete_exam_cate(cfg, driver, base_url, org_name):
     exam_subject = SubjectListPage(driver, cfg)
     exam_subject.open()
     exam_subject.click_cate_page()
+    total_num = driver.execute_script("return $('.categTitleFalse').size()")
     exam_cate = ExamCateListPage(driver, cfg)
     exam_cate.click_delete_cate()
     exam_cate.click_addcate_ok()
+    return total_num
 
 
 
@@ -183,11 +186,13 @@ def modify_exam_point(cfg, driver, base_url, org_name):
     exam_point.click_modify_point()
     exam_point.input_pname(point_name)
     exam_point.input_pdetail(point_detail)
-    exam_point.click_lesdel_point()
+    #exam_point.click_lesdel_point()
+    time.sleep(1)
     exam_point.click_add_course()
     exam_point.click_add_courses()
     exam_point.click_addcourse_ok()
     exam_point.input_other_groom(point_other)
+    time.sleep(1)
     exam_point.click_addpoint_ok()
     return point_name
 
@@ -198,6 +203,9 @@ def delete_exam_point(cfg, driver, base_url, org_name):
     exam_subject = SubjectListPage(driver, cfg)
     exam_subject.open()
     exam_subject.click_point_page()
+    time.sleep(1)
+    total_num = driver.execute_script("return $('.categTitleFalse').size()")
     exam_point = ExamPointListPage(driver, cfg)
     exam_point.click_delete_point()
     exam_point.click_delpoint_ok()
+    return total_num

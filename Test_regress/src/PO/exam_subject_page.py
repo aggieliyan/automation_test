@@ -43,7 +43,7 @@ class SubjectListPage(base.Base):
             self.cfg.get('exam', 'sub_name'))
         sub_c.clear()
 
-    def input_sub(self):
+    def input_sub(self, subject_name):
         sub_c = self.dr.find_element(self.cfg.get('exam', 'sub_name_by'), \
             self.cfg.get('exam', 'sub_name'))
         sub_c.clear()

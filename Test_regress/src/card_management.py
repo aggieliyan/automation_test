@@ -9,6 +9,8 @@ import exam_paper
 import exam_user_management
 from PO.org_card_page import OrgCardgroupListPage, OrgCardgroupInputPage, OrgBuyliscardPage, \
     OrgAddcardPage, OrgUselearncardPage, OrgAcademyFirstPage, OrgAddExamcardPage, OrguseExamcardPage
+from PO.exam_subject_page import SubjectListPage
+from PO.exam_paper_page import ExamInfoPage, QuestionInfoPage
 
 #使用充值卡和充课卡
 def use_prepaidorcate_card(cfg, driver, base_url, card_num, card_psw):
@@ -132,11 +134,22 @@ def add_exam_card_management(cfg, driver, base_url, count, academy):
 
 #总调用方法####################################
 def add_exam_card(cfg, driver, base_url, count, academy):
-    page_catename = get_academy_catename(cfg, driver, academy)
-    exam_paper.create_paper(cfg, driver, base_url, page_catename, 1, 1, 1, 1)
-#    time.sleep(2)
-#    driver.get("http://www.beta.ablesky.com/exam/examPaperRedirect.do?action=toExamPaperList&subjectId=3171")
-#    time.sleep(2)  
+    page_catename = get_academy_catename(cfg, driver, academy)   
+    #exam_paper.create_paper(cfg, driver, base_url, page_catename, 1, 1, 1, 1)
+    ogsublist = SubjectListPage(driver, cfg)
+    ogsublist.open()
+#    ogsublist.click_exampaper()
+    ogexaminfo = ExamInfoPage(driver, cfg)
+    ogexaminfo.create_paper()
+    time.sleep(1)
+    ogexaminfo.input_exam_name(page_catename)
+    time.sleep(1)
+    ogexaminfo.click_next()
+    time.sleep(2)
+    ogqueinfo = QuestionInfoPage(driver, cfg)
+    ogqueinfo.add_big_question(1,1)
+    time.sleep(2)
+    ogqueinfo.click_submit_btn()
     examcard_number = add_exam_card_management(cfg, driver, base_url, count, academy)
     return examcard_number
 
@@ -158,7 +171,7 @@ def user_usexamcard_management(cfg, driver, base_url, examcard_num):
 def user_usexamcard(cfg, driver, base_url, examcard_num):  
     academy_catename = user_usexamcard_management(cfg, driver, base_url, examcard_num)
     # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
-    exam_user_management.exam_user(cfg, driver, operation=0, blank_pager=0, question_answer='123', paper_name=academy_catename)
+    exam_user_management.exam_user(cfg, driver, base_url, operation=0, blank_pager=0, question_answer='123', paper_name=academy_catename)
     return academy_catename
 
 ##使用充值卡和充课卡

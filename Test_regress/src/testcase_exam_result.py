@@ -6,6 +6,7 @@ from selenium import webdriver
 
 import login
 import exam_paper
+from PO.base import Base
 
 class ExamResultTest(unittest.TestCase):
 
@@ -58,20 +59,33 @@ class ExamResultTest(unittest.TestCase):
    #为学员评分
     # @unittest.skip("test")        
     def test_score_paper(self):
-        
-        exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=3, username=self.user_name)        
+        ba = Base(self.driver)
+        score = 0   
+        score = exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=3, username=self.user_name)        
+
+        #验证
+        ascore = self.driver.execute_script("$(\"a:contains('"+self.user_name+"')\").parents('.odd').children().eq(4).text()")
+        self.assertEqual(score, ascore)
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
     # @unittest.skip("test")
     #导出开放试卷的结果
     def test_export_openpaper_result(self):
+        ba = Base(self.driver)
         paper_name = self.cfg.get("env_para", "paper_name")
         exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=2, username=self.user_name)        
-
+        filename = ba.save_screenshot()
+        print "image:"+filename
+        
     # @unittest.skip("test")
     #导出分发试卷的结果
     def test_export_sendpaper_result(self):
+        ba = Base(self.driver)
         paper_name = self.cfg.get("env_para", "paper_name")
         exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=1, username=self.user_name)        
-        
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
     def tearDown(self):
         self.driver.quit()

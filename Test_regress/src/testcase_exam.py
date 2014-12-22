@@ -15,12 +15,10 @@ import exam_user_management
 class ExamTest(unittest.TestCase):
 
     def setUp(self):
-        self.verificationErrors = []
-        self.browser = "ie"
         self.cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
         self.cfg.read(self.cfg_file)
-        self.verificationErrors = []
+        self.browser = self.cfg.get("env_para", "browser")
         self.org_name = self.cfg.get("env_para", "org_name")
         self.org_password = self.cfg.get("env_para", "org_password")
         self.user_name = self.cfg.get("env_para", "user_name")
@@ -209,14 +207,19 @@ class ExamTest(unittest.TestCase):
    
     # @unittest.skip("test")
     def test_send_paper(self):
-
+        ba = Base(self.driver)
         exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=1)
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
     # @unittest.skip("test")
     def test_close_paper(self):
+        ba = Base(self.driver)
         exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=2)
+        filename = ba.save_screenshot()
+        print "image:"+filename
         
-    @unittest.skip("test")    
+    # @unittest.skip("test")    
     def test_createpaper(self):
         #免得创建试卷失败后，后面要用到这个变量会失败
         #paper_name = self.cfg.get('env_para', 'paper_name')
@@ -230,12 +233,13 @@ class ExamTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
         
-    @unittest.skip("test")       
+    # @unittest.skip("test")       
     def test_random_paper(self):
         ba = Base(self.driver)
         exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 2) 
         filename = ba.save_screenshot()
         print "image:"+filename
+
 
     def tearDown(self):
         self.driver.quit()

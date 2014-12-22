@@ -55,7 +55,14 @@ class ExamStudentTest(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
-            
+
+    def test_buy_paper(self):
+        ba = Base(self.driver)
+        paper_url = self.cfg.get("env_para", "paper_url")
+        exam_user_management.buy_paper(self.cfg, self.driver, paper_url)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
     #学员参加考试
     def test_exam_user(self):
         ba = Base(self.driver)
@@ -73,6 +80,8 @@ class ExamStudentTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename 
         self.assertEqual(paper_name, paper_name_ok)
+
+
 
     def tearDown(self):
         self.driver.quit()

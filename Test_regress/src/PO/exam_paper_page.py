@@ -105,6 +105,9 @@ class  ExamInfoPage(base.Base):
     def click_next(self):
         self.dr.find_element(self.cfg.get('exam', 'exam_next_one_by'), \
                         self.cfg.get('exam', 'exam_next_one')).click()
+
+
+
 class QuestionInfoPage(base.Base):
     
     def __init__(self, driver, cfg):
@@ -180,6 +183,7 @@ class QuestionInfoPage(base.Base):
         self.dr.find_element(self.cfg.get('exam', 'exam_paper_build_btn_by'), \
                         self.cfg.get('exam', 'exam_paper_build_btn')).click()
 
+
 #点击试卷标题进入的页面 里面有试卷信息、试题信息、学员信息和试题统计
 class PaperRecordPage(base.Base):
 
@@ -201,21 +205,32 @@ class PaperRecordPage(base.Base):
 
     #在学员信息统计结果那全选
     def choose_all_stu(self):
-        self.dr.find_element(self.cfg.get('exam', 'select_stu_by'), \
-            self.cfg.get('exam', 'select_stu')).click()
+        try:
+            self.dr.find_element(self.cfg.get('exam', 'select_stu_by'), \
+                self.cfg.get('exam', 'select_stu')).click()
+        except Exception, e:
+            print u"统计结果列表为空"
 
     #导出分发给学员试卷的结果
     def output_sendpaper_result(self):
-        driver.find_element(cfg.get('exam', 'output_by'), \
-            cfg.get('exam', 'output')).click()
+        try:
+            self.dr.find_element(self.cfg.get('exam', 'output_by'), \
+                self.cfg.get('exam', 'output')).click()
+            time.sleep(2)
+        except:
+            print u'试卷暂时没有分发给学员'
 
     def click_open_paper_result(self):
         self.dr.find_element_by_link_text(u"作为开放试卷的统计结果").click()
 
     #导出开发试卷的统计结果
     def output_opnepaper_result(self):
-        driver.find_element(cfg.get('exam', 'output_open_by'), \
-            cfg.get('exam', 'output_open')).click()
+        try:
+            self.dr.find_element(self.cfg.get('exam', 'output_open_by'), \
+                self.cfg.get('exam', 'output_open')).click()
+            time.sleep(2)
+        except:
+            print u"还没有学员购买该试卷"
 
     #点击某个学员后面的去评分
     def click_score(self, username):
@@ -228,6 +243,9 @@ class PaperRecordPage(base.Base):
 
         grade_href = self.dr.execute_script(\
             "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
+        if not grade_href:
+            print u"学员尚未提交试卷"
+            return 0
         time.sleep(2)
         self.dr.get("%sexam/%s" % (self.base_url, grade_href))
         return 1
@@ -255,3 +273,8 @@ class ScorePage(base.Base):
                 continue
 
         return count * score
+
+    def click_save(self):
+        self.dr.find_element(self.cfg.get('exam', 'score_save_by'), \
+            self.cfg.get('exam', 'score_save')).click()
+        time.sleep(1)

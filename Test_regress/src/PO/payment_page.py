@@ -17,17 +17,12 @@ class PaymentPage(base.Base):
 		self.cfg = cfg
 		self.base_url = cfg.get('env_para', 'base_url')
 
-	def open(self, course_url, ptype="course"):
-		"""
-		ptype 是购买东西的类型，course 为课程
-		                       exampaper 为试卷
-
-		"""
+	def open(self, course_url):
 		course_id = re.search(r'\d{1,10}', course_url).group(0)
 		host = self.base_url.replace("http://","")
 		self.dr.get("%spaymentRedirect.do?action=paymentDomainRedirect&\
-			host=%s&grouponid=&type=%s&id=%s"\
-			%(self.base_url, host, ptype, str(course_id)))
+			host=%s&grouponid=&type=course&id=%s"\
+			%(self.base_url, host, str(course_id)))
 
 	def choose_use_rmb(self):
 		self.dr.find_element(self.cfg.get('org_index','use_rmb_by'), \

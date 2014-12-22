@@ -19,7 +19,15 @@ class  RandomExamPage(base.Base):
         
     def add_question_btn(self):
         self.dr.find_element(self.cfg.get("exam","random_add_question_by"), \
-                             self.cfg.get("exam","random_add_question")).click() 
+                             self.cfg.get("exam","random_add_question")).click()
+        num_input = self.dr.find_element(self.cfg.get("exam","random_q_num_by"), \
+                             self.cfg.get("exam","random_q_num"))
+        num_input.clear()
+        num_input.send_keys("1")
+        score_input = self.dr.find_element(self.cfg.get("exam","random_q_num_by"), \
+                             self.cfg.get("exam","random_q_num"))
+        score_input.clear()
+        score_input.send_keys("1")                              
                              
     def click_submit_btn(self):
         self.dr.find_element(self.cfg.get("exam","random_submit_btn_by"), \

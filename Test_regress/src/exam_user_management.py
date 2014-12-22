@@ -6,29 +6,20 @@ Created on Jul 24, 2014
 '''
 
 import time
-
 from PO.exam_user_page import UserpaperListPage, UserexampaperPage
-from PO.payment_page import PaymentPage
 
 def buy_paper(cfg, driver, paper_url):
-
-    pay = PaymentPage(driver, cfg)
-    pay.open(paper_url, "exampaper")
-    pay.click_pay()
-    pay.save_screenshot()
-
     #paper_url = "http://www.gamma.ablesky.com/examRedirect.do?action=viewExamPaperInfo&examPaperId=6129"
-    # driver.get(paper_url)
-    # time.sleep(1)
-    # driver.find_element(cfg.get('exam', 'buy_paper_by'), \
-    #     cfg.get('exam', 'buy_paper')).click()
-    # h = driver.window_handles
-    # driver.switch_to_window(h[-1])
-    # driver.implicitly_wait(10)
-    # driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
-    #     cfg.get('org_index', 'pay_ok')).click()
-    # time.sleep(5)
-
+    driver.get(paper_url)
+    time.sleep(1)
+    driver.find_element(cfg.get('exam', 'buy_paper_by'), \
+        cfg.get('exam', 'buy_paper')).click()
+    h = driver.window_handles
+    driver.switch_to_window(h[-1])
+    driver.implicitly_wait(10)
+    driver.find_element(cfg.get('org_index', 'pay_ok_by'), \
+        cfg.get('org_index', 'pay_ok')).click()
+    time.sleep(5)
 #学员考试
 def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, paper_name):
     userpaperlist = UserpaperListPage(driver, cfg)

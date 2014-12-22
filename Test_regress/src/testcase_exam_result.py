@@ -68,16 +68,15 @@ class ExamResultTest(unittest.TestCase):
         self.assertEqual(score, ascore)
         filename = ba.save_screenshot()
         print "image:"+filename
-
     # @unittest.skip("test")
     #导出开放试卷的结果
     def test_export_openpaper_result(self):
-        ba = Base(self.driver)
+        ba = Base(self.driver)      
         paper_name = self.cfg.get("env_para", "paper_name")
         exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=self.paper_name, etype=2, username=self.user_name)        
         filename = ba.save_screenshot()
         print "image:"+filename
-        
+
     # @unittest.skip("test")
     #导出分发试卷的结果
     def test_export_sendpaper_result(self):

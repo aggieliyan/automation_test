@@ -160,30 +160,17 @@ class Test(unittest.TestCase):
     def test_create_admin(self):
         ba = Base(self.driver)
         aname = admin_management.auto_create_admin(self.cfg, self.driver, adm_num=1)
-        # lastadmin = self.driver.execute_script("return $('.floatleft').eq(-10).text()")
+        lastadmin = self.driver.execute_script("return $('.floatleft').eq(-10).text()")
         filename = ba.save_screenshot()
         print "image:"+filename
-        # self.assertEqual(aname, lastadmin)
-
-    def test_modify_admin(self):
-        ba = Base(self.driver)
-        admin_name = admin_management.modify_admin(self.cfg, self.driver, self.base_url)
-        filename = ba.save_screenshot()
-        print "image:"+filename
-
-    def test_delete_admin(self):
-        ba = Base(self.driver)
-        rs = admin_management.delete_admin(self.cfg, self.driver, self.base_url)
-        self.assertEqual(True, rs) 
-        filename = ba.save_screenshot()
-        print "image:"+filename
-      
+        self.assertEqual(aname, lastadmin)
+        
     def test_add_cate(self):
         ba = Base(self.driver)
         cate_name = u"cate" + ba.rand_name()
         cate_management.add_cate(self.cfg, self.driver, self.base_url, cate_name=cate_name)
         
-        time.sleep(2)          
+        time.sleep(3)          
         actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
         filename = ba.save_screenshot()
         print "image:"+filename
@@ -281,12 +268,13 @@ class Test(unittest.TestCase):
     def test_buy_listen_card(self):
         ba = Base(self.driver)
         card_management.buy_listen_card(self.cfg, self.driver, self.base_url)
+        payconfirm = u"付款成功！"
         
-        time.sleep(2)
+        time.sleep(4)
         payok = self.driver.execute_script("return $('.page-headline').text()").strip()
         filename = ba.save_screenshot()
         print "image:"+filename
-        self.assertEqual("付款成功！", payok)
+        self.assertEqual(payconfirm, payok)
         
     #添加试听卡组
     def test_listen_cardgroup(self):
@@ -333,7 +321,7 @@ class Test(unittest.TestCase):
    
         return card_num, card_pwd
 
-    # @unittest.skip("test") 
+    @unittest.skip("test") 
     #添加考试卡并返回第一个卡号
     def test_add_exam_card(self):
         ba = Base(self.driver)
@@ -350,7 +338,7 @@ class Test(unittest.TestCase):
         print "image:"+filename       
         self.assertEqual(True, rs)
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #导入一个学员
     def test_import_one_student(self):
         ba = Base(self.driver)
@@ -368,7 +356,7 @@ class Test(unittest.TestCase):
             rs = True
         self.assertEqual(True, rs)
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #导入多个学员
     def test_import_multi_student(self):
         ba = Base(self.driver)
@@ -376,7 +364,7 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #创建学员
     def test_auto_create_student(self):
         ba = Base(self.driver)
@@ -385,7 +373,7 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #给一个学员开通课程
     def test_open_course_for_one(self):
         ba = Base(self.driver)
@@ -393,7 +381,7 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #给多个学员开通课程
     def test_open_course_for_multi(self):
         ba = Base(self.driver)
@@ -401,7 +389,7 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #管理学员播放授权数
     def test_manage_course_num(self):
         ba = Base(self.driver)
@@ -409,7 +397,7 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #购买授权
     def test_buy_open_num(self):
         ba = Base(self.driver)
@@ -474,16 +462,16 @@ if __name__ == "__main__":
     suite_register = unittest.TestLoader().loadTestsFromTestCase(RegisterTest)
     suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
-    # suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
-    # suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
-    # suite_exam_result = unittest.TestLoader().loadTestsFromTestCase(ExamResultTest)
+    suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
+    suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
+    suite_exam_result = unittest.TestLoader().loadTestsFromTestCase(ExamResultTest)
     allsuites = []
-    allsuites.append(suite_register)
-    allsuites.append(suite1)
-    allsuites.append(suite2)
-    # allsuites.append(suite_exam)
-    # allsuites.append(suite_exam_student)
-    # allsuites.append(suite_exam_result)  
+#    allsuites.append(suite_register)
+#    allsuites.append(suite1)
+#    allsuites.append(suite2)
+    allsuites.append(suite_exam)
+#    allsuites.append(suite_exam_student)
+    allsuites.append(suite_exam_result)  
 
     alltests = unittest.TestSuite(allsuites)
 

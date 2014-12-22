@@ -14,8 +14,8 @@ class SubjectListPage(base.Base):
 		self.cfg = cfg
 		self.base_url = cfg.get('env_para', 'base_url')
 
-	def open(self, driver, cfg):
-		self.dr.get("%sexam/" %(base_url))
+	def open(self):
+		self.dr.get("%sexam/" %(self.base_url))
 
 	#试卷库
 	def click_exampaper(self):
@@ -27,4 +27,5 @@ class SubjectListPage(base.Base):
 
 	#学员管理
 	def click_stu_manage(self):
-		pass
+		self.dr.find_element(self.cfg.get('exam', 'stu_manage_by'), \
+			self.cfg.get('exam', 'stu_manage')).click()

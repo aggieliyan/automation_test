@@ -59,7 +59,8 @@ class ExamTest(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
-
+    
+    @unittest.skip("test")
     def test_import_questions(self):
         ba = Base(self.driver)
         self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
@@ -167,6 +168,33 @@ class ExamTest(unittest.TestCase):
     @unittest.skip("test")
     def test_exam_create_cate():
         cate_name = exam_cate_managementpo.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
+   
+    # @unittest.skip("test")
+    def test_send_paper(self):
+
+        exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=1)
+
+    # @unittest.skip("test")
+    def test_close_paper(self):
+        exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=2)
+    #为学员评分
+    # @unittest.skip("test")        
+    def test_score_paper(self):
+        paper_name = self.cfg.get("env_para", "paper_name")
+        exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=paper_name, etype=3, username=self.user_name)        
+
+    # @unittest.skip("test")
+    #导出开放试卷的结果
+    def test_export_openpaper_result(self):
+        paper_name = self.cfg.get("env_para", "paper_name")
+        exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=paper_name, etype=2, username=self.user_name)        
+
+    # @unittest.skip("test")
+    #导出分发试卷的结果
+    def test_export_sendpaper_result(self):
+        paper_name = self.cfg.get("env_para", "paper_name")
+        exam_paper.exam_result(self.cfg, self.driver, self.base_url, exam_name=paper_name, etype=1, username=self.user_name)        
+
 
     def tearDown(self):
         self.driver.quit()

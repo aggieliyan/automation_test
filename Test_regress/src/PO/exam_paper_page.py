@@ -32,7 +32,13 @@ class PaperListPage(base.Base):
         exam_href = self.dr.execute_script(\
             "return $(\"a:contains(\'"+exam_name+"\')\").attr('href')")
         time.sleep(1)
-        self.dr.get("%sexam/%s" % (self.base_url, exam_href))   
+        if exam_href:
+            self.dr.get("%sexam/%s" % (self.base_url, exam_href))
+            return 1
+        else:
+            print u"no paper named ",exam_name
+            return 0
+        
 
 class ClickExamSystem(base.Base):
     def __init__(self, driver, cfg):
@@ -188,7 +194,7 @@ class PaperRecordPage(base.Base):
         sp.click_exampaper()
         pp = PaperListPage(self.dr, self.cfg)
         pp.search_paper(exam_name)
-        pp.click_paper(exam_name)
+        return pp.click_paper(exam_name)
 
     def click_student_info(self):
         self.dr.find_element_by_link_text("学员信息").click()

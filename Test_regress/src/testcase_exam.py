@@ -12,7 +12,9 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 import HTMLTestRunner
 from PO.base import Base
-from PO.org_cate_exam import OrgExamCreateListPage, OrgExamInputListPage, OrgExamiOkListPage, OrgExamSearchListPage
+from PO.exam_subject_page import SubjectListPage 
+from PO.exam_cate_page import ExamCateListPage
+from PO.exam_point_page import ExamPointListPage
 import login, time
 import exam_paper, exam_questions, exam_cate_management
 import exam_user_management

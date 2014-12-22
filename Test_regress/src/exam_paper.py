@@ -11,7 +11,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 
-
 from PO.exam_paper_page import ClickExamSystem, ExamInfoPage, QuestionInfoPage, PaperRecordPage
 from PO.base import Base
 from PO.random_exam_page import RandomExamPage
@@ -71,7 +70,6 @@ def auto_creatquestion(cfg, driver, q_num):
 #随机组卷                        
 def random_exam(cfg, driver, base_url, exam_name, exam_time,\
                   eoperation, erandom, eopen):
-    time.sleep(2)
     clickexamsystem = ClickExamSystem(driver,cfg)
     clickexamsystem.open_examsystem()
     
@@ -85,26 +83,27 @@ def random_exam(cfg, driver, base_url, exam_name, exam_time,\
     examinfo.whether_random(erandom)
     examinfo.open_or_no(eopen)
     
-    auto_create_randomquestion(cfg, driver, 2)
-    randompg.click_submit_btn()
-    
-    
-    
-#    driver.find_element_by_css_selector("#question_select_1 > #combobox-container > div.cc-box > span.cc-arrow").click()
-#    driver.find_element_by_css_selector("li.cc-item.selectedItem").click()
+    auto_create_randomquestion(cfg, driver, 1)    driver.find_element_by_css_selector("#question_select_1 > #combobox-container > div.cc-box > span.cc-arrow").click()
+##    driver.find_element_by_css_selector("li.cc-item.selectedItem").click())
 #    driver.find_element_by_css_selector("p.random-q-num-con > input.random-input").clear()
 #    driver.find_element_by_css_selector("p.random-q-num-con > input.random-input").send_keys("9")
 #    driver.find_element_by_css_selector("p.random-q-score-con > input.random-input").clear()
 #    driver.find_element_by_css_selector("p.random-q-score-con > input.random-input").send_keys("5")
-#    driver.find_element_by_id("add_random_btn").click()
-#    driver.find_element_by_css_selector("#question_select_2 > #combobox-container > div.cc-box > span.cc-arrow").click()
-#    driver.find_element_by_xpath("//div[5]/ul/li[2]").click()
-#    driver.find_element_by_xpath("(//input[@type='text'])[14]").clear()
-#    driver.find_element_by_xpath("(//input[@type='text'])[14]").send_keys("1")
-#    driver.find_element_by_xpath("(//input[@type='text'])[15]").clear()
-#    driver.find_element_by_xpath("(//input[@type='text'])[15]").send_keys("2")
-#    driver.find_element_by_xpath("(//input[@type='text'])[16]").clear()
-#    driver.find_element_by_xpath("(//input[@type='text'])[16]").send_keys("1")
+##    driver.find_element_by_id("add_random_btn").click()
+##    driver.find_element_by_css_selector("#question_select_2 > #combobox-container > div.cc-box > span.cc-arrow").click()
+##    driver.find_element_by_xpath("//div[5]/ul/li[2]").click()
+##    driver.find_element_by_xpath("(//input[@type='text'])[14]").clear()
+##    driver.find_element_by_xpath("(//input[@type='text'])[14]").send_keys("1")
+##    driver.find_element_by_xpath("(//input[@type='text'])[15]").clear()
+##    driver.find_element_by_xpath("(//input[@type='text'])[15]").send_keys("2")
+##    driver.find_element_by_xpath("(//input[@type='text'])[16]").clear()
+##    driver.find_element_by_xpath("(//input[@type='text'])[16]").send_keys("1")
+    randompg.click_submit_btn()
+    time.sleep(2)
+    
+    
+    
+
 #    driver.find_element_by_id("create_step_one").click()
     
 #自动添加题
@@ -115,11 +114,12 @@ def auto_create_randomquestion(cfg, driver, q_num):
 #        qtype = random.randint(1, 7)
         #print qtype
         add_randomq = RandomExamPage(driver,cfg)
-        add_randomq.add_qusetion_btn()
+        add_randomq.add_question_btn()
+        time.sleep(2)
                           
 #自动创建试卷
 def auto_createpaper(cfg, driver, base_url, eoperation, \
-                     erandom, eopen, q_nun, exam_num, type):
+                     erandom, eopen, q_num, exam_num, type):
     ba = Base(driver)
     for i in range(exam_num):
         exam_time = '120'

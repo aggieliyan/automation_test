@@ -224,7 +224,6 @@ class ExamTest(unittest.TestCase):
     @unittest.skip("test")    
     def test_createpaper(self):
         #免得创建试卷失败后，后面要用到这个变量会失败
-        #paper_name = self.cfg.get('env_para', 'paper_name')
         ba = Base(self.driver)
         self.paper_name = ""
         self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 2, 1, 1)
@@ -234,11 +233,10 @@ class ExamTest(unittest.TestCase):
         
         filename = ba.save_screenshot()
         print "image:"+filename
-        
-    @unittest.skip("test")       
+#    @unittest.skip("test")        
     def test_random_paper(self):
         ba = Base(self.driver)
-        exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 2) 
+        exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 1, 2) 
         filename = ba.save_screenshot()
         print "image:"+filename
 

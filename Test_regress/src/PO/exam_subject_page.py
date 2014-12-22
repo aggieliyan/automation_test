@@ -22,6 +22,11 @@ class SubjectListPage(base.Base):
     def click_exampaper(self):
         self.dr.find_element_by_link_text(u"试卷库").click()
 
+    #学员管理
+    def click_stu_manage(self):
+        self.dr.find_element(self.cfg.get('exam', 'stu_manage_by'), \
+            self.cfg.get('exam', 'stu_manage')).click()
+
     #创建科目
     def click_create_sub(self):
         self.dr.find_element(self.cfg.get('exam', 'new_subject_by'), \
@@ -86,15 +91,3 @@ class SubjectListPage(base.Base):
     def click_addsub_ok(self):
         self.dr.find_element(self.cfg.get('exam', 'sub_ok_by'), \
         	self.cfg.get('exam', 'sub_ok')).click()
-        
-    
-
-
-
-    #试题库
-    def click_examquestion(self):
-        pass
-
-    #学员管理
-    def click_stu_manage(self):
-        pass

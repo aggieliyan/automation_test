@@ -555,6 +555,7 @@ if __name__ == "__main__":
     allsuites.append(suite2)
     allsuites.append(suite_exam)
     allsuites.append(suite_exam_student)    
+
     alltests = unittest.TestSuite(allsuites)
 
     fp = file("myreport.html", 'wb')

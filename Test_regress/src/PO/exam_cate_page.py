@@ -1,4 +1,9 @@
 # -*- coding: UTF-8 -*-
+'''
+Created on 2014-12-20
+
+@author: guoyuling
+'''
 import time
 
 from selenium.webdriver.support.wait import WebDriverWait

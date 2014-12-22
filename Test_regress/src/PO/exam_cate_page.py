@@ -30,7 +30,7 @@ class ExamCateListPage(base.Base):
             self.cfg.get('exam', 'cate_desname'))
         cd_input.clear()
         cd_input.send_keys(cate_detail)
-        self.dr.implicitly_wait(10)
+        
 
      
 
@@ -38,7 +38,7 @@ class ExamCateListPage(base.Base):
     def click_create(self):
         self.dr.find_element(self.cfg.get('exam', 'cate_newcateid_by'), \
             self.cfg.get('exam', 'cate_newcateid')).click()
-        self.dr.implicitly_wait(10)
+        
 
     #编辑类目
     def click_modify_cate(self):
@@ -50,17 +50,17 @@ class ExamCateListPage(base.Base):
     def click_delete_cate(self):
         self.dr.find_element(self.cfg.get('exam', 'cate_del_by'), \
             self.cfg.get('exam', 'cate_del_xpath')).click()
-        self.dr.implicitly_wait(10)
+        
 
 
     #确认新建类目
     def click_addcate_ok(self):
         self.dr.find_element(self.cfg.get('exam', 'cate_oknew_button_by'),\
             self.cfg.get('exam', 'cate_oknew_button')).click()
-        self.dr.implicitly_wait(10)
+        
 
     #确认删除类目
     def click_delcate_ok(self):
         self.dr.find_element(self.cfg.get('exam', 'cate_oknew_button_by'), \
             self.cfg.get('exam', 'cate_oknew_button')).click()
-        self.dr.implicitly_wait(10)
+        

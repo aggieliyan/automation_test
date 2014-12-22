@@ -16,7 +16,7 @@ class SubjectListPage(base.Base):
 
     def open(self):
         self.dr.get("%sexam/" %(self.base_url))
-        self.dr.implicitly_wait(10)
+        
 
     #试卷库
     def click_exampaper(self):
@@ -26,12 +26,12 @@ class SubjectListPage(base.Base):
     def click_create_sub(self):
         self.dr.find_element(self.cfg.get('exam', 'new_subject_by'), \
         	self.cfg.get('exam', 'new_subject_id')).click()
-        self.dr.implicitly_wait(10)
+        
 
     #类目管理
     def click_cate_page(self):
         self.dr.find_element_by_link_text(u"类目管理").click()
-        self.dr.implicitly_wait(10)
+        
 
     #考点库
     def click_point_page(self):
@@ -80,13 +80,13 @@ class SubjectListPage(base.Base):
     def click_delsub_ok(self):
         self.dr.find_element(self.cfg.get('exam', 'sub_delok_by'), \
             self.cfg.get('exam', 'sub_delok_xpath')).click()
-        self.dr.implicitly_wait(10)
+        
 
     #新建科目OK
     def click_addsub_ok(self):
         self.dr.find_element(self.cfg.get('exam', 'sub_ok_by'), \
         	self.cfg.get('exam', 'sub_ok')).click()
-        self.dr.implicitly_wait(30)
+        
     
 
 

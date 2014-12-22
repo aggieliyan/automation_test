@@ -434,55 +434,6 @@ class Test(unittest.TestCase):
         student_management.buy_open_num(self.cfg, self.driver, self.base_url)
         filename = ba.save_screenshot()
         print "image:"+filename
-                        
-    def test_import_questions(self):
-        ba = Base(self.driver)
-        self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
-        #建立数据库连接查询当前试题总数并关闭连接,否则下面的查询会有缓存
-        db = 'ablesky_examsystem'
-        conn = ba.connect_db(self.dbhost, db)
-        cursor = conn.cursor()
-        sql = "SELECT COUNT(*) FROM e_question_q"
-        cursor.execute(sql)
-        num1 = cursor.fetchall()[0][0]
-        cursor.close()
-        #调用导入试题
-        try:
-            exam_questions.import_questions(self.cfg, self.driver, self.template)
-        except Exception, e:
-            print traceback.format_exc() 
-            self.verificationErrors.append("fail to import questions..")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
-        #重新建立数据库,查询导入试题后的总数,二者差即为导入总数
-        conn = ba.connect_db(self.dbhost, db)
-        cursor = conn.cursor()
-        cursor.execute(sql)
-        num2 = cursor.fetchall()[0][0]
-        num = num2 - num1
-        cursor.execute \
-            ("SELECT content_q,content_q FROM e_question_q ORDER BY id_q DESC LIMIT 1")
-        title = cursor.fetchall()[0][0]
-        msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
-        print msg
-
-    @unittest.skip("test")#暂时只支持ie
-    #创建一个试题
-    def test_auto_exam_onequestion(self):
-        ba = Base(self.driver)
-        title = "exam" + ba.rand_name()
-        exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa=title, onetype=7)
-        filename = ba.save_screenshot()
-        print "image:"+filename
-
-    @unittest.skip("test")#暂时只支持ie
-    #创建多个试题
-    def test_auto_exam_questions(self):
-        ba = Base(self.driver)
-        title = "exam" + ba.rand_name()
-        exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa=title, num=1)
-        filename = ba.save_screenshot()
-        print "image:"+filename
 
     # @unittest.skip("test")
     def test_add_announcement(self):
@@ -550,7 +501,7 @@ if __name__ == "__main__":
     suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
     suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
     allsuites = []
-#    allsuites.append(suite_register)
+    allsuites.append(suite_register)
     allsuites.append(suite1)
     allsuites.append(suite2)
     allsuites.append(suite_exam)

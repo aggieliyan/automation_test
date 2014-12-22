@@ -1,12 +1,39 @@
+
 # -*- coding: UTF-8 -*-
 '''
 Created on Dec 18, 2014
 
 @author: liwen
 '''
-import base
 
 import time
+
+import base
+from PO.exam_subject_page import SubjectListPage
+
+class PaperListPage(base.Base):
+
+
+    def __init__(self, driver, cfg):
+        self.cfg = cfg
+        self.base_url = cfg.get('env_para', 'base_url')
+        self.dr = driver
+
+    def click_creat_paper(self):
+        pass
+
+    def search_paper(self, paper_name):
+        self.dr.find_element(self.cfg.get('exam', 'paper_search_by'), \
+            self.cfg.get('exam', 'paper_search')).send_keys(paper_name)
+        time.sleep(1)
+    
+    #点击试卷名称
+    def click_paper(self, exam_name):
+        exam_href = self.dr.execute_script(\
+            "return $(\"a:contains(\'"+exam_name+"\')\").attr('href')")
+        time.sleep(1)
+        self.dr.get("%sexam/%s" % (self.base_url, exam_href))   
+
 class ClickExamSystem(base.Base):
     def __init__(self, driver, cfg):
         self.cfg = cfg
@@ -146,3 +173,79 @@ class QuestionInfoPage(base.Base):
     def click_submit_btn(self):
         self.dr.find_element(self.cfg.get('exam', 'exam_paper_build_btn_by'), \
                         self.cfg.get('exam', 'exam_paper_build_btn')).click()
+
+#点击试卷标题进入的页面 里面有试卷信息、试题信息、学员信息和试题统计
+class PaperRecordPage(base.Base):
+
+    def __init__(self, driver, cfg):
+        self.cfg = cfg
+        self.base_url = cfg.get('env_para', 'base_url')
+        self.dr = driver
+
+    def open(self, exam_name):
+        sp = SubjectListPage(self.dr, self.cfg)
+        sp.open()
+        sp.click_exampaper()
+        pp = PaperListPage(self.dr, self.cfg)
+        pp.search_paper(exam_name)
+        pp.click_paper(exam_name)
+
+    def click_student_info(self):
+        self.dr.find_element_by_link_text("学员信息").click()
+
+    #在学员信息统计结果那全选
+    def choose_all_stu(self):
+        self.dr.find_element(self.cfg.get('exam', 'select_stu_by'), \
+            self.cfg.get('exam', 'select_stu')).click()
+
+    #导出分发给学员试卷的结果
+    def output_sendpaper_result(self):
+        driver.find_element(cfg.get('exam', 'output_by'), \
+            cfg.get('exam', 'output')).click()
+
+    def click_open_paper_result(self):
+        self.dr.find_element_by_link_text(u"作为开放试卷的统计结果").click()
+
+    #导出开发试卷的统计结果
+    def output_opnepaper_result(self):
+        driver.find_element(cfg.get('exam', 'output_open_by'), \
+            cfg.get('exam', 'output_open')).click()
+
+    #点击某个学员后面的去评分
+    def click_score(self, username):
+        stu_name = self.dr.execute_script(\
+            "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(0).children().text()")
+        time.sleep(1)
+        if username not in stu_name:
+            print username + u'该学员不存在,无法评分。。'
+            return 0
+
+        grade_href = self.dr.execute_script(\
+            "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
+        time.sleep(2)
+        self.dr.get("%sexam/%s" % (self.base_url, grade_href))
+        return 1
+
+
+class ScorePage(base.Base):
+
+
+    def __init__(self, driver, cfg):
+        self.cfg = cfg
+        self.base_url = cfg.get('env_para', 'base_url')
+        self.dr = driver
+
+    #评分并返回总分
+    def input_score(self, score="0.1"):
+        score_input = self.dr.find_elements(self.cfg.get('exam', 'input_score_by'), \
+            self.cfg.get('exam', 'input_score'))
+        count = 0
+        for item in score_input:
+            try:
+                item.clear()
+                item.send_keys(score)
+                count += 1
+            except:
+                continue
+
+        return count * score

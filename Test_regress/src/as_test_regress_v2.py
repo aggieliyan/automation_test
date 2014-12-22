@@ -16,6 +16,7 @@ from PO.base import Base
 from testcase_student import StudentTest
 from testcase_register import RegisterTest
 from testcase_exam import ExamTest
+from testcase_exam_student import ExamStudentTest
 import login, new_course_management, course_management, student_management
 import card_management, cate_management, admin_management, user_management
 import exam_paper, exam_questions, exam_cate_management
@@ -25,36 +26,17 @@ class Test(unittest.TestCase):
     
 
     def setUp(self):
-        self.verificationErrors = []
-        self.browser = "Chrome"
+
         self.cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
         self.cfg.read(self.cfg_file)
-        self.verificationErrors = []
+        self.browser = self.cfg.get("env_para", "browser")
         self.org_name = self.cfg.get("env_para", "org_name")
         self.org_password = self.cfg.get("env_para", "org_password")
         self.user_name = self.cfg.get("env_para", "user_name")
         self.user_password = self.cfg.get("env_para", "user_password")
         self.base_url = self.cfg.get("env_para", "base_url")
         self.dbhost = self.cfg.get("env_para", "dbhost")
-        self.total = 0
-
-
-        #一些使用卡相关变量，前置条件：管理员先创建卡，给变量赋值，用户才可获取卡号登录使用卡号
-        #充值卡-卡号、密码
-        self.p_card_num = 0
-        self.p_card_pwd = 0
-        #充课卡-卡号、密码
-        self.c_card_num = 0
-        self.c_card_pwd = 0
-        #补课卡-卡号、密码
-        self.ca_card_num = 0
-        self.ca_card_pwd = 0
-        #试听卡-考号、密码
-        self.l_card_num = 0
-        self.l_card_pwd = 0
-        #考试卡-卡号
-        self.examcard_num = 0
 
         #注册的时候会把第一个值赋给它
         self.import_name = ""
@@ -101,19 +83,6 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
         self.assertEqual(True, rs)
-
-     
-
-        # self.normal_course = title#待用-在数据库中查是否转换失败
-
-          
-        #取链接待后面购买
-        # course_href = self.driver.execute_script("return $(\"a:contains(\'"+title+"\')\").attr('href')")
-        # time.sleep(1)
-        # if course_href:
-        #     self.course_href = self.base_url + course_href
-        # else:
-        #     self.course_href = ""
 
     # @unittest.skip("test")
     def test_release_three_video(self):
@@ -357,6 +326,8 @@ class Test(unittest.TestCase):
         count = 5
         academy = "qqhru"
         self.examcard_num = card_management.add_exam_card(self.cfg, self.driver, self.base_url, count, academy)
+        self.cfg.set("env_para", "examcard_num", self.examcard_num)
+        self.cfg.write(open(self.cfg_file, "w"))
         if self.examcard_num == None:
            rs = False
         else:
@@ -431,25 +402,6 @@ class Test(unittest.TestCase):
         student_management.buy_open_num(self.cfg, self.driver, self.base_url)
         filename = ba.save_screenshot()
         print "image:"+filename
-                        
-
-    @unittest.skip("test")#暂时只支持ie
-    #创建一个试题
-    def test_auto_exam_onequestion(self):
-        ba = Base(self.driver)
-        title = "exam" + ba.rand_name()
-        exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa=title, onetype=7)
-        filename = ba.save_screenshot()
-        print "image:"+filename
-
-    @unittest.skip("test")#暂时只支持ie
-    #创建多个试题
-    def test_auto_exam_questions(self):
-        ba = Base(self.driver)
-        title = "exam" + ba.rand_name()
-        exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa=title, num=1)
-        filename = ba.save_screenshot()
-        print "image:"+filename
 
     # @unittest.skip("test")
     def test_add_announcement(self):
@@ -515,11 +467,14 @@ if __name__ == "__main__":
     suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
     suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
+    suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
     allsuites = []
-#    allsuites.append(suite_register)
+    allsuites.append(suite_register)
     allsuites.append(suite1)
     allsuites.append(suite2)
     allsuites.append(suite_exam)
+    allsuites.append(suite_exam_student)    
+
     alltests = unittest.TestSuite(allsuites)
 
     fp = file("myreport.html", 'wb')

@@ -1,3 +1,4 @@
+
 # -*- coding: UTF-8 -*-
 '''
 Created on Dec 18, 2014
@@ -99,6 +100,7 @@ class  ExamInfoPage(base.Base):
         self.dr.find_element(self.cfg.get('exam', 'exam_next_one_by'), \
                         self.cfg.get('exam', 'exam_next_one')).click()
 class QuestionInfoPage(base.Base):
+    
     def __init__(self, driver, cfg):
         self.cfg = cfg
         self.base_url = cfg.get('env_para', 'base_url')
@@ -171,7 +173,6 @@ class QuestionInfoPage(base.Base):
     def click_submit_btn(self):
         self.dr.find_element(self.cfg.get('exam', 'exam_paper_build_btn_by'), \
                         self.cfg.get('exam', 'exam_paper_build_btn')).click()
-
 
 #点击试卷标题进入的页面 里面有试卷信息、试题信息、学员信息和试题统计
 class PaperRecordPage(base.Base):
@@ -248,4 +249,3 @@ class ScorePage(base.Base):
                 continue
 
         return count * score
-

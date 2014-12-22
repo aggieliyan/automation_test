@@ -156,7 +156,7 @@ def user_usexamcard_management(cfg, driver, base_url, examcard_num):
     return academy_catename
 
 def user_usexamcard(cfg, driver, base_url, examcard_num):  
-    academy_catename = user_usexamcard_management(cfg, driver, examcard_num)
+    academy_catename = user_usexamcard_management(cfg, driver, base_url, examcard_num)
     # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
     exam_user_management.exam_user(cfg, driver, operation=0, blank_pager=0, question_answer='123', paper_name=academy_catename)
     return academy_catename

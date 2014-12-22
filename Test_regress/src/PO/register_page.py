@@ -4,7 +4,7 @@ Created on Dec 9, 2014
 
 @author: liwen
 '''
-import base
+import base, time
 
 #class RegisterPage(base.Base):
 #    def __init__(self, driver, cfg):
@@ -57,12 +57,11 @@ class EmailRegisterPage(base.Base):
                                 'register_email_confirm_psw')).send_keys(r_psw)
                                 
     def verification_code(self):
-        raw_input(u"请输入验证码:")
         self.dr.find_element(self.cfg.get('as_index',"register_code_by"),\
                             self.cfg.get('as_index',"register_code")).click()
 #        self.dr.find_element(self.cfg.get('as_index',"register_code_by"),\
 #                            self.cfg.get('as_index',"register_code")).send_keys(raw_input(u"请输入验证码:"))
-                            
+        time.sleep(5)                  
     def register_submit_btn(self):
         self.dr.find_element(self.cfg.get('as_index', 'register_email_submit_by'), \
                         self.cfg.get('as_index', 'register_email_submit')).click()

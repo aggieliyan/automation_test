@@ -170,7 +170,7 @@ class Test(unittest.TestCase):
         cate_name = u"cate" + ba.rand_name()
         cate_management.add_cate(self.cfg, self.driver, self.base_url, cate_name=cate_name)
         
-        time.sleep(2)          
+        time.sleep(3)          
         actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
         filename = ba.save_screenshot()
         print "image:"+filename
@@ -268,12 +268,13 @@ class Test(unittest.TestCase):
     def test_buy_listen_card(self):
         ba = Base(self.driver)
         card_management.buy_listen_card(self.cfg, self.driver, self.base_url)
+        payconfirm = u"付款成功！"
         
-        time.sleep(2)
+        time.sleep(4)
         payok = self.driver.execute_script("return $('.page-headline').text()").strip()
         filename = ba.save_screenshot()
         print "image:"+filename
-        self.assertEqual("付款成功！", payok)
+        self.assertEqual(payconfirm, payok)
         
     #添加试听卡组
     def test_listen_cardgroup(self):

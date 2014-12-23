@@ -34,7 +34,7 @@ class BannerPage(base.Base):
 			self.cfg.get('org_index', 'home_logoname'))
 		# print ainput
 		# for a in ainput:
-		print ainput.is_displayed()
+		# print ainput.is_displayed()
 		self.dr.execute_script("\
 			$('#J_uploadLogoIndex').attr('style','display:block;');\
 			$('#J_uploadLogo').attr('style','display:block;');\
@@ -43,7 +43,7 @@ class BannerPage(base.Base):
 				display:block;transform:translate(0px, 0px) scale(1)')")
 		time.sleep(1)
 		# for a in ainput:
-		print ainput.is_displayed()
+		# print ainput.is_displayed()
 
 		self.dr.find_element(self.cfg.get('org_index', 'home_logoname_by'), \
 			self.cfg.get('org_index', 'home_logoname')).send_keys(logo_pic)

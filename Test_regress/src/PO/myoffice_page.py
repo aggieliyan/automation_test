@@ -27,7 +27,10 @@ class MyOfficePage(base.Base):
 		self.dr.find_element_by_link_text(u"系统设置").click()
 
 	def click_logo_settings(self):
-		self.dr.find_element_by_link_text(u"logo/联系方式设置").click()
+		try:
+			self.dr.find_element_by_link_text(u"logo/联系方式设置").click()
+		except NoSuchElementException, e:
+			print u"该导航不存在"
 
 	#点击网校管理员
 	def click_org_admin(self):

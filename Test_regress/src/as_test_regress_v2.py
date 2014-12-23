@@ -18,6 +18,8 @@ from testcase_register import RegisterTest
 from testcase_exam import ExamTest
 from testcase_exam_student import ExamStudentTest
 from testcase_exam_result import ExamResultTest
+from testcase_course import CourseTest
+from testcase_card import StudyCardTest
 import login, new_course_management, course_management, student_management
 import card_management, cate_management, admin_management, user_management
 import exam_paper, exam_questions, exam_cate_management
@@ -33,7 +35,7 @@ class Test(unittest.TestCase):
         self.cfg.read(self.cfg_file)
         self.browser = self.cfg.get("env_para", "browser")
         self.org_name = self.cfg.get("env_para", "org_name")
-        self.org_password = self.cfg.get("env_para", "org_password")sw
+        self.org_password = self.cfg.get("env_para", "org_password")
         self.user_name = self.cfg.get("env_para", "user_name")
         self.user_password = self.cfg.get("env_para", "user_password")
         self.base_url = self.cfg.get("env_para", "base_url")
@@ -73,88 +75,6 @@ class Test(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
- 
-    # @unittest.skip("test")
-    def test_release_normal_course(self):      
-        ba = Base(self.driver)
-        title = "course" + ba.rand_name()
-        new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
-        
-        rs = ba.is_element_present("link text", u"查看课程")
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(True, rs)
-
-    # @unittest.skip("test")
-    def test_release_three_video(self):
-        ba = Base(self.driver)
-        title = "coursethree" + ba.rand_name()
-        new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title)
-        
-        rs = ba.is_element_present("link text", u"查看课程")
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(True, rs)
-
-    # @unittest.skip("test")
-    def test_release_two_video(self):
-        ba = Base(self.driver)
-        title = "two_video" + ba.rand_name()
-        new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
-        
-        rs = ba.is_element_present("link text", u"查看课程")
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(True, rs)
-
-    # @unittest.skip("test")
-    def test_presaleclass(self):
-        ba = Base(self.driver)
-        title = "presaleclass" + ba.rand_name()
-        new_course_management.class_redirect(self.cfg, self.driver, self.base_url, ctype=2, classname=title)
-
-        course = self.driver.find_element("link text", title)
-        #若发课成功了取出课程链接存入文件中供后面的购买流程用
-        rs = False
-        if course:
-            rs = True
-            self.cfg.set("env_para", "course_href1", course.get_attribute("href"))
-            self.cfg.write(open(self.cfg_file, "w"))
-        
-        filename = ba.save_screenshot()
-        print "image:"+filename
-
-        self.assertEqual(True, rs)
-
-    # @unittest.skip("test")
-    def test_onlineclass(self):
-        ba = Base(self.driver)
-        title = "onlineclass" + ba.rand_name()
-        new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)
-
-        # rs = ba.is_element_present("link text", title)
-        course = self.driver.find_element("link text", title)
-        #若发课成功了取出课程链接存入文件中供后面的购买流程用
-        rs = False
-        if course:
-            rs = True
-            self.cfg.set("env_para", "course_href2", course.get_attribute("href"))
-            self.cfg.write(open(self.cfg_file, "w"))
-
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(True, rs)
-
-    # @unittest.skip("test")
-    def test_agency_course(self):
-        ba = Base(self.driver)
-        title = "agency" + ba.rand_name()
-        new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
-
-        rs = ba.is_element_present("link text", title)
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(True, rs)
 
     # @unittest.skip("test")
     def test_create_admin(self):
@@ -472,19 +392,24 @@ class Test(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    suite_register = unittest.TestLoader().loadTestsFromTestCase(RegisterTest)
-    suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
-    suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
-    suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
-    suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
-    suite_exam_result = unittest.TestLoader().loadTestsFromTestCase(ExamResultTest)
+    # suite_register = unittest.TestLoader().loadTestsFromTestCase(RegisterTest)
+    # suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
+    # suite_course = unittest.TestLoader().loadTestsFromTestCase(CourseTest)
+    suite_card = unittest.TestLoader().loadTestsFromTestCase(StudyCardTest)
+    # suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
+    # suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
+    # suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
+    # suite_exam_result = unittest.TestLoader().loadTestsFromTestCase(ExamResultTest)
     allsuites = []
-    allsuites.append(suite_register)
-    allsuites.append(suite1)
-    allsuites.append(suite2)
-    allsuites.append(suite_exam)
-    allsuites.append(suite_exam_student)
-    allsuites.append(suite_exam_result)  
+    # allsuites.append(suite_register)
+    # allsuites.append(suite_course)
+    allsuites.append(suite_card)
+    # allsuites.append(suite1)
+    # allsuites.append(suite2)
+    # allsuites.append(suite_exam)
+    # allsuites.append(suite_exam_student)
+    # allsuites.append(suite_exam_result)
+
 
     alltests = unittest.TestSuite(allsuites)
 

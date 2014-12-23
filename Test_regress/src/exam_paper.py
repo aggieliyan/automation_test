@@ -11,7 +11,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 
-from PO.exam_paper_page import ClickExamSystem, ExamInfoPage, QuestionInfoPage, PaperRecordPage
+from PO.exam_paper_page import ClickExamSystem, ExamInfoPage, QuestionInfoPage, PaperRecordPage, ScorePage
 from PO.base import Base
 from PO.random_exam_page import RandomExamPage
 from PO.exam_student_page import ExamStudentListPage
@@ -83,7 +83,8 @@ def random_exam(cfg, driver, base_url, exam_name, exam_time,\
     examinfo.whether_random(erandom)
     examinfo.open_or_no(eopen)
     
-    auto_create_randomquestion(cfg, driver, 1)    driver.find_element_by_css_selector("#question_select_1 > #combobox-container > div.cc-box > span.cc-arrow").click()
+    auto_create_randomquestion(cfg, driver, 1)
+    driver.find_element_by_css_selector("#question_select_1 > #combobox-container > div.cc-box > span.cc-arrow").click()
 ##    driver.find_element_by_css_selector("li.cc-item.selectedItem").click())
 #    driver.find_element_by_css_selector("p.random-q-num-con > input.random-input").clear()
 #    driver.find_element_by_css_selector("p.random-q-num-con > input.random-input").send_keys("9")
@@ -146,19 +147,14 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
     pp.click_student_info()
 
     if etype == 1:
-        try:
-            pp.choose_all_stu()
-            pp.output_sendpaper_result()
-        except:
-            print u'试卷暂时没有分发给学员'
+        pp.choose_all_stu()
+        pp.output_sendpaper_result()
 
     elif etype == 2:
         pp.click_open_paper_result()
-        try:
-            pp.choose_all_stu()
-            pp.output_opnepaper_result()
-        except:
-            print u'试卷暂时没有学员购买'
+        pp.choose_all_stu()
+        pp.output_opnepaper_result()
+        
     else:
         if pp.click_score(username):
             sp = ScorePage(driver, cfg)

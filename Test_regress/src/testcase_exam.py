@@ -11,6 +11,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 import HTMLTestRunner
+
 from PO.base import Base
 from PO.exam_subject_page import SubjectListPage 
 from PO.exam_cate_page import ExamCateListPage
@@ -22,12 +23,10 @@ import exam_user_management
 class ExamTest(unittest.TestCase):
 
     def setUp(self):
-        self.verificationErrors = []
-        self.browser = "ie"
         self.cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
         self.cfg.read(self.cfg_file)
-        self.verificationErrors = []
+        self.browser = self.cfg.get("env_para", "browser")
         self.org_name = self.cfg.get("env_para", "org_name")
         self.org_password = self.cfg.get("env_para", "org_password")
         self.user_name = self.cfg.get("env_para", "user_name")

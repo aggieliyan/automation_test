@@ -15,12 +15,10 @@ from PO.base import Base
 class ExamStudentTest(unittest.TestCase):
 
     def setUp(self):
-        self.verificationErrors = []
-        self.browser = "Chrome"
         self.cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
         self.cfg.read(self.cfg_file)
-        self.verificationErrors = []
+        self.browser = self.cfg.get("env_para", "browser")
         self.org_name = self.cfg.get("env_para", "org_name")
         self.org_password = self.cfg.get("env_para", "org_password")
         self.user_name = self.cfg.get("env_para", "user_name")

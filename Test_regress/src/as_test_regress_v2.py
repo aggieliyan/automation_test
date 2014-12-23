@@ -117,7 +117,7 @@ class Test(unittest.TestCase):
         time.sleep(1)         
         after_delete = self.driver.execute_script("return $(\".categTitle:last\").text()")#取最后一个类目的名称
         #print after_delete
-        rs = (before_delete==after_delete )
+        rs = (before_delete==after_delete)
         #若删除前后最后一个类目名类不同则证明删除类目成功
         filename = ba.save_screenshot()
         print "image:"+filename
@@ -190,7 +190,7 @@ class Test(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    # suite_register = unittest.TestLoader().loadTestsFromTestCase(RegisterTest)
+    suite_register = unittest.TestLoader().loadTestsFromTestCase(RegisterTest)
     # suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
     # suite_course = unittest.TestLoader().loadTestsFromTestCase(CourseTest)
     # suite_card = unittest.TestLoader().loadTestsFromTestCase(StudyCardTest)
@@ -200,7 +200,7 @@ if __name__ == "__main__":
     # suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
     # suite_exam_result = unittest.TestLoader().loadTestsFromTestCase(ExamResultTest)
     allsuites = []
-    # allsuites.append(suite_register)
+    allsuites.append(suite_register)
     # allsuites.append(suite_course)
     # allsuites.append(suite_card)
     allsuites.append(suite_stumanage)

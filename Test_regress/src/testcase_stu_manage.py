@@ -62,7 +62,8 @@ class StudentMangeTest(unittest.TestCase):
     #导入一个学员
     def test_import_one_student(self):
         ba = Base(self.driver)
-        stu_name = "exam3996"#还是固定的学员，以后改成注册那生成的学员
+        # stu_name = "exam3996"#还是固定的学员，以后改成注册那生成的学员
+        stu_name = self.cfg.get("env_para", "import_name")
         student_management.import_one_student(self.cfg, self.driver, self.base_url, stu_name)
         filename = ba.save_screenshot()
         print "image:"+filename

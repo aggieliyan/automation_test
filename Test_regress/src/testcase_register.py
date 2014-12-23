@@ -46,9 +46,14 @@ class RegisterTest(unittest.TestCase):
     def test_register(self):
         ba = Base(self.driver)
         user_name = ""
-        user_name = login.auto_register(self.cfg, self.driver, self.base_url, 1, 1)
-        self.import_name = user_name        
+        user_name = login.auto_register(self.cfg, self.driver, self.base_url, 2, 1)
+        if user_name:
+            self.cfg.set("env_para", "import_name", user_name)
+            self.cfg.write(open(self.cfg_file, "w"))    
         filename = ba.save_screenshot()
         print "image:"+filename
+    
+    def tearDown(self):
+        self.driver.quit()
         
         

@@ -24,8 +24,8 @@ class  RandomExamPage(base.Base):
                              self.cfg.get("exam","random_q_num"))
         num_input.clear()
         num_input.send_keys("1")
-        score_input = self.dr.find_element(self.cfg.get("exam","random_q_num_by"), \
-                             self.cfg.get("exam","random_q_num"))
+        score_input = self.dr.find_element(self.cfg.get("exam","random_q_score_by"), \
+                             self.cfg.get("exam","random_q_score"))
         score_input.clear()
         score_input.send_keys("1")                              
                              

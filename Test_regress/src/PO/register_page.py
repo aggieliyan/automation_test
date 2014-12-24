@@ -100,7 +100,7 @@ class PhoneRegisterPage(base.Base):
                                 
     def verification_code(self):
         self.dr.find_element(self.cfg.get('as_index', 'register_mobile_code_by'), \
-                        self.cfg.get('as_index', 'register_mobile_code')).send_keys(raw_input(u'请输入验证码：'))
+                        self.cfg.get('as_index', 'register_mobile_code')).send_keys('')
                             
     def register_submit_btn(self):
         self.dr.find_element(self.cfg.get('as_index', 'register_mobile_submit_by'), \

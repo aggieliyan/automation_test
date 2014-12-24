@@ -242,10 +242,11 @@ class ExamTest(unittest.TestCase):
         self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 2, 1, 1)
                
         self.cfg.set("env_para", "paper_name", str(self.paper_name))
-        self.cfg.write(open(self.cfg_file, "w"))
-        
+        self.cfg.write(open(self.cfg_file, "w"))        
         filename = ba.save_screenshot()
         print "image:"+filename
+
+        
     #@unittest.skip("test")        
     def test_random_paper(self):
         ba = Base(self.driver)

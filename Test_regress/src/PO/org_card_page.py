@@ -83,6 +83,7 @@ class OrgCardgroupInputPage(base.Base):
             self.cfg.get('org_manage', 'cate')).click()
 
 	def input_cateprice(self, group_price):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', 'cate_price_by'), \
             self.cfg.get('org_manage', 'cate_price')).send_keys(group_price)
 
@@ -158,7 +159,7 @@ class OrgUselearncardPage(base.Base):
 		self.cfg = cfg
 		self.base_url = cfg.get('env_para', 'base_url')
 		
-	def inter_uselearncard(self):
+	def open_uselearncard(self):
 	    self.dr.get(self.base_url+"useCard.do?action=toStudyCard")
 
 	def input_cardnum(self, card_num):
@@ -217,7 +218,7 @@ class OrgAcademyFirstPage(base.Base):
 		self.cfg = cfg
 		self.base_url = cfg.get('env_para', 'base_url')
 		
-	def enter_academyfirstpage(self, academy):
+	def open_academyfirstpage(self, academy):
 	    self.dr.get(self.base_url+academy)
 
 	def click_closewindow(self):

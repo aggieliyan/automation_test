@@ -15,10 +15,11 @@ from PO.exam_paper_page import ExamInfoPage, QuestionInfoPage
 #使用充值卡和充课卡
 def use_prepaidorcate_card(cfg, driver, base_url, card_num, card_psw):
     ogusecard = OrgUselearncardPage(driver, cfg)
-    ogusecard.inter_uselearncard()
+    ogusecard.open_uselearncard()
     ogusecard.input_cardnum(card_num)
     ogusecard.input_cardpwd(card_psw)
-    ogusecard.click_usenow()    
+    ogusecard.save_screenshot() 
+    ogusecard.click_usenow()   
     ogusecard.click_pconfirmagain()
     prepaid_num = ogusecard.get_pcardnum()
     return prepaid_num        
@@ -26,12 +27,14 @@ def use_prepaidorcate_card(cfg, driver, base_url, card_num, card_psw):
 #使用补课卡
 def use_course_card(cfg, driver, base_url, card_num, card_psw):
     ogusecard = OrgUselearncardPage(driver, cfg)
-    ogusecard.inter_uselearncard()
+    ogusecard.open_uselearncard()
     ogusecard.input_cardnum(card_num)
     ogusecard.input_cardpwd(card_psw)
+    ogusecard.save_screenshot()
     ogusecard.click_usenow()
     ogusecard.select_relatecourse()
     ogusecard.click_selected()
+    ogusecard.save_screenshot()
     ogusecard.click_confirmselect()
     course_num = ogusecard.get_ccardnum()  
     return course_num    
@@ -45,6 +48,7 @@ def add_prepaid_cardgroup(cfg, driver, base_url, org_name, \
     ogaddcardgroup = OrgCardgroupInputPage(driver, cfg)    
     ogaddcardgroup.input_groupname(group_name)
     ogaddcardgroup.input_prepaidprice(group_price)
+    ogaddcardgroup.save_screenshot()
     ogaddcardgroup.click_addgroup()
     
 #添加卡组-充课卡
@@ -56,7 +60,9 @@ def add_course_cardgroup(cfg, driver, base_url, org_name, group_name):
     ogaddcardgroup.select_coursecard() 
     ogaddcardgroup.input_groupname(group_name)
     ogaddcardgroup.select_relatecourse()
+    ogaddcardgroup.save_screenshot()
     ogaddcardgroup.click_select()
+    ogaddcardgroup.save_screenshot()
     ogaddcardgroup.click_addgroup()
 
 #添加卡组-补课卡 
@@ -69,7 +75,9 @@ def add_cate_cardgroup(cfg, driver, base_url, org_name, \
     ogaddcardgroup.select_catecard()
     ogaddcardgroup.input_groupname(group_name)
     ogaddcardgroup.select_relatecate()
+    ogaddcardgroup.save_screenshot()
     ogaddcardgroup.input_cateprice(group_price)
+    ogaddcardgroup.save_screenshot() 
     ogaddcardgroup.click_addgroup()
 
  #购买试听卡
@@ -79,7 +87,9 @@ def buy_listen_card(cfg, driver, base_url):
     ogmancardgroup.click_buyliscard()
     ogbuyliscard = OrgBuyliscardPage(driver, cfg)    
     ogbuyliscard.input_buyliscardcount()
+    ogbuyliscard.save_screenshot()
     ogbuyliscard.click_confirmbuyliscard()
+    ogbuyliscard.save_screenshot()    
     ogbuyliscard.click_confirmgivemoney()
     
 #添加卡组-试听卡
@@ -92,7 +102,9 @@ def add_listen_cardgroup(cfg, driver, base_url, \
     ogaddcardgroup.select_listencard()
     ogaddcardgroup.input_groupname(group_name)
     ogaddcardgroup.select_listencourse()
+    ogaddcardgroup.save_screenshot() 
     ogaddcardgroup.click_select()
+    ogaddcardgroup.save_screenshot()
     ogaddcardgroup.click_addgroup()
 
 #添加卡
@@ -104,29 +116,34 @@ def add_card(cfg, driver, org_name, base_url, \
     ogaddcard = OrgAddcardPage(driver, cfg)
     ogaddcard.input_cardprefix(card_prifix)    
     ogaddcard.input_cardnum(card_num)
+    ogaddcard.save_screenshot() 
     ogaddcard.click_add()   
              
 #机构获取院校机构类目名称
 def get_academy_catename(cfg, driver, academy):
     ogacafpage = OrgAcademyFirstPage(driver, cfg)
-    ogacafpage.enter_academyfirstpage(academy)
+    ogacafpage.open_academyfirstpage(academy)
+    ogacafpage.save_screenshot()
     ogacafpage.click_selectcourse()       
     try:
         ogacafpage.click_closewindow() 
     except:
         ogacafpage.click_skip() 
-        ogacafpage.click_selectcourse()    
+        ogacafpage.click_selectcourse()
     finally:
-        academy_catename = ogacafpage.get_firstcoursename()  
+        academy_catename = ogacafpage.get_firstcoursename()
+        ogacafpage.save_screenshot()
         return academy_catename
+    
 #创建考试卡获取第一个考号
 def add_exam_card_management(cfg, driver, base_url, count, academy):
     ogadexcard = OrgAddExamcardPage(driver, cfg)
     ogadexcard.click_more()
     ogadexcard.click_distributexam()
     ogadexcard.input_orgname(academy)  
-    ogadexcard.input_examcardnum(count)  
-    ogadexcard.click_ok()  
+    ogadexcard.input_examcardnum(count)
+    ogadexcard.save_screenshot() 
+    ogadexcard.click_ok()
     ogadexcard.click_more()  
     ogadexcard.enter_viewexamcardnumpage()  
     examcard_number = ogadexcard.get_examcardnum()
@@ -141,15 +158,17 @@ def add_exam_card(cfg, driver, base_url, count, academy):
 #    ogsublist.click_exampaper()
     ogexaminfo = ExamInfoPage(driver, cfg)
     ogexaminfo.create_paper()
-    time.sleep(2)
+    time.sleep(3)
     ogexaminfo.input_exam_name(page_catename)
-    time.sleep(2)
+    ogexaminfo.save_screenshot()
+    time.sleep(3)
     ogexaminfo.click_next()
     time.sleep(2)
     ogqueinfo = QuestionInfoPage(driver, cfg)
     time.sleep(2)
     ogqueinfo.add_big_question(1,1)
     time.sleep(2)
+    ogexaminfo.save_screenshot()
     ogqueinfo.click_submit_btn()
     examcard_number = add_exam_card_management(cfg, driver, base_url, count, academy)
     return examcard_number
@@ -157,15 +176,18 @@ def add_exam_card(cfg, driver, base_url, count, academy):
 def user_usexamcard_management(cfg, driver, base_url, examcard_num):
     ogacafpage = OrgAcademyFirstPage(driver, cfg)
     academy = "qqhru"
-    ogacafpage.enter_academyfirstpage(academy)
+    ogacafpage.open_academyfirstpage(academy)
     ogacafpage.click_selectcourse() 
     academy_catename = ogacafpage.get_firstcoursename()
-    ogacafpage.click_selectfirstcourse() 
+    ogacafpage.click_selectfirstcourse()
+    ogacafpage.save_screenshot() 
     ogacafpage.click_enterclearncener() 
-    ogacafpage.click_examonline() 
+    ogacafpage.click_examonline()
+    ogacafpage.save_screenshot() 
     oguseexcard = OrguseExamcardPage(driver, cfg)
     oguseexcard.input_examcard(examcard_num)        
-    oguseexcard.click_startexam() 
+    oguseexcard.click_startexam()
+    oguseexcard.save_screenshot()    
     oguseexcard.remark_confirmation()       
     return academy_catename
 

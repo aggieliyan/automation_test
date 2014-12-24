@@ -4,6 +4,13 @@
 Created on Dec 18, 2014
 
 @author: liwen
+
+modified on Dec. 24, 2014
+@author:yilulu
+added: PaperListPage
+       PaperRecordPage
+       ScorePage
+
 '''
 
 import time

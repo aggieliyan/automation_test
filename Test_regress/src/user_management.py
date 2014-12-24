@@ -23,7 +23,7 @@ def buy_course(cfg, driver, base_url, course_url):
     pay.save_screenshot()
     pay.choose_use_rmb()
     pay.click_pay()
-    pay.save_screenshot()
+
     
 #个人充值卡买课
 def buy_course_usecard(cfg, driver, base_url, course_url):
@@ -32,8 +32,7 @@ def buy_course_usecard(cfg, driver, base_url, course_url):
     pay.open(course_url)
     pay.save_screenshot()
     pay.click_pay()
-    pay.save_screenshot()
-           
+          
     
 #个人修改头像
 def change_headpic(cfg, base_url, driver, \
@@ -52,54 +51,27 @@ def release_announcement(cfg,driver, base_url, org_name, title,  an_content=u'an
     
     index = OrgIndexPage(driver, cfg)
     index.open(org_name)
+    index.save_screenshot()
     index.click_announcement()
     al = AnnouncementListPage(driver, cfg)
+    al.save_screenshot()
     al.click_add_announcement()
-    ai = AnnouncementInputPage(driver, cfg)
+    ai = AnnouncementInputPage(driver, cfg) 
     ai.input_title(title)
     ai.input_content(an_content)
+    ai.save_screenshot()
     ai.click_save()
 
-
-
-    # driver.get("%s%s"%(base_url, org_name))
-    # driver.implicitly_wait(10)
-    # driver.find_element_by_link_text(u"网校公告").click()
-    # driver.implicitly_wait(10)
-    # driver.find_element(cfg.get('org_index', 'release_announcementx_by'), \
-    #     cfg.get('org_index', 'release_announcementx')).click()
-    # driver.find_element(cfg.get('org_index', 'release_announcementc_by'), \
-    #     cfg.get('org_index', 'release_announcementc')).send_keys(title)
-    # an_content = an_content.replace("\"","\\\"").replace("\'","\\\'")
-    # driver.implicitly_wait(10)
-    # driver.execute_script("var element=window.document.getElementById('editNotice_ifr');\
-    # idocument=element.contentDocument;\
-    # element=idocument.getElementById('tinymce');\
-    # element.innerHTML='" + an_content + "'")
-    # time.sleep(2)
-    # driver.find_element(cfg.get('org_index', 'act_ok_by'), \
-    #     cfg.get('org_index', 'act_ok')).click()
-    # time.sleep(1)
 
 #获取视频外链发公告    
 def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_announcement'):
     
     cp = CourseManageListPage(driver, cfg)
     cp.open()
+    cp.save_screenshot()
     an_content = cp.click_get_link()
+    cp.save_screenshot()
     release_announcement(cfg,driver, base_url, org_name, title, an_content)
-    # driver.get("%smyOffice.do" %(base_url))
-    # driver.implicitly_wait(10)
-    # driver.find_element_by_link_text(u"教学教务").click()
-    # driver.implicitly_wait(10)
-    # driver.find_element_by_link_text(u"课程管理").click()
-    # driver.implicitly_wait(30)
-    # driver.find_element_by_link_text(u"获取视频链接").click()
-    # time.sleep(2)
-    # an_content = driver.execute_script("return $('textarea:eq(1)').text()")
-    # time.sleep(1)  
-    # release_announcement(cfg,driver, base_url, org_name, title, an_content)
-    # time.sleep(2)
 
 #机构修改头像
 def org_chang_headpic(cfg, driver, base_url, org_name, \
@@ -115,18 +87,8 @@ def change_homelogo(cfg, driver, base_url, org_name, \
 
     lop = BannerPage(driver, cfg)
     lop.open()
+    lop.save_screenshot()
     lop.change_logo(logo_pic)
-
-    # driver.get("%s%s"%(base_url, org_name))
-    # time.sleep(2)
-    # driver.execute_script("$('#J_uploadLogoIndex').attr('style','display:block;');\
-    #     $('#J_uploadLogo ').attr('style','display:block;');\
-    #     $('#J_uploadLogo input').eq(0).attr('style','height:300px;opacity:1;\
-    #         display:block;position:static;transform:translate(0px, 0px) scale(1)')")
-    # time.sleep(1)
-    # driver.find_element(cfg.get('org_index', 'home_logoname_by'), \
-    #     cfg.get('org_index', 'home_logoname')).send_keys(logo_pic)
-    # time.sleep(1)
 
 #修改页脚
 def modify_pagefoot(cfg, driver, base_url, org_name, \
@@ -134,25 +96,11 @@ def modify_pagefoot(cfg, driver, base_url, org_name, \
    
     fp = FootPage(driver, cfg)
     fp.open(org_name)
+    fp.save_screenshot()
     fp.input_footname(foot_name)
     fp.input_link(foot_url)
     fp.click_save()
 
-    # driver.get("%s%s"%(base_url, org_name))
-    # foot_href = driver.execute_script("return $('#J_dressNav_warp a').eq(6).attr('href')")
-    # time.sleep(1)
-    # driver.get("%s%s"%(base_url, foot_href))
-    # driver.find_element(cfg.get('org_index', 'pf_name_by'), \
-    #     cfg.get('org_index', 'pf_name')).clear()
-    # driver.find_element(cfg.get('org_index', 'pf_name_by'), \
-    #     cfg.get('org_index', 'pf_name')).send_keys(foot_name)
-    # driver.find_element(cfg.get('org_index', 'pf_link_by'), \
-    #     cfg.get('org_index', 'pf_link')).clear()
-    # driver.find_element(cfg.get('org_index', 'pf_modx4_by'), \
-    #     cfg.get('org_index', 'pf_modx4')).send_keys(foot_url)
-    # driver.find_element(cfg.get('org_index', 'pf_save_by'), \
-    #     cfg.get('org_index', 'pf_save')).click()
-    # time.sleep(1)
 
 
     

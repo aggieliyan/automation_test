@@ -28,7 +28,7 @@ class ExamStudentListPage(base.Base):
 		for letter in username:
 			self.dr.find_element(self.cfg.get('exam', 'user_search_by'), \
 				self.cfg.get('exam', 'user_search')).send_keys(letter)
-			time.sleep(1)
+			time.sleep(0.1)
 
 	def click_send_paper(self):
 		self.dr.find_element_by_link_text(u"分发试卷").click()
@@ -37,16 +37,16 @@ class ExamStudentListPage(base.Base):
 		self.dr.find_element_by_link_text(u"关闭试卷").click()
 
 	def choose_all_paper(self):
-		time.sleep(1)
+		time.sleep(0.1)
 		self.dr.find_element(self.cfg.get('exam', 'open_paper_by'), \
 			self.cfg.get('exam', 'open_paper')).click()
 
 	def choose_one_paper(self):
-		time.sleep(1)
+		time.sleep(0.1)
 		self.dr.find_elements(self.cfg.get('exam', 'select_one_p_by'), \
 			self.cfg.get('exam', 'select_one_p'))[-1].click()
 
 	def click_save(self):
 		self.dr.find_element(self.cfg.get('exam', 'open_paper_ok_by'), \
 			self.cfg.get('exam', 'open_paper_ok')).click()
-		time.sleep(1)
+		time.sleep(0.1)

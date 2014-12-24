@@ -27,6 +27,10 @@ class SubjectListPage(base.Base):
     def click_exampaper(self):
         self.dr.find_element_by_link_text(u"试卷库").click()
 
+    #试题库
+    def click_questions(self):
+        self.dr.find_element_by_link_text(u"试题库").click()
+
     #学员管理
     def click_stu_manage(self):
         self.dr.find_element(self.cfg.get('exam', 'stu_manage_by'), \

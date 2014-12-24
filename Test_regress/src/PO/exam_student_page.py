@@ -37,12 +37,12 @@ class ExamStudentListPage(base.Base):
 		self.dr.find_element_by_link_text(u"关闭试卷").click()
 
 	def choose_all_paper(self):
-		time.sleep(0.1)
+		time.sleep(0.5)
 		self.dr.find_element(self.cfg.get('exam', 'open_paper_by'), \
 			self.cfg.get('exam', 'open_paper')).click()
 
 	def choose_one_paper(self):
-		time.sleep(0.1)
+		time.sleep(0.5)
 		self.dr.find_elements(self.cfg.get('exam', 'select_one_p_by'), \
 			self.cfg.get('exam', 'select_one_p'))[-1].click()
 

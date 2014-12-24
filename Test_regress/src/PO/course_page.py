@@ -31,7 +31,7 @@ class CourseStepOnePage(base.Base):
 	def click_upload(self, i):
 		self.dr.find_elements(self.cfg.get('courseRedirect', 'upload_btn_by'), \
 			self.cfg.get('courseRedirect', 'upload_btn'))[i].click()
-		time.sleep(0.1)
+		time.sleep(1)
 
 	def choose_flv(self):
 		self.dr.execute_script("$(\"[filetype='flv']\").eq(0).click()")#选一个视频课件

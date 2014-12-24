@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -191,15 +189,9 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>My unit test</h1>
-<<<<<<< HEAD
-<p class='attribute'><strong>Start Time:</strong> 2014-12-23 13:58:38</p>
-<p class='attribute'><strong>Duration:</strong> 0:01:34.538000</p>
-<p class='attribute'><strong>Status:</strong> Pass 3</p>
-=======
-<p class='attribute'><strong>Start Time:</strong> 2014-12-23 17:59:26</p>
-<p class='attribute'><strong>Duration:</strong> 0:05:44.744000</p>
-<p class='attribute'><strong>Status:</strong> Pass 11 Failure 1 Error 8</p>
->>>>>>> origin/master
+<p class='attribute'><strong>Start Time:</strong> 2014-12-24 15:18:43</p>
+<p class='attribute'><strong>Duration:</strong> 0:22:15.948000</p>
+<p class='attribute'><strong>Status:</strong> Pass 42 Failure 3 Error 13</p>
 
 <p class='description'>This demonstrates the report output by HTMLTestRunner.</p>
 </div>
@@ -230,526 +222,18 @@ function showOutput(id, name) {
     <td>Screenshot</td>
 </tr>
 
-<<<<<<< HEAD
 <tr class='passClass'>
-    <td>testcase_exam.ExamTest</td>
-=======
-<tr class='errorClass'>
-    <td>testcase_exam.ExamTest</td>
-    <td>15</td>
-    <td>8</td>
+    <td>testcase_register.RegisterTest</td>
     <td>1</td>
-    <td>6</td>
-    <td><a href="javascript:showClassDetail('c1',15)">Detail</a></td>
-    <td>&nbsp;</td>
-</tr>
-
-<tr id='ft1.1' class='none'>
-    <td class='errorCase'><div class='testcase'>test_auto_exam_onequestion</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.1')" >
-        error</a>
-
-    <div id='div_ft1.1' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.1').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.1: Traceback (most recent call last):
-  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 106, in test_auto_exam_onequestion
-    exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa=title, onetype=7)
-  File "D:\code\automation_test\Test_regress\src\exam_questions.py", line 142, in auto_exam_onequestion
-    exam_question_Composite(cfg, driver, base_url, question_ansa)
-  File "D:\code\automation_test\Test_regress\src\exam_questions.py", line 88, in exam_question_Composite
-    question.click_question_name(question_ansa)
-  File "D:\code\automation_test\Test_regress\src\PO\exam_questions_page.py", line 81, in click_question_name
-    self.cfg.get('exam_questions', "question_name"))
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
-    {'using': by, 'value': value})['value']
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
-    self.error_handler.check_response(response)
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='ft1.2' class='none'>
-    <td class='errorCase'><div class='testcase'>test_auto_exam_questions</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.2')" >
-        error</a>
-
-    <div id='div_ft1.2' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.2').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.2: Traceback (most recent call last):
-  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 114, in test_auto_exam_questions
-    exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa=title, num=1)
-  File "D:\code\automation_test\Test_regress\src\exam_questions.py", line 109, in auto_exam_questions
-    exam_question_Single(cfg, driver, base_url, question_ansa)
-  File "D:\code\automation_test\Test_regress\src\exam_questions.py", line 17, in exam_question_Single
-    question.click_question_name(question_ansa)
-  File "D:\code\automation_test\Test_regress\src\PO\exam_questions_page.py", line 81, in click_question_name
-    self.cfg.get('exam_questions', "question_name"))
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
-    {'using': by, 'value': value})['value']
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
-    self.error_handler.check_response(response)
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.3' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_close_paper</div></td>
-    <td colspan='5' align='center'>pass</td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='ft1.4' class='none'>
-    <td class='errorCase'><div class='testcase'>test_exam_create_cate</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.4')" >
-        error</a>
-
-    <div id='div_ft1.4' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.4').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.4: TypeError: test_exam_create_cate() takes no arguments (1 given)
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.5' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_exam_create_point</div></td>
-    <td colspan='5' align='center'>pass</td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.6' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_exam_create_subject</div></td>
-    <td colspan='5' align='center'>pass</td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='ft1.7' class='none'>
-    <td class='failCase'><div class='testcase'>test_exam_delete_cate</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.7')" >
-        fail</a>
-
-    <div id='div_ft1.7' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.7').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.7: Traceback (most recent call last):
-  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 179, in test_exam_delete_cate
-    self.assertEqual(total_num - 1, last_num)
-AssertionError: -1 != 4
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='ft1.8' class='none'>
-    <td class='errorCase'><div class='testcase'>test_exam_delete_point</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.8')" >
-        error</a>
-
-    <div id='div_ft1.8' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.8').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.8: Traceback (most recent call last):
-  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 206, in test_exam_delete_point
-    total_num = exam_cate_management.delete_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
-  File "D:\code\automation_test\Test_regress\src\exam_cate_management.py", line 219, in delete_exam_point
-    exam_point.click_delpoint_ok()
-  File "D:\code\automation_test\Test_regress\src\PO\exam_point_page.py", line 71, in click_delpoint_ok
-    self.cfg.get('exam', 'point_delokbot_xpath')).click()
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
-    {'using': by, 'value': value})['value']
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
-    self.error_handler.check_response(response)
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.9' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_exam_delete_subject</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.9')" >
-        pass</a>
-
-    <div id='div_pt1.9' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.9').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-pt1.9: 默认科目
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.10' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_exam_modify_cate</div></td>
-    <td colspan='5' align='center'>pass</td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='ft1.11' class='none'>
-    <td class='errorCase'><div class='testcase'>test_exam_modify_point</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.11')" >
-        error</a>
-
-    <div id='div_ft1.11' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.11').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.11: Traceback (most recent call last):
-  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 196, in test_exam_modify_point
-    point_name = exam_cate_management.modify_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
-  File "D:\code\automation_test\Test_regress\src\exam_cate_management.py", line 205, in modify_exam_point
-    exam_point.click_addpoint_ok()
-  File "D:\code\automation_test\Test_regress\src\PO\exam_point_page.py", line 65, in click_addpoint_ok
-    self.cfg.get('exam', 'point_okbotton')).click()
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 60, in click
-    self._execute(Command.CLICK_ELEMENT)
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 370, in _execute
-    return self._parent.execute(command, params)
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
-    self.error_handler.check_response(response)
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
-    raise exception_class(message, screen, stacktrace)
-WebDriverException: Message: u'unknown error: Element is not clickable at point (915, 696). Other element would receive the click: &lt;div class="courserecom-right"&gt;...&lt;/div&gt;\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.12' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_exam_modify_subject</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.12')" >
-        pass</a>
-
-    <div id='div_pt1.12' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.12').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-pt1.12: 默认科目
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.13' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_import_questions</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.13')" >
-        pass</a>
-
-    <div id='div_pt1.13' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.13').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-pt1.13: 导入0道试题,最后一个试题题目为&lt;p&gt;&lt;img src="http://stat2.beta.ablesky.com/content/pic/communitythreadphoto/2014/12/22/19763263-9007-46f5-83a7-3dee74621a2f.png" _src="http://stat2.beta.ablesky.com/content/pic/communitythreadphoto/2014/12/22/19763263-9007-46f5-83a7-3dee74621a2f.png"/&gt;&lt;/p&gt;
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/试题,最后一个试题题目为&lt;p&gt;&lt;img src="http://stat2.beta.ablesky.com/content/pic/communitythreadphoto/2014/12/22/19763263-9007-46f5-83a7-3dee74621a2f.png">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='ft1.14' class='none'>
-    <td class='errorCase'><div class='testcase'>test_random_paper</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.14')" >
-        error</a>
-
-    <div id='div_ft1.14' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.14').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.14: Traceback (most recent call last):
-  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 241, in test_random_paper
-    exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 1, 2)
-  File "D:\code\automation_test\Test_regress\src\exam_paper.py", line 118, in auto_createpaper
-    eoperation, erandom, eopen)
-  File "D:\code\automation_test\Test_regress\src\exam_paper.py", line 90, in random_exam
-    auto_create_randomquestion(cfg, driver, 1)
-  File "D:\code\automation_test\Test_regress\src\exam_paper.py", line 102, in auto_create_randomquestion
-    add_randomq.add_question_btn()
-  File "D:\code\automation_test\Test_regress\src\PO\random_exam_page.py", line 24, in add_question_btn
-    self.cfg.get("exam","random_q_num"))
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
-    {'using': by, 'value': value})['value']
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
-    self.error_handler.check_response(response)
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
-    raise exception_class(message, screen, stacktrace)
-UnexpectedAlertPresentException: Message: u'unexpected alert open\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.15' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_send_paper</div></td>
-    <td colspan='5' align='center'>pass</td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr class='errorClass'>
-    <td>testcase_exam_student.ExamStudentTest</td>
-    <td>2</td>
+    <td>1</td>
     <td>0</td>
     <td>0</td>
-    <td>2</td>
-    <td><a href="javascript:showClassDetail('c2',2)">Detail</a></td>
-    <td>&nbsp;</td>
-</tr>
-
-<tr id='ft2.1' class='none'>
-    <td class='errorCase'><div class='testcase'>test_buy_paper</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.1')" >
-        error</a>
-
-    <div id='div_ft2.1' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.1').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft2.1: Traceback (most recent call last):
-  File "D:\code\automation_test\Test_regress\src\testcase_exam_student.py", line 60, in test_buy_paper
-    exam_user_management.buy_paper(self.cfg, self.driver, paper_url)
-  File "D:\code\automation_test\Test_regress\src\exam_user_management.py", line 16, in buy_paper
-    pay.click_pay()
-  File "D:\code\automation_test\Test_regress\src\PO\payment_page.py", line 38, in click_pay
-    self.cfg.get('org_index', 'pay_ok')).click()
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
-    {'using': by, 'value': value})['value']
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
-    self.error_handler.check_response(response)
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='ft2.2' class='none'>
-    <td class='errorCase'><div class='testcase'>test_exam_user</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.2')" >
-        error</a>
-
-    <div id='div_ft2.2' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.2').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft2.2: Traceback (most recent call last):
-  File "D:\code\automation_test\Test_regress\src\testcase_exam_student.py", line 74, in test_exam_user
-    exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, paper_name)
-  File "D:\code\automation_test\Test_regress\src\exam_user_management.py", line 25, in exam_user
-    userpaperlist.click_examnow()
-  File "D:\code\automation_test\Test_regress\src\PO\exam_user_page.py", line 32, in click_examnow
-    self.dr.find_element_by_link_text(u"ç«å³èè¯").click()
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 254, in find_element_by_link_text
-    return self.find_element(by=By.LINK_TEXT, value=link_text)
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
-    {'using': by, 'value': value})['value']
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
-    self.error_handler.check_response(response)
-  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
-    raise exception_class(message, screen, stacktrace)
-NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr class='passClass'>
-    <td>testcase_exam_result.ExamResultTest</td>
->>>>>>> origin/master
-    <td>3</td>
-    <td>3</td>
-    <td>0</td>
-    <td>0</td>
-<<<<<<< HEAD
-    <td><a href="javascript:showClassDetail('c1',3)">Detail</a></td>
+    <td><a href="javascript:showClassDetail('c1',1)">Detail</a></td>
     <td>&nbsp;</td>
 </tr>
 
 <tr id='pt1.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_createpaper</div></td>
+    <td class='none'><div class='testcase'>test_register</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -759,13 +243,259 @@ NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0
     <div id='div_pt1.1' class="popup_window">
         <div style='text-align: left; color:red;cursor:pointer'>
         <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1').style.display = 'none' " >
-=======
-    <td><a href="javascript:showClassDetail('c3',3)">Detail</a></td>
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1: pass
+image:2014-12-24-15_19_42.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_19_42.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr class='errorClass'>
+    <td>testcase_course.CourseTest</td>
+    <td>6</td>
+    <td>3</td>
+    <td>0</td>
+    <td>3</td>
+    <td><a href="javascript:showClassDetail('c2',6)">Detail</a></td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_agency_course</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.1')" >
+        pass</a>
+
+    <div id='div_pt2.1' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.1: image:2014-12-24-15_20_06.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_20_06.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt2.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_onlineclass</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.2')" >
+        pass</a>
+
+    <div id='div_pt2.2' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.2: image:2014-12-24-15_20_28.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_20_28.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt2.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_presaleclass</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.3')" >
+        pass</a>
+
+    <div id='div_pt2.3' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.3: image:2014-12-24-15_20_50.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_20_50.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft2.4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_release_normal_course</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.4')" >
+        error</a>
+
+    <div id='div_ft2.4' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft2.4: Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_course.py", line 70, in test_release_normal_course
+    new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
+  File "D:\code\automation_test\Test_regress\src\new_course_management.py", line 56, in course_redirect
+    course.click_next_step()
+  File "D:\code\automation_test\Test_regress\src\PO\course_page.py", line 50, in click_next_step
+    self.cfg.get('courseRedirect', 'next_btn')).click()
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 60, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 370, in _execute
+    return self._parent.execute(command, params)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+WebDriverException: Message: u'unknown error: Element is not clickable at point (951, 928). Other element would receive the click: &lt;div class="dialog-mask" style="width: 1903px; height: 1186px; z-index: 9999;"&gt;&lt;/div&gt;\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft2.5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_release_three_video</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.5')" >
+        error</a>
+
+    <div id='div_ft2.5' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft2.5: Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_course.py", line 81, in test_release_three_video
+    new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title)
+  File "D:\code\automation_test\Test_regress\src\new_course_management.py", line 56, in course_redirect
+    course.click_next_step()
+  File "D:\code\automation_test\Test_regress\src\PO\course_page.py", line 50, in click_next_step
+    self.cfg.get('courseRedirect', 'next_btn')).click()
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 60, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 370, in _execute
+    return self._parent.execute(command, params)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+WebDriverException: Message: u'unknown error: Element is not clickable at point (951, 928). Other element would receive the click: &lt;div class="dialog-mask" style="width: 1903px; height: 1186px; z-index: 9999;"&gt;&lt;/div&gt;\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft2.6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_release_two_video</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.6')" >
+        error</a>
+
+    <div id='div_ft2.6' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft2.6: Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_course.py", line 92, in test_release_two_video
+    new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10)
+  File "D:\code\automation_test\Test_regress\src\new_course_management.py", line 56, in course_redirect
+    course.click_next_step()
+  File "D:\code\automation_test\Test_regress\src\PO\course_page.py", line 50, in click_next_step
+    self.cfg.get('courseRedirect', 'next_btn')).click()
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 60, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 370, in _execute
+    return self._parent.execute(command, params)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+WebDriverException: Message: u'unknown error: Element is not clickable at point (951, 928). Other element would receive the click: &lt;div class="dialog-mask" style="width: 1903px; height: 1186px; z-index: 9999;"&gt;&lt;/div&gt;\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr class='failClass'>
+    <td>testcase_card.StudyCardTest</td>
+    <td>6</td>
+    <td>5</td>
+    <td>1</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c3',6)">Detail</a></td>
     <td>&nbsp;</td>
 </tr>
 
 <tr id='pt3.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_export_openpaper_result</div></td>
+    <td class='none'><div class='testcase'>test_add_exam_card</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -775,17 +505,11 @@ NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0
     <div id='div_pt3.1' class="popup_window">
         <div style='text-align: left; color:red;cursor:pointer'>
         <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.1').style.display = 'none' " >
->>>>>>> origin/master
            [x]</a>
         </div>
         <pre>
         
-<<<<<<< HEAD
-pt1.1: image:2014-12-23-13_59_34.png
-=======
-pt3.1: no paper named  testpaper_bby9272
-image:2014-12-23-18_04_38.png
->>>>>>> origin/master
+pt3.1: image:2014-12-24-15_22_16.png
 
 
         </pre>
@@ -794,29 +518,12 @@ image:2014-12-23-18_04_38.png
 
     </td>
     <td align='center'>
-<<<<<<< HEAD
-    <a target=_blank href="file://C://test_rs_pic/2014-12-23-13_59_34.png">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.2' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_exam_modify_subject</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.2')" >
-        pass</a>
-
-    <div id='div_pt1.2' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.2').style.display = 'none' " >
-=======
-    <a target=_blank href="file://C://test_rs_pic/2014-12-23-18_04_38.png">check Screenshot</a>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_22_16.png">check Screenshot</a>
     </td>
 </tr>
 
 <tr id='pt3.2' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_export_sendpaper_result</div></td>
+    <td class='none'><div class='testcase'>test_buy_listen_card</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -826,17 +533,11 @@ image:2014-12-23-18_04_38.png
     <div id='div_pt3.2' class="popup_window">
         <div style='text-align: left; color:red;cursor:pointer'>
         <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.2').style.display = 'none' " >
->>>>>>> origin/master
            [x]</a>
         </div>
         <pre>
         
-<<<<<<< HEAD
-pt1.2: 默认科目
-=======
-pt3.2: no paper named  testpaper_bby9272
-image:2014-12-23-18_04_54.png
->>>>>>> origin/master
+pt3.2: image:2014-12-24-15_22_39.png
 
 
         </pre>
@@ -845,29 +546,12 @@ image:2014-12-23-18_04_54.png
 
     </td>
     <td align='center'>
-<<<<<<< HEAD
-    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.3' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_random_paper</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.3')" >
-        pass</a>
-
-    <div id='div_pt1.3' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.3').style.display = 'none' " >
-=======
-    <a target=_blank href="file://C://test_rs_pic/2014-12-23-18_04_54.png">check Screenshot</a>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_22_39.png">check Screenshot</a>
     </td>
 </tr>
 
 <tr id='pt3.3' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_score_paper</div></td>
+    <td class='none'><div class='testcase'>test_cate_cardgroup</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -877,17 +561,11 @@ image:2014-12-23-18_04_54.png
     <div id='div_pt3.3' class="popup_window">
         <div style='text-align: left; color:red;cursor:pointer'>
         <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.3').style.display = 'none' " >
->>>>>>> origin/master
            [x]</a>
         </div>
         <pre>
         
-<<<<<<< HEAD
-pt1.3: image:2014-12-23-14_00_11.png
-=======
-pt3.3: no paper named  testpaper_bby9272
-image:2014-12-23-18_05_09.png
->>>>>>> origin/master
+pt3.3: image:2014-12-24-15_23_03.png
 
 
         </pre>
@@ -896,27 +574,1594 @@ image:2014-12-23-18_05_09.png
 
     </td>
     <td align='center'>
-<<<<<<< HEAD
-    <a target=_blank href="file://C://test_rs_pic/2014-12-23-14_00_11.png">check Screenshot</a>
-=======
-    <a target=_blank href="file://C://test_rs_pic/2014-12-23-18_05_09.png">check Screenshot</a>
->>>>>>> origin/master
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_23_03.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt3.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_course_cardgroup</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.4')" >
+        pass</a>
+
+    <div id='div_pt3.4' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.4: image:2014-12-24-15_24_02.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_24_02.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft3.5' class='none'>
+    <td class='failCase'><div class='testcase'>test_listen_cardgroup</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft3.5')" >
+        fail</a>
+
+    <div id='div_ft3.5' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft3.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft3.5: 每个自然月内可进行试听收费课程不能超过10门
+image:2014-12-24-15_25_11.png
+Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_card.py", line 146, in test_listen_cardgroup
+    self.assertEqual(True, rs)
+AssertionError: True != False
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_25_11.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt3.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_prepaid_cardgroup</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.6')" >
+        pass</a>
+
+    <div id='div_pt3.6' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.6: image:2014-12-24-15_25_34.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_25_34.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>testcase_stu_manage.StudentMangeTest</td>
+    <td>7</td>
+    <td>7</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c4',7)">Detail</a></td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_auto_create_student</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.1')" >
+        pass</a>
+
+    <div id='div_pt4.1' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.1: image:2014-12-24-15_26_24.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_26_24.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt4.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_buy_open_num</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.2')" >
+        pass</a>
+
+    <div id='div_pt4.2' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.2: image:2014-12-24-15_26_41.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_26_41.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt4.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_import_multi_student</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.3')" >
+        pass</a>
+
+    <div id='div_pt4.3' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.3: image:2014-12-24-15_26_57.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_26_57.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt4.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_import_one_student</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.4')" >
+        pass</a>
+
+    <div id='div_pt4.4' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.4: image:2014-12-24-15_27_13.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_27_13.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt4.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_manage_course_num</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.5')" >
+        pass</a>
+
+    <div id='div_pt4.5' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.5: image:2014-12-24-15_27_53.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_27_53.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt4.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_open_course_for_multi</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.6')" >
+        pass</a>
+
+    <div id='div_pt4.6' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.6: image:2014-12-24-15_28_40.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_28_40.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt4.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_open_course_for_one</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.7')" >
+        pass</a>
+
+    <div id='div_pt4.7' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.7: image:2014-12-24-15_29_14.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_29_14.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr class='errorClass'>
+    <td>Test</td>
+    <td>11</td>
+    <td>9</td>
+    <td>0</td>
+    <td>2</td>
+    <td><a href="javascript:showClassDetail('c5',11)">Detail</a></td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr id='ft5.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_announcement</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft5.1')" >
+        error</a>
+
+    <div id='div_ft5.1' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft5.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft5.1: okkkk
+网校公告导航不存在
+Traceback (most recent call last):
+  File "as_test_regress_v2.py", line 144, in test_add_announcement
+    user_management.release_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
+  File "D:\code\automation_test\Test_regress\src\user_management.py", line 58, in release_announcement
+    al.click_add_announcement()
+  File "D:\code\automation_test\Test_regress\src\PO\announcement_page.py", line 23, in click_add_announcement
+    self.dr.find_element("link text", u"æ°å¢å¬å").click()
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
+    {'using': by, 'value': value})['value']
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt5.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_add_cate</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.2')" >
+        pass</a>
+
+    <div id='div_pt5.2' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.2: image:2014-12-24-15_29_50.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_29_50.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt5.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_add_course_to_cate</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.3')" >
+        pass</a>
+
+    <div id='div_pt5.3' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.3: image:2014-12-24-15_30_22.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_30_22.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt5.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_change_headpic</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.4')" >
+        pass</a>
+
+    <div id='div_pt5.4' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.4: image:2014-12-24-15_30_33.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_30_33.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt5.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_change_homelogo</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.5')" >
+        pass</a>
+
+    <div id='div_pt5.5' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.5: image:2014-12-24-15_30_50.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_30_50.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt5.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_create_admin</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.6')" >
+        pass</a>
+
+    <div id='div_pt5.6' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.6: image:2014-12-24-15_31_11.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_31_11.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt5.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_delete_admin</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.7')" >
+        pass</a>
+
+    <div id='div_pt5.7' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.7: 464
+463
+image:2014-12-24-15_31_37.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_31_37.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt5.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_delete_cate</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.8')" >
+        pass</a>
+
+    <div id='div_pt5.8' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.8: image:2014-12-24-15_31_55.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_31_55.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft5.9' class='none'>
+    <td class='errorCase'><div class='testcase'>test_href_announcement</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft5.9')" >
+        error</a>
+
+    <div id='div_ft5.9' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft5.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft5.9: okkkk
+网校公告导航不存在
+Traceback (most recent call last):
+  File "as_test_regress_v2.py", line 154, in test_href_announcement
+    user_management.release_href_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
+  File "D:\code\automation_test\Test_regress\src\user_management.py", line 74, in release_href_announcement
+    release_announcement(cfg,driver, base_url, org_name, title, an_content)
+  File "D:\code\automation_test\Test_regress\src\user_management.py", line 58, in release_announcement
+    al.click_add_announcement()
+  File "D:\code\automation_test\Test_regress\src\PO\announcement_page.py", line 23, in click_add_announcement
+    self.dr.find_element("link text", u"æ°å¢å¬å").click()
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
+    {'using': by, 'value': value})['value']
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt5.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modify_admin</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.10')" >
+        pass</a>
+
+    <div id='div_pt5.10' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.10: image:2014-12-24-15_32_44.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_32_44.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt5.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_modify_pagefoot</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.11')" >
+        pass</a>
+
+    <div id='div_pt5.11' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.11: okkkk
+2249
+image:2014-12-24-15_33_01.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_33_01.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr class='errorClass'>
+    <td>testcase_student.StudentTest</td>
+    <td>7</td>
+    <td>5</td>
+    <td>1</td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c6',7)">Detail</a></td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr id='pt6.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_buy_course_use_RMB</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.1')" >
+        pass</a>
+
+    <div id='div_pt6.1' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.1: image:2014-12-24-15_33_19.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_33_19.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt6.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_buy_course_use_card</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.2')" >
+        pass</a>
+
+    <div id='div_pt6.2' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.2: image:2014-12-24-15_33_33.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_33_33.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt6.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_use_catecard</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.3')" >
+        pass</a>
+
+    <div id='div_pt6.3' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.3: image:2014-12-24-15_34_01.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_34_01.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt6.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_use_coursecard</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.4')" >
+        pass</a>
+
+    <div id='div_pt6.4' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.4: image:2014-12-24-15_34_19.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_34_19.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft6.5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_use_exam_card</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft6.5')" >
+        error</a>
+
+    <div id='div_ft6.5' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft6.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft6.5: 考试卡错误，请使用本校考试卡号！
+Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_student.py", line 151, in test_use_exam_card
+    academy_catename = card_management.user_usexamcard(self.cfg, self.driver, self.base_url, examcard_num)
+  File "D:\code\automation_test\Test_regress\src\card_management.py", line 173, in user_usexamcard
+    academy_catename = user_usexamcard_management(cfg, driver, base_url, examcard_num)
+  File "D:\code\automation_test\Test_regress\src\card_management.py", line 169, in user_usexamcard_management
+    oguseexcard.remark_confirmation()
+  File "D:\code\automation_test\Test_regress\src\PO\org_card_page.py", line 330, in remark_confirmation
+    self.cfg.get('use_card', 'exam_paper')).text#æ é¢
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
+    {'using': by, 'value': value})['value']
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft6.6' class='none'>
+    <td class='failCase'><div class='testcase'>test_use_listencard</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft6.6')" >
+        fail</a>
+
+    <div id='div_ft6.6' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft6.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft6.6: image:2014-12-24-15_35_11.png
+Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_student.py", line 145, in test_use_listencard
+    self.assertEqual(u"ç»å®ææº", confirm_ok)
+AssertionError: u'\u7ed1\u5b9a\u624b\u673a' != u''
+- \u7ed1\u5b9a\u624b\u673a
++ 
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_35_11.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt6.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_use_prepaidcard</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt6.7')" >
+        pass</a>
+
+    <div id='div_pt6.7' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt6.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt6.7: image:2014-12-24-15_35_30.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_35_30.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr class='errorClass'>
+    <td>testcase_exam.ExamTest</td>
+    <td>15</td>
+    <td>8</td>
+    <td>0</td>
+    <td>7</td>
+    <td><a href="javascript:showClassDetail('c7',15)">Detail</a></td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr id='ft7.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_auto_exam_onequestion</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.1')" >
+        error</a>
+
+    <div id='div_ft7.1' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.1: Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 106, in test_auto_exam_onequestion
+    exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa=title, onetype=7)
+  File "D:\code\automation_test\Test_regress\src\exam_questions.py", line 147, in auto_exam_onequestion
+    exam_question_composite(cfg, driver, base_url, question_ansa)
+  File "D:\code\automation_test\Test_regress\src\exam_questions.py", line 95, in exam_question_composite
+    question.input_question_name(question_ansa)
+  File "D:\code\automation_test\Test_regress\src\PO\exam_questions_page.py", line 89, in input_question_name
+    name.send_keys(question_ansa)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 293, in send_keys
+    self._execute(Command.SEND_KEYS_TO_ELEMENT, {'value': typing})
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 370, in _execute
+    return self._parent.execute(command, params)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+WebDriverException: Message: u'unknown error: cannot focus element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft7.2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_auto_exam_questions</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.2')" >
+        error</a>
+
+    <div id='div_ft7.2' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.2: Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 114, in test_auto_exam_questions
+    exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa=title, num=1)
+  File "D:\code\automation_test\Test_regress\src\exam_questions.py", line 115, in auto_exam_questions
+    exam_question_single(cfg, driver, base_url, question_ansa)
+  File "D:\code\automation_test\Test_regress\src\exam_questions.py", line 18, in exam_question_single
+    question.input_question_name(question_ansa)
+  File "D:\code\automation_test\Test_regress\src\PO\exam_questions_page.py", line 89, in input_question_name
+    name.send_keys(question_ansa)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 293, in send_keys
+    self._execute(Command.SEND_KEYS_TO_ELEMENT, {'value': typing})
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 370, in _execute
+    return self._parent.execute(command, params)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+WebDriverException: Message: u'unknown error: cannot focus element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt7.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_close_paper</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.3')" >
+        pass</a>
+
+    <div id='div_pt7.3' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.3: image:2014-12-24-15_36_16.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_36_16.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft7.4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_createpaper</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.4')" >
+        error</a>
+
+    <div id='div_ft7.4' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.4: Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 247, in test_createpaper
+    self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 2, 1, 1)
+  File "D:\code\automation_test\Test_regress\src\exam_paper.py", line 134, in auto_createpaper
+    eoperation, erandom, eopen)
+  File "D:\code\automation_test\Test_regress\src\exam_paper.py", line 55, in create_paper
+    auto_creatquestion(cfg, driver, 2)
+  File "D:\code\automation_test\Test_regress\src\exam_paper.py", line 85, in auto_creatquestion
+    add_big_question(cfg, driver, qscore, qtype)
+  File "D:\code\automation_test\Test_regress\src\exam_paper.py", line 72, in add_big_question
+    qinfo.add_big_question(qtype,qscore)
+  File "D:\code\automation_test\Test_regress\src\PO\exam_paper_page.py", line 133, in add_big_question
+    self.cfg.get('exam', 'exam_topic_dropdown')).click()
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 60, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 370, in _execute
+    return self._parent.execute(command, params)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+ElementNotVisibleException: Message: u'element not visible\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft7.5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_exam_create_cate</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.5')" >
+        error</a>
+
+    <div id='div_ft7.5' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.5: TypeError: test_exam_create_cate() takes no arguments (1 given)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt7.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_exam_create_point</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.6')" >
+        pass</a>
+
+    <div id='div_pt7.6' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.6: image:2014-12-24-15_37_13.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_37_13.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt7.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_exam_create_subject</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.7')" >
+        pass</a>
+
+    <div id='div_pt7.7' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.7: image:2014-12-24-15_37_26.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_37_26.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft7.8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_exam_delete_cate</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.8')" >
+        error</a>
+
+    <div id='div_ft7.8' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.8: Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 181, in test_exam_delete_cate
+    total_num = exam_cate_management.delete_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
+  File "D:\code\automation_test\Test_regress\src\exam_cate_management.py", line 152, in delete_exam_cate
+    exam_cate.click_delete_cate()
+  File "D:\code\automation_test\Test_regress\src\PO\exam_cate_page.py", line 57, in click_delete_cate
+    self.cfg.get('exam', 'cate_del_xpath')).click()
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 60, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 370, in _execute
+    return self._parent.execute(command, params)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+ElementNotVisibleException: Message: u'element not visible\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt7.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_exam_delete_point</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.9')" >
+        pass</a>
+
+    <div id='div_pt7.9' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.9: image:2014-12-24-15_37_48.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_37_48.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt7.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_exam_delete_subject</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.10')" >
+        pass</a>
+
+    <div id='div_pt7.10' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.10: 默认科目
+image:2014-12-24-15_38_03.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_38_03.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt7.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_exam_modify_cate</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.11')" >
+        pass</a>
+
+    <div id='div_pt7.11' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.11: image:2014-12-24-15_38_15.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_38_15.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft7.12' class='none'>
+    <td class='errorCase'><div class='testcase'>test_exam_modify_point</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.12')" >
+        error</a>
+
+    <div id='div_ft7.12' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.12').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.12: Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 203, in test_exam_modify_point
+    point_name = exam_cate_management.modify_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
+  File "D:\code\automation_test\Test_regress\src\exam_cate_management.py", line 195, in modify_exam_point
+    exam_point.click_modify_point()
+  File "D:\code\automation_test\Test_regress\src\PO\exam_point_page.py", line 83, in click_modify_point
+    self.cfg.get('exam', 'point_edit')).click()
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
+    {'using': by, 'value': value})['value']
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt7.13' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_exam_modify_subject</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.13')" >
+        pass</a>
+
+    <div id='div_pt7.13' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.13').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.13: 默认科目
+image:2014-12-24-15_38_43.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_38_43.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft7.14' class='none'>
+    <td class='errorCase'><div class='testcase'>test_import_questions</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.14')" >
+        error</a>
+
+    <div id='div_ft7.14' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft7.14').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft7.14: Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 84, in test_import_questions
+    exam_questions.import_questions(self.cfg, self.driver, self.template)
+  File "D:\code\automation_test\Test_regress\src\exam_questions.py", line 10, in import_questions
+    questionlist.click_import_questions(template)
+  File "D:\code\automation_test\Test_regress\src\PO\exam_questions_page.py", line 27, in click_import_questions
+    self.cfg.get('exam', 'import_questions')).click()
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 60, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webelement.py", line 370, in _execute
+    return self._parent.execute(command, params)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+WebDriverException: Message: u'unknown error: Element is not clickable at point (630, 302). Other element would receive the click: &lt;a href="javascript:;" data-type="1" class="normal first-item selected"&gt;...&lt;/a&gt;\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_exam.py", line 87, in test_import_questions
+    self.verificationErrors.append("fail to import questions..")
+AttributeError: 'ExamTest' object has no attribute 'verificationErrors'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt7.15' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_send_paper</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.15')" >
+        pass</a>
+
+    <div id='div_pt7.15' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt7.15').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt7.15: image:2014-12-24-15_39_07.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_39_07.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr class='failClass'>
+    <td>testcase_exam_student.ExamStudentTest</td>
+    <td>2</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c8',2)">Detail</a></td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr id='pt8.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_buy_paper</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.1')" >
+        pass</a>
+
+    <div id='div_pt8.1' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt8.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt8.1: image:2014-12-24-15_39_20.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_39_20.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='ft8.2' class='none'>
+    <td class='failCase'><div class='testcase'>test_exam_user</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft8.2')" >
+        fail</a>
+
+    <div id='div_ft8.2' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft8.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft8.2: image:2014-12-24-15_40_03.png
+Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_exam_student.py", line 80, in test_exam_user
+    self.assertEqual(paper_name, paper_name_ok)
+AssertionError: 'testpaper_lhf2951' != u'random_p_yxi9848'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_40_03.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>testcase_exam_result.ExamResultTest</td>
+    <td>3</td>
+    <td>3</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c9',3)">Detail</a></td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr id='pt9.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_export_openpaper_result</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt9.1')" >
+        pass</a>
+
+    <div id='div_pt9.1' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt9.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt9.1: 还没有学员购买该试卷
+image:2014-12-24-15_40_19.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_40_19.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt9.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_export_sendpaper_result</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt9.2')" >
+        pass</a>
+
+    <div id='div_pt9.2' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt9.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt9.2: image:2014-12-24-15_40_36.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_40_36.png">check Screenshot</a>
+    </td>
+</tr>
+
+<tr id='pt9.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_score_paper</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt9.3')" >
+        pass</a>
+
+    <div id='div_pt9.3' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt9.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt9.3: image:2014-12-24-15_40_57.png
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/2014-12-24-15_40_57.png">check Screenshot</a>
     </td>
 </tr>
 
 <tr id='total_row'>
     <td>Total</td>
-<<<<<<< HEAD
+    <td>58</td>
+    <td>42</td>
     <td>3</td>
-    <td>3</td>
-    <td>0</td>
-    <td>0</td>
-=======
-    <td>20</td>
-    <td>11</td>
-    <td>1</td>
-    <td>8</td>
->>>>>>> origin/master
+    <td>13</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
 </tr>
@@ -926,4 +2171,3 @@ image:2014-12-23-18_05_09.png
 
 </body>
 </html>
->>>>>>> origin/master

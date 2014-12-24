@@ -15,10 +15,12 @@ def exam_question_single(cfg, driver, base_url, question_ansa):
     questionlist = QuestionListPage(driver, cfg)
     questionlist.click_question_create()
     question = QuestionInputPage(driver, cfg)
+    question.save_screenshot()
     question.input_question_name(question_ansa)
     question.add_music()
     question.input_answera(question_ansa)
     question.input_answerb(question_ansa)
+    question.save_screenshot()
     question.click_question_save()
 
     #创建多选题
@@ -27,11 +29,13 @@ def exam_question_multiple(cfg, driver, base_url, question_ansa):
     questionlist = QuestionListPage(driver, cfg)
     questionlist.click_question_create()
     question = QuestionInputPage(driver, cfg)
+    question.save_screenshot()
     question.click_question_type()
     question.click_question_multiple()
     question.input_question_name(question_ansa)
     question.input_answera(question_ansa)
     question.input_answerb(question_ansa)
+    question.save_screenshot()
     question.click_question_save()
 
 #创建是非题
@@ -40,9 +44,11 @@ def exam_question_trueOrFalse(cfg, driver, base_url, question_ansa):
     questionlist = QuestionListPage(driver, cfg)
     questionlist.click_question_create()
     question = QuestionInputPage(driver, cfg)
+    question.save_screenshot()
     question.click_question_type()
     question.click_question_trueOrFalse()
     question.input_question_name(question_ansa)
+    question.save_screenshot()
     question.click_question_save()
 #    driver.implicitly_wait(30)
 
@@ -52,10 +58,12 @@ def exam_question_answer(cfg, driver, base_url, question_ansa):
     questionlist = QuestionListPage(driver, cfg)
     questionlist.click_question_create()
     question = QuestionInputPage(driver, cfg)
+    question.save_screenshot()
     question.click_question_type()
     question.click_question_answer()
     question.input_question_name(question_ansa)
     question.input_answer_answer(question_ansa)
+    question.save_screenshot()
     question.click_question_save()
 #创建填空题
 def exam_question_blank(cfg, driver, base_url, question_ansa):
@@ -63,10 +71,12 @@ def exam_question_blank(cfg, driver, base_url, question_ansa):
     questionlist = QuestionListPage(driver, cfg)
     questionlist.click_question_create()
     question = QuestionInputPage(driver, cfg)
+    question.save_screenshot()
     question.click_question_type()
     question.click_question_blank()
     question.input_question_name(question_ansa)
     question.input_blank_answer(question_ansa)
+    question.save_screenshot()
     question.click_question_save()
 
 #创建完型填空题
@@ -75,6 +85,7 @@ def exam_question_cloze(cfg, driver, base_url, question_ansa):
     questionlist = QuestionListPage(driver, cfg)
     questionlist.click_question_create()
     question = QuestionInputPage(driver, cfg)
+    question.save_screenshot()
     question.click_question_type()
     question.click_question_cloze()
     question.input_question_name(question_ansa)
@@ -82,6 +93,7 @@ def exam_question_cloze(cfg, driver, base_url, question_ansa):
     question.input_cloze2(question_ansa)
     question.input_cloze3(question_ansa)
     question.input_cloze4(question_ansa)
+    question.save_screenshot()
     question.click_question_save()
 
 #创建综合题
@@ -90,12 +102,14 @@ def exam_question_composite(cfg, driver, base_url, question_ansa):
     questionlist = QuestionListPage(driver, cfg)
     questionlist.click_question_create()
     question = QuestionInputPage(driver, cfg)
+    question.save_screenshot()
     question.click_question_type()
     question.click_question_composite()
     question.input_question_name(question_ansa)
     question.input_composite_name(question_ansa)
     question.input_answera(question_ansa)
     question.input_answerb(question_ansa)
+    question.save_screenshot()
     question.click_question_save()
 
 def auto_exam_questions(cfg, driver, base_url, question_ansa, num):
@@ -111,6 +125,7 @@ def auto_exam_questions(cfg, driver, base_url, question_ansa, num):
     # Composite：综合题
     questionlist = QuestionListPage(driver, cfg)
     questionlist.open()
+    questionlist.save_screenshot()
     for i in range(num):
         exam_question_single(cfg, driver, base_url, question_ansa)
         exam_question_multiple(cfg, driver, base_url, question_ansa)
@@ -131,6 +146,7 @@ def auto_exam_onequestion(cfg, driver, base_url, question_ansa, onetype):
     #onetype == 7:创建综合题
     questionlist = QuestionListPage(driver, cfg)
     questionlist.open()
+    questionlist.save_screenshot()
     if onetype == 1:
         exam_question_single(cfg, driver, base_url, question_ansa)
     elif onetype == 2:

@@ -13,6 +13,7 @@ def add_cate(cfg, driver, base_url, cate_name=u'cate_name'):
     ogcate.open()
     ogcate.click_create_FirstCate()
     ogcate.input_catename(cate_name)
+    ogcate.save_screenshot()
     ogcate.click_ensure()
         
 #删除类目   
@@ -22,6 +23,7 @@ def delete_cate(cfg, driver, base_url):
     before_delete = ogcate.get_lastcatename()
     ogcate.click_delete()
     ogcate.click_delete_ok()
+    ogcate.save_screenshot()
     return before_delete #返回被删除的类目名 
 
 #向类目中加入课程  
@@ -30,8 +32,10 @@ def add_courese_to_cate(cfg, driver, base_url, cate_num=0):
     ogcate.open()    
     ogcatecourse = OrgcatecoursePge(driver, cfg)
     ogcatecourse.inter_catecourse(cate_num)
+    ogcatecourse.save_screenshot()
     ogcatecourse.click_addcourse_tocate()
     ogcatecourse.select_first()
+    ogcatecourse.save_screenshot()
     add_course_name = ogcatecourse.get_firstcoursename()
     ogcatecourse.click_add()
     return add_course_name

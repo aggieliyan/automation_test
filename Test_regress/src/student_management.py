@@ -22,6 +22,7 @@ def import_multi_student(cfg, driver, base_url, stu_txt):
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
     ogstumanage.click_import_multi()
+    ogstumanage.save_screenshot()
     ogstumanage.click_importchoose()
     ogstumanage.click_importfile(stu_txt)
     ogstumanage.click_importmulti()
@@ -31,6 +32,7 @@ def create_student(cfg, driver, base_url, stu_txt):
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
     ogstumanage.click_create_multi()
+    ogstumanage.save_screenshot()
     ogstumanage.click_createchoose()
     ogstumanage.click_createfile(stu_txt)
     ogstumanage.click_createmulti()
@@ -58,9 +60,11 @@ def open_course_for_one(cfg, driver, base_url):
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
     ogstumanage.click_open_course()
+    ogstumanage.save_screenshot()
     ogstumanage.click_opencate()
     ogstumanage.click_openchoose()
     ogstumanage.click_openok()
+    ogstumanage.save_screenshot()
     ogstumanage.click_opensure()
 
 def open_course_for_multi(cfg, driver, base_url):
@@ -70,11 +74,14 @@ def open_course_for_multi(cfg, driver, base_url):
     ogstumanage.click_open_list()
     ogstumanage.click_open_choose()
     ogstumanage.click_open_check()
+    ogstumanage.save_screenshot()
     ogstumanage.click_open_apply()
+    ogstumanage.save_screenshot()
     ogstumanage.click_opencate()
     ogstumanage.click_openchoose()
     ogstumanage.click_openok()
     ogstumanage.click_openkeep()
+    ogstumanage.save_screenshot()
     ogstumanage.click_openaway()
 
 #管理播放授权数
@@ -89,13 +96,15 @@ def manage_course_numdetail(cfg, driver, base_url, user_name):
             ogstumanage.click_changenum()
             ogstumanage.click_course_num()
             ogstumanage.click_save()
+            ogstumanage.save_screenshot()
         except:
             pass
     except:
         pass
     ogstumanage.click_coursenum_all()
     ogstumanage.click_coursenum_allnum()
-    ogstumanage.click_coursenum_apply() 
+    ogstumanage.save_screenshot()
+    ogstumanage.click_coursenum_apply()
   
 #学员管理页面操作
 def manage_course_num(cfg, driver, base_url, user_name):
@@ -106,12 +115,15 @@ def manage_course_num(cfg, driver, base_url, user_name):
     ogstumanage.click_stu_selectuser()
     ogstumanage.click_stu_selectinput(user_name)
     ogstumanage.click_stu_selectsearch()
+    ogstumanage.save_screenshot()
     try:
         ogstumanage.click_managenum()
+        ogstumanage.save_screenshot()
         manage_course_numdetail(cfg, driver, base_url, user_name)
     except:
         ogstumanage.self_dr_refresh()
         ogstumanage.click_managenum()
+        ogstumanage.save_screenshot()
         manage_course_numdetail(cfg, driver, base_url, user_name)
 
 #购买开通授权数 bnum为购买的数量
@@ -120,8 +132,10 @@ def buy_open_num(cfg, driver, base_url):
     ba = Base(driver)
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open_buyopennum()
-    ogstumanage.click_inputnum()
+    ogstumanage.save_screenshot()
+    ogstumanage.input_num()
     ogstumanage.click_buy()
+    ogstumanage.save_screenshot()
     #判断余额是否充足
     re = ba.is_element_present("xpath", "//div[1]/p/span[2]")
     if re == True:

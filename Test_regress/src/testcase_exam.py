@@ -1,7 +1,9 @@
 # -*- coding: UTF-8 -*-
 '''
-modified on Dec. 24, 2014
+Created on 2014-12-20
 @author: guoyuling
+modified on Dec. 24, 2014
+@author: liuhongjiao
 added: test_import_questions
        test_auto_exam_onequestion
        test_auto_exam_questions

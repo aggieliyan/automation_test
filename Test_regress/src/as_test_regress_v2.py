@@ -33,7 +33,7 @@ class Test(unittest.TestCase):
         self.cfg.read(self.cfg_file)
         self.browser = self.cfg.get("env_para", "browser")
         self.org_name = self.cfg.get("env_para", "org_name")
-        self.org_password = self.cfg.get("env_para", "org_password")sw
+        self.org_password = self.cfg.get("env_para", "org_password")
         self.user_name = self.cfg.get("env_para", "user_name")
         self.user_password = self.cfg.get("env_para", "user_password")
         self.base_url = self.cfg.get("env_para", "base_url")
@@ -479,12 +479,12 @@ if __name__ == "__main__":
     suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
     suite_exam_result = unittest.TestLoader().loadTestsFromTestCase(ExamResultTest)
     allsuites = []
-    allsuites.append(suite_register)
-    allsuites.append(suite1)
-    allsuites.append(suite2)
+#    allsuites.append(suite_register)
+#    allsuites.append(suite1)
+#    allsuites.append(suite2)
     allsuites.append(suite_exam)
-    allsuites.append(suite_exam_student)
-    allsuites.append(suite_exam_result)  
+#    allsuites.append(suite_exam_student)
+#    allsuites.append(suite_exam_result)  
 
     alltests = unittest.TestSuite(allsuites)
 

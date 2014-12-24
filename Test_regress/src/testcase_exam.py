@@ -213,16 +213,16 @@ class ExamTest(unittest.TestCase):
         cate_name = exam_cate_management.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
 
    
-    # @unittest.skip("test")
+    @unittest.skip("test")
     def test_send_paper(self):
 
         exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=1)
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     def test_close_paper(self):
         exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=2)
         
-    @unittest.skip("test")    
+#    @unittest.skip("test")    
     def test_createpaper(self):
         #免得创建试卷失败后，后面要用到这个变量会失败
         ba = Base(self.driver)

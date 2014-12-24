@@ -3,6 +3,12 @@
 Created on Jul 23, 2014
 
 @author: liwen
+
+modified on Dec. 24, 2014
+@author:yilulu
+added: exam_result
+       send_close_paper
+
 '''
 import random, time
 

@@ -215,7 +215,6 @@ if __name__ == "__main__":
     allsuites.append(suite_exam_student)
     allsuites.append(suite_exam_result)
 
-
     alltests = unittest.TestSuite(allsuites)
 
     fp = file("myreport.html", 'wb')

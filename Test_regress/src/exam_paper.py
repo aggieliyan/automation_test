@@ -41,7 +41,7 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     examinfo.click_next()    
     #添加大题
     auto_creatquestion(cfg, driver, 2)
-    time.sleep(2)
+    time.sleep(3)
     #生成试卷
     submit = QuestionInfoPage(driver,cfg)    
     submit.click_submit_btn()

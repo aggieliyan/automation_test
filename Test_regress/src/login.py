@@ -26,15 +26,14 @@ def login_by_as(cfg, driver, base_url, user_name, user_psw):
 def login_by_search(cfg, driver, test_enviroment, user_name, user_psw):
     driver.get("http://s." + test_enviroment + ".ablesky.com/s.do?aft=Course")
     time.sleep(2)
-    driver.find_element_by_link_text('登录').click()
+    click = ClickLoginText(driver,cfg)
+    click.click_login()
+    
+    loginpage = LoginPage(driver,cfg)
+    loginpage.input_username(user_name)
+    loginpage.input_pwd(user_psw)
+    loginpage.click_login_btn()
     time.sleep(2)
-    driver.find_element(cfg.get('search', 'login_username_by'), \
-                        cfg.get('search', 'login_username')).send_keys(user_name)
-    driver.find_element(cfg.get('search', 'login_psw_by'), \
-                        cfg.get('search', 'login_psw')).send_keys(user_psw)
-    driver.find_element(cfg.get('search', 'login_btn_by'), \
-                        cfg.get('search', 'login_btn')).click()
-    time.sleep(2)    
 #从独立域名登录
 #参数：driverenium对象，独立域名地址、用户名和密码
 def login_by_independent_domian(cfg, driver, independent_url, user_name, user_psw):
@@ -54,10 +53,12 @@ def login_by_independent_domian(cfg, driver, independent_url, user_name, user_ps
 def login_by_logindo(cfg, driver, base_url, user_name, user_psw):
     loginpage = LoginPage(driver,cfg)    
     loginpage.open_logindo()
+    loginpage.save_screenshot()
     
     loginpage.input_username(user_name)
     loginpage.input_pwd(user_psw)
     loginpage.click_login_btn()
+    loginpage.save_screenshot()
     time.sleep(2)
     
 #从独立域名退出
@@ -80,6 +81,7 @@ def is_element_present(driver, how, what):
 def register_by_email_index(cfg, driver, base_url, r_username, r_email, r_psw):
     clickregister = ClickRegisterText(driver,cfg)
     clickregister.click_register()
+    clickregister.save_screenshot()
 
     registerpage = EmailRegisterPage(driver,cfg)
     registerpage.click_emalimod()
@@ -89,6 +91,7 @@ def register_by_email_index(cfg, driver, base_url, r_username, r_email, r_psw):
     time.sleep(2)
     registerpage.verification_code()
     time.sleep(8)
+    registerpage.save_screenshot()
 #    code = driver.find_element_by_id("J_iCode")
 #    code.click()
 #    time.sleep(2)
@@ -99,6 +102,7 @@ def register_by_email_index(cfg, driver, base_url, r_username, r_email, r_psw):
 #                        cfg.get('as_index', 'register_email_submit')).click()
 #    time.sleep(6)
     registerpage.register_submit_btn()
+    registerpage.save_screenshot()
 
     try:
         logout(driver, base_url)
@@ -116,9 +120,10 @@ def register_by_mobile_index(cfg, driver, base_url, r_username, r_mobile, r_psw)
     registerpage.input_mobile(r_mobile)
     registerpage.input_psw(r_psw)
     registerpage.get_verification()    
-    #registerpage.verification_code()
-    driver.find_element_by_id("J_imessageCode").send_keys(raw_input(u'请输入验证码：')) 
+#    registerpage.verification_code()
+#    driver.find_element_by_id("J_imessageCode").send_keys(raw_input(u'请输入验证码：')) 
     registerpage.register_submit_btn()
+    registerpage.save_screenshot()
 
     try:
         logout(driver, base_url)
@@ -217,6 +222,7 @@ def register_by_independent_domian(cfg, driver, base_url, r_username, r_email, r
     registerpage.input_pwd(r_psw)
     registerpage.verification_code()
     time.sleep(10)
+    registerpage.save_screenshot()
     #下一步
     independentreg = IndependentDomianLoginPage(driver,cfg)
     independentreg.click_next()
@@ -224,6 +230,7 @@ def register_by_independent_domian(cfg, driver, base_url, r_username, r_email, r
     # ...
     # ...
     registerpage.register_submit_btn()
+    registerpage.save_screenshot()
     time.sleep(2)
     try:
         logout(driver, base_url)

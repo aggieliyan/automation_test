@@ -31,20 +31,28 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     clickexamsystem = ClickExamSystem(driver,cfg)
     clickexamsystem.open_examsystem()
     
+    listpage = SubjectListPage(driver,cfg)
+    listpage.click_exampaper()
+    listpage.save_screenshot()
+        
     examinfo = ExamInfoPage(driver,cfg)
     examinfo.create_paper()
+    examinfo.save_screenshot()
     examinfo.input_exam_name(exam_name)
     examinfo.input_exam_time(exam_time)
     examinfo.whether_auto_commit(eoperation)
     examinfo.whether_random(erandom)
     examinfo.open_or_no(eopen)
-    examinfo.click_next()    
+    examinfo.click_next()
+    examinfo.save_screenshot()    
     #添加大题
     auto_creatquestion(cfg, driver, 2)
     time.sleep(3)
+    examinfo.save_screenshot()
     #生成试卷
     submit = QuestionInfoPage(driver,cfg)    
     submit.click_submit_btn()
+    submit.save_screenshot()
     time.sleep(2)
     return exam_name   
             
@@ -56,8 +64,10 @@ def add_big_question(cfg, driver, qscore, qtype):
     time.sleep(3)
     qinfo = QuestionInfoPage(driver,cfg)
     qinfo.add_big_question(qtype,qscore)
+    qinfo.save_screenshot()
     qinfo.exam_import_question()
     time.sleep(3)
+    qinfo.save_screenshot()
     
 #自动添加题
 def auto_creatquestion(cfg, driver, q_num):
@@ -76,9 +86,11 @@ def random_exam(cfg, driver, base_url, exam_name, exam_time,\
     
     listpage = SubjectListPage(driver,cfg)
     listpage.click_exampaper()
+    listpage.save_screenshot()
     
     randompg = RandomExamPage(driver,cfg)
     randompg.click_random_btn()
+    randompg.save_screenshot()
     
     examinfo = ExamInfoPage(driver,cfg)
     examinfo.input_exam_name(exam_name)
@@ -86,8 +98,9 @@ def random_exam(cfg, driver, base_url, exam_name, exam_time,\
     examinfo.whether_auto_commit(eoperation)
     examinfo.whether_random(erandom)
     examinfo.open_or_no(eopen)
-    
+        
     auto_create_randomquestion(cfg, driver, 1)
+    randompg.save_screenshot()
     randompg.click_submit_btn()
     time.sleep(2)
     
@@ -100,6 +113,7 @@ def auto_create_randomquestion(cfg, driver, q_num):
         #print qtype
         add_randomq = RandomExamPage(driver,cfg)
         add_randomq.add_question_btn()
+        add_randomq.save_screenshot()
         time.sleep(2)
                           
 #自动创建试卷

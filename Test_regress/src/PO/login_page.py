@@ -26,6 +26,7 @@ class SearchPage(base.Base):
         self.dr = driver  
         
     def open_search_page(self):
+        url = "%sindex.do" %(self.base_url)
         self.dr.get('env_para', 'base_url') 
 
 class IndependentDomianLoginPage(base.Base):

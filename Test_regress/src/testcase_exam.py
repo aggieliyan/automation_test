@@ -115,7 +115,7 @@ class ExamTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-#ok
+
     # @unittest.skip("test")
     def test_exam_create_subject(self):
         ba = Base(self.driver)
@@ -124,6 +124,7 @@ class ExamTest(unittest.TestCase):
         lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
         self.assertEqual(subject_name, lastsubject)
         ba.save_screenshot()
+        print "image:"+filename
 
 
     #@unittest.skip("test")
@@ -134,8 +135,9 @@ class ExamTest(unittest.TestCase):
         lastsubject = self.driver.execute_script("return $('.subject-name').eq(1).text()")
         self.assertEqual(subject_name, lastsubject)
         ba.save_screenshot()
+        print "image:"+filename
 
-#ok
+
     # @unittest.skip("test")
     def test_exam_delete_subject(self):
         ba = Base(self.driver)
@@ -146,8 +148,9 @@ class ExamTest(unittest.TestCase):
         last_num = self.driver.execute_script("return $('.subject-item-con').size()")
         self.assertEqual(total_num - 1, last_num)
         ba.save_screenshot()
+        print "image:"+filename
         
-#ok
+
     # @unittest.skip("test")
     def test_exam_create_cate(self):
         ba = Base(self.driver)
@@ -156,8 +159,9 @@ class ExamTest(unittest.TestCase):
         lastcate = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
         self.assertEqual(cate_name, lastcate)
         ba.save_screenshot()
+        print "image:"+filename
 
-#ok       
+       
     # @unittest.skip("test")
     def test_exam_modify_cate(self):
         ba = Base(self.driver)
@@ -166,8 +170,9 @@ class ExamTest(unittest.TestCase):
         lastcate = self.driver.execute_script("return $('.categTitleFalse').eq(1).text()")
         self.assertEqual(cate_name, lastcate)
         ba.save_screenshot()
+        print "image:"+filename
 
-#ok
+
     # @unittest.skip("test")
     def test_exam_delete_cate(self):
         ba = Base(self.driver)
@@ -177,10 +182,11 @@ class ExamTest(unittest.TestCase):
         time.sleep(1)
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
-        ba.save_screenshot()        
+        ba.save_screenshot()
+        print "image:"+filename        
 
 
-#ok
+
     # @unittest.skip("test")
     def test_exam_create_point(self):
         ba = Base(self.driver)
@@ -189,7 +195,8 @@ class ExamTest(unittest.TestCase):
         lastpoint = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
         self.assertEqual(point_name, lastpoint)
         ba.save_screenshot()
-#ok
+        print "image:"+filename
+
     # @unittest.skip("test")
     def test_exam_modify_point(self):
         ba = Base(self.driver)
@@ -199,7 +206,8 @@ class ExamTest(unittest.TestCase):
         time.sleep(2)
         self.assertEqual(point_name, lastpoint)
         ba.save_screenshot()
-#oks
+        print "image:"+filename
+
     # @unittest.skip("test")
     def test_exam_delete_point(self):
         ba = Base(self.driver)

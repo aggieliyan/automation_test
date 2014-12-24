@@ -207,22 +207,30 @@ class ExamTest(unittest.TestCase):
         time.sleep(1)
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
-        ba.save_screenshot()
+        filename = ba.save_screenshot()
+        print "image:"+filename
         
     # @unittest.skip("test")
     def test_exam_create_cate():
+        ba = Base(self.driver)
         cate_name = exam_cate_management.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
-
+        filename = ba.save_screenshot()
+        print "image:"+filename
    
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_send_paper(self):
-
+        ba = Base(self.driver)
         exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=1)
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_close_paper(self):
+        ba = Base(self.driver)
         exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=2)
-        
+        filename = ba.save_screenshot()
+        print "image:"+filename 
+
 #    @unittest.skip("test")    
     def test_createpaper(self):
         #免得创建试卷失败后，后面要用到这个变量会失败

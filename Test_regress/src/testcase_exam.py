@@ -107,7 +107,7 @@ class ExamTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    #@unittest.skip("test")#暂时只支持ie
+    @unittest.skip("test")#暂时只支持ie
     def test_auto_exam_questions(self):
         ba = Base(self.driver)
         title = "exam" + ba.rand_name()
@@ -167,7 +167,7 @@ class ExamTest(unittest.TestCase):
         ba = Base(self.driver)
         cate_name = exam_cate_management.modify_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
         time.sleep(1)
-        lastcate = self.driver.execute_script("return $('.categTitleFalse').eq(1).text()")
+        lastcate = self.driver.execute_script("return $('.categTitleFalse').eq(0).text()")
         self.assertEqual(cate_name, lastcate)
         filename = ba.save_screenshot()
         print "image:"+filename
@@ -187,7 +187,7 @@ class ExamTest(unittest.TestCase):
 
 
 
-    # @unittest.skip("test")
+    #@unittest.skip("test")
     def test_exam_create_point(self):
         ba = Base(self.driver)
         point_name = exam_cate_management.auto_create_exam_point(self.cfg, self.driver, self.base_url, self.org_name, point_num = 1)

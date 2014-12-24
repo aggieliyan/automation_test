@@ -80,13 +80,9 @@ class ExamTest(unittest.TestCase):
         num1 = cursor.fetchall()[0][0]
         cursor.close()
         #调用导入试题
-        try:
-            exam_questions.import_questions(self.cfg, self.driver, self.template)
-        except Exception, e:
-            print traceback.format_exc() 
-            self.verificationErrors.append("fail to import questions..")
-        finally:
-            self.driver.save_screenshot("C:/test_rs_pic/create_paper.png")
+        exam_questions.import_questions(self.cfg, self.driver, self.template)
+        filename = ba.save_screenshot()
+        print "image:"+filename
         #重新建立数据库,查询导入试题后的总数,二者差即为导入总数
         conn = ba.connect_db(self.dbhost, db)
         cursor = conn.cursor()
@@ -98,6 +94,7 @@ class ExamTest(unittest.TestCase):
         title = cursor.fetchall()[0][0]
         msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
         print msg
+        self.assertEqual(6, num)
 
     #@unittest.skip("test")#暂时只支持ie
     def test_auto_exam_onequestion(self):

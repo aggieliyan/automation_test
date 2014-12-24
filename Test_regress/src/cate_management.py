@@ -31,7 +31,7 @@ def add_courese_to_cate(cfg, driver, base_url, cate_num=0):
     ogcate = OrgCateListPage(driver, cfg)
     ogcate.open()    
     ogcatecourse = OrgcatecoursePge(driver, cfg)
-    ogcatecourse.inter_catecourse(cate_num)
+    ogcatecourse.open_catecourse(cate_num)
     ogcatecourse.save_screenshot()
     ogcatecourse.click_addcourse_tocate()
     ogcatecourse.select_first()

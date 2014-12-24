@@ -57,7 +57,7 @@ class OrgcatecoursePge(base.Base):
 		self.cfg = cfg
 		self.base_url = cfg.get('env_para', 'base_url')
 
-	def inter_catecourse(self, cate_num):
+	def open_catecourse(self, cate_num):
 		time.sleep(2)
 		url_add = self.dr.execute_script("return $('#categoryList .manageCategCourse:eq("+str(cate_num)+")').attr('href')")
 		time.sleep(2)

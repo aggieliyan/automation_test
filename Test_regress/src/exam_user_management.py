@@ -13,8 +13,8 @@ from PO.payment_page import PaymentPage
 def buy_paper(cfg, driver, paper_url):
     pay = PaymentPage(driver, cfg)
     pay.open(paper_url, "exampaper")
-    pay.click_pay()
     pay.save_screenshot()
+    pay.click_pay()
 
 #学员考试
 def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, paper_name):

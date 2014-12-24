@@ -107,10 +107,10 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
     cg.save_screenshot()
     cg.click_manage_course()
     cg.click_edit()
-    cg.save_screenshot()
 
     ac = AgentCourseInputPage(driver, cfg)
     ac.input_title(course_title)
+    ac.save_screenshot()
 
     str_price = driver.execute_script(\
         "return $('.ablableSNew .colorGreen').text()")

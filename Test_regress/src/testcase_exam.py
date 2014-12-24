@@ -67,7 +67,7 @@ class ExamTest(unittest.TestCase):
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_import_questions(self):
         ba = Base(self.driver)
         self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
@@ -99,7 +99,7 @@ class ExamTest(unittest.TestCase):
         msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
         print msg
 
-    @unittest.skip("test")#暂时只支持ie
+    # @unittest.skip("test")#暂时只支持ie
     def test_auto_exam_onequestion(self):
         ba = Base(self.driver)
         title = "exam" + ba.rand_name()
@@ -107,7 +107,7 @@ class ExamTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    @unittest.skip("test")#暂时只支持ie
+    # @unittest.skip("test")#暂时只支持ie
     def test_auto_exam_questions(self):
         ba = Base(self.driver)
         title = "exam" + ba.rand_name()
@@ -116,7 +116,7 @@ class ExamTest(unittest.TestCase):
         print "image:"+filename
 
 #ok
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_exam_create_subject(self):
         ba = Base(self.driver)
         subject_name = exam_cate_management.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num = 1)
@@ -136,7 +136,7 @@ class ExamTest(unittest.TestCase):
         ba.save_screenshot()
 
 #ok
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_exam_delete_subject(self):
         ba = Base(self.driver)
         #统计科目总数
@@ -148,7 +148,7 @@ class ExamTest(unittest.TestCase):
         ba.save_screenshot()
         
 #ok
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_exam_create_cate(self):
         ba = Base(self.driver)
         cate_name = exam_cate_management.auto_create_exam_cate(self.cfg, self.driver, self.base_url, self.org_name, cate_num = 1)
@@ -158,7 +158,7 @@ class ExamTest(unittest.TestCase):
         ba.save_screenshot()
 
 #ok       
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_exam_modify_cate(self):
         ba = Base(self.driver)
         cate_name = exam_cate_management.modify_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
@@ -168,7 +168,7 @@ class ExamTest(unittest.TestCase):
         ba.save_screenshot()
 
 #ok
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_exam_delete_cate(self):
         ba = Base(self.driver)
         time.sleep(1)
@@ -181,7 +181,7 @@ class ExamTest(unittest.TestCase):
 
 
 #ok
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_exam_create_point(self):
         ba = Base(self.driver)
         point_name = exam_cate_management.auto_create_exam_point(self.cfg, self.driver, self.base_url, self.org_name, point_num = 1)
@@ -190,7 +190,7 @@ class ExamTest(unittest.TestCase):
         self.assertEqual(point_name, lastpoint)
         ba.save_screenshot()
 #ok
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_exam_modify_point(self):
         ba = Base(self.driver)
         point_name = exam_cate_management.modify_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
@@ -200,7 +200,7 @@ class ExamTest(unittest.TestCase):
         self.assertEqual(point_name, lastpoint)
         ba.save_screenshot()
 #oks
-    @unittest.skip("test")
+    # @unittest.skip("test")
     def test_exam_delete_point(self):
         ba = Base(self.driver)
         total_num = exam_cate_management.delete_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
@@ -208,7 +208,8 @@ class ExamTest(unittest.TestCase):
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
         ba.save_screenshot()
-    @unittest.skip("test")
+        
+    # @unittest.skip("test")
     def test_exam_create_cate():
         cate_name = exam_cate_management.auto_create_exam_cate(cfg, driver, base_url, org_name, cate_num = 1)
 

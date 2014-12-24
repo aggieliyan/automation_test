@@ -95,7 +95,7 @@ class OrgCardgroupInputPage(base.Base):
 		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', 'listen_spread_by'), \
 			self.cfg.get('org_manage', 'listen_spread')).click()#展开默认类目下资料
-		time.sleep(8)
+		time.sleep(5)
 		self.dr.find_element(self.cfg.get('org_manage', 'listen_course_by'), \
 			self.cfg.get('org_manage', 'listen_course')).click()#勾选第一个课程
 		time.sleep(1)

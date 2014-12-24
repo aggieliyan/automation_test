@@ -73,9 +73,9 @@ class MyOfficePage(base.Base):
 	#点击在线购买授权
 	def click_buy_opennum(self):
 		self.dr.find_element_by_link_text(u"在线购买授权").click()
-    #进入考试系统
-	def click_exam(self):
-		self.dr.get(self.base_url + "exam/")
+		h = self.dr.window_handles
+		self.dr.switch_to_window(h[-1])
+		time.sleep(2)
 		
 	#点击教学教务导航
 	def click_org_teach(self):

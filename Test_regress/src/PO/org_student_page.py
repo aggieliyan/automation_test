@@ -99,6 +99,7 @@ class OrgStudentManagePage(base.Base):
 	def click_openchoose(self):
 		self.dr.find_element(self.cfg.get('org_manage', "open_course_1_by"), \
 			self.cfg.get('org_manage', "open_course_1")).click()
+		time.sleep(2)
 	#确认开通
 	def click_openok(self):
 		time.sleep(2)
@@ -139,6 +140,7 @@ class OrgStudentManagePage(base.Base):
 	#点击管理播放授权数
 	def click_managenum(self):
 		self.dr.find_element_by_link_text(u"管理播放授权数").click()
+		time.sleep(2)
 	#刷新页面
 	def self_dr_refresh(self):
 		self.dr.refresh()
@@ -177,9 +179,7 @@ class OrgStudentManagePage(base.Base):
 
 	#在线购买授权
 	#输入1个授权
-	def click_inputnum(self):
-		h = self.dr.window_handles
-		self.dr.switch_to_window(h[-1])
+	def input_num(self):
 		num = self.dr.find_element(self.cfg.get('org_manage', "buy_open_num_input_by"), \
 								self.cfg.get('org_manage', "buy_open_num_input"))
 		num.click()

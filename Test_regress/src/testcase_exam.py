@@ -123,7 +123,7 @@ class ExamTest(unittest.TestCase):
         time.sleep(1)
         lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
         self.assertEqual(subject_name, lastsubject)
-        ba.save_screenshot()
+        filename = ba.save_screenshot()
         print "image:"+filename
 
 
@@ -134,7 +134,7 @@ class ExamTest(unittest.TestCase):
         time.sleep(1)
         lastsubject = self.driver.execute_script("return $('.subject-name').eq(1).text()")
         self.assertEqual(subject_name, lastsubject)
-        ba.save_screenshot()
+        filename = ba.save_screenshot()
         print "image:"+filename
 
 
@@ -147,7 +147,7 @@ class ExamTest(unittest.TestCase):
         time.sleep(1)
         last_num = self.driver.execute_script("return $('.subject-item-con').size()")
         self.assertEqual(total_num - 1, last_num)
-        ba.save_screenshot()
+        filename = ba.save_screenshot()
         print "image:"+filename
         
 
@@ -158,7 +158,7 @@ class ExamTest(unittest.TestCase):
         time.sleep(1)
         lastcate = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
         self.assertEqual(cate_name, lastcate)
-        ba.save_screenshot()
+        filename = ba.save_screenshot()
         print "image:"+filename
 
        
@@ -169,7 +169,7 @@ class ExamTest(unittest.TestCase):
         time.sleep(1)
         lastcate = self.driver.execute_script("return $('.categTitleFalse').eq(1).text()")
         self.assertEqual(cate_name, lastcate)
-        ba.save_screenshot()
+        filename = ba.save_screenshot()
         print "image:"+filename
 
 
@@ -182,7 +182,7 @@ class ExamTest(unittest.TestCase):
         time.sleep(1)
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
-        ba.save_screenshot()
+        filename = ba.save_screenshot()
         print "image:"+filename        
 
 
@@ -194,7 +194,7 @@ class ExamTest(unittest.TestCase):
         time.sleep(1)
         lastpoint = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
         self.assertEqual(point_name, lastpoint)
-        ba.save_screenshot()
+        filename = ba.save_screenshot()
         print "image:"+filename
 
     # @unittest.skip("test")
@@ -205,7 +205,7 @@ class ExamTest(unittest.TestCase):
         lastpoint = self.driver.execute_script("return $('.categTitleFalse').eq(0).text()")
         time.sleep(2)
         self.assertEqual(point_name, lastpoint)
-        ba.save_screenshot()
+        filename = ba.save_screenshot()
         print "image:"+filename
 
     # @unittest.skip("test")

@@ -203,14 +203,6 @@ if __name__ == "__main__":
     suite_exam_result = unittest.TestLoader().loadTestsFromTestCase(ExamResultTest)
     
     allsuites = []
-<<<<<<< HEAD
-#    allsuites.append(suite_register)
-#    allsuites.append(suite1)
-#    allsuites.append(suite2)
-    allsuites.append(suite_exam)
-#    allsuites.append(suite_exam_student)
-#    allsuites.append(suite_exam_result)  
-=======
     allsuites.append(suite_register)
     allsuites.append(suite_course)
     allsuites.append(suite_card)
@@ -222,8 +214,6 @@ if __name__ == "__main__":
     allsuites.append(suite_exam)
     allsuites.append(suite_exam_student)
     allsuites.append(suite_exam_result)
-
->>>>>>> origin/master
 
     alltests = unittest.TestSuite(allsuites)
 

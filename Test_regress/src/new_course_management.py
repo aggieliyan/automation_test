@@ -29,6 +29,7 @@ def course_redirect(cfg, driver, base_url, isthree=0,\
     course = CourseStepOnePage(driver, cfg)
     #进入发课页面
     course.open()
+    course.save_screenshot()
 
     if isthree != 0:
         course.choose_three_video()
@@ -49,11 +50,13 @@ def course_redirect(cfg, driver, base_url, isthree=0,\
     else:
         course.click_upload(0)
         course.choose_flv()
-        course.click_choose_ok()     
-
+        course.click_choose_ok()
+    
+    course.save_screenshot()
     course.click_next_step()
     #第二步填写课程信息页面
     course_info = CourseInfoPage(driver, cfg)
+    course_info.save_screenshot()
     course_info.input_course_title(course_title)
 
     #课程价格
@@ -65,6 +68,7 @@ def course_redirect(cfg, driver, base_url, isthree=0,\
     course_info.input_description(course_describe)
     course_info.click_service_cate()
     course_info.input_tag(course_tags)
+    course_info.save_screenshot()
     course_info.click_save()
 
 def class_redirect(cfg, driver, base_url, classname='onlineclass', \
@@ -75,13 +79,17 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
 
     olclass = OnLineClassListPage(driver, cfg)
     olclass.open()
+    olclass.save_screenshot()
     olclass.click_create()
+    olclass.save_screenshot()
 
     cinfo = ClassInfoPage(driver, cfg)
     if ctype == 1:
         cinfo.chooes_course()
+        cinfo.save_screenshot()
     else:
         cinfo.click_presell()
+        cinfo.save_screenshot()
         cinfo.choose_cate()
         cinfo.input_price(price)
 
@@ -96,8 +104,10 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
 
     cg = CourseAgencyPage(driver, cfg)
     cg.open()
+    cg.save_screenshot()
     cg.click_manage_course()
     cg.click_edit()
+    cg.save_screenshot()
 
     ac = AgentCourseInputPage(driver, cfg)
     ac.input_title(course_title)
@@ -109,5 +119,5 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
         price = temp.group(0)
         ac.input_price(price)
         ac.input_rank(100)
-
+    ac.save_screenshot()
     ac.click_save()

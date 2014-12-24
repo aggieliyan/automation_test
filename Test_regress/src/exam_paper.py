@@ -140,9 +140,11 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
                              3代表为学员评分
     """
     pp = PaperRecordPage(driver, cfg)
+    pp.save_screenshot()
     if not (pp.open(exam_name)):
         return
     pp.click_student_info()
+    pp.save_screenshot()
 
     if etype == 1:
         pp.choose_all_stu()
@@ -156,76 +158,9 @@ def exam_result(cfg, driver, base_url, exam_name, etype=1, username=""):
     else:
         if pp.click_score(username):
             sp = ScorePage(driver, cfg)
+            sp.save_screenshot()
             sp.input_score()
 
-
-    #exam_name = u"未作答（主观题，免费）"
-    #username = "sun123"
-    # driver.get("%sexam/" %(base_url))
-    # driver.implicitly_wait(10)
-    # driver.find_element_by_link_text(u"试卷库").click()
-    # driver.implicitly_wait(10)
-    # driver.find_element(cfg.get('exam', 'paper_search_by'), \
-    #     cfg.get('exam', 'paper_search')).send_keys(exam_name)
-    # time.sleep(1)
-    # exam_href = driver.execute_script(\
-    #     "return $(\"a:contains(\'"+exam_name+"\')\").attr('href')")
-    # time.sleep(1)
-    # driver.get("%sexam/%s" % (base_url, exam_href))
-    # driver.find_element_by_link_text("学员信息").click()
-    # time.sleep(1)
-    # if etype == 2:
-    #     driver.find_element_by_link_text(u"作为开放试卷的统计结果").click()
-    #     time.sleep(1)
-    #     try:
-    #         driver.find_element(cfg.get('exam', 'select_stu_by'), \
-    #             cfg.get('exam', 'select_stu')).click()
-    #         driver.find_element(cfg.get('exam', 'output_open_by'), \
-    #             cfg.get('exam', 'output_open')).click()
-    #         time.sleep(2)
-
-    #     except:
-    #         print u'试卷暂时没有学员购买'
-
-    # elif etype == 1:
-    #     try:
-    #         driver.find_element(cfg.get('exam', 'select_stu_by'), \
-    #             cfg.get('exam', 'select_stu')).click()
-    #         driver.find_element(cfg.get('exam', 'output_by'), \
-    #             cfg.get('exam', 'output')).click()
-    #         time.sleep(2)
-    #     except:
-    #         print u'试卷暂时没有分发给学员'
-
-    # else:
-    #     #取评分链接
-    #     time.sleep(2)
-    #     stu_name = driver.execute_script(\
-    #         "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(0).children().text()")
-    #     time.sleep(1)
-    #     if username not in stu_name:
-    #         print username + u'该学员不存在,无法评分。。'
-    #     else:
-    #         grade_href = driver.execute_script(\
-    #             "return $(\"a:contains(\'"+username+"\')\").parents('.odd').children().eq(5).children().attr('href')")
-    #         time.sleep(2)
-    #         driver.get("%sexam/%s" % (base_url, grade_href))
-    #         score_input = driver.find_elements(cfg.get('exam', 'input_score_by'), \
-    #             cfg.get('exam', 'input_score'))
-    #         score = "0.1"
-    #         count = 0
-    #         for item in score_input:
-    #             try:
-    #                 item.clear()
-    #                 item.send_keys(score)
-    #                 count += 1
-    #             except:
-    #                 continue
-    #         driver.find_element(cfg.get('exam', 'score_save_by'), \
-    #             cfg.get('exam', 'score_save')).click()
-    #         total_score = count * score
-    #         return total_score
-    # return True
 
 def send_close_paper(cfg, driver, base_url, username, atype=2):
     """
@@ -233,12 +168,15 @@ def send_close_paper(cfg, driver, base_url, username, atype=2):
     """
     ep = ExamStudentListPage(driver, cfg)
     ep.open()
+    ep.save_screenshot()
     ep.search_student(username)
     if atype == 1:
         ep.click_send_paper()
+        ep.save_screenshot()
         ep.choose_all_paper()
     else:
         ep.click_close_paper()
+        ep.save_screenshot()
         ep.choose_one_paper()
     ep.click_save()
  

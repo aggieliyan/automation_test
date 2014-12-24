@@ -30,10 +30,10 @@ class UserpaperListPage(base.Base):
 	def click_examnow(self):
 		time.sleep(5)
 		try:
-		    self.dr.find_element_by_link_text(u"立即考试").click()
+			self.dr.find_element_by_link_text(u"立即考试").click()
 		except:
-            print "没有搜索到此名称的试卷"
-			
+			print u"没有搜索到此名称的试卷"
+
 
 class UserexampaperPage(base.Base):
 	

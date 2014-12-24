@@ -1,4 +1,8 @@
 # -*- coding: UTF-8 -*-
+Created on Dec. 24, 2014
+@author:liuhongjiao
+
+
 import time
 import base
 from exam_subject_page import SubjectListPage

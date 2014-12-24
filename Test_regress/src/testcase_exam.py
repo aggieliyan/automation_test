@@ -1,9 +1,12 @@
 # -*- coding: UTF-8 -*-
 '''
-Created on 2014-12-20
-
+modified on Dec. 24, 2014
 @author: guoyuling
+added: test_import_questions
+       test_auto_exam_onequestion
+       test_auto_exam_questions
 '''
+
 import unittest, ConfigParser, random, time, os, logging, MySQLdb
 import traceback
 

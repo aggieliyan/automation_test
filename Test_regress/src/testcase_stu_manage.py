@@ -1,4 +1,7 @@
 # -*- coding: UTF-8 -*-
+Created on Dec. 24, 2014
+@author:liuhongjiao
+
 
 import unittest, ConfigParser, random, time, os, logging, MySQLdb
 import traceback

@@ -1,4 +1,8 @@
 # -*- coding: UTF-8 -*-
+Created on Dec. 24, 2014
+@author:liuhongjiao
+
+
 import time
 from selenium.webdriver.common.keys import Keys
 from PO.exam_questions_page import QuestionListPage

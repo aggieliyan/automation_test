@@ -72,7 +72,7 @@ class ExamTest(unittest.TestCase):
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
 
-    #@unittest.skip("test")
+#    @unittest.skip("test")
     def test_import_questions(self):
         ba = Base(self.driver)
         self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
@@ -101,24 +101,40 @@ class ExamTest(unittest.TestCase):
         print msg
         self.assertEqual(6, num)
 
-    #@unittest.skip("test")#暂时只支持ie
+#    @unittest.skip("test")#暂时只支持ie
     def test_auto_exam_onequestion(self):
         ba = Base(self.driver)
         title = "exam" + ba.rand_name()
         exam_questions.auto_exam_onequestion(self.cfg, self.driver, self.base_url, question_ansa=title, onetype=7)
         filename = ba.save_screenshot()
         print "image:"+filename
+        #验证
+        time.sleep(5)
+        ts = ba.is_element_present(By.XPATH, "//td[2]/a")
+        if ts == False:
+            rs = False
+        else:
+            rs = True
+        self.assertEqual(True, rs)
 
-    #@unittest.skip("test")#暂时只支持ie
+#    @unittest.skip("test")#暂时只支持ie
     def test_auto_exam_questions(self):
         ba = Base(self.driver)
         title = "exam" + ba.rand_name()
         exam_questions.auto_exam_questions(self.cfg, self.driver, self.base_url, question_ansa=title, num=1)
         filename = ba.save_screenshot()
         print "image:"+filename
+        #验证
+        time.sleep(5)
+        ts = ba.is_element_present(By.XPATH, "//td[2]/a")
+        if ts == False:
+            rs = False
+        else:
+            rs = True
+        self.assertEqual(True, rs)
 
 
-    #@unittest.skip("test")
+#    @unittest.skip("test")
     def test_exam_create_subject(self):
         ba = Base(self.driver)
         subject_name = exam_cate_management.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num = 1)
@@ -129,7 +145,7 @@ class ExamTest(unittest.TestCase):
         print "image:"+filename
 
 
-    #@unittest.skip("test")
+#    @unittest.skip("test")
     def test_exam_modify_subject(self):
         ba = Base(self.driver)
         subject_name = exam_cate_management.modify_subject(self.cfg, self.driver, self.base_url, self.org_name)
@@ -140,7 +156,7 @@ class ExamTest(unittest.TestCase):
         print "image:"+filename
 
 
-    #@unittest.skip("test")
+#    @unittest.skip("test")
     def test_exam_delete_subject(self):
         ba = Base(self.driver)
         #统计科目总数
@@ -150,10 +166,9 @@ class ExamTest(unittest.TestCase):
         last_num = self.driver.execute_script("return $('.subject-item-con').size()")
         self.assertEqual(total_num - 1, last_num)
         filename = ba.save_screenshot()
-        print "image:"+filename
-        
+        print "image:"+filename     
 
-    #@unittest.skip("test")
+#    @unittest.skip("test")
     def test_exam_create_cate(self):
         ba = Base(self.driver)
         cate_name = exam_cate_management.auto_create_exam_cate(self.cfg, self.driver, self.base_url, self.org_name, cate_num = 1)
@@ -162,9 +177,8 @@ class ExamTest(unittest.TestCase):
         self.assertEqual(cate_name, lastcate)
         filename = ba.save_screenshot()
         print "image:"+filename
-
        
-    #@unittest.skip("test")
+#    @unittest.skip("test")
     def test_exam_modify_cate(self):
         ba = Base(self.driver)
         cate_name = exam_cate_management.modify_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
@@ -174,8 +188,7 @@ class ExamTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-
-    #@unittest.skip("test")
+#    @unittest.skip("test")
     def test_exam_delete_cate(self):
         ba = Base(self.driver)
         time.sleep(1)
@@ -185,11 +198,9 @@ class ExamTest(unittest.TestCase):
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
         filename = ba.save_screenshot()
-        print "image:"+filename        
+        print "image:"+filename
 
-
-
-    # @unittest.skip("test")
+#    @unittest.skip("test")
     def test_exam_create_point(self):
         ba = Base(self.driver)
         point_name = exam_cate_management.auto_create_exam_point(self.cfg, self.driver, self.base_url, self.org_name, point_num = 1)
@@ -199,7 +210,7 @@ class ExamTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    #@unittest.skip("test")
+#    @unittest.skip("test")
     def test_exam_modify_point(self):
         ba = Base(self.driver)
         point_name = exam_cate_management.modify_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
@@ -210,7 +221,7 @@ class ExamTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    #@unittest.skip("test")
+#    @unittest.skip("test")
     def test_exam_delete_point(self):
         ba = Base(self.driver)
         total_num = exam_cate_management.delete_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
@@ -219,24 +230,22 @@ class ExamTest(unittest.TestCase):
         self.assertEqual(total_num - 1, last_num)
         filename = ba.save_screenshot()
         print "image:"+filename
-        
-    
-   
-    #@unittest.skip("test")
+
+#    @unittest.skip("test")
     def test_send_paper(self):
         ba = Base(self.driver)
         exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=1)
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    #@unittest.skip("test")
+#    @unittest.skip("test")
     def test_close_paper(self):
         ba = Base(self.driver)
         exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=2)
         filename = ba.save_screenshot()
         print "image:"+filename 
 
-    #@unittest.skip("test")    
+#    @unittest.skip("test")
     def test_createpaper(self):
         #免得创建试卷失败后，后面要用到这个变量会失败
         ba = Base(self.driver)
@@ -248,8 +257,7 @@ class ExamTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-        
-    #@unittest.skip("test")        
+#    @unittest.skip("test")        
     def test_random_paper(self):
         ba = Base(self.driver)
         exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 1, 2) 

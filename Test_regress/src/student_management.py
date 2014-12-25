@@ -1,9 +1,14 @@
 # -*- coding: UTF-8 -*-
 '''
 Created on Jun 2, 2012
-
 @author: yilulu
+modified on Dec. 24, 2014
+@author: liuhongjiao
+added: manage_course_numdetail
+       manage_course_num
+       buy_open_num
 '''
+
 import time, random
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By

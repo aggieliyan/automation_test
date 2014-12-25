@@ -7,6 +7,8 @@ Created on Nov. 17, 2014
 import time
 import ConfigParser
 
+from selenium.common.exceptions import NoSuchElementException
+
 import base
 
 class MyOfficePage(base.Base):

@@ -154,7 +154,7 @@ class StudentTest(unittest.TestCase):
 
         ba = Base(self.driver)            
         time.sleep(1)         
-        academy_catename_ok = self.driver.execute_script("return $('.exampaper-title:eq(0)').text()")#获取已考完的第一个试卷名称
+        academy_catename_ok = self.driver.execute_script("return $('.exampaper-title:eq(1)').text()")#获取已考完的第一个试卷名称
         filename = ba.save_screenshot()
         print "image:"+filename
         self.assertEqual(academy_catename_ok, academy_catename)

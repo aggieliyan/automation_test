@@ -150,11 +150,11 @@ def auto_exam_questions(cfg, driver, base_url, question_ansa, num):
     questionlist.save_screenshot()
     for i in range(num):
         exam_question_single(cfg, driver, base_url, question_ansa)
-#        exam_question_multiple(cfg, driver, base_url, question_ansa)
-#        exam_question_trueorfalse(cfg, driver, base_url, question_ansa)
-#        exam_question_blank(cfg, driver, base_url, question_ansa)
-#        exam_question_answer(cfg, driver, base_url, question_ansa)
-#        exam_question_cloze(cfg, driver, base_url, question_ansa)
+        exam_question_multiple(cfg, driver, base_url, question_ansa)
+        exam_question_trueorfalse(cfg, driver, base_url, question_ansa)
+        exam_question_blank(cfg, driver, base_url, question_ansa)
+        exam_question_answer(cfg, driver, base_url, question_ansa)
+        exam_question_cloze(cfg, driver, base_url, question_ansa)
         exam_question_composite(cfg, driver, base_url, question_ansa)
 
     #创建一种题型的试题

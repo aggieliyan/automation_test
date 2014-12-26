@@ -20,7 +20,6 @@ def buy_paper(cfg, driver, paper_url):
 def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, paper_name):
     userpaperlist = UserpaperListPage(driver, cfg)
     userpaperlist.enter_exampaperlist()
-    userpaperlist.clear_searchpapername()
     userpaperlist.input_searchpapername(paper_name)
     userpaperlist.save_screenshot()
     userpaperlist.click_examnow()

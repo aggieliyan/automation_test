@@ -23,7 +23,10 @@ class BannerPage(base.Base):
 		op = MyOfficePage(self.dr, self.cfg)
 		op.open()
 		op.click_system_settings()
-		op.click_logo_settings()
+
+		if not op.click_logo_settings():
+			return 0
+		return 1
 
 	def change_logo(self, logo_pic):
 		# self.dr.execute_script("$('#J_uploadLogoIndex').attr('style','display:block;');\

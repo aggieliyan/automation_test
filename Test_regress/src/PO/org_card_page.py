@@ -230,7 +230,7 @@ class OrgAcademyFirstPage(base.Base):
 		self.dr.find_element_by_link_text(u"跳过").click()#点击跳过
 		
 	def click_selectcourse(self):
-		time.sleep(2)
+		time.sleep(3)
 		self.dr.find_element(self.cfg.get('org_manage', 'exam_selectcourse_by'), \
 			self.cfg.get('org_manage', 'exam_selectcourse')).click()#点击选课 
 		
@@ -320,14 +320,5 @@ class OrguseExamcardPage(base.Base):
 	    self.dr.find_element(self.cfg.get('use_card', 'exam_start_by'), \
 		    self.cfg.get('use_card', 'exam_start')).click()#点击开始考试
 		
-	def remark_confirmation(self):
-	    time.sleep(2)
-	    try:
-		    print self.dr.execute_script("return $('p.error').text()")
-	    except:
-		    None
-	    time.sleep(2)
-	    self.dr.find_element(self.cfg.get('use_card', 'exam_paper_by'), \
-		    self.cfg.get('use_card', 'exam_paper')).text#标题  
 
 		 		   

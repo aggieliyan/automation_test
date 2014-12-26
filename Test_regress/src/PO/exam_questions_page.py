@@ -44,6 +44,33 @@ class QuestionListPage(base.Base):
 		self.dr.find_element(self.cfg.get('exam', "close_button_by"), \
 							self.cfg.get('exam', "close_button")).click()	
 
+	#搜索各种题型
+	def search_multiple(self):
+		self.dr.find_element(self.cfg.get('exam_questions', "question_search_multiple_by"), \
+							self.cfg.get('exam_questions', "question_search_multiple")).click()	
+	def search_trueorfalse(self):
+		self.dr.find_element(self.cfg.get('exam_questions', "question_search_trueorfalse_by"), \
+							self.cfg.get('exam_questions', "question_search_trueorfalse")).click()	
+	def search_blank(self):
+		self.dr.find_element(self.cfg.get('exam_questions', "question_search_blank_by"), \
+							self.cfg.get('exam_questions', "question_search_blank")).click()
+	def search_answer(self):
+		self.dr.find_element(self.cfg.get('exam_questions', "question_search_answer_by"), \
+							self.cfg.get('exam_questions', "question_search_answer")).click()
+	def search_cloze(self):
+		self.dr.find_element(self.cfg.get('exam_questions', "question_search_cloze_by"), \
+							self.cfg.get('exam_questions', "question_search_cloze")).click()
+	def search_composite(self):
+		self.dr.find_element(self.cfg.get('exam_questions', "question_search_composite_by"), \
+							self.cfg.get('exam_questions', "question_search_composite")).click()
+	#搜索试题
+	def search_questions(self, question_ansa):
+		name = self.dr.find_element(self.cfg.get('exam_questions', "question_search_by"), \
+							self.cfg.get('exam_questions', "question_search"))
+		name.click()
+		name.send_keys(question_ansa)
+		time.sleep(2)
+		
 class QuestionInputPage(base.Base):
 
 	def __init__(self, driver, cfg):
@@ -56,33 +83,28 @@ class QuestionInputPage(base.Base):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_type_by"), \
 							self.cfg.get('exam_questions', "question_type")).click()
 		time.sleep(1)
-	#多选
-   	def click_question_multiple(self):
+	#选择各种题型进行新建试题
+	def click_question_multiple(self):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_type_Multiple_by"), \
 							self.cfg.get('exam_questions', "question_type_Multiple")).click()
 		time.sleep(1)
-	#是非
-   	def click_question_trueOrFalse(self):
+	def click_question_trueOrFalse(self):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_type_TrueOrFalse_by"), \
 							self.cfg.get('exam_questions', "question_type_TrueOrFalse")).click()
 		time.sleep(1)
-	#问答
-   	def click_question_answer(self):
+	def click_question_answer(self):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_type_Answer_by"), \
 							self.cfg.get('exam_questions', "question_type_Answer")).click()
 		time.sleep(1)
-	#填空
-   	def click_question_blank(self):
+	def click_question_blank(self):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_type_Blank_by"), \
 							self.cfg.get('exam_questions', "question_type_Blank")).click()
 		time.sleep(1)
-	#完型
-   	def click_question_cloze(self):
+	def click_question_cloze(self):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_type_Cloze_by"), \
 							self.cfg.get('exam_questions', "question_type_Cloze")).click()
 		time.sleep(1)
-	#综合
-   	def click_question_composite(self):
+	def click_question_composite(self):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_type_Composite_by"), \
 							self.cfg.get('exam_questions', "question_type_Composite")).click()
 		time.sleep(1)
@@ -91,9 +113,7 @@ class QuestionInputPage(base.Base):
 	def input_question_name(self, question_ansa):
 		name = self.dr.find_element(self.cfg.get('exam_questions', "question_name_by"), \
 							self.cfg.get('exam_questions', "question_name"))
-		time.sleep(1)
 		name.click()
-		time.sleep(1)
 		name.send_keys(question_ansa)
 		time.sleep(1)
 
@@ -107,22 +127,17 @@ class QuestionInputPage(base.Base):
 							(r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\123.mp3")
 		time.sleep(2)
 
-		#单选多选答案A				
-	def input_answera(self, question_ansa):
-		name = self.dr.find_element(self.cfg.get('exam_questions', "question_answerA_by"), \
+		#单选多选答案ab				
+	def input_answerab(self, question_ansa):
+		namea = self.dr.find_element(self.cfg.get('exam_questions', "question_answerA_by"), \
 							self.cfg.get('exam_questions', "question_answerA"))
-		name.click()
+		namea.click()
+		namea.send_keys(question_ansa)
 		time.sleep(1)
-		name.send_keys(question_ansa)
-		time.sleep(1)
-
-		#单选多选答案B
-	def input_answerb(self, question_ansa):
-		name = self.dr.find_element(self.cfg.get('exam_questions', "question_answerB_by"), \
+		nameb = self.dr.find_element(self.cfg.get('exam_questions', "question_answerB_by"), \
 							self.cfg.get('exam_questions', "question_answerB"))
-		name.click()
-		time.sleep(1)
-		name.send_keys(question_ansa)
+		nameb.click()
+		nameb.send_keys(question_ansa)
 		time.sleep(1)
 
 	#问答题答案
@@ -130,7 +145,6 @@ class QuestionInputPage(base.Base):
 		name = self.dr.find_element(self.cfg.get('exam_questions', "question_answer_Answer_by"), \
 							self.cfg.get('exam_questions', "question_answer_Answer"))
 		name.click()
-		time.sleep(1)
 		name.send_keys(question_ansa)
 		time.sleep(1)
 
@@ -142,29 +156,25 @@ class QuestionInputPage(base.Base):
 		time.sleep(1)
 
 	#完型题答案
-	def input_cloze1(self, question_ansa):
+	def input_cloze_answer(self, question_ansa):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_Cloze1_by"), \
 							self.cfg.get('exam_questions', "question_Cloze1")).send_keys(question_ansa)
 		time.sleep(1)
-	def input_cloze2(self, question_ansa):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_Cloze2_by"), \
 							self.cfg.get('exam_questions', "question_Cloze2")).send_keys(question_ansa)
 		time.sleep(1)
-	def input_cloze3(self, question_ansa):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_Cloze3_by"), \
 							self.cfg.get('exam_questions', "question_Cloze3")).send_keys(question_ansa)
 		time.sleep(1)
-	def input_cloze4(self, question_ansa):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_Cloze4_by"), \
 							self.cfg.get('exam_questions', "question_Cloze4")).send_keys(question_ansa)
 		time.sleep(1)
-							
+
 	#综合题中的单选题名称
 	def input_composite_name(self, question_ansa):
 		name = self.dr.find_element(self.cfg.get('exam_questions', "question_Composite_name_by"), \
 							self.cfg.get('exam_questions', "question_Composite_name"))
 		name.click()
-		time.sleep(1)
 		name.send_keys(question_ansa)
 		time.sleep(1)
 
@@ -172,5 +182,4 @@ class QuestionInputPage(base.Base):
 	def click_question_save(self):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_save_by"), \
 							self.cfg.get('exam_questions', "question_save")).click()
-		time.sleep(1)
-
+		time.sleep(3)

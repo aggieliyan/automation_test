@@ -187,15 +187,19 @@ def user_usexamcard_management(cfg, driver, base_url, examcard_num):
     oguseexcard = OrguseExamcardPage(driver, cfg)
     oguseexcard.input_examcard(examcard_num)        
     oguseexcard.click_startexam()
-    oguseexcard.save_screenshot()    
-    oguseexcard.remark_confirmation()       
+    oguseexcard.save_screenshot()     
     return academy_catename
 
 def user_usexamcard(cfg, driver, base_url, examcard_num):  
     academy_catename = user_usexamcard_management(cfg, driver, base_url, examcard_num)
+    time.sleep(2)
+    message = driver.execute_script("return $('p.error').text()")
+    time.sleep(2)
+    print message
+    if message == "":
     # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
-    exam_user_management.exam_user(cfg, driver, base_url, operation=0, blank_pager=0, question_answer='123', paper_name=academy_catename)
-    return academy_catename
+        exam_user_management.exam_user(cfg, driver, base_url, operation=0, blank_pager=0, question_answer='123', paper_name=academy_catename)
+        return academy_catename
 
 ##使用充值卡和充课卡
 #def use_prepaid_card(cfg, driver, base_url, card_num, card_psw):

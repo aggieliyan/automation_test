@@ -109,7 +109,10 @@ class CourseManageListPage(base.Base):
 
 	def click_get_link(self):
 		time.sleep(3)
-		self.dr.find_element_by_link_text(u"获取视频链接").click()
-		time.sleep(1)
-		link = self.dr.execute_script("return $('textarea:eq(1)').text()")
+		try:
+			self.dr.find_element_by_link_text(u"获取视频链接").click()
+			time.sleep(1)
+			link = self.dr.execute_script("return $('textarea:eq(1)').text()")
+		except:
+			return ""
 		return link

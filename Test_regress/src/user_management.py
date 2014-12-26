@@ -71,6 +71,8 @@ def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_an
     cp.save_screenshot()
     an_content = cp.click_get_link()
     cp.save_screenshot()
+    if not an_content:
+        an_content = "content-test"
     release_announcement(cfg,driver, base_url, org_name, title, an_content)
 
 #机构修改头像
@@ -86,7 +88,8 @@ def change_homelogo(cfg, driver, base_url, org_name, \
     logo_pic = r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\headpic.jpg"):
 
     lop = BannerPage(driver, cfg)
-    lop.open()
+    if not lop.open():
+        return
     lop.save_screenshot()
     lop.change_logo(logo_pic)
 

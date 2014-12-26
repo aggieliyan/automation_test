@@ -134,19 +134,7 @@ class Test(unittest.TestCase):
         actual_name = actual_name.strip()   
         filename = ba.save_screenshot()
         print "image:"+filename
-        self.assertEqual(course_name, actual_name) 
-
-    # @unittest.skip("test")
-    def test_add_announcement(self):
-        ba = Base(self.driver)
-
-        title = ba.rand_name()
-        user_management.release_announcement(self.cfg, self.driver, self.base_url, self.org_name, title)
-
-        rs = ba.is_element_present("link text", title)
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(True, rs)
+        self.assertEqual(course_name, actual_name)
 
     def test_href_announcement(self):
         ba = Base(self.driver)

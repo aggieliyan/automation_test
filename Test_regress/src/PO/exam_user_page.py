@@ -17,12 +17,10 @@ class UserpaperListPage(base.Base):
 	def enter_exampaperlist(self):
 		self.dr.get(self.base_url+"exam/")
 
-	def clear_searchpapername(self):
+	def input_searchpapername(self, paper_name):
 		time.sleep(2)
 		self.dr.find_element(self.cfg.get('exam', 'search_input_by'), \
 			self.cfg.get('exam', 'search_input')).clear()
-
-	def input_searchpapername(self, paper_name):
 		time.sleep(2)
 		self.dr.find_element(self.cfg.get('exam', 'search_input_by'), \
 			self.cfg.get('exam', 'search_input')).send_keys(paper_name)

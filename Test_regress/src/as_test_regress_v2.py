@@ -190,30 +190,30 @@ class Test(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    # suite_register = unittest.TestLoader().loadTestsFromTestCase(RegisterTest)
+    suite_register = unittest.TestLoader().loadTestsFromTestCase(RegisterTest)
     suite1 = unittest.TestLoader().loadTestsFromTestCase(Test)
-    # suite_course = unittest.TestLoader().loadTestsFromTestCase(CourseTest)
-    # suite_card = unittest.TestLoader().loadTestsFromTestCase(StudyCardTest)
-    # suite_stumanage = unittest.TestLoader().loadTestsFromTestCase(StudentMangeTest)    
-    # suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
+    suite_course = unittest.TestLoader().loadTestsFromTestCase(CourseTest)
+    suite_card = unittest.TestLoader().loadTestsFromTestCase(StudyCardTest)
+    suite_stumanage = unittest.TestLoader().loadTestsFromTestCase(StudentMangeTest)    
+    suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
 
     #考试部分
-    # suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
-    # suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
-    # suite_exam_result = unittest.TestLoader().loadTestsFromTestCase(ExamResultTest)
+    suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
+    suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
+    suite_exam_result = unittest.TestLoader().loadTestsFromTestCase(ExamResultTest)
     
     allsuites = []
-    # allsuites.append(suite_register)
-    # allsuites.append(suite_course)
-    # allsuites.append(suite_card)
-    # allsuites.append(suite_stumanage)
+    allsuites.append(suite_register)
+    allsuites.append(suite_course)
+    allsuites.append(suite_card)
+    allsuites.append(suite_stumanage)
     allsuites.append(suite1)
-    # allsuites.append(suite2)
+    allsuites.append(suite2)
 
     #考试部分
-    # allsuites.append(suite_exam)
-    # allsuites.append(suite_exam_student)
-    # allsuites.append(suite_exam_result)
+    allsuites.append(suite_exam)
+    allsuites.append(suite_exam_student)
+    allsuites.append(suite_exam_result)
 
     alltests = unittest.TestSuite(allsuites)
 

@@ -21,16 +21,51 @@ class CourseStepOnePage(base.Base):
 		self.dr = driver
 
 	def open(self):
-		url = "%s/coursePostRedirect.do?action=courseStepOne"%(self.base_url)
+		url = "%s/course/manage/create"%(self.base_url)
 		self.dr.get(url)
 
-	def choose_three_video(self):
-		self.dr.find_element(self.cfg.get('courseRedirect', 'threevideo_by'), \
-			self.cfg.get('courseRedirect', 'threevideo')).click()	
+	def input_course_title(self, ctitle):
+		c_input = self.dr.find_element(self.cfg.get('courseRedirect', 'ctitle_by'), \
+			self.cfg.get('courseRedirect', 'ctitle'))
+		c_input.clear()
+		c_input.send_keys(ctitle)
 
-	def click_upload(self, i):
-		self.dr.find_elements(self.cfg.get('courseRedirect', 'upload_btn_by'), \
-			self.cfg.get('courseRedirect', 'upload_btn'))[i].click()
+	def click_service_cate(self):
+		self.dr.execute_script("$(\'li.level2\').click()")
+		self.dr.execute_script("$(\'li.level3.selected\').click()")
+		time.sleep(0.1)
+
+	#点创建进入下一步
+	def click_next_step(self):
+		self.dr.find_element(self.cfg.get('courseRedirect', 'next_btn_by'), \
+			self.cfg.get('courseRedirect', 'next_btn')).click()
+
+class CuorsefilePage(base.Base):
+	def __init__(self, driver, cfg):
+		self.cfg = cfg
+		self.base_url = cfg.get('env_para', 'base_url')
+		self.dr = driver
+
+	def click_addClasshour(self):
+		self.dr.find_element_by_link_text(u"课时").click()
+		time.sleep(0.5)
+
+	def click_singlevideo(self):#点击弹出上传框
+		self.dr.find_element_by_link_text(u"单视频").click()
+		time.sleep(1)
+
+	def choose_three_video(self):
+		# self.dr.find_elements("class name", "tvql")[0].click()
+		self.dr.find_elements(self.cfg.get('courseRedirect', 'choose_three_by'), \
+			self.cfg.get('courseRedirect', 'choose_three'))[0].click()		
+
+	def input_cname(self):
+		# self.dr.find_element("class name", "saveTitle").send_keys("threecoursehour")
+		self.dr.find_element(self.cfg.get('courseRedirect', 'cname_by'), \
+			self.cfg.get('courseRedirect', 'cname')).send_keys("threecoursehour")
+
+	def click_add(self, cno):
+		self.dr.find_elements_by_link_text(u"添加")[cno].click()
 		time.sleep(1)
 
 	def choose_flv(self):
@@ -44,10 +79,17 @@ class CourseStepOnePage(base.Base):
 	def click_choose_ok(self):
 		self.dr.find_element(self.cfg.get('courseRedirect', 'select_ok_by'), \
 			self.cfg.get('courseRedirect', 'select_ok')).click()
+		time.sleep(1)
 
-	def click_next_step(self):
-		self.dr.find_element(self.cfg.get('courseRedirect', 'next_btn_by'), \
-			self.cfg.get('courseRedirect', 'next_btn')).click()
+	def click_save(self):
+		time.sleep(0.5)
+		self.dr.find_element_by_link_text(u"保存").click()
+
+	def click_info(self):
+		self.dr.find_element_by_link_text(u"基本信息").click()
+		time.sleep(1)
+
+
 
 class CourseInfoPage(base.Base):
 
@@ -57,19 +99,18 @@ class CourseInfoPage(base.Base):
 		self.base_url = cfg.get('env_para', 'base_url')
 		self.dr = driver
 
-	def input_course_title(self, ctitle):
-		c_input = self.dr.find_element(self.cfg.get('courseRedirect', 'ctitle_by'), \
-			self.cfg.get('courseRedirect', 'ctitle'))
-		c_input.clear()
-		c_input.send_keys(ctitle)
 
 	def click_charge(self):
+		self.dr.find_element("id", "J_setPriceNav").click()
+		time.sleep(1)
 		self.dr.find_element(self.cfg.get('courseRedirect', 'chanrge_by'), \
 			self.cfg.get('courseRedirect', 'chanrge')).click()
 
 	def input_price(self, cprice):
-		self.dr.find_element(self.cfg.get('courseRedirect', 'price_by'), \
-			self.cfg.get('courseRedirect', 'price')).send_keys(cprice)
+		pinput = self.dr.find_element(self.cfg.get('courseRedirect', 'price_by'), \
+			self.cfg.get('courseRedirect', 'price'))
+		pinput.clear()
+		pinput.send_keys(cprice)
 
 	def input_description(self, cdescription ):
 		self.dr.execute_script("var element=\
@@ -79,10 +120,7 @@ class CourseInfoPage(base.Base):
 			element.innerHTML =\'"+cdescription+"\';")
 		time.sleep(0.1)
 
-	def click_service_cate(self):
-		self.dr.execute_script("$(\'li.level2\').click()")
-		self.dr.execute_script("$(\'li.level3.selected\').click()")
-		time.sleep(0.1)
+
 
 	def input_tag(self, course_tags):
 		self.dr.find_element(self.cfg.get('courseRedirect', 'tags_by'), \

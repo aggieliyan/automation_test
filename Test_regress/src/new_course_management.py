@@ -8,7 +8,7 @@ import re
 import time
 from selenium.common.exceptions import NoSuchElementException
 
-from PO.course_page import CourseStepOnePage, CourseInfoPage
+from PO.course_page import CourseStepOnePage, CuorsefilePage, CourseInfoPage
 from PO.class_page import OnLineClassListPage, ClassInfoPage
 from PO.agency_page import CourseAgencyPage, AgentCourseInputPage
 
@@ -30,44 +30,55 @@ def course_redirect(cfg, driver, base_url, isthree=0,\
     #进入发课页面
     course.open()
     course.save_screenshot()
+    
+    course.input_course_title(course_title)
+    course.click_service_cate()
 
-    if isthree != 0:
-        course.choose_three_video()
-        
-        #三分屏左上角的必须传视频文件
-        course.click_upload(1)
-        course.choose_flv()
-        course.click_choose_ok()
 
-        #双视频的右边讲义部分传视频flv，普通三分屏传pdf
-        course.click_upload(2)
-        if isthree == 1:
-            course.choose_pdf()
-        else:
-            course.choose_flv()
-        course.click_choose_ok()
-
-    else:
-        course.click_upload(0)
-        course.choose_flv()
-        course.click_choose_ok()
     
     course.save_screenshot()
     course.click_next_step()
-    #第二步填写课程信息页面
-    course_info = CourseInfoPage(driver, cfg)
-    course_info.save_screenshot()
-    course_info.input_course_title(course_title)
 
+    #课程章节页面，传课件
+    cfile = CuorsefilePage(driver, cfg)
+    cfile.click_addClasshour()
+    if isthree != 0:
+        cfile.choose_three_video()
+        cfile.input_cname()
+        
+        # #三分屏左上角的必须传视频文件
+        cfile.click_add(0)
+        cfile.choose_flv()
+        cfile.click_choose_ok()
+
+        # #双视频的右边讲义部分传视频flv，普通三分屏传pdf
+        cfile.click_add(0)
+        if isthree == 1:
+            cfile.choose_pdf()
+        else:
+            cfile.choose_flv()
+        cfile.click_choose_ok()
+
+    else:
+        cfile.click_singlevideo()
+        cfile.choose_flv()
+        cfile.click_choose_ok()
+
+    cfile.click_save()
+    cfile.save_screenshot()
+
+    cfile.click_info()
+
+    #课程信息页面
+    course_info = CourseInfoPage(driver, cfg)
+     
     #课程价格
     if course_price != 0:
         course_info.click_charge()
         course_info.input_price(str(course_price))
-
-
-    course_info.input_description(course_describe)
-    course_info.click_service_cate()
+   
     course_info.input_tag(course_tags)
+    course_info.input_description(course_describe)
     course_info.save_screenshot()
     course_info.click_save()
 
@@ -98,6 +109,7 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
     cinfo.input_tag(course_tags)
     cinfo.click_service_cate()
     cinfo.click_save()
+    time.sleep(2)
 
 #发布代理课程-没有发布了现在代理人只能编辑代理的课程
 def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
@@ -109,15 +121,17 @@ def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
     cg.click_edit()
 
     ac = AgentCourseInputPage(driver, cfg)
+    ac.click_modify()
     ac.input_title(course_title)
-    ac.save_screenshot()
+    ac.click_modify_ok()
+    # ac.save_screenshot()
 
-    str_price = driver.execute_script(\
-        "return $('.ablableSNew .colorGreen').text()")
-    if str_price:
-        temp = re.search(r'\d{1,10}.\d', str_price)
-        price = temp.group(0)
-        ac.input_price(price)
-        ac.input_rank(100)
+    # str_price = driver.execute_script(\
+    #     "return $('.ablableSNew .colorGreen').text()")
+    # if str_price:
+    #     temp = re.search(r'\d{1,10}.\d', str_price)
+    #     price = temp.group(0)
+    #     ac.input_price(price)
+    #     ac.input_rank(100)
     ac.save_screenshot()
     ac.click_save()

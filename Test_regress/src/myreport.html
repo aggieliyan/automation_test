@@ -189,9 +189,9 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>My unit test</h1>
-<p class='attribute'><strong>Start Time:</strong> 2014-12-26 17:32:30</p>
-<p class='attribute'><strong>Duration:</strong> 0:03:57.726000</p>
-<p class='attribute'><strong>Status:</strong> Pass 11</p>
+<p class='attribute'><strong>Start Time:</strong> 2015-04-15 14:10:46</p>
+<p class='attribute'><strong>Duration:</strong> 0:01:52.507000</p>
+<p class='attribute'><strong>Status:</strong> Pass 5 Error 1</p>
 
 <p class='description'>This demonstrates the report output by HTMLTestRunner.</p>
 </div>
@@ -222,18 +222,18 @@ function showOutput(id, name) {
     <td>Screenshot</td>
 </tr>
 
-<tr class='passClass'>
-    <td>Test</td>
-    <td>11</td>
-    <td>11</td>
+<tr class='errorClass'>
+    <td>testcase_course.CourseTest</td>
+    <td>6</td>
+    <td>5</td>
     <td>0</td>
-    <td>0</td>
-    <td><a href="javascript:showClassDetail('c1',11)">Detail</a></td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c1',6)">Detail</a></td>
     <td>&nbsp;</td>
 </tr>
 
 <tr id='pt1.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_add_announcement</div></td>
+    <td class='none'><div class='testcase'>test_agency_course</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -247,8 +247,7 @@ function showOutput(id, name) {
         </div>
         <pre>
         
-pt1.1: okkkk
-image:2014-12-26-17_32_55.png
+pt1.1: image:2015-04-15-14_11_02.png
 
 
         </pre>
@@ -257,12 +256,12 @@ image:2014-12-26-17_32_55.png
 
     </td>
     <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2014-12-26-17_32_55.png">check Screenshot</a>
+    <a target=_blank href="file://C://test_rs_pic/2015-04-15-14_11_02.png">check Screenshot</a>
     </td>
 </tr>
 
 <tr id='pt1.2' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_add_cate</div></td>
+    <td class='none'><div class='testcase'>test_onlineclass</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -276,7 +275,7 @@ image:2014-12-26-17_32_55.png
         </div>
         <pre>
         
-pt1.2: image:2014-12-26-17_33_18.png
+pt1.2: image:2015-04-15-14_11_20.png
 
 
         </pre>
@@ -285,26 +284,35 @@ pt1.2: image:2014-12-26-17_33_18.png
 
     </td>
     <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2014-12-26-17_33_18.png">check Screenshot</a>
+    <a target=_blank href="file://C://test_rs_pic/2015-04-15-14_11_20.png">check Screenshot</a>
     </td>
 </tr>
 
-<tr id='pt1.3' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_add_course_to_cate</div></td>
+<tr id='ft1.3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_presaleclass</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.3')" >
-        pass</a>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.3')" >
+        error</a>
 
-    <div id='div_pt1.3' class="popup_window">
+    <div id='div_ft1.3' class="popup_window">
         <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.3').style.display = 'none' " >
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.3').style.display = 'none' " >
            [x]</a>
         </div>
         <pre>
         
-pt1.3: image:2014-12-26-17_33_50.png
+ft1.3: Traceback (most recent call last):
+  File "D:\code\automation_test\Test_regress\src\testcase_course.py", line 100, in test_presaleclass
+    course = self.driver.find_element("link text", title)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 662, in find_element
+    {'using': by, 'value': value})['value']
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\python27\lib\site-packages\selenium-2.42.1-py2.7.egg\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: u'no such element\n  (Session info: chrome=38.0.2125.101)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
 
 
         </pre>
@@ -313,12 +321,12 @@ pt1.3: image:2014-12-26-17_33_50.png
 
     </td>
     <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2014-12-26-17_33_50.png">check Screenshot</a>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
     </td>
 </tr>
 
 <tr id='pt1.4' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_change_headpic</div></td>
+    <td class='none'><div class='testcase'>test_release_normal_course</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -332,7 +340,7 @@ pt1.3: image:2014-12-26-17_33_50.png
         </div>
         <pre>
         
-pt1.4: image:2014-12-26-17_34_02.png
+pt1.4: image:2015-04-15-14_11_59.png
 
 
         </pre>
@@ -341,12 +349,12 @@ pt1.4: image:2014-12-26-17_34_02.png
 
     </td>
     <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2014-12-26-17_34_02.png">check Screenshot</a>
+    <a target=_blank href="file://C://test_rs_pic/2015-04-15-14_11_59.png">check Screenshot</a>
     </td>
 </tr>
 
 <tr id='pt1.5' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_change_homelogo</div></td>
+    <td class='none'><div class='testcase'>test_release_three_video</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -360,8 +368,7 @@ pt1.4: image:2014-12-26-17_34_02.png
         </div>
         <pre>
         
-pt1.5: 该导航不存在
-image:2014-12-26-17_34_19.png
+pt1.5: image:2015-04-15-14_12_17.png
 
 
         </pre>
@@ -370,12 +377,12 @@ image:2014-12-26-17_34_19.png
 
     </td>
     <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2014-12-26-17_34_19.png">check Screenshot</a>
+    <a target=_blank href="file://C://test_rs_pic/2015-04-15-14_12_17.png">check Screenshot</a>
     </td>
 </tr>
 
 <tr id='pt1.6' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_create_admin</div></td>
+    <td class='none'><div class='testcase'>test_release_two_video</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -389,7 +396,7 @@ image:2014-12-26-17_34_19.png
         </div>
         <pre>
         
-pt1.6: image:2014-12-26-17_34_40.png
+pt1.6: image:2015-04-15-14_12_37.png
 
 
         </pre>
@@ -398,161 +405,16 @@ pt1.6: image:2014-12-26-17_34_40.png
 
     </td>
     <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2014-12-26-17_34_40.png">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.7' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_delete_admin</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.7')" >
-        pass</a>
-
-    <div id='div_pt1.7' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.7').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-pt1.7: 402
-401
-image:2014-12-26-17_35_05.png
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2014-12-26-17_35_05.png">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.8' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_delete_cate</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.8')" >
-        pass</a>
-
-    <div id='div_pt1.8' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.8').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-pt1.8: image:2014-12-26-17_35_23.png
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2014-12-26-17_35_23.png">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.9' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_href_announcement</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.9')" >
-        pass</a>
-
-    <div id='div_pt1.9' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.9').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-pt1.9: okkkk
-image:2014-12-26-17_35_51.png
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2014-12-26-17_35_51.png">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.10' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_modify_admin</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.10')" >
-        pass</a>
-
-    <div id='div_pt1.10' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.10').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-pt1.10: image:2014-12-26-17_36_10.png
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2014-12-26-17_36_10.png">check Screenshot</a>
-    </td>
-</tr>
-
-<tr id='pt1.11' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_modify_pagefoot</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.11')" >
-        pass</a>
-
-    <div id='div_pt1.11' class="popup_window">
-        <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.11').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-pt1.11: okkkk
-2249
-image:2014-12-26-17_36_26.png
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-    <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2014-12-26-17_36_26.png">check Screenshot</a>
+    <a target=_blank href="file://C://test_rs_pic/2015-04-15-14_12_37.png">check Screenshot</a>
     </td>
 </tr>
 
 <tr id='total_row'>
     <td>Total</td>
-    <td>11</td>
-    <td>11</td>
+    <td>6</td>
+    <td>5</td>
     <td>0</td>
-    <td>0</td>
+    <td>1</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
 </tr>

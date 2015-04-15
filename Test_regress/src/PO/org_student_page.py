@@ -196,4 +196,4 @@ class OrgStudentManagePage(base.Base):
 		self.dr.find_element_by_link_text(u"确认购买").click()
 	#确认付款
 	def click_sure(self):
-		self.dr.find_element_by_link_text(u"确认付款").click()
+		self.dr.find_element_by_link_text(u"去付款").click()

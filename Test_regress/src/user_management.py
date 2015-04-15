@@ -69,6 +69,7 @@ def release_href_announcement(cfg, driver, base_url, org_name, title = u'href_an
     cp = CourseManageListPage(driver, cfg)
     cp.open()
     cp.save_screenshot()
+    cp.click_manage()
     an_content = cp.click_get_link()
     cp.save_screenshot()
     if not an_content:

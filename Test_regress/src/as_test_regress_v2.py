@@ -86,12 +86,14 @@ class Test(unittest.TestCase):
         print "image:"+filename
         # self.assertEqual(aname, lastadmin)
 
+    # @unittest.skip("test")
     def test_modify_admin(self):
         ba = Base(self.driver)
         admin_name = admin_management.modify_admin(self.cfg, self.driver, self.base_url)
         filename = ba.save_screenshot()
         print "image:"+filename
 
+    # @unittest.skip("test")
     def test_delete_admin(self):
         ba = Base(self.driver)
         rs = admin_management.delete_admin(self.cfg, self.driver, self.base_url)
@@ -99,6 +101,7 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
+    # @unittest.skip("test")
     def test_add_cate(self):
         ba = Base(self.driver)
         cate_name = u"cate" + ba.rand_name()
@@ -110,6 +113,7 @@ class Test(unittest.TestCase):
         print "image:"+filename
         self.assertEqual(actul, cate_name)
 
+    # @unittest.skip("test")
     def test_delete_cate(self):
         ba = Base(self.driver)
         before_delete = cate_management.delete_cate(self.cfg, self.driver, self.base_url)
@@ -123,6 +127,7 @@ class Test(unittest.TestCase):
         print "image:"+filename
         self.assertEqual(True, rs)
 
+    # @unittest.skip("test")
     def test_add_course_to_cate(self):
         ba = Base(self.driver)
         course_name = ""
@@ -160,6 +165,7 @@ class Test(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
+    # @unittest.skip("test")
     def test_modify_pagefoot(self):
         ba = Base(self.driver)
         user_management.modify_pagefoot(self.cfg, self.driver, self.base_url, self.org_name)

@@ -72,6 +72,14 @@ class CourseTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
+    def test_course_with_chapter(self):
+        ba = Base(self.driver)
+        title = "course" + ba.rand_name()
+        new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10, chapter=1)
+        
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
     # @unittest.skip("test")
     def test_release_three_video(self):
         ba = Base(self.driver)

@@ -14,7 +14,7 @@ from PO.agency_page import CourseAgencyPage, AgentCourseInputPage
 
 def course_redirect(cfg, driver, base_url, isthree=0,\
     course_title=u"course", course_describe='hello world', \
-    course_tags='english\n', course_price=0):
+    course_tags='english\n', course_price=0, chapter=0):
     """
     upload是发点播课程的时候需要用的，1是存储空间上传，2是本地上传
     isthree代表是不是发三分屏，1代表发三分屏，0代表发的是单视频, 2代表发双视频
@@ -24,6 +24,7 @@ def course_redirect(cfg, driver, base_url, isthree=0,\
     course_describe 是课程信息页面的课程详情
     course_tags 标签
     course_price 价格 填0时为免费的课
+    chapter 表示是否带章节0为不带 1 为带
     """
 
     course = CourseStepOnePage(driver, cfg)
@@ -34,14 +35,25 @@ def course_redirect(cfg, driver, base_url, isthree=0,\
     course.input_course_title(course_title)
     course.click_service_cate()
 
-
     
     course.save_screenshot()
     course.click_next_step()
 
     #课程章节页面，传课件
     cfile = CuorsefilePage(driver, cfg)
-    cfile.click_addClasshour()
+
+    cnum = 0
+    if chapter:
+        cfile.click_add_chapter()
+        cfile.input_cname()
+        cfile.click_save()
+        cfile.click_add_section()
+        cfile.input_cname(1)
+        cfile.click_save()
+        cnum = 2
+
+
+    cfile.click_add_classhour(cnum)
     if isthree != 0:
         cfile.choose_three_video()
         cfile.input_cname()

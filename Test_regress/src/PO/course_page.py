@@ -46,9 +46,16 @@ class CuorsefilePage(base.Base):
 		self.base_url = cfg.get('env_para', 'base_url')
 		self.dr = driver
 
-	def click_addClasshour(self):
-		self.dr.find_element_by_link_text(u"课时").click()
+	def click_add_classhour(self, cnum):
+		self.dr.find_elements_by_link_text(u"课时")[cnum].click()
 		time.sleep(0.5)
+
+	def click_add_chapter(self):
+		self.dr.find_element_by_link_text(u"章").click()
+
+	def click_add_section(self):
+		self.dr.find_element_by_link_text(u"节").click()
+		time.sleep(1)
 
 	def click_singlevideo(self):#点击弹出上传框
 		self.dr.find_element_by_link_text(u"单视频").click()
@@ -59,10 +66,11 @@ class CuorsefilePage(base.Base):
 		self.dr.find_elements(self.cfg.get('courseRedirect', 'choose_three_by'), \
 			self.cfg.get('courseRedirect', 'choose_three'))[0].click()		
 
-	def input_cname(self):
+	def input_cname(self, cnum=0):
 		# self.dr.find_element("class name", "saveTitle").send_keys("threecoursehour")
-		self.dr.find_element(self.cfg.get('courseRedirect', 'cname_by'), \
-			self.cfg.get('courseRedirect', 'cname')).send_keys("threecoursehour")
+		self.dr.find_elements(self.cfg.get('courseRedirect', 'cname_by'), \
+			self.cfg.get('courseRedirect', 'cname'))[cnum].send_keys("threecoursehour")
+		time.sleep(0.5)
 
 	def click_add(self, cno):
 		self.dr.find_elements_by_link_text(u"添加")[cno].click()
@@ -82,8 +90,9 @@ class CuorsefilePage(base.Base):
 		time.sleep(1)
 
 	def click_save(self):
-		time.sleep(0.5)
+		time.sleep(1)
 		self.dr.find_element_by_link_text(u"保存").click()
+		time.sleep(0.5)
 
 	def click_info(self):
 		self.dr.find_element_by_link_text(u"基本信息").click()

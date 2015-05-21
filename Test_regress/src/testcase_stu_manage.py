@@ -82,13 +82,14 @@ class StudentMangeTest(unittest.TestCase):
             rs = True
         self.assertEqual(True, rs)
 
-    # @unittest.skip("test")
-    #导入多个学员
-    def test_import_multi_student(self):
-        ba = Base(self.driver)
-        student_management.import_multi_student(self.cfg, self.driver, self.base_url, r"C:\register_user_list.txt")
-        filename = ba.save_screenshot()
-        print "image:"+filename
+    # 注：以后管理员不能批量导入学员了
+    @unittest.skip("test")
+    # 导入多个学员
+    # def test_import_multi_student(self):
+    #     ba = Base(self.driver)
+    #     student_management.import_multi_student(self.cfg, self.driver, self.base_url, r"C:\register_user_list.txt")
+    #     filename = ba.save_screenshot()
+    #     print "image:"+filename
 
     # @unittest.skip("test")
     #创建学员

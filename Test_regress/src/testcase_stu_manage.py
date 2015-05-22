@@ -65,7 +65,7 @@ class StudentMangeTest(unittest.TestCase):
 
     @unittest.skip("test")
     #导入一个学员
-    def test_import_one_student(self):
+    # def test_import_one_student(self):
         ba = Base(self.driver)
         stu_name = self.cfg.get("env_para", "import_name")
         # stu_name = "wuding0125"#还是固定的学员，以后改成注册那生成的学员
@@ -90,7 +90,7 @@ class StudentMangeTest(unittest.TestCase):
     #     filename = ba.save_screenshot()
     #     print "image:"+filename
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     #创建学员
     def test_auto_create_student(self):
         ba = Base(self.driver)
@@ -99,7 +99,7 @@ class StudentMangeTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     #给一个学员开通课程
     def test_open_course_for_one(self):
         ba = Base(self.driver)
@@ -115,7 +115,7 @@ class StudentMangeTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     #管理学员播放授权数
     def test_manage_course_num(self):
         ba = Base(self.driver)
@@ -123,7 +123,7 @@ class StudentMangeTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    @unittest.skip("test")
+    # @unittest.skip("test")
     #购买授权
     def test_buy_open_num(self):
         ba = Base(self.driver)

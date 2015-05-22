@@ -100,7 +100,7 @@ class OrgStudentManagePage(base.Base):
 	def click_opencate(self):
 		self.dr.find_element(self.cfg.get('org_manage', "open_cate_by"), \
 			self.cfg.get('org_manage', "open_cate")).click()
-		time.sleep(5)
+		time.sleep(10)
 	#选中资料
 	def click_openchoose(self):
 		self.dr.find_element(self.cfg.get('org_manage', "open_course_1_by"), \

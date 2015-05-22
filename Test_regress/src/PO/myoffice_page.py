@@ -74,13 +74,6 @@ class MyOfficePage(base.Base):
 	def click_student_management(self):
 		self.dr.find_element_by_link_text(u"学员管理").click()
 
-	#点击在线购买授权
-	def click_buy_opennum(self):
-		self.dr.find_element_by_link_text(u"在线购买授权").click()
-		h = self.dr.window_handles
-		self.dr.switch_to_window(h[-1])
-		time.sleep(2)
-		
 	#点击教学教务导航
 	def click_org_teach(self):
 		time.sleep(2)

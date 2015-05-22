@@ -63,12 +63,12 @@ class StudentMangeTest(unittest.TestCase):
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})  
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #导入一个学员
     def test_import_one_student(self):
         ba = Base(self.driver)
-        # stu_name = "exam3996"#还是固定的学员，以后改成注册那生成的学员
         stu_name = self.cfg.get("env_para", "import_name")
+        # stu_name = "wuding0125"#还是固定的学员，以后改成注册那生成的学员
         student_management.import_one_student(self.cfg, self.driver, self.base_url, stu_name)
         filename = ba.save_screenshot()
         print "image:"+filename
@@ -83,7 +83,6 @@ class StudentMangeTest(unittest.TestCase):
         self.assertEqual(True, rs)
 
     # 注：以后管理员不能批量导入学员了
-    @unittest.skip("test")
     # 导入多个学员
     # def test_import_multi_student(self):
     #     ba = Base(self.driver)
@@ -91,7 +90,7 @@ class StudentMangeTest(unittest.TestCase):
     #     filename = ba.save_screenshot()
     #     print "image:"+filename
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #创建学员
     def test_auto_create_student(self):
         ba = Base(self.driver)
@@ -100,7 +99,7 @@ class StudentMangeTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #给一个学员开通课程
     def test_open_course_for_one(self):
         ba = Base(self.driver)
@@ -116,7 +115,7 @@ class StudentMangeTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #管理学员播放授权数
     def test_manage_course_num(self):
         ba = Base(self.driver)
@@ -124,7 +123,7 @@ class StudentMangeTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
+    @unittest.skip("test")
     #购买授权
     def test_buy_open_num(self):
         ba = Base(self.driver)
@@ -134,3 +133,25 @@ class StudentMangeTest(unittest.TestCase):
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()
+
+if __name__ == "__main__":
+    suite_stumanage = unittest.TestLoader().loadTestsFromTestCase(StudentMangeTest) 
+    allsuites = [suite_stumanage]
+    allsuites.append(suite_stumanage)
+    alltests = unittest.TestSuite(suite_stumanage)
+
+    fp = file("myreport.html", 'wb')
+    runner = HTMLTestRunner.HTMLTestRunner(
+                stream=fp,
+                title='My unit test',
+                description='This demonstrates the report output by HTMLTestRunner.'
+                )
+    runner.run(alltests)
+
+    cfg_file = 'config.ini'
+    cfg = ConfigParser.RawConfigParser()
+    cfg.read(cfg_file)
+    cfg.set("env_para", "cookie1", "no")
+    cfg.set("env_para", "cookie_stu", "no")
+    cfg.write(open(cfg_file, "w"))
+

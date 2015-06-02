@@ -101,7 +101,7 @@ class ExamTest(unittest.TestCase):
         print msg
         self.assertEqual(6, num)
 
-#    @unittest.skip("test")#暂时只支持ie
+#    @unittest.skip("test")
     def test_auto_exam_onequestion(self):
         ba = Base(self.driver)
         title = "exam" + ba.rand_name()
@@ -118,7 +118,7 @@ class ExamTest(unittest.TestCase):
         self.assertEqual(True, rs)
 
 
-#   @unittest.skip("test")#暂时只支持ie
+#   @unittest.skip("test")
     def test_auto_exam_questions(self):
         ba = Base(self.driver)
         title = "exam" + ba.rand_name()

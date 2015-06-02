@@ -25,7 +25,7 @@ class OrgStudentManagePage(base.Base):
 	def open_buyopennum(self):
 		m = MyOfficePage(self.dr, self.cfg)
 		m.open()
-		m.click_buy_opennum()
+		m.click_num_record()
 
 	#输入所导入的学员
 	def input_studentname(self, stu_name):
@@ -103,7 +103,7 @@ class OrgStudentManagePage(base.Base):
 	def click_opencate(self):
 		self.dr.find_element(self.cfg.get('org_manage', "open_cate_by"), \
 			self.cfg.get('org_manage', "open_cate")).click()
-		time.sleep(5)
+		time.sleep(10)
 	#选中资料
 	def click_openchoose(self):
 		self.dr.find_element(self.cfg.get('org_manage', "open_course_1_by"), \

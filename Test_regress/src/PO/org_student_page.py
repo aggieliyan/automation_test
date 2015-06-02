@@ -39,7 +39,10 @@ class OrgStudentManagePage(base.Base):
 
 	#点击批量导入学员
 	def click_import_multi(self):
-		self.dr.find_element_by_link_text(u"批量导入学员").click()
+		try:
+			self.dr.find_element_by_link_text(u"批量导入学员").click()
+		except:
+			print '没批量导入学员权限'
 	#选择文件
 	def click_importchoose(self):
 		self.dr.execute_script("$('#fileFieldName-file').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(0.5)')")

@@ -46,6 +46,9 @@ class CuorsefilePage(base.Base):
 		self.base_url = cfg.get('env_para', 'base_url')
 		self.dr = driver
 
+	def click_know(self):
+		self.dr.find_element("id", "J_know").click()
+
 	def click_add_classhour(self, cnum):
 		self.dr.find_elements_by_link_text(u"课时")[cnum].click()
 		time.sleep(0.5)

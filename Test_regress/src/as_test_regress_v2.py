@@ -6,6 +6,7 @@ Created on Sep. 24, 2012
 '''
 import unittest, ConfigParser, random, time, os, logging, MySQLdb
 import traceback
+import os
 
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
@@ -220,6 +221,7 @@ if __name__ == "__main__":
     runner.run(alltests)
 
     cfg_file = 'config.ini'
+    print os.path
     cfg = ConfigParser.RawConfigParser()
     cfg.read(cfg_file)
     cfg.set("env_para", "cookie1", "no")

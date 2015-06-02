@@ -43,6 +43,7 @@ def course_redirect(cfg, driver, base_url, isthree=0,\
     cfile = CuorsefilePage(driver, cfg)
 
     cnum = 0
+    cfile.click_know()
     if chapter:
         cfile.click_add_chapter()
         cfile.input_cname()
@@ -71,12 +72,12 @@ def course_redirect(cfg, driver, base_url, isthree=0,\
             cfile.choose_flv()
         cfile.click_choose_ok()
 
+        cfile.click_save()
     else:
         cfile.click_singlevideo()
         cfile.choose_flv()
         cfile.click_choose_ok()
 
-    cfile.click_save()
     cfile.save_screenshot()
 
     cfile.click_info()

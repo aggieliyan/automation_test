@@ -76,7 +76,8 @@ class MyOfficePage(base.Base):
 
 	#点击在线购买授权
 	def click_buy_opennum(self):
-		self.dr.find_element_by_link_text(u"在线购买授权").click()
+		self.dr.find_element_by_link_text(u"授权购买记录").click()
+		self.dr.find_element_by_link_text(u"购买授权").click()
 		h = self.dr.window_handles
 		self.dr.switch_to_window(h[-1])
 		time.sleep(2)
@@ -92,11 +93,11 @@ class MyOfficePage(base.Base):
 		
 	#点击首页导航
 	def click_org_firstpage(self):
-		self.dr.find_element_by_link_text(u"首页").click()
+		self.dr.find_element_by_link_text(u"后台首页").click()
 
 	#点击管理/卡组
 	def click_org_mancardgroup(self):
-		self.dr.find_element_by_link_text(u"管理/卡组").click()
+		self.dr.find_element_by_link_text(u"管理卡组").click()
 
 
 

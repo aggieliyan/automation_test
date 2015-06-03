@@ -80,7 +80,7 @@ class CourseTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
+    #@unittest.skip("test")
     def test_release_three_video(self):
         ba = Base(self.driver)
         title = "coursethree" + ba.rand_name()
@@ -90,7 +90,7 @@ class CourseTest(unittest.TestCase):
         print "image:"+filename
 
 
-    # @unittest.skip("test")
+    #@unittest.skip("test")
     def test_release_two_video(self):
         ba = Base(self.driver)
         title = "two_video" + ba.rand_name()
@@ -99,7 +99,7 @@ class CourseTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
+    #@unittest.skip("test")
     def test_presaleclass(self):
         ba = Base(self.driver)
         title = "presaleclass" + ba.rand_name()
@@ -118,7 +118,7 @@ class CourseTest(unittest.TestCase):
 
         self.assertEqual(True, rs)
 
-    # @unittest.skip("test")
+    #@unittest.skip("test")
     def test_onlineclass(self):
         ba = Base(self.driver)
         title = "onlineclass" + ba.rand_name()
@@ -137,7 +137,7 @@ class CourseTest(unittest.TestCase):
         print "image:"+filename
         self.assertEqual(True, rs)
 
-    # @unittest.skip("test")
+    #@unittest.skip("test")
     def test_agency_course(self):
         ba = Base(self.driver)
         title = "agency" + ba.rand_name()

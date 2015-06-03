@@ -63,9 +63,9 @@ class StudentMangeTest(unittest.TestCase):
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})  
 
-    @unittest.skip("test")
+    #@unittest.skip("test")
     #导入一个学员
-    # def test_import_one_student(self):
+    def test_import_one_student(self):
         ba = Base(self.driver)
         stu_name = self.cfg.get("env_para", "import_name")
         # stu_name = "wuding0125"#还是固定的学员，以后改成注册那生成的学员
@@ -154,4 +154,3 @@ if __name__ == "__main__":
     cfg.set("env_para", "cookie1", "no")
     cfg.set("env_para", "cookie_stu", "no")
     cfg.write(open(cfg_file, "w"))
-

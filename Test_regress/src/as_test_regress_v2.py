@@ -54,9 +54,10 @@ class Test(unittest.TestCase):
         elif self.browser == 'firefox':
             self.driver = webdriver.Firefox()
         elif self.browser == 'Chrome':
-            chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
-            os.environ["webdriver.chrome.driver"] = chromedriver
-            self.driver = webdriver.Chrome(chromedriver)
+            # chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
+            # os.environ["webdriver.chrome.driver"] = chromedriver
+            # self.driver = webdriver.Chrome(chromedriver)
+            self.driver = webdriver.Chrome()
         elif self.browser == "Html":
             self.driver = webdriver.Remote("http://localhost:4444/wd/hub", webdriver.DesiredCapabilities.HTMLUNIT.copy())
         else:
@@ -206,9 +207,9 @@ if __name__ == "__main__":
     allsuites.append(suite2)
 
     #考试部分
-    allsuites.append(suite_exam)
-    allsuites.append(suite_exam_student)
-    allsuites.append(suite_exam_result)
+    # allsuites.append(suite_exam)
+    # allsuites.append(suite_exam_student)
+    # allsuites.append(suite_exam_result)
 
     alltests = unittest.TestSuite(allsuites)
 
@@ -221,7 +222,6 @@ if __name__ == "__main__":
     runner.run(alltests)
 
     cfg_file = 'config.ini'
-    print os.path
     cfg = ConfigParser.RawConfigParser()
     cfg.read(cfg_file)
     cfg.set("env_para", "cookie1", "no")

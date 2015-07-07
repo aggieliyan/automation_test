@@ -22,7 +22,6 @@ def import_one_student(cfg, driver, base_url, stu_name):
     ogstumanage.input_studentname(stu_name)
     ogstumanage.click_import()
 
-@unittest.skip("test")
 def import_multi_student(cfg, driver, base_url, stu_txt):
 
     ogstumanage = OrgStudentManagePage(driver, cfg)
@@ -33,7 +32,6 @@ def import_multi_student(cfg, driver, base_url, stu_txt):
     ogstumanage.click_importfile(stu_txt)
     ogstumanage.click_importmulti()
 
-@unittest.skip("test")
 def create_student(cfg, driver, base_url, stu_txt):
 
     ogstumanage = OrgStudentManagePage(driver, cfg)
@@ -44,7 +42,6 @@ def create_student(cfg, driver, base_url, stu_txt):
     ogstumanage.click_createfile(stu_txt)
     ogstumanage.click_createmulti()
 
-@unittest.skip("test")
 def auto_create_student(cfg, driver, base_url, stu_num):
     #自动生成用户名文件创建学员
     #stu_num为需要创建学员的数量
@@ -62,8 +59,7 @@ def auto_create_student(cfg, driver, base_url, stu_num):
     time.sleep(2)
     create_student(cfg, driver, base_url, stu_txt)
     time.sleep(5)
-
-@unittest.skip("test")   
+ 
 def open_course_for_one(cfg, driver, base_url):
     
     ogstumanage = OrgStudentManagePage(driver, cfg)
@@ -76,7 +72,6 @@ def open_course_for_one(cfg, driver, base_url):
     ogstumanage.save_screenshot()
     ogstumanage.click_opensure()
 
-@unittest.skip("test")
 def open_course_for_multi(cfg, driver, base_url):
     
     ogstumanage = OrgStudentManagePage(driver, cfg)
@@ -96,7 +91,6 @@ def open_course_for_multi(cfg, driver, base_url):
 
 #管理播放授权数
 #管理播放授权数页面操作
-@unittest.skip("test")
 def manage_course_numdetail(cfg, driver, base_url, user_name):
 
     ogstumanage = OrgStudentManagePage(driver, cfg)
@@ -118,7 +112,6 @@ def manage_course_numdetail(cfg, driver, base_url, user_name):
     ogstumanage.click_coursenum_apply()
   
 #学员管理页面操作
-@unittest.skip("test")
 def manage_course_num(cfg, driver, base_url, user_name):
 
     ogstumanage = OrgStudentManagePage(driver, cfg)

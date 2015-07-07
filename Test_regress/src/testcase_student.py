@@ -154,7 +154,7 @@ class StudentTest(unittest.TestCase):
             print u"没有获取到考试卡号"
 
         ba = Base(self.driver)            
-        time.sleep(1)         
+        time.sleep(5)         
         academy_catename_ok = self.driver.execute_script("return $('.exampaper-title:eq(1)').text()")#获取已考完的第一个试卷名称
         filename = ba.save_screenshot()
         print "image:"+filename

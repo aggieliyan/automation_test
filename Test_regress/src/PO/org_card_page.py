@@ -65,7 +65,7 @@ class OrgCardgroupInputPage(base.Base):
 		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', 'course_dismore_by'), \
 			self.cfg.get('org_manage', 'course_dismore')).click()
-		time.sleep(5)
+		time.sleep(10)
 		self.dr.execute_script("$('input[type=checkbox]:eq(2)').click()")#选择未归类类目下的一个课程
 		time.sleep(2)
 
@@ -96,7 +96,7 @@ class OrgCardgroupInputPage(base.Base):
 		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', 'listen_spread_by'), \
 			self.cfg.get('org_manage', 'listen_spread')).click()#展开默认类目下资料
-		time.sleep(5)
+		time.sleep(10)
 		self.dr.find_element(self.cfg.get('org_manage', 'listen_course_by'), \
 			self.cfg.get('org_manage', 'listen_course')).click()#勾选第一个课程
 		time.sleep(1)

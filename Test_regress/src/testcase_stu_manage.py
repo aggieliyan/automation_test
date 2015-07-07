@@ -63,8 +63,6 @@ class StudentMangeTest(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})  
-
-    #@unittest.skip("test")
     #导入一个学员
     def test_import_one_student(self):
         ba = Base(self.driver)
@@ -91,7 +89,6 @@ class StudentMangeTest(unittest.TestCase):
     #     filename = ba.save_screenshot()
     #     print "image:"+filename
 
-    # @unittest.skip("test")
     #创建学员
     def test_auto_create_student(self):
         ba = Base(self.driver)
@@ -100,7 +97,6 @@ class StudentMangeTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
     #给一个学员开通课程
     def test_open_course_for_one(self):
         ba = Base(self.driver)
@@ -108,7 +104,6 @@ class StudentMangeTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
     #给多个学员开通课程
     def test_open_course_for_multi(self):
         ba = Base(self.driver)
@@ -116,7 +111,6 @@ class StudentMangeTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
     #管理学员播放授权数
     def test_manage_course_num(self):
         ba = Base(self.driver)
@@ -124,7 +118,6 @@ class StudentMangeTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    # @unittest.skip("test")
     #购买授权
     def test_buy_open_num(self):
         ba = Base(self.driver)

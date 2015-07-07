@@ -32,9 +32,10 @@ class StudentTest(unittest.TestCase):
         elif self.browser == 'firefox':
             self.driver = webdriver.Firefox()
         elif self.browser == 'Chrome':
-            chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
-            os.environ["webdriver.chrome.driver"] = chromedriver
-            self.driver = webdriver.Chrome(chromedriver)
+#            chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
+#            os.environ["webdriver.chrome.driver"] = chromedriver
+#            self.driver = webdriver.Chrome(chromedriver)
+             self.driver = webdriver.Chrome()
         elif self.browser == "Html":
             self.driver = webdriver.Remote("http://localhost:4444/wd/hub", webdriver.DesiredCapabilities.HTMLUNIT.copy())
         else:

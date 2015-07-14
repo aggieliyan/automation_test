@@ -52,7 +52,9 @@ class AgentCourseInputPage(base.Base):
 	def input_title(self, title):
 		tinput = self.dr.find_element(self.cfg.get('courseRedirect', 'agency_title_by'), \
 			self.cfg.get('courseRedirect', 'agency_title'))
+		time.sleep(2)
 		tinput.clear()
+		time.sleep(1)
 		tinput.send_keys(title)
 
 	def click_modify_ok(self):

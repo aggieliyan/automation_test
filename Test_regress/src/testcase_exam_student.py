@@ -15,6 +15,7 @@ from PO.base import Base
 class ExamStudentTest(unittest.TestCase):
 
     def setUp(self):
+
         self.cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
         self.cfg.read(self.cfg_file)
@@ -24,6 +25,9 @@ class ExamStudentTest(unittest.TestCase):
         self.user_name = self.cfg.get("env_para", "user_name")
         self.user_password = self.cfg.get("env_para", "user_password")
         self.base_url = self.cfg.get("env_para", "base_url")
+
+        if os.path.exists("C:\\test_rs_pic") != True:
+                os.system("mkdir C:\\test_rs_pic")
 
         if self.browser == 'ie':
             self.driver = webdriver.Ie()
@@ -43,12 +47,12 @@ class ExamStudentTest(unittest.TestCase):
         self.driver.maximize_window()
         self.driver.get(self.base_url)
 
-        cookie1 = self.cfg.get('env_para', 'cookie_stu')     
+        cookie1 = self.cfg.get('env_para', 'cookie_stu')
         if(cookie1 == 'no'):
             login.login_by_logindo(self.cfg, self.driver, self.base_url, self.user_name, self.user_password)
             self.cfg.set("env_para", "cookie_stu", str(self.driver.get_cookie('ASUSS')['value']))
             self.cfg.write(open(self.cfg_file, "w"))
-            
+           
             #本来还有一个叫RM的cookie，但是值都是rm不变所以不取了
             # path=/; domain=.ablesky.com
         else:

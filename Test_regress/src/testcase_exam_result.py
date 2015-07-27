@@ -10,9 +10,8 @@ from PO.base import Base
 
 class ExamResultTest(unittest.TestCase):
 
-
     def setUp(self):
-        
+
         self.cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
         self.cfg.read(self.cfg_file)
@@ -23,6 +22,7 @@ class ExamResultTest(unittest.TestCase):
         self.user_password = self.cfg.get("env_para", "user_password")
         self.base_url = self.cfg.get("env_para", "base_url")
         self.paper_name = self.cfg.get("env_para", "paper_name")
+        self.dbhost = self.cfg.get("env_para", "dbhost")
 
         if os.path.exists("C:\\test_rs_pic") != True:
                 os.system("mkdir C:\\test_rs_pic")

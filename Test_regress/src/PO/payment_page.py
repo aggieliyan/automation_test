@@ -34,6 +34,7 @@ class PaymentPage(base.Base):
 			self.cfg.get('org_index','use_rmb')).click()
 
 	def click_pay(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_index', 'pay_ok_by'), \
 			self.cfg.get('org_index', 'pay_ok')).click()
 		time.sleep(2)

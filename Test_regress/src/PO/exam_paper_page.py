@@ -100,11 +100,13 @@ class  ExamInfoPage(base.Base):
         elif eopen == 1:
             self.dr.find_element(self.cfg.get('exam', 'exam_open_true_by'), \
                                 self.cfg.get('exam', 'exam_open_true')).click()
+            time.sleep(2)
             self.dr.find_element(self.cfg.get('exam', 'exam_times_down_by'), \
                                 self.cfg.get('exam', 'exam_times_down')).click()
+            time.sleep(1)              
             self.dr.find_element(self.cfg.get('exam', 'exam_times_by'), \
                                 self.cfg.get('exam', 'exam_times')).click()
-                            
+            time.sleep(1)                    
             paper_price = self.dr.find_element(self.cfg.get('exam', 'exam_paper_price_by'), \
                             self.cfg.get('exam', 'exam_paper_price'))
             paper_price.clear()

@@ -135,7 +135,18 @@ class ExamTest(unittest.TestCase):
             rs = True
         self.assertEqual(True, rs)
 
-
+#    @unittest.skip("test")
+    def test_exam_delete_subject(self):
+        ba = Base(self.driver)
+        #统计科目总数
+        time.sleep(1)
+        total_num = exam_cate_management.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
+        time.sleep(1)
+        last_num = self.driver.execute_script("return $('.subject-item-con').size()")
+        self.assertEqual(total_num - 1, last_num)
+        filename = ba.save_screenshot()
+        print "image:"+filename   
+        
 #    @unittest.skip("test")
     def test_exam_create_subject(self):
         ba = Base(self.driver)
@@ -155,20 +166,7 @@ class ExamTest(unittest.TestCase):
         lastsubject = self.driver.execute_script("return $('.subject-name').eq(1).text()")
         self.assertEqual(subject_name, lastsubject)
         filename = ba.save_screenshot()
-        print "image:"+filename
-
-
-#    @unittest.skip("test")
-    def test_exam_delete_subject(self):
-        ba = Base(self.driver)
-        #统计科目总数
-        time.sleep(1)
-        total_num = exam_cate_management.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
-        time.sleep(1)
-        last_num = self.driver.execute_script("return $('.subject-item-con').size()")
-        self.assertEqual(total_num - 1, last_num)
-        filename = ba.save_screenshot()
-        print "image:"+filename     
+        print "image:"+filename  
 
 #    @unittest.skip("test")
     def test_exam_create_cate(self):

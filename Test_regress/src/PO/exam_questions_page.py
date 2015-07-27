@@ -114,6 +114,7 @@ class QuestionInputPage(base.Base):
 		name = self.dr.find_element(self.cfg.get('exam_questions', "question_name_by"), \
 							self.cfg.get('exam_questions', "question_name"))
 		name.click()
+		time.sleep(2)
 		name.send_keys(question_ansa)
 		time.sleep(1)
 

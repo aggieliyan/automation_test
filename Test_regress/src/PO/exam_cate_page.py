@@ -54,7 +54,7 @@ class ExamCateListPage(base.Base):
     #删除类目
     def click_delete_cate(self):
         self.dr.find_element(self.cfg.get('exam', 'cate_del_by'), \
-            self.cfg.get('exam', 'cate_del_xpath')).click()
+            self.cfg.get('exam', 'cate_del')).click()
         
 
 
@@ -66,6 +66,7 @@ class ExamCateListPage(base.Base):
 
     #确认删除类目
     def click_delcate_ok(self):
+        time.sleep(1)
         self.dr.find_element(self.cfg.get('exam', 'cate_oknew_button_by'), \
             self.cfg.get('exam', 'cate_oknew_button')).click()
         

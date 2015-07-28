@@ -49,30 +49,13 @@ def modify_subject(cfg, driver, base_url, org_name):
     edit_name = driver.execute_script("return $('.subject-item-con').eq(0).children().eq(0).text()")
     subject_name = org_name[0] + "sub_" + prefix
     print edit_name
-    if edit_name != u'默认科目':  
-        try:
-            exam_subject.click_sub_big1()
-        except:
-            print u"亲,先创建个科目再来编辑呗!"
-            return "lack of subject"
-        else:
-            
-            exam_subject.click_sub_small1()
-    else:
-        time.sleep(1)
-        try:
-            
-            exam_subject.click_sub_big2()
-        
-        except:
-            print u"亲,先创建个科目再来编辑呗！！！！！！！！!"
-            return "lack of subject"
-        else:
-            time.sleep(1)
-            #button = driver.execute_script("return $('.subject-item-con').eq(1).children().eq(2).children().eq(0).attr('href')")
-            #button.click()
-            
-            exam_subject.click_sub_small2()
+    try:
+        exam_subject.click_sub_big()
+    except:
+        print u"亲,先创建个科目再来编辑呗!"
+        return "lack of subject"
+  
+    exam_subject.click_sub_edit()
     exam_subject.clear_sub()
     exam_subject.input_sub(subject_name)
     exam_subject.click_addsub_ok()  
@@ -83,24 +66,12 @@ def delete_subject(cfg, driver, base_url, org_name, sub_num=1):
     exam_subject.open()
     del_name = driver.execute_script("return $('.subject-item-con').eq(0).children().eq(0).text()")
     total_num = driver.execute_script("return $('.subject-item-con').size()")
-    if del_name != u'默认科目': 
-        try:
-            exam_subject.click_sub_big1()
-        except NoSuchElementException, e:
-            print u"亲,先创建个科目再来删除呗!"
-            return False
-        else:
-            exam_subject.click_sub_del1()
-    else:
-        driver.implicitly_wait(10)
-        try:
-            exam_subject.click_sub_big2()
-        except NoSuchElementException, e:
-            print u"亲,先创建个科目再来删除呗!"
-            return False
-        else:
-            exam_subject.click_sub_del2()
-            #del_name = exam_subject.click_sub_big2().text
+    try:
+        exam_subject.click_sub_big()
+    except NoSuchElementException, e:
+        print u"亲,先创建个科目再来删除呗!"
+        return False
+    exam_subject.click_sub_del()
     time.sleep(2)
     exam_subject.click_delsub_ok()
     print del_name 
@@ -147,6 +118,7 @@ def delete_exam_cate(cfg, driver, base_url, org_name):
     exam_subject = SubjectListPage(driver, cfg)
     exam_subject.open()
     exam_subject.click_cate_page()
+    time.sleep(1)
     total_num = driver.execute_script("return $('.categTitleFalse').size()")
     exam_cate = ExamCateListPage(driver, cfg)
     exam_cate.click_delete_cate()

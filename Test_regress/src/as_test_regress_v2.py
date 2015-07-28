@@ -207,8 +207,8 @@ if __name__ == "__main__":
 
     #考试部分
     allsuites.append(suite_exam)
-    allsuites.append(suite_exam_student)
-    allsuites.append(suite_exam_result)
+#    allsuites.append(suite_exam_student)
+#    allsuites.append(suite_exam_result)
 
     alltests = unittest.TestSuite(allsuites)
 

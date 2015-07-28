@@ -53,8 +53,9 @@ class ExamCateListPage(base.Base):
 
     #删除类目
     def click_delete_cate(self):
-        self.dr.find_element(self.cfg.get('exam', 'cate_del_by'), \
-            self.cfg.get('exam', 'cate_del')).click()
+        time.sleep(1)
+        self.dr.find_elements(self.cfg.get('exam', 'cate_del_by'), \
+            self.cfg.get('exam', 'cate_del'))[-1].click()
         
 
 

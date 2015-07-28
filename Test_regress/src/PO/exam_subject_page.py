@@ -63,33 +63,22 @@ class SubjectListPage(base.Base):
         sub_c.clear()
         sub_c.send_keys(subject_name)
 
-    #第一个科目外面的框
-    def click_sub_big1(self):
-        self.dr.find_element(self.cfg.get('exam', 'sub_big1_by'), \
-        	self.cfg.get('exam', 'sub_big1_xpath')).click()
-    #第一个科目
-    def click_sub_small1(self):
-        self.dr.find_element(self.cfg.get('exam', 'sub_small1_by'), \
-        	self.cfg.get('exam', 'sub_small1_xpath')).click()
+    #显示科目边框
+    def click_sub_big(self):
+        self.dr.execute_script("return $('.u-exam-btns').attr('style','display:block')")
 
-    #第二个科目外面的框
-    def click_sub_big2(self):
-        self.dr.find_element(self.cfg.get('exam', 'sub_big2_by'), \
-        	self.cfg.get('exam', 'sub_big2_xpath')).click()
-    
-    #第二个科目
-    def click_sub_small2(self):
-        self.dr.find_element(self.cfg.get('exam', 'sub_small2_by'), \
-        	self.cfg.get('exam', 'sub_small2_xpath')).click()
-    #删除科目
-    def click_sub_del1(self):
-        self.dr.find_element(self.cfg.get('exam', 'sub_del1_by'), \
-        	self.cfg.get('exam', 'sub_del1_xpath')).click()
-    #删除另一个科目
-    def click_sub_del2(self):
-        self.dr.find_element(self.cfg.get('exam', 'sub_del2_by'), \
-        	self.cfg.get('exam', 'sub_del2_xpath')).click()
-
+    #修改第一个科目
+    def click_sub_edit(self):
+        time.sleep(2)
+        self.dr.find_element(self.cfg.get('exam', 'sub_edit_by'), \
+            self.cfg.get('exam', 'sub_edit')).click()
+                  
+    #删除最后一个科目
+    def click_sub_del(self):
+        time.sleep(2)
+        self.dr.find_elements(self.cfg.get('exam', 'sub_del_by'), \
+        	self.cfg.get('exam', 'sub_del'))[-1].click()
+            
     #确认删除科目
     def click_delsub_ok(self):
         self.dr.find_element(self.cfg.get('exam', 'sub_delok_by'), \

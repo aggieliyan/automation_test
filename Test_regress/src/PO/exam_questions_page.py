@@ -68,6 +68,7 @@ class QuestionListPage(base.Base):
 		name = self.dr.find_element(self.cfg.get('exam_questions', "question_search_by"), \
 							self.cfg.get('exam_questions', "question_search"))
 		name.click()
+		time.sleep(2)
 		name.send_keys(question_ansa)
 		time.sleep(2)
 		

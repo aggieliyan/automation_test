@@ -118,7 +118,6 @@ class ExamTest(unittest.TestCase):
             rs = True
         self.assertEqual(True, rs)
 
-
 #   @unittest.skip("test")
     def test_auto_exam_questions(self):
         ba = Base(self.driver)
@@ -163,7 +162,7 @@ class ExamTest(unittest.TestCase):
         ba = Base(self.driver)
         subject_name = exam_cate_management.modify_subject(self.cfg, self.driver, self.base_url, self.org_name)
         time.sleep(1)
-        lastsubject = self.driver.execute_script("return $('.subject-name').eq(1).text()")
+        lastsubject = self.driver.execute_script("return $('.subject-name').eq(0).text()")
         self.assertEqual(subject_name, lastsubject)
         filename = ba.save_screenshot()
         print "image:"+filename  
@@ -199,7 +198,6 @@ class ExamTest(unittest.TestCase):
         self.assertEqual(total_num - 1, last_num)
         filename = ba.save_screenshot()
         print "image:"+filename
-
 
     #@unittest.skip("test")
     def test_exam_create_point(self):

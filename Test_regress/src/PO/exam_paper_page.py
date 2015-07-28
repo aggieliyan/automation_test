@@ -95,14 +95,16 @@ class  ExamInfoPage(base.Base):
                                 self.cfg.get('exam', 'exam_random_true')).click()
     def open_or_no(self,eopen):
         if eopen == 0:
+            time.sleep(1)
             self.dr.find_element(self.cfg.get('exam', 'exam_open_false_by'), \
                                 self.cfg.get('exam', 'exam_open_false')).click()
         elif eopen == 1:
+            time.sleep(1)
             self.dr.find_element(self.cfg.get('exam', 'exam_open_true_by'), \
                                 self.cfg.get('exam', 'exam_open_true')).click()
-            time.sleep(2)
-            self.dr.find_element(self.cfg.get('exam', 'exam_times_down_by'), \
-                                self.cfg.get('exam', 'exam_times_down')).click()
+            time.sleep(1)
+            self.dr.find_elements(self.cfg.get('exam', 'exam_times_down_by'), \
+                                self.cfg.get('exam', 'exam_times_down'))[-1].click()
             time.sleep(1)              
             self.dr.find_element(self.cfg.get('exam', 'exam_times_by'), \
                                 self.cfg.get('exam', 'exam_times')).click()
@@ -112,6 +114,7 @@ class  ExamInfoPage(base.Base):
             paper_price.clear()
             paper_price.send_keys("10")
     def click_next(self):
+        time.sleep(1)
         self.dr.find_element(self.cfg.get('exam', 'exam_next_one_by'), \
                         self.cfg.get('exam', 'exam_next_one')).click()
 class QuestionInfoPage(base.Base):
@@ -122,10 +125,11 @@ class QuestionInfoPage(base.Base):
         self.dr = driver
     
     def add_big_question(self,qtype,qscore):
+        time.sleep(2)
         self.dr.find_element(self.cfg.get('exam', 'paper_add_big_question_by'), \
                         self.cfg.get('exam', 'paper_add_big_question')).click()
-        self.dr.implicitly_wait(1)
         if qtype == 1:
+            time.sleep(2)
             self.dr.find_element(self.cfg.get('exam', 'exam_topic_dropdown_by'), \
                             self.cfg.get('exam', 'exam_topic_dropdown')).click()
             self.dr.find_element('xpath', '//div[10]/ul/li').click()
@@ -133,7 +137,7 @@ class QuestionInfoPage(base.Base):
             time.sleep(2)
             self.dr.find_element(self.cfg.get('exam', 'exam_topic_dropdown_by'), \
                             self.cfg.get('exam', 'exam_topic_dropdown')).click()
-            self.dr.implicitly_wait(10)
+            time.sleep(2)          
         if qtype == 2:
             time.sleep(2)
             self.dr.find_element(self.cfg.get('exam', 'exam_topic_multiple_by'), \
@@ -149,7 +153,6 @@ class QuestionInfoPage(base.Base):
             time.sleep(2)
             self.dr.find_element(self.cfg.get('exam', 'exam_topic_fills_by'), \
                                 self.cfg.get('exam', 'exam_topic_fills')).click()
-            self.dr.implicitly_wait(10)
         if qtype == 5:
             time.sleep(2)
             self.dr.find_element(self.cfg.get('exam', 'exam_topic_question_by'), \
@@ -180,12 +183,14 @@ class QuestionInfoPage(base.Base):
     def exam_import_question(self):
         self.dr.find_element(self.cfg.get('exam', 'paper_import_question_by'), \
                         self.cfg.get('exam', 'paper_import_question')).click()
+        time.sleep(2)
         self.dr.find_element(self.cfg.get('exam', 'paper_selece_all_by'), \
                         self.cfg.get('exam', 'paper_selece_all')).click()
         time.sleep(2)
         self.dr.find_element(self.cfg.get('exam', 'exam_add_big_question_ok_by'), \
                         self.cfg.get('exam', 'exam_add_big_question_ok')).click()
     def click_submit_btn(self):
+        time.sleep(2)
         self.dr.find_element(self.cfg.get('exam', 'exam_paper_build_btn_by'), \
                         self.cfg.get('exam', 'exam_paper_build_btn')).click()
 

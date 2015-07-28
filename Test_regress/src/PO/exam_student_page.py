@@ -30,13 +30,14 @@ class ExamStudentListPage(base.Base):
 				self.cfg.get('exam', 'user_search')).send_keys(letter)
 			time.sleep(0.1)
 		self.dr.find_element(self.cfg.get('exam', 'click_search_by'), \
-			self.cfg.get('exam', 'click_search')).send_keys(letter)	
+			self.cfg.get('exam', 'click_search')).click()	
 
 	def click_send_paper(self):
-		time.sleep(2)
-		self.dr.find_element_by_link_text(u"分发试卷").click()
+		time.sleep(1)
+		self.dr.find_element_by_link_text(u"发试卷").click()
 
 	def click_close_paper(self):
+		time.sleep(1)
 		self.dr.find_element_by_link_text(u"关闭试卷").click()
 
 	def choose_all_paper(self):

@@ -15,7 +15,8 @@ from PO.exam_questions_page import QuestionInputPage
 def import_questions(cfg, driver, template):
     questionlist = QuestionListPage(driver, cfg)
     questionlist.open()
-    questionlist.click_import_questions(template)
+    count = questionlist.click_import_questions(template)
+    return count
 
     #创建单选题
 def exam_question_single(cfg, driver, base_url, question_ansa):
@@ -120,8 +121,8 @@ def exam_question_composite(cfg, driver, base_url, question_ansa):
     question.click_question_composite()
     question.save_screenshot()
     question.input_question_name(question_ansa)
-    question.input_composite_name(question_ansa)
-    question.input_answerab(question_ansa)
+    question.input_composite_small_name(question_ansa)
+    question.input_com_answerab(question_ansa)
     question.save_screenshot()
     question.click_question_save()
     questionlist.search_composite()

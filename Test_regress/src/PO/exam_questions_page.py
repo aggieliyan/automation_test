@@ -41,28 +41,26 @@ class QuestionListPage(base.Base):
 		self.dr.find_element(self.cfg.get('exam', "upload_button_by"), \
 							self.cfg.get('exam', "upload_button")).click()
 		time.sleep(2)
+		count = self.dr.execute_script("return $('#J_successImportNum').text()")
+		time.sleep(1)
 		self.dr.find_element(self.cfg.get('exam', "close_button_by"), \
-							self.cfg.get('exam', "close_button")).click()	
+							self.cfg.get('exam', "close_button")).click()
+		return count	
 
 	#搜索各种题型
 	def search_multiple(self):
-		self.dr.find_element(self.cfg.get('exam_questions', "question_search_multiple_by"), \
-							self.cfg.get('exam_questions', "question_search_multiple")).click()	
+		self.dr.execute_script("$('#subjectSideBar .normal').eq(1).click()")	
 	def search_trueorfalse(self):
-		self.dr.find_element(self.cfg.get('exam_questions', "question_search_trueorfalse_by"), \
-							self.cfg.get('exam_questions', "question_search_trueorfalse")).click()	
+		self.dr.execute_script("$('#subjectSideBar .normal').eq(2).click()")
 	def search_blank(self):
-		self.dr.find_element(self.cfg.get('exam_questions', "question_search_blank_by"), \
-							self.cfg.get('exam_questions', "question_search_blank")).click()
+		self.dr.execute_script("$('#subjectSideBar .normal').eq(3).click()")
 	def search_answer(self):
-		self.dr.find_element(self.cfg.get('exam_questions', "question_search_answer_by"), \
-							self.cfg.get('exam_questions', "question_search_answer")).click()
+		self.dr.execute_script("$('#subjectSideBar .normal').eq(4).click()")
 	def search_cloze(self):
-		self.dr.find_element(self.cfg.get('exam_questions', "question_search_cloze_by"), \
-							self.cfg.get('exam_questions', "question_search_cloze")).click()
+		self.dr.execute_script("$('#subjectSideBar .normal').eq(5).click()")
 	def search_composite(self):
-		self.dr.find_element(self.cfg.get('exam_questions', "question_search_composite_by"), \
-							self.cfg.get('exam_questions', "question_search_composite")).click()
+		self.dr.execute_script("$('#subjectSideBar .normal').eq(6).click()")
+		time.sleep(1)
 	#搜索试题
 	def search_questions(self, question_ansa):
 		name = self.dr.find_element(self.cfg.get('exam_questions', "question_search_by"), \
@@ -112,11 +110,7 @@ class QuestionInputPage(base.Base):
 
 	#填题目
 	def input_question_name(self, question_ansa):
-		name = self.dr.find_element(self.cfg.get('exam_questions', "question_name_by"), \
-							self.cfg.get('exam_questions', "question_name"))
-		name.click()
-		time.sleep(2)
-		name.send_keys(question_ansa)
+		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(0).text('" + question_ansa + "')")
 		time.sleep(1)
 
 		#添加音频
@@ -131,55 +125,44 @@ class QuestionInputPage(base.Base):
 
 		#单选多选答案ab				
 	def input_answerab(self, question_ansa):
-		namea = self.dr.find_element(self.cfg.get('exam_questions', "question_answerA_by"), \
-							self.cfg.get('exam_questions', "question_answerA"))
-		namea.click()
-		namea.send_keys(question_ansa)
+		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(1).text('" + question_ansa + "')")
 		time.sleep(1)
-		nameb = self.dr.find_element(self.cfg.get('exam_questions', "question_answerB_by"), \
-							self.cfg.get('exam_questions', "question_answerB"))
-		nameb.click()
-		nameb.send_keys(question_ansa)
+		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(2).text('" + question_ansa + "')")
 		time.sleep(1)
 
+		#综合题单选多选答案ab				
+	def input_com_answerab(self, question_ansa):
+
+		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(2).text('" + question_ansa + "')")
+		time.sleep(1)
+		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(3).text('" + question_ansa + "')")
+		time.sleep(1)
+		
 	#问答题答案
 	def input_answer_answer(self, question_ansa):
-		name = self.dr.find_element(self.cfg.get('exam_questions', "question_answer_Answer_by"), \
-							self.cfg.get('exam_questions', "question_answer_Answer"))
-		name.click()
-		name.send_keys(question_ansa)
+		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(1).text('" + question_ansa + "')")
 		time.sleep(1)
 
 	#填空题答案
 	def input_blank_answer(self, question_ansa):
-		time.sleep(1)
-		self.dr.find_element(self.cfg.get('exam_questions', "question_Blank_by"), \
-							self.cfg.get('exam_questions', "question_Blank")).send_keys(question_ansa)
-		time.sleep(1)
+		self.dr.execute_script("$('.key').val('" + question_ansa + "')")
+        time.sleep(1)
 
 	#完型题答案
 	def input_cloze_answer(self, question_ansa):
-		self.dr.find_element(self.cfg.get('exam_questions', "question_Cloze1_by"), \
-							self.cfg.get('exam_questions', "question_Cloze1")).send_keys(question_ansa)
-		time.sleep(1)
-		self.dr.find_element(self.cfg.get('exam_questions', "question_Cloze2_by"), \
-							self.cfg.get('exam_questions', "question_Cloze2")).send_keys(question_ansa)
-		time.sleep(1)
-		self.dr.find_element(self.cfg.get('exam_questions', "question_Cloze3_by"), \
-							self.cfg.get('exam_questions', "question_Cloze3")).send_keys(question_ansa)
-		time.sleep(1)
-		self.dr.find_element(self.cfg.get('exam_questions', "question_Cloze4_by"), \
-							self.cfg.get('exam_questions', "question_Cloze4")).send_keys(question_ansa)
-		time.sleep(1)
+		self.dr.execute_script("$('.key').val('" + question_ansa + "')")
+		time.sleep(2)
 
 	#综合题中的单选题名称
 	def input_composite_name(self, question_ansa):
-		name = self.dr.find_element(self.cfg.get('exam_questions', "question_Composite_name_by"), \
-							self.cfg.get('exam_questions', "question_Composite_name"))
-		name.click()
-		name.send_keys(question_ansa)
+		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(0).text('" + question_ansa + "')")
+		
 		time.sleep(1)
-
+	#综合题中的单选题名称
+	def input_composite_small_name(self, question_ansa):
+		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(1).text('" + question_ansa + "')")
+		time.sleep(1)
+		
 	#保存
 	def click_question_save(self):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_save_by"), \

@@ -125,7 +125,7 @@ class QuestionInfoPage(base.Base):
         self.dr = driver
     
     def add_big_question(self,qtype,qscore):
-        time.sleep(2)
+        time.sleep(1)
         self.dr.find_element(self.cfg.get('exam', 'paper_add_big_question_by'), \
                         self.cfg.get('exam', 'paper_add_big_question')).click()
         if qtype == 1:
@@ -177,10 +177,12 @@ class QuestionInfoPage(base.Base):
         self.dr.find_element(self.cfg.get('exam', 'exam_question_score_by'), \
                         self.cfg.get('exam', \
                                 'exam_question_score')).send_keys(qscore)
+        time.sleep(1)
         self.dr.find_element(self.cfg.get('exam', 'exam_add_big_question_ok_by'), \
                         self.cfg.get('exam', 'exam_add_big_question_ok')).click()        
     
     def exam_import_question(self):
+        time.sleep(1)
         self.dr.find_element(self.cfg.get('exam', 'paper_import_question_by'), \
                         self.cfg.get('exam', 'paper_import_question')).click()
         time.sleep(2)
@@ -190,9 +192,10 @@ class QuestionInfoPage(base.Base):
         self.dr.find_element(self.cfg.get('exam', 'exam_add_big_question_ok_by'), \
                         self.cfg.get('exam', 'exam_add_big_question_ok')).click()
     def click_submit_btn(self):
-        time.sleep(2)
+        time.sleep(4)
         self.dr.find_element(self.cfg.get('exam', 'exam_paper_build_btn_by'), \
                         self.cfg.get('exam', 'exam_paper_build_btn')).click()
+        time.sleep(2)
 
 #点击试卷标题进入的页面 里面有试卷信息、试题信息、学员信息和试题统计
 class PaperRecordPage(base.Base):

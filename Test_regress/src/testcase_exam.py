@@ -86,21 +86,22 @@ class ExamTest(unittest.TestCase):
         num1 = cursor.fetchall()[0][0]
         cursor.close()
         #调用导入试题
-        exam_questions.import_questions(self.cfg, self.driver, self.template)
+        count = exam_questions.import_questions(self.cfg, self.driver, self.template)
         filename = ba.save_screenshot()
         print "image:"+filename
-        #重新建立数据库,查询导入试题后的总数,二者差即为导入总数
-        conn = ba.connect_db(self.dbhost, db)
-        cursor = conn.cursor()
-        cursor.execute(sql)
-        num2 = cursor.fetchall()[0][0]
-        num = num2 - num1
-        cursor.execute \
-            ("SELECT content_q,content_q FROM e_question_q ORDER BY id_q DESC LIMIT 1")
-        title = cursor.fetchall()[0][0]
-        msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
-        print msg
-        self.assertEqual(6, num)
+#        #重新建立数据库,查询导入试题后的总数,二者差即为导入总数
+#        conn = ba.connect_db(self.dbhost, db)
+#        cursor = conn.cursor()
+#        cursor.execute(sql)
+#        num2 = cursor.fetchall()[0][0]
+#        num = num2 - num1
+#        cursor.execute \
+#            ("SELECT content_q,content_q FROM e_question_q ORDER BY id_q DESC LIMIT 1")
+#        title = cursor.fetchall()[0][0]
+#        msg = u"导入%d道试题,最后一个试题题目为%s"%(num, title)
+#        print msg
+
+        self.assertEqual("6", count)
 
 #    @unittest.skip("test")
     def test_auto_exam_onequestion(self):
@@ -244,6 +245,13 @@ class ExamTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename 
 
+#    @unittest.skip("test")        
+    def test_random_paper(self):
+        ba = Base(self.driver)
+        exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 1, 2) 
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
 #    @unittest.skip("test")
     def test_createpaper(self):
         #免得创建试卷失败后，后面要用到这个变量会失败
@@ -255,14 +263,7 @@ class ExamTest(unittest.TestCase):
         self.cfg.write(open(self.cfg_file, "w"))        
         filename = ba.save_screenshot()
         print "image:"+filename
-
-#    @unittest.skip("test")        
-    def test_random_paper(self):
-        ba = Base(self.driver)
-        exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 1, 2) 
-        filename = ba.save_screenshot()
-        print "image:"+filename
-
+        
     def tearDown(self):
         self.driver.quit()
 

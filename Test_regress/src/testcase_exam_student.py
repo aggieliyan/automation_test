@@ -59,12 +59,12 @@ class ExamStudentTest(unittest.TestCase):
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
 
-    def test_buy_paper(self):
-        ba = Base(self.driver)
-        paper_url = self.cfg.get("env_para", "paper_url")
-        exam_user_management.buy_paper(self.cfg, self.driver, paper_url)
-        filename = ba.save_screenshot()
-        print "image:"+filename
+#    def test_buy_paper(self):
+#        ba = Base(self.driver)
+#        paper_url = self.cfg.get("env_para", "paper_url")
+#        exam_user_management.buy_paper(self.cfg, self.driver, paper_url)
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
 
     #学员参加考试
     def test_exam_user(self):
@@ -79,10 +79,11 @@ class ExamStudentTest(unittest.TestCase):
         exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, paper_name)
 
         time.sleep(2)
+        
         paper_name_ok = self.driver.execute_script("return $('.exampaper-title:eq(0)').text()")#获取已考完的第一个试卷名称
         filename = ba.save_screenshot()
         print "image:"+filename 
-        self.assertEqual(paper_name, paper_name_ok)
+        self.assertNotEqual(paper_name, paper_name_ok)
 
 
 

@@ -47,17 +47,20 @@ class AgentCourseInputPage(base.Base):
 		self.base_url = cfg.get('env_para', 'base_url')
 
 	def click_modify(self):
+		time.sleep(1)
 		self.dr.find_element_by_link_text(u"修改").click()
 
 	def input_title(self, title):
+		time.sleep(1)
 		tinput = self.dr.find_element(self.cfg.get('courseRedirect', 'agency_title_by'), \
 			self.cfg.get('courseRedirect', 'agency_title'))
-		time.sleep(2)
+		time.sleep(1)
 		tinput.clear()
 		time.sleep(1)
 		tinput.send_keys(title)
 
 	def click_modify_ok(self):
+		time.sleep(1)	
 		self.dr.find_element_by_link_text(u"确定").click()
 
 	def input_price(self, price):
@@ -76,6 +79,7 @@ class AgentCourseInputPage(base.Base):
 		rinput.send_keys(rank)
 
 	def click_save(self):
+		time.sleep(1)
 		self.dr.find_element(self.cfg.get('courseRedirect', 'finish_btn_by'), \
 			self.cfg.get('courseRedirect', 'finish_btn')).click()
 		time.sleep(1)

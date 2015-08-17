@@ -80,10 +80,12 @@ class CuorsefilePage(base.Base):
 		self.dr.find_elements_by_link_text(u"添加")[cno].click()
 
 	def choose_flv(self):
+		time.sleep(2)
 		self.dr.execute_script("$(\"[filetype='flv']\").eq(0).click()")#选一个视频课件
 		time.sleep(0.1)
 
 	def choose_pdf(self):
+		time.sleep(2)
 		self.dr.execute_script("$(\"[filetype='pdf']\").eq(0).click()")#选一个pdf课件
 		time.sleep(0.1)
 

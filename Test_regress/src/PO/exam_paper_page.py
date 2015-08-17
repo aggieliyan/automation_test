@@ -69,7 +69,7 @@ class  ExamInfoPage(base.Base):
         new_href = self.dr.execute_script("return $('.exam-new-btn').attr('href')")
         self.dr.get("%sexam/%s" %(self.base_url,new_href))
     def input_exam_name(self,exam_name):
-        time.sleep(2)
+        time.sleep(3)
         input_papername = self.dr.find_element(self.cfg.get('exam', 'exam_paper_name_by'), \
                                         self.cfg.get('exam', 'exam_paper_name'))
         input_papername.clear()

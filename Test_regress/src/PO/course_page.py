@@ -76,7 +76,7 @@ class CuorsefilePage(base.Base):
 		time.sleep(0.5)
 
 	def click_add(self, cno):
-		time.sleep(1)
+		time.sleep(2)
 		self.dr.find_elements_by_link_text(u"添加")[cno].click()
 
 	def choose_flv(self):

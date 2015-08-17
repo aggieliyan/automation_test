@@ -117,11 +117,13 @@ class OrgStudentManagePage(base.Base):
 		time.sleep(2)
 	#弹出框中确认
 	def click_opensure(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', "open_popup_by"), \
 			self.cfg.get('org_manage', "open_popup")).click()
 		time.sleep(2)
 	#有学习进度的确认弹框
 	def click_openkeep(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', "open_keep_by"), \
 			self.cfg.get('org_manage', "open_keep")).click()
 		time.sleep(2)

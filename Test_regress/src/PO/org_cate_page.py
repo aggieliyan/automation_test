@@ -23,6 +23,7 @@ class OrgCateListPage(base.Base):
 		m.click_org_cate()
 
 	def click_create_FirstCate(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', 'add_topcate_by'), \
             self.cfg.get('org_manage', 'add_topcate')).click()#新建一级类目
         time.sleep(2)

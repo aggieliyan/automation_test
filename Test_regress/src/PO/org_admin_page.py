@@ -25,9 +25,11 @@ class OrgAdminListPage(base.Base):
 		m.click_org_admin()
 
 	def click_create(self):
+		time.sleep(1)
 		self.dr.find_element_by_link_text(u"添加管理员").click()
 
 	def click_edit(self):
+		time.sleep(1)
 		self.dr.find_element_by_link_text(u"编辑管理员").click()
 
 	def click_delete(self, i=-1):

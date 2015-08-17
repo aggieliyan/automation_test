@@ -98,6 +98,7 @@ class MyOfficePage(base.Base):
 
 	#点击管理/卡组
 	def click_org_mancardgroup(self):
+		time.sleep(2)
 		self.dr.find_element_by_link_text(u"管理卡组").click()
 
 	#去在线购买授权页面

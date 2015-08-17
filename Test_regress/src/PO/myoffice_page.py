@@ -107,6 +107,7 @@ class MyOfficePage(base.Base):
 		self.dr.find_element_by_link_text(u"授权购买记录").click()
 		h = self.dr.window_handles
 		self.dr.switch_to_window(h[-1])
+		time.sleep(2)
 		self.dr.find_element_by_link_text(u"购买授权").click()	
 
 

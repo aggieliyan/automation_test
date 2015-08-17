@@ -76,8 +76,8 @@ class CuorsefilePage(base.Base):
 		time.sleep(0.5)
 
 	def click_add(self, cno):
-		self.dr.find_elements_by_link_text(u"添加")[cno].click()
 		time.sleep(1)
+		self.dr.find_elements_by_link_text(u"添加")[cno].click()
 
 	def choose_flv(self):
 		self.dr.execute_script("$(\"[filetype='flv']\").eq(0).click()")#选一个视频课件
@@ -98,10 +98,8 @@ class CuorsefilePage(base.Base):
 		time.sleep(0.5)
 
 	def click_info(self):
-		self.dr.find_element_by_link_text(u"基本信息").click()
 		time.sleep(1)
-
-
+		self.dr.find_element_by_link_text(u"基本信息").click()
 
 class CourseInfoPage(base.Base):
 

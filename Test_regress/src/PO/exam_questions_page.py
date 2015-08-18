@@ -104,6 +104,7 @@ class QuestionInputPage(base.Base):
 							self.cfg.get('exam_questions', "question_type_Cloze")).click()
 		time.sleep(1)
 	def click_question_composite(self):
+		time.sleep(1)
 		self.dr.find_element(self.cfg.get('exam_questions', "question_type_Composite_by"), \
 							self.cfg.get('exam_questions', "question_type_Composite")).click()
 		time.sleep(1)

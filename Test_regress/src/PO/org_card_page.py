@@ -58,8 +58,8 @@ class OrgCardgroupInputPage(base.Base):
 		self.dr.execute_script("$(\".x-btn-text\").eq(2).click()")
 	
 	def select_coursecard(self):
-		self.dr.find_element(self.cfg.get('org_manage', 'course_card_by'), \
-			self.cfg.get('org_manage', 'course_card')).click()#选择充课卡
+		self.dr.find_elements(self.cfg.get('org_manage', 'course_card_by'), \
+			self.cfg.get('org_manage', 'course_card'))[1].click()#选择充课卡
         
 	def select_relatecourse(self):
 		time.sleep(2)
@@ -89,8 +89,8 @@ class OrgCardgroupInputPage(base.Base):
 
 	def select_listencard(self):
 		time.sleep(2)
-		self.dr.find_element(self.cfg.get('org_manage', 'listen_card_by'), \
-            self.cfg.get('org_manage', 'listen_card')).click()#选择试听卡
+		self.dr.find_elements(self.cfg.get('org_manage', 'listen_card_by'), \
+            self.cfg.get('org_manage', 'listen_card'))[-1].click()#选择试听卡
 
 	def select_listencourse(self):
 		time.sleep(2)

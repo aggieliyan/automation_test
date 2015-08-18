@@ -74,8 +74,8 @@ class OrgCardgroupInputPage(base.Base):
 		time.sleep(2)
 
 	def select_catecard(self):
-		self.dr.find_element(self.cfg.get('org_manage', 'cate_card_by'), \
-            self.cfg.get('org_manage', 'cate_card')).click()
+		self.dr.find_elements(self.cfg.get('org_manage', 'cate_card_by'), \
+            self.cfg.get('org_manage', 'cate_card'))[2].click()
 
 	def select_relatecate(self):
 		time.sleep(2)

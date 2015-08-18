@@ -41,6 +41,7 @@ class ExamCateListPage(base.Base):
 
     #编辑类目
     def click_modify_cate(self):
+        time.sleep(1)
         self.dr.find_element(self.cfg.get('exam', 'cate_mod_by'), \
             self.cfg.get('exam','cate_mod_xpath')).click()  
 

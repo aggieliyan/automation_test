@@ -72,7 +72,9 @@ class  ExamInfoPage(base.Base):
         time.sleep(3)
         input_papername = self.dr.find_element(self.cfg.get('exam', 'exam_paper_name_by'), \
                                         self.cfg.get('exam', 'exam_paper_name'))
+        time.sleep(1)
         input_papername.clear()
+        time.sleep(1)
         input_papername.send_keys(exam_name)
                         
     def input_exam_time(self,exam_time):
@@ -193,7 +195,7 @@ class QuestionInfoPage(base.Base):
         self.dr.find_element(self.cfg.get('exam', 'exam_add_big_question_ok_by'), \
                         self.cfg.get('exam', 'exam_add_big_question_ok')).click()
     def click_submit_btn(self):
-        time.sleep(4)
+        time.sleep(5)
         self.dr.find_element(self.cfg.get('exam', 'exam_paper_build_btn_by'), \
                         self.cfg.get('exam', 'exam_paper_build_btn')).click()
         time.sleep(2)

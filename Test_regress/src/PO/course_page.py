@@ -125,6 +125,7 @@ class CourseInfoPage(base.Base):
 		pinput.send_keys(cprice)
 
 	def input_description(self, cdescription ):
+		time.sleep(1)
 		self.dr.execute_script("var element=\
 			window.document.getElementById('courseDesc-editor_ifr');\
 			idocument=element.contentDocument;\

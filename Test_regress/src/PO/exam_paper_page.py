@@ -1,4 +1,4 @@
-
+﻿
 # -*- coding: UTF-8 -*-
 '''
 Created on Dec 18, 2014
@@ -63,11 +63,15 @@ class  ExamInfoPage(base.Base):
         self.base_url = cfg.get('env_para', 'base_url')
         self.dr = driver    
 
-    def create_paper(self):    
+    def create_paper(self):
+        time.sleep(1)    
         self.dr.find_element(self.cfg.get('exam', 'exam_subject_by'), \
                         self.cfg.get('exam', 'exam_subject')).click()
+        time.sleep(1) 
         new_href = self.dr.execute_script("return $('.exam-new-btn').attr('href')")
+        time.sleep(2) 
         self.dr.get("%sexam/%s" %(self.base_url,new_href))
+
     def input_exam_name(self,exam_name):
         time.sleep(3)
         input_papername = self.dr.find_element(self.cfg.get('exam', 'exam_paper_name_by'), \

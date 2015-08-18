@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+﻿# -*- coding: UTF-8 -*-
 '''
 Created on Dec. 24, 2014
 @author:liuhongjiao
@@ -63,6 +63,7 @@ class QuestionListPage(base.Base):
 		time.sleep(1)
 	#搜索试题
 	def search_questions(self, question_ansa):
+                time.sleep(2)
 		name = self.dr.find_element(self.cfg.get('exam_questions', "question_search_by"), \
 							self.cfg.get('exam_questions', "question_search"))
 		name.click()
@@ -111,6 +112,7 @@ class QuestionInputPage(base.Base):
 
 	#填题目
 	def input_question_name(self, question_ansa):
+		time.sleep(2)
 		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(0).text('" + question_ansa + "')")
 		time.sleep(1)
 
@@ -122,7 +124,7 @@ class QuestionInputPage(base.Base):
 		self.dr.find_element(self.cfg.get('exam_questions', "question_music_by"), \
 							self.cfg.get('exam_questions', "question_music")).send_keys \
 							(r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\123.mp3")
-		time.sleep(3)
+		time.sleep(5)
 
 		#单选多选答案ab				
 	def input_answerab(self, question_ansa):

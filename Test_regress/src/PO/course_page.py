@@ -47,6 +47,7 @@ class CuorsefilePage(base.Base):
 		self.dr = driver
 
 	def click_know(self):
+		time.sleep(1)
 		self.dr.find_element("id", "J_know").click()
 
 	def click_add_classhour(self, cnum):

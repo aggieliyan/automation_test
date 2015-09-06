@@ -51,7 +51,7 @@ class AgentCourseInputPage(base.Base):
 		self.dr.find_element_by_link_text(u"修改").click()
 
 	def input_title(self, title):
-		time.sleep(1)
+		time.sleep(3)
 		tinput = self.dr.find_element(self.cfg.get('courseRedirect', 'agency_title_by'), \
 			self.cfg.get('courseRedirect', 'agency_title'))
 		time.sleep(2)

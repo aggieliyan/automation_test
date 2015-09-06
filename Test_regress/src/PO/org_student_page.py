@@ -85,6 +85,7 @@ class OrgStudentManagePage(base.Base):
 		time.sleep(2)
 	#选择批量开通课程
 	def click_open_choose(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', "all_open_by"), \
 			self.cfg.get('org_manage', "all_open")).click()
 		time.sleep(2)
@@ -124,12 +125,12 @@ class OrgStudentManagePage(base.Base):
 	#有学习进度的确认弹框
 	def click_openkeep(self):
 		time.sleep(3)
-		self.dr.find_element(self.cfg.get('org_manage', "open_keep_by"), \
-			self.cfg.get('org_manage', "open_keep")).click()
+		self.dr.find_elements(self.cfg.get('org_manage', "open_keep_by"), \
+			self.cfg.get('org_manage', "open_keep"))[0].click()
 		time.sleep(2)
 	def click_openaway(self):
-		self.dr.find_element(self.cfg.get('org_manage', "open_away_by"), \
-			self.cfg.get('org_manage', "open_away")).click()
+		self.dr.find_elements(self.cfg.get('org_manage', "open_away_by"), \
+			self.cfg.get('org_manage', "open_away"))[-1].click()
 		time.sleep(2)
 
 	#管理播放授权数
@@ -139,9 +140,11 @@ class OrgStudentManagePage(base.Base):
 		self.dr.find_element(self.cfg.get('manage_course_num', "stu_select_by"), \
 							self.cfg.get('manage_course_num', "stu_select")).click()
 	def click_stu_selectuser(self):#改xpath
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('manage_course_num', "stu_selectuser_by"), \
-							self.cfg.get('manage_course_num', "stu_selectuser")).click()
+							self.cfg.get('manage_course_num', "stu_selectuser")).click()				
 	def click_stu_selectinput(self, user_name):
+		time.sleep(1)
 		self.dr.find_element(self.cfg.get('manage_course_num', 'stu_selectinput_by'), \
 							self.cfg.get('manage_course_num', 'stu_selectinput')).send_keys(user_name)
 	def click_stu_selectsearch(self):

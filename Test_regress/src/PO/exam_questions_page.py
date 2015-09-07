@@ -38,6 +38,7 @@ class QuestionListPage(base.Base):
 		time.sleep(1)
 		self.dr.find_element(self.cfg.get('exam', "path_by"), \
 							self.cfg.get('exam', "path")).send_keys(template)
+		time.sleep(2)					
 		self.dr.find_element(self.cfg.get('exam', "upload_button_by"), \
 							self.cfg.get('exam', "upload_button")).click()
 		time.sleep(3)

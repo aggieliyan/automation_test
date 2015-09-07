@@ -160,7 +160,7 @@ class StudyCardTest(unittest.TestCase):
         card_prifix = "c" + ba.rand_name()
         card_management.add_card(self.cfg, self.driver, self.base_url, self.org_name, card_prifix)
         if card_type == 0:
-            time.sleep(3)
+            time.sleep(5)
             self.driver.find_element_by_link_text(u"浏览卡").click()
             time.sleep(2)
             card_num = self.driver.execute_script("return $(\"input[name='groupCheck']:eq(0)\").parent().next().text()")

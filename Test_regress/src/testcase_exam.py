@@ -151,7 +151,7 @@ class ExamTest(unittest.TestCase):
     def test_exam_create_subject(self):
         ba = Base(self.driver)
         subject_name = exam_cate_management.auto_create_subject(self.cfg, self.driver, self.base_url, self.org_name, sub_num = 1)
-        time.sleep(1)
+        time.sleep(3)
         lastsubject = self.driver.execute_script("return $('.subject-name').eq(-1).text()")
         self.assertEqual(subject_name, lastsubject)
         filename = ba.save_screenshot()

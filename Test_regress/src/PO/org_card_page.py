@@ -56,8 +56,10 @@ class OrgCardgroupInputPage(base.Base):
 
 	def click_addgroup(self):
 		self.dr.execute_script("$(\".x-btn-text\").eq(2).click()")
+		time.sleep(2)
 	
 	def select_coursecard(self):
+		time.sleep(2)
 		self.dr.find_elements(self.cfg.get('org_manage', 'course_card_by'), \
 			self.cfg.get('org_manage', 'course_card'))[1].click()#选择充课卡
         

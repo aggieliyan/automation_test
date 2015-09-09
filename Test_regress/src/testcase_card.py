@@ -179,7 +179,6 @@ class StudyCardTest(unittest.TestCase):
    
         return card_num, card_pwd
 
-
     #添加考试卡并返回第一个卡号
     def test_add_exam_card(self):
         ba = Base(self.driver)

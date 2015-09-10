@@ -47,7 +47,7 @@ class AgentCourseInputPage(base.Base):
 		self.base_url = cfg.get('env_para', 'base_url')
 
 	def click_modify(self):
-		time.sleep(1)
+		time.sleep(3)
 		self.dr.find_element_by_link_text(u"修改").click()
 
 	def input_title(self, title):

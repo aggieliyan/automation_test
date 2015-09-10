@@ -65,7 +65,7 @@ class OrgcatecoursePge(base.Base):
 		self.dr.get(self.base_url + str(url_add))
 
 	def click_addcourse_tocate(self):
-		time.sleep(2)
+		time.sleep(4)
 		self.dr.find_element_by_link_text(u"向类目添加知识资料").click()
 
 	def select_first(self):

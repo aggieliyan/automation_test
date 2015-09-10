@@ -22,7 +22,7 @@ class OrgCardgroupListPage(base.Base):
 		m.click_org_mancardgroup()
 
 	def click_addcardgroup(self):
-		time.sleep(3)
+		time.sleep(5)
 		self.dr.find_element_by_link_text(u"添加卡组").click()
 
 	def click_buyliscard(self):

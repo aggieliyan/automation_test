@@ -80,6 +80,7 @@ class ExamPointListPage(base.Base):
 
     #编辑考点
     def click_modify_point(self):
+        time.sleep(2)
         self.dr.find_element(self.cfg.get('exam', 'point_edit_by'), \
             self.cfg.get('exam', 'point_edit')).click()
         

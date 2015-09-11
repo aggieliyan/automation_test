@@ -102,6 +102,7 @@ class OrgStudentManagePage(base.Base):
 	#开通课程页面
 	#未归类内容，展开资料
 	def click_opencate(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', "open_cate_by"), \
 			self.cfg.get('org_manage', "open_cate")).click()
 		time.sleep(15)

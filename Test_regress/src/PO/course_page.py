@@ -116,7 +116,7 @@ class CourseInfoPage(base.Base):
 	def click_charge(self):
 		time.sleep(2)
 		self.dr.find_element("id", "J_setPriceNav").click()
-		time.sleep(3)
+		time.sleep(4)
 		self.dr.find_element(self.cfg.get('courseRedirect', 'chanrge_by'), \
 			self.cfg.get('courseRedirect', 'chanrge')).click()
 

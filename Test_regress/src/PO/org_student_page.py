@@ -85,9 +85,9 @@ class OrgStudentManagePage(base.Base):
 		time.sleep(2)
 	#选择批量开通课程
 	def click_open_choose(self):
-		time.sleep(2)
-		self.dr.find_element(self.cfg.get('org_manage', "all_open_by"), \
-			self.cfg.get('org_manage', "all_open")).click()
+		time.sleep(3)
+		self.dr.find_elements(self.cfg.get('org_manage', "all_open_by"), \
+			self.cfg.get('org_manage', "all_open"))[0].click()
 		time.sleep(2)
 	#全选
 	def click_open_check(self):
@@ -102,7 +102,7 @@ class OrgStudentManagePage(base.Base):
 	#开通课程页面
 	#未归类内容，展开资料
 	def click_opencate(self):
-		time.sleep(2)
+		time.sleep(5)
 		self.dr.find_element(self.cfg.get('org_manage', "open_cate_by"), \
 			self.cfg.get('org_manage', "open_cate")).click()
 		time.sleep(15)

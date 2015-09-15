@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+﻿# -*- coding: UTF-8 -*-
 '''
 Created on Sep. 24, 2012
 
@@ -135,7 +135,7 @@ class Test(unittest.TestCase):
         actual_name = "0"
         course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url)
 
-        time.sleep(3)
+        time.sleep(5)
         actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")
         actual_name = actual_name.strip()   
         filename = ba.save_screenshot()

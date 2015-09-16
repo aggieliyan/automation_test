@@ -132,7 +132,7 @@ class QuestionInfoPage(base.Base):
         self.dr = driver
     
     def add_big_question(self,qtype,qscore):
-        time.sleep(1)
+        time.sleep(4)
         self.dr.find_element(self.cfg.get('exam', 'paper_add_big_question_by'), \
                         self.cfg.get('exam', 'paper_add_big_question')).click()
         if qtype == 1:
@@ -141,10 +141,9 @@ class QuestionInfoPage(base.Base):
                             self.cfg.get('exam', 'exam_topic_dropdown')).click()
             self.dr.find_element('xpath', '//div[10]/ul/li').click()
         else:
-            time.sleep(2)
+            time.sleep(3)
             self.dr.find_element(self.cfg.get('exam', 'exam_topic_dropdown_by'), \
                             self.cfg.get('exam', 'exam_topic_dropdown')).click()
-            time.sleep(2)          
         if qtype == 2:
             time.sleep(2)
             self.dr.find_element(self.cfg.get('exam', 'exam_topic_multiple_by'), \

@@ -43,11 +43,11 @@ class OrgCateListPage(base.Base):
 		return name
 			
 	def click_delete(self):
-		time.sleep(2)
+		time.sleep(3)
 		self.dr.execute_script("$(\".delete:last\").click()")
-        time.sleep(2)
 			
 	def click_delete_ok(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', 'delete_cate_ok_by'), \
             self.cfg.get('org_manage', 'delete_cate_ok')).click()
 

@@ -142,7 +142,7 @@ class QuestionInfoPage(base.Base):
             time.sleep(2)                
             self.dr.find_element('xpath', '//div[10]/ul/li').click()
         else:
-            time.sleep(3)
+            time.sleep(4)
             self.dr.find_element(self.cfg.get('exam', 'exam_topic_dropdown_by'), \
                             self.cfg.get('exam', 'exam_topic_dropdown')).click()
         if qtype == 2:

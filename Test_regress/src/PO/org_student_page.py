@@ -91,8 +91,9 @@ class OrgStudentManagePage(base.Base):
 		time.sleep(2)
 	#全选
 	def click_open_check(self):
-		self.dr.find_element(self.cfg.get('org_manage', "all_open_check_by"), \
-			self.cfg.get('org_manage', "all_open_check")).click()
+		time.sleep(2)
+		self.dr.find_elements(self.cfg.get('org_manage', "all_open_check_by"), \
+			self.cfg.get('org_manage', "all_open_check"))[-1].click()
 		time.sleep(2)
 	#应用
 	def click_open_apply(self):
@@ -137,13 +138,13 @@ class OrgStudentManagePage(base.Base):
 	#管理播放授权数
 	#筛选学员user_name
 	def click_stu_select(self):
-		time.sleep(5)
+		time.sleep(4)
 		self.dr.find_element(self.cfg.get('manage_course_num', "stu_select_by"), \
 							self.cfg.get('manage_course_num', "stu_select")).click()
 	def click_stu_selectuser(self):#改xpath
-		time.sleep(2)
-		self.dr.find_element(self.cfg.get('manage_course_num', "stu_selectuser_by"), \
-							self.cfg.get('manage_course_num', "stu_selectuser")).click()				
+		time.sleep(3)
+		self.dr.find_elements(self.cfg.get('manage_course_num', "stu_selectuser_by"), \
+							self.cfg.get('manage_course_num', "stu_selectuser"))[1].click()				
 	def click_stu_selectinput(self, user_name):
 		time.sleep(1)
 		self.dr.find_element(self.cfg.get('manage_course_num', 'stu_selectinput_by'), \

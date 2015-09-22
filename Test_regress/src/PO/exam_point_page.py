@@ -38,7 +38,7 @@ class ExamPointListPage(base.Base):
         
     #输入考点名称
     def input_pname(self, point_name):
-        time.sleep(2)
+        time.sleep(3)
         p_input = self.dr.find_element(self.cfg.get('exam', 'point_addname_by'), \
             self.cfg.get('exam', 'point_addname'))
         p_input.clear()

@@ -31,6 +31,7 @@ class QuestionListPage(base.Base):
 
 	#点击导入试题
 	def click_import_questions(self, template):
+		time.sleep(1)
 		self.dr.find_element(self.cfg.get('exam', "import_questions_by"), \
 							self.cfg.get('exam', 'import_questions')).click()
 		self.dr.execute_script("$('#J_uploadFileInput').attr('style', \

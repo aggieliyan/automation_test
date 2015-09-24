@@ -65,6 +65,7 @@ def delete_subject(cfg, driver, base_url, org_name, sub_num=1):
     exam_subject = SubjectListPage(driver, cfg)
     exam_subject.open()
     del_name = driver.execute_script("return $('.subject-item-con').eq(0).children().eq(0).text()")
+    time.sleep(2)
     total_num = driver.execute_script("return $('.subject-item-con').size()")
     try:
         exam_subject.click_sub_big()

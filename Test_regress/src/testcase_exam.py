@@ -143,7 +143,6 @@ class ExamTest(unittest.TestCase):
         total_num = exam_cate_management.delete_subject(self.cfg, self.driver, self.base_url, self.org_name)
         time.sleep(2)
         last_num = self.driver.execute_script("return $('.subject-item-con').size()")
-        time.sleep(2)
         self.assertEqual(total_num - 1, last_num)
         filename = ba.save_screenshot()
         print "image:"+filename   

@@ -31,18 +31,19 @@ class QuestionListPage(base.Base):
 
 	#点击导入试题
 	def click_import_questions(self, template):
-		time.sleep(1)
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('exam', "import_questions_by"), \
 							self.cfg.get('exam', 'import_questions')).click()
+		time.sleep(3)
 		self.dr.execute_script("$('#J_uploadFileInput').attr('style', \
 		'height:20px;opacity:1;transform:translate(0px, 0px) scale(1)')")
-		time.sleep(1)
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('exam', "path_by"), \
 							self.cfg.get('exam', "path")).send_keys(template)
 		time.sleep(3)					
 		self.dr.find_element(self.cfg.get('exam', "upload_button_by"), \
 							self.cfg.get('exam', "upload_button")).click()
-		time.sleep(3)
+		time.sleep(6)
 		count = self.dr.execute_script("return $('#J_successImportNum').text()")
 		time.sleep(1)
 		self.dr.find_element(self.cfg.get('exam', "close_button_by"), \

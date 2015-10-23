@@ -204,7 +204,7 @@ class ExamTest(unittest.TestCase):
     def test_exam_create_point(self):
         ba = Base(self.driver)
         point_name = exam_cate_management.auto_create_exam_point(self.cfg, self.driver, self.base_url, self.org_name, point_num = 1)
-        time.sleep(1)
+        time.sleep(3)
         lastpoint = self.driver.execute_script("return $('.categTitleFalse').eq(-1).text()")
         self.assertEqual(point_name, lastpoint)
         filename = ba.save_screenshot()

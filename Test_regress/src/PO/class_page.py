@@ -36,6 +36,7 @@ class ClassInfoPage(base.Base):
 		self.dr.find_element_by_link_text(u"课程预售").click()
 
 	def chooes_course(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('classRedirect', 'select_course_by'), \
 			self.cfg.get('classRedirect', 'select_course')).click()
 

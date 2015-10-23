@@ -65,7 +65,7 @@ class OrgcatecoursePge(base.Base):
 		self.dr.get(self.base_url + str(url_add))
 
 	def click_addcourse_tocate(self):
-		time.sleep(4)
+		time.sleep(5)
 		self.dr.find_element_by_link_text(u"向类目添加知识资料").click()
 
 	def select_first(self):
@@ -74,7 +74,7 @@ class OrgcatecoursePge(base.Base):
             self.cfg.get('org_manage', 'course_add_1')).click()
 
 	def get_firstcoursename(self):
-		time.sleep(2)
+		time.sleep(3)
 		name = self.dr.execute_script("return $(\"input[name='win_groupCheck']:eq(0)\").parent().parent().next().children().text()")
 		return name.strip()
 			

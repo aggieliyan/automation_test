@@ -45,7 +45,7 @@ class QuestionListPage(base.Base):
 							self.cfg.get('exam', "upload_button")).click()
 		time.sleep(5)
 		count = self.dr.execute_script("return $('#J_successImportNum').text()")
-		time.sleep(2)
+		time.sleep(4)
 		self.dr.find_element(self.cfg.get('exam', "close_button_by"), \
 							self.cfg.get('exam', "close_button")).click()
 		time.sleep(2)

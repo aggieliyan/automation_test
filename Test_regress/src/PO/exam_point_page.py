@@ -68,6 +68,7 @@ class ExamPointListPage(base.Base):
     
     #确认删除考点
     def click_delpoint_ok(self):
+        time.sleep(2)
         self.dr.find_element(self.cfg.get('exam', 'point_delokbot_by'), \
             self.cfg.get('exam', 'point_delokbot_xpath')).click()
         

@@ -109,10 +109,10 @@ class UserexampaperPage(base.Base):
             
 	def click_confirmsubmit(self):
 		time.sleep(2)
-		self.dr.find_element(self.cfg.get('exam', 'exam_continue_by'), \
-			self.cfg.get('exam', 'exam_continue')).click()#弹窗-继续考试  
+		self.dr.find_elements(self.cfg.get('exam', 'exam_continue_by'), \
+			self.cfg.get('exam', 'exam_continue'))[-1].click()#弹窗-继续考试  
         
 	def click_continueexam(self):
 		time.sleep(2)
-		self.dr.find_element(self.cfg.get('exam', 'window_submit_by'), \
-			self.cfg.get('exam', 'window_submit')).click()#弹窗-提交
+		self.dr.find_elements(self.cfg.get('exam', 'window_submit_by'), \
+			self.cfg.get('exam', 'window_submit'))[0].click()#弹窗-提交

@@ -153,8 +153,13 @@ class StudentTest(unittest.TestCase):
         else:
             print u"没有获取到考试卡号"
 
-        ba = Base(self.driver)            
-        time.sleep(3)         
+        ba = Base(self.driver)
+        time.sleep(2)
+        try:
+            self.driver.find_element_by_link_text(u"点击刷新").click()
+        except:
+             None       
+        time.sleep(2)         
         academy_catename_ok = self.driver.execute_script("return $('#J_examPaperName').text()")#获取已考完试卷的名称
         filename = ba.save_screenshot()
         print "image:"+filename

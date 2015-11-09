@@ -106,7 +106,7 @@ class CourseTest(unittest.TestCase):
         title = "presaleclass" + ba.rand_name()
         new_course_management.class_redirect(self.cfg, self.driver, self.base_url, ctype=2, classname=title)
         
-        time.sleep(2)
+        time.sleep(3)
         course = self.driver.find_element("link text", title)
         #若发课成功了取出课程链接存入文件中供后面的购买流程用
         rs = False

@@ -44,8 +44,12 @@ class QuestionListPage(base.Base):
 		self.dr.find_element(self.cfg.get('exam', "upload_button_by"), \
 							self.cfg.get('exam', "upload_button")).click()
 		time.sleep(5)
-		count = self.dr.execute_script("return $('#J_successImportNum').text()")
-		time.sleep(4)
+		count = ""
+		i = 0
+		while count == "" and i < 5:
+		    count = self.dr.execute_script("return $('#J_successImportNum').text()")
+		    time.sleep(5)
+		    i =+ 1
 		self.dr.find_element(self.cfg.get('exam', "close_button_by"), \
 							self.cfg.get('exam', "close_button")).click()
 		time.sleep(2)

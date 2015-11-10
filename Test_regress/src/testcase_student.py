@@ -73,7 +73,7 @@ class StudentTest(unittest.TestCase):
        ba.save_screenshot()
        
     def test_buy_course_use_card(self):
-        course_href = self.cfg.get("env_para", "course_href2")
+        course_href = self.cfg.get("env_para", "course_href1")
         if course_href != '0':
             user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, course_href)
         else:

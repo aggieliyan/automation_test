@@ -29,6 +29,7 @@ class OrgCateListPage(base.Base):
         time.sleep(2)
 
 	def input_catename(self, cate_name):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', 'cate_addname_by'), \
             self.cfg.get('org_manage', 'cate_addname')).send_keys(cate_name)
         time.sleep(2)
@@ -59,7 +60,7 @@ class OrgcatecoursePge(base.Base):
 		self.base_url = cfg.get('env_para', 'base_url')
 
 	def open_catecourse(self, cate_num):
-		time.sleep(2)
+		time.sleep(6)
 		url_add = self.dr.execute_script("return $('#categoryList .manageCategCourse:eq("+str(cate_num)+")').attr('href')")
 		time.sleep(2)
 		self.dr.get(self.base_url + str(url_add))

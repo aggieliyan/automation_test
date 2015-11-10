@@ -49,7 +49,7 @@ class QuestionListPage(base.Base):
 		while count == "" and i < 5:
 		    count = self.dr.execute_script("return $('#J_successImportNum').text()")
 		    time.sleep(5)
-		    i =+ 1
+		    i = i + 1
 		self.dr.find_element(self.cfg.get('exam', "close_button_by"), \
 							self.cfg.get('exam', "close_button")).click()
 		time.sleep(2)

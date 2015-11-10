@@ -189,9 +189,9 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>My unit test</h1>
-<p class='attribute'><strong>Start Time:</strong> 2015-11-05 11:38:35</p>
-<p class='attribute'><strong>Duration:</strong> 0:02:05.272000</p>
-<p class='attribute'><strong>Status:</strong> Pass 1</p>
+<p class='attribute'><strong>Start Time:</strong> 2015-11-10 11:00:49</p>
+<p class='attribute'><strong>Duration:</strong> 0:02:51.801000</p>
+<p class='attribute'><strong>Status:</strong> Error 2</p>
 
 <p class='description'>This demonstrates the report output by HTMLTestRunner.</p>
 </div>
@@ -222,32 +222,45 @@ function showOutput(id, name) {
     <td>Screenshot</td>
 </tr>
 
-<tr class='passClass'>
-    <td>testcase_exam_student.ExamStudentTest</td>
-    <td>1</td>
+<tr class='errorClass'>
+    <td>testcase_course.CourseTest</td>
     <td>1</td>
     <td>0</td>
     <td>0</td>
+    <td>1</td>
     <td><a href="javascript:showClassDetail('c1',1)">Detail</a></td>
     <td>&nbsp;</td>
 </tr>
 
-<tr id='pt1.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_exam_user</div></td>
+<tr id='ft1.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_onlineclass</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
-        pass</a>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.1')" >
+        error</a>
 
-    <div id='div_pt1.1' class="popup_window">
+    <div id='div_ft1.1' class="popup_window">
         <div style='text-align: left; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1').style.display = 'none' " >
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.1').style.display = 'none' " >
            [x]</a>
         </div>
         <pre>
         
-pt1.1: image:2015-11-05-11_40_39.png
+ft1.1: Traceback (most recent call last):
+  File "C:\Users\Administrator\workspace\autos\automation_test\Test_regress\src\testcase_course.py", line 127, in test_onlineclass
+    new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)
+  File "C:\Users\Administrator\workspace\autos\automation_test\Test_regress\src\new_course_management.py", line 112, in class_redirect
+    cinfo.chooes_course()
+  File "C:\Users\Administrator\workspace\autos\automation_test\Test_regress\src\PO\class_page.py", line 41, in chooes_course
+    self.cfg.get('classRedirect', 'select_course')).click()
+  File "C:\Python27\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 662, in find_element
+    {'using': by, 'value': value})['value']
+  File "C:\Python27\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\Python27\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: u'no such element\n  (Session info: chrome=39.0.2171.71)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
 
 
         </pre>
@@ -256,16 +269,67 @@ pt1.1: image:2015-11-05-11_40_39.png
 
     </td>
     <td align='center'>
-    <a target=_blank href="file://C://test_rs_pic/2015-11-05-11_40_39.png">check Screenshot</a>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
+    </td>
+</tr>
+
+<tr class='errorClass'>
+    <td>testcase_student.StudentTest</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c2',1)">Detail</a></td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr id='ft2.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_buy_course_use_card</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.1')" >
+        error</a>
+
+    <div id='div_ft2.1' class="popup_window">
+        <div style='text-align: left; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft2.1: Traceback (most recent call last):
+  File "C:\Users\Administrator\workspace\autos\automation_test\Test_regress\src\testcase_student.py", line 78, in test_buy_course_use_card
+    user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, course_href)
+  File "C:\Users\Administrator\workspace\autos\automation_test\Test_regress\src\user_management.py", line 34, in buy_course_usecard
+    pay.click_pay()
+  File "C:\Users\Administrator\workspace\autos\automation_test\Test_regress\src\PO\payment_page.py", line 39, in click_pay
+    self.cfg.get('org_index', 'pay_ok')).click()
+  File "C:\Python27\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 662, in find_element
+    {'using': by, 'value': value})['value']
+  File "C:\Python27\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 173, in execute
+    self.error_handler.check_response(response)
+  File "C:\Python27\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 164, in check_response
+    raise exception_class(message, screen, stacktrace)
+NoSuchElementException: Message: u'no such element\n  (Session info: chrome=39.0.2171.71)\n  (Driver info: chromedriver=2.10.267521,platform=Windows NT 6.1 SP1 x86_64)' 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+    <td align='center'>
+    <a target=_blank href="file://C://test_rs_pic/">check Screenshot</a>
     </td>
 </tr>
 
 <tr id='total_row'>
     <td>Total</td>
-    <td>1</td>
-    <td>1</td>
+    <td>2</td>
     <td>0</td>
     <td>0</td>
+    <td>2</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
 </tr>

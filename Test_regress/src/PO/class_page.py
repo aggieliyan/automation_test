@@ -49,7 +49,12 @@ class ClassInfoPage(base.Base):
 			self.cfg.get('classRedirect', 'classname'))
 		ninput.clear()
 		ninput.send_keys(classname)
-
+	
+	def input_current_price(self,price):
+		time.sleep(1)
+		self.dr.find_element(self.cfg.get('classRedirect', 'current_price_by'), \
+			self.cfg.get('classRedirect', 'current_price')).send_keys(price)
+    	
 	def input_price(self, price):
 		pinput = self.dr.find_element(self.cfg.get('classRedirect', 'presell_price_by'), \
 			self.cfg.get('classRedirect', 'presell_price'))

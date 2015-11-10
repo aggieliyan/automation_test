@@ -53,6 +53,7 @@ class SubjectListPage(base.Base):
     
      #输入科目名称,分成两个方法为了验证
     def clear_sub(self):
+        time.sleep(2)
         sub_c = self.dr.find_element(self.cfg.get('exam', 'sub_name_by'), \
             self.cfg.get('exam', 'sub_name'))
         sub_c.clear()

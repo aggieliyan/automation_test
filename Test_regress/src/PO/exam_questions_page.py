@@ -43,13 +43,15 @@ class QuestionListPage(base.Base):
 		time.sleep(3)					
 		self.dr.find_element(self.cfg.get('exam', "upload_button_by"), \
 							self.cfg.get('exam', "upload_button")).click()
-		time.sleep(5)
-		count = ""
-		i = 0
-		while count == "" and i < 5:
-		    count = self.dr.execute_script("return $('#J_successImportNum').text()")
-		    time.sleep(5)
-		    i = i + 1
+		time.sleep(10)
+		count = self.dr.execute_script("return $('#J_successImportNum').text()")
+#		count = ""
+#		i = 0
+#		while count == "" and i < 5:
+#		    count = self.dr.execute_script("return $('#J_successImportNum').text()")
+#		    time.sleep(5)
+#		    i = i + 1
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('exam', "close_button_by"), \
 							self.cfg.get('exam', "close_button")).click()
 		time.sleep(2)
@@ -88,8 +90,9 @@ class QuestionInputPage(base.Base):
 
 	#点击题型的下拉框
 	def click_question_type(self):
-		self.dr.find_element(self.cfg.get('exam_questions', "question_type_by"), \
-							self.cfg.get('exam_questions', "question_type")).click()
+		time.sleep(2)
+		self.dr.find_elements(self.cfg.get('exam_questions', "question_type_by"), \
+							self.cfg.get('exam_questions', "question_type"))[-1].click()
 		time.sleep(1)
 	#选择各种题型进行新建试题
 	def click_question_multiple(self):

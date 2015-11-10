@@ -194,7 +194,7 @@ class ExamTest(unittest.TestCase):
         time.sleep(1)
         #total_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         total_num = exam_cate_management.delete_exam_cate(self.cfg, self.driver, self.base_url, self.org_name)
-        time.sleep(1)
+        time.sleep(3)
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
         filename = ba.save_screenshot()
@@ -225,7 +225,7 @@ class ExamTest(unittest.TestCase):
     def test_exam_delete_point(self):
         ba = Base(self.driver)
         total_num = exam_cate_management.delete_exam_point(self.cfg, self.driver, self.base_url, self.org_name)
-        time.sleep(1)
+        time.sleep(3)
         last_num = self.driver.execute_script("return $('.categTitleFalse').size()")
         self.assertEqual(total_num - 1, last_num)
         filename = ba.save_screenshot()

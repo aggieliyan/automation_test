@@ -90,7 +90,7 @@ class QuestionInputPage(base.Base):
 
 	#点击题型的下拉框
 	def click_question_type(self):
-		time.sleep(3)
+		time.sleep(5)
 		self.dr.find_elements(self.cfg.get('exam_questions', "question_type_by"), \
 							self.cfg.get('exam_questions', "question_type"))[-1].click()
 		time.sleep(1)

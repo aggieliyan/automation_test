@@ -78,69 +78,69 @@ class Test(unittest.TestCase):
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
 
-#    # @unittest.skip("test")
-#    def test_create_admin(self):
-#        ba = Base(self.driver)
-#        aname = admin_management.auto_create_admin(self.cfg, self.driver, adm_num=1)
-#        # lastadmin = self.driver.execute_script("return $('.floatleft').eq(-10).text()")
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
-#        # self.assertEqual(aname, lastadmin)
-#
-#    # @unittest.skip("test")
-#    def test_modify_admin(self):
-#        ba = Base(self.driver)
-#        admin_name = admin_management.modify_admin(self.cfg, self.driver, self.base_url)
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
-#
-#    # @unittest.skip("test")
-#    def test_delete_admin(self):
-#        ba = Base(self.driver)
-#        rs = admin_management.delete_admin(self.cfg, self.driver, self.base_url)
-#        self.assertEqual(True, rs) 
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
-#
-#    # @unittest.skip("test")
-#    def test_add_cate(self):
-#        ba = Base(self.driver)
-#        cate_name = u"cate" + ba.rand_name()
-#        cate_management.add_cate(self.cfg, self.driver, self.base_url, cate_name=cate_name)
-#        
-#        time.sleep(3)          
-#        actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
-#        self.assertEqual(actul, cate_name)
-#
-#    # @unittest.skip("test")
-#    def test_delete_cate(self):
-#        ba = Base(self.driver)
-#        before_delete = cate_management.delete_cate(self.cfg, self.driver, self.base_url)
-#        #print before_delete
-#        time.sleep(1)         
-#        after_delete = self.driver.execute_script("return $(\".categTitle:last\").text()")#取最后一个类目的名称
-#        #print after_delete
-#        rs = (before_delete==after_delete)
-#        #若删除前后最后一个类目名类不同则证明删除类目成功
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
-#        self.assertEqual(True, rs)
-#
-#    # @unittest.skip("test")
-#    def test_add_course_to_cate(self):
-#        ba = Base(self.driver)
-#        course_name = ""
-#        actual_name = "0"
-#        course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url)
-#
-#        time.sleep(5)
-#        actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")
-#        actual_name = actual_name.strip()   
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
-#        self.assertEqual(course_name, actual_name)
+    # @unittest.skip("test")
+    def test_create_admin(self):
+        ba = Base(self.driver)
+        aname = admin_management.auto_create_admin(self.cfg, self.driver, adm_num=1)
+        # lastadmin = self.driver.execute_script("return $('.floatleft').eq(-10).text()")
+        filename = ba.save_screenshot()
+        print "image:"+filename
+        # self.assertEqual(aname, lastadmin)
+
+    # @unittest.skip("test")
+    def test_modify_admin(self):
+        ba = Base(self.driver)
+        admin_name = admin_management.modify_admin(self.cfg, self.driver, self.base_url)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    # @unittest.skip("test")
+    def test_delete_admin(self):
+        ba = Base(self.driver)
+        rs = admin_management.delete_admin(self.cfg, self.driver, self.base_url)
+        self.assertEqual(True, rs) 
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    # @unittest.skip("test")
+    def test_add_cate(self):
+        ba = Base(self.driver)
+        cate_name = u"cate" + ba.rand_name()
+        cate_management.add_cate(self.cfg, self.driver, self.base_url, cate_name=cate_name)
+        
+        time.sleep(3)          
+        actul = self.driver.execute_script("return $(\".categTitleFalse :last\").text()")#取最后一个类目的名称
+        filename = ba.save_screenshot()
+        print "image:"+filename
+        self.assertEqual(actul, cate_name)
+
+    # @unittest.skip("test")
+    def test_delete_cate(self):
+        ba = Base(self.driver)
+        before_delete = cate_management.delete_cate(self.cfg, self.driver, self.base_url)
+        #print before_delete
+        time.sleep(1)         
+        after_delete = self.driver.execute_script("return $(\".categTitle:last\").text()")#取最后一个类目的名称
+        #print after_delete
+        rs = (before_delete==after_delete)
+        #若删除前后最后一个类目名类不同则证明删除类目成功
+        filename = ba.save_screenshot()
+        print "image:"+filename
+        self.assertEqual(True, rs)
+
+    # @unittest.skip("test")
+    def test_add_course_to_cate(self):
+        ba = Base(self.driver)
+        course_name = ""
+        actual_name = "0"
+        course_name = cate_management.add_courese_to_cate(self.cfg, self.driver, self.base_url)
+
+        time.sleep(5)
+        actual_name = self.driver.execute_script("return $(\"input[name='course_ckeckbox']:eq(0)\").next().text()")
+        actual_name = actual_name.strip()   
+        filename = ba.save_screenshot()
+        print "image:"+filename
+        self.assertEqual(course_name, actual_name)
 
     def test_href_announcement(self):
         ba = Base(self.driver)
@@ -152,26 +152,26 @@ class Test(unittest.TestCase):
         print "image:"+filename
         self.assertEqual(True, rs)
 
-#    # @unittest.skip("test")
-#    def test_change_homelogo(self):
-#        ba = Base(self.driver)
-#        user_management.change_homelogo(self.cfg, self.driver, self.base_url, self.org_name)
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
-#    
-#    # @unittest.skip("test")
-#    def test_change_headpic(self):
-#        ba = Base(self.driver)
-#        user_management.org_chang_headpic(self.cfg, self.driver, self.base_url, self.org_name)
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
-#
-#    # @unittest.skip("test")
-#    def test_modify_pagefoot(self):
-#        ba = Base(self.driver)
-#        user_management.modify_pagefoot(self.cfg, self.driver, self.base_url, self.org_name)
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
+    # @unittest.skip("test")
+    def test_change_homelogo(self):
+        ba = Base(self.driver)
+        user_management.change_homelogo(self.cfg, self.driver, self.base_url, self.org_name)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+    
+    # @unittest.skip("test")
+    def test_change_headpic(self):
+        ba = Base(self.driver)
+        user_management.org_chang_headpic(self.cfg, self.driver, self.base_url, self.org_name)
+        filename = ba.save_screenshot()
+        print "image:"+filename
+
+    # @unittest.skip("test")
+    def test_modify_pagefoot(self):
+        ba = Base(self.driver)
+        user_management.modify_pagefoot(self.cfg, self.driver, self.base_url, self.org_name)
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
         
 
@@ -198,17 +198,17 @@ if __name__ == "__main__":
     suite_exam_result = unittest.TestLoader().loadTestsFromTestCase(ExamResultTest)
     
     allsuites = []
-#    allsuites.append(suite_register)
-#    allsuites.append(suite_course)
-#    allsuites.append(suite_card)
-#    allsuites.append(suite_stumanage)
+    allsuites.append(suite_register)
+    allsuites.append(suite_course)
+    allsuites.append(suite_card)
+    allsuites.append(suite_stumanage)
     allsuites.append(suite1)
-#    allsuites.append(suite2)
-#
-#    #考试部分
-#    allsuites.append(suite_exam)
-#    allsuites.append(suite_exam_student)
-#    allsuites.append(suite_exam_result)
+    allsuites.append(suite2)
+
+    #考试部分
+    allsuites.append(suite_exam)
+    allsuites.append(suite_exam_student)
+    allsuites.append(suite_exam_result)
 
     alltests = unittest.TestSuite(allsuites)
 

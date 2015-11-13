@@ -115,9 +115,9 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
         cinfo.click_presell()
         cinfo.save_screenshot()
         cinfo.choose_cate()
-        cinfo.input_current_price(price)
-        cinfo.input_price(price)
 
+    cinfo.input_current_price(price)
+    cinfo.input_price(price)
     cinfo.input_classname(classname)
     cinfo.input_description(course_describe)
     cinfo.input_tag(course_tags)

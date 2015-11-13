@@ -36,7 +36,7 @@ class ClassInfoPage(base.Base):
 		self.dr.find_element_by_link_text(u"课程预售").click()
 
 	def chooes_course(self):
-		time.sleep(2)
+		time.sleep(3)
 		self.dr.find_element(self.cfg.get('classRedirect', 'select_course_by'), \
 			self.cfg.get('classRedirect', 'select_course')).click()
 
@@ -50,10 +50,12 @@ class ClassInfoPage(base.Base):
 		ninput.clear()
 		ninput.send_keys(classname)
 	
-	def input_current_price(self,price):
-		time.sleep(1)
-		self.dr.find_element(self.cfg.get('classRedirect', 'current_price_by'), \
-			self.cfg.get('classRedirect', 'current_price')).send_keys(price)
+	def input_current_price(self, price):
+		time.sleep(3)
+		current = self.dr.find_element(self.cfg.get('classRedirect', 'current_price_by'), \
+			self.cfg.get('classRedirect', 'current_price'))
+		current.clear()
+		current.send_keys(price)
     	
 	def input_price(self, price):
 		pinput = self.dr.find_element(self.cfg.get('classRedirect', 'presell_price_by'), \

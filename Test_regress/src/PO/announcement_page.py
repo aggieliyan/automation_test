@@ -16,12 +16,27 @@ class AnnouncementListPage(base.Base):
 		self.cfg = cfg
 		self.base_url = cfg.get('env_para', 'base_url')
 
-	def click_edit_announcement(self):
-		pass
-
+	def click_list(self):
+	    time.sleep(2)
+	    self.dr.find_element(self.cfg.get('org_index', 'noticelist_by'), \
+			self.cfg.get('org_index', 'noticelist')).click()
+	    time.sleep(1)
+	    try:	
+	        self.dr.find_element(self.cfg.get('org_index', 'sure_by'), \
+			    self.cfg.get('org_index', 'sure')).click()
+	    except:
+	    	None
+    
+	def click_manage(self):
+		time.sleep(1)
+		self.dr.find_elements(self.cfg.get('org_index', 'manage_by'), \
+			self.cfg.get('org_index', 'manage'))[0].click()
+			
 	def click_add_announcement(self):
-		self.dr.find_element("link text", u"新增公告").click()
-
+		bh = self.dr.window_handles
+		self.dr.find_element("link text", u"新增内容").click()
+		self.switch_window(bh)
+		
 class AnnouncementInputPage(base.Base):
 
 
@@ -29,6 +44,14 @@ class AnnouncementInputPage(base.Base):
 		self.dr = driver
 		self.cfg = cfg
 		self.base_url = cfg.get('env_para', 'base_url')
+		
+	def click_dropdown(self):
+		self.dr.find_element(self.cfg.get('org_index', 'dropdown_by'), \
+			self.cfg.get('org_index', 'dropdown')).click()
+			
+	def choice_column(self):
+		self.dr.find_element(self.cfg.get('org_index', 'column_by'), \
+			self.cfg.get('org_index', 'column')).click()
 
 	def input_title(self, title):
 		self.dr.find_element(self.cfg.get('org_index', 'act_title_by'), \

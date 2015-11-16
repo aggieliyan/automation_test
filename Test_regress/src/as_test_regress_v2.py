@@ -191,6 +191,7 @@ if __name__ == "__main__":
     suite_card = unittest.TestLoader().loadTestsFromTestCase(StudyCardTest)
     suite_stumanage = unittest.TestLoader().loadTestsFromTestCase(StudentMangeTest)    
     suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
+    suite_teacher = unittest.TestLoader().loadTestsFromTestCase(TeacherTest)
 
     #考试部分
     suite_exam = unittest.TestLoader().loadTestsFromTestCase(ExamTest)
@@ -204,6 +205,7 @@ if __name__ == "__main__":
     allsuites.append(suite_stumanage)
     allsuites.append(suite1)
     allsuites.append(suite2)
+    allsuites.append(suite_teacher)
 
     #考试部分
     allsuites.append(suite_exam)

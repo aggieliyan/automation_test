@@ -24,6 +24,11 @@ class OnLineClassListPage(base.Base):
 		self.dr.find_element(self.cfg.get('classRedirect', 'redirect_btn_by'), \
 			self.cfg.get('classRedirect', 'redirect_btn')).click()
 
+	def click_classface(self):
+		time.sleep(1)
+		self.dr.find_element(self.cfg.get('classRedirect', 'classface_by'), \
+			self.cfg.get('classRedirect', 'classface')).click()
+
 class ClassInfoPage(base.Base):
 
 
@@ -82,4 +87,12 @@ class ClassInfoPage(base.Base):
 	def click_save(self):
 		self.dr.find_element(self.cfg.get('classRedirect', 'save_btn_by'), \
 			self.cfg.get('classRedirect', 'save_btn')).click()
-		time.sleep(1)	
+		time.sleep(1)
+        
+	def input_classadress(self, address):
+		self.dr.find_element(self.cfg.get('classRedirect', 'address_by'), \
+			self.cfg.get('classRedirect', 'address')).send_keys(address)
+
+	def input_classnum(self, number):
+		self.dr.find_element(self.cfg.get('classRedirect', 'number_by'), \
+			self.cfg.get('classRedirect', 'number')).send_keys(number)  

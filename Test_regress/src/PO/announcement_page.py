@@ -34,7 +34,8 @@ class AnnouncementListPage(base.Base):
 			
 	def click_add_announcement(self):
 		bh = self.dr.window_handles
-		self.dr.find_element("link text", u"新增内容").click()
+		self.dr.find_elements(self.cfg.get('org_index', 'addannoun_by'), \
+			self.cfg.get('org_index', 'addannoun'))[0].click()
 		self.switch_window(bh)
 		
 class AnnouncementInputPage(base.Base):
@@ -46,6 +47,7 @@ class AnnouncementInputPage(base.Base):
 		self.base_url = cfg.get('env_para', 'base_url')
 		
 	def click_dropdown(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_index', 'dropdown_by'), \
 			self.cfg.get('org_index', 'dropdown')).click()
 			

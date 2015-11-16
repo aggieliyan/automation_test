@@ -125,6 +125,28 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
     cinfo.click_save()
     time.sleep(2)
 
+def class_face(cfg, driver, base_url, classname, address, classnum, \
+    price=10, course_describe='hello world', course_tags='english\n'):
+    
+    olclass = OnLineClassListPage(driver, cfg)
+    olclass.open()
+    olclass.save_screenshot()
+    olclass.click_classface()
+    olclass.click_create()
+    olclass.save_screenshot()
+
+    cinfo = ClassInfoPage(driver, cfg)
+    cinfo.input_classname(classname)
+    cinfo.input_current_price(price)
+    cinfo.input_price(price)
+    cinfo.input_classadress(address)
+    cinfo.input_classnum(classnum)
+    cinfo.input_description(course_describe)
+    cinfo.input_tag(course_tags)
+    cinfo.click_service_cate()
+    cinfo.click_save()
+    time.sleep(2)
+    
 #发布代理课程-没有发布了现在代理人只能编辑代理的课程
 def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
 

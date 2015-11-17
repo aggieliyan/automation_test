@@ -8,7 +8,7 @@ import re
 import time
 from selenium.common.exceptions import NoSuchElementException
 
-from PO.course_page import CourseStepOnePage, CuorsefilePage, CourseInfoPage
+from PO.course_page import CourseStepOnePage, CuorsefilePage, CourseInfoPage, CourseManageListPage
 from PO.class_page import OnLineClassListPage, ClassInfoPage
 from PO.agency_page import CourseAgencyPage, AgentCourseInputPage
 
@@ -95,6 +95,25 @@ def course_redirect(cfg, driver, base_url, isthree=0,\
     course_info.save_screenshot()
     course_info.click_save()
 
+def course_edit(cfg, driver):
+    couremanage = CourseManageListPage(driver, cfg)
+    couremanage.open()
+    couremanage.click_manage()
+    couremanage.click_edit()
+    couremanage.click_window_ok()
+    
+    courefile = CuorsefilePage(driver, cfg)
+    courefile.click_know()
+    courefile.click_info()
+    
+    courseinfo = CourseInfoPage(driver, cfg)
+    courseinfo.click_teacher()
+    courseinfo.click_choiceteacher()
+    courseinfo.choice_firsteacher()
+    courseinfo.click_window_sure()
+    courseinfo.click_save()
+    driver.refresh()
+    
 def class_redirect(cfg, driver, base_url, classname='onlineclass', \
     ctype=1, price=10, course_describe='hello world', course_tags='english\n'):
     '''

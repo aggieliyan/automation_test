@@ -15,6 +15,7 @@ import HTMLTestRunner
 
 from PO.base import Base
 import login, teacher_management
+from testcase_teacher import TeacherTest
 
 class TeacherTest(unittest.TestCase):
 

@@ -22,6 +22,7 @@ from testcase_exam_result import ExamResultTest
 from testcase_course import CourseTest
 from testcase_card import StudyCardTest
 from testcase_stu_manage import StudentMangeTest
+from testcase_teacher import TeacherTest
 import login, new_course_management, course_management, student_management
 import card_management, cate_management, admin_management, user_management
 import exam_paper, exam_questions, exam_cate_management

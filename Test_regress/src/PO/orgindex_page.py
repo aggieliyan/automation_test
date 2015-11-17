@@ -37,8 +37,6 @@ class OrgIndexPage(base.Base):
 		print orgid
 		return orgid
 
-
-
 	#网校公告
 	def click_announcement(self):
 		try:

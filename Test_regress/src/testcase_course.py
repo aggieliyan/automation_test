@@ -75,9 +75,10 @@ class CourseTest(unittest.TestCase):
 
     def test_course_with_chapter(self):
         ba = Base(self.driver)
-        title = "course" + ba.rand_name()
-        new_course_management.course_redirect(self.cfg, self.driver, self.base_url, course_title=title, course_price=10, chapter=1)
+        new_course_management.course_edit(self.cfg, self.driver)
         
+        rs = ba.is_element_present("class name", "del")
+        self.assertEqual(True, rs)
         filename = ba.save_screenshot()
         print "image:"+filename
 

@@ -101,7 +101,7 @@ class CuorsefilePage(base.Base):
 		time.sleep(0.5)
 
 	def click_info(self):
-		time.sleep(1)
+		time.sleep(2)
 		self.dr.find_element_by_link_text(u"基本信息").click()
 
 class CourseInfoPage(base.Base):
@@ -135,18 +135,33 @@ class CourseInfoPage(base.Base):
 			element.innerHTML =\'"+cdescription+"\';")
 		time.sleep(0.1)
 
-
-
 	def input_tag(self, course_tags):
 		self.dr.find_element(self.cfg.get('courseRedirect', 'tags_by'), \
 			self.cfg.get('courseRedirect', 'tags')).send_keys(course_tags)
-
+	
+	def click_teacher(self):
+		time.sleep(1)
+		self.dr.execute_script("$('.baseInfoNav li').eq(8).click()")
+    	
+	def click_choiceteacher(self):
+		time.sleep(2)
+		self.dr.find_element(self.cfg.get('courseRedirect', 'teacherbtn_by'), \
+			self.cfg.get('courseRedirect', 'teacherbtn')).click()
+			
+	def choice_firsteacher(self):
+		time.sleep(1)
+		self.dr.find_elements(self.cfg.get('courseRedirect', 'choiceteacher_by'), \
+			self.cfg.get('courseRedirect', 'choiceteacher'))[0].click()
+			
+	def click_window_sure(self):
+		self.dr.find_elements(self.cfg.get('courseRedirect', 'sure_by'), \
+			self.cfg.get('courseRedirect', 'sure'))[0].click()	
+				
 	def click_save(self):
 		self.dr.find_element(self.cfg.get('courseRedirect', 'done_btn_by'), \
 			self.cfg.get('courseRedirect', 'done_btn')).click()
 
 class CourseManageListPage(base.Base):
-
 
 	def __init__(self, driver, cfg):
 
@@ -173,3 +188,11 @@ class CourseManageListPage(base.Base):
 		except:
 			return ""
 		return link
+	
+	def click_edit(self):
+		self.dr.find_elements(self.cfg.get('courseRedirect', 'editcourse_by'), \
+			self.cfg.get('courseRedirect', 'editcourse'))[0].click()
+			
+	def click_window_ok(self):
+		self.dr.find_element(self.cfg.get('courseRedirect', 'winok_by'), \
+			self.cfg.get('courseRedirect', 'winok')).click()

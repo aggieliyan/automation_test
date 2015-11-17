@@ -17,7 +17,7 @@ class AnnouncementListPage(base.Base):
 		self.base_url = cfg.get('env_para', 'base_url')
 
 	def click_list(self):
-	    time.sleep(2)
+	    time.sleep(3)
 	    self.dr.find_element(self.cfg.get('org_index', 'noticelist_by'), \
 			self.cfg.get('org_index', 'noticelist')).click()
 	    time.sleep(1)

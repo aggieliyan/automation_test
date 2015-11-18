@@ -24,6 +24,10 @@ class MyOfficePage(base.Base):
 		self.dr.get("%smyOffice.do" %(self.base_url))
 		self.dr.maximize_window()
 
+	#点击后台首页
+	def click_org_firstage(self):
+		self.dr.find_element_by_link_text(u"后台首页").click()
+		
 	#点击系统设置导航
 	def click_system_settings(self):
 		self.dr.find_element_by_link_text(u"系统设置").click()

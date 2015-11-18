@@ -21,11 +21,6 @@ class OrgStudentManagePage(base.Base):
 		m.open()
 		m.click_student()
 		m.click_student_management()
-		
-	def open_buyopennum(self):
-		m = MyOfficePage(self.dr, self.cfg)
-		m.open()
-		m.click_num_record()
 
 	#输入所导入的学员
 	def input_studentname(self, stu_name):

@@ -14,6 +14,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from PO.org_student_page import OrgStudentManagePage
 from PO.base import Base
+from PO.myoffice_page import MyOfficePage
 
 def import_one_student(cfg, driver, base_url, stu_name):
 
@@ -135,8 +136,12 @@ def manage_course_num(cfg, driver, base_url, user_name):
 def buy_open_num(cfg, driver, base_url):
 
     ba = Base(driver)
+    m = MyOfficePage(driver, cfg)
+    m.open()
+    m.click_org_firstage()
+    m.click_num_record()
+    
     ogstumanage = OrgStudentManagePage(driver, cfg)
-    ogstumanage.open_buyopennum()
     ogstumanage.save_screenshot()
     ogstumanage.input_num()
     ogstumanage.click_buy()

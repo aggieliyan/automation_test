@@ -118,19 +118,22 @@ class StudentMangeTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
 
-    #购买授权
+    #购买授权(线上不走购买授权)
     def test_buy_open_num(self):
         ba = Base(self.driver)
-        student_management.buy_open_num(self.cfg, self.driver, self.base_url)
-        filename = ba.save_screenshot()
-        print "image:"+filename
+        if self.base_url == "http://www.ablesky.com/":
+            return
+        else:
+            student_management.buy_open_num(self.cfg, self.driver, self.base_url)
+            filename = ba.save_screenshot()
+            print "image:"+filename
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()
 
 if __name__ == "__main__":
     suite_stumanage = unittest.TestLoader().loadTestsFromTestCase(StudentMangeTest) 
-    allsuites = [suite_stumanage]
+    allsuites = []
     allsuites.append(suite_stumanage)
     alltests = unittest.TestSuite(suite_stumanage)
 

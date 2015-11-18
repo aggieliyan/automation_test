@@ -45,16 +45,16 @@ class RegisterTest(unittest.TestCase):
         self.driver.maximize_window()
         self.driver.get(self.base_url)
             
-##    @unittest.skip("test")    
-#    def test_register(self):
-#        ba = Base(self.driver)
-#        user_name = ""
-#        user_name = login.auto_register(self.cfg, self.driver, self.base_url, 2, 1)
-#        if user_name:
-#            self.cfg.set("env_para", "import_name", user_name)
-#            self.cfg.write(open(self.cfg_file, "w"))    
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
+#    @unittest.skip("test")    
+    def test_register(self):
+        ba = Base(self.driver)
+        user_name = ""
+        user_name = login.auto_register(self.cfg, self.driver, self.base_url, 2, 1)
+        if user_name:
+            self.cfg.set("env_para", "import_name", user_name)
+            self.cfg.write(open(self.cfg_file, "w"))    
+        filename = ba.save_screenshot()
+        print "image:"+filename
     
 #    @unittest.skip("test")    
     def test_register_domain(self):
@@ -65,14 +65,14 @@ class RegisterTest(unittest.TestCase):
         filename = ba.save_screenshot()
         print "image:"+filename
         
-##    @unittest.skip("test")    
-#    def test_logandout_domain(self):
-#        ba = Base(self.driver)
-#        login.login_by_independent_domian(self.cfg, self.driver, self.independent_url, self.user_name, self.user_password)
-#        login.logout_by_independent_domian(self.driver, self.independent_url)
-#   
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
+#    @unittest.skip("test")    
+    def test_logandout_domain(self):
+        ba = Base(self.driver)
+        login.login_by_independent_domian(self.cfg, self.driver, self.independent_url, self.user_name, self.user_password)
+        login.logout_by_independent_domian(self.driver, self.independent_url)
+   
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
     def tearDown(self):
         self.driver.quit()

@@ -22,7 +22,6 @@ class ExamPointListPage(base.Base):
     def click_create_point(self):
         self.dr.find_element(self.cfg.get('exam', 'point_addnewid_by'), \
             self.cfg.get('exam', 'point_addnewid')).click()
-
     
     #加课程推荐
     def click_add_course(self):
@@ -64,7 +63,7 @@ class ExamPointListPage(base.Base):
     def click_addpoint_ok(self):
         self.dr.find_element(self.cfg.get('exam', 'point_okbotton_by'), \
             self.cfg.get('exam', 'point_okbotton')).click()
-        
+    
     
     #确认删除考点
     def click_delpoint_ok(self):

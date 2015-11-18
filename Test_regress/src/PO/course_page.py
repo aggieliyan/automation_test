@@ -190,6 +190,7 @@ class CourseManageListPage(base.Base):
 		return link
 	
 	def click_edit(self):
+		time.sleep(2)
 		self.dr.find_elements(self.cfg.get('courseRedirect', 'editcourse_by'), \
 			self.cfg.get('courseRedirect', 'editcourse'))[0].click()
 			

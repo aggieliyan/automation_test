@@ -199,7 +199,7 @@ class QuestionInfoPage(base.Base):
         self.dr.find_element(self.cfg.get('exam', 'exam_add_big_question_ok_by'), \
                         self.cfg.get('exam', 'exam_add_big_question_ok')).click()
     def click_submit_btn(self):
-        time.sleep(5)
+        time.sleep(6)
         self.dr.find_element(self.cfg.get('exam', 'exam_paper_build_btn_by'), \
                         self.cfg.get('exam', 'exam_paper_build_btn')).click()
         time.sleep(2)

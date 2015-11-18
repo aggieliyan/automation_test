@@ -34,8 +34,8 @@ class AnnouncementListPage(base.Base):
 			
 	def click_add_announcement(self):
 		bh = self.dr.window_handles
-		self.dr.find_elements(self.cfg.get('org_index', 'addannoun_by'), \
-			self.cfg.get('org_index', 'addannoun'))[0].click()
+		self.dr.find_element(self.cfg.get('org_index', 'addannoun_by'), \
+			self.cfg.get('org_index', 'addannoun')).click()
 		self.switch_window(bh)
 		
 class AnnouncementInputPage(base.Base):

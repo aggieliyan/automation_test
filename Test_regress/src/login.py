@@ -66,13 +66,15 @@ def login_by_logindo(cfg, driver, base_url, user_name, user_psw):
 def logout_by_independent_domian(driver, independent_url):
     driver.get(independent_url)
     time.sleep(2)
-    driver.find_element_by_link_text("退出").click()
+    driver.find_element_by_link_text(u"[退出]").click()
     time.sleep(1)
+    
 def logout(driver, base_url):
     driver.get(base_url)
     time.sleep(1)
     driver.find_element_by_link_text(u"[退出]").click()
     time.sleep(1)
+    
 def is_element_present(driver, how, what):
     try: driver.find_element(by=how, value=what)
     except Exception, e: return False
@@ -217,18 +219,19 @@ def register_by_independent_domian(cfg, driver, base_url, r_username, r_email, r
     clickregister.click_register()
 
     registerpage = EmailRegisterPage(driver,cfg)
+    registerpage.click_emailmod_domain()
     registerpage.input_username(r_username)
     registerpage.input_email(r_email)
-    registerpage.input_pwd(r_psw)
+    registerpage.input_psw(r_psw)
     registerpage.verification_code()
     time.sleep(10)
     registerpage.save_screenshot()
-    #下一步
-    independentreg = IndependentDomianLoginPage(driver,cfg)
-    independentreg.click_next()
-    independentreg.input_realname()
-    # ...
-    # ...
+#    #下一步(设置没有下一步填写项)
+#    independentreg = IndependentDomianLoginPage(driver,cfg)
+#    independentreg.click_next()
+#    independentreg.input_realname()
+#    # ...
+#    # ...
     registerpage.register_submit_btn()
     registerpage.save_screenshot()
     time.sleep(2)

@@ -39,8 +39,13 @@ class EmailRegisterPage(base.Base):
     def click_emalimod(self):
         self.dr.find_element(self.cfg.get('as_index', 'register_email_type_by'), \
                         self.cfg.get('as_index', 'register_email_type')).click()
-        
+    
+    def click_emailmod_domain(self):
+        self.dr.find_element(self.cfg.get('as_index', 'register_email_typedomain_by'), \
+                        self.cfg.get('as_index', 'register_email_typedomain')).click()
+                           
     def input_username(self,r_username):
+        time.sleep(1)
         self.dr.find_element(self.cfg.get('as_index', 'register_email_username_by'), \
                         self. cfg.get('as_index', 'register_email_username')).send_keys(r_username)
     

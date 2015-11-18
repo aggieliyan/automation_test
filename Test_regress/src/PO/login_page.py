@@ -47,7 +47,10 @@ class ClickLoginText(base.Base):
     
     def click_login(self):
         self.dr.find_element_by_link_text(u"[登录]").click()
-            
+
+    def click_register(self):
+        self.dr.find_element_by_link_text(u"[注册]").click()
+               
 class LoginPage(base.Base):
     
     def __init__(self, driver, cfg):

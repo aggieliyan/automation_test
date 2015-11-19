@@ -47,8 +47,11 @@ class CuorsefilePage(base.Base):
 		self.dr = driver
 
 	def click_know(self):
-		time.sleep(1)
-		self.dr.find_element("id", "J_know").click()
+		time.sleep(2)
+		try:
+		    self.dr.find_element("id", "J_know").click()
+		except:
+			None
 
 	def click_add_classhour(self, cnum):
 		self.dr.find_elements_by_link_text(u"课时")[cnum].click()
@@ -144,7 +147,7 @@ class CourseInfoPage(base.Base):
 		self.dr.execute_script("$('.baseInfoNav li').eq(8).click()")
     	
 	def click_choiceteacher(self):
-		time.sleep(2)
+		time.sleep(3)
 		self.dr.find_element(self.cfg.get('courseRedirect', 'teacherbtn_by'), \
 			self.cfg.get('courseRedirect', 'teacherbtn')).click()
 			

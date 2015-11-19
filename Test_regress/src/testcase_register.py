@@ -60,7 +60,7 @@ class RegisterTest(unittest.TestCase):
     def test_register_domain(self):
         ba = Base(self.driver)
         user_name = ""
-        user_name = login.auto_register(self.cfg, self.driver, self.independent_url, 1, 3)
+        user_name = login.auto_register(self.cfg, self.driver, self.independent_url, 2, 3)
      
         filename = ba.save_screenshot()
         print "image:"+filename

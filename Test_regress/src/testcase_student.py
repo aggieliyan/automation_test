@@ -58,6 +58,7 @@ class StudentTest(unittest.TestCase):
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
 
     def test_buy_course_use_RMB(self):
+       #购买普通的网络班
        course_href = self.cfg.get("env_para", "course_href1")
        if course_href != '0':
            user_management.buy_course(self.cfg, self.driver, self.base_url, course_href)
@@ -73,7 +74,8 @@ class StudentTest(unittest.TestCase):
        ba.save_screenshot()
        
     def test_buy_course_use_card(self):
-        course_href = self.cfg.get("env_para", "course_href1")
+        #购买预售的网络班
+        course_href = self.cfg.get("env_para", "course_href2")
         if course_href != '0':
             user_management.buy_course_usecard(self.cfg, self.driver, self.base_url, course_href)
         else:

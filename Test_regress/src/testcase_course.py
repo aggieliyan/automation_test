@@ -150,6 +150,7 @@ class CourseTest(unittest.TestCase):
         self.assertEqual(True, rs)
 
     #@unittest.skip("test")
+    #普通网络班
     def test_onlineclass(self):
         ba = Base(self.driver)
         title = "onlineclass" + ba.rand_name()

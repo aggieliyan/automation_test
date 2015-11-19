@@ -133,7 +133,8 @@ class CourseTest(unittest.TestCase):
     def test_onlineclass(self):
         ba = Base(self.driver)
         title = "onlineclass" + ba.rand_name()
-        new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title)
+        new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title,\
+                             ctype=1, price="0.1")
 
         # rs = ba.is_element_present("link text", title)
         time.sleep(2)

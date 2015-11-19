@@ -4,7 +4,7 @@ Created on Dec 9, 2014
 
 @author: liwen
 '''
-import base
+import base, time
 
 
 class  IndexPage(base.Base):

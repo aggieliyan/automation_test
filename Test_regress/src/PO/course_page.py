@@ -179,6 +179,7 @@ class CourseManageListPage(base.Base):
 		op.click_course_manage()
 
 	def click_manage(self):
+		time.sleep(2)
 		self.dr.find_elements("class name", "chapterSelect")[0].click()
 		time.sleep(0.5)
 

@@ -81,7 +81,7 @@ class StudentMangeTest(unittest.TestCase):
             rs = True
         self.assertEqual(True, rs)
 
-    # 注：以后管理员不能批量导入学员了
+    # 注：以后机构不能批量导入学员了，只有超管可以
     # 导入多个学员
     # def test_import_multi_student(self):
     #     ba = Base(self.driver)

@@ -202,16 +202,16 @@ if __name__ == "__main__":
     allsuites = []
     allsuites.append(suite_register)
     allsuites.append(suite_course)
-#    allsuites.append(suite_card)
-#    allsuites.append(suite_stumanage)
-#    allsuites.append(suite1)
-#    allsuites.append(suite2)
-#    allsuites.append(suite_teacher)
-#
-#    #考试部分
-#    allsuites.append(suite_exam)
-#    allsuites.append(suite_exam_student)
-#    allsuites.append(suite_exam_result)
+    allsuites.append(suite_card)
+    allsuites.append(suite_stumanage)
+    allsuites.append(suite1)
+    allsuites.append(suite2)
+    allsuites.append(suite_teacher)
+
+    #考试部分
+    allsuites.append(suite_exam)
+    allsuites.append(suite_exam_student)
+    allsuites.append(suite_exam_result)
 
     alltests = unittest.TestSuite(allsuites)
 

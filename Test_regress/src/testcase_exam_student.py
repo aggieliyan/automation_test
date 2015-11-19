@@ -5,7 +5,7 @@ Created on Sep. 24, 2012
 @author: yilulu
 '''
 
-import unittest,  ConfigParser, os, time
+import unittest,  ConfigParser, os, time, HTMLTestRunner
 
 from selenium import webdriver
 
@@ -59,12 +59,16 @@ class ExamStudentTest(unittest.TestCase):
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
 
-#    def test_buy_paper(self):
-#        ba = Base(self.driver)
-#        paper_url = self.cfg.get("env_para", "paper_url")
-#        exam_user_management.buy_paper(self.cfg, self.driver, paper_url)
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
+    def test_buy_paper(self):
+        ba = Base(self.driver)
+        if self.base_url == "http://www.ablesky.com/":
+            paper_url = self.cfg.get("env_para", "paper_url")
+        elif self.base_url == "http://www.beta.ablesky.com/":
+            paper_url = self.cfg.get("env_para", "paper_url_beta")
+            
+        exam_user_management.buy_paper(self.cfg, self.driver, paper_url)
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
     #学员参加考试
     def test_exam_user(self):
@@ -85,7 +89,28 @@ class ExamStudentTest(unittest.TestCase):
         print "image:"+filename 
         self.assertNotEqual(paper_name, paper_name_ok)
 
-
-
     def tearDown(self):
         self.driver.quit()
+        
+if __name__ == "__main__":
+    
+    suite_exam_student = unittest.TestLoader().loadTestsFromTestCase(ExamStudentTest)
+    allsuites = []
+    allsuites.append(suite_exam_student)
+    alltests = unittest.TestSuite(allsuites)
+
+    fp = file("myreport.html", 'wb')
+    runner = HTMLTestRunner.HTMLTestRunner(
+                stream=fp,
+                title='My unit test',
+                description='This demonstrates the report output by HTMLTestRunner.'
+                )
+    runner.run(alltests)
+
+    cfg_file = 'config.ini'
+    cfg = ConfigParser.RawConfigParser()
+    cfg.read(cfg_file)
+    cfg.set("env_para", "cookie1", "no")
+    cfg.set("env_para", "cookie_stu", "no")
+    cfg.write(open(cfg_file, "w"))
+    

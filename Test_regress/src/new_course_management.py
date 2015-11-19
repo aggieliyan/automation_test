@@ -12,6 +12,7 @@ from PO.course_page import CourseStepOnePage, CuorsefilePage, CourseInfoPage, Co
 from PO.class_page import OnLineClassListPage, ClassInfoPage
 from PO.agency_page import CourseAgencyPage, AgentCourseInputPage
 
+    
 def course_redirect(cfg, driver, base_url, isthree=0,\
     course_title=u"course", course_describe='hello world', \
     course_tags='english\n', course_price=0, chapter=0):
@@ -114,7 +115,26 @@ def course_edit(cfg, driver):
     courseinfo.click_save()
     driver.refresh()
     time.sleep(2)
-    
+
+#价格不能输入0.1
+#def test_course_rmbbuy(cfg, driver, course_title, course_price=0.1):
+#    course = CourseStepOnePage(driver, cfg)
+#    #进入发课页面
+#    course.open()
+#    course.input_course_title(course_title)
+#    course.click_service_cate()
+#    course.click_next_step()
+#
+#    courefile = CuorsefilePage(driver, cfg)
+#    courefile.click_know()
+#    courefile.click_info()
+#    
+#    #课程信息页面
+#    course_info = CourseInfoPage(driver, cfg)
+#    course_info.click_charge()
+#    course_info.input_price(str(course_price))
+#    course_info.click_save()
+        
 def class_redirect(cfg, driver, base_url, classname='onlineclass', \
     ctype=1, price=10, course_describe='hello world', course_tags='english\n'):
     '''

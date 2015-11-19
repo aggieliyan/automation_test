@@ -30,6 +30,7 @@ class PaymentPage(base.Base):
 			%(self.base_url, host, ptype, str(course_id)))
 
 	def choose_use_rmb(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_index','use_rmb_by'), \
 			self.cfg.get('org_index','use_rmb')).click()
 

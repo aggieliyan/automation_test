@@ -63,7 +63,26 @@ class CourseTest(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
-
+   
+#   #仅供学员购买的课程，没有课时，为了防止防作弊开启，课程价格为0.1,但是设置不成功
+#    def test_course_rmbbuy(self):
+#       ba = Base(self.driver)
+#       title = "course" + ba.rand_name()
+#       new_course_management.test_course_rmbbuy(self.cfg, self.driver, course_title=title, course_price=0.1)
+#       
+#       time.sleep(2)
+#       course_href = self.driver.find_element("link text", u"预览")
+#       #若发课成功了取出课程链接存入文件中供后面的购买流程用
+#       rs = False
+#       if course_href:
+#            rs = True
+#            self.cfg.set("env_para", "course_href_rmb",  "http://www.ablesky.com/" + course.get_attribute("href"))
+#            self.cfg.write(open(self.cfg_file, "w"))
+#
+#       filename = ba.save_screenshot()
+#       print "image:"+filename
+#       self.assertEqual(True, rs)
+        
     # @unittest.skip("test")
     def test_release_normal_course(self):      
         ba = Base(self.driver)
@@ -110,6 +129,7 @@ class CourseTest(unittest.TestCase):
         print "image:"+filename
 
     #@unittest.skip("test")
+    #预售网络班
     def test_presaleclass(self):
         ba = Base(self.driver)
         title = "presaleclass" + ba.rand_name()

@@ -113,6 +113,7 @@ def course_edit(cfg, driver):
     courseinfo.click_window_sure()
     courseinfo.click_save()
     driver.refresh()
+    time.sleep(2)
     
 def class_redirect(cfg, driver, base_url, classname='onlineclass', \
     ctype=1, price=10, course_describe='hello world', course_tags='english\n'):

@@ -46,7 +46,7 @@ class UserexampaperPage(base.Base):
 		return exam_time
 			
 	def click_startexam(self):
-		time.sleep(2)
+		time.sleep(3)
 		self.dr.find_element_by_link_text(u"开始考试").click()		
 
 	def get_questiontitle(self):

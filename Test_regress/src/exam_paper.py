@@ -58,8 +58,8 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     #生成试卷
     submit = QuestionInfoPage(driver,cfg)    
     submit.click_submit_btn()
-    submit.save_screenshot()
     time.sleep(2)
+    submit.save_screenshot()
     return exam_name   
             
 #添加大题

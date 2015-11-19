@@ -45,7 +45,7 @@ class EmailRegisterPage(base.Base):
                         self.cfg.get('as_index', 'register_email_typedomain')).click()
                            
     def input_username(self,r_username):
-        time.sleep(1)
+        time.sleep(2)
         self.dr.find_element(self.cfg.get('as_index', 'register_email_username_by'), \
                         self. cfg.get('as_index', 'register_email_username')).send_keys(r_username)
     

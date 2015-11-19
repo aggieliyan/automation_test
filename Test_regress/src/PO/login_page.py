@@ -63,6 +63,7 @@ class LoginPage(base.Base):
         self.dr.get(url)
             
     def input_username(self,user_name):
+        time.sleep(1)
         self.dr.find_element(self.cfg.get('search', 'login_username_by'), \
                         self.cfg.get('search', 'login_username')).send_keys(user_name)
     

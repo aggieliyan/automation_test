@@ -206,5 +206,9 @@ class CourseManageListPage(base.Base):
 			self.cfg.get('courseRedirect', 'editcourse'))[0].click()
 			
 	def click_window_ok(self):
+		bh = self.dr.window_handles
+		time.sleep(1)
 		self.dr.find_element(self.cfg.get('courseRedirect', 'winok_by'), \
 			self.cfg.get('courseRedirect', 'winok')).click()
+		time.sleep(1)
+		self.switch_window(bh)

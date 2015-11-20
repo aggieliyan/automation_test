@@ -37,7 +37,7 @@ class QuestionListPage(base.Base):
 		time.sleep(3)
 		self.dr.execute_script("$('#J_uploadFileInput').attr('style', \
 		'height:20px;opacity:1;transform:translate(0px, 0px) scale(1)')")
-		time.sleep(2)
+		time.sleep(3)
 		self.dr.find_element(self.cfg.get('exam', "path_by"), \
 							self.cfg.get('exam', "path")).send_keys(template)
 		time.sleep(3)					

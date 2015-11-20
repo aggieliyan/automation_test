@@ -193,8 +193,8 @@ class QuestionInfoPage(base.Base):
         self.dr.find_element(self.cfg.get('exam', 'paper_import_question_by'), \
                         self.cfg.get('exam', 'paper_import_question')).click()
         time.sleep(2)
-        self.dr.find_element(self.cfg.get('exam', 'paper_selece_all_by'), \
-                        self.cfg.get('exam', 'paper_selece_all')).click()
+        self.dr.find_elements(self.cfg.get('exam', 'paper_selece_first_by'), \
+                        self.cfg.get('exam', 'paper_selece_first'))[0].click()
         time.sleep(2)
         self.dr.find_element(self.cfg.get('exam', 'exam_add_big_question_ok_by'), \
                         self.cfg.get('exam', 'exam_add_big_question_ok')).click()

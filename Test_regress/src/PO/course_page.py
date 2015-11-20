@@ -120,11 +120,17 @@ class CourseInfoPage(base.Base):
 	def click_charge(self):
 		time.sleep(2)
 		self.dr.find_element("id", "J_setPriceNav").click()
-		time.sleep(4)
+		time.sleep(3)
 		self.dr.find_element(self.cfg.get('courseRedirect', 'chanrge_by'), \
 			self.cfg.get('courseRedirect', 'chanrge')).click()
 
 	def input_price(self, cprice):
+		time.sleep(1)
+		price_orign = self.dr.find_element(self.cfg.get('courseRedirect', 'price_orign_by'), \
+			self.cfg.get('courseRedirect', 'price_orign'))
+		price_orign.clear()
+		price_orign.send_keys(cprice)
+		time.sleep(1)
 		pinput = self.dr.find_element(self.cfg.get('courseRedirect', 'price_by'), \
 			self.cfg.get('courseRedirect', 'price'))
 		pinput.clear()

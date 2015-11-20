@@ -62,13 +62,14 @@ class StudentMangeTest(unittest.TestCase):
             # path=/; domain=.ablesky.com
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
-            self.driver.add_cookie({'name':'RM', 'value':'rm'})  
+            self.driver.add_cookie({'name':'RM', 'value':'rm'}) 
+             
     #导入一个学员
     def test_import_one_student(self):
         ba = Base(self.driver)
-        stu_name = self.cfg.get("env_para", "import_name")
-        # stu_name = "wuding0125"#还是固定的学员，以后改成注册那生成的学员
-        student_management.import_one_student(self.cfg, self.driver, self.base_url, stu_name)
+        #导入的学员为注册生成的学员
+        #stu_name = self.cfg.get("env_para", "import_name")
+        stu_name = student_management.import_one_student(self.cfg, self.driver, self.base_url)
         filename = ba.save_screenshot()
         print "image:"+filename
         #验证

@@ -31,7 +31,18 @@ class OrgStudentManagePage(base.Base):
 		self.dr.find_element(self.cfg.get('org_manage', "stu_import_btn_by"), \
 			self.cfg.get('org_manage', "stu_import_btn")).click()
 		time.sleep(2)
-
+	
+    #删除第一个学员并获取用户名供导入使用
+	def delete_firstudent(self):
+		time.sleep(2)
+		first_stuname = self.dr.execute_script("return $('.x-grid3-cell-inner .clearfix span').eq(0).text()")
+		time.sleep(1)
+		self.dr.find_element_by_link_text(u"删除学员").click()
+		time.sleep(2)
+		self.dr.execute_script("return $('.x-panel-btns-right button').eq(0).click()")
+		time.sleep(2)
+		return first_stuname
+		
 	#点击批量导入学员
 	def click_import_multi(self):
 		try:

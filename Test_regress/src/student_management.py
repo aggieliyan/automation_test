@@ -16,12 +16,14 @@ from PO.org_student_page import OrgStudentManagePage
 from PO.base import Base
 from PO.myoffice_page import MyOfficePage
 
-def import_one_student(cfg, driver, base_url, stu_name):
+def import_one_student(cfg, driver, base_url):
 
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
+    stu_name = ogstumanage.delete_firstudent()
     ogstumanage.input_studentname(stu_name)
     ogstumanage.click_import()
+    return stu_name
 
 def import_multi_student(cfg, driver, base_url, stu_txt):
 

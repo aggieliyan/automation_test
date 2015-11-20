@@ -79,7 +79,7 @@ def add_big_question(cfg, driver, qscore, qtype):
 def auto_creatquestion(cfg, driver, q_num):
     #typel = [1,2,3,4,5,6,7]
     for i in range(q_num):
-        qscore = '0'
+        qscore = '5'
         qtype = random.randint(1, 7)
         #print qtype
         add_big_question(cfg, driver, qscore, qtype)

@@ -20,6 +20,7 @@ class ExamPointListPage(base.Base):
     
     #新建考点
     def click_create_point(self):
+        time.sleep(2)
         self.dr.find_element(self.cfg.get('exam', 'point_addnewid_by'), \
             self.cfg.get('exam', 'point_addnewid')).click()
     
@@ -80,7 +81,7 @@ class ExamPointListPage(base.Base):
 
     #编辑考点
     def click_modify_point(self):
-        time.sleep(2)
+        time.sleep(4)
         self.dr.find_elements(self.cfg.get('exam', 'point_edit_by'), \
             self.cfg.get('exam', 'point_edit'))[0].click()
         

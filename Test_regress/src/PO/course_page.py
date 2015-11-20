@@ -54,6 +54,7 @@ class CuorsefilePage(base.Base):
 			None
 
 	def click_add_classhour(self, cnum):
+		time.sleep(1)
 		self.dr.find_elements_by_link_text(u"课件")[cnum].click()
 		time.sleep(0.5)
 
@@ -99,7 +100,7 @@ class CuorsefilePage(base.Base):
 		time.sleep(1)
 
 	def click_save(self):
-		time.sleep(1)
+		time.sleep(2)
 		self.dr.find_element_by_link_text(u"保存").click()
 		time.sleep(0.5)
 
@@ -147,7 +148,7 @@ class CourseInfoPage(base.Base):
 		self.dr.execute_script("$('.baseInfoNav li').eq(8).click()")
     	
 	def click_choiceteacher(self):
-		time.sleep(3)
+		time.sleep(4)
 		self.dr.find_element(self.cfg.get('courseRedirect', 'teacherbtn_by'), \
 			self.cfg.get('courseRedirect', 'teacherbtn')).click()
 			

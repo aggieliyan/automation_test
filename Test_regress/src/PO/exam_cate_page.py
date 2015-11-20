@@ -21,6 +21,7 @@ class ExamCateListPage(base.Base):
 
     #填写类目名称
     def input_cname(self, cate_name):
+        time.sleep(1)
         c_input = self.dr.find_element(self.cfg.get('exam', 'cate_addname_by'), \
             self.cfg.get('exam', 'cate_addname'))
         c_input.clear()
@@ -42,8 +43,8 @@ class ExamCateListPage(base.Base):
     #编辑类目
     def click_modify_cate(self):
         time.sleep(1)
-        self.dr.find_element(self.cfg.get('exam', 'cate_mod_by'), \
-            self.cfg.get('exam','cate_mod_xpath')).click()  
+        self.dr.find_elements(self.cfg.get('exam', 'cate_mod_by'), \
+            self.cfg.get('exam','cate_mod'))[0].click()  
 
     #删除类目
     def click_delete_cate(self):

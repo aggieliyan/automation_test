@@ -44,7 +44,10 @@ def course_redirect(cfg, driver, base_url, isthree=0,\
     cfile = CuorsefilePage(driver, cfg)
 
     cnum = 0
-    cfile.click_know()
+    try:
+        cfile.click_know()
+    except:
+        None
     if chapter:
         cfile.click_add_chapter()
         cfile.input_cname()

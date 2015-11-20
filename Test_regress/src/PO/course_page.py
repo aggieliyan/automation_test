@@ -54,7 +54,7 @@ class CuorsefilePage(base.Base):
 			None
 
 	def click_add_classhour(self, cnum):
-		self.dr.find_elements_by_link_text(u"课时")[cnum].click()
+		self.dr.find_elements_by_link_text(u"课件")[cnum].click()
 		time.sleep(0.5)
 
 	def click_add_chapter(self):

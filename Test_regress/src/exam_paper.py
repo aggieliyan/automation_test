@@ -52,11 +52,12 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     examinfo.click_next()
     examinfo.save_screenshot()    
     #添加大题
-    auto_creatquestion(cfg, driver, 2)
+    auto_creatquestion(cfg, driver, 1)
     time.sleep(3)
     examinfo.save_screenshot()
     #生成试卷
-    submit = QuestionInfoPage(driver,cfg)    
+    submit = QuestionInfoPage(driver,cfg)
+    time.sleep(2)    
     submit.click_submit_btn()
     time.sleep(2)
     return exam_name   

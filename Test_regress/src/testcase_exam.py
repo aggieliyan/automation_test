@@ -257,7 +257,7 @@ class ExamTest(unittest.TestCase):
         #免得创建试卷失败后，后面要用到这个变量会失败
         ba = Base(self.driver)
         self.paper_name = ""
-        self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 1, 1, 1)
+        self.paper_name = exam_paper.auto_createpaper(self.cfg, self.driver, self.base_url, 1 , 1, 1, 2, 1, 1)
                
         self.cfg.set("env_para", "paper_name", str(self.paper_name))
         self.cfg.write(open(self.cfg_file, "w"))        

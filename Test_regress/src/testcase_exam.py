@@ -77,14 +77,14 @@ class ExamTest(unittest.TestCase):
     def test_import_questions(self):
         ba = Base(self.driver)
         self.template = '\\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\createquestions.xls'
-        #建立数据库连接查询当前试题总数并关闭连接,否则下面的查询会有缓存
-        db = 'ablesky_examsystem'
-        conn = ba.connect_db(self.dbhost, db)
-        cursor = conn.cursor()
-        sql = "SELECT COUNT(*) FROM e_question_q"
-        cursor.execute(sql)
-        num1 = cursor.fetchall()[0][0]
-        cursor.close()
+#        #建立数据库连接查询当前试题总数并关闭连接,否则下面的查询会有缓存
+#        db = 'ablesky_examsystem'
+#        conn = ba.connect_db(self.dbhost, db)
+#        cursor = conn.cursor()
+#        sql = "SELECT COUNT(*) FROM e_question_q"
+#        cursor.execute(sql)
+#        num1 = cursor.fetchall()[0][0]
+#        cursor.close()
         #调用导入试题
         count = exam_questions.import_questions(self.cfg, self.driver, self.template)
         filename = ba.save_screenshot()

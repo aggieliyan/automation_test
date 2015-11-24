@@ -104,6 +104,9 @@ class CourseTest(unittest.TestCase):
         ba = Base(self.driver)
         new_course_management.course_edit(self.cfg, self.driver)
         
+        time.sleep(2)
+        self.driver.execute_script("$('.baseInfoNav li').eq(8).click()")
+        time.sleep(2)
         rs = ba.is_element_present("class name", "del")
         self.assertEqual(True, rs)
         filename = ba.save_screenshot()

@@ -69,8 +69,8 @@ class ExamPointListPage(base.Base):
     #确认删除考点
     def click_delpoint_ok(self):
         time.sleep(2)
-        self.dr.find_element(self.cfg.get('exam', 'point_delokbot_by'), \
-            self.cfg.get('exam', 'point_delokbot_xpath')).click()
+        self.dr.find_element(self.cfg.get('exam', 'point_delok_by'), \
+            self.cfg.get('exam', 'point_delok')).click()
         
 
     #确认添加课程
@@ -88,8 +88,8 @@ class ExamPointListPage(base.Base):
 
     #删除考点
     def click_delete_point(self):
-        self.dr.find_element(self.cfg.get('exam', 'point_delete_by'), \
-            self.cfg.get('exam', 'point_delete_xpath')).click()
+        self.dr.find_elements(self.cfg.get('exam', 'point_delete_by'), \
+            self.cfg.get('exam', 'point_delete'))[-1].click()
         
     #
     def click_lesdel_point(self):

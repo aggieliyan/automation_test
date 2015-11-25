@@ -117,6 +117,7 @@ def course_edit(cfg, driver):
     courseinfo.click_window_sure()
     courseinfo.click_save()
     driver.refresh()
+    time.sleep(2)
     
 #价格不能输入0.1
 #def test_course_rmbbuy(cfg, driver, course_title, course_price=0.1):

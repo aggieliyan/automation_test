@@ -168,6 +168,7 @@ class CourseInfoPage(base.Base):
 			self.cfg.get('courseRedirect', 'sure'))[0].click()	
 				
 	def click_save(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('courseRedirect', 'done_btn_by'), \
 			self.cfg.get('courseRedirect', 'done_btn')).click()
 

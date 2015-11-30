@@ -140,7 +140,7 @@ class StudyCardTest(unittest.TestCase):
         title = u"listen" + ba.rand_name()
         card_management.add_listen_cardgroup(self.cfg, self.driver, self.base_url, self.org_name, group_name=title)
 
-        self.driver.implicitly_wait(10)
+        time.sleep(2)
         rs = ba.is_element_present("link text", title)
         filename = ba.save_screenshot()
         print "image:"+filename

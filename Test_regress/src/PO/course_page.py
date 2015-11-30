@@ -105,7 +105,7 @@ class CuorsefilePage(base.Base):
 		time.sleep(0.5)
 
 	def click_info(self):
-		time.sleep(2)
+		time.sleep(3)
 		self.dr.find_element_by_link_text(u"基本信息").click()
 
 class CourseInfoPage(base.Base):

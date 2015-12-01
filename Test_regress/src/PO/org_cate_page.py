@@ -29,7 +29,7 @@ class OrgCateListPage(base.Base):
         time.sleep(2)
 
 	def input_catename(self, cate_name):
-		time.sleep(2)
+		time.sleep(3)
 		self.dr.find_element(self.cfg.get('org_manage', 'cate_addname_by'), \
             self.cfg.get('org_manage', 'cate_addname')).send_keys(cate_name)
         time.sleep(2)

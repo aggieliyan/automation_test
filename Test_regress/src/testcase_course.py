@@ -104,9 +104,9 @@ class CourseTest(unittest.TestCase):
         ba = Base(self.driver)
         new_course_management.course_edit(self.cfg, self.driver)
         
-        time.sleep(2)
+        time.sleep(3)
         self.driver.execute_script("$('.chapterRight .baseInfoNav li').eq(8).click()")
-        time.sleep(2)
+        time.sleep(3)
         rs = ba.is_element_present("class name", "del")
         self.assertEqual(True, rs)
         filename = ba.save_screenshot()

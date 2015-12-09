@@ -102,7 +102,7 @@ class CuorsefilePage(base.Base):
 	def click_save(self):
 		time.sleep(2)
 		self.dr.find_element_by_link_text(u"保存").click()
-		time.sleep(0.5)
+		time.sleep(3)
 
 	def click_info(self):
 		time.sleep(3)

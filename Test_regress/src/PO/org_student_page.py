@@ -36,7 +36,7 @@ class OrgStudentManagePage(base.Base):
 	def delete_firstudent(self):
 		time.sleep(2)
 		first_stuname = self.dr.execute_script("return $('.x-grid3-cell-inner .clearfix span').eq(0).text()")
-		time.sleep(1)
+		time.sleep(2)
 		self.dr.find_element_by_link_text(u"删除学员").click()
 		time.sleep(2)
 		self.dr.execute_script("return $('.x-panel-btns-right button').eq(0).click()")

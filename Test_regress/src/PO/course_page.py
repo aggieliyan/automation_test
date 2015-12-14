@@ -150,7 +150,7 @@ class CourseInfoPage(base.Base):
 			self.cfg.get('courseRedirect', 'tags')).send_keys(course_tags)
 	
 	def click_teacher(self):
-		time.sleep(1)
+		time.sleep(2)
 		self.dr.execute_script("$('.baseInfoNav li').eq(8).click()")
     	
 	def click_choiceteacher(self):
@@ -159,11 +159,12 @@ class CourseInfoPage(base.Base):
 			self.cfg.get('courseRedirect', 'teacherbtn')).click()
 			
 	def choice_firsteacher(self):
-		time.sleep(1)
+		time.sleep(2)
 		self.dr.find_elements(self.cfg.get('courseRedirect', 'choiceteacher_by'), \
 			self.cfg.get('courseRedirect', 'choiceteacher'))[0].click()
 			
 	def click_window_sure(self):
+		time.sleep(2)
 		self.dr.find_elements(self.cfg.get('courseRedirect', 'sure_by'), \
 			self.cfg.get('courseRedirect', 'sure'))[0].click()	
 				

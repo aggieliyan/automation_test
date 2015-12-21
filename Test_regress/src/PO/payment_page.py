@@ -38,4 +38,9 @@ class PaymentPage(base.Base):
 		time.sleep(3)
 		self.dr.find_element(self.cfg.get('org_index', 'pay_ok_by'), \
 			self.cfg.get('org_index', 'pay_ok')).click()
-		time.sleep(2)
+		
+	def click_look_Coursedetail(self):
+		time.sleep(3)
+		self.dr.find_element_by_link_text(u"查看课程详情").click()
+		time.sleep(3)
+		

@@ -23,6 +23,7 @@ def buy_course(cfg, driver, base_url, course_url):
     pay.save_screenshot()
     pay.choose_use_rmb()
     pay.click_pay()
+    pay.click_look_Coursedetail()
 
     
 #个人充值卡买课

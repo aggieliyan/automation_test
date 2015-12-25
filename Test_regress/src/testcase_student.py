@@ -66,7 +66,7 @@ class StudentTest(unittest.TestCase):
            print u"没有购买链接"
        ba = Base(self.driver)
 
-       rs = ba.is_element_present("id", "J_studycenter")
+       rs = ba.is_element_present("css selector", ".item-content .course-name a")
        filename = ba.save_screenshot()
        print "image:"+filename
        self.assertEqual(True, rs)

@@ -159,7 +159,7 @@ class CourseInfoPage(base.Base):
 			self.cfg.get('courseRedirect', 'teacherbtn')).click()
 			
 	def choice_firsteacher(self):
-		time.sleep(2)
+		time.sleep(3)
 		self.dr.find_elements(self.cfg.get('courseRedirect', 'choiceteacher_by'), \
 			self.cfg.get('courseRedirect', 'choiceteacher'))[0].click()
 			
@@ -172,6 +172,7 @@ class CourseInfoPage(base.Base):
 		time.sleep(2)
 		self.dr.find_element(self.cfg.get('courseRedirect', 'done_btn_by'), \
 			self.cfg.get('courseRedirect', 'done_btn')).click()
+		time.sleep(2)
 
 class CourseManageListPage(base.Base):
 

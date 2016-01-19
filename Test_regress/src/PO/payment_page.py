@@ -29,6 +29,12 @@ class PaymentPage(base.Base):
 			host=%s&grouponid=&type=%s&id=%s"\
 			%(self.base_url, host, ptype, str(course_id)))
 
+    #选择账户余额支付
+	def choose_balance_pay(self):
+		time.sleep(2)
+		self.dr.find_element(self.cfg.get('org_index','balance_by'), \
+			self.cfg.get('org_index','balance')).click()
+			
 	def choose_use_rmb(self):
 		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_index','use_rmb_by'), \

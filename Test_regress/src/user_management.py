@@ -21,6 +21,7 @@ def buy_course(cfg, driver, base_url, course_url):
     pay = PaymentPage(driver, cfg)
     pay.open(course_url)
     pay.save_screenshot()
+    pay.choose_balance_pay()
     pay.choose_use_rmb()
     pay.click_pay()
     pay.click_look_Coursedetail()
@@ -32,6 +33,7 @@ def buy_course_usecard(cfg, driver, base_url, course_url):
     pay = PaymentPage(driver, cfg)
     pay.open(course_url)
     pay.save_screenshot()
+    pay.choose_balance_pay()
     pay.click_pay()
           
     

@@ -8,7 +8,7 @@ Created on Sep. 24, 2012
 import unittest,  ConfigParser, os, time
 
 from selenium import webdriver
-
+import HTMLTestRunner
 import login, user_management, card_management, exam_user_management
 from PO.base import Base
 
@@ -169,3 +169,25 @@ class StudentTest(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
+        
+if __name__ == "__main__":
+
+    suite2 = unittest.TestLoader().loadTestsFromTestCase(StudentTest)
+    allsuites = []
+    allsuites.append(suite2)
+    alltests = unittest.TestSuite(allsuites)
+
+    fp = file("myreport.html", 'wb')
+    runner = HTMLTestRunner.HTMLTestRunner(
+                stream=fp,
+                title='My unit test',
+                description='This demonstrates the report output by HTMLTestRunner.'
+                )
+    runner.run(alltests)
+
+    cfg_file = 'config.ini'
+    cfg = ConfigParser.RawConfigParser()
+    cfg.read(cfg_file)
+    cfg.set("env_para", "cookie1", "no")
+    cfg.set("env_para", "cookie_stu", "no")
+    cfg.write(open(cfg_file, "w"))

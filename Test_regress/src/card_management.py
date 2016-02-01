@@ -12,8 +12,20 @@ from PO.org_card_page import OrgCardgroupListPage, OrgCardgroupInputPage, OrgBuy
 from PO.exam_subject_page import SubjectListPage
 from PO.exam_paper_page import ExamInfoPage, QuestionInfoPage
 
-#使用充值卡和充课卡
-def use_prepaidorcate_card(cfg, driver, base_url, card_num, card_psw):
+#使用充值卡
+def use_prepaid_card(cfg, driver, base_url, card_num, card_psw):
+    ogusecard = OrgUselearncardPage(driver, cfg)
+    ogusecard.open_uselearncard()
+    ogusecard.input_cardnum(card_num)
+    ogusecard.input_cardpwd(card_psw)
+    ogusecard.save_screenshot() 
+    ogusecard.click_usenow()   
+    ogusecard.click_pconfirmagain1()
+    prepaid_num = ogusecard.get_pcardnum()
+    return prepaid_num
+
+#使用充课卡
+def use_cate_card(cfg, driver, base_url, card_num, card_psw):
     ogusecard = OrgUselearncardPage(driver, cfg)
     ogusecard.open_uselearncard()
     ogusecard.input_cardnum(card_num)
@@ -22,7 +34,7 @@ def use_prepaidorcate_card(cfg, driver, base_url, card_num, card_psw):
     ogusecard.click_usenow()   
     ogusecard.click_pconfirmagain()
     prepaid_num = ogusecard.get_pcardnum()
-    return prepaid_num        
+    return prepaid_num    
   
 #使用补课卡
 def use_course_card(cfg, driver, base_url, card_num, card_psw):

@@ -94,7 +94,7 @@ class StudentTest(unittest.TestCase):
         p_card_num = self.cfg.get("env_para", "p_card_num")
         p_card_pwd = self.cfg.get("env_para", "p_card_pwd")
         if p_card_num != 0 and p_card_pwd != 0:
-            confirm_num = card_management.use_prepaidorcate_card(self.cfg, self.driver, self.base_url, p_card_num, p_card_pwd)
+            confirm_num = card_management.use_prepaid_card(self.cfg, self.driver, self.base_url, p_card_num, p_card_pwd)
         else:
             print u"没有获取到卡充值卡号或者密码"
            
@@ -108,7 +108,7 @@ class StudentTest(unittest.TestCase):
         c_card_num = self.cfg.get("env_para", "c_card_num")
         c_card_pwd = self.cfg.get("env_para", "c_card_pwd")
         if c_card_num != 0 and c_card_pwd != 0:
-            confirm_num = card_management.use_prepaidorcate_card(self.cfg, self.driver, self.base_url, c_card_num, c_card_pwd)
+            confirm_num = card_management.use_cate_card(self.cfg, self.driver, self.base_url, c_card_num, c_card_pwd)
         else:
             print u"没有获取到充课卡号或者密码"
            

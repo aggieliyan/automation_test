@@ -178,7 +178,12 @@ class OrgUselearncardPage(base.Base):
 	    time.sleep(2)
 	    self.dr.find_element(self.cfg.get('use_card', 'card_ok_by'), \
 		    self.cfg.get('use_card', 'card_ok')).click()
-	
+
+	def click_pconfirmagain1(self):
+	    time.sleep(2)
+	    self.dr.find_element(self.cfg.get('use_card', 'prepaid1_ok_by'), \
+		    self.cfg.get('use_card', 'prepaid1_ok')).click()
+		    
 	def click_pconfirmagain(self):
 	    time.sleep(2)
 	    self.dr.find_element(self.cfg.get('use_card', 'prepaid_ok_by'), \

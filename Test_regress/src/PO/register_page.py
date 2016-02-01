@@ -41,6 +41,7 @@ class EmailRegisterPage(base.Base):
                         self.cfg.get('as_index', 'register_email_type')).click()
     
     def click_emailmod_domain(self):
+        time.sleep(1)
         self.dr.find_element(self.cfg.get('as_index', 'register_email_typedomain_by'), \
                         self.cfg.get('as_index', 'register_email_typedomain')).click()
                            

@@ -197,3 +197,25 @@ class StudyCardTest(unittest.TestCase):
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()
+        
+if __name__ == "__main__":
+
+    suite_card = unittest.TestLoader().loadTestsFromTestCase(StudyCardTest)
+    allsuites = []
+    allsuites.append(suite_card)
+    alltests = unittest.TestSuite(allsuites)
+
+    fp = file("myreport.html", 'wb')
+    runner = HTMLTestRunner.HTMLTestRunner(
+                stream=fp,
+                title='My unit test',
+                description='This demonstrates the report output by HTMLTestRunner.'
+                )
+    runner.run(alltests)
+
+    cfg_file = 'config.ini'
+    cfg = ConfigParser.RawConfigParser()
+    cfg.read(cfg_file)
+    cfg.set("env_para", "cookie1", "no")
+    cfg.set("env_para", "cookie_stu", "no")
+    cfg.write(open(cfg_file, "w"))

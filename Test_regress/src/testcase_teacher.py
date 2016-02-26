@@ -17,9 +17,10 @@ from PO.base import Base
 import login, teacher_management
 
 class TeacherTest(unittest.TestCase):
-
+      
     def setUp(self):
-
+        
+        self.i = 0
         self.cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
         self.cfg.read(self.cfg_file)
@@ -60,31 +61,50 @@ class TeacherTest(unittest.TestCase):
         else:
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
-
+            
     # @unittest.skip("test")
     def test_create_teacher(self):      
         ba = Base(self.driver)
         name = u"teacher" + ba.rand_name()
-        teacher_management.create_teacher(self.cfg, self.driver, tea_name=name)
-        
-        time.sleep(2)
+        try:
+           teacher_management.create_teacher(self.cfg, self.driver, tea_name=name)
+           time.sleep(2)
+        except:   
+            while self.i < 2:
+                self.i = self.i + 1
+                self.test_create_teacher()
+           
+        get_name = ba.is_element_present("link text", name)
         rs = False
-        get_name = self.driver.find_element_by_link_text(name)
         if get_name:
             rs = True
+        else:
+            while self.i < 2:
+                self.i = self.i + 1
+                self.test_create_teacher()
+              
         self.assertEqual(True, rs)
         filename = ba.save_screenshot()
         print "image:"+filename
-        
+         
     # @unittest.skip("test")
     def test_edit_teacher(self):      
         ba = Base(self.driver)
         time.sleep(2)
-        get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
-        name = u"teacher" + ba.rand_name()
-        teacher_management.edit_teacher(self.cfg, self.driver, tea_name=name)
-        
-        self.assertNotEqual(get_name, name)
+        try:
+            get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
+            name = u"teacher" + ba.rand_name()
+            teacher_management.edit_teacher(self.cfg, self.driver, tea_name=name)
+            time.sleep(1)
+            get_name1 = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
+            
+        except:      
+            while self.i < 3:
+                self.i = self.i + 1
+                self.test_edit_teacher()
+                return
+            
+        self.assertNotEqual(get_name, get_name1)
         filename = ba.save_screenshot()
         print "image:"+filename
         

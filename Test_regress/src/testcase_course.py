@@ -20,6 +20,7 @@ class CourseTest(unittest.TestCase):
 
     def setUp(self):
 
+        self.i = 0
         self.cfg_file = 'config.ini'
         self.cfg = ConfigParser.RawConfigParser()
         self.cfg.read(self.cfg_file)
@@ -134,8 +135,14 @@ class CourseTest(unittest.TestCase):
     def test_onlineclass(self):
         ba = Base(self.driver)
         title = "onlineclass" + ba.rand_name()
-        new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title,\
+        try:
+            new_course_management.class_redirect(self.cfg, self.driver, self.base_url, classname=title,\
                              ctype=1, price="0.01")
+        except:      
+            while self.i < 2:
+                self.i = self.i + 1
+                self.test_onlineclass()
+                return
 
         # rs = ba.is_element_present("link text", title)
         time.sleep(2)
@@ -158,7 +165,7 @@ class CourseTest(unittest.TestCase):
         title = "presaleclass" + ba.rand_name()
         new_course_management.class_redirect(self.cfg, self.driver, self.base_url, ctype=2, classname=title)
         
-        time.sleep(3)
+        time.sleep(4)
         course = self.driver.find_element("link text", title)
         #若发课成功了取出课程链接存入文件中供后面的购买流程用
         rs = False

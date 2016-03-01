@@ -46,11 +46,11 @@ class ClickLoginText(base.Base):
         self.base_url = cfg.get('env_para', 'base_url')
     
     def click_login(self):
-        time.sleep(2)
+        time.sleep(3)
         self.dr.find_element_by_link_text(u"[登录]").click()
 
     def click_register(self):
-        time.sleep(2)
+        time.sleep(3)
         self.dr.find_element_by_link_text(u"[注册]").click()
                
 class LoginPage(base.Base):

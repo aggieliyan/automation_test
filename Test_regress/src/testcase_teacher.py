@@ -96,10 +96,9 @@ class TeacherTest(unittest.TestCase):
             name = u"teacher" + ba.rand_name()
             teacher_management.edit_teacher(self.cfg, self.driver, tea_name=name)
             time.sleep(1)
-            get_name1 = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
-            
+            get_name1 = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师   
         except:      
-            while self.i < 3:
+            while self.i < 2:
                 self.i = self.i + 1
                 self.test_edit_teacher()
                 return

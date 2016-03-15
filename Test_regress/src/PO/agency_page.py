@@ -21,7 +21,7 @@ class CourseAgencyPage(base.Base):
 
 	def open(self):
 		m = MyOfficePage(self.dr, self.cfg)
-		m.open()
+		m.click_org_operatage()
 		m.click_myapplyagency()
 
 	def click_manage_course(self):

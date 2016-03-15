@@ -19,7 +19,7 @@ class OrgteacherManagePage(base.Base):
 	def open(self):
 		m = MyOfficePage(self.dr, self.cfg)
 		m.open()
-		m.click_teaching()
+		m.click_student()
 		m.click_teacher()
 		
 	def click_createacher(self):

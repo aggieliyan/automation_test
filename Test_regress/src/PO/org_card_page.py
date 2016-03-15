@@ -18,7 +18,7 @@ class OrgCardgroupListPage(base.Base):
 	def open(self):
 		m = MyOfficePage(self.dr, self.cfg)
 		m.open()
-		m.click_org_firstpage()
+		m.click_org_operatage()
 		m.click_org_mancardgroup()
 
 	def click_addcardgroup(self):

@@ -26,11 +26,15 @@ class MyOfficePage(base.Base):
 
 	#点击后台首页
 	def click_org_firstage(self):
-		self.dr.find_element_by_link_text(u"后台首页").click()
+		self.dr.find_element_by_link_text(u"首页").click()
+		
+	#点击运营
+	def click_org_operatage(self):
+		self.dr.find_element_by_link_text(u"运营").click()
 		
 	#点击系统设置导航
 	def click_system_settings(self):
-		self.dr.find_element_by_link_text(u"系统设置").click()
+		self.dr.find_element_by_link_text(u"系统").click()
 
 	def click_logo_settings(self):
 		try:
@@ -46,7 +50,7 @@ class MyOfficePage(base.Base):
 
 	#点击教学教务
 	def click_teaching(self):
-		self.dr.find_element_by_link_text(u"教学教务").click()
+		self.dr.find_element_by_link_text(u"教学").click()
 
 	def click_course_manage(self):
 		self.dr.find_element_by_link_text(u"课程管理").click()	
@@ -72,7 +76,7 @@ class MyOfficePage(base.Base):
 
 	#点击学员/员工导航
 	def click_student(self):
-		self.dr.find_element_by_link_text(u"学员/员工").click()
+		self.dr.find_element_by_link_text(u"人员").click()
 
 	#点击学员管理
 	def click_student_management(self):
@@ -90,7 +94,7 @@ class MyOfficePage(base.Base):
 	#点击教学教务导航
 	def click_org_teach(self):
 		time.sleep(2)
-		self.dr.find_element_by_link_text(u"教学教务").click()
+		self.dr.find_element_by_link_text(u"教学").click()
 
 	#点击课程类目
 	def click_org_cate(self):
@@ -98,7 +102,7 @@ class MyOfficePage(base.Base):
 		
 	#点击首页导航
 	def click_org_firstpage(self):
-		self.dr.find_element_by_link_text(u"后台首页").click()
+		self.dr.find_element_by_link_text(u"首页").click()
 
 	#点击管理/卡组
 	def click_org_mancardgroup(self):

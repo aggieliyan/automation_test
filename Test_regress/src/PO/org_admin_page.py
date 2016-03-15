@@ -21,7 +21,7 @@ class OrgAdminListPage(base.Base):
 	def open(self):
 		m = MyOfficePage(self.dr, self.cfg)
 		m.open()
-		m.click_system_settings()
+		m.click_student()
 		m.click_org_admin()
 
 	def click_create(self):

@@ -182,6 +182,9 @@ def add_exam_card(cfg, driver, base_url, count, academy):
     time.sleep(2)
     ogexaminfo.save_screenshot()
     ogqueinfo.click_submit_btn()
+    time.sleep(1)
+    driver.refresh()
+    time.sleep(1)
     examcard_number = add_exam_card_management(cfg, driver, base_url, count, academy)
     return examcard_number
 

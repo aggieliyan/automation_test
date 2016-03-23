@@ -301,7 +301,7 @@ class OrgAddExamcardPage(base.Base):
 	def enter_viewexamcardnumpage(self):
 	    time.sleep(2)
 	    #获取点击查看卡号触发的链接
-	    lookcardnum_url = self.dr.execute_script("return $('#paper_list_con li:eq(1)').attr('data-url')")
+	    lookcardnum_url = self.dr.execute_script("return $('.more-ul li:eq(2)').attr('data-url')")
 	    time.sleep(2)
 	    self.dr.get(lookcardnum_url)#定位查看卡号连接
 	    

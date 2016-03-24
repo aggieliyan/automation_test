@@ -53,7 +53,6 @@ class StudyCardTest(unittest.TestCase):
             login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
             self.cfg.set("env_para", "cookie1", str(self.driver.get_cookie('ASUSS')['value']))
             self.cfg.write(open(self.cfg_file, "w"))
-           
             #本来还有一个叫RM的cookie，但是值都是rm不变所以不取了
             # path=/; domain=.ablesky.com
         else:

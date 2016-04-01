@@ -48,7 +48,7 @@ def delete_admin(cfg, driver, base_url, admin_num=1):
     print bdelete
     adpage.click_delete()
     adpage.click_delete_ok()
-    time.sleep(1)
+    time.sleep(2)
     adelete = adpage.count_admin()
     print adelete
 

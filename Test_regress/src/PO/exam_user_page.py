@@ -26,7 +26,7 @@ class UserpaperListPage(base.Base):
 			self.cfg.get('exam', 'search_input')).send_keys(paper_name)
 			
 	def click_examnow(self):
-		time.sleep(5)
+		time.sleep(7)
 		try:
 			self.dr.find_element_by_link_text(u"立即考试").click()
 		except:

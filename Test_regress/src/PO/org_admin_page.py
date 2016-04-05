@@ -40,8 +40,9 @@ class OrgAdminListPage(base.Base):
 			self.cfg.get('org_manage', 'delete_ad_ok')).click()
 
 	def count_admin(self):
+		time.sleep(5)
 		return len(self.dr.find_elements_by_link_text(u"删除管理员"))
-
+		time.sleep(3)
 
 class OrgAdminInputPage(base.Base):
 

@@ -43,7 +43,7 @@ class QuestionListPage(base.Base):
 		time.sleep(3)					
 		self.dr.find_element(self.cfg.get('exam', "upload_button_by"), \
 							self.cfg.get('exam', "upload_button")).click()
-		time.sleep(10)
+		time.sleep(15)
 		count = self.dr.execute_script("return $('#J_successImportNum').text()")
 #		count = ""
 #		i = 0
@@ -131,11 +131,11 @@ class QuestionInputPage(base.Base):
 	def add_music(self):
 		self.dr.execute_script("$('.J_audioForm').eq(0).attr('style','display:block;'); \
 		$('.file-ie-con input').eq(0).attr('style','height:300px;opacity:1;display:block;position:static;transform:translate(0px, 0px) scale(1)')")
-		time.sleep(10)
+		time.sleep(15)
 		self.dr.find_element(self.cfg.get('exam_questions', "question_music_by"), \
 							self.cfg.get('exam_questions', "question_music")).send_keys \
 							(r"\\data.ablesky.com\workspace\Testing\Testing Files\Automation_test\123.mp3")
-		time.sleep(3)
+		time.sleep(10)
 
 		#单选多选答案ab				
 	def input_answerab(self, question_ansa):

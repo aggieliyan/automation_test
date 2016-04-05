@@ -21,6 +21,7 @@ class OnLineClassListPage(base.Base):
 		m.class_manage()
 
 	def click_create(self):
+		self.dr.implicitly_wait(10)
 		self.dr.find_element(self.cfg.get('classRedirect', 'redirect_btn_by'), \
 			self.cfg.get('classRedirect', 'redirect_btn')).click()
 

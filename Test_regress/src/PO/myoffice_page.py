@@ -53,10 +53,10 @@ class MyOfficePage(base.Base):
 		self.dr.find_element_by_link_text(u"教学").click()
 
 	def click_course_manage(self):
-		self.dr.find_element_by_link_text(u"课程管理").click()	
+		self.dr.find_element_by_link_text(u"点播课程管理").click()	
 
 	def class_manage(self):
-		self.dr.find_element_by_link_text(u"报班管理").click()
+		self.dr.find_element_by_link_text(u"报班课程管理").click()
 
 	#点击管理我申请的代理
 	def click_myapplyagency(self):

@@ -94,11 +94,25 @@ class OrgCardgroupInputPage(base.Base):
 		time.sleep(2)
 		self.dr.find_elements(self.cfg.get('org_manage', 'listen_card_by'), \
             self.cfg.get('org_manage', 'listen_card'))[-1].click()#选择试听卡
-
+            
+#	def select_listencourse(self):
+#		time.sleep(2)
+#		self.dr.find_element(self.cfg.get('org_manage', 'listen_spread_by'), \
+#			self.cfg.get('org_manage', 'listen_spread')).click()#展开默认类目下资料
+#		time.sleep(30)
+#		self.dr.find_element(self.cfg.get('org_manage', 'listen_course_by'), \
+#			self.cfg.get('org_manage', 'listen_course')).click()#勾选第一个课程
+#		time.sleep(1)
+#		try:
+#			print self.dr.find_element(self.cfg.get('org_manage', 'listen_warn_by'), \
+#			self.cfg.get('org_manage', 'listen_warn')).text
+#		except:
+#			None
+#		time.sleep(1)
+    #勾选免费课程
 	def select_listencourse(self):
 		time.sleep(2)
-		self.dr.find_element(self.cfg.get('org_manage', 'listen_spread_by'), \
-			self.cfg.get('org_manage', 'listen_spread')).click()#展开默认类目下资料
+		self.dr.execute_script("$('.disMore_btn').eq(2).click()")#展开指定类目下资料
 		time.sleep(30)
 		self.dr.find_element(self.cfg.get('org_manage', 'listen_course_by'), \
 			self.cfg.get('org_manage', 'listen_course')).click()#勾选第一个课程

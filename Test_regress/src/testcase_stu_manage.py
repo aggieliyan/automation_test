@@ -91,43 +91,43 @@ class StudentMangeTest(unittest.TestCase):
     #     print "image:"+filename
 
     #创建学员
-    def test_auto_create_student(self):
-        ba = Base(self.driver)
-        stu_num = 1
-        student_management.auto_create_student(self.cfg, self.driver, self.base_url, stu_num)
-        filename = ba.save_screenshot()
-        print "image:"+filename
+#    def test_auto_create_student(self):
+#        ba = Base(self.driver)
+#        stu_num = 1
+#        student_management.auto_create_student(self.cfg, self.driver, self.base_url, stu_num)
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
 
     #给一个学员开通课程
-    def test_open_course_for_one(self):
-        ba = Base(self.driver)
-        student_management.open_course_for_one(self.cfg, self.driver, self.base_url)
-        filename = ba.save_screenshot()
-        print "image:"+filename
+#    def test_open_course_for_one(self):
+#        ba = Base(self.driver)
+#        student_management.open_course_for_one(self.cfg, self.driver, self.base_url)
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
 
     #给多个学员开通课程
-    def test_open_course_for_multi(self):
-        ba = Base(self.driver)
-        student_management.open_course_for_multi(self.cfg, self.driver, self.base_url)
-        filename = ba.save_screenshot()
-        print "image:"+filename
+#    def test_open_course_for_multi(self):
+#        ba = Base(self.driver)
+#        student_management.open_course_for_multi(self.cfg, self.driver, self.base_url)
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
 
     #管理学员播放授权数
-    def test_manage_course_num(self):
-        ba = Base(self.driver)
-        student_management.manage_course_num(self.cfg, self.driver, self.base_url, self.user_name)
-        filename = ba.save_screenshot()
-        print "image:"+filename
+#    def test_manage_course_num(self):
+#        ba = Base(self.driver)
+#        student_management.manage_course_num(self.cfg, self.driver, self.base_url, self.user_name)
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
 
     #购买授权(线上不走购买授权)
-    def test_buy_open_num(self):
-        ba = Base(self.driver)
-        if self.base_url == "http://www.ablesky.com/":
-            return
-        else:
-            student_management.buy_open_num(self.cfg, self.driver, self.base_url)
-            filename = ba.save_screenshot()
-            print "image:"+filename
+#    def test_buy_open_num(self):
+#        ba = Base(self.driver)
+#        if self.base_url == "http://www.ablesky.com/":
+#            return
+#        else:
+#            student_management.buy_open_num(self.cfg, self.driver, self.base_url)
+#            filename = ba.save_screenshot()
+#            print "image:"+filename
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()

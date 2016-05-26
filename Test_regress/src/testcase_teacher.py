@@ -63,29 +63,29 @@ class TeacherTest(unittest.TestCase):
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
             
     # @unittest.skip("test")
-#    def test_create_teacher(self):      
-#        ba = Base(self.driver)
-#        name = u"teacher" + ba.rand_name()
-#        try:
-#           teacher_management.create_teacher(self.cfg, self.driver, tea_name=name)
-#           time.sleep(20)
-#        except:   
-#            while self.i < 2:
-#                self.i = self.i + 1
-#                self.test_create_teacher()
+    def test_create_teacher(self):      
+        ba = Base(self.driver)
+        name = u"teacher" + ba.rand_name()
+        try:
+           teacher_management.create_teacher(self.cfg, self.driver, tea_name=name)
+           time.sleep(20)
+        except:   
+            while self.i < 2:
+                self.i = self.i + 1
+                self.test_create_teacher()
            
-#        get_name = ba.is_element_present("link text", name)
-#        rs = False
-#        if get_name:
-#            rs = True
-#        else:
-#            while self.i < 2:
-#                self.i = self.i + 1
-#                self.test_create_teacher()
+        get_name = ba.is_element_present("link text", name)
+        rs = False
+        if get_name:
+            rs = True
+        else:
+            while self.i < 2:
+                self.i = self.i + 1
+                self.test_create_teacher()
               
-#        self.assertEqual(True, rs)
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
+        self.assertEqual(True, rs)
+        filename = ba.save_screenshot()
+        print "image:"+filename
     
     def test_create_account_teacher(self):      
         ba = Base(self.driver)
@@ -116,37 +116,37 @@ class TeacherTest(unittest.TestCase):
         print "image:"+filename
                  
     # @unittest.skip("test")
-#    def test_edit_teacher(self):      
-#        ba = Base(self.driver)
-#        time.sleep(20)
-#        try:
-#            get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
-#            name = u"teacher" + ba.rand_name()
-#            teacher_management.edit_teacher(self.cfg, self.driver, tea_name=name)
-#            time.sleep(20)
-#            get_name1 = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师   
-#        except:      
-#            while self.i < 2:
-#                self.i = self.i + 1
-#                self.test_edit_teacher()
-#                return
+    def test_edit_teacher(self):      
+        ba = Base(self.driver)
+        time.sleep(20)
+        try:
+            get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
+            name = u"teacher" + ba.rand_name()
+            teacher_management.edit_teacher(self.cfg, self.driver, tea_name=name)
+            time.sleep(20)
+            get_name1 = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师   
+        except:      
+            while self.i < 2:
+                self.i = self.i + 1
+                self.test_edit_teacher()
+                return
             
-#        self.assertNotEqual(get_name, get_name1)
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
+        self.assertNotEqual(get_name, get_name1)
+        filename = ba.save_screenshot()
+        print "image:"+filename
         
     # @unittest.skip("test")
-#    def test_delete_teacher(self):      
-#        ba = Base(self.driver)
-#        time.sleep(2)
-#        get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
-#        teacher_management.delete_teacher(self.cfg, self.driver)
-#        time.sleep(20)
+    def test_delete_teacher(self):      
+        ba = Base(self.driver)
+        time.sleep(2)
+        get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
+        teacher_management.delete_teacher(self.cfg, self.driver)
+        time.sleep(20)
 
-#        get_newname = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
-#        self.assertNotEqual(get_name, get_newname)
-#        filename = ba.save_screenshot()
-#        print "image:"+filename
+        get_newname = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
+        self.assertNotEqual(get_name, get_newname)
+        filename = ba.save_screenshot()
+        print "image:"+filename
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()

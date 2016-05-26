@@ -25,10 +25,25 @@ def create_teacher(cfg, driver, tea_name):
     ogteacreate.input_recommend(tea_name)
     ogteacreate.click_publish()
     
+def create_account_teacher(cfg, driver, tea_name,account_name,account_password,account_mail):
+
+    ogteamanage = OrgteacherManagePage(driver, cfg)
+    ogteamanage.open()
+    ogteamanage.click_createacher()
+    ogteacreate = OrgteacherCreatePage(driver, cfg)
+    ogteacreate.input_name(tea_name)
+    ogteacreate.input_recommend(tea_name)
+    ogteacreate.select_true()
+    ogteacreate.input_account(account_name)
+    ogteacreate.input_password(account_password)
+    ogteacreate.input_mail(account_mail)
+    ogteacreate.click_publish()
+    
 def edit_teacher(cfg, driver, tea_name):
     
     ogteamanage = OrgteacherManagePage(driver, cfg)
     ogteamanage.open()
+    ogteamanage.click_manage()
     ogteamanage.click_editeacher()
     ogteacreate = OrgteacherCreatePage(driver, cfg)
     ogteacreate.clear_name()
@@ -39,6 +54,7 @@ def delete_teacher(cfg, driver):
     
     ogteamanage = OrgteacherManagePage(driver, cfg)
     ogteamanage.open()
+    ogteamanage.click_manage()
     ogteamanage.click_deleteacher()
     ogteamanage.click_sure()
     

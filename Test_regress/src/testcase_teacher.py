@@ -68,7 +68,7 @@ class TeacherTest(unittest.TestCase):
 #        name = u"teacher" + ba.rand_name()
 #        try:
 #           teacher_management.create_teacher(self.cfg, self.driver, tea_name=name)
-#           time.sleep(2)
+#           time.sleep(20)
 #        except:   
 #            while self.i < 2:
 #                self.i = self.i + 1
@@ -86,26 +86,54 @@ class TeacherTest(unittest.TestCase):
 #        self.assertEqual(True, rs)
 #        filename = ba.save_screenshot()
 #        print "image:"+filename
-         
-    # @unittest.skip("test")
-    def test_edit_teacher(self):      
+    
+    def test_create_account_teacher(self):      
         ba = Base(self.driver)
-        time.sleep(2)
+        name = u"teacher" + ba.rand_name()
+        account = ba.rand_name()
+        password = u"1234ab"
+        mail = account + u"@126.com"
         try:
-            get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
-            name = u"teacher" + ba.rand_name()
-            teacher_management.edit_teacher(self.cfg, self.driver, tea_name=name)
-            time.sleep(1)
-            get_name1 = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师   
-        except:      
+           teacher_management.create_account_teacher(self.cfg, self.driver, tea_name=name, \
+           account_name=account,account_password=password,account_mail=mail)
+           time.sleep(20)
+        except:   
             while self.i < 2:
                 self.i = self.i + 1
-                self.test_edit_teacher()
-                return
-            
-        self.assertNotEqual(get_name, get_name1)
+                self.create_account_teacher()
+           
+        get_name = ba.is_element_present("link text", name)
+        rs = False
+        if get_name:
+            rs = True
+        else:
+            while self.i < 2:
+                self.i = self.i + 1
+                self.create_account_teacher()
+              
+        self.assertEqual(True, rs)
         filename = ba.save_screenshot()
         print "image:"+filename
+                 
+    # @unittest.skip("test")
+#    def test_edit_teacher(self):      
+#        ba = Base(self.driver)
+#        time.sleep(20)
+#        try:
+#            get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
+#            name = u"teacher" + ba.rand_name()
+#            teacher_management.edit_teacher(self.cfg, self.driver, tea_name=name)
+#            time.sleep(20)
+#            get_name1 = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师   
+#        except:      
+#            while self.i < 2:
+#                self.i = self.i + 1
+#                self.test_edit_teacher()
+#                return
+            
+#        self.assertNotEqual(get_name, get_name1)
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
         
     # @unittest.skip("test")
 #    def test_delete_teacher(self):      
@@ -113,6 +141,7 @@ class TeacherTest(unittest.TestCase):
 #        time.sleep(2)
 #        get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
 #        teacher_management.delete_teacher(self.cfg, self.driver)
+#        time.sleep(20)
 
 #        get_newname = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
 #        self.assertNotEqual(get_name, get_newname)

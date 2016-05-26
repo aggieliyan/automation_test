@@ -120,7 +120,7 @@ class MyOfficePage(base.Base):
 		time.sleep(2)
 		self.dr.find_element_by_link_text(u"购买授权").click()	
 
-	#点击名师管理
+	#点击老师管理
 	def click_teacher(self):
 		time.sleep(2)
-		self.dr.find_element_by_link_text(u"名师管理").click()
+		self.dr.find_element_by_link_text(u"老师管理").click()

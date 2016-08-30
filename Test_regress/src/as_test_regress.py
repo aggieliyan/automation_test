@@ -20,7 +20,7 @@ class Test(unittest.TestCase):
 
         self.browser = "Chrome"
         self.test_enviroment = "beta"
-        self.independent_url = "www.dlym.com" #独立域名网址
+        self.independent_url = "test.ablesky.com" #独立域名网址
         self.org_name = "salesdemo"
         self.org_password = "1234"
         self.user_name = "stu_aa02"

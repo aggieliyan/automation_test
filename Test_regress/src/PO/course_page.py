@@ -29,10 +29,16 @@ class CourseStepOnePage(base.Base):
 			self.cfg.get('courseRedirect', 'ctitle'))
 		c_input.clear()
 		c_input.send_keys(ctitle)
+		time.sleep(0.5)
 
 	def click_service_cate(self):
-		self.dr.execute_script("$(\'li.level2\').click()")
-		self.dr.execute_script("$(\'li.level3.selected\').click()")
+		self.dr.execute_script("$('li.level2').eq(1).click()")
+		self.dr.execute_script("$('li.level3').eq(1).click()")
+#		self.dr.execute_script("$('li.level3.selected').click()")
+		time.sleep(0.1)
+		
+	def click_course_explain(self):
+		self.dr.find_element_by_id("J_agreeBtn").click()
 		time.sleep(0.1)
 
 	#点创建进入下一步
@@ -78,7 +84,6 @@ class CuorsefilePage(base.Base):
 		# self.dr.find_element("class name", "saveTitle").send_keys("threecoursehour")
 		self.dr.find_elements(self.cfg.get('courseRedirect', 'cname_by'), \
 			self.cfg.get('courseRedirect', 'cname'))[cnum].send_keys("threecoursehour")
-		time.sleep(0.5)
 
 	def click_add(self, cno):
 		time.sleep(2)
@@ -109,8 +114,7 @@ class CuorsefilePage(base.Base):
 		self.dr.find_element_by_link_text(u"基本信息").click()
 
 class CourseInfoPage(base.Base):
-
-
+	
 	def __init__(self, driver, cfg):
 		self.cfg = cfg
 		self.base_url = cfg.get('env_para', 'base_url')

@@ -42,7 +42,7 @@ class ClassInfoPage(base.Base):
 		self.dr.find_element_by_link_text(u"课程预售").click()
 
 	def chooes_course(self):
-		time.sleep(6)
+		time.sleep(10)
 		self.dr.find_elements(self.cfg.get('classRedirect', 'select_course_by'), \
 			self.cfg.get('classRedirect', 'select_course'))[0].click()
 
@@ -82,8 +82,8 @@ class ClassInfoPage(base.Base):
 			self.cfg.get('courseRedirect', 'tags')).send_keys(class_tags)
 
 	def click_service_cate(self):
-		self.dr.execute_script("$(\'li.level2\').click()")
-		self.dr.execute_script("$(\'li.level3.selected\').click()")
+		self.dr.execute_script("$('li.level2').eq(1).click()")
+		self.dr.execute_script("$('li.level3').eq(1).click()")
 		time.sleep(1)
 
 	def click_save(self):

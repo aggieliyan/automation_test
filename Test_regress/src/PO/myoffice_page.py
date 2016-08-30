@@ -53,16 +53,17 @@ class MyOfficePage(base.Base):
 		self.dr.find_element_by_link_text(u"教学").click()
 
 	def click_course_manage(self):
-#		self.dr.find_element_by_link_text(u"课程管理").click()	
-		self.dr.find_element_by_link_text(u"点播课程").click()	
+		self.dr.find_element_by_link_text(u"课程管理").click()	
+#		self.dr.find_element_by_link_text(u"点播课程").click()	
 
 	def class_manage(self):
-		self.dr.find_element_by_link_text(u"报班课程").click()
-#		self.dr.find_element_by_link_text(u"报班管理").click()
+#		self.dr.find_element_by_link_text(u"报班课程").click()
+		self.dr.find_element_by_link_text(u"报班管理").click()
 
 	#点击管理我申请的代理
 	def click_myapplyagency(self):
-		self.dr.find_element_by_link_text(u"我申请的代理").click()
+		self.dr.find_element_by_link_text(u"管理我申请的代理").click()
+#		self.dr.find_element_by_link_text(u"我申请的代理").click()
 
 
 	#为机构头像换图片
@@ -83,7 +84,6 @@ class MyOfficePage(base.Base):
 	#点击学员管理
 	def click_student_management(self):
 		self.dr.find_element_by_link_text(u"学员管理").click()
-
 
 	# #点击在线购买授权
 	# def click_buy_opennum(self):

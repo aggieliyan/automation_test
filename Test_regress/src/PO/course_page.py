@@ -37,9 +37,9 @@ class CourseStepOnePage(base.Base):
 #		self.dr.execute_script("$('li.level3.selected').click()")
 		time.sleep(0.1)
 		
-	def click_course_explain(self):
-		self.dr.find_element_by_id("J_agreeBtn").click()
-		time.sleep(0.1)
+#	def click_course_explain(self):
+#		self.dr.find_element_by_id("J_agreeBtn").click()
+#		time.sleep(0.1)
 
 	#点创建进入下一步
 	def click_next_step(self):

@@ -35,7 +35,7 @@ def course_redirect(cfg, driver, base_url, isthree=0,\
     
     course.input_course_title(course_title)
     course.click_service_cate()
-    course.click_course_explain()
+#    course.click_course_explain()
 
     
     course.save_screenshot()
@@ -126,7 +126,7 @@ def test_course_rmbbuy(cfg, driver, course_title, course_price=0.1):
     course.open()
     course.input_course_title(course_title)
     course.click_service_cate()
-    course.click_course_explain()
+#    course.click_course_explain()
     course.click_next_step()
 
     courefile = CuorsefilePage(driver, cfg)

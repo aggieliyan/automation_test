@@ -6,6 +6,7 @@ Created on Nov 17, 2014
 '''
 import time
 import base
+from myoffice_page import MyOfficePage
 
 class UserpaperListPage(base.Base):
 
@@ -13,25 +14,37 @@ class UserpaperListPage(base.Base):
 		self.dr = driver
 		self.cfg = cfg
 		self.base_url = self.cfg.get('env_para', 'base_url')
-
+		
 	def enter_exampaperlist(self):
-		self.dr.get(self.base_url+"exam/")
-
-	def input_searchpapername(self, paper_name):
-		time.sleep(2)
-		self.dr.find_element(self.cfg.get('exam', 'search_input_by'), \
-			self.cfg.get('exam', 'search_input')).clear()
-		time.sleep(2)
-		self.dr.find_element(self.cfg.get('exam', 'search_input_by'), \
-			self.cfg.get('exam', 'search_input')).send_keys(paper_name)
-			
+		url = "%s/studyCenterRedirect.do?action=toStudentExamCenter&orgId=2249&ccgId="%(self.base_url)
+		self.dr.get(url)	
+	def enter_practice(self):
+		self.dr.find_element(self.cfg.get('exam', 'enter_practice_by'), \
+			self.cfg.get('exam', 'enter_practice')).click()	      			
 	def click_examnow(self):
 		time.sleep(7)
+		bh = self.dr.window_handles
 		try:
-			self.dr.find_element_by_link_text(u"立即考试").click()
+			self.dr.find_element_by_link_text(u"答题").click()
 		except:
-			print u"没有搜索到此名称的试卷"
-
+			print u"没有搜索到此名称的试卷"		
+		self.switch_window(bh)
+	#进入试卷答题页面	
+	def click_paper(self):
+		time.sleep(2)
+		self.dr.find_element_by_link_text(u"开始答题").click()
+#	def clear_searchpapername(self):
+#		time.sleep(2)
+#		self.dr.find_element(self.cfg.get('exam', 'search_input_by'), \
+#			self.cfg.get('exam', 'search_input')).clear()
+				
+#	def input_searchpapername(self, paper_name):
+#		time.sleep(2)		
+#		self.dr.find_element(self.cfg.get('exam', 'search_input_by'), \
+#			self.cfg.get('exam', 'search_input')).send_keys(paper_name)		
+#		time.sleep(0.5)
+#        self.dr.find_element(self.cfg.get('exam', 'exam_search_by'), \
+#			self.cfg.get('exam', 'exam_search')).click()
 
 class UserexampaperPage(base.Base):
 	
@@ -50,8 +63,8 @@ class UserexampaperPage(base.Base):
 		self.dr.find_element_by_link_text(u"开始考试").click()		
 
 	def get_questiontitle(self):
-		time.sleep(2)
-		question_title = self.dr.execute_script("return $('#J_classification a:eq(0)').text()")
+		time.sleep(3)
+		question_title = self.dr.execute_script("return $('#totalType').text()")
 		return question_title
 	
 	#点击单选题或多选题中的第一个 
@@ -67,14 +80,19 @@ class UserexampaperPage(base.Base):
     #点击填空题        
 	def click_blankquestion(self, question_answer):
 		self.dr.find_element(self.cfg.get('exam', 'exam_blankque_by'), \
-			self.cfg.get('exam', 'exam_blankque')).send_keys(question_answer)  
+			self.cfg.get('exam', 'exam_blankque')).send_keys(question_answer)
+	
+	#点击 问答题        
+	def click_essayquestion(self, question_answer):
+		self.dr.find_element(self.cfg.get('exam', 'exam_essayque_by'), \
+			self.cfg.get('exam', 'exam_essayque')).send_keys(question_answer)
     
     #点击问答题        
-	def click_essayquestion(self, question_answer):
-		iframe_id = self.dr.execute_script("return $('#J_examWrapper iframe:eq(0)').attr('id')")
-		self.dr.execute_script("var element=window.document.getElementById('" + iframe_id + "');\
-		idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
-		element.innerHTML =\'"+question_answer+"\';")
+#	def click_essayquestion(self, question_answer):
+#		iframe_id = self.dr.execute_script("return $('#J_examWrapper iframe:eq(0)').attr('id')")
+#		self.dr.execute_script("var element=window.document.getElementById('" + iframe_id + "');\
+#		idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
+#		element.innerHTML =\'"+question_answer+"\';")
     
     #点击完形填空题       
 	def click_clozequestion(self):
@@ -95,13 +113,18 @@ class UserexampaperPage(base.Base):
 	def click_all_blankquestion(self, question_answer):
 		self.dr.find_element(self.cfg.get('exam', 'exam_all_blankque_by'), \
 			self.cfg.get('exam', 'exam_all_blankque')).send_keys(question_answer)
+			
+	#点击综合题-填空题
+	def click_all_essayquestion(self, question_answer):
+		self.dr.find_element(self.cfg.get('exam', 'exam_all_essayque_by'), \
+			self.cfg.get('exam', 'exam_all_essayque')).send_keys(question_answer)
      
     #点击综合题-问答题   
-	def click_all_essayquestion(self, question_answer):
-		iframe_id = self.dr.execute_script("return $('#J_examWrapper iframe:eq(0)').attr('id')")
-		self.dr.execute_script("var element=window.document.getElementById('" + iframe_id + "');\
-		idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
-		element.innerHTML =\'"+question_answer+"\';") 
+#	def click_all_essayquestion(self, question_answer):
+#		iframe_id = self.dr.execute_script("return $('#J_examWrapper iframe:eq(0)').attr('id')")
+#		self.dr.execute_script("var element=window.document.getElementById('" + iframe_id + "');\
+#		idocument=element.contentDocument;element=idocument.getElementById('tinymce');\
+#		element.innerHTML =\'"+question_answer+"\';") 
 
 	def click_submit(self):
 		self.dr.find_element(self.cfg.get('exam', 'exam_submit_by'), \

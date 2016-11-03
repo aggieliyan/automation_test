@@ -6,39 +6,59 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 import base
 from PO.exam_subject_page import SubjectListPage
+from myoffice_page import MyOfficePage
 
 
 class ExamStudentListPage(base.Base):
-
 
 	def __init__(self, driver, cfg):
 		self.dr = driver
 		self.cfg = cfg
 		self.base_url = cfg.get('env_para', 'base_url')
-
+	
+	#进入后台页面
 	def open(self):
-		sp = SubjectListPage(self.dr, self.cfg)
-		sp.open()
-		sp.click_stu_manage()
+		self.dr.find_element_by_css_selector(".myoffice ").click()
+	#点击后台人员
+	def click_org_student(self):
+		self.dr.find_element_by_link_text(u"人员").click()
+        time.sleep(2)
 
-	def search_student(self, username):
-		self.dr.find_element(self.cfg.get('exam', 'user_search_by'), \
-			self.cfg.get('exam', 'user_search')).clear()
-		#得一个字母一个字母的输入，否则因为输入太快得到的搜索结果不准确
-		for letter in username:
-			self.dr.find_element(self.cfg.get('exam', 'user_search_by'), \
-				self.cfg.get('exam', 'user_search')).send_keys(letter)
-			time.sleep(0.1)
-		self.dr.find_element(self.cfg.get('exam', 'click_search_by'), \
-			self.cfg.get('exam', 'click_search')).click()	
+	#筛选学员user_name
+	def click_select_stu(self):
+		time.sleep(4)
+		self.dr.find_elements(self.cfg.get('manage_course_num', "stu_select_by"), \
+							self.cfg.get('manage_course_num', "stu_select"))[0].click()
+	def click_selectuser_stu(self):#改xpath
+		time.sleep(3)
+		self.dr.execute_script("$('ul.cc-itemList li:eq(1)').click()")
+#		self.dr.find_elements(self.cfg.get('manage_course_num', "stu_selectuser_by"), \
+#							self.cfg.get('manage_course_num', "stu_selectuser")).click()				
+	def click_selectinput_stu(self, user_name):
+		time.sleep(1)
+		self.dr.find_element(self.cfg.get('manage_course_num', 'stu_selectinput_by'), \
+							self.cfg.get('manage_course_num', 'stu_selectinput')).send_keys(user_name)
+	def click_selectsearch_stu(self):
+		self.dr.find_element(self.cfg.get('manage_course_num', "stu_selectsearch_by"), \
+							self.cfg.get('manage_course_num', "stu_selectsearch")).click()
+		time.sleep(5)
+	#点击开通试卷题库
+	def click_test_paper(self):
+		bh = self.dr.window_handles
+		self.dr.find_element_by_link_text(u"开通试卷题库").click()
+		time.sleep(2)		
+		self.switch_window(bh)
+		time.sleep(3)
 
 	def click_send_paper(self):
 		time.sleep(1)
-		self.dr.find_element_by_link_text(u"发试卷").click()
+		self.dr.find_element(self.cfg.get('exam', 'send_paper_by'), \
+			self.cfg.get('exam', 'send_paper')).click()
 
 	def click_close_paper(self):
 		time.sleep(1)
-		self.dr.find_element_by_link_text(u"关闭试卷").click()
+		self.dr.find_element(self.cfg.get('exam', 'close_paper_by'), \
+			self.cfg.get('exam', 'close_paper')).click()
 
 	def choose_all_paper(self):
 		time.sleep(0.5)
@@ -48,9 +68,16 @@ class ExamStudentListPage(base.Base):
 	def choose_one_paper(self):
 		time.sleep(0.5)
 		self.dr.find_elements(self.cfg.get('exam', 'select_one_p_by'), \
-			self.cfg.get('exam', 'select_one_p'))[-1].click()
+			self.cfg.get('exam', 'select_one_p'))[0].click()
+			
+	def click_close(self):
+		time.sleep(2)
+		self.dr.find_element(self.cfg.get('exam', 'open_paper_close_by'), \
+			self.cfg.get('exam', 'open_paper_close')).click()	
+		time.sleep(2)	
 
 	def click_save(self):
+		time.sleep(0.5)
 		self.dr.find_element(self.cfg.get('exam', 'open_paper_ok_by'), \
 			self.cfg.get('exam', 'open_paper_ok')).click()
 		time.sleep(0.1)

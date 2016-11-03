@@ -20,9 +20,8 @@ class SubjectListPage(base.Base):
         self.base_url = cfg.get('env_para', 'base_url')
 
     def open(self):
-        self.dr.get("%sexam/" %(self.base_url))
-        
-
+        self.dr.get("%sexam/" %(self.base_url)) 
+                   
     #试卷库
     def click_exampaper(self):
         self.dr.find_element_by_link_text(u"试卷库").click()

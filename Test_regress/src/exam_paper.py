@@ -174,15 +174,24 @@ def send_close_paper(cfg, driver, base_url, username, atype=2):
     """
     ep = ExamStudentListPage(driver, cfg)
     ep.open()
+    ep.click_org_student()
     ep.save_screenshot()
-    ep.search_student(username)
+    ep.click_select_stu()
+    ep.click_selectuser_stu()
+    ep.click_selectinput_stu(username)
+    ep.click_selectsearch_stu()
+    ep.click_test_paper()
     if atype == 1:
         ep.click_send_paper()
         ep.save_screenshot()
         ep.choose_all_paper()
+        ep.save_screenshot()
+        ep.click_save()
     else:
         ep.click_close_paper()
         ep.save_screenshot()
         ep.choose_one_paper()
-    ep.click_save()
+        ep.save_screenshot()
+        ep.click_close()
+    
  

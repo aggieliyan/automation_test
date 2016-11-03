@@ -83,13 +83,9 @@ def open_course_for_multi(cfg, driver, base_url):
     ogstumanage.click_open_choose()
     ogstumanage.click_open_check()
     ogstumanage.save_screenshot()
-    ogstumanage.click_open_apply()
-    ogstumanage.save_screenshot()
     ogstumanage.click_opencate()
-    ogstumanage.click_openchoose()
+    ogstumanage.click_class_openchoose()
     ogstumanage.click_openok()
-    ogstumanage.click_openkeep()
-    ogstumanage.save_screenshot()
     ogstumanage.click_openaway()
 
 #管理播放授权数
@@ -130,7 +126,7 @@ def manage_course_num(cfg, driver, base_url, user_name):
         manage_course_numdetail(cfg, driver, base_url, user_name)
     except:
         ogstumanage.self_dr_refresh()
-        ogstumanage.click_managenum()
+#        ogstumanage.click_managenum()
         ogstumanage.save_screenshot()
         manage_course_numdetail(cfg, driver, base_url, user_name)
 

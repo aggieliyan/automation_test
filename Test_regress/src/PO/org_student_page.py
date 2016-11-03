@@ -24,25 +24,31 @@ class OrgStudentManagePage(base.Base):
 
 	#输入所导入的学员
 	def input_studentname(self, stu_name):
+		self.dr.find_element_by_id("importBtn").click()
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', "stu_input_by"), \
 			self.cfg.get('org_manage', "stu_input")).send_keys(stu_name)
+		time.sleep(2)
 	#导入
 	def click_import(self):
-		self.dr.find_element(self.cfg.get('org_manage', "stu_import_btn_by"), \
-			self.cfg.get('org_manage', "stu_import_btn")).click()
+		self.dr.execute_script("$('.dialog-button-container button').eq(0).click()")
 		time.sleep(2)
 	
     #删除第一个学员并获取用户名供导入使用
 	def delete_firstudent(self):
+		time.sleep(5)
+		self.dr.execute_script("$('li.alt-info-link').eq(0).click()")
 		time.sleep(2)
-		first_stuname = self.dr.execute_script("return $('.x-grid3-cell-inner .clearfix span').eq(0).text()")
+		first_stuname = self.dr.execute_script("return $('.field-title').eq(1).text()")
 		time.sleep(2)
-		self.dr.find_element_by_link_text(u"删除学员").click()
+		self.dr.execute_script("$('.dialog-button-container button').eq(1).click()")
 		time.sleep(2)
-		self.dr.execute_script("return $('.x-panel-btns-right button').eq(0).click()")
+		self.dr.execute_script("$('li.del-student-link').eq(0).click()")
+		time.sleep(2)
+		self.dr.execute_script("$('.dialog-button-container button').eq(0).click()")
 		time.sleep(2)
 		return first_stuname
-		
+			
 	#点击批量导入学员
 	def click_import_multi(self):
 		try:
@@ -63,10 +69,12 @@ class OrgStudentManagePage(base.Base):
 
 	#点击批量创建学员
 	def click_create_multi(self):
-		self.dr.find_element_by_link_text(u"批量创建学员").click()
+		time.sleep(5)
+		self.dr.find_element_by_id("createBtn").click()
+		self.dr.find_element_by_css_selector('#toggle-container > div > div:last-child > input[type="radio"]').click()
 	#选择文件
 	def click_createchoose(self):
-		self.dr.execute_script("$('#fileFieldName-file').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(0.5)')")
+		self.dr.execute_script("$('#fileArea').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(0.5)')")
 	def click_createfile(self, stu_txt):
 		self.dr.find_element(self.cfg.get('org_manage', "stu_file_by"), \
 			self.cfg.get('org_manage', "stu_file")).send_keys(stu_txt)
@@ -74,37 +82,44 @@ class OrgStudentManagePage(base.Base):
 	def click_createmulti(self):
 		self.dr.find_element(self.cfg.get('org_manage', "stu_file_ok_by"), \
 			self.cfg.get('org_manage', "stu_file_ok")).click()
+		self.dr.find_element_by_css_selector("#certainCreateDialog > table > tbody > tr:nth-child(2) > td.td-content > div.dialog-button-container > button").click()
+		time.sleep(2)
 
 	#点击开通课程
 	def click_open_course(self):
-		time.sleep(2)
-		self.dr.find_element(self.cfg.get('org_manage', "open_course_by"), \
-			self.cfg.get('org_manage', "open_course")).click()
 		time.sleep(3)
+		bh = self.dr.window_handles
+		self.dr.find_element_by_link_text(u"开通移除课程").click()
+		time.sleep(3)		
+		self.switch_window(bh)
+#		self.dr.find_element(self.cfg.get('org_manage', "open_course_by"), \
+#			self.cfg.get('org_manage', "open_course")).click()
 
-	#批量开通课程
-	#点击下拉框
+	#班级开通课程
+	#点击进入类目/班级页面
 	def click_open_list(self):
-		time.sleep(5)
-		self.dr.find_element(self.cfg.get('org_manage', "all_open_list_by"), \
-			self.cfg.get('org_manage', "all_open_list")).click()
+		time.sleep(10)
+		self.dr.find_element_by_link_text(u"类目/班级").click()
+#		self.dr.find_element(self.cfg.get('org_manage', "all_open_list_by"), \
+#			self.cfg.get('org_manage', "all_open_list")).click()
 		time.sleep(2)
-	#选择批量开通课程
+	#选择操作项
 	def click_open_choose(self):
 		time.sleep(3)
-		self.dr.find_elements(self.cfg.get('org_manage', "all_open_by"), \
-			self.cfg.get('org_manage', "all_open"))[0].click()
+		self.dr.find_elements(self.cfg.get('org_manage', "operation_by"), \
+			self.cfg.get('org_manage', "operation"))[0].click()
 		time.sleep(2)
-	#全选
+	#选择开通/移除课程
 	def click_open_check(self):
 		time.sleep(2)
-		self.dr.find_elements(self.cfg.get('org_manage', "all_open_check_by"), \
-			self.cfg.get('org_manage', "all_open_check"))[-1].click()
-		time.sleep(2)
+		bh = self.dr.window_handles
+		self.dr.find_element_by_xpath("//ul[@id='categoryList']/ul/li[1]/span[2]/select/option[4]").click()
+		time.sleep(3)
+		self.switch_window(bh)
 	#应用
-	def click_open_apply(self):
-		self.dr.find_element_by_link_text(u"应用").click()
-		time.sleep(5)
+#	def click_open_apply(self):
+#		self.dr.find_element_by_link_text(u"应用").click()
+#		time.sleep(5)
 
 	#开通课程页面
 	#未归类内容，展开资料
@@ -117,6 +132,11 @@ class OrgStudentManagePage(base.Base):
 	def click_openchoose(self):
 		self.dr.find_element(self.cfg.get('org_manage', "open_course_1_by"), \
 			self.cfg.get('org_manage', "open_course_1")).click()
+		time.sleep(2)
+	#选中开通班级里的课程
+	def click_class_openchoose(self):
+		self.dr.find_element(self.cfg.get('org_manage', "open_course_2_by"), \
+			self.cfg.get('org_manage', "open_course_2")).click()
 		time.sleep(2)
 	#确认开通
 	def click_openok(self):
@@ -136,21 +156,23 @@ class OrgStudentManagePage(base.Base):
 		self.dr.find_elements(self.cfg.get('org_manage', "open_keep_by"), \
 			self.cfg.get('org_manage', "open_keep"))[0].click()
 		time.sleep(2)
+	#开通班级关闭窗口
 	def click_openaway(self):
-		self.dr.find_elements(self.cfg.get('org_manage', "open_away_by"), \
-			self.cfg.get('org_manage', "open_away"))[-1].click()
+		self.dr.find_element(self.cfg.get('org_manage', "open_away_by"), \
+			self.cfg.get('org_manage', "open_away")).click()
 		time.sleep(2)
 
 	#管理播放授权数
 	#筛选学员user_name
 	def click_stu_select(self):
 		time.sleep(4)
-		self.dr.find_element(self.cfg.get('manage_course_num', "stu_select_by"), \
-							self.cfg.get('manage_course_num', "stu_select")).click()
+		self.dr.find_elements(self.cfg.get('manage_course_num', "stu_select_by"), \
+							self.cfg.get('manage_course_num', "stu_select"))[0].click()
 	def click_stu_selectuser(self):#改xpath
 		time.sleep(3)
-		self.dr.find_elements(self.cfg.get('manage_course_num', "stu_selectuser_by"), \
-							self.cfg.get('manage_course_num', "stu_selectuser"))[1].click()				
+		self.dr.execute_script("$('ul.cc-itemList li:eq(1)').click()")
+#		self.dr.find_elements(self.cfg.get('manage_course_num', "stu_selectuser_by"), \
+#							self.cfg.get('manage_course_num', "stu_selectuser")).click()				
 	def click_stu_selectinput(self, user_name):
 		time.sleep(1)
 		self.dr.find_element(self.cfg.get('manage_course_num', 'stu_selectinput_by'), \
@@ -161,8 +183,11 @@ class OrgStudentManagePage(base.Base):
 		time.sleep(5)
 	#点击管理播放授权数
 	def click_managenum(self):
-		self.dr.find_element_by_link_text(u"管理播放授权数").click()
-		time.sleep(2)
+		bh = self.dr.window_handles
+		self.dr.find_element_by_link_text(u"修改观看次数").click()
+		time.sleep(2)		
+		self.switch_window(bh)
+		time.sleep(3)
 	#刷新页面
 	def self_dr_refresh(self):
 		self.dr.refresh()
@@ -181,15 +206,19 @@ class OrgStudentManagePage(base.Base):
 	#单个课程增加授权数
 	#展开资料
 	def click_pushcourse(self):
-		self.dr.find_element(self.cfg.get('manage_course_num', "manage_coursenum_opencouse_by"), \
-							self.cfg.get('manage_course_num', "manage_coursenum_opencouse")).click()
+#		self.dr.find_element(self.cfg.get('manage_course_num', "manage_coursenum_opencouse_by"), \
+#							self.cfg.get('manage_course_num', "manage_coursenum_opencouse")).click()
+		self.dr.find_elements_by_link_text(u"展开课程")[-1].click()     
+		time.sleep(3)  
 	#展开内容
 	def click_pushcontent(self):
-		self.dr.find_element(self.cfg.get('manage_course_num', "manage_coursenum_opennum_by"), \
-							self.cfg.get('manage_course_num', "manage_coursenum_opennum")).click()
+#		self.dr.find_element(self.cfg.get('manage_course_num', "manage_coursenum_opennum_by"), \
+#							self.cfg.get('manage_course_num', "manage_coursenum_opennum")).click()
+		self.dr.find_elements_by_link_text(u"展开内容")[-1].click()  
+		time.sleep(2)
 	#点击修改剩余播放次数
 	def click_changenum(self):
-		self.dr.find_element_by_link_text(u"修改剩余播放次数").click()
+		self.dr.find_elements_by_link_text(u"修改剩余次数")[-1].click()
 	def click_course_num(self):
 		num = self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_change_by'), \
 							self.cfg.get('manage_course_num', 'manage_coursenum_change'))
@@ -198,6 +227,7 @@ class OrgStudentManagePage(base.Base):
 	#保存
 	def click_save(self):
 		self.dr.find_element_by_link_text(u"保存").click()
+		self.dr.find_element_by_css_selector('.dialog-button-container button').click()	
 
 	#在线购买授权
 	#输入1个授权

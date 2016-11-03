@@ -20,13 +20,16 @@ def buy_paper(cfg, driver, paper_url):
 def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, paper_name):
     userpaperlist = UserpaperListPage(driver, cfg)
     userpaperlist.enter_exampaperlist()
-    userpaperlist.input_searchpapername(paper_name)
+    userpaperlist.enter_practice()
     userpaperlist.save_screenshot()
     userpaperlist.click_examnow()
-    userexampaper = UserexampaperPage(driver, cfg)
-    exam_time = userexampaper.get_examtime()
     userpaperlist.save_screenshot()
-    userexampaper.click_startexam()
+    userpaperlist.click_paper()
+    userpaperlist.save_screenshot()
+    userexampaper = UserexampaperPage(driver, cfg)
+#    exam_time = userexampaper.get_examtime()
+#    userpaperlist.save_screenshot()
+#    userexampaper.click_startexam()
     question_title = userexampaper.get_questiontitle()
     time.sleep(5)
      # blank_pager=1 是白卷 ;blank_pager=0 是做了一个题
@@ -107,3 +110,4 @@ def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, pa
             userexampaper.click_confirmsubmit()
         except:
              None
+    

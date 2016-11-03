@@ -83,7 +83,7 @@ class OrgcatecoursePge(base.Base):
 		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', 'course_add_ok_by'), \
             self.cfg.get('org_manage', 'course_add_ok')).click()
-		time.sleep(3)
+		time.sleep(5)
 
 
 

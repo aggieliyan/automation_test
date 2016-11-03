@@ -63,7 +63,7 @@ class AgentCourseInputPage(base.Base):
 	def click_modify_ok(self):
 		time.sleep(1)	
 		self.dr.find_element_by_link_text(u"确定").click()
-
+	
 	def input_price(self, price):
 		"""
 		代理课程的价格是规定的，根据页面上的提示取

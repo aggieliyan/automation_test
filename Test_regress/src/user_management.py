@@ -20,22 +20,28 @@ def buy_course(cfg, driver, base_url, course_url):
 
     pay = PaymentPage(driver, cfg)
     pay.open(course_url)
+    bm = pay.choose_registerNow()
     pay.save_screenshot()
-    pay.choose_balance_pay()
-    pay.choose_use_rmb()
-    pay.click_pay()
-    pay.click_look_Coursedetail()
-
-    
+    if bm == 0:
+        pay.choose_balance_pay()
+        pay.choose_use_rmb()
+        pay.click_pay()
+        pay.click_look_Coursedetail()
+    else:
+        pass
+   
 #个人充值卡买课
 def buy_course_usecard(cfg, driver, base_url, course_url):
 
     pay = PaymentPage(driver, cfg)
     pay.open(course_url)
+    cm = pay.choose_registerNow()
     pay.save_screenshot()
-    pay.choose_balance_pay()
-    pay.click_pay()
-          
+    if cm == 0:
+        pay.choose_balance_pay()
+        pay.click_pay()
+    else:
+        pass          
     
 #个人修改头像
 def change_headpic(cfg, base_url, driver, \

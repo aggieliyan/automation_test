@@ -26,12 +26,14 @@ class CourseAgencyPage(base.Base):
 		m.click_myapplyagency()
 
 	def click_manage_course(self):
+		time.sleep(3)
 		try:
-			self.dr.find_element_by_link_text(u"管理课程").click()
+			self.dr.find_elements_by_link_text(u"管理课程")[3].click()
 		except NoSuchElementException, e:
 			print u"该机构还没有申请代理"
 
 	def click_edit(self):
+		time.sleep(3)
 		try:
 			bh = self.dr.window_handles
 			self.dr.find_element_by_link_text(u"编辑").click()

@@ -86,14 +86,15 @@ def register_by_email_index(cfg, driver, base_url, r_username, r_email, r_psw):
     clickregister.save_screenshot()
 
     registerpage = EmailRegisterPage(driver,cfg)
-    registerpage.click_emalimod()
-    registerpage.input_username(r_username)
-    registerpage.input_email(r_email)
-    registerpage.input_psw(r_psw)
-    time.sleep(2)
-    registerpage.verification_code()
-    time.sleep(8)
-    registerpage.save_screenshot()
+    em = registerpage.click_emalimod()
+    if em == 0:
+        registerpage.input_username(r_username)
+        registerpage.input_email(r_email)
+        registerpage.input_psw(r_psw)
+        time.sleep(2)
+        registerpage.verification_code()
+        time.sleep(8)
+        registerpage.save_screenshot()       
 #    code = driver.find_element_by_id("J_iCode")
 #    code.click()
 #    time.sleep(2)
@@ -103,8 +104,10 @@ def register_by_email_index(cfg, driver, base_url, r_username, r_email, r_psw):
 #    driver.find_element(cfg.get('as_index', 'register_email_submit_by'), \
 #                        cfg.get('as_index', 'register_email_submit')).click()
 #    time.sleep(6)
-    registerpage.register_submit_btn()
-    registerpage.save_screenshot()
+        registerpage.register_submit_btn()
+        registerpage.save_screenshot()
+    else:
+        pass
 
     try:
         logout(driver, base_url)
@@ -219,21 +222,24 @@ def register_by_independent_domian(cfg, driver, base_url, r_username, r_email, r
     clickregister.click_register()
 
     registerpage = EmailRegisterPage(driver,cfg)
-    registerpage.click_emailmod_domain()
-    registerpage.input_username(r_username)
-    registerpage.input_email(r_email)
-    registerpage.input_psw(r_psw)
-    registerpage.verification_code()
-    time.sleep(10)
-    registerpage.save_screenshot()
+    dem = registerpage.click_emailmod_domain()
+    if dem == 0:
+        registerpage.input_username(r_username)
+        registerpage.input_email(r_email)
+        registerpage.input_psw(r_psw)
+        registerpage.verification_code()
+        time.sleep(10)
+        registerpage.save_screenshot()
 #    #下一步(设置没有下一步填写项)
 #    independentreg = IndependentDomianLoginPage(driver,cfg)
 #    independentreg.click_next()
 #    independentreg.input_realname()
 #    # ...
 #    # ...
-    registerpage.register_submit_btn()
-    registerpage.save_screenshot()
+        registerpage.register_submit_btn()
+        registerpage.save_screenshot()
+    else:
+        pass
     time.sleep(2)
     try:
         logout(driver, base_url)

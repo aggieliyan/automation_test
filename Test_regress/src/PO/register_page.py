@@ -5,6 +5,7 @@ Created on Dec 9, 2014
 @author: liwen
 '''
 import base, time
+import selenium.common.exceptions
 
 #class RegisterPage(base.Base):
 #    def __init__(self, driver, cfg):
@@ -37,13 +38,25 @@ class EmailRegisterPage(base.Base):
         self.base_url = cfg.get('env_para', 'base_url')
         
     def click_emalimod(self):
-        self.dr.find_element(self.cfg.get('as_index', 'register_email_type_by'), \
-                        self.cfg.get('as_index', 'register_email_type')).click()
-    
+        em = 0
+        try:
+            self.dr.find_element(self.cfg.get('as_index', 'register_email_type_by'), \
+                                 self.cfg.get('as_index', 'register_email_type')).click()
+        except Exception:
+            print u"没有邮箱注册入口"
+            em = 1
+        return em
+                                 
     def click_emailmod_domain(self):
         time.sleep(1)
-        self.dr.find_element(self.cfg.get('as_index', 'register_email_typedomain_by'), \
-                        self.cfg.get('as_index', 'register_email_typedomain')).click()
+        dem = 0
+        try:
+            self.dr.find_element(self.cfg.get('as_index', 'register_email_typedomain_by'), \
+                                 self.cfg.get('as_index', 'register_email_typedomain')).click()
+        except Exception:
+            print u"没有邮箱注册入口"
+            dem = 1
+        return dem
                            
     def input_username(self,r_username):
         time.sleep(3)

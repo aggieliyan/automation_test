@@ -29,8 +29,8 @@ class AnnouncementListPage(base.Base):
     
 	def click_manage(self):
 		time.sleep(1)
-		self.dr.find_elements(self.cfg.get('org_index', 'manage_by'), \
-			self.cfg.get('org_index', 'manage'))[0].click()
+		self.dr.find_element(self.cfg.get('org_index', 'manage_by'), \
+			self.cfg.get('org_index', 'manage')).click()
 			
 	def click_add_announcement(self):
 		bh = self.dr.window_handles

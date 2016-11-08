@@ -40,7 +40,7 @@ class OrgIndexPage(base.Base):
 	#网校公告
 	def click_announcement(self):
 		try:
-			self.dr.find_element_by_link_text(u"网校公告").click()
+			self.dr.find_element_by_link_text(u"资讯公告").click()
 		except NoSuchElementException, e:
 			print u'网校公告导航不存在'
 		# except WebDriverException, e:

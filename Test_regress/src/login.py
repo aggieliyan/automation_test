@@ -65,7 +65,7 @@ def login_by_logindo(cfg, driver, base_url, user_name, user_psw):
 #参数：driverenium对象，独立域名地址、用户名和密码
 def logout_by_independent_domian(driver, independent_url):
     driver.get(independent_url)
-    time.sleep(2)
+    driver.implicitly_wait(30)
     driver.find_element_by_link_text(u"[退出]").click()
     time.sleep(1)
     

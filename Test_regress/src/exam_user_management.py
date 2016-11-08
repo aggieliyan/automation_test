@@ -13,8 +13,15 @@ from PO.payment_page import PaymentPage
 def buy_paper(cfg, driver, paper_url):
     pay = PaymentPage(driver, cfg)
     pay.open(paper_url, "exampaper")
+    exm = pay.choose_buyNow()
     pay.save_screenshot()
-    pay.click_pay()
+    if exm == 0:
+        pay.choose_balance_pay()
+        pay.choose_use_rmb()
+        pay.click_pay()
+        pay.click_look_Examdetail()
+    else:
+        pass
 
 #学员考试
 def exam_user(cfg, driver, base_url, operation, blank_pager, question_answer, paper_name):

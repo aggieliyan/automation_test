@@ -74,6 +74,7 @@ def open_course_for_one(cfg, driver, base_url):
     ogstumanage.click_openok()
     ogstumanage.save_screenshot()
     ogstumanage.click_opensure()
+    ogstumanage.save_screenshot()
 
 def open_course_for_multi(cfg, driver, base_url):
     

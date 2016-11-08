@@ -130,13 +130,13 @@ class OrgStudentManagePage(base.Base):
 		time.sleep(15)
 	#选中资料
 	def click_openchoose(self):
-		self.dr.find_element(self.cfg.get('org_manage', "open_course_1_by"), \
-			self.cfg.get('org_manage', "open_course_1")).click()
+		self.dr.find_elements(self.cfg.get('org_manage', "open_course_1_by"), \
+			self.cfg.get('org_manage', "open_course_1"))[2].click()
 		time.sleep(2)
 	#选中开通班级里的课程
 	def click_class_openchoose(self):
-		self.dr.find_element(self.cfg.get('org_manage', "open_course_2_by"), \
-			self.cfg.get('org_manage', "open_course_2")).click()
+		self.dr.find_elements(self.cfg.get('org_manage', "open_course_2_by"), \
+			self.cfg.get('org_manage', "open_course_2"))[2].click()
 		time.sleep(2)
 	#确认开通
 	def click_openok(self):

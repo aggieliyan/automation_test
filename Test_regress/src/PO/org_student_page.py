@@ -98,7 +98,7 @@ class OrgStudentManagePage(base.Base):
 	#班级开通课程
 	#点击进入类目/班级页面
 	def click_open_list(self):
-		time.sleep(10)
+		time.sleep(5)
 		self.dr.find_element_by_link_text(u"类目/班级").click()
 #		self.dr.find_element(self.cfg.get('org_manage', "all_open_list_by"), \
 #			self.cfg.get('org_manage', "all_open_list")).click()
@@ -127,7 +127,7 @@ class OrgStudentManagePage(base.Base):
 		time.sleep(5)
 		self.dr.find_element(self.cfg.get('org_manage', "open_cate_by"), \
 			self.cfg.get('org_manage', "open_cate")).click()
-		time.sleep(15)
+		time.sleep(10)
 	#选中资料
 	def click_openchoose(self):
 		self.dr.find_elements(self.cfg.get('org_manage', "open_course_1_by"), \
@@ -198,9 +198,11 @@ class OrgStudentManagePage(base.Base):
 		self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_all_by'), \
 							self.cfg.get('manage_course_num', 'manage_coursenum_all')).click()
 	def click_coursenum_allnum(self):
+		time.sleep(1)
 		self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_allnum_by'), \
 							self.cfg.get('manage_course_num', 'manage_coursenum_allnum')).send_keys("1")
 	def click_coursenum_apply(self):
+		time.sleep(1)
 		self.dr.find_element(self.cfg.get('manage_course_num', 'manage_coursenum_apply_by'), \
 							self.cfg.get('manage_course_num', 'manage_coursenum_apply')).click()
 	#单个课程增加授权数

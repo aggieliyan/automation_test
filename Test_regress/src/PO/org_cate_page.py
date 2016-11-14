@@ -73,6 +73,7 @@ class OrgcatecoursePge(base.Base):
 		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', 'course_add_1_by'), \
             self.cfg.get('org_manage', 'course_add_1')).click()
+        time.sleep(2)
 
 	def get_firstcoursename(self):
 		time.sleep(3)

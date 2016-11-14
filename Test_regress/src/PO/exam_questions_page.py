@@ -25,9 +25,10 @@ class QuestionListPage(base.Base):
 
 	#点击新建试题
 	def click_question_create(self):
+		time.sleep(2)
 		self.dr.find_element(self.cfg.get('exam_questions', "question_create_by"), \
 							self.cfg.get('exam_questions', "question_create")).click()
-		time.sleep(1)
+		time.sleep(2)
 
 	#点击导入试题
 	def click_import_questions(self, template):

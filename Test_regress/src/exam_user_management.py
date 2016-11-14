@@ -13,6 +13,7 @@ from PO.payment_page import PaymentPage
 def buy_paper(cfg, driver, paper_url):
     pay = PaymentPage(driver, cfg)
     pay.open(paper_url, "exampaper")
+#    pay.self_dr_refresh()
     exm = pay.choose_buyNow()
     pay.save_screenshot()
     if exm == 0:

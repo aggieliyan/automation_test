@@ -24,12 +24,23 @@ class PaymentPage(base.Base):
 		                       exampaper 为试卷
 
 		"""
-		self.dr.get(course_url)
+		try:
+			self.dr.get(course_url)
+			time.sleep(3)
+		except:
+			self.dr.refresh()
+			time.sleep(3)
 #		course_id = re.search(r'\d{1,10}', course_url).group(0)
 #		host = self.base_url.replace("http://","")
 #		self.dr.get("%spaymentRedirect.do?action=paymentDomainRedirect&\
 #			host=%s&grouponid=&type=%s&id=%s"\
 #			%(self.base_url, host, ptype, str(course_id)))
+
+	#刷新页面
+#	def self_dr_refresh(self):
+#		self.dr.refresh()
+#		time.sleep(3)
+
 	#点击立即报名
 	def choose_registerNow(self):
 		time.sleep(2)

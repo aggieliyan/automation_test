@@ -47,11 +47,17 @@ class ClickLoginText(base.Base):
     
     def click_login(self):
         time.sleep(3)
-        self.dr.find_element_by_link_text(u"[登录]").click()
+        try:
+            self.dr.find_element_by_link_text(u"[登录]").click()
+        except:
+            self.dr.find_element_by_link_text(u"登录").click()
 
     def click_register(self):
         time.sleep(3)
-        self.dr.find_element_by_link_text(u"[注册]").click()
+        try:
+            self.dr.find_element_by_link_text(u"[注册]").click()
+        except:
+            self.dr.find_element_by_link_text(u"注册").click()
                
 class LoginPage(base.Base):
     

@@ -61,18 +61,18 @@ def login_by_logindo(cfg, driver, base_url, user_name, user_psw):
     loginpage.save_screenshot()
     time.sleep(2)
     
+def login_by_know(cfg, driver):
+    time.sleep(1)
+    driver.find_element_by_css_selector("#J_continueGuid > span.greenbtn30_text").click()
+    time.sleep(1)
+    
 #从独立域名退出
 #参数：driverenium对象，独立域名地址、用户名和密码
 def logout_by_independent_domian(driver,independent_url):
-    try:
-        driver.get(independent_url)
-    except:
-        driver.refresh()
-    time.sleep(2)
+    time.sleep(3)
     driver.find_element_by_link_text(u"[退出]").click()
-    time.sleep(1)
-    
-    
+    time.sleep(2)
+       
 def logout(driver, base_url):
     driver.get(base_url)
     time.sleep(1)

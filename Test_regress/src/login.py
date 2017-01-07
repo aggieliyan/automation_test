@@ -70,13 +70,13 @@ def login_by_know(cfg, driver):
 #参数：driverenium对象，独立域名地址、用户名和密码
 def logout_by_independent_domian(driver,independent_url):
     time.sleep(3)
-    driver.find_element_by_link_text(u"[退出]").click()
+    driver.find_element_by_link_text(u"退出").click()
     time.sleep(2)
        
 def logout(driver, base_url):
     driver.get(base_url)
     time.sleep(1)
-    driver.find_element_by_link_text(u"[退出]").click()
+    driver.find_element_by_link_text(u"退出").click()
     time.sleep(1)
     
 def is_element_present(driver, how, what):

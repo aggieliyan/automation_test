@@ -29,7 +29,7 @@ class ClickRegisterText(base.Base):
         self.base_url = cfg.get('env_para', 'base_url')
     
     def click_register(self):
-        self.dr.find_element_by_link_text(u"[注册]").click()
+        self.dr.find_element_by_link_text(u"免费注册").click()
         
 class EmailRegisterPage(base.Base):
     def __init__(self, driver, cfg):

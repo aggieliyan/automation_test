@@ -145,12 +145,26 @@ class QuestionInputPage(base.Base):
 		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(2).text('" + question_ansa + "')")
 		time.sleep(1)
 
+		#单选正确答案a				
+	def select_single_answera(self):
+		self.dr.execute_script("$(':radio').eq(0).click()")
+		time.sleep(1)
+		
+		#多选正确答案a
+	def select_multiple_answera(self):
+		self.dr.execute_script("$(':checkbox').eq(0).click()")
+		time.sleep(1)
+
 		#综合题单选多选答案ab				
 	def input_com_answerab(self, question_ansa):
-
 		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(2).text('" + question_ansa + "')")
 		time.sleep(1)
 		self.dr.execute_script("$('.J_RICH_TEXTAREA p').eq(3).text('" + question_ansa + "')")
+		time.sleep(1)
+		
+		#综合题单选正确答案a
+	def select_com_answera(self):
+		self.dr.execute_script("$(':radio').eq(0).click()")
 		time.sleep(1)
 		
 	#问答题答案

@@ -75,8 +75,11 @@ class PaymentPage(base.Base):
 			
 	def choose_use_rmb(self):
 		time.sleep(2)
-		self.dr.find_element(self.cfg.get('org_index','use_rmb_by'), \
-			self.cfg.get('org_index','use_rmb')).click()
+        try:
+            self.dr.find_element(self.cfg.get('org_index','use_rmb_by'), \
+                self.cfg.get('org_index','use_rmb')).click()
+        except:
+            pass
 
 	def click_pay(self):
 		time.sleep(3)

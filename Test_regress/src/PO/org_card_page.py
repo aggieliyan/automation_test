@@ -24,11 +24,17 @@ class OrgCardgroupListPage(base.Base):
 	def click_addcardgroup(self):
 		time.sleep(5)
 		self.dr.find_element_by_link_text(u"添加卡组").click()
-
+		
 	def click_buyliscard(self):
 		time.sleep(2)
-		self.dr.find_element_by_link_text(u"购买试听卡").click()
-
+		liscard = 0
+		try:
+			self.dr.find_element_by_link_text(u"购买试听卡").click()
+		except:
+			print u'机构为免费模式，没有试听卡购买入口'
+			liscard = 1
+		return liscard
+		      
 	def click_addcard(self, cgroup_num):
 	    time.sleep(2)
 	    if cgroup_num == 1:

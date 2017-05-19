@@ -96,14 +96,17 @@ def add_cate_cardgroup(cfg, driver, base_url, org_name, \
 def buy_listen_card(cfg, driver, base_url):
     ogmancardgroup = OrgCardgroupListPage(driver, cfg)
     ogmancardgroup.open()
-    ogmancardgroup.click_buyliscard()
-    ogbuyliscard = OrgBuyliscardPage(driver, cfg)    
-    ogbuyliscard.input_buyliscardcount()
-    ogbuyliscard.save_screenshot()
-    ogbuyliscard.click_confirmbuyliscard()
-    ogbuyliscard.save_screenshot()    
-    ogbuyliscard.click_confirmgivemoney()
-    
+    liscard = ogmancardgroup.click_buyliscard()
+    if liscard == 1:
+        pass        
+    else:
+        ogbuyliscard = OrgBuyliscardPage(driver, cfg)    
+        ogbuyliscard.input_buyliscardcount()
+        ogbuyliscard.save_screenshot()
+        ogbuyliscard.click_confirmbuyliscard()
+        ogbuyliscard.save_screenshot()    
+        ogbuyliscard.click_confirmgivemoney()
+    return liscard           
 #添加卡组-试听卡
 def add_listen_cardgroup(cfg, driver, base_url, \
         org_name, group_name):

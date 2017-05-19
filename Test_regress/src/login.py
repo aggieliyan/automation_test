@@ -228,7 +228,7 @@ def register_by_independent_domian(cfg, driver, base_url, r_username, r_email, r
     registerpage = EmailRegisterPage(driver,cfg)
     dem = registerpage.click_emailmod_domain()
     if dem == 0:
-        registerpage.input_username(r_username)
+#        registerpage.input_username(r_username)
         registerpage.input_email(r_email)
         registerpage.input_psw(r_psw)
         registerpage.verification_code()

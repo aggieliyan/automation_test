@@ -57,11 +57,12 @@ class EmailRegisterPage(base.Base):
             print u"没有邮箱注册入口"
             dem = 1
         return dem
-                           
-    def input_username(self,r_username):
-        time.sleep(3)
-        self.dr.find_element(self.cfg.get('as_index', 'register_email_username_by'), \
-                        self. cfg.get('as_index', 'register_email_username')).send_keys(r_username)
+
+#注册页面取消了用户名输入                           
+#    def input_username(self,r_username):
+#        time.sleep(3)
+#        self.dr.find_element(self.cfg.get('as_index', 'register_email_username_by'), \
+#                        self. cfg.get('as_index', 'register_email_username')).send_keys(r_username)
     
     def input_email(self,r_email):
         self.dr.find_element(self.cfg.get('as_index', 'register_email_by'), \

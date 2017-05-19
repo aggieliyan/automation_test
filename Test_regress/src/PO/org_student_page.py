@@ -70,8 +70,14 @@ class OrgStudentManagePage(base.Base):
 	#点击批量创建学员
 	def click_create_multi(self):
 		time.sleep(5)
-		self.dr.find_element_by_id("createBtn").click()
-		self.dr.find_element_by_css_selector('#toggle-container > div > div:last-child > input[type="radio"]').click()
+		cm = 0
+		try:
+			self.dr.find_element_by_id("createBtn").click()
+			self.dr.find_element_by_css_selector('#toggle-container > div > div:last-child > input[type="radio"]').click()
+		except:
+			print u'机构为免费模式，没有创建学员入口'
+			cm = 1
+		return cm
 	#选择文件
 	def click_createchoose(self):
 		self.dr.execute_script("$('#fileArea').attr('style','height:20px;opacity:1;transform:translate(0px, 0px) scale(0.5)')")
@@ -143,7 +149,7 @@ class OrgStudentManagePage(base.Base):
 		time.sleep(2)
 		self.dr.find_element(self.cfg.get('org_manage', "open_ok_by"), \
 			self.cfg.get('org_manage', "open_ok")).click()
-		time.sleep(2)
+		time.sleep(10)
 	#弹出框中确认
 	def click_opensure(self):
 		time.sleep(3)

@@ -39,11 +39,14 @@ def create_student(cfg, driver, base_url, stu_txt):
 
     ogstumanage = OrgStudentManagePage(driver, cfg)
     ogstumanage.open()
-    ogstumanage.click_create_multi()
-    ogstumanage.save_screenshot()
-    ogstumanage.click_createchoose()
-    ogstumanage.click_createfile(stu_txt)
-    ogstumanage.click_createmulti()
+    cm = ogstumanage.click_create_multi()
+    if cm == 1:
+        pass
+    else:
+        ogstumanage.save_screenshot()
+        ogstumanage.click_createchoose()
+        ogstumanage.click_createfile(stu_txt)
+        ogstumanage.click_createmulti()
 
 def auto_create_student(cfg, driver, base_url, stu_num):
     #自动生成用户名文件创建学员
@@ -86,6 +89,7 @@ def open_course_for_multi(cfg, driver, base_url):
     ogstumanage.save_screenshot()
     ogstumanage.click_opencate()
     ogstumanage.click_class_openchoose()
+    ogstumanage.save_screenshot()
     ogstumanage.click_openok()
     ogstumanage.click_openaway()
 

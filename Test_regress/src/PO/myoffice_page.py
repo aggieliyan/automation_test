@@ -63,8 +63,13 @@ class MyOfficePage(base.Base):
 	#点击管理我申请的代理
 	def click_myapplyagency(self):
 #		self.dr.find_element_by_link_text(u"管理我申请的代理").click()
-		self.dr.find_element_by_link_text(u"我申请的代理").click()
-
+		en = 0
+		try:
+			self.dr.find_element_by_link_text(u"我申请的代理").click()
+		except:
+			print u'机构为免费模式，没有申请代理入口'
+			en = 1
+			return en
 
 	#为机构头像换图片
 	def input_org_pic(self, picfile):

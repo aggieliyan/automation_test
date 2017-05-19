@@ -23,7 +23,8 @@ class CourseAgencyPage(base.Base):
 		m = MyOfficePage(self.dr, self.cfg)
 		m.open()
 		m.click_org_operatage()
-		m.click_myapplyagency()
+		en = m.click_myapplyagency()
+		return en
 
 	def click_manage_course(self):
 		time.sleep(3)

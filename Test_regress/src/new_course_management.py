@@ -195,23 +195,27 @@ def class_face(cfg, driver, base_url, classname, address, classnum, \
 def release_agency_course(cfg, driver, base_url, course_title=u'代理课程'):
 
     cg = CourseAgencyPage(driver, cfg)
-    cg.open()
+    en = cg.open()
     cg.save_screenshot()
-    cg.click_manage_course()
-    cg.click_edit()
+    if en == 1:
+        pass
+    else:
+        cg.click_manage_course()
+        cg.click_edit()
 
-    ac = AgentCourseInputPage(driver, cfg)
-    ac.click_modify()
-    ac.input_title(course_title)
-    ac.click_modify_ok()
-    ac.save_screenshot()
-    ac.click_save()
+        ac = AgentCourseInputPage(driver, cfg)
+        ac.click_modify()
+        ac.input_title(course_title)
+        ac.click_modify_ok()
+        ac.save_screenshot()
+        ac.click_save()
     
-    cg = CourseAgencyPage(driver, cfg)
-    cg.open()
-    cg.save_screenshot()
-    cg.click_manage_course()
-    time.sleep(3)
+        cg = CourseAgencyPage(driver, cfg)
+        cg.open()
+        cg.save_screenshot()
+        cg.click_manage_course()
+        time.sleep(3)
+    return en
     
     # ac.save_screenshot()
 

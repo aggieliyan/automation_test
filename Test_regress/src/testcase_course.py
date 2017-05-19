@@ -66,23 +66,23 @@ class CourseTest(unittest.TestCase):
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
    
 #   #仅供学员购买的课程，没有课时，为了防止防作弊开启，课程价格为0.1,但是设置不成功
-#    def test_course_rmbbuy(self):
-#       ba = Base(self.driver)
-#       title = "course" + ba.rand_name()
-#       new_course_management.test_course_rmbbuy(self.cfg, self.driver, course_title=title, course_price=0.1)
+    #def test_course_rmbbuy(self):
+    #   ba = Base(self.driver)
+    #   title = "course" + ba.rand_name()
+    #   new_course_management.test_course_rmbbuy(self.cfg, self.driver, course_title=title, course_price=0.1)
        
-#       time.sleep(2)
-#       course_href = self.driver.find_element("link text", u"预览")
+    #   time.sleep(2)
+    #   course_href = self.driver.find_element("link text", u"预览")
        #若发课成功了取出课程链接存入文件中供后面的购买流程用
-#       rs = False
-#      if course_href:
-#            rs = True
-#            self.cfg.set("env_para", "course_href_rmb",  "http://www.ablesky.com/" + course.get_attribute("href"))
-#            self.cfg.write(open(self.cfg_file, "w"))
+    #   rs = False
+    #   if course_href:
+    #        rs = True
+    #        self.cfg.set("env_para", "course_href_rmb",  "http://www.ablesky.com/" + course.get_attribute("href"))
+    #        self.cfg.write(open(self.cfg_file, "w"))
 
-#       filename = ba.save_screenshot()
-#       print "image:"+filename
-#       self.assertEqual(True, rs)
+    #   filename = ba.save_screenshot()
+    #   print "image:"+filename
+    #  self.assertEqual(True, rs)
         
     # @unittest.skip("test")
     def test_release_normal_course(self):      
@@ -144,7 +144,7 @@ class CourseTest(unittest.TestCase):
                 self.test_onlineclass()
                 return
 
-#        rs = ba.is_element_present("link text", title)
+        rs = ba.is_element_present("link text", title)
         time.sleep(2)
         course = self.driver.find_element("link text", title)
         #若发课成功了取出课程链接存入文件中供后面的购买流程用
@@ -199,15 +199,16 @@ class CourseTest(unittest.TestCase):
     def test_agency_course(self):
         ba = Base(self.driver)
         title = "agency" + ba.rand_name()
-        new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
+        en = new_course_management.release_agency_course(self.cfg, self.driver, self.base_url, course_title=title)
+        #判断机构是否为免费模式，如果是免费模式en=1，收费模式en=0
+        if en == 1:
+            pass
+        else:
+            rs = ba.is_element_present("link text", title)
+            filename = ba.save_screenshot()
+            print "image:"+filename
+            self.assertEqual(True, rs)
         
-        rs = ba.is_element_present("link text", title)
-        filename = ba.save_screenshot()
-        print "image:"+filename
-        self.assertEqual(True, rs)
-        
-        
-
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()
         

@@ -174,6 +174,7 @@ def send_close_paper(cfg, driver, base_url, username, atype=2):
     """
     ep = ExamStudentListPage(driver, cfg)
     ep.open()
+    ep.click_org_personnel()
     ep.click_org_student()
     ep.save_screenshot()
     ep.click_select_stu()

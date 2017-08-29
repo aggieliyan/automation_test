@@ -18,10 +18,17 @@ class ExamStudentListPage(base.Base):
 	
 	#进入后台页面
 	def open(self):
-		self.dr.find_element_by_css_selector(".myoffice ").click()
+		self.dr.get("http://www.ablesky.com/myOffice.do ")
+		time.sleep(2)
+		
 	#点击后台人员
-	def click_org_student(self):
+	def click_org_personnel(self):
 		self.dr.find_element_by_link_text(u"人员").click()
+        time.sleep(2)
+        
+    #点击后台学员
+	def click_org_student(self):
+		self.dr.find_element_by_link_text(u"学员").click()
         time.sleep(2)
 
 	#筛选学员user_name
@@ -45,20 +52,18 @@ class ExamStudentListPage(base.Base):
 	#点击开通试卷题库
 	def click_test_paper(self):
 		bh = self.dr.window_handles
-		self.dr.find_element_by_link_text(u"开通试卷题库").click()
-		time.sleep(2)		
-		self.switch_window(bh)
+		self.dr.find_element_by_link_text(u"开通试卷题库").click()		
 		time.sleep(3)
 
 	def click_send_paper(self):
 		time.sleep(1)
-		self.dr.find_element(self.cfg.get('exam', 'send_paper_by'), \
-			self.cfg.get('exam', 'send_paper')).click()
+		self.dr.find_elements(self.cfg.get('exam', 'send_paper_by'), \
+			self.cfg.get('exam', 'send_paper'))[0].click()
 
 	def click_close_paper(self):
 		time.sleep(1)
-		self.dr.find_element(self.cfg.get('exam', 'close_paper_by'), \
-			self.cfg.get('exam', 'close_paper')).click()
+		self.dr.find_elements(self.cfg.get('exam', 'close_paper_by'), \
+			self.cfg.get('exam', 'close_paper'))[1].click()
 
 	def choose_all_paper(self):
 		time.sleep(0.5)
@@ -68,7 +73,7 @@ class ExamStudentListPage(base.Base):
 	def choose_one_paper(self):
 		time.sleep(0.5)
 		self.dr.find_elements(self.cfg.get('exam', 'select_one_p_by'), \
-			self.cfg.get('exam', 'select_one_p'))[0].click()
+			self.cfg.get('exam', 'select_one_p'))[1].click()
 			
 	def click_close(self):
 		time.sleep(2)

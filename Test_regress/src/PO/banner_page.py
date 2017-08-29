@@ -22,7 +22,8 @@ class BannerPage(base.Base):
 	def open(self):
 		op = MyOfficePage(self.dr, self.cfg)
 		op.open()
-		op.click_system_settings()
+		op.click_home_dress()
+		op.click_logo_settings()
 
 		if not op.click_logo_settings():
 			return 0

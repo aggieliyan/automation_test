@@ -59,16 +59,16 @@ class ExamStudentTest(unittest.TestCase):
             self.driver.add_cookie({'name':'ASUSS', 'value':cookie1, 'path':'/', 'domain':'.ablesky.com'})
             self.driver.add_cookie({'name':'RM', 'value':'rm'})
 
-    def test_buy_paper(self):
-        ba = Base(self.driver)
-        if self.base_url == "http://www.ablesky.com/":
-            paper_url = self.cfg.get("env_para", "paper_url")
-        elif self.base_url == "http://www.beta.ablesky.com/":
-            paper_url = self.cfg.get("env_para", "paper_url_beta")
+#    def test_buy_paper(self):
+#        ba = Base(self.driver)
+#        if self.base_url == "http://www.ablesky.com/":
+#            paper_url = self.cfg.get("env_para", "paper_url")
+#        elif self.base_url == "http://www.beta.ablesky.com/":
+#            paper_url = self.cfg.get("env_para", "paper_url_beta")
             
-        exam_user_management.buy_paper(self.cfg, self.driver, paper_url)
-        filename = ba.save_screenshot()
-        print "image:"+filename
+#        exam_user_management.buy_paper(self.cfg, self.driver, paper_url)
+#        filename = ba.save_screenshot()
+#        print "image:"+filename
 
     #学员参加考试
     def test_exam_user(self):
@@ -78,7 +78,6 @@ class ExamStudentTest(unittest.TestCase):
         question_answer ='123'
         # blank_pager=1是交白卷 ；blank_pager=0 是做了一个题
         blank_pager = 0
-#        paper_name = self.paper_name
         paper_name = self.cfg.get("env_para", "paper_name")
         exam_user_management.exam_user(self.cfg, self.driver, self.base_url, operation, blank_pager, question_answer, paper_name)
 

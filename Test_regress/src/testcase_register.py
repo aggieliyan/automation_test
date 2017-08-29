@@ -69,7 +69,8 @@ class RegisterTest(unittest.TestCase):
     def test_logandout_domain(self):
         ba = Base(self.driver)
         login.login_by_independent_domian(self.cfg, self.driver, self.independent_url, self.org_name, self.org_password)
-        login.login_by_know(self.cfg, self.driver)
+         #v8.0改版去掉了遮罩提示页面
+#        login.login_by_know(self.cfg, self.driver)
         login.logout_by_independent_domian(self.driver, self.independent_url)
    
         filename = ba.save_screenshot()

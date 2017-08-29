@@ -94,10 +94,7 @@ class OrgStudentManagePage(base.Base):
 	#点击开通课程
 	def click_open_course(self):
 		time.sleep(3)
-		bh = self.dr.window_handles
 		self.dr.find_element_by_link_text(u"开通移除课程").click()
-		time.sleep(3)		
-		self.switch_window(bh)
 #		self.dr.find_element(self.cfg.get('org_manage', "open_course_by"), \
 #			self.cfg.get('org_manage', "open_course")).click()
 
@@ -117,11 +114,8 @@ class OrgStudentManagePage(base.Base):
 		time.sleep(2)
 	#选择开通/移除课程
 	def click_open_check(self):
-		time.sleep(2)
-		bh = self.dr.window_handles
 		self.dr.find_element_by_xpath("//ul[@id='categoryList']/ul/li[1]/span[2]/select/option[4]").click()
 		time.sleep(3)
-		self.switch_window(bh)
 	#应用
 #	def click_open_apply(self):
 #		self.dr.find_element_by_link_text(u"应用").click()
@@ -133,11 +127,11 @@ class OrgStudentManagePage(base.Base):
 		time.sleep(5)
 		self.dr.find_element(self.cfg.get('org_manage', "open_cate_by"), \
 			self.cfg.get('org_manage', "open_cate")).click()
-		time.sleep(10)
+		time.sleep(5)
 	#选中资料
 	def click_openchoose(self):
 		self.dr.find_elements(self.cfg.get('org_manage', "open_course_1_by"), \
-			self.cfg.get('org_manage', "open_course_1"))[2].click()
+			self.cfg.get('org_manage', "open_course_1"))[4].click()
 		time.sleep(2)
 	#选中开通班级里的课程
 	def click_class_openchoose(self):
@@ -191,8 +185,9 @@ class OrgStudentManagePage(base.Base):
 	def click_managenum(self):
 		bh = self.dr.window_handles
 		self.dr.find_element_by_link_text(u"修改观看次数").click()
-		time.sleep(2)		
-		self.switch_window(bh)
+		#播放授权页面从新开页面变为当页跳转，去掉这块代码
+#		time.sleep(2)		
+#		self.switch_window(bh)
 		time.sleep(3)
 	#刷新页面
 	def self_dr_refresh(self):

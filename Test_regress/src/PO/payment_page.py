@@ -66,6 +66,11 @@ class PaymentPage(base.Base):
 			print u"已购买该试卷或试卷为免费试卷"
 			exm = 1
 		return exm
+	
+	#付款确认信息页面
+	def confirm_pay(self):
+		time.sleep(2)
+		self.dr.find_element_by_class_name("button").click()
 
     #选择账户余额支付
 	def choose_balance_pay(self):

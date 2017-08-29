@@ -23,6 +23,7 @@ def buy_course(cfg, driver, base_url, course_url):
     bm = pay.choose_registerNow()
     pay.save_screenshot()
     if bm == 0:
+        pay.confirm_pay()
         pay.choose_balance_pay()
         pay.choose_use_rmb()
         pay.click_pay()
@@ -38,8 +39,10 @@ def buy_course_usecard(cfg, driver, base_url, course_url):
     cm = pay.choose_registerNow()
     pay.save_screenshot()
     if cm == 0:
+        pay.confirm_pay()
         pay.choose_balance_pay()
         pay.click_pay()
+        pay.click_look_Coursedetail()
     else:
         pass          
     

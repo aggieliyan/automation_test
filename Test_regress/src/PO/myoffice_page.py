@@ -32,13 +32,13 @@ class MyOfficePage(base.Base):
 	def click_org_operatage(self):
 		self.dr.find_element_by_link_text(u"运营").click()
 		
-	#点击系统设置导航
-	def click_system_settings(self):
-		self.dr.find_element_by_link_text(u"系统").click()
+	#点击网校装扮
+	def click_home_dress(self):
+		self.dr.find_element_by_link_text(u"网校装扮").click()
 
 	def click_logo_settings(self):
 		try:
-			self.dr.find_element_by_link_text(u"logo/联系方式设置").click()
+			self.dr.find_element_by_link_text(u"logo/联系方式").click()
 		except NoSuchElementException, e:
 			print u"该导航不存在"
 			return 0
@@ -88,7 +88,7 @@ class MyOfficePage(base.Base):
 
 	#点击学员管理
 	def click_student_management(self):
-		self.dr.find_element_by_link_text(u"学员管理").click()
+		self.dr.find_element_by_link_text(u"学员").click()
 
 	# #点击在线购买授权
 	# def click_buy_opennum(self):
@@ -114,7 +114,7 @@ class MyOfficePage(base.Base):
 	#点击管理/卡组
 	def click_org_mancardgroup(self):
 		time.sleep(2)
-		self.dr.find_element_by_link_text(u"新建/管理卡").click()
+		self.dr.find_element_by_link_text(u"学习卡").click()
 
 	#去在线购买授权页面
 	def click_num_record(self):
@@ -128,4 +128,4 @@ class MyOfficePage(base.Base):
 	#点击老师管理
 	def click_teacher(self):
 		time.sleep(2)
-		self.dr.find_element_by_link_text(u"老师管理").click()
+		self.dr.find_element_by_link_text(u"老师").click()

@@ -20,6 +20,8 @@ class ExamStudentListPage(base.Base):
 	def open(self):
 		self.dr.get("http://www.ablesky.com/myOffice.do ")
 		time.sleep(2)
+		self.dr.find_element_by_class_name("close-btn").click()
+		time.sleep(1)
 		
 	#点击后台人员
 	def click_org_personnel(self):
@@ -58,7 +60,7 @@ class ExamStudentListPage(base.Base):
 	def click_send_paper(self):
 		time.sleep(1)
 		self.dr.find_elements(self.cfg.get('exam', 'send_paper_by'), \
-			self.cfg.get('exam', 'send_paper'))[0].click()
+			self.cfg.get('exam', 'send_paper'))[1].click()
 
 	def click_close_paper(self):
 		time.sleep(1)

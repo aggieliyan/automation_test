@@ -16,7 +16,7 @@ class UserpaperListPage(base.Base):
 		self.base_url = self.cfg.get('env_para', 'base_url')
 		
 	def enter_exampaperlist(self):
-		url = "%s/studyCenterRedirect.do?action=toStudentExamCenter&orgId=2249&ccgId="%(self.base_url)
+		url = "%s/studyCenterRedirect.do?action=toStudentExamCenter&orgId=8246&ccgId="%(self.base_url)
 		self.dr.get(url)	
 	def enter_practice(self):
 		self.dr.find_element(self.cfg.get('exam', 'enter_practice_by'), \

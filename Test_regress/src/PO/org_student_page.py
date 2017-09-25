@@ -125,8 +125,8 @@ class OrgStudentManagePage(base.Base):
 	#未归类内容，展开资料
 	def click_opencate(self):
 		time.sleep(5)
-		self.dr.find_element(self.cfg.get('org_manage', "open_cate_by"), \
-			self.cfg.get('org_manage', "open_cate")).click()
+		self.dr.find_elements(self.cfg.get('org_manage', "open_cate_by"), \
+			self.cfg.get('org_manage', "open_cate"))[0].click()
 		time.sleep(5)
 	#选中资料
 	def click_openchoose(self):

@@ -140,7 +140,7 @@ def test_course_rmbbuy(cfg, driver, course_title, course_price=0.1):
     course_info.click_save()
         
 def class_redirect(cfg, driver, base_url, classname='onlineclass', \
-    ctype=1, price=0.01, course_describe='hello world', course_tags='english\n'):
+    ctype=1, price=1, course_describe='hello world', course_tags='english\n'):
     '''
     ctype代表发课类型，1代表普通网络班（打包），2代表预售网络班
     '''
@@ -170,7 +170,7 @@ def class_redirect(cfg, driver, base_url, classname='onlineclass', \
     time.sleep(2)
 
 def class_face(cfg, driver, base_url, classname, address, classnum, \
-    price=0.01, course_describe='hello world', course_tags='english\n'):
+    price=1, course_describe='hello world', course_tags='english\n'):
     
     olclass = OnLineClassListPage(driver, cfg)
     olclass.open()

@@ -27,6 +27,11 @@ class ClickRegisterText(base.Base):
         self.dr = driver
         self.cfg = cfg
         self.base_url = cfg.get('env_para', 'base_url')
+        
+    def click_iknow(self):
+        time.sleep(1)
+        self.dr.find_element_by_id("break_new_close").click()
+        time.sleep(1)
     
     def click_register(self):
         self.dr.find_element_by_link_text(u"免费注册").click()

@@ -69,7 +69,11 @@ class LoginPage(base.Base):
     def open_logindo(self):
         url = "%slogin.do" %(self.base_url)
         self.dr.get(url)
-            
+    
+    def click_accounts(self):
+        time.sleep(1)
+        self.dr.find_element_by_class_name('login-switch').click()
+                                
     def input_username(self,user_name):
         time.sleep(1)
         self.dr.find_element(self.cfg.get('search', 'login_username_by'), \

@@ -18,6 +18,7 @@ def login_by_as(cfg, driver, base_url, user_name, user_psw):
     click.click_login()
     
     loginpage = LoginPage(driver,cfg)
+    loginpage.click_accounts()
     loginpage.input_username(user_name)
     loginpage.input_pwd(user_psw)
     loginpage.click_login_btn()
@@ -30,6 +31,7 @@ def login_by_search(cfg, driver, test_enviroment, user_name, user_psw):
     click.click_login()
     
     loginpage = LoginPage(driver,cfg)
+    loginpage.click_accounts()
     loginpage.input_username(user_name)
     loginpage.input_pwd(user_psw)
     loginpage.click_login_btn()
@@ -45,6 +47,7 @@ def login_by_independent_domian(cfg, driver, independent_url, user_name, user_ps
     click.click_login()
     
     loginpage = LoginPage(driver,cfg)
+    loginpage.click_accounts()
     loginpage.input_username(user_name)
     loginpage.input_pwd(user_psw)
     loginpage.click_login_btn()
@@ -54,7 +57,7 @@ def login_by_logindo(cfg, driver, base_url, user_name, user_psw):
     loginpage = LoginPage(driver,cfg)    
     loginpage.open_logindo()
     loginpage.save_screenshot()
-    
+    loginpage.click_accounts()
     loginpage.input_username(user_name)
     loginpage.input_pwd(user_psw)
     loginpage.click_login_btn()
@@ -87,6 +90,7 @@ def is_element_present(driver, how, what):
 #email注册
 def register_by_email_index(cfg, driver, base_url, r_username, r_email, r_psw):
     clickregister = ClickRegisterText(driver,cfg)
+    clickregister.click_iknow()
     clickregister.click_register()
     clickregister.save_screenshot()
 

@@ -90,7 +90,7 @@ def is_element_present(driver, how, what):
 #email注册
 def register_by_email_index(cfg, driver, base_url, r_username, r_email, r_psw):
     clickregister = ClickRegisterText(driver,cfg)
-    clickregister.click_iknow()
+    #clickregister.click_iknow()
     clickregister.click_register()
     clickregister.save_screenshot()
 

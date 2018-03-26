@@ -96,7 +96,7 @@ class TeacherTest(unittest.TestCase):
         try:
            teacher_management.create_account_teacher(self.cfg, self.driver, tea_name=name, \
            account_name=account,account_password=password,account_mail=mail)
-           time.sleep(30)
+           time.sleep(60)
         except:   
             while self.i < 2:
                 self.i = self.i + 1
@@ -123,7 +123,7 @@ class TeacherTest(unittest.TestCase):
             get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
             name = u"teacher" + ba.rand_name()
             teacher_management.edit_teacher(self.cfg, self.driver, tea_name=name)
-            time.sleep(30)
+            self.driver.implicitly_wait(120)
             get_name1 = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师   
         except:      
             while self.i < 2:

@@ -51,10 +51,12 @@ class OrgteacherCreatePage(base.Base):
 	def clear_name(self):
 		self.dr.find_element(self.cfg.get('org_teacher', 'name_by'), \
 		self.cfg.get('org_teacher', 'name')).clear()
+		time.sleep(1)
 				
 	def input_name(self, name):
 		self.dr.find_element(self.cfg.get('org_teacher', 'name_by'), \
 		self.cfg.get('org_teacher', 'name')).send_keys(name)
+		time.sleep(3)
 	
 	def input_recommend(self, commend):
 		self.dr.find_element(self.cfg.get('org_teacher', 'recommend_by'), \
@@ -79,6 +81,6 @@ class OrgteacherCreatePage(base.Base):
 	def click_publish(self):
 		self.dr.find_element(self.cfg.get('org_teacher', 'publish_by'), \
 		self.cfg.get('org_teacher', 'publish')).click()
-	
+		
 		
 	

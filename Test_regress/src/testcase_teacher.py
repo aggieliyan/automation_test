@@ -71,17 +71,17 @@ class TeacherTest(unittest.TestCase):
            time.sleep(30)
         except:   
             while self.i < 2:
-                self.i = self.i + 1
+               self.i = self.i + 1
                 self.test_create_teacher()
            
         get_name = ba.is_element_present("link text", name)
         rs = False
-        if get_name:
+       if get_name:
             rs = True
-        else:
-            while self.i < 2:
-                self.i = self.i + 1
-                self.test_create_teacher()
+        #else:
+            #while self.i < 2:
+                #self.i = self.i + 1
+                #self.test_create_teacher()
               
         self.assertEqual(True, rs)
         filename = ba.save_screenshot()
@@ -106,10 +106,10 @@ class TeacherTest(unittest.TestCase):
         rs = False
         if get_name:
             rs = True
-        else:
-            while self.i < 2:
-                self.i = self.i + 1
-                self.create_account_teacher()
+        #else:
+            #while self.i < 2:
+                #self.i = self.i + 1
+                #self.create_account_teacher()
               
         self.assertEqual(True, rs)
         filename = ba.save_screenshot()
@@ -123,7 +123,7 @@ class TeacherTest(unittest.TestCase):
             get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
             name = u"teacher" + ba.rand_name()
             teacher_management.edit_teacher(self.cfg, self.driver, tea_name=name)
-            self.driver.implicitly_wait(120)
+            time.sleep(120)
             get_name1 = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师   
         except:      
             while self.i < 2:

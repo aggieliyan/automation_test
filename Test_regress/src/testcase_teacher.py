@@ -72,11 +72,11 @@ class TeacherTest(unittest.TestCase):
         except:   
             while self.i < 2:
                self.i = self.i + 1
-                self.test_create_teacher()
+               self.test_create_teacher()
            
         get_name = ba.is_element_present("link text", name)
         rs = False
-       if get_name:
+        if get_name:
             rs = True
         #else:
             #while self.i < 2:
@@ -147,6 +147,11 @@ class TeacherTest(unittest.TestCase):
         self.assertNotEqual(get_name, get_newname)
         filename = ba.save_screenshot()
         print "image:"+filename
+
+        time.sleep(2)
+        get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")
+        teacher_management.delete_teacher(self.cfg, self.driver)#删除第二个老师
+        time.sleep(30)
 
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()

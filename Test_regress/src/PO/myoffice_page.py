@@ -24,10 +24,12 @@ class MyOfficePage(base.Base):
 		self.dr.get("%smyOffice.do" %(self.base_url))
 		self.dr.maximize_window()
 		time.sleep(1)
-		try:
-			self.dr.find_element_by_class_name("close-btn").click()
-		except:
-			pass
+		self.dr.refresh()#刷新去掉后台首页广告
+		time.sleep(3)
+		#try:
+		#	self.dr.find_elements_by_class_name("close-ico")[1].click()#关闭后台广告弹框
+		#except:
+		#	pass
 
 	#点击后台首页
 	def click_org_firstage(self):

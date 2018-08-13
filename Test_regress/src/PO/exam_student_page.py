@@ -18,8 +18,10 @@ class ExamStudentListPage(base.Base):
 	
 	#进入后台页面
 	def open(self):
-		self.dr.get("http://www.ablesky.com/myOffice.do ")
-		time.sleep(2)
+		op = MyOfficePage(self.dr, self.cfg)
+		op.open()
+		#self.dr.get("http://www.ablesky.com/myOffice.do ")
+		#time.sleep(2)
 		#self.dr.find_element_by_class_name("close-btn").click()
 		#time.sleep(1)
 		
@@ -35,7 +37,7 @@ class ExamStudentListPage(base.Base):
 
 	#筛选学员user_name
 	def click_select_stu(self):
-		time.sleep(4)
+		time.sleep(6)
 		self.dr.find_elements(self.cfg.get('manage_course_num', "stu_select_by"), \
 							self.cfg.get('manage_course_num', "stu_select"))[0].click()
 	def click_selectuser_stu(self):#改xpath

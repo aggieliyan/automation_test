@@ -89,4 +89,11 @@ class ExamStudentListPage(base.Base):
 		time.sleep(0.5)
 		self.dr.find_element(self.cfg.get('exam', 'open_paper_ok_by'), \
 			self.cfg.get('exam', 'open_paper_ok')).click()
+		time.sleep(1)
+		#首次开通扣授权弹框确认
+		try:
+			self.dr.find_element(self.cfg.get('exam','pay_authorization_ok_by'),\
+								 self.cfg.get('exam','pay_authorization_ok')).click()
+		except:
+			pass
 		time.sleep(0.1)

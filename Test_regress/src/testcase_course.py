@@ -14,7 +14,7 @@ from selenium.webdriver.common.by import By
 import HTMLTestRunner
 
 from PO.base import Base
-import login, new_course_management
+import login, new_course_management, new_book_management
 
 class CourseTest(unittest.TestCase):
 
@@ -56,6 +56,7 @@ class CourseTest(unittest.TestCase):
         cookie1 = self.cfg.get('env_para', 'cookie1')
         if(cookie1 == 'no'):
             login.login_by_logindo(self.cfg, self.driver, self.base_url, self.org_name, self.org_password)
+            time.sleep(2)
             self.cfg.set("env_para", "cookie1", str(self.driver.get_cookie('ASUSS')['value']))
             self.cfg.write(open(self.cfg_file, "w"))
            
@@ -186,7 +187,8 @@ class CourseTest(unittest.TestCase):
         new_course_management.class_face(self.cfg, self.driver, self.base_url, \
             classname=title, address="address", classnum=10)
 
-        time.sleep(2)
+        time.sleep(4)
+        self.driver.refresh()
         course = self.driver.find_element("link text", title)
         rs = False
         if course:
@@ -208,6 +210,36 @@ class CourseTest(unittest.TestCase):
             filename = ba.save_screenshot()
             print "image:"+filename
             self.assertEqual(True, rs)
+
+    # 创建教辅图书
+    #@unittest.skip("test")
+    def test_create_book(self):
+        ba = Base(self.driver)
+        title = "book" + ba.rand_name()
+        author="author" + ba.rand_name()
+        bo1=new_book_management.new_book(self.cfg, self.driver, self.base_url, book_title=title,book_author=author,book_price='0.1',mark=0)
+        filename = ba.save_screenshot()
+        print "image:" + filename
+        self.assertEqual(title,bo1)
+
+    #删除教辅图书
+    #@unittest.skip("test")
+    def test_del_book(self):
+        ba = Base(self.driver)
+        mark = True
+        bo1=new_book_management.del_book(self.cfg,self.driver)
+        if bo1:
+            try:
+                bo2 = self.driver.find_element(self.cfg.get('courseRedirect', 'book_title_by'), \
+                                           self.cfg.get('courseRedirect', 'book_title')).get_attribute('title')
+                if bo1 == bo2:
+                    mark = False
+            except:
+                #没有图书数据
+                pass
+            filename = ba.save_screenshot()
+            print "image:" + filename
+            self.assertEqual(True,mark)
         
     def tearDown(self): #在每个测试方法执行后调用，这个地方做所有清理工作
         self.driver.quit()

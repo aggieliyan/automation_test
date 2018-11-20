@@ -232,14 +232,14 @@ class ExamTest(unittest.TestCase):
         print "image:"+filename
 
 #    @unittest.skip("test")
-    def test_send_paper(self):
+    def test_a_send_paper(self):
         ba = Base(self.driver)
         exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=1)
         filename = ba.save_screenshot()
         print "image:"+filename
 
 #    @unittest.skip("test")
-    def test_close_paper(self):
+    def test_b_close_paper(self):
         ba = Base(self.driver)
         exam_paper.send_close_paper(self.cfg, self.driver, self.base_url, self.user_name, atype=2)
         filename = ba.save_screenshot()

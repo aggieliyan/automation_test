@@ -41,7 +41,7 @@ class MyOfficePage(base.Base):
 		
 	#点击网校装扮
 	def click_home_dress(self):
-		self.dr.find_element_by_link_text(u"网校装扮").click()
+		self.dr.find_element_by_link_text(u"PC装扮").click()
 
 	def click_logo_settings(self):
 		try:

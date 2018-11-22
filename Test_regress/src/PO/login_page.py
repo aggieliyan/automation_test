@@ -55,7 +55,7 @@ class ClickLoginText(base.Base):
     def click_register(self):
         time.sleep(3)
         try:
-            self.dr.find_element_by_link_text(u"免费注册").click()
+            self.dr.find_element_by_link_text(u"学员注册").click()
         except:
             self.dr.find_element_by_link_text(u"注册").click()
                

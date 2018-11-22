@@ -34,7 +34,7 @@ class ClickRegisterText(base.Base):
         time.sleep(1)
     
     def click_register(self):
-        self.dr.find_element_by_link_text(u"免费注册").click()
+        self.dr.find_element_by_link_text(u"学员注册").click()
         
 class EmailRegisterPage(base.Base):
     def __init__(self, driver, cfg):

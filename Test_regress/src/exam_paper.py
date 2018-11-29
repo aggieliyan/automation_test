@@ -60,6 +60,8 @@ def create_paper(cfg, driver, base_url, exam_name, exam_time,\
     time.sleep(2)    
     submit.click_submit_btn()
     time.sleep(2)
+    submit.click_confirm_btn()
+    time.sleep(2)
     return exam_name   
             
 #添加大题

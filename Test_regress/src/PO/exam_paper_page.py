@@ -203,6 +203,10 @@ class QuestionInfoPage(base.Base):
         self.dr.find_element(self.cfg.get('exam', 'exam_paper_build_btn_by'), \
                         self.cfg.get('exam', 'exam_paper_build_btn')).click()
         time.sleep(2)
+    def click_confirm_btn(self):
+        time.sleep(2)
+        self.dr.find_element(self.cfg.get('exam', 'exam_paper_confirm_btn_by'), \
+                        self.cfg.get('exam', 'exam_paper_confirm_btn')).click()
 
 #点击试卷标题进入的页面 里面有试卷信息、试题信息、学员信息和试题统计
 class PaperRecordPage(base.Base):

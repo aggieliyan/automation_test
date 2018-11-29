@@ -22,14 +22,14 @@ class CourseAgencyPage(base.Base):
 	def open(self):
 		m = MyOfficePage(self.dr, self.cfg)
 		m.open()
-		m.click_org_operatage()
+		m.click_schoolcoopera()
 		en = m.click_myapplyagency()
 		return en
 
 	def click_manage_course(self):
 		time.sleep(3)
 		try:
-			self.dr.find_elements_by_link_text(u"管理课程")[3].click()
+			self.dr.find_elements_by_link_text(u"管理课程")[0].click()
 		except NoSuchElementException, e:
 			print u"该机构还没有申请代理"
 

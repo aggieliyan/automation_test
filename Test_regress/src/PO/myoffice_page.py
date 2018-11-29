@@ -70,6 +70,12 @@ class MyOfficePage(base.Base):
 	def click_book(self):
 		self.dr.find_element_by_link_text(u"教辅图书").click()
 
+	#点击网校课程合作
+	def click_schoolcoopera(self):
+		try:
+			self.dr.find_element_by_link_text(u"网校课程合作").click()
+		except:
+			print u'机构为免费模式，没有网校课程合作入口'
 
 	#点击管理我申请的代理
 	def click_myapplyagency(self):

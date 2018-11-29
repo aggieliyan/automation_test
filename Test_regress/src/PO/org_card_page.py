@@ -29,7 +29,7 @@ class OrgCardgroupListPage(base.Base):
 		time.sleep(2)
 		liscard = 0
 		try:
-			self.dr.find_element_by_link_text(u"购买试听卡").click()
+			self.dr.find_element_by_link_text(u"试听卡管理").click()
 		except:
 			print u'机构为免费模式，没有试听卡购买入口'
 			liscard = 1

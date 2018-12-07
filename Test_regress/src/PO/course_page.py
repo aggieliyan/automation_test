@@ -185,12 +185,14 @@ class CourseManageListPage(base.Base):
 		self.cfg = cfg
 		self.base_url = cfg.get('env_para', 'base_url')
 		self.dr = driver
+		self.org_id = self.cfg.get("env_para", "org_id")
 
 	def open(self):
-		op = MyOfficePage(self.dr, self.cfg)
-		op.open()
-		op.click_teaching()
-		op.click_course_manage()
+		#op = MyOfficePage(self.dr, self.cfg)
+		self.dr.get('http://www.ablesky.com/organizationAdminRedirect.do?action=toManageCourse&organizationId=%s'%self.org_id)
+		#op.open()
+		#op.click_teaching()
+		#op.click_course_manage()
 
 	def click_manage(self):
 		time.sleep(5)

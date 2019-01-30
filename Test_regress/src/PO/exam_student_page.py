@@ -92,8 +92,8 @@ class ExamStudentListPage(base.Base):
 		time.sleep(1)
 		#首次开通扣授权弹框确认
 		try:
-			self.dr.find_element(self.cfg.get('exam','pay_authorization_ok_by'),\
-								 self.cfg.get('exam','pay_authorization_ok')).click()
+			self.dr.find_elements(self.cfg.get('exam','pay_authorization_ok_by'),\
+								 self.cfg.get('exam','pay_authorization_ok'))[1].click()
 		except:
 			pass
 		time.sleep(0.1)

@@ -35,13 +35,15 @@ class MyOfficePage(base.Base):
 	def click_org_firstage(self):
 		self.dr.find_element_by_link_text(u"首页").click()
 		
-	#点击运营
+	#点击运营（一级菜单）
 	def click_org_operatage(self):
-		self.dr.find_element_by_link_text(u"运营").click()
+		#self.dr.find_element_by_link_text(u"运营").click()
+		self.dr.find_element_by_link_text(u"营销推广").click()
+		self.dr.execute_script("$('.left-second-nav').eq(4).attr('style','display:block;')")
 		
-	#点击网校装扮
+	#点击网校装扮（一级菜单）
 	def click_home_dress(self):
-		self.dr.find_element_by_link_text(u"PC装扮").click()
+		self.dr.find_element_by_link_text(u"网站装扮").click()
 
 	def click_logo_settings(self):
 		try:
@@ -55,9 +57,10 @@ class MyOfficePage(base.Base):
 	def click_org_admin(self):
 		self.dr.find_element_by_link_text(u"网校管理员").click()
 
-	#点击教学教务
+	#点击教学教务（一级菜单）
 	def click_teaching(self):
-		self.dr.find_element_by_link_text(u"教学").click()
+		self.dr.find_element_by_link_text(u"教学管理").click()
+		self.dr.execute_script("$('.left-second-nav').eq(0).attr('style','display:block;')")
 
 	def click_course_manage(self):
 #		self.dr.find_element_by_link_text(u"课程管理").click()	
@@ -70,10 +73,12 @@ class MyOfficePage(base.Base):
 	def click_book(self):
 		self.dr.find_element_by_link_text(u"教辅图书").click()
 
+
 	#点击网校课程合作
 	def click_schoolcoopera(self):
 		try:
-			self.dr.find_element_by_link_text(u"网校课程合作").click()
+			#self.dr.find_element_by_link_text(u"网校课程合作").click()
+			self.dr.execute_script("$('.left-second-nav').eq(5).attr('style','display:block;')")
 		except:
 			print u'机构为免费模式，没有网校课程合作入口'
 
@@ -99,9 +104,10 @@ class MyOfficePage(base.Base):
 		self.dr.find_element(self.cfg.get('org_index','headpic_by'), \
 			self.cfg.get('org_index','headpic')).send_keys(picfile)
 
-	#点击学员/员工导航
+	#点击学员/员工导航（一级菜单）
 	def click_student(self):
 		self.dr.find_element_by_link_text(u"人员").click()
+		self.dr.execute_script("$('.left-second-nav').eq(2).attr('style','display:block;')")
 
 	#点击学员管理
 	def click_student_management(self):

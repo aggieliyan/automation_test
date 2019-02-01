@@ -19,7 +19,8 @@ class OrgCateListPage(base.Base):
 	def open(self):
 		m = MyOfficePage(self.dr, self.cfg)
 		m.open()
-		m.click_org_teach()
+		#m.click_org_teach()
+		print 'ok'
 		m.click_org_cate()
 
 	def click_create_FirstCate(self):

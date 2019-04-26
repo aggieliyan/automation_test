@@ -25,7 +25,7 @@ class MyOfficePage(base.Base):
 		self.dr.maximize_window()
 		time.sleep(1)
 		self.dr.refresh()#刷新去掉后台首页广告
-		time.sleep(3)
+		time.sleep(5)
 		#try:
 		#	self.dr.find_elements_by_class_name("close-ico")[1].click()#关闭后台广告弹框
 		#except:
@@ -104,9 +104,9 @@ class MyOfficePage(base.Base):
 		self.dr.find_element(self.cfg.get('org_index','headpic_by'), \
 			self.cfg.get('org_index','headpic')).send_keys(picfile)
 
-	#点击学员/员工导航（一级菜单）
+	#展示导航菜单人员（一级菜单）下的二级菜单
 	def click_student(self):
-		self.dr.find_element_by_link_text(u"人员").click()
+		#self.dr.find_element_by_link_text(u"人员").click()
 		self.dr.execute_script("$('.left-second-nav').eq(2).attr('style','display:block;')")
 
 	#点击学员管理

@@ -25,15 +25,19 @@ class ExamStudentListPage(base.Base):
 		#self.dr.find_element_by_class_name("close-btn").click()
 		#time.sleep(1)
 		
-	#点击后台人员
+	#点击后台人员（准备弃用）
 	def click_org_personnel(self):
 		self.dr.find_element_by_link_text(u"人员").click()
-        time.sleep(2)
+		time.sleep(2)
         
-    #点击后台学员
+	#点击后台学员
 	def click_org_student(self):
-		self.dr.find_element_by_link_text(u"学员").click()
-        time.sleep(2)
+		#去掉此定位，统一使用officepage里的定位
+		#self.dr.find_element_by_link_text(u"学员").click()
+		m = MyOfficePage(self.dr,self.cfg)
+		m.click_student()
+		m.click_student_management()
+		time.sleep(2)
 
 	#筛选学员user_name
 	def click_select_stu(self):

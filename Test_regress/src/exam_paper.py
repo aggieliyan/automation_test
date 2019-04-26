@@ -176,7 +176,9 @@ def send_close_paper(cfg, driver, base_url, username, atype=2):
     """
     ep = ExamStudentListPage(driver, cfg)
     ep.open()
-    ep.click_org_personnel()
+    #菜单中的人员已经去掉链接
+    #ep.click_org_personnel()
+    #js操作显示二级菜单学员
     ep.click_org_student()
     ep.save_screenshot()
     ep.click_select_stu()

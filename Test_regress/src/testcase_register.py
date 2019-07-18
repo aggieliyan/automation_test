@@ -49,6 +49,9 @@ class RegisterTest(unittest.TestCase):
     def test_register(self):
         ba = Base(self.driver)
         time.sleep(2)
+        #跳回登录页
+        self.driver.get('http://www.ablesky.com/recommend')
+        time.sleep(2)
         # 关闭首页广告
         try:
             self.driver.find_element_by_id('break_new_close').click()

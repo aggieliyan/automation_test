@@ -21,7 +21,8 @@ class OrgteacherManagePage(base.Base):
 		m.open()
 		m.click_student()
 		m.click_teacher()
-		self.dr.implicitly_wait(120)
+		#self.dr.implicitly_wait(120)
+		time.sleep(120)
 		
 	def click_createacher(self):
 		self.dr.find_element(self.cfg.get('org_teacher', 'create_by'), \

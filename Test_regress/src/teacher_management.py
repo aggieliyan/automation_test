@@ -43,18 +43,22 @@ def edit_teacher(cfg, driver, tea_name):
     
     ogteamanage = OrgteacherManagePage(driver, cfg)
     ogteamanage.open()
+    get_name = driver.execute_script("return $('.odd .text-center').eq(1).text()")  # 取第一个老师
     ogteamanage.click_manage()
     ogteamanage.click_editeacher()
     ogteacreate = OrgteacherCreatePage(driver, cfg)
     ogteacreate.clear_name()
     ogteacreate.input_name(tea_name)
     ogteacreate.click_publish()
+    return  get_name
     
 def delete_teacher(cfg, driver):
     
     ogteamanage = OrgteacherManagePage(driver, cfg)
     ogteamanage.open()
+    get_name = driver.execute_script("return $('.odd .text-center').eq(1).text()")  # 取第一个老师
     ogteamanage.click_manage()
     ogteamanage.click_deleteacher()
     ogteamanage.click_sure()
+    return  get_name
     

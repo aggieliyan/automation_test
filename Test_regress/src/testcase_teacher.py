@@ -15,6 +15,7 @@ import HTMLTestRunner
 
 from PO.base import Base
 import login, teacher_management
+from PO.org_teacher_page import OrgteacherManagePage
 
 class TeacherTest(unittest.TestCase):
       
@@ -118,20 +119,24 @@ class TeacherTest(unittest.TestCase):
     # @unittest.skip("test")
     def test_edit_teacher(self):      
         ba = Base(self.driver)
-        time.sleep(20)
+        time.sleep(2)
         try:
-            get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
             name = u"teacher" + ba.rand_name()
-            teacher_management.edit_teacher(self.cfg, self.driver, tea_name=name)
+            get_name = teacher_management.edit_teacher(self.cfg, self.driver, tea_name=name)
+            time.sleep(2)
+            # 重新进入老师列表获取第一个老师
+            op = OrgteacherManagePage(self.driver, self.cfg)
+            op.open()
             time.sleep(120)
-            get_name1 = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师   
+            get_newname = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
+
         except:      
             while self.i < 2:
                 self.i = self.i + 1
                 self.test_edit_teacher()
                 return
             
-        self.assertNotEqual(get_name, get_name1)
+        self.assertNotEqual(get_name, get_newname)
         filename = ba.save_screenshot()
         print "image:"+filename
         
@@ -139,10 +144,12 @@ class TeacherTest(unittest.TestCase):
     def test_delete_teacher(self):      
         ba = Base(self.driver)
         time.sleep(2)
-        get_name = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
-        teacher_management.delete_teacher(self.cfg, self.driver)
+        get_name = teacher_management.delete_teacher(self.cfg, self.driver)
         time.sleep(30)
-
+        #重新进入老师列表获取第一个老师
+        op = OrgteacherManagePage(self.driver,self.cfg)
+        op.open()
+        time.sleep(20)
         get_newname = self.driver.execute_script("return $('.odd .text-center').eq(1).text()")#取第一个老师
         self.assertNotEqual(get_name, get_newname)
         filename = ba.save_screenshot()
